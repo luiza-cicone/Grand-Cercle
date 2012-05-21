@@ -43,18 +43,15 @@ public class ListFeedAdapter extends BaseAdapter {
 		return this.feeds.get(index).getId();
 		
 	}
-
 	
-	 // * Voici la partie la plus complexe de la classe
-	
+	/* Le paramètre "convertView" permet de recycler les élements 
+	 * de notre liste. En effet, l'opération pour convertir un layout 
+	 * XML en IHM standard est très couteuse pour la plateforme Android. 
+	 * On nous propose ici de réutiliser des occurences créées qui ne sont 
+	 * plus affichées. Donc si ce paramètre est "null" alors, il faut "inflater" 
+	 * notre layout XML, sinon on le réutilise
+	 */ 
 	public View getView(int position, View convertView, ViewGroup parent){
-		/* Le paramètre "convertView" permet de recycler les élements 
-		 * de notre liste. En effet, l'opération pour convertir un layout 
-		 * XML en IHM standard est très couteuse pour la plateforme Android. 
-		 * On nous propose ici de réutiliser des occurences créées qui ne sont 
-		 * plus affichées. Donc si ce paramètre est "null" alors, il faut "inflater" 
-		 * notre layout XML, sinon on le réutilise
-		 */ 
 		FeedView fv;		
 		
 		if (convertView == null) {

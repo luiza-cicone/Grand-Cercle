@@ -14,10 +14,9 @@ public class FeedPlayer extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         ArrayList<Feed> feeds = ContainerData.getFeeds();
-        //for (Feed feed : feeds) {
-        	Feed f = feeds.get(0);
-			Log.d("FeedPlayer",f.toString());
-		//}
+        for (Feed feed : feeds) {
+			Log.i("FeedPlayer",feed.toString());
+		}
         ListFeedAdapter lfa = new ListFeedAdapter(this, feeds);
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);   
     }

@@ -41,10 +41,12 @@ public class ContainerData {
 		URL url = null;
 		try {
 			// url de test : à remplacer par "http://www.grandcercle.org/news/rss.xml"
-			url = new URL("http://thibault-koprowski.fr/feed");
+			//url = new URL("http://thibault-koprowski.fr/feed");
+			url = new URL("http://www.lequipe.fr/rss/actu_rss.xml");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
+		
 		
 		/* 
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé

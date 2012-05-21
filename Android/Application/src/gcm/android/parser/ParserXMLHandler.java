@@ -29,22 +29,22 @@ public class ParserXMLHandler extends DefaultHandler {
 	// Buffer permettant de contenir les données d'un tag XML
 	private StringBuffer buffer;
 	
-	@Override
-	public void processingInstruction(String target, String data) throws SAXException {		
-		super.processingInstruction(target, data);
-	}
-
 	public ParserXMLHandler() {
 		super();		
 	}
 	
+	@Override
+	public void processingInstruction(String target, String data) throws SAXException {		
+		super.processingInstruction(target, data);
+	}
 	
-	// * Cette méthode est appelée par le parser une et une seule  
-	// * fois au démarrage de l'analyse de votre flux xml. 
-	// * Elle est appelée avant toutes les autres méthodes de l'interface,  
-	// * à l'exception unique, évidemment, de la méthode setDocumentLocator. 
-	// * Cet événement devrait vous permettre d'initialiser tout ce qui doit 
-	// * l'être avant ledébut du parcours du document.
+	/* Cette méthode est appelée par le parser une et une seule  
+	 * fois au démarrage de l'analyse de votre flux xml. 
+	 * Elle est appelée avant toutes les autres méthodes de l'interface,  
+	 * à l'exception unique, évidemment, de la méthode setDocumentLocator. 
+	 * Cet événement devrait vous permettre d'initialiser tout ce qui doit 
+	 * l'être avant le début du parcours du document.
+	 */ 
 	 
 	@Override
 	public void startDocument() throws SAXException {
@@ -63,13 +63,13 @@ public class ParserXMLHandler extends DefaultHandler {
 		
 		// Ci dessous, localName contient le nom du tag rencontré
 		
-		// Nous avons rencontré un tag ITEM, il faut donc instancier un nouveau feed
+		// Nous avons rencontré un tag ITEM, il faut donc instancier un nouveau feed		
 		if (localName.equalsIgnoreCase(ITEM)){			
 			this.currentFeed = new Feed();
 			inItem = true;
 		}
 		
-		// Vous pouvez définir des actions à effectuer pour chaque item rencontré
+		/* Pour tous les autres tags, on ne fait aucun traitement pour le moment
 		if (localName.equalsIgnoreCase(TITLE)){
 			// Nothing to do	
 		}
@@ -85,16 +85,17 @@ public class ParserXMLHandler extends DefaultHandler {
 		if(localName.equalsIgnoreCase(DESCRIPTION)){
 			// Nothing to do	
 		}
+		*/
 	}
 	
 	 
-	// * Fonction étant déclenchée lorsque le parser à parsé 	
-	// * l'intérieur de la balise XML La méthode characters  
-	// * a donc fait son ouvrage et tous les caractère inclus 
-	// * dans la balise en cours sont copiés dans le buffer 
-	// * On peut donc tranquillement les récupérer pour compléter
-	// * notre objet currentFeed
-	
+	/* Fonction étant déclenchée lorsque le parser à parsé 	
+	 * l'intérieur de la balise XML La méthode characters  
+	 * a donc fait son ouvrage et tous les caractères inclus 
+	 * dans la balise en cours sont copiés dans le buffer 
+	 * On peut donc tranquillement les récupérer pour compléter
+	 * notre objet currentFeed
+	 */
 	@Override
 	public void endElement(String uri, String localName, String name) throws SAXException {		
 		
@@ -143,7 +144,9 @@ public class ParserXMLHandler extends DefaultHandler {
 	 */ 
 	public void characters(char[] ch,int start, int length)	throws SAXException{		
 		String lecture = new String(ch,start,length);
-		if(buffer != null) buffer.append(lecture);      		
+		if (buffer != null) {
+			buffer.append(lecture);      		
+		}
 	}
 	
 	
