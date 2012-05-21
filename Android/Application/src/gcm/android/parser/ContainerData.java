@@ -38,6 +38,7 @@ public class ContainerData {
 		}
 		
 		// On définit l'url du fichier XML
+		
 		URL url = null;
 		try {
 			// url de test : à remplacer par "http://www.grandcercle.org/news/rss.xml"
