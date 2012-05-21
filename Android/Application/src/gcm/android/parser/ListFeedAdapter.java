@@ -14,29 +14,27 @@ public class ListFeedAdapter extends BaseAdapter {
 	// les données à afficher
 	private ArrayList<Feed> feeds;
 	
-	// * Le LayoutInflater permet de parser un layout XML et de 
-	// * le transcoder en IHM Android. Pour respecter la classe 
-	// * BaseAdapter 
+	/* Le LayoutInflater permet de parser un layout XML et de 
+	 * le transcoder en IHM Android. Pour respecter la classe 
+	 * BaseAdapter
+	 */
 	private LayoutInflater inflater;
 	
 	public ListFeedAdapter(Context context,ArrayList<Feed> feeds) {
 		inflater = LayoutInflater.from(context);
 		this.feeds = feeds;
-		
 	}
 	
-	// * il nous faut spécifier la méthode "getCount()". 
-	// * Cette méthode permet de connaître le nombre d'items présent 
-	// * dans la liste. Dans notre cas, il faut donc renvoyer le nombre
-	// * de personnes contenus dans "mListP".
-	
+	/* il nous faut spécifier la méthode "getCount()". 
+	 * Cette méthode permet de connaître le nombre d'items présent 
+	 * dans la liste. Dans notre cas, il faut donc renvoyer le nombre
+	 * de personnes contenus dans "mListP".
+	 */
 	public int getCount() {
 		return feeds.size();
 	}
 
-	
-	 // Permet de retourner un objet contenu dans la liste
-	
+	// Permet de retourner un objet contenu dans la liste
 	public Object getItem(int index) {
 		return feeds.get(index);
 	}
@@ -50,12 +48,13 @@ public class ListFeedAdapter extends BaseAdapter {
 	 // * Voici la partie la plus complexe de la classe
 	
 	public View getView(int position, View convertView, ViewGroup parent){
-		// * Le paramètre "convertView" permet de recycler les élements 
-		// * de notre liste. En effet, l'opération pour convertir un layout 
-		// * XML en IHM standard est très couteuse pour la plateforme Android. 
-		// * On nous propose ici de réutiliser des occurences créées qui ne sont 
-		// * plus affichées. Donc si ce paramètre est "null" alors, il faut "inflater" 
-		// * notre layout XML, sinon on le réutilise
+		/* Le paramètre "convertView" permet de recycler les élements 
+		 * de notre liste. En effet, l'opération pour convertir un layout 
+		 * XML en IHM standard est très couteuse pour la plateforme Android. 
+		 * On nous propose ici de réutiliser des occurences créées qui ne sont 
+		 * plus affichées. Donc si ce paramètre est "null" alors, il faut "inflater" 
+		 * notre layout XML, sinon on le réutilise
+		 */ 
 		FeedView fv;		
 		
 		if (convertView == null) {

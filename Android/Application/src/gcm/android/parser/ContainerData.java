@@ -49,7 +49,7 @@ public class ContainerData {
 		/* 
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
 		 * des opérations de parsing.
-		*/
+		 */
 		DefaultHandler handler = new ParserXMLHandler();
 		try {
 			// On parse le fichier XML
