@@ -50,7 +50,7 @@ public class ListFeedAdapter extends BaseAdapter {
 	 * On nous propose ici de réutiliser des occurences créées qui ne sont 
 	 * plus affichées. Donc si ce paramètre est "null" alors, il faut "inflater" 
 	 * notre layout XML, sinon on le réutilise
-	 */ 
+	 */
 	public View getView(int position, View convertView, ViewGroup parent){
 		FeedView fv;		
 		
@@ -61,6 +61,7 @@ public class ListFeedAdapter extends BaseAdapter {
 			fv.creator = (TextView)convertView.findViewById(R.id.creator);			
 			fv.title = (TextView)convertView.findViewById(R.id.title);
 			fv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
+			fv.link = (TextView)convertView.findViewById(R.id.link);
 			convertView.setTag(fv);
 
 		} else {
@@ -69,6 +70,7 @@ public class ListFeedAdapter extends BaseAdapter {
 		fv.creator.setText(feeds.get(position).getCreator());
 		fv.pubDate.setText(feeds.get(position).getPubDate());
 		fv.title.setText(feeds.get(position).getTitle());
+		fv.link.setText(feeds.get(position).getLink());
 		
 		return convertView;
 	}

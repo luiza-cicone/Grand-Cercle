@@ -7,5 +7,6 @@ public class FeedView {
 	public TextView pubDate;
 	public TextView title;
 	public TextView creator;
+	public TextView link;
 	public ImageView image;
 }
