@@ -18,7 +18,6 @@ public class FeedPlayer extends Activity {
 			Log.e("FeedPlayer",feed.toString());
 		}
         ListFeedAdapter lfa = new ListFeedAdapter(this, feeds);
-        ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
-        
+        ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);   
     }
 }

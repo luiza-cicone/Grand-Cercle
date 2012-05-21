@@ -135,12 +135,12 @@ public class ParserXMLHandler extends DefaultHandler {
 		}
 	}
 
-	// * Tout ce qui est dans l'arborescence mais n'est pas partie  
-	// * intégrante d'un tag, déclenche la levée de cet événement.  
-	// * En général, cet événement est donc levé tout simplement 
-	// * par la présence de texte entre la balise d'ouverture et 
-	// * la balise de fermeture
-
+	/* Tout ce qui est dans l'arborescence mais n'est pas partie  
+	 * intégrante d'un tag, déclenche la levée de cet événement.  
+	 * En général, cet événement est donc levé tout simplement 
+	 * par la présence de texte entre la balise d'ouverture et 
+	 * la balise de fermeture
+	 */ 
 	public void characters(char[] ch,int start, int length)	throws SAXException{		
 		String lecture = new String(ch,start,length);
 		if(buffer != null) buffer.append(lecture);      		

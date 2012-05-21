@@ -40,7 +40,7 @@ public class ContainerData {
 		// On définit l'url du fichier XML
 		URL url = null;
 		try {
-			// url de test : à remplaer par "http://www.grandcercle.org/news/rss.xml"
+			// url de test : à remplacer par "http://www.grandcercle.org/news/rss.xml"
 			url = new URL("http://thibault-koprowski.fr/feed");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
@@ -48,7 +48,7 @@ public class ContainerData {
 		
 		/* 
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
-		 * des opérations de parsing. On vera cette classe en détails ci après.
+		 * des opérations de parsing.
 		*/
 		DefaultHandler handler = new ParserXMLHandler();
 		try {
