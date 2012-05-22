@@ -16,7 +16,7 @@
 		android:layout_height="wrap_content"    
 	    android:hint="@string/recherche"
     	android:inputType="textMultiLine"
-    	android:lines="5" 
+    	android:lines="1" 
     />
 	<ListView android:id="@+id/listFeed" 
 	    android:layout_width="fill_parent" 
