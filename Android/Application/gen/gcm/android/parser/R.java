@@ -17,7 +17,8 @@ public final class R {
     }
     public static final class id {
         public static final int creator=0x7f050000;
-        public static final int listFeed=0x7f050003;
+        public static final int link=0x7f050003;
+        public static final int listFeed=0x7f050004;
         public static final int pub_date=0x7f050002;
         public static final int title=0x7f050001;
     }
