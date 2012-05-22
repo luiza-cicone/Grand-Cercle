@@ -8,7 +8,7 @@
   		android:id="@+id/creator"  
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
-  		android:layout_marginRight="10px"
+  		android:layout_marginRight="10dp"
  	/>
  
 	
@@ -26,12 +26,19 @@
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
 	/>
-  	 <TextView 
+  	 
+  	  <TextView 
   		android:id="@+id/link" 
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
   		android:textSize="10sp"
-  		android:textStyle="italic"
-	/>
+  		android:textStyle="italic"/> 
+	<!-- <EditText
+  		android:layout_width="wrap_content" 
+  		android:layout_height="wrap_content"
+  		android:hint="@+id/editText"
+  		android:inputType="textMultiLine"
+    	android:lines="5"/>
+    	-->
   </LinearLayout>
 </LinearLayout>
