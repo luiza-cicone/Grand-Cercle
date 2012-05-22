@@ -32,6 +32,7 @@ public class FeedPlayer extends Activity {
     private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			setContentView(R.layout.content_view);
+
 			((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
 			((TextView)findViewById(R.id.description)).setText(((Feed)parent.getItemAtPosition(position)).getDescription());
 		}
