@@ -9,6 +9,4 @@ public class FeedView {
 	public TextView title;
 	public TextView creator;
 	public TextView link;
-	public EditText editText;
-	public ImageView image;
 }

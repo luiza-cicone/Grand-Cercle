@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,11 +15,13 @@ public class FeedPlayer extends Activity {
     /** Called when the activity is first created. */
 	
 	private ListView feedListView;
+	private EditText recherche;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        recherche = (EditText)findViewById(R.id.recherche);
         ArrayList<Feed> feeds = ContainerData.getFeeds();
         for (Feed feed : feeds) {
 			Log.i("FeedPlayer",feed.toString());

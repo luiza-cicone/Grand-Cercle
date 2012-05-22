@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, FeedPlayer!</string>
     <string name="app_name">FeedPlayer</string>
+    <string name="recherche">Rechercher</string>
 </resources>
