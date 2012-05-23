@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FeedPlayer</string>
     <string name="recherche">Rechercher</string>
+    <string name="hello">Hello World, TroimsActivity!</string>
+    <string name="histoire">Vous connaissez l\'histoire de <b>\"Tom Sawyer\"</b> ?</string>
+    <string name="app_name">Troims</string>
 </resources>
