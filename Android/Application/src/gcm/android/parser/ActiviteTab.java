@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TabActivity;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ActiviteTab extends TabActivity {
+public class ActiviteTab extends Activity {
 	private ListView feedListView;
 	private EditText recherche;
 	
