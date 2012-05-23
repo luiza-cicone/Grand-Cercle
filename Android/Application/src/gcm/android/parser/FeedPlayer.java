@@ -3,6 +3,9 @@ package gcm.android.parser;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -31,8 +34,18 @@ public class FeedPlayer extends TabActivity {
 		
 		tabSpec = tabHost.newTabSpec("deux").setIndicator("Deux").setContent(intent);
 		tabHost.addTab(tabSpec);
+		
+		tabHost.setOnClickListener(clickListenerTab);
 	
 	}
+	
+	private OnClickListener clickListenerTab = new OnClickListener() {
+		public void onClick(View v) {
+			setContentView(R.layout.tab);
+			
+		}
+	};
+
 }
 
 
