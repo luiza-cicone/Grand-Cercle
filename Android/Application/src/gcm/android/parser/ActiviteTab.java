@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,7 +33,7 @@ public class ActiviteTab extends Activity {
         ListFeedAdapter lfa = new ListFeedAdapter(this, feeds);
         feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
-        feedListView.setOnItemClickListener(clickListenerFeed);
+        feedListView.setOnItemClickListener(clickListenerFeed);	
     }
     
     private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
@@ -39,7 +41,11 @@ public class ActiviteTab extends Activity {
 			setContentView(R.layout.content_view);
 
 			((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
-			((TextView)findViewById(R.id.description)).setText(((Feed)parent.getItemAtPosition(position)).getDescription());
+			// On récupère notre ressource au format String
+			String Des = ((Feed)parent.getItemAtPosition(position)).getDescription();
+			// On le convertit en Spanned
+			Spanned marked_up = Html.fromHtml(Des);	
+			((TextView)findViewById(R.id.description)).setText(marked_up);
 		
 			
 			 /* Get the notification manager  */
