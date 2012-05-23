@@ -40,8 +40,8 @@ public class ContainerData {
 		// On définit l'url du fichier XML
 		URL url = null;
 		try {
-			// url de test : à remplacer par "http://www.grandcercle.org/news/rss.xml"
-			url = new URL("http://thibault-koprowski.fr/feed");
+			url = new URL("http://www.grandcercle.org/news/rss.xml");
+			//url = new URL("http://thibault-koprowski.fr/feed");
 			//url = new URL("http://www.lequipe.fr/rss/actu_rss.xml");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
