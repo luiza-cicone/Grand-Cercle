@@ -1,0 +1,11 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Mod\IeC {\`e}le de t\IeC {\^a}ches}{2}
+\contentsline {subsection}{\numberline {1.1}Conventions}{2}
+\contentsline {subsection}{\numberline {1.2}Pour l'\IeC {\'e}tudiant}{2}
+\contentsline {subsection}{\numberline {1.3}Pour les membres des associations}{2}
+\contentsline {section}{\numberline {2}Diagrammes UML}{3}
+\contentsline {section}{\numberline {3}Interface utilisateur abstraite}{4}
+\contentsline {section}{\numberline {4}Sketching}{5}
+\contentsline {subsection}{\numberline {4.1}Page 1}{5}
+\contentsline {subsection}{\numberline {4.2}Page 2}{5}
+\contentsline {subsection}{\numberline {4.3}Page 3}{5}

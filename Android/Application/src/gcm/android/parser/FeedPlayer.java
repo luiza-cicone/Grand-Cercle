@@ -43,7 +43,6 @@ public class FeedPlayer extends TabActivity {
 	private OnClickListener clickListenerTab = new OnClickListener() {
 		public void onClick(View v) {
 			setContentView(R.layout.tab);
-			
 		}
 	};
 
