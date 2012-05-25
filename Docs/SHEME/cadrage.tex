@@ -1,4 +1,4 @@
-\documentclass[a4paper, 11px]{article}
+\documentclass[a4paper,11px]{article}
 
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
@@ -55,10 +55,10 @@
 
 \setlength{\parindent}{1cm}
 \setlength{\parskip}{1ex}
-\setlength{\textwidth}{17cm}
-\setlength{\textheight}{22,7cm}
-\setlength{\oddsidemargin}{-.7cm}
-\setlength{\evensidemargin}{-.7cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{21,7cm}
+\setlength{\oddsidemargin}{-.2cm}
+\setlength{\evensidemargin}{-.2cm}
 
 
 \renewcommand{\labelenumi}{\arabic{enumi}.} 
@@ -206,10 +206,57 @@ $ $\\
 
 
 % Intro
-
+\vspace*{\fill}
+\indent Composée d'une cinquantaine de membres, le Grand Cercle s'occupe d'établir un centre d’activité au service des 5200 étudiants de Grenoble INP. Les associations rattachées ou ayant un lien avec le Grand Cercle sont nombreuses, et la communication inter-école n'est pas facile.\\
+En effet, les différentes associations de Grenoble INP possèdent la plupart du temps des budgets serrés et ne peuvent pas lancer une campagne de publicité d'envergure pour promouvoir leur événement. Il existe ainsi un réel besoin de rapidité et d'efficacité d'information auprès des étudiants.\\
+\\
+\\
+\indent La principale difficulté est de faire une application qui réponde aux attentes des 5200 étudiants de Grenoble INP. C'est pourquoi nous avons réalisé une étude des besoins afin de définir les réelles attentes des étudiants. Cette étude à la fois qualitative et quantitative (questionnaire lancé sur les réseaux sociaux pour obtenir de nombreux résultats rapidement) a soulevé certains axes d'amélioration de la communication.\\
+\\
+\\
+\indent L'application Grand Cercle Mobile a pour but d'offrir aux étudiants la possibilité de consulter rapidement les événements organisés par les associations de Grenoble INP. Nous souhaitons qu'un maximum d'étudiants utilisent cette application afin de créer une certaine dynamique au sein de Grenoble INP. Notre but est que lorsqu'un étudiant veut s'informer sur la vie associative, il ait le réflexe de le faire sur cette application.\\
+\\
+\\
+\indent Cette dernière doit être rendue sous une version fonctionnelle le 15 Juin, soit la date de fin de projet, mais également lancée sur l'Apple Store et le Play Store (plate-forme de téléchargement pour Apple et Android) avant la rentrée prochaine, nourrie par les différents retours obtenus pendant les vacances scolaires auprès des utilisateurs sélectionnés.\\
+\\
+\\
+\indent Les enjeux de ce projet sont multiples, et soulèvent plusieurs problématiques. Comment répondre à toutes les attentes en garantissant une cohérence de l'application ? Comment rendre l'information exhaustive sans perdre la rapidité et la simplicité d'utilisation de l'application ? Comment convaincre les étudiants de son utilité ?\\
+Toutes ces questions articulent notre réflexion autour des fonctionnalités et de l'ergonomie de l'application et imposent des choix de conception.\\
+\vspace*{\fill}
+\newpage
 
 % Contenu
+%Macro-Planning
+\indent Notre démarche s'articule autour 4 de grands axes:
+\begin{itemize}
+ 	\item[\textbullet] la définition du besoin des utilisateurs pour dégager des fonctionnalités importantes, qui décriront le périmètre à couvrir à travers l'élaboration d'un cahier des charges. Ce cahier des charges s'appuie sur les résultats de deux études menées de façon successive : 
+	\begin{itemize}
+		\item d'abord une étude qualitative, qui nous permettent de dégager des idées importantes en terme de fonctionnalité attendues par les utilisateurs de profils différents. Cette étude donne lieu à un entretien enregistré d'une quinzaine de minutes durant lequel l'interviewé doit répondre à un certain nombre de questions ouvertes;
+		\item puis une étude quantitative, qui est composée d'un questionnaire destiné à un grand nombre de personnes. Celui-ci nous permettra d'évaluer à grande échelle la pertinence des idées dégagées lors de l'étude qualitative menée précédemment.
+	\end{itemize}
+	\item[\textbullet] la conception logicielle précise, notamment l'architecture logicielle et l'élaboration de l'interface Homme-Machine qui doivent répondre aux besoin exprimés dans le cahier des charges réalisé à l'étape précédente.
+	\item[\textbullet] l'implémentation de ces deux applications dans deux langages différents, ce qui donne lieu à une gestion d'équipe particulière détaillée par la suite.
+	\item[\textbullet] la validation de ces deux applications, tant d'un point de vue logicielle que d'un point de vue ergonomie et facilité d'utilisation. Cette validation ergonomique par les utilisateurs est cruciale et sera réalisée en deux parties :
+	\begin{itemize}
+		\item dans un premier temps, une validation auprès d'un panel d'utilisateurs potentiels sélectionnés suivant leur profil, qui permettra de valider les applications dans le cadre du projet de spécialité
+		\item dans un second temps, une validation ergonomique sur un panel d'utilisateurs potentiels plus large avant la mise à disposition des deux applications sur leur plate-forme de téléchargement respective. Cette mise à disposition générale et gratuite est fixée par le Bureau de Cercle des \'Elèves de Grenoble INP au 10 août 2012.
+\\
+\\
+	\end{itemize}
+\end{itemize}
 
+%\indent \'Etant donné que ce projet fait intervenir des technologies
+
+
+%Organisation du projet:
+
+\indent Notre équipe est constituée de quatre membres mais est séparée en deux sous-groupes. Comme mentionné précédemment, notre projet consiste à réaliser deux applications : une pour iPhone et une pour Android, toujours dans l'optique de fournir de l'information à un maximum d'étudiants. Nous avons ainsi deux binômes, chacun en charge d'une application.\\
+\\
+\indent Néanmoins, les choix de conception et d'interface Homme-Machine doivent être communs aux deux technologies. Cela impose un certain suivi, une réflexion commune et des réunions fréquentes entre les deux sous-groupes. La première partie du projet est donc réalisée avec l'équipe toute entière, sans distinction de technologie, afin de réaliser les différents entretiens pour recueillir les attentes du public ciblé. Le cahier des charges est ainsi réalisé à partir de ces entretiens, lesquels nous permettent également de construire la documentation de spécifications externes, regroupant les cas d'utilisations et les fonctionnalités principales des deux applications.\\
+\\
+\indent La communication au sein de l'équipe est rendue facile par le fait que trois des quatre membres sont colocataires. Les réunions sont donc très fréquentes, ce qui permet une rapidité d'échange et de réflexion au sein du groupe. Ces réunions fréquentes sont nécessaires dans un projet, mais plus particulièrement dans notre cas. En effet, après la réalisation du cahier des charges (c'est à dire après que les fonctionnalités de l'application aient été choisies), il nous faudra réfléchir au visuel, à l'interface même de l'application. Il faudra alors analyser les différents entretiens réalisés, en dégager les idées principales et réfléchir en groupe.\\
+\\
+\indent La particularité de notre projet est qu'il existe également une communication externe. Les entretiens réalisés nourrissent notre réflexion et nous servent en quelque sorte de pilotage client, de processus de validation des besoins : les personnes interrogées , ainsi que les membres de l'association nous disent ce qu'ils valident, et surtout en quoi ils le valident. Cette communication avec les futurs utilisateurs, couplée à la communication interne à l'équipe constitue la réussite même de notre application par une validation dynamique.
 
 % Conclusion
 
