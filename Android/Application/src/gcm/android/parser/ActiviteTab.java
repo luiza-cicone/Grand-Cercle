@@ -40,12 +40,12 @@ public class ActiviteTab extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			setContentView(R.layout.content_view);
 
-			((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
+			/*((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
 			// On récupère notre ressource au format String
 			String Des = ((Feed)parent.getItemAtPosition(position)).getDescription();
 			// On le convertit en Spanned
 			Spanned marked_up = Html.fromHtml(Des);	
-			((TextView)findViewById(R.id.description)).setText(marked_up);
+			((TextView)findViewById(R.id.description)).setText(marked_up);*/
 		
 			
 			 /* Get the notification manager  */
