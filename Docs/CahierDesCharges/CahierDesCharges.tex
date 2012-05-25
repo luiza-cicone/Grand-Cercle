@@ -184,14 +184,43 @@ De l'autre côté, nous avons des étudiants qui ont chacun leurs goûts et occu
 
 
 \section{Vision de la solution}
-Nous avons choisi de développer une application smartphone dédiée à la communication du Grand Cercle et de la vie associative de Grenoble INP. Les objectives principaux..
+Nous avons choisi de développer une application smartphone dédiée à la communication du Grand Cercle et de la vie associative de Grenoble INP. L'objectif principal est de permettre aux étudiants d'être informés tout le temps des événements organisés par ces associations. Parmi les objectifs secondaires se trouve la communication des nouveautés de la vie étudiante à Grenoble et les avantages de la CVA et de la carte étudiant de Grenoble INP.
+
+\subsection{Événements}
+Les étudiants doivent pouvoir visualiser tous les informations concernant un événement comme date, heure, lieu, thème, prix, etc. Aussi ils auront la possibilité d'exporter un certain événement dans leur calendrier. En ce qui concerne la visualisation, l'écran ne doit pas être chargé des informations inutiles comme une longue description.
+
+Comme cette fonctionnalité est la plus importante, il faut être la plus rapide à accéder. Donc, nous prenons en compte la possibilité d'avoir comme page d'accueil l'affichage des événements.
+
+La visualisation des événements doit pouvoir se faire en plusieurs manières concernant la choix de l'utilisateur. Nous avons considéré trois manières différentes d'organisation de cette information : l'affichage de type calendrier qui est indispensable, l'affichage de type liste et un affichage avec les quatre prochains événements.
+
+Pour l'affichage calendrier, l'information présente est minimale, comme l'espace ne permette pas intégrer beaucoup d'information. L'affichage de type liste présente plus d'informations comme le nom, la date et le lieu et un image. L'affichage spécial des événements prochaines doivent avoir un design attirant en promouvant l'affiche de l'événement.
+
+\subsection{Préférences}
+
+L'utilisateur doit pouvoir choisir les modalités d'affichage ainsi que l'information qu'il veut voir. Pour cela, l'application faut proposer des filtres par type d'événement et par association. Une autre fonctionnalité nécessaire est la configuration des notifications.
+
+\subsection{Nouveautés}
+
+Les étudiants doivent avoir des informations concernant la vie étudiante à Grenoble. Cette information sera affiché sur la forme d'une liste avec le titre et un sommaire et optionnellement une image.
+
+\subsection{Bons plans}
+
+Les étudiants doivent pouvoir trouver les informations concernant les avantages de la CVA et de la carte étudiante. Pour cela, chaque bon plan doit présenter l'offre et aussi un contact et un plan d'accès:
+
+\subsection{Recherche}
+
+L'application doit fournir un moteur de recherche global pour que les utilisateurs puissent trouver facilement les informations concernant les événements ou bons plans. Cette recherche doit fonctionner aussi par des mots clés.
+
+\subsection{Contact}
+
+Les étudiants doivent pouvoir facilement contacter les associations. Donc il faut prévoir un contact sous la forme d'une adresse mail ou un numéro de téléphone pour chaque association.
 
 \newpage
 
 \section{Méthodes}
 
 \subsection{Étude de la concurrence}
-La vie associative à Grenoble INP est dense, et toutes les associations - ou presque - possèdent leur propre site internet ou ont un espace dédié sur le site u Grand Cercle.
+La vie associative à Grenoble INP est dense, et toutes les associations - ou presque - possèdent leur propre site internet ou ont un espace dédié sur le site du Grand Cercle.
 Cependant, malgré une visibilité importante sur internet, aucune association n'a encore développé d'application pour smartphone. Cette application serait donc une première du point de vue de la communication pour un association à Grenoble INP.
 
 \subsection{Étude qualitative}
@@ -218,12 +247,614 @@ En considérant les résultats obtenus lors de la restitution des idées obtenue
 
 \section{Questionnaire utilisé pour l'étude qualitative}
 
-bla bla..
+ \textbf {\large 1. Informations sur l'interview}
+
+	NOM de l'interviewer
+	
+	Prénom de l'interviewer
+	
+	Date (JJ/MM/AAAA)
+	
+	Heures Début - Fin
+	
+	Lieu
+
+\vspace{.3cm}
+
+ \textbf {\large 2. Informations sur l'interviewé(e)}
+
+	NOM
+	
+	Prénom
+	
+	Ecole : 
+	 Ense3,
+	 Ensimag,
+	 Esisar,
+	 Génie Industriel,
+	 Pagora,
+	 Phelma,
+	 Autres
+	
+	Promo :
+	 1A,
+	 2A,
+	 3A,
+	 4A ou +,
+	 Césure,
+	 Autres
+	
+	Profil : 
+	 Grand Cercleux,
+	 Cercleux,
+	 Associatifs,
+	 Elus étudiants,
+	 Lambda
+
+\vspace{.3cm}
+
+ \textbf {\large 3. Bilan de l'interview}
+
+Quels événements ont marqué l'entretien ?
+\textit{Interruption, téléphone, etc.}
+
+Quelles informations essentielles retenez vous de cette rencontre ?
+
+Notez l'intérêt de l'entretien sur 5p
+
+
+\vspace{.3cm}
+
+ \textbf {\large 4. Adhérents et Services}
+
+Êtes vous adhérent au Grand Cercle
+\textit{On est adhérent au Grand Cercle quand on possède la CVA}
+
+Pourquoi êtes vous / n'êtes vous pas adhérent au Grand Cercle ?
+
+Connaissez vous les avantages dont vous bénéficiez en tant qu'adhérent du Grand Cercle ?
+\textit{C'est à dire les avantages de la CVA}
+
+Voyez vous des inconvénients à être adhérent au Grand Cercle ?
+\textit{C'est à dire les inconvénients de la CVA}
+
+
+\vspace{.2cm}
+ \textbf {\large 5. Événements Associatifs et Vous}
+
+Participez vous à des événements associatifs ?
+\textit{Soirées, Événements sportifs, etc.}
+
+Si oui $\rightarrow$ Vous participez aux événements de quelles associations ?
+
+Si non $\rightarrow$ Pourquoi ne participez vous pas ?
+
+A quels types d'événements vous participez ?
+
+
+\vspace{.3cm}
+
+ \textbf {\large 6. Événement et Communication}
+
+Comment vous informez vous sur les différents événements ?
+
+Trouvez vous que l'information est facile d'accès ?
+\textit{Parler des limites des moyens de s'informer existants}
+
+
+La communication est - elle bien menée par les associations ?
+
+Êtes vous déjà passé à côté d'un événement auquel vous auriez aimé participer si vous en aviez été informé ?
+
+Que trouvez vous de bien dans les moyens de communication actuels ?
+
+
+Que trouvez vous de mauvais dans les moyens de communication actuels ?
+
+
+\vspace{.3cm}
+
+ \textbf {\large 7. Usage et Scénarios}
+
+Que pensez vous de l'idée d'une application mobile dédiée à la communication du Grand Cercle et de la vie associative de Grenoble INP ?
+
+
+Dans quelles circonstances utiliseriez vous une t-elle application ?
+\textit{Un téléphone est transportable partout...}
+
+
+Pouvez vous imaginer un ou plusieurs scénarios où vous utilisez cette application sur votre mobile ou celui d'un(e) ami(e) ?
+\textit{Exemple : nous sommes dans un bar, nous ne savons pas quoi faire, etc.}
+
+Qu'attendez vous d'une telle application ?
+
+
+\vspace{.3cm}
+
+ \textbf {\large 8. Environnement}
+
+Possédez vous un Smartphone ?
+
+Êtes vous familier avec l'utilisation d'applications sur Smartphone ?
+
+Pour vous quels sont les avantages de ces applications ?
+
+Pour vous quels sont les inconvénients de ces applications ?
+
+Utilisez vous de telles applications pour vous informer ? (restaurant, météo, etc.)
+\textit {Ne pas les influencer, sauf vraiment si l'interviewé(e) n'a vraiment rien à dire}
+
+
+\vspace{.3cm}
+
+ \textbf {\large 9. Application et Fonctionnalités}\\
+\textit{Dans cette partie, nous parlons de l'application Grand Cercle}
+
+Quelles informations aimeriez vous recevoir ?
+
+
+Comment aimeriez vous les recevoir ?
+Les informations
+
+
+Quelles fonctionnalités incontournables voyez vous ?
+
+
+Quelles fonctionnalités annexes voyez vous ?
+
+
+Avez vous d'autres idées ?
+
 \newpage
 
 \section{Compte-rendus des entretiens}
 
-bla bla..
+ \textbf {\large Entretien no. 1}
+Arnaud
+
+\textbf{Date, heure, lieu : }
+22/05/2012, 12h40, Ensimag
+
+\textbf{Profil : }
+Étudiant cercleux
+
+\textbf{École : }
+Ensimag
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item application rapide et fluide
+		\item calendrier avec tous les événements
+		\item les jours avec événements se distinguent, code couleur pour le type d'événement
+		\item envoi automatique de message/notification comme rappel, information
+		\item surtout événementiel
+		\item proposition de colocations
+		\item il veut tous les type d'événements : sport, festif + etc.
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 2}
+Adrien
+
+\textbf{Date, heure, lieu : }
+22/05/2012, 13h15, Ensimag
+
+\textbf{Profil : }
+Étudiant impliqué dans l'associatif : pôle Gala
+
+\textbf{École : }
+Ensimag
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item application très ergonomique très intuitive
+		\item pas de pub
+		\item C’est chiant de lire un mail, trop d'effort
+	- Informations brèves
+	- Calendrier
+	- Le logo du grand cercle
+	- Des boutons correspondants au types d’événements
+	- Un calendrier propre au type d’événement (soirée, sport, bda)
+	- Bref ! informations qu’il faut, pas trop de bouton
+	- Notification sur les nouveaux évènements
+	- Possibilité de commentaire
+	- Possibilité d’abonnement à l’événement pour recevoir les infos au fur et à mesure
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 3}
+Yaya
+
+\textbf{Date, heure, lieu : }
+22/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant cercleux
+
+\textbf{École : }
+Ensimag
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 4}
+Vanflet
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Élu étudiant
+
+\textbf{École : }
+Ense3
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 5}
+Lea
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant cercleux et grand cercleux
+
+
+\textbf{École : }
+Phelma
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 6}
+Maxx
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant grand cercleux et ancien cercleux
+
+
+\textbf{École : }
+Phelma
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 7}
+Aurore
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant grand cercleux et cercleux
+
+
+\textbf{École : }
+Ense3
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 8}
+Greg
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant grand cercleux
+
+
+\textbf{École : }
+Ense3
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 9}
+Billie
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant grand cercleux
+
+\textbf{École : }
+Ense3, année césure
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 10}
+Emile
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Étudiant
+
+\textbf{École : }
+Ensimag
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 11}
+Simon
+
+\textbf{Date, heure, lieu : }
+21/05/2012, 20h15, Colocation
+
+\textbf{Profil : }
+Élu étudiant, ancien cercleux
+
+\textbf{École : }
+Ensimag
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 12}
+Firmin
+
+\textbf{Date, heure, lieu : }
+23/05/2012, 19h00, Colocation
+
+\textbf{Profil : }
+Étudiant grand cercleux
+
+\textbf{École : }
+Ense3, année césure
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 13}
+Justine
+
+\textbf{Date, heure, lieu : }
+23/05/2012, 19h30, Colocation
+
+\textbf{Profil : }
+Étudiant grand cercleux, élu étudiant
+
+\textbf{École : }
+Pagora
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 14}
+Denis
+
+\textbf{Date, heure, lieu : }
+24/05/2012, 20h15, Maison de l'INP
+
+\textbf{Profil : }
+Étudiant grand cercleux
+
+\textbf{École : }
+Génie Industriel
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{.3cm}
+
+ \textbf {\large Entretien no. 15}
+Simon Papet
+
+\textbf{Date, heure, lieu : }
+25/05/2012, 12h00, Kfet Pagora
+
+\textbf{Profil : }
+Étudiant 
+
+\textbf{École : }
+Pagora
+
+\textbf{Résumé}
+	\begin{itemize}
+		\item ?
+		\item ?
+	\end{itemize}
+
+\textbf{Événements marquants}
+??
+
+\textbf{Impression}
+??
 \newpage
 
 \section{Questionnaire utilisé pour l'étude quantitative}
