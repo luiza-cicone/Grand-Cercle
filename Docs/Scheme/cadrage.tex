@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[a4paper, 11px]{article}
 
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
@@ -11,17 +11,17 @@
 \usepackage[toc,page]{appendix}
 \usepackage{array}
 \usepackage{amssymb}
-\usepackage{needspace}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{eso-pic}
+
+% \usepackage{needspace}
 
 
 %%%%%%
-% Pour mise-en-forme des fichiers Ada
-%
-% voir exemple en fin de ce fichier.
-%
-% ATTENTION, requiert encoding utf-8 (voir 2ième "\lstset" ci-dessous)
  
 \usepackage{listings}
+
 \lstset{
   morekeywords={},
   sensitive=f,
@@ -53,39 +53,93 @@
 %%%%%%%%%%
 % TAILLE DES PAGES (A4 serré)
 
-\setlength{\parindent}{0.5cm}
+\setlength{\parindent}{1cm}
 \setlength{\parskip}{1ex}
 \setlength{\textwidth}{17cm}
-\setlength{\textheight}{22.5cm}
+\setlength{\textheight}{22,7cm}
 \setlength{\oddsidemargin}{-.7cm}
 \setlength{\evensidemargin}{-.7cm}
-\setlength{\topmargin}{-.5in}
+
+
+\renewcommand{\labelenumi}{\arabic{enumi}.} 
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 
 %%%%%%%%%%
-% EN-TÊTES ET PIED DE PAGES
 
-%\pagestyle{fancyplain}
-%\lfoot{}
-\cfoot{\footnotesize\sf page~\thepage/\pageref{LastPage}\\}
-%\rfoot{\footnotesize\sf page~\thepage/\pageref{LastPage}\\}
-%\lhead{}
-
-%%%%%%%%%%
-% TITRE DU DOCUMENT
-
-\title{\strong Projet Spécialité}
-
-\author{Luiza Maria CICONE\\
-Jérémy KREIN\\
-Jérémy LUQUET\\
-Paul MAYER\\
-}
-\date{2012}
-
-
+\newcommand\BackgroundPic{
+\put(0,0){
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\includegraphics[width=\paperwidth,height=\paperheight,
+keepaspectratio]{background.jpg}%
+\vfill
+}}}
 %%%%%%%
 
 \begin{document}
+
+\AddToShipoutPicture{\BackgroundPic}
+
+
+\renewcommand{\appendixtocname}{Annexes}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\begin{titlepage}
+\setlength{\parindent}{0cm}
+
+\begin{center}
+
+% Upper part of the page
+ \begin{figure}[!h]
+\includegraphics[bb=-550 -10 -250 20, scale=0.7]{./logo.pdf}
+\end{figure}
+% logo.pdf: 612x792 pixel, 72dpi, 21.59x27.94 cm, bb=0 0 612 792
+
+
+\vspace{4cm}
+\rule{\linewidth}{.5pt}
+\vspace{2mm}
+
+
+\begin{center}
+{\LARGE GRAND CERCLE MOBILE - GCM}
+
+\vspace{1cm}
+
+
+{\Huge \bf CAHIER DES CHARGES}
+
+
+\end{center}
+
+
+\vspace{1cm}
+
+%===================================================
+\begin{center}
+$ $\\
+\large{ \textbf{Luiza CICONE - Jérémy KREIN - Jérémy LUQUET - Paul MAYER}}\\
+\large{ \textbf{ISI - IF}}
+$ $\\
+\end{center}
+\rule{\linewidth}{.5pt}
+
+
+\vfill
+
+% Bottom of the page
+
+{\large Mai 2012}
+
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+
 %
 \newenvironment{myenumerate}{%
   \edef\backupindent{\the\parindent}%
@@ -172,9 +226,7 @@ Nous souhaitons en fin de projet avoir deux applications fonctionelles Android e
 
 \newpage
 
-	\textbf{\item Une estimation du planning de travail (Gantt).}
 
-\includegraphics[bb=-250 1140 -100 0, scale=0.529]{./gantt}
 
 \end{myenumerate}
 \end{document}
