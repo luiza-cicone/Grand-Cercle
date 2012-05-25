@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage[toc,page]{appendix}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{needspace}
+
+
+%%%%%%
+% Pour mise-en-forme des fichiers Ada
+%
+% voir exemple en fin de ce fichier.
+%
+% ATTENTION, requiert encoding utf-8 (voir 2ième "\lstset" ci-dessous)
+ 
+\usepackage{listings}
+\lstset{
+  morekeywords={},
+  sensitive=f,
+  morecomment=[l]--,
+  morestring=[d]",
+  showstringspaces=false,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\bf\small,
+  commentstyle=\itshape,
+  stringstyle=\sf,
+  extendedchars=true,
+  columns=[c]fixed
+}
+
+% CI-DESSOUS: conversion des caractères accentués UTF-8 
+% en caractères TeX dans les listings...
+\lstset{
+  literate=%
+  {À}{{\`A}}1 {Â}{{\^A}}1 {Ç}{{\c{C}}}1%
+  {à}{{\`a}}1 {â}{{\^a}}1 {ç}{{\c{c}}}1%
+  {É}{{\'E}}1 {È}{{\`E}}1 {Ê}{{\^E}}1 {Ë}{{\"E}}1% 
+  {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1%
+  {Ï}{{\"I}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1%
+  {ï}{{\"i}}1 {î}{{\^i}}1 {ô}{{\^o}}1%
+  {Ù}{{\`U}}1 {Û}{{\^U}}1 {Ü}{{\"U}}1%
+  {ù}{{\`u}}1 {û}{{\^u}}1 {ü}{{\"u}}1%
+}
+
+%%%%%%%%%%
+% TAILLE DES PAGES (A4 serré)
+
+\setlength{\parindent}{0.5cm}
+\setlength{\parskip}{1ex}
+\setlength{\textwidth}{17cm}
+\setlength{\textheight}{22.5cm}
+\setlength{\oddsidemargin}{-.7cm}
+\setlength{\evensidemargin}{-.7cm}
+\setlength{\topmargin}{-.5in}
+
+%%%%%%%%%%
+% EN-TÊTES ET PIED DE PAGES
+
+%\pagestyle{fancyplain}
+%\lfoot{}
+\cfoot{\footnotesize\sf page~\thepage/\pageref{LastPage}\\}
+%\rfoot{\footnotesize\sf page~\thepage/\pageref{LastPage}\\}
+%\lhead{}
+
+%%%%%%%%%%
+% TITRE DU DOCUMENT
+
+\title{\strong Projet Spécialité}
+
+\author{Luiza Maria CICONE\\
+Jérémy KREIN\\
+Jérémy LUQUET\\
+Paul MAYER\\
+}
+\date{2012}
+
+
+%%%%%%%
+
+\begin{document}
+%
+\newenvironment{myenumerate}{%
+  \edef\backupindent{\the\parindent}%
+  \enumerate%
+  \setlength{\parindent}{\backupindent}%
+}{\endenumerate}
+
+%
+
+\renewcommand{\appendixtocname}{Annexes}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\begin{center}
+ Proposition de sujet pour le projet de spécialité
+
+ {\Large Le Grand Cercle arrive sur vos mobiles
+
+ avec {\bf Grand Cercle Mobile}}
+\end{center}
+\vspace{1cm}
+
+\begin{myenumerate}
+	{\bf \item Les noms et filières des étudiants impliqués\\}
+			Luiza CICONE - filière ISI\\
+			Jérémy KREIN - filière IF\\
+			Jérémy LUQUET - filière IF\\
+			Paul MAYER - filière IF
+
+	\textbf{\item Le titre du projet}
+
+Analyse, conception, prototypage et évaluation d’un système interactif multiplateformes, iOS et Android, dédié à la communication du Cercle des Élèves de Grenoble INP.
+
+	 \textbf {\item L'enseignant de l'Ensimag ayant accepté d'encadrer notre projet}
+
+Gaëlle CALVARY
+
+	\textbf{\item La description du problème à étudier et/ou du logiciel à développer}
+
+{ Nous sommes 4 membres du Cercle des Élevés de Grenoble INP, une association touchant tous les étudiants des 6 écoles d'ingénieurs du groupe. Pour notre association regroupant plus de 5000 adhérents, la communication est un facteur clé de réussite et nous aimerions disposer d’un nouveau vecteur de communication pour mener à bien tous nos projets.}
+ \vspace{.2 cm}
+
+En effet, la communication sur facebook devient de plus en plus difficile à cause de la sur abondance d'informations. Nous aimerions donc créer une application multiplateforme, iOS et Android, synchronisée avec le site internet de l'association et ainsi mettre en place une communication optimale pour l'intégration 2012.
+ \vspace{.2 cm}
+
+	\textbf{\item Le bagage théorique et technique nécessaire à la réalisation du projet}
+
+
+Tout d’abord, nous voulons mettre en relation notre projet et le cours d’IHM (Interface Homme Machine) de l’Ensimag.
+Notre principal objectif est de faire utiliser l’application par les étudiants à la rentrée 2012. Il faut donc que l’on ait (comme dans ce cours) une approche centrée utilisateur.
+
+Nous pourrons également rapprocher ce projet de plusieurs cours qui sont dispensés à l’Ensimag. Comme le projet est basé sur la programmation orientée objet nous mettrons en pratique les cours d’APOO (Algorithmes et Programmation Orientée Objet) et d’ACVL (Analyse, Conception et Validation de Logiciel). En plus de cela, nous utiliserons le concept de MVC (Modèle-Vue-Contrôleur) vu en cours de Programmation Web.
+ \vspace{.2 cm}
+
+En ce qui concerne les compétences techniques pour l’implémentation de ces deux applications, nous serons confrontés à deux langages de programmation : le Java et l'Objective-C (basé sur le langage C). Comme le Java et le C sont enseignés à l'Ensimag, nous pourrons nous mettre à niveau sans problème pour réaliser ce projet.
+De plus, comme aucun cours à l’Ensimag n’est consacré à ce type de problème nous allons pouvoir ajouter deux nouvelles technologies à notre formation.
+
+	\textbf{\item Une liste de points à préciser par recherche bibliographique/webographique au début du projet.}
+ 
+Au début du projet, les membres n’ayant pas suivi le cours d’ihm devront se mettre à jour sur la démarche que nous allons suivre.
+Nous devrons également nous initier aux langages utilisés pour les applications iOS et Android avec l’aide de Luiza. Pour cela on pourra utiliser en complément les cours de Stanford sur les applications iOS ou encore le site officiel de développement Android.
+
+	\textbf{\item Le(s) résultat(s) attendu(s) en fin de projet.}
+
+Nous souhaitons en fin de projet avoir deux applications fonctionelles Android et iOS, qui respectent les besoins des étudiants de Grenoble INP. Cela suppose d'avoir effectué avec succes :
+\begin{enumerate}
+	\item l'analyse pour identifier les besoins fonctionnels et non fonctionnels des étudiants
+	\item la conception à la fois ergonomique et logicielle
+	\item l'implémentation sur les deux plateformes (Android et iOS) de notre application
+	\item l'évaluation de notre système par le biais de tests unitaires, de tests d'intégrations et de l'évaluation ergonomique.
+\end{enumerate}
+ \vspace{1 cm}
+
+{\bf Nous nous engageons à travailler sur ce sujet dans le cadre du projet de spécialité.}\\
+ 
+			Luiza CICONE \hspace{1cm}		lu et approuvé\\
+
+			Jérémy KREIN \hspace{1cm} 		lu et approuvé\\
+
+			Jérémy LUQUET \hspace{0.6cm}	lu et approuvé\\
+
+			Paul MAYER \hspace{1.3cm} 		lu et approuvé\\
+
+			Gaëlle CALVARY \hspace{0.6cm}	lu et approuvé
+
+\newpage
+
+	\textbf{\item Une estimation du planning de travail (Gantt).}
+
+\includegraphics[bb=-250 1140 -100 0, scale=0.529]{./gantt}
+
+\end{myenumerate}
+\end{document}
+
