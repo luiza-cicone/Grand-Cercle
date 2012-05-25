@@ -1,5 +1,9 @@
 package gcm.android.parser;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -19,12 +24,13 @@ import android.widget.TextView;
 
 public class ActiviteTab extends Activity {
 	private ListView feedListView;
-	private EditText recherche;
+	private EditText recherche;	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab);
+        
         recherche = (EditText)findViewById(R.id.recherche);
         ArrayList<Feed> feeds = ContainerData.getFeeds();
         for (Feed feed : feeds) {
@@ -33,7 +39,7 @@ public class ActiviteTab extends Activity {
         ListFeedAdapter lfa = new ListFeedAdapter(this, feeds);
         feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
-        feedListView.setOnItemClickListener(clickListenerFeed);	
+        feedListView.setOnItemClickListener(clickListenerFeed);
     }
     
     private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {

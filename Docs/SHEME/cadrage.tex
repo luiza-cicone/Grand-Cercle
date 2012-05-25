@@ -1,0 +1,224 @@
+\documentclass[a4paper,11px]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage[toc,page]{appendix}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{eso-pic}
+
+% \usepackage{needspace}
+
+
+%%%%%%
+ 
+\usepackage{listings}
+
+\lstset{
+  morekeywords={},
+  sensitive=f,
+  morecomment=[l]--,
+  morestring=[d]",
+  showstringspaces=false,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\bf\small,
+  commentstyle=\itshape,
+  stringstyle=\sf,
+  extendedchars=true,
+  columns=[c]fixed
+}
+
+% CI-DESSOUS: conversion des caractères accentués UTF-8 
+% en caractères TeX dans les listings...
+\lstset{
+  literate=%
+  {À}{{\`A}}1 {Â}{{\^A}}1 {Ç}{{\c{C}}}1%
+  {à}{{\`a}}1 {â}{{\^a}}1 {ç}{{\c{c}}}1%
+  {É}{{\'E}}1 {È}{{\`E}}1 {Ê}{{\^E}}1 {Ë}{{\"E}}1% 
+  {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1%
+  {Ï}{{\"I}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1%
+  {ï}{{\"i}}1 {î}{{\^i}}1 {ô}{{\^o}}1%
+  {Ù}{{\`U}}1 {Û}{{\^U}}1 {Ü}{{\"U}}1%
+  {ù}{{\`u}}1 {û}{{\^u}}1 {ü}{{\"u}}1%
+}
+
+%%%%%%%%%%
+% TAILLE DES PAGES (A4 serré)
+
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{1ex}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{21,7cm}
+\setlength{\oddsidemargin}{-.2cm}
+\setlength{\evensidemargin}{-.2cm}
+
+
+\renewcommand{\labelenumi}{\arabic{enumi}.} 
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+
+%%%%%%%%%%
+
+\newcommand\BackgroundPic{
+\put(0,0){
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\includegraphics[width=\paperwidth,height=\paperheight,
+keepaspectratio]{background.jpg}%
+\vfill
+}}}
+%%%%%%%
+
+\begin{document}
+
+\AddToShipoutPicture{\BackgroundPic}
+
+
+\renewcommand{\appendixtocname}{Annexes}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\begin{titlepage}
+\setlength{\parindent}{0cm}
+
+\begin{center}
+
+% Upper part of the page
+ \begin{figure}[!h]
+\includegraphics[bb=-550 -10 -250 20, scale=0.7]{./logo.pdf}
+\end{figure}
+% logo.pdf: 612x792 pixel, 72dpi, 21.59x27.94 cm, bb=0 0 612 792
+
+
+\vspace{4cm}
+\rule{\linewidth}{.5pt}
+\vspace{2mm}
+
+
+\begin{center}
+{\LARGE GRAND CERCLE MOBILE - GCM}
+
+\vspace{1cm}
+
+
+{\Huge \bf CADRAGE DU PROJET}
+
+
+\end{center}
+
+
+\vspace{1cm}
+
+%===================================================
+\begin{center}
+$ $\\
+\large{ \textbf{Luiza CICONE - Jérémy KREIN - Jérémy LUQUET - Paul MAYER}}\\
+\large{ \textbf{ISI - IF}}
+$ $\\
+\end{center}
+\rule{\linewidth}{.5pt}
+
+
+\vfill
+
+% Bottom of the page
+
+{\large Mai 2012}
+
+\end{center}
+\end{titlepage}
+
+%\tableofcontents
+
+\newpage
+
+
+%
+\newenvironment{myenumerate}{%
+  \edef\backupindent{\the\parindent}%
+  \enumerate%
+  \setlength{\parindent}{\backupindent}%
+}{\endenumerate}
+
+%
+
+\renewcommand{\appendixtocname}{Annexes}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+% Intro
+\vspace*{\fill}
+\indent Composée d'une cinquantaine de membres, le Grand Cercle s'occupe d'établir un centre d’activité au service des 5200 étudiants de Grenoble INP. Les associations rattachées ou ayant un lien avec le Grand Cercle sont nombreuses, et la communication inter-école n'est pas facile.\\
+En effet, les différentes associations de Grenoble INP possèdent la plupart du temps des budgets serrés et ne peuvent pas lancer une campagne de publicité d'envergure pour promouvoir leur événement. Il existe ainsi un réel besoin de rapidité et d'efficacité d'information auprès des étudiants.\\
+\\
+\\
+\indent La principale difficulté est de faire une application qui réponde aux attentes des 5200 étudiants de Grenoble INP. C'est pourquoi nous avons réalisé une étude des besoins afin de définir les réelles attentes des étudiants. Cette étude à la fois qualitative et quantitative (questionnaire lancé sur les réseaux sociaux pour obtenir de nombreux résultats rapidement) a soulevé certains axes d'amélioration de la communication.\\
+\\
+\\
+\indent L'application Grand Cercle Mobile a pour but d'offrir aux étudiants la possibilité de consulter rapidement les événements organisés par les associations de Grenoble INP. Nous souhaitons qu'un maximum d'étudiants utilisent cette application afin de créer une certaine dynamique au sein de Grenoble INP. Notre but est que lorsqu'un étudiant veut s'informer sur la vie associative, il ait le réflexe de le faire sur cette application.\\
+\\
+\\
+\indent Cette dernière doit être rendue sous une version fonctionnelle le 15 Juin, soit la date de fin de projet, mais également lancée sur l'Apple Store et le Play Store (plate-forme de téléchargement pour Apple et Android) avant la rentrée prochaine, nourrie par les différents retours obtenus pendant les vacances scolaires auprès des utilisateurs sélectionnés.\\
+\\
+\\
+\indent Les enjeux de ce projet sont multiples, et soulèvent plusieurs problématiques. Comment répondre à toutes les attentes en garantissant une cohérence de l'application ? Comment rendre l'information exhaustive sans perdre la rapidité et la simplicité d'utilisation de l'application ? Comment convaincre les étudiants de son utilité ?\\
+Toutes ces questions articulent notre réflexion autour des fonctionnalités et de l'ergonomie de l'application et imposent des choix de conception.\\
+\vspace*{\fill}
+\newpage
+
+% Contenu
+%Organisation du projet:
+
+\indent Notre équipe est constituée de quatre membres mais est séparée en deux sous-groupes. Comme mentionné précédemment, notre projet consiste à réaliser deux applications : une pour iPhone et une pour Android, toujours dans l'optique de fournir de l'information à un maximum d'étudiants. Nous avons ainsi deux binômes, chacun en charge d'une application.\\
+\indent Néanmoins, les choix de conception et d'interface Homme-Machine doivent être communs aux deux technologies. Cela impose un certain suivi, une réflexion commune et des réunions fréquentes entre les deux sous-groupes. La première partie du projet est donc réalisée avec l'équipe toute entière, sans distinction de technologie, afin de réaliser les différents entretiens pour recueillir les attentes du public ciblé. Le cahier des charges est ainsi réalisé à partir de ces entretiens, lesquels nous permettent également de construire la documentation de spécifications externes, regroupant les cas d'utilisations et les fonctionnalités principales des deux applications.\\
+\indent La communication au sein de l'équipe est rendue facile par le fait que trois des quatre membres sont colocataires. Les réunions sont donc très fréquentes, ce qui permet une rapidité d'échange et de réflexion au sein du groupe. Ces réunions fréquentes sont nécessaires dans un projet, mais plus particulièrement dans notre cas. En effet, après la réalisation du cahier des charges (c'est à dire après que les fonctionnalités de l'application aient été choisies), il nous faudra réfléchir au visuel, à l'interface même de l'application. Il faudra alors analyser les différents entretiens réalisés, en dégager les idées principales et réfléchir en groupe.\\
+\indent La particularité de notre projet est qu'il existe également une communication externe. Les entretiens réalisés nourrissent notre réflexion et nous servent en quelque sorte de pilotage client, de processus de validation des besoins : les personnes interrogées , ainsi que les membres de l'association nous disent ce qu'ils valident, et surtout en quoi ils le valident. Cette communication avec les futurs utilisateurs, couplée à la communication interne à l'équipe constitue la réussite même de notre application par une validation dynamique.\\
+\\
+%Macro-Planning
+\indent Notre démarche s'articule autour 4 de grands axes:
+\begin{itemize}
+ 	\item[\textbullet] la définition du besoin des utilisateurs pour dégager des fonctionnalités importantes, qui décriront le périmètre à couvrir à travers l'élaboration d'un cahier des charges. Ce cahier des charges s'appuie sur les résultats de deux études menées de façon successive : 
+	\begin{itemize}
+		\item d'abord une étude qualitative, qui nous permettent de dégager des idées importantes en terme de fonctionnalité attendues par les utilisateurs de profils différents. Cette étude donne lieu à un entretien enregistré d'une quinzaine de minutes durant lequel l'interviewé doit répondre à un certain nombre de questions ouvertes;
+		\item puis une étude quantitative, qui est composée d'un questionnaire destiné à un grand nombre de personnes. Celui-ci nous permettra d'évaluer à grande échelle la pertinence des idées dégagées lors de l'étude qualitative menée précédemment.
+	\end{itemize}
+	\item[\textbullet] la conception logicielle précise, notamment l'architecture logicielle et l'élaboration de l'interface Homme-Machine qui doivent répondre aux besoin exprimés dans le cahier des charges réalisé à l'étape précédente.
+	\item[\textbullet] l'implémentation de ces deux applications dans deux langages différents, ce qui donne lieu à une gestion d'équipe particulière détaillée par la suite.
+	\item[\textbullet] la validation de ces deux applications, tant d'un point de vue logicielle que d'un point de vue ergonomie et facilité d'utilisation. Cette validation ergonomique par les utilisateurs est cruciale et sera réalisée en deux parties :
+	\begin{itemize}
+		\item dans un premier temps, une validation auprès d'un panel d'utilisateurs potentiels sélectionnés suivant leur profil, qui permettra de valider les applications dans le cadre du projet de spécialité
+		\item dans un second temps, une validation ergonomique sur un panel d'utilisateurs potentiels plus large avant la mise à disposition des deux applications sur leur plate-forme de téléchargement respective. Cette mise à disposition générale et gratuite est fixée par le Bureau de Cercle des \'Elèves de Grenoble INP au 10 août 2012.
+\\
+\\
+\\
+	\end{itemize}
+\end{itemize}
+\indent \indent Ce projet comporte des risques et des dépendances que nous ne pouvons pas occulter, puisque bien qu’une mise à niveau soit prévue dans notre planning, notre groupe contient 3 personnes qui n’ont aucune expérience dans les technologies utilisées pour l’implémentation d’applications mobiles sur iPhone et Android. De plus, les professeurs encadrant et notre tutrice ne possèdent pas de compétence particulière dans ce domaine. De ce fait, le risque qu’un problème technologique nous ralentisse n'est pas négligeable, ceci entrainant un non respect des délais mis en place.\\
+\indent Pour réduire ces risques, nous allons donc implémenter nos applications par incrément pour assurer l’obtention d’un livrable stable en fin de projet. Nous allons donc, une fois l’étape d’implémentation commencée, nous consacrer d’abord à la partie événementielle, la plus importante pour nos futurs utilisateurs et notre association. Nous disposons tout de même d’un filet de sécurité. En effet, notre association désire mettre en place l’application pour la rentrée scolaire 2012, nous disposons donc de la période estivale pour compenser un éventuel retard.\\
+\indent Pour aller plus loin, nous serons confrontés à l’intégration 2012 à un risque très important. En effet, notre démarche prend son sens dans son orientation utilisateur et c’est dans cette période que nous obtiendrons le plus de retour concernant nos applications. Nous devrons alors les prendre en compte pour adapter les choix que nous avions effectués. Cependant, avec le début de la troisième année, nous n’aurons peut être pas le temps de nous y consacrer suffisamment rapidement.\\
+\\
+\indent Au delà des risques auxquels nous sommes confrontés, nous devons considérer les différentes dépendances qui peuvent, elles aussi, avoir un impact significatif sur la réussite de notre entreprise.\\
+\indent Tout d’abord, considérons les dépendances externes de notre projet. Nos deux applications utilisent les informations présentent sur le site internet du Grand Cercle. Il faut donc que le site possède du contenu pour que nos deux applications aient de l’intérêt. De plus, nous devons prendre en compte le délai d’obtention de la licence de développeur Apple et de mise en place sur la plate-forme de téléchargement (Play store, Apple store).\\
+\indent Ensuite, il nous faut  considérer une forte dépendance interne. Bien que nous implémentons deux applications mobiles sur deux plate-formes différentes, nous allons devoir assurer une cohérence entre les interfaces utilisateurs et les fonctionnalités.\\
+\indent Pour sécuriser ces dépendances, nous allons donc commencer les démarches d'obtention des licences rapidement et nous assurer que les différentes associations de Grenoble INP mettent en place du contenu sur le site internet pour l’intégration 2012. En ce qui concerne la dépendance interne, nous effectuerons un unique cahier des charges ainsi qu’un unique document de spécifications externes. De ce fait, bien que chaque plate-forme possèdent ses propres subtilités graphiques, nos deux applications seront cohérentes.\\
+\\
+\\
+\\
+\\
+\indent Pour vérifier la réussite de notre projet, nous devrons dans un premier temps relever le nombre de téléchargement de l’application à la rentrée 2012. Nous pourrons ensuite diviser ce nombre par le nombre d'étudiants à Grenoble INP à la rentrée prochaine, et ainsi obtenir un rapport pertinent, que l'on pourra comparer avec le rapport du nombre estimés d'étudiants possédant un smartphone sur le nombre d'étudiants total à Grenoble INP. Nous espérons que 50\% des étudiants de Grenoble INP qui possèdent un smartphone à la rentrée 2012 téléchargerons l'une de nos deux applications.\\
+\indent Par la suite, nous mettrons en place un feedback concernant l’application qui nous permettra de récupérer les critiques de nombreux utilisateurs. Grâce à cela nous pourrons revenir sur les choix effectués pour améliorer nos applications. Nous sommes conscients que ce travail en aval demande de l’investissement de notre part, mais nous sommes tous membres de l’association et notre mandat se termine en Décembre. Motivés, nous comptons réaliser la meilleure application possible et transmettre le savoir accumulé autour de ce projet aux futurs membres intéressés.
+% Conclusion
+
+
+
+
+
+\end{document}
+
