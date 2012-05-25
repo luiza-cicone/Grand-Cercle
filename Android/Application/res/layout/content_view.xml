@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical">
-  <TextView 
-  		android:id="@+id/title"  
-  		android:layout_width="wrap_content" 
-  		android:layout_height="wrap_content"
-  		android:textSize="12dp"
-  		android:layout_marginRight="10dp"
- 	/>
-  <TextView 
-  		android:id="@+id/description"  
-  		android:layout_width="fill_parent" 
-  		android:layout_height="fill_parent"
-  		android:textSize="7dp"
-  		android:layout_marginRight="10dp"
- 	/>
-</LinearLayout>
+	<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" >
+	 
+	 
+	    <LinearLayout
+	        android:id="@+id/linearLayout1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:baselineAligned="false" >
+	 
+	 
+	 
+	        <LinearLayout
+	            android:id="@+id/linearLayout2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="0.01"
+	            android:orientation="vertical" >
+	 
+	        </LinearLayout>
+	 
+	            <LinearLayout
+	                android:id="@+id/linearLayout3"
+	                android:layout_width="wrap_content"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="0.99"
+	                android:orientation="vertical" >
+	  <TableRow
+	                    android:id="@+id/tableRow1"
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="vertical" >
+	 
+	    <LinearLayout
+	        android:id="@+id/linearLayout5"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:orientation="horizontal" >     
+	 
+	          
+	        <Button
+	            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="ToggleMenu"
+	            android:layout_marginTop="2dp" />
+	    </LinearLayout>
+	 
+	     </TableRow>
+	 
+	</LinearLayout>
+	</LinearLayout>
+	</FrameLayout>

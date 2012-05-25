@@ -22,16 +22,12 @@ public class FeedPlayer extends TabActivity {
 		setContentView(R.layout.main);
 		
 		Intent intent = new Intent(this, ActiviteTab.class);
-		
 		tabHost = getTabHost();
 		
-		intent.putExtra("valeur", "Coucou tout le monde");
-		
-		tabSpec = tabHost.newTabSpec("un").setIndicator("Un",
-		getResources().getDrawable(R.drawable.icon)).setContent(intent);
+		// ci-dessous : pour mettre un icone dans l'onglet !
+		//tabSpec = tabHost.newTabSpec("un").setIndicator("Un",getResources().getDrawable(R.drawable.icon)).setContent(intent);
+		tabSpec = tabHost.newTabSpec("un").setIndicator("Un").setContent(intent);
 		tabHost.addTab(tabSpec);
-		
-		intent.putExtra("valeur", "Hello world !");
 		
 		tabSpec = tabHost.newTabSpec("deux").setIndicator("Deux").setContent(intent);
 		tabHost.addTab(tabSpec);
