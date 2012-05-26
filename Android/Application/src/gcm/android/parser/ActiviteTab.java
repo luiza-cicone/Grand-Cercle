@@ -1,9 +1,5 @@
 package gcm.android.parser;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -45,7 +40,6 @@ public class ActiviteTab extends Activity {
     private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			setContentView(R.layout.content_view);
-
 			((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
 			// On récupère notre ressource au format String
 			String Des = ((Feed)parent.getItemAtPosition(position)).getDescription();
