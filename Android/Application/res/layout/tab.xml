@@ -9,18 +9,18 @@
   	<ImageView 
       	android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:src="@drawable/header"
+	    android:src="@drawable/grand_cercle"
 	    android:adjustViewBounds= "true"
 	    android:maxHeight="40dp" >
 	</ImageView>
-	<EditText
+	<!--<EditText
 	    android:id="@+id/recherche"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"    
 	    android:hint="@string/recherche"
     	android:inputType="textMultiLine"
     	android:lines="1" 
-    />
+    />-->
 	<ListView 
 	    android:id="@+id/listFeed" 
 	    android:layout_width="fill_parent" 
