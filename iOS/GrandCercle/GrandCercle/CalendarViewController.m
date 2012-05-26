@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "CalendarViewController.h"
 
-@interface FirstViewController ()
+@interface CalendarViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation CalendarViewController
 
 - (void)viewDidLoad
 {

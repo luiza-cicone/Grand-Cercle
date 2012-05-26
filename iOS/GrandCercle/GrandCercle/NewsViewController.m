@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "NewsViewController.h"
 
-@interface SecondViewController ()
+@interface NewsViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation NewsViewController
 
 - (void)viewDidLoad
 {
