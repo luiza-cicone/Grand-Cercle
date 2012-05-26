@@ -10,10 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.TabHost.TabSpec;
 
 public class FeedPlayer extends TabActivity {
     /** Called when the activity is first created. */
@@ -26,7 +24,6 @@ public class FeedPlayer extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		Intent intent = new Intent(this, ActiviteTab.class);
 		tabHost = getTabHost();
 		
 		// Décommentez la ligne suivante pour séparer vos onglets via une image
