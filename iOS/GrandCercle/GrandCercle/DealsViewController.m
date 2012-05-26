@@ -1,18 +1,18 @@
 //
-//  FirstViewController.m
+//  SecondViewController.m
 //  GrandCercle
 //
 //  Created by Luiza Cicone on 22/5/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "DealsViewController.h"
 
-@interface FirstViewController ()
+@interface DealsViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation DealsViewController
 
 - (void)viewDidLoad
 {

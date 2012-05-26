@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  SecondViewController.h
 //  GrandCercle
 //
 //  Created by Luiza Cicone on 22/5/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface DealsViewController : UIViewController
 
 @end
