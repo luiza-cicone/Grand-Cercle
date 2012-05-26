@@ -28,6 +28,8 @@
          <activity 
             android:name=".Event">
         </activity>
+             <activity android:name=".Tab1"></activity>
+        <activity android:name=".Tab2"></activity>
 
     </application>
     

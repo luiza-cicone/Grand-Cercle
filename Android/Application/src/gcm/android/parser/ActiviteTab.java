@@ -2,6 +2,7 @@ package gcm.android.parser;
 
 import java.util.ArrayList;
 
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -21,7 +23,7 @@ import android.widget.TextView;
 
 public class ActiviteTab extends Activity {
 	private ListView feedListView;
-	private EditText recherche;	
+	private EditText recherche;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,16 +41,20 @@ public class ActiviteTab extends Activity {
         feedListView.setOnItemClickListener(clickListenerFeed);
     }
     
-
-    private View.OnClickListener clickListenerButton = new View.OnClickListener() {
+  
+	
+   /* private View.OnClickListener clickListenerButton = new View.OnClickListener() {
     	public void onClick(View v) {
     		setContentView(R.layout.tab);
     	}
     	
-    };
+    };*/
+    
+   
+    
     private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			setContentView(R.layout.content_view);
+			setContentView(R.layout.description_evenement);
 			((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
 			// On récupère notre ressource au format String
 			String Des = ((Feed)parent.getItemAtPosition(position)).getDescription();
