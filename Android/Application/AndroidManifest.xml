@@ -25,6 +25,9 @@
         <activity 
             android:name=".ActiviteTab">
         </activity>
+         <activity 
+            android:name=".Event">
+        </activity>
 
     </application>
     
