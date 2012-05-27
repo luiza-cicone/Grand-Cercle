@@ -39,7 +39,7 @@ public class GCM extends TabActivity {
 	}
 	
 	  private void setupTab(String name, String tag, Intent intent) {
-			tabHost.addTab(tabHost.newTabSpec(tag).setIndicator(createTabView(tabHost.getContext(), name)).setContent(intent));
+			tabHost.addTab(tabHost.newTabSpec(tag).setIndicator( createTabView(tabHost.getContext(), name)).setContent(intent));
 		}
 	  
 	  private static View createTabView(final Context context, final String text) {
