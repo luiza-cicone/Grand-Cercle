@@ -33,6 +33,7 @@
 		<activity android:name=".Tab3"></activity>
 		<activity android:name=".Tab4"></activity>
 		<activity android:name=".Tab5"></activity>
+		<activity android:name=".PageEvent"></activity>
     </application>
     
 

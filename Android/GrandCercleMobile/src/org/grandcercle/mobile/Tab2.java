@@ -40,15 +40,6 @@ public class Tab2 extends Activity {
 	 
 	 private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				setContentView(R.layout.description_evenement);
-				((TextView)findViewById(R.id.title)).setText(((Feed)parent.getItemAtPosition(position)).getTitle());
-				// On récupère notre ressource au format String
-				String Des = ((Feed)parent.getItemAtPosition(position)).getDescription();
-				// On le convertit en Spanned
-				Spanned marked_up = Html.fromHtml(Des);	
-				((TextView)findViewById(R.id.description)).setText(marked_up);
-				
-				
 				 /* Get the notification manager  */
 		         NotificationManager mNotManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -83,6 +74,19 @@ public class Tab2 extends Activity {
 
 		         /* Sent Notification to notification bar */
 		         mNotManager.notify(  0 , mNotification );
+				
+				
+				// Ouverture nouvelle activity
+				Intent intent = new Intent(Tab2.this,PageEvent.class);
+				// Passage des paramètres
+				Bundle bundle = new Bundle();
+				//Add the parameters to bundle as
+				bundle.putString("titre",((Feed)parent.getItemAtPosition(position)).getTitle());
+				bundle.putString("description",((Feed)parent.getItemAtPosition(position)).getDescription());
+				//Ajout du Bundle
+				intent.putExtras(bundle);
+				
+				Tab2.this.startActivity(intent);
 			}
 	    };
 }
