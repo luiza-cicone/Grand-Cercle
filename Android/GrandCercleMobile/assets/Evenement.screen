@@ -58,26 +58,29 @@
   <widgets xsi:type="model:Button" id="32" x="212" y="584" height="49" text="Ajouter à mon calendrier" measuredWidth="157" measuredHeight="49">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Rectangle" id="33" x="64" y="120" width="99" height="91" text="Image" measuredWidth="99" measuredHeight="91">
+  <widgets xsi:type="model:Rectangle" id="33" x="64" y="120" width="99" height="153" text="Image" measuredWidth="99" measuredHeight="153">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" id="35" x="272" y="191" width="64" height="20" text="Cercle GI" measuredWidth="64" measuredHeight="20" dummyText="true">
+  <widgets xsi:type="model:Text" id="35" x="272" y="120" width="64" height="20" text="Cercle GI" measuredWidth="64" measuredHeight="20" dummyText="true">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Rectangle" id="36" x="272" y="120" width="71" height="61" text="Logo cercle" measuredWidth="71" measuredHeight="61">
+  <widgets xsi:type="model:Rectangle" id="36" x="272" y="139" width="71" height="61" text="Logo cercle" measuredWidth="71" measuredHeight="61">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" id="37" x="64" y="249" width="137" height="72" text="&lt;Nom de l'événement>&#xA;&#xA;Lieu : &lt;Lieu>&#xA;&#xA;Prix : &lt;Prix>" measuredWidth="137" measuredHeight="72" dummyText="true">
+  <widgets xsi:type="model:Text" id="37" x="272" y="224" width="137" height="49" text="&#xA;&#xA;Lieu : &lt;Lieu>&#xA;&#xA;Date : &lt;Date>" measuredWidth="137" measuredHeight="49" dummyText="true">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" id="38" x="64" y="379" width="300" height="194" text="Description de l'événement&#xA;&#xA;" measuredWidth="300" measuredHeight="194" dummyText="true">
+  <widgets xsi:type="model:Text" id="38" x="64" y="408" width="300" height="134" text="Description de l'événement&#xA;&#xA;" measuredWidth="300" measuredHeight="134" dummyText="true">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" id="39" x="208" y="249" width="161" height="104" text="Type : &lt;Type>&#xA;&#xA;Date : &lt;Date>&#xA;&#xA;Heure de début : &lt;HH:MM>&#xA;" measuredWidth="161" measuredHeight="104" dummyText="true">
+  <widgets xsi:type="model:Text" id="39" x="61" y="352" width="313" height="81" text="PAF : &lt;Prix>                               Heure de début : &lt;HH:MM>&#xA;" measuredWidth="313" measuredHeight="81" dummyText="true">
     <font/>
   </widgets>
   <widgets xsi:type="model:Text" id="40" x="432" y="168" width="105" height="49" text="Feed ici" measuredWidth="105" measuredHeight="49" dummyText="true">
     <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="42" x="132" y="288" text="&lt;Titre>" measuredWidth="145" measuredHeight="57">
+    <font size="43px"/>
   </widgets>
   <hRuler/>
   <vRuler/>

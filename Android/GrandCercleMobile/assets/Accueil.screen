@@ -52,9 +52,11 @@
     </widgets>
     <widgets xsi:type="model:Panel" id="26" x="38" y="89" width="320" height="536" measuredWidth="320" measuredHeight="536" border="none"/>
   </widgets>
-  <widgets xsi:type="model:TabbedPane" id="29" x="104" y="56" width="329" height="537" text="Evénements,News" measuredWidth="329" measuredHeight="537" selection="0">
+  <widgets xsi:type="model:TabbedPane" id="29" x="104" y="56" width="329" height="537" text="Evénements,News,Bons Plans, Infos" measuredWidth="329" measuredHeight="537" selection="0">
     <items x="10" y="0" width="88" height="27" text="Evénements"/>
     <items x="98" y="0" width="50" height="27" text="News"/>
+    <items x="148" y="0" width="78" height="27" text="Bons Plans"/>
+    <items x="226" y="0" width="47" height="27" text="Infos"/>
     <font/>
   </widgets>
   <widgets xsi:type="model:ButtonBar" id="31" x="104" y="556" width="329" height="37" text="Calendrier,Liste,Prochainement" measuredWidth="329" measuredHeight="37" selection="0">
