@@ -29,7 +29,7 @@
             android:name=".Event">
         </activity>
              <activity android:name=".Tab1"></activity>
-        <activity android:name=".Tab2"></activity>
+        <activity android:name="org.grandcercle.mobile.Tab2"></activity>
 
     </application>
     
