@@ -4,3 +4,4 @@ Android/.metadata
 *~
 iOS/GrandCercle/GrandCercle.xcodeproj/project.xcworkspace/
 iOS/GrandCercle/GrandCercle.xcodeproj/xcuserdata/
+*.DS_Store
