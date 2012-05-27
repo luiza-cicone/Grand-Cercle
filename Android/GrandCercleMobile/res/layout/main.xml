@@ -10,19 +10,20 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
         android:textSize="3dp">
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="3dp"
-            android:layout_weight="0"
-        />
+        
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="3dp"
             android:layout_weight="1"
+        />
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="3dp"
+            android:layout_weight="0"
         />
     </LinearLayout>
 </TabHost>
