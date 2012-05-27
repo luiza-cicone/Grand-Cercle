@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:WidgetGroup" id="2" x="72" y="-32" measuredWidth="396" measuredHeight="790" name="Phone">
+    <widgets xsi:type="model:WidgetGroup" id="3" measuredWidth="396" measuredHeight="790">
+      <widgets xsi:type="model:WidgetGroup" id="4" y="281" measuredWidth="396" measuredHeight="509">
+        <widgets xsi:type="model:Circle" id="5" y="324" width="396" height="185" measuredWidth="396" measuredHeight="185" background="#444444" foreground="#444444">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Rectangle" id="6" width="395" height="415" measuredWidth="395" measuredHeight="415" background="#444444" foreground="#444444">
+          <font/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="7" measuredWidth="396" measuredHeight="763">
+        <widgets xsi:type="model:Circle" id="8" y="586" width="396" height="177" measuredWidth="396" measuredHeight="177" background="#666666" foreground="#666666">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Circle" id="9" width="396" height="177" measuredWidth="396" measuredHeight="177" background="#666666" foreground="#666666">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Rectangle" id="10" y="86" width="395" height="585" measuredWidth="395" measuredHeight="585" background="#666666" foreground="#666666">
+          <font/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="11" x="10" y="28" measuredWidth="376" measuredHeight="674">
+        <widgets xsi:type="model:Circle" id="12" y="582" width="376" height="92" measuredWidth="376" measuredHeight="92" background="#000000">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Circle" id="13" width="376" height="115" measuredWidth="376" measuredHeight="115" background="#000000">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Rectangle" id="14" y="53" width="375" height="574" measuredWidth="375" measuredHeight="574" background="#000000">
+          <font/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Rectangle" id="15" x="121" y="16" width="153" height="9" measuredWidth="153" measuredHeight="9" background="#999999" border="solid-rounded">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Circle" id="16" x="180" y="714" width="36" height="36" measuredWidth="36" measuredHeight="36" background="#999999">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="17" x="70" y="649" measuredWidth="260" measuredHeight="16">
+        <widgets xsi:type="model:Icon" id="18" measuredWidth="16" measuredHeight="16" foreground="#ffffff" icon="undo (small)"/>
+        <widgets xsi:type="model:Icon" id="19" x="162" measuredWidth="16" measuredHeight="16" foreground="#ffffff" icon="home (small)"/>
+        <widgets xsi:type="model:Icon" id="20" x="244" measuredWidth="16" measuredHeight="16" foreground="#ffffff" icon="find (small)"/>
+        <widgets xsi:type="model:WidgetGroup" id="21" x="82" measuredWidth="14" measuredHeight="15">
+          <widgets xsi:type="model:HLine" id="22" width="14" measuredWidth="14" measuredHeight="6" foreground="#ffffff"/>
+          <widgets xsi:type="model:HLine" id="23" x="4" y="3" width="10" measuredWidth="10" measuredHeight="6" foreground="#ffffff"/>
+          <widgets xsi:type="model:HLine" id="24" x="4" y="9" width="10" measuredWidth="10" measuredHeight="6" foreground="#ffffff"/>
+          <widgets xsi:type="model:HLine" id="25" x="4" y="6" width="10" measuredWidth="10" measuredHeight="6" foreground="#ffffff"/>
+        </widgets>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Panel" id="26" x="38" y="89" width="320" height="536" measuredWidth="320" measuredHeight="536" border="none"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" id="29" x="104" y="56" width="329" height="537" text="Evénements,News" measuredWidth="329" measuredHeight="537" selection="0">
+    <items x="10" y="0" width="88" height="27" text="Evénements"/>
+    <items x="98" y="0" width="50" height="27" text="News"/>
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:ButtonBar" id="31" x="104" y="556" width="329" height="37" text="Calendrier,Liste,Prochainement" measuredWidth="329" measuredHeight="37" selection="0">
+    <font/>
+    <items x="0" y="0" width="110" height="37" text="Calendrier"/>
+    <items x="110" y="0" width="65" height="37" text="Liste"/>
+    <items x="175" y="0" width="154" height="37" text="Prochainement"/>
+  </widgets>
+  <widgets xsi:type="model:Rectangle" id="34" x="120" y="124" width="289" height="401" text="CALENDRIER : un mois" measuredWidth="289" measuredHeight="401">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
