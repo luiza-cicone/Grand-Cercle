@@ -11,7 +11,7 @@
 	<TextView android:id="@+id/tabsText"
 	    android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:textSize="15dip"
+		android:textSize="7dip"
 		android:textColor="@drawable/tab_text_selector"
 	/>
 </LinearLayout>

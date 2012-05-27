@@ -31,8 +31,11 @@ public class GCM extends TabActivity {
 		// Décommentez la ligne suivante pour séparer vos onglets via une image
         //this.tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
 
-        setupTab("Onglet 1", "tab1", new Intent().setClass(this, Tab1.class));
-        setupTab("Onglet 2", "tab2", new Intent().setClass(this, Tab2.class));
+        setupTab("Evenement", "tab1", new Intent().setClass(this, Tab1.class));
+        setupTab("News", "tab2", new Intent().setClass(this, Tab2.class));
+        setupTab("Calendrier", "tab3", new Intent().setClass(this, Tab3.class));
+        setupTab("Boutique", "tab4", new Intent().setClass(this, Tab4.class));
+        setupTab("Infos", "tab5", new Intent().setClass(this, Tab5.class));
 	}
 	
 	  private void setupTab(String name, String tag, Intent intent) {

@@ -39,7 +39,10 @@ public final class R {
         public static final int tab=0x7f030003;
         public static final int tab1=0x7f030004;
         public static final int tab2=0x7f030005;
-        public static final int tab_item=0x7f030006;
+        public static final int tab3=0x7f030006;
+        public static final int tab4=0x7f030007;
+        public static final int tab5=0x7f030008;
+        public static final int tab_item=0x7f030009;
     }
     public static final class string {
         public static final int app_name=0x7f040004;
