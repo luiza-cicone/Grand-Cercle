@@ -59,11 +59,8 @@ public final class R {
         public static final int calendarheader=0x7f07000c;
         public static final int currentMonth=0x7f07000a;
         public static final int description=0x7f070003;
-<<<<<<< HEAD
-        public static final int icone=0x7f070010;
-=======
         public static final int group=0x7f070005;
->>>>>>> b8c7d4df1c46b444aaacff56901ff826155def08
+        public static final int icone=0x7f070010;
         public static final int link=0x7f070007;
         public static final int listFeed=0x7f07000e;
         public static final int nextMonth=0x7f07000b;
