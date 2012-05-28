@@ -1,7 +1,6 @@
 package org.grandcercle.mobile;
 
 
-
 import java.util.ArrayList;
 
 import org.grandcercle.mobile.R;
@@ -14,13 +13,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class Tab2 extends Activity {
 	 @Override
@@ -28,11 +24,11 @@ public class Tab2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab2);
         //recherche = (EditText)findViewById(R.id.recherche);
-        ArrayList<Feed> feeds = ContainerData.getFeeds();
-        for (Feed feed : feeds) {
-			Log.i("FeedPlayer",feed.toString());
+        ArrayList<News> listNews = ContainerData.getNews();
+        for (News news : listNews) {
+			Log.i("FeedPlayer",news.toString());
 		}
-        ListFeedAdapter lfa = new ListFeedAdapter(this, feeds);
+        ListNewsAdapter lfa = new ListNewsAdapter(this,listNews);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
         feedListView.setOnItemClickListener(clickListenerFeed);
@@ -77,16 +73,22 @@ public class Tab2 extends Activity {
 				
 				
 				// Ouverture nouvelle activity
-				Intent intent = new Intent(Tab2.this,PageEvent.class);
+				Intent intent = new Intent(Tab2.this,PageNews.class);
 				// Passage des paramètres
 				Bundle bundle = new Bundle();
 				//Add the parameters to bundle as
-				bundle.putString("titre",((Feed)parent.getItemAtPosition(position)).getTitle());
-				bundle.putString("description",((Feed)parent.getItemAtPosition(position)).getDescription());
+				bundle.putString("titre",((News)parent.getItemAtPosition(position)).getTitle());
+				bundle.putString("description",((News)parent.getItemAtPosition(position)).getDescription());
+				bundle.putString("auteur",((News)parent.getItemAtPosition(position)).getAuthor());
+				bundle.putString("datepublication",((News)parent.getItemAtPosition(position)).getPubDate());
+				bundle.putString("group",((News)parent.getItemAtPosition(position)).getGroup());
+				bundle.putString("logo",((News)parent.getItemAtPosition(position)).getLogo());
+				//bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
 				Tab2.this.startActivity(intent);
 			}
 	    };
+	    
 }

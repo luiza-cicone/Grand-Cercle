@@ -2,6 +2,7 @@ package org.grandcercle.mobile;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.grandcercle.mobile.R;
@@ -12,12 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListFeedAdapter extends BaseAdapter {
+public class ListEventAdapter extends BaseAdapter {
 
 	// les données à afficher
-	private ArrayList<Feed> feeds;
+	private ArrayList<Event> listEvent;
 	
 	/* Le LayoutInflater permet de parser un layout XML et de 
 	 * le transcoder en IHM Android. Pour respecter la classe 
@@ -25,9 +27,9 @@ public class ListFeedAdapter extends BaseAdapter {
 	 */
 	private LayoutInflater inflater;
 	
-	public ListFeedAdapter(Context context,ArrayList<Feed> feeds) {
+	public ListEventAdapter(Context context,ArrayList<Event> listEvent) {
 		inflater = LayoutInflater.from(context);
-		this.feeds = feeds;
+		this.listEvent = listEvent;
 	}
 	
 	/* il nous faut spécifier la méthode "getCount()". 
@@ -36,16 +38,16 @@ public class ListFeedAdapter extends BaseAdapter {
 	 * de personnes contenus dans "mListP".
 	 */
 	public int getCount() {
-		return feeds.size();
+		return listEvent.size();
 	}
 
 	// Permet de retourner un objet contenu dans la liste
 	public Object getItem(int index) {
-		return feeds.get(index);
+		return listEvent.get(index);
 	}
 
 	public long getItemId(int index) {
-		return this.feeds.get(index).getId();
+		return this.listEvent.get(index).getId();
 		
 	}
 	
@@ -57,25 +59,33 @@ public class ListFeedAdapter extends BaseAdapter {
 	 * notre layout XML, sinon on le réutilise
 	 */
 	public View getView(int position, View convertView, ViewGroup parent){
-		FeedView fv;		
+		EventView ev;		
 		
 		if (convertView == null) {
-			fv = new FeedView();
-			convertView = inflater.inflate(R.layout.feed_view, null);
+			ev = new EventView();
+			convertView = inflater.inflate(R.layout.list_event, null);
 
-			fv.creator = (TextView)convertView.findViewById(R.id.creator);			
-			fv.title = (TextView)convertView.findViewById(R.id.title);
-			fv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
-			fv.link = (TextView)convertView.findViewById(R.id.link);
-			convertView.setTag(fv);
+			ev.group = (TextView)convertView.findViewById(R.id.group);			
+			ev.title = (TextView)convertView.findViewById(R.id.title);
+			ev.day = (TextView)convertView.findViewById(R.id.day);
+			ev.date = (TextView)convertView.findViewById(R.id.date);
+			ev.time = (TextView)convertView.findViewById(R.id.time);
+			ev.logo = (ImageView)convertView.findViewById(R.id.logo);
+			convertView.setTag(ev);
 
 		} else {
-			fv = (FeedView) convertView.getTag();
+			ev = (EventView) convertView.getTag();
 		}						
-		fv.creator.setText(feeds.get(position).getCreator());
-		fv.pubDate.setText(feeds.get(position).getPubDate());
-		fv.title.setText(feeds.get(position).getTitle());
-		fv.link.setText(feeds.get(position).getLink());
+		ev.group.setText(listEvent.get(position).getGroup());
+		ev.title.setText(listEvent.get(position).getTitle());
+		ev.day.setText(listEvent.get(position).getDay());
+		ev.date.setText(listEvent.get(position).getDate());
+		ev.time.setText(listEvent.get(position).getTime());
+		try {
+			SaveImageFromUrl.setImage(ev.logo,listEvent.get(position).getLogo());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return convertView;
 	}
