@@ -2,6 +2,7 @@ package org.grandcercle.mobile;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.grandcercle.mobile.R;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ListEventAdapter extends BaseAdapter {
@@ -61,19 +63,29 @@ public class ListEventAdapter extends BaseAdapter {
 		
 		if (convertView == null) {
 			ev = new EventView();
-			convertView = inflater.inflate(R.layout.feed_view, null);
+			convertView = inflater.inflate(R.layout.list_event, null);
 
 			ev.group = (TextView)convertView.findViewById(R.id.group);			
 			ev.title = (TextView)convertView.findViewById(R.id.title);
-			ev.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
+			ev.day = (TextView)convertView.findViewById(R.id.day);
+			ev.date = (TextView)convertView.findViewById(R.id.date);
+			ev.time = (TextView)convertView.findViewById(R.id.time);
+			ev.logo = (ImageView)convertView.findViewById(R.id.logo);
 			convertView.setTag(ev);
 
 		} else {
 			ev = (EventView) convertView.getTag();
 		}						
 		ev.group.setText(listEvent.get(position).getGroup());
-		ev.pubDate.setText(listEvent.get(position).getPubDate());
 		ev.title.setText(listEvent.get(position).getTitle());
+		ev.day.setText(listEvent.get(position).getDay());
+		ev.date.setText(listEvent.get(position).getDate());
+		ev.time.setText(listEvent.get(position).getTime());
+		try {
+			SaveImageFromUrl.setImage(ev.logo,listEvent.get(position).getLogo());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return convertView;
 	}

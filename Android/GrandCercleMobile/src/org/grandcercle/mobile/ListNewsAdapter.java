@@ -2,6 +2,7 @@ package org.grandcercle.mobile;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.grandcercle.mobile.R;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ListNewsAdapter extends BaseAdapter {
@@ -61,19 +63,27 @@ public class ListNewsAdapter extends BaseAdapter {
 		
 		if (convertView == null) {
 			nv = new NewsView();
-			convertView = inflater.inflate(R.layout.feed_view, null);
+			convertView = inflater.inflate(R.layout.list_news, null);
 
 			nv.group = (TextView)convertView.findViewById(R.id.group);			
 			nv.title = (TextView)convertView.findViewById(R.id.title);
 			nv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
+			nv.logo = (ImageView)convertView.findViewById(R.id.logo);
+			
 			convertView.setTag(nv);
 
 		} else {
-			nv = (NewsView) convertView.getTag();
+			nv = (NewsView)convertView.getTag();
 		}						
 		nv.group.setText(listNews.get(position).getGroup());
 		nv.pubDate.setText(listNews.get(position).getPubDate());
 		nv.title.setText(listNews.get(position).getTitle());
+		
+		try {
+			SaveImageFromUrl.setImage(nv.logo,listNews.get(position).getLogo());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return convertView;
 	}

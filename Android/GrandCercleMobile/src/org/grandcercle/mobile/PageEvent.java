@@ -11,7 +11,7 @@ public class PageEvent extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		// PROVISOIRE !!
-		setContentView(R.layout.description_news);
+		setContentView(R.layout.description_event);
 		
 		// Recuperation des paramètres
 		Bundle param = this.getIntent().getExtras();
