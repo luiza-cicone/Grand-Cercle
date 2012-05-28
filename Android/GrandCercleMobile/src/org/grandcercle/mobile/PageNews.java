@@ -21,7 +21,8 @@ public class PageNews extends Activity {
 		((TextView)findViewById(R.id.description)).setText(markedUp);
 		((TextView)findViewById(R.id.group)).setText(param.getString("group"));
 		((TextView)findViewById(R.id.PubDate)).setText(param.getString("datepublication"));
-		((TextView)findViewById(R.id.link)).setText(param.getString("link"));
+		ImageView image = (ImageView)findViewById(R.id.logo);
+		//((TextView)findViewById(R.id.link)).setText(param.getString("link"));
 		/*String imageURL = "http://grandcercle.org/sites/default/files/styles/mobile_small/public/logo_gc_0.png";
 		String img="image.jpg";
 		
@@ -31,7 +32,7 @@ public class PageNews extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		((ImageView)findViewById(R.id.logo)).setImageResource(R.drawable.bg);
+		
 		//String temp = (param.getString("logo")).substring(30);
 		
 		//((TextView)findViewById(R.id.logo)).setText(param.getString(temp));
