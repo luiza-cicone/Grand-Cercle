@@ -1,0 +1,493 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
+		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
+		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
+		2595EAA81573FA9000CA27B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAA61573FA9000CA27B3 /* InfoPlist.strings */; };
+		2595EAAA1573FA9000CA27B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAA91573FA9000CA27B3 /* main.m */; };
+		2595EAAE1573FA9000CA27B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAAD1573FA9000CA27B3 /* AppDelegate.m */; };
+		2595EAB11573FA9000CA27B3 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAB01573FA9000CA27B3 /* EventsViewController.m */; };
+		2595EAB31573FA9000CA27B3 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAB21573FA9000CA27B3 /* first.png */; };
+		2595EAB51573FA9000CA27B3 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAB41573FA9000CA27B3 /* first@2x.png */; };
+		2595EAB81573FA9000CA27B3 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAB71573FA9000CA27B3 /* NewsViewController.m */; };
+		2595EABA1573FA9000CA27B3 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAB91573FA9000CA27B3 /* second.png */; };
+		2595EABC1573FA9000CA27B3 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2595EABB1573FA9000CA27B3 /* second@2x.png */; };
+		2595EABF1573FA9000CA27B3 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2595EABD1573FA9000CA27B3 /* EventsViewController.xib */; };
+		2595EAC21573FA9000CA27B3 /* NewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAC01573FA9000CA27B3 /* NewsViewController.xib */; };
+		2595EACA1573FA9000CA27B3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAC91573FA9000CA27B3 /* SenTestingKit.framework */; };
+		2595EACB1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
+		2595EACC1573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
+		2595EAD41573FA9000CA27B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAD21573FA9000CA27B3 /* InfoPlist.strings */; };
+		2595EAD71573FA9000CA27B3 /* Grand_CercleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAD61573FA9000CA27B3 /* Grand_CercleTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2595EACD1573FA9000CA27B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2595EA901573FA9000CA27B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2595EA981573FA9000CA27B3;
+			remoteInfo = "Grand Cercle";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2595EAA51573FA9000CA27B3 /* Grand Cercle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Grand Cercle-Info.plist"; sourceTree = "<group>"; };
+		2595EAA71573FA9000CA27B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2595EAA91573FA9000CA27B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2595EAAB1573FA9000CA27B3 /* Grand Cercle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grand Cercle-Prefix.pch"; sourceTree = "<group>"; };
+		2595EAAC1573FA9000CA27B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2595EAAD1573FA9000CA27B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2595EAAF1573FA9000CA27B3 /* EventsViewController.h */ = {isa = PBXFileReference; path = EventsViewController.h; sourceTree = "<group>"; };
+		2595EAB01573FA9000CA27B3 /* EventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		2595EAB21573FA9000CA27B3 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		2595EAB41573FA9000CA27B3 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		2595EAB61573FA9000CA27B3 /* NewsViewController.h */ = {isa = PBXFileReference; path = NewsViewController.h; sourceTree = "<group>"; };
+		2595EAB71573FA9000CA27B3 /* NewsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		2595EAB91573FA9000CA27B3 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		2595EABB1573FA9000CA27B3 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		2595EABE1573FA9000CA27B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EventsViewController.xib; sourceTree = "<group>"; };
+		2595EAC11573FA9000CA27B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NewsViewController.xib; sourceTree = "<group>"; };
+		2595EAC81573FA9000CA27B3 /* Grand CercleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Grand CercleTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2595EAC91573FA9000CA27B3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2595EAD11573FA9000CA27B3 /* Grand CercleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Grand CercleTests-Info.plist"; sourceTree = "<group>"; };
+		2595EAD31573FA9000CA27B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2595EAD51573FA9000CA27B3 /* Grand_CercleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Grand_CercleTests.h; sourceTree = "<group>"; };
+		2595EAD61573FA9000CA27B3 /* Grand_CercleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Grand_CercleTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2595EA961573FA9000CA27B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */,
+				2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */,
+				2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2595EAC41573FA9000CA27B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2595EACA1573FA9000CA27B3 /* SenTestingKit.framework in Frameworks */,
+				2595EACB1573FA9000CA27B3 /* UIKit.framework in Frameworks */,
+				2595EACC1573FA9000CA27B3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2595EA8E1573FA9000CA27B3 = {
+			isa = PBXGroup;
+			children = (
+				2595EAA31573FA9000CA27B3 /* Grand Cercle */,
+				2595EACF1573FA9000CA27B3 /* Grand CercleTests */,
+				2595EA9C1573FA9000CA27B3 /* Frameworks */,
+				2595EA9A1573FA9000CA27B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2595EA9A1573FA9000CA27B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2595EA991573FA9000CA27B3 /* Grand Cercle.app */,
+				2595EAC81573FA9000CA27B3 /* Grand CercleTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2595EA9C1573FA9000CA27B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2595EA9D1573FA9000CA27B3 /* UIKit.framework */,
+				2595EA9F1573FA9000CA27B3 /* Foundation.framework */,
+				2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */,
+				2595EAC91573FA9000CA27B3 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
+			isa = PBXGroup;
+			children = (
+				2595EAE11573FABD00CA27B3 /* UI */,
+				2595EAE01573FAAB00CA27B3 /* images */,
+				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
+				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
+				2595EAAF1573FA9000CA27B3 /* EventsViewController.h */,
+				2595EAB01573FA9000CA27B3 /* EventsViewController.m */,
+				2595EAB61573FA9000CA27B3 /* NewsViewController.h */,
+				2595EAB71573FA9000CA27B3 /* NewsViewController.m */,
+				2595EAA41573FA9000CA27B3 /* Supporting Files */,
+			);
+			path = "Grand Cercle";
+			sourceTree = "<group>";
+		};
+		2595EAA41573FA9000CA27B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2595EAA51573FA9000CA27B3 /* Grand Cercle-Info.plist */,
+				2595EAA61573FA9000CA27B3 /* InfoPlist.strings */,
+				2595EAA91573FA9000CA27B3 /* main.m */,
+				2595EAAB1573FA9000CA27B3 /* Grand Cercle-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2595EACF1573FA9000CA27B3 /* Grand CercleTests */ = {
+			isa = PBXGroup;
+			children = (
+				2595EAD51573FA9000CA27B3 /* Grand_CercleTests.h */,
+				2595EAD61573FA9000CA27B3 /* Grand_CercleTests.m */,
+				2595EAD01573FA9000CA27B3 /* Supporting Files */,
+			);
+			path = "Grand CercleTests";
+			sourceTree = "<group>";
+		};
+		2595EAD01573FA9000CA27B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2595EAD11573FA9000CA27B3 /* Grand CercleTests-Info.plist */,
+				2595EAD21573FA9000CA27B3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2595EAE01573FAAB00CA27B3 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				2595EAB21573FA9000CA27B3 /* first.png */,
+				2595EAB41573FA9000CA27B3 /* first@2x.png */,
+				2595EAB91573FA9000CA27B3 /* second.png */,
+				2595EABB1573FA9000CA27B3 /* second@2x.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		2595EAE11573FABD00CA27B3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2595EABD1573FA9000CA27B3 /* EventsViewController.xib */,
+				2595EAC01573FA9000CA27B3 /* NewsViewController.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2595EA981573FA9000CA27B3 /* Grand Cercle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2595EADA1573FA9000CA27B3 /* Build configuration list for PBXNativeTarget "Grand Cercle" */;
+			buildPhases = (
+				2595EA951573FA9000CA27B3 /* Sources */,
+				2595EA961573FA9000CA27B3 /* Frameworks */,
+				2595EA971573FA9000CA27B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Grand Cercle";
+			productName = "Grand Cercle";
+			productReference = 2595EA991573FA9000CA27B3 /* Grand Cercle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2595EAC71573FA9000CA27B3 /* Grand CercleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2595EADD1573FA9000CA27B3 /* Build configuration list for PBXNativeTarget "Grand CercleTests" */;
+			buildPhases = (
+				2595EAC31573FA9000CA27B3 /* Sources */,
+				2595EAC41573FA9000CA27B3 /* Frameworks */,
+				2595EAC51573FA9000CA27B3 /* Resources */,
+				2595EAC61573FA9000CA27B3 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2595EACE1573FA9000CA27B3 /* PBXTargetDependency */,
+			);
+			name = "Grand CercleTests";
+			productName = "Grand CercleTests";
+			productReference = 2595EAC81573FA9000CA27B3 /* Grand CercleTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2595EA901573FA9000CA27B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Ensimag;
+			};
+			buildConfigurationList = 2595EA931573FA9000CA27B3 /* Build configuration list for PBXProject "Grand Cercle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2595EA8E1573FA9000CA27B3;
+			productRefGroup = 2595EA9A1573FA9000CA27B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2595EA981573FA9000CA27B3 /* Grand Cercle */,
+				2595EAC71573FA9000CA27B3 /* Grand CercleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2595EA971573FA9000CA27B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2595EAA81573FA9000CA27B3 /* InfoPlist.strings in Resources */,
+				2595EAB31573FA9000CA27B3 /* first.png in Resources */,
+				2595EAB51573FA9000CA27B3 /* first@2x.png in Resources */,
+				2595EABA1573FA9000CA27B3 /* second.png in Resources */,
+				2595EABC1573FA9000CA27B3 /* second@2x.png in Resources */,
+				2595EABF1573FA9000CA27B3 /* EventsViewController.xib in Resources */,
+				2595EAC21573FA9000CA27B3 /* NewsViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2595EAC51573FA9000CA27B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2595EAD41573FA9000CA27B3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2595EAC61573FA9000CA27B3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2595EA951573FA9000CA27B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2595EAAA1573FA9000CA27B3 /* main.m in Sources */,
+				2595EAAE1573FA9000CA27B3 /* AppDelegate.m in Sources */,
+				2595EAB11573FA9000CA27B3 /* EventsViewController.m in Sources */,
+				2595EAB81573FA9000CA27B3 /* NewsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2595EAC31573FA9000CA27B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2595EAD71573FA9000CA27B3 /* Grand_CercleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2595EACE1573FA9000CA27B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2595EA981573FA9000CA27B3 /* Grand Cercle */;
+			targetProxy = 2595EACD1573FA9000CA27B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2595EAA61573FA9000CA27B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2595EAA71573FA9000CA27B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2595EABD1573FA9000CA27B3 /* EventsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2595EABE1573FA9000CA27B3 /* en */,
+			);
+			name = EventsViewController.xib;
+			sourceTree = "<group>";
+		};
+		2595EAC01573FA9000CA27B3 /* NewsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2595EAC11573FA9000CA27B3 /* en */,
+			);
+			name = NewsViewController.xib;
+			sourceTree = "<group>";
+		};
+		2595EAD21573FA9000CA27B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2595EAD31573FA9000CA27B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2595EAD81573FA9000CA27B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2595EAD91573FA9000CA27B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2595EADB1573FA9000CA27B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
+				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2595EADC1573FA9000CA27B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
+				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2595EADE1573FA9000CA27B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Grand Cercle.app/Grand Cercle";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
+				INFOPLIST_FILE = "Grand CercleTests/Grand CercleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		2595EADF1573FA9000CA27B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Grand Cercle.app/Grand Cercle";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
+				INFOPLIST_FILE = "Grand CercleTests/Grand CercleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2595EA931573FA9000CA27B3 /* Build configuration list for PBXProject "Grand Cercle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2595EAD81573FA9000CA27B3 /* Debug */,
+				2595EAD91573FA9000CA27B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2595EADA1573FA9000CA27B3 /* Build configuration list for PBXNativeTarget "Grand Cercle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2595EADB1573FA9000CA27B3 /* Debug */,
+				2595EADC1573FA9000CA27B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2595EADD1573FA9000CA27B3 /* Build configuration list for PBXNativeTarget "Grand CercleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2595EADE1573FA9000CA27B3 /* Debug */,
+				2595EADF1573FA9000CA27B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2595EA901573FA9000CA27B3 /* Project object */;
+}
