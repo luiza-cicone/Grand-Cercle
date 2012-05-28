@@ -8,10 +8,6 @@
 
 #import "NewsViewController.h"
 
-@interface NewsViewController ()
-
-@end
-
 @implementation NewsViewController
 
 - (void)viewDidLoad
