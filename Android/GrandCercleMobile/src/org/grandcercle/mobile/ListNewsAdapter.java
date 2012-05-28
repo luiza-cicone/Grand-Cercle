@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class ListFeedAdapter extends BaseAdapter {
+public class ListNewsAdapter extends BaseAdapter {
 
 	// les données à afficher
-	private ArrayList<Feed> feeds;
+	private ArrayList<News> listNews;
 	
 	/* Le LayoutInflater permet de parser un layout XML et de 
 	 * le transcoder en IHM Android. Pour respecter la classe 
@@ -25,9 +25,9 @@ public class ListFeedAdapter extends BaseAdapter {
 	 */
 	private LayoutInflater inflater;
 	
-	public ListFeedAdapter(Context context,ArrayList<Feed> feeds) {
+	public ListNewsAdapter(Context context,ArrayList<News> listNews) {
 		inflater = LayoutInflater.from(context);
-		this.feeds = feeds;
+		this.listNews = listNews;
 	}
 	
 	/* il nous faut spécifier la méthode "getCount()". 
@@ -36,16 +36,16 @@ public class ListFeedAdapter extends BaseAdapter {
 	 * de personnes contenus dans "mListP".
 	 */
 	public int getCount() {
-		return feeds.size();
+		return listNews.size();
 	}
 
 	// Permet de retourner un objet contenu dans la liste
 	public Object getItem(int index) {
-		return feeds.get(index);
+		return listNews.get(index);
 	}
 
 	public long getItemId(int index) {
-		return this.feeds.get(index).getId();
+		return this.listNews.get(index).getId();
 		
 	}
 	
@@ -57,25 +57,23 @@ public class ListFeedAdapter extends BaseAdapter {
 	 * notre layout XML, sinon on le réutilise
 	 */
 	public View getView(int position, View convertView, ViewGroup parent){
-		FeedView fv;		
+		NewsView nv;		
 		
 		if (convertView == null) {
-			fv = new FeedView();
+			nv = new NewsView();
 			convertView = inflater.inflate(R.layout.feed_view, null);
 
-			fv.creator = (TextView)convertView.findViewById(R.id.creator);			
-			fv.title = (TextView)convertView.findViewById(R.id.title);
-			fv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
-			fv.link = (TextView)convertView.findViewById(R.id.link);
-			convertView.setTag(fv);
+			nv.group = (TextView)convertView.findViewById(R.id.group);			
+			nv.title = (TextView)convertView.findViewById(R.id.title);
+			nv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
+			convertView.setTag(nv);
 
 		} else {
-			fv = (FeedView) convertView.getTag();
+			nv = (NewsView) convertView.getTag();
 		}						
-		fv.creator.setText(feeds.get(position).getCreator());
-		fv.pubDate.setText(feeds.get(position).getPubDate());
-		fv.title.setText(feeds.get(position).getTitle());
-		fv.link.setText(feeds.get(position).getLink());
+		nv.group.setText(listNews.get(position).getGroup());
+		nv.pubDate.setText(listNews.get(position).getPubDate());
+		nv.title.setText(listNews.get(position).getTitle());
 		
 		return convertView;
 	}
