@@ -1,7 +1,6 @@
 package org.grandcercle.mobile;
 
-
-
+import java.io.IOException;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
@@ -21,21 +20,12 @@ public class PageNews extends Activity {
 		((TextView)findViewById(R.id.description)).setText(markedUp);
 		((TextView)findViewById(R.id.group)).setText(param.getString("group"));
 		((TextView)findViewById(R.id.PubDate)).setText(param.getString("datepublication"));
-		((TextView)findViewById(R.id.link)).setText(param.getString("link"));
-		/*String imageURL = "http://grandcercle.org/sites/default/files/styles/mobile_small/public/logo_gc_0.png";
-		String img="image.jpg";
-		
+		ImageView logo = (ImageView)findViewById(R.id.logo);
 		try {
-			SaveImageFromUrl.saveImage(imageURL,img);
+			SaveImageFromUrl.setImage(logo,param.getString("logo"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		((ImageView)findViewById(R.id.logo)).setImageResource(R.drawable.bg);
-		//String temp = (param.getString("logo")).substring(30);
-		
-		//((TextView)findViewById(R.id.logo)).setText(param.getString(temp));
-		
+		}
 		
 	}
 	

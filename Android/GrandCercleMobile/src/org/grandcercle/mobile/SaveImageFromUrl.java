@@ -1,32 +1,28 @@
 package org.grandcercle.mobile;
 
-import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
+import java.net.URLConnection;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 public class SaveImageFromUrl {
-
-	public static void main(String[] args) throws Exception {
-		String imageUrl = "http://www.avajava.com/images/avajavalogo.jpg";
-		String destinationFile = "image.jpg";
-
-		saveImage(imageUrl, destinationFile);
-	}
-	public static void saveImage(String imageUrl, String destinationFile) throws IOException {
-		URL url = new URL(imageUrl);
-		InputStream is = url.openStream();
-		OutputStream os = new FileOutputStream(destinationFile);
-
-		byte[] b = new byte[2048];
-		int length;
-
-		while ((length = is.read(b)) != -1) {
-			os.write(b, 0, length);
-		}
-
+	
+	public static ImageView setImage(ImageView view, String url) throws IOException {
+		final URLConnection conn = new URL(url).openConnection();
+		conn.connect();
+		final InputStream is = conn.getInputStream();
+	 
+		final BufferedInputStream bis = new BufferedInputStream(is, 100000);
+	 
+		final Bitmap bm = BitmapFactory.decodeStream(bis);
+		bis.close();
 		is.close();
-		os.close();
+		view.setImageBitmap(bm);
+		return view;
 	}
 }

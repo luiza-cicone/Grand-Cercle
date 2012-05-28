@@ -84,8 +84,7 @@ public class Tab2 extends Activity {
 				bundle.putString("datepublication",((News)parent.getItemAtPosition(position)).getPubDate());
 				bundle.putString("group",((News)parent.getItemAtPosition(position)).getGroup());
 				bundle.putString("logo",((News)parent.getItemAtPosition(position)).getLogo());
-				
-				bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
+				//bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
