@@ -6,20 +6,20 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "NewsViewController.h"
+#import "DealsViewController.h"
 
-@interface NewsViewController ()
+@interface DealsViewController ()
 
 @end
 
-@implementation NewsViewController
+@implementation DealsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Second", @"Second");
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.title = NSLocalizedString(@"Deals", @"");
+        self.tabBarItem.image = [UIImage imageNamed:@"deals"];
     }
     return self;
 }

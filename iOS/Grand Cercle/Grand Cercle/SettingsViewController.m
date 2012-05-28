@@ -6,20 +6,20 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "NewsViewController.h"
+#import "SettingsViewController.h"
 
-@interface NewsViewController ()
+@interface SettingsViewController ()
 
 @end
 
-@implementation NewsViewController
+@implementation SettingsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Second", @"Second");
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.title = NSLocalizedString(@"Settings", @"Settings");
+        self.tabBarItem.image = [UIImage imageNamed:@"settings"];
     }
     return self;
 }

@@ -6,20 +6,20 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "NewsViewController.h"
+#import "InfosViewController.h"
 
-@interface NewsViewController ()
+@interface InfosViewController ()
 
 @end
 
-@implementation NewsViewController
+@implementation InfosViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Second", @"Second");
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.title = NSLocalizedString(@"Infos", @"Infos");
+        self.tabBarItem.image = [UIImage imageNamed:@"infos"];
     }
     return self;
 }

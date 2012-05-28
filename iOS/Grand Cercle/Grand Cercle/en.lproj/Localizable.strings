@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Grand Cercle
+
+  Created by Luiza Cicone on 28/5/12.
+  Copyright (c) 2012 Ensimag. All rights reserved.
+*/
+
+
+"Events" = "Événements";
+"News" = "News";
+"Deals" = "Bons Plans";
+"Infos" = "Infos";
+"Settings" = "Paramètres";
