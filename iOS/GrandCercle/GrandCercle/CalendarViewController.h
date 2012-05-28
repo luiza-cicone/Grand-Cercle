@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalendarViewController : UIViewController
+@interface CalendarViewController : UIViewController <UIScrollViewDelegate> {
+    IBOutlet UIScrollView *sv;
+}
+@property (nonatomic, retain) IBOutlet UIScrollView *sv;
+@property (nonatomic, retain) IBOutlet UIPageControl *laPage;
+
+- (IBAction)changePage:(id)sender;
 
 @end
