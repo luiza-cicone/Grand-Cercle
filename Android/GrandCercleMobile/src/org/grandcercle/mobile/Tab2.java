@@ -1,7 +1,6 @@
 package org.grandcercle.mobile;
 
 
-
 import java.util.ArrayList;
 
 import org.grandcercle.mobile.R;
