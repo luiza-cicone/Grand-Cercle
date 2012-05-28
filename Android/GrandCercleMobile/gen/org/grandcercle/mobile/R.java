@@ -26,31 +26,26 @@ public final class R {
         public static final int cal_left_arrow_on=0x7f020003;
         public static final int cal_right_arrow_off=0x7f020004;
         public static final int cal_right_arrow_on=0x7f020005;
-        public static final int calendar=0x7f020006;
-        public static final int calendar_bar=0x7f020007;
-        public static final int calendar_bg_orange=0x7f020008;
-        public static final int calendar_button_selector=0x7f020009;
-        public static final int calendar_centralheader=0x7f02000a;
-        public static final int calendar_left_arrow_selector=0x7f02000b;
-        public static final int calendar_right_arrow_selector=0x7f02000c;
-        public static final int calendar_tile=0x7f02000d;
-        public static final int calendar_tile_small=0x7f02000e;
-        public static final int calendar_top_header=0x7f02000f;
-        public static final int calendar_view=0x7f020010;
-        public static final int deals=0x7f020011;
-        public static final int essai=0x7f020012;
-        public static final int grand_cercle=0x7f020013;
-        public static final int header=0x7f020014;
-        public static final int ic_launcher=0x7f020015;
-        public static final int icon=0x7f020016;
-        public static final int icons=0x7f020017;
-        public static final int news=0x7f020018;
-        public static final int search=0x7f020019;
-        public static final int settings=0x7f02001a;
-        public static final int tab_bg_selected=0x7f02001b;
-        public static final int tab_bg_selector=0x7f02001c;
-        public static final int tab_bg_unselected=0x7f02001d;
-        public static final int tab_text_selector=0x7f02001e;
+        public static final int calendar=0x7f020019;
+        public static final int calendar_bar=0x7f020006;
+        public static final int calendar_bg_orange=0x7f020007;
+        public static final int calendar_button_selector=0x7f020008;
+        public static final int calendar_centralheader=0x7f020009;
+        public static final int calendar_left_arrow_selector=0x7f02000a;
+        public static final int calendar_right_arrow_selector=0x7f02000b;
+        public static final int calendar_tile=0x7f02000c;
+        public static final int calendar_tile_small=0x7f02000d;
+        public static final int calendar_top_header=0x7f02000e;
+        public static final int calendar_view=0x7f02000f;
+        public static final int essai=0x7f020010;
+        public static final int grand_cercle=0x7f020011;
+        public static final int header=0x7f020012;
+        public static final int ic_launcher=0x7f020013;
+        public static final int icon=0x7f020014;
+        public static final int tab_bg_selected=0x7f020015;
+        public static final int tab_bg_selector=0x7f020016;
+        public static final int tab_bg_unselected=0x7f020017;
+        public static final int tab_text_selector=0x7f020018;
     }
     public static final class id {
         public static final int button1=0x7f070004;
@@ -59,11 +54,8 @@ public final class R {
         public static final int calendarheader=0x7f07000c;
         public static final int currentMonth=0x7f07000a;
         public static final int description=0x7f070003;
-<<<<<<< HEAD
-        public static final int icone=0x7f070010;
-=======
         public static final int group=0x7f070005;
->>>>>>> b8c7d4df1c46b444aaacff56901ff826155def08
+        public static final int icone=0x7f070010;
         public static final int link=0x7f070007;
         public static final int listFeed=0x7f07000e;
         public static final int nextMonth=0x7f07000b;
