@@ -1,6 +1,6 @@
 package org.grandcercle.mobile;
 
-public class Event extends News {
+public class Event extends Item {
 	private String type;
 	private String day;
 	private String date;
@@ -8,13 +8,21 @@ public class Event extends News {
 	private String thumbnail;
 	private String image;
 	private String lieu;
-	private float paf;
-	private float pafSansCVA;
+	private String paf;
+	private String pafSansCVA;
 	
 	public Event(long id, String title, String description, String link, String pubDate, String author, 
 			String group, String logo, String type, String day, String date, String time, 
-			String thumbnail, String image, String lieu, float paf, float pafSansCVA) {
-		super(id,title,description,link,pubDate,author,group,logo);
+			String thumbnail, String image, String lieu, String paf, String pafSansCVA) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.link = link;
+		this.pubDate = pubDate;
+		this.author = author;
+		this.group = group;
+		this.logo = logo;
 		this.type = type;
 		this.day = day;
 		this.date = date;
@@ -26,19 +34,8 @@ public class Event extends News {
 		this.pafSansCVA = pafSansCVA;
 	}
 	
-	public Event(News n, String type, String day, String date, String time, 
-			String thumbnail, String image, String lieu, float paf, float pafSansCVA) {
-		super(n.getId(),n.getTitle(),n.getDescription(),n.getLink(),
-				n.getPubDate(),n.getAuthor(),n.getGroup(),n.getLogo());
-		this.type = type;
-		this.day = day;
-		this.date = date;
-		this.time = time;
-		this.thumbnail = thumbnail;
-		this.image = image;
-		this.lieu = lieu;
-		this.paf = paf;
-		this.pafSansCVA = pafSansCVA;
+	public Event() {
+		super();
 	}
 
 	public String getType() {
@@ -97,25 +94,25 @@ public class Event extends News {
 		this.lieu = lieu;
 	}
 
-	public float getPaf() {
+	public String getPaf() {
 		return paf;
 	}
 
-	public void setPaf(float paf) {
+	public void setPaf(String paf) {
 		this.paf = paf;
 	}
 
-	public float getPafSansCVA() {
+	public String getPafSansCVA() {
 		return pafSansCVA;
 	}
 
-	public void setPafSansCVA(float pafSansCVA) {
+	public void setPafSansCVA(String pafSansCVA) {
 		this.pafSansCVA = pafSansCVA;
 	}
 	
 	@Override
 	public String toString() {
-		return super.toString()+"Event [type=" + type + ", day=" + day + ", date="
-				+ date + ", time=" + time + ", lieu=" + lieu + "paf=" + paf + "]";
+		return "Event [type=" + type + ", day=" + day + ", date=" + date + ", time=" + time + 
+				", lieu=" + lieu + "paf=" + paf + "]" + super.toString();
 	}
 }
