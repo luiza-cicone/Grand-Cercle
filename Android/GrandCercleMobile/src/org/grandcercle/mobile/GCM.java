@@ -4,8 +4,6 @@ package org.grandcercle.mobile;
 import org.grandcercle.mobile.R;
 import org.grandcercle.mobile.Tab1;
 import org.grandcercle.mobile.Tab2;
-
-
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +11,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+
 import android.widget.TabHost;
+
 
 import android.widget.TextView;
 
