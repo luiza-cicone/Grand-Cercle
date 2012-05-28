@@ -80,10 +80,17 @@ public class Tab2 extends Activity {
 				//Add the parameters to bundle as
 				bundle.putString("titre",((News)parent.getItemAtPosition(position)).getTitle());
 				bundle.putString("description",((News)parent.getItemAtPosition(position)).getDescription());
+				bundle.putString("auteur",((News)parent.getItemAtPosition(position)).getAuthor());
+				bundle.putString("datepublication",((News)parent.getItemAtPosition(position)).getPubDate());
+				bundle.putString("group",((News)parent.getItemAtPosition(position)).getGroup());
+				bundle.putString("logo",((News)parent.getItemAtPosition(position)).getLogo());
+				
+				bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
 				Tab2.this.startActivity(intent);
 			}
 	    };
+	    
 }
