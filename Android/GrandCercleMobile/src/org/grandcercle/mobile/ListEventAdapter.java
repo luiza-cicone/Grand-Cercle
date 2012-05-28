@@ -67,10 +67,10 @@ public class ListEventAdapter extends BaseAdapter {
 
 			ev.group = (TextView)convertView.findViewById(R.id.group);			
 			ev.title = (TextView)convertView.findViewById(R.id.title);
-			ev.day = (TextView)convertView.findViewById(R.id.day);
-			ev.date = (TextView)convertView.findViewById(R.id.date);
+			ev.lieu = (TextView)convertView.findViewById(R.id.lieu);
 			ev.time = (TextView)convertView.findViewById(R.id.time);
 			ev.logo = (ImageView)convertView.findViewById(R.id.logo);
+			ev.thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
 			convertView.setTag(ev);
 
 		} else {
@@ -78,11 +78,15 @@ public class ListEventAdapter extends BaseAdapter {
 		}						
 		ev.group.setText(listEvent.get(position).getGroup());
 		ev.title.setText(listEvent.get(position).getTitle());
-		ev.day.setText(listEvent.get(position).getDay());
-		ev.date.setText(listEvent.get(position).getDate());
+		ev.lieu.setText(listEvent.get(position).getLieu());
 		ev.time.setText(listEvent.get(position).getTime());
 		try {
 			SaveImageFromUrl.setImage(ev.logo,listEvent.get(position).getLogo());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			SaveImageFromUrl.setImage(ev.thumbnail,listEvent.get(position).getThumbnail());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
