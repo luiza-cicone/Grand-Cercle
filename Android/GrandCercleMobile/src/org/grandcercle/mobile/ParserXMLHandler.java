@@ -10,21 +10,23 @@ import org.xml.sax.helpers.DefaultHandler;
 public class ParserXMLHandler extends DefaultHandler {
 
 	// nom des tags XML
-	private final String ITEM = "item";
+	private final String NODE = "node";
 	private final String TITLE = "title";
+	private final String DESCRIPTION = "description";
 	private final String LINK = "link";
 	private final String PUBDATE = "pubDate";
-	private final String CREATOR = "creator";
-	private final String DESCRIPTION = "description";
+	private final String AUTHOR = "author";
+	private final String GROUP = "group";
+	private final String LOGO = "logo";
 	
 	// Array list de feeds	
-	private ArrayList<Feed> feeds;
+	private ArrayList<News> news;
 	
 	// Boolean permettant de savoir si nous sommes à l'intérieur d'un item
 	private boolean inItem;
 	
 	// Feed courant
-	private Feed currentFeed;
+	private News currentFeed;
 	
 	// Buffer permettant de contenir les données d'un tag XML
 	private StringBuffer buffer;
@@ -49,7 +51,7 @@ public class ParserXMLHandler extends DefaultHandler {
 	@Override
 	public void startDocument() throws SAXException {
 		super.startDocument();
-		feeds = new ArrayList<Feed>();
+		news = new ArrayList<News>();
 	}
 
 	/* 
@@ -64,8 +66,8 @@ public class ParserXMLHandler extends DefaultHandler {
 		// Ci dessous, localName contient le nom du tag rencontré
 		
 		// Nous avons rencontré un tag ITEM, il faut donc instancier un nouveau feed		
-		if (localName.equalsIgnoreCase(ITEM)){			
-			this.currentFeed = new Feed();
+		if (localName.equalsIgnoreCase(NODE)){			
+			this.currentFeed = new News();
 			inItem = true;
 		}
 		
@@ -106,6 +108,12 @@ public class ParserXMLHandler extends DefaultHandler {
 				buffer = null;
 			}
 		}
+		if(localName.equalsIgnoreCase(DESCRIPTION)){
+			if(inItem){				
+				this.currentFeed.setDescription(buffer.toString());				
+				buffer = null;
+			}
+		}
 		if (localName.equalsIgnoreCase(LINK)){
 			if(inItem){				
 				this.currentFeed.setLink(buffer.toString());				
@@ -114,24 +122,30 @@ public class ParserXMLHandler extends DefaultHandler {
 		}
 		if (localName.equalsIgnoreCase(PUBDATE)){	
 			if(inItem){				
-				this.currentFeed.setPubDate(buffer.toString());				
+				this.currentFeed.setPubDate(buffer.toString());
 				buffer = null;
 			}
 		}
-		if (localName.equalsIgnoreCase(CREATOR)){
+		if (localName.equalsIgnoreCase(AUTHOR)){
 			if(inItem){				
-				this.currentFeed.setCreator(buffer.toString());				
+				this.currentFeed.setAuthor(buffer.toString());				
 				buffer = null;	
 			}
 		}
-		if(localName.equalsIgnoreCase(DESCRIPTION)){
+		if (localName.equalsIgnoreCase(GROUP)){
 			if(inItem){				
-				this.currentFeed.setDescription(buffer.toString());				
-				buffer = null;
+				this.currentFeed.setGroup(buffer.toString());				
+				buffer = null;	
 			}
 		}
-		if (localName.equalsIgnoreCase(ITEM)){		
-			feeds.add(currentFeed);
+		if (localName.equalsIgnoreCase(LOGO)){
+			if(inItem){				
+				this.currentFeed.setLogo(buffer.toString());				
+				buffer = null;	
+			}
+		}
+		if (localName.equalsIgnoreCase(NODE)){		
+			news.add(currentFeed);
 			inItem = false;
 		}
 	}
@@ -151,7 +165,7 @@ public class ParserXMLHandler extends DefaultHandler {
 	
 	
 	// cette méthode nous permettra de récupérer les données
-	public ArrayList<Feed> getData(){
-		return feeds;
+	public ArrayList<News> getNews(){
+		return news;
 	}
 }
