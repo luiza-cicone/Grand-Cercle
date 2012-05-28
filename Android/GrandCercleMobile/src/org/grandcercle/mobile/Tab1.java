@@ -37,6 +37,13 @@ public class Tab1 extends Activity {
 			//Add the parameters to bundle as
 			bundle.putString("titre",((Event)parent.getItemAtPosition(position)).getTitle());
 			bundle.putString("description",((Event)parent.getItemAtPosition(position)).getDescription());
+			bundle.putString("image",((Event)parent.getItemAtPosition(position)).getImage());
+			bundle.putString("day",((Event)parent.getItemAtPosition(position)).getDay());
+			bundle.putString("date",((Event)parent.getItemAtPosition(position)).getDate());
+			bundle.putString("time",((Event)parent.getItemAtPosition(position)).getTime());
+			bundle.putString("lieu",((Event)parent.getItemAtPosition(position)).getLieu());
+			bundle.putString("logo",((Event)parent.getItemAtPosition(position)).getLogo());
+			bundle.putString("group",((Event)parent.getItemAtPosition(position)).getGroup());
 			//Ajout du Bundle
 			intent.putExtras(bundle);
 			

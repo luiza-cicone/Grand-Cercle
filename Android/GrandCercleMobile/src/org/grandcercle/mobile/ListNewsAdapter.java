@@ -65,7 +65,6 @@ public class ListNewsAdapter extends BaseAdapter {
 			nv = new NewsView();
 			convertView = inflater.inflate(R.layout.list_news, null);
 
-			nv.group = (TextView)convertView.findViewById(R.id.group);			
 			nv.title = (TextView)convertView.findViewById(R.id.title);
 			nv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
 			nv.logo = (ImageView)convertView.findViewById(R.id.logo);
@@ -75,7 +74,6 @@ public class ListNewsAdapter extends BaseAdapter {
 		} else {
 			nv = (NewsView)convertView.getTag();
 		}						
-		nv.group.setText(listNews.get(position).getGroup());
 		nv.pubDate.setText(listNews.get(position).getPubDate());
 		nv.title.setText(listNews.get(position).getTitle());
 		
