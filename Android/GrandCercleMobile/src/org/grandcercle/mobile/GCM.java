@@ -30,6 +30,9 @@ public class GCM extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+		//Parsing des fichiers XML
+		ContainerData.ParseFiles();
+		
 		tabHost = getTabHost();
 		
 		// Décommentez la ligne suivante pour séparer vos onglets via une image

@@ -57,10 +57,13 @@ public final class R {
         public static final int calendar=0x7f07000d;
         public static final int calendar_day_gridcell=0x7f070000;
         public static final int calendarheader=0x7f07000c;
-        public static final int creator=0x7f070005;
         public static final int currentMonth=0x7f07000a;
         public static final int description=0x7f070003;
+<<<<<<< HEAD
         public static final int icone=0x7f070010;
+=======
+        public static final int group=0x7f070005;
+>>>>>>> b8c7d4df1c46b444aaacff56901ff826155def08
         public static final int link=0x7f070007;
         public static final int listFeed=0x7f07000e;
         public static final int nextMonth=0x7f07000b;
@@ -74,7 +77,7 @@ public final class R {
     }
     public static final class layout {
         public static final int calendar_day_gridcell=0x7f030000;
-        public static final int description_evenement=0x7f030001;
+        public static final int description_news=0x7f030001;
         public static final int feed_view=0x7f030002;
         public static final int main=0x7f030003;
         public static final int simple_calendar_view=0x7f030004;

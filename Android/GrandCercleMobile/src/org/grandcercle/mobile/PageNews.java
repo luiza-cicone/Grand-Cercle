@@ -6,11 +6,9 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.TextView;
 
-public class PageEvent extends Activity {
+public class PageNews extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		// PROVISOIRE !!
 		setContentView(R.layout.description_news);
 		
 		// Recuperation des paramètres

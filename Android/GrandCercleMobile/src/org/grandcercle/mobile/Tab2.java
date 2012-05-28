@@ -25,11 +25,11 @@ public class Tab2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab2);
         //recherche = (EditText)findViewById(R.id.recherche);
-        ArrayList<Feed> feeds = ContainerData.getFeeds();
-        for (Feed feed : feeds) {
-			Log.i("FeedPlayer",feed.toString());
+        ArrayList<News> listNews = ContainerData.getNews();
+        for (News news : listNews) {
+			Log.i("FeedPlayer",news.toString());
 		}
-        ListFeedAdapter lfa = new ListFeedAdapter(this, feeds);
+        ListNewsAdapter lfa = new ListNewsAdapter(this,listNews);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
         feedListView.setOnItemClickListener(clickListenerFeed);
@@ -74,12 +74,12 @@ public class Tab2 extends Activity {
 				
 				
 				// Ouverture nouvelle activity
-				Intent intent = new Intent(Tab2.this,PageEvent.class);
+				Intent intent = new Intent(Tab2.this,PageNews.class);
 				// Passage des paramètres
 				Bundle bundle = new Bundle();
 				//Add the parameters to bundle as
-				bundle.putString("titre",((Feed)parent.getItemAtPosition(position)).getTitle());
-				bundle.putString("description",((Feed)parent.getItemAtPosition(position)).getDescription());
+				bundle.putString("titre",((News)parent.getItemAtPosition(position)).getTitle());
+				bundle.putString("description",((News)parent.getItemAtPosition(position)).getDescription());
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
