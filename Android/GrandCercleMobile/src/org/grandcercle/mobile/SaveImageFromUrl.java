@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
+
+
 public class SaveImageFromUrl {
 	
 	public static ImageView setImage(ImageView view, String url) throws IOException {
@@ -25,4 +27,5 @@ public class SaveImageFromUrl {
 		view.setImageBitmap(bm);
 		return view;
 	}
+
 }
