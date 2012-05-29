@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewsViewController : UIViewController
-
+@interface NewsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+    IBOutlet UITableViewCell *newsCell;
+    NSMutableArray *newsArray;
+}
+@property (assign, nonatomic) IBOutlet UITableViewCell *newsCell;
+@property (assign, nonatomic) NSMutableArray *newsArray;
 @end

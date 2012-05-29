@@ -14,6 +14,8 @@
 #import "InfosViewController.h"
 #import "SettingsViewController.h"
 
+#import "NewsParser.h"
+
 
 @implementation AppDelegate
 
@@ -29,6 +31,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    NewsParser *np = [NewsParser instance];
+    [np loadNews];
+    NSLog(@"np %d", [[np arrayNews] count]);
+
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // Override point for customization after application launch.
