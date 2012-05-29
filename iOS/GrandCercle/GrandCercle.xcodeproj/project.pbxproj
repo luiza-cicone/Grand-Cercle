@@ -7,11 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045DB6B41573DA1600F153B8 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DB6B31573DA1600F153B8 /* News.m */; };
+		045DB6B71573E2EF00F153B8 /* NewsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DB6B61573E2EF00F153B8 /* NewsParser.m */; };
+		045DB6C01573EECF00F153B8 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DB6BD1573EECF00F153B8 /* TBXML.m */; };
+		045DB6C11573EECF00F153B8 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DB6BF1573EECF00F153B8 /* TBXML+HTTP.m */; };
+		045DB6C31573F7CE00F153B8 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DB6C21573F7CE00F153B8 /* FirstView.xib */; };
+		045DB7181574102A00F153B8 /* Evenements.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DB7171574102A00F153B8 /* Evenements.m */; };
+		045DB71B1574159300F153B8 /* EvenementsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DB71A1574159300F153B8 /* EvenementsParser.m */; };
 		04AAF89A15737B97004B0149 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAF89515737B97004B0149 /* calendar.png */; };
 		04AAF89B15737B97004B0149 /* deals.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAF89615737B97004B0149 /* deals.png */; };
 		04AAF89C15737B97004B0149 /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAF89715737B97004B0149 /* news.png */; };
 		04AAF89D15737B97004B0149 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAF89815737B97004B0149 /* search.png */; };
 		04AAF89E15737B97004B0149 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAF89915737B97004B0149 /* settings.png */; };
+		04CEC93E1573CBC700A8BFFB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CEC93D1573CBC700A8BFFB /* libz.dylib */; };
 		25506D82156BD6C900EB1FC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25506D81156BD6C900EB1FC5 /* UIKit.framework */; };
 		25506D84156BD6C900EB1FC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25506D83156BD6C900EB1FC5 /* Foundation.framework */; };
 		25506D86156BD6C900EB1FC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25506D85156BD6C900EB1FC5 /* CoreGraphics.framework */; };
@@ -44,11 +52,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		045DB6A11573D16B00F153B8 /* GrandCercle copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GrandCercle copy-Info.plist"; path = "/Users/jeremykrein/Documents/Cours/Projet_Spe/GC_Mobile/iOS/GrandCercle/GrandCercle copy-Info.plist"; sourceTree = "<absolute>"; };
+		045DB6B21573DA1600F153B8 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		045DB6B31573DA1600F153B8 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		045DB6B51573E2EF00F153B8 /* NewsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsParser.h; sourceTree = "<group>"; };
+		045DB6B61573E2EF00F153B8 /* NewsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsParser.m; sourceTree = "<group>"; };
+		045DB6BC1573EECF00F153B8 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		045DB6BD1573EECF00F153B8 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		045DB6BE1573EECF00F153B8 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
+		045DB6BF1573EECF00F153B8 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
+		045DB6C21573F7CE00F153B8 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
+		045DB7161574102A00F153B8 /* Evenements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Evenements.h; sourceTree = "<group>"; };
+		045DB7171574102A00F153B8 /* Evenements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Evenements.m; sourceTree = "<group>"; };
+		045DB7191574159300F153B8 /* EvenementsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvenementsParser.h; sourceTree = "<group>"; };
+		045DB71A1574159300F153B8 /* EvenementsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvenementsParser.m; sourceTree = "<group>"; };
 		04AAF89515737B97004B0149 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		04AAF89615737B97004B0149 /* deals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deals.png; sourceTree = "<group>"; };
 		04AAF89715737B97004B0149 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
 		04AAF89815737B97004B0149 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		04AAF89915737B97004B0149 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		04CEC93D1573CBC700A8BFFB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		25506D7D156BD6C900EB1FC5 /* GrandCercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrandCercle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25506D81156BD6C900EB1FC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		25506D83156BD6C900EB1FC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CEC93E1573CBC700A8BFFB /* libz.dylib in Frameworks */,
 				25506D82156BD6C900EB1FC5 /* UIKit.framework in Frameworks */,
 				25506D84156BD6C900EB1FC5 /* Foundation.framework in Frameworks */,
 				25506D86156BD6C900EB1FC5 /* CoreGraphics.framework in Frameworks */,
@@ -102,13 +126,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04CEC9361573C85500A8BFFB /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				045DB6BC1573EECF00F153B8 /* TBXML.h */,
+				045DB6BD1573EECF00F153B8 /* TBXML.m */,
+				045DB6BE1573EECF00F153B8 /* TBXML+HTTP.h */,
+				045DB6BF1573EECF00F153B8 /* TBXML+HTTP.m */,
+			);
+			name = TBXML;
+			sourceTree = "<group>";
+		};
 		25506D72156BD6C900EB1FC5 = {
 			isa = PBXGroup;
 			children = (
+				04CEC93D1573CBC700A8BFFB /* libz.dylib */,
+				04CEC9361573C85500A8BFFB /* TBXML */,
 				25506D87156BD6C900EB1FC5 /* GrandCercle */,
 				25506DB0156BD6CA00EB1FC5 /* GrandCercleTests */,
 				25506D80156BD6C900EB1FC5 /* Frameworks */,
 				25506D7E156BD6C900EB1FC5 /* Products */,
+				045DB6A11573D16B00F153B8 /* GrandCercle copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,7 +183,16 @@
 				25506D97156BD6CA00EB1FC5 /* CalendarViewController.m */,
 				25506D9D156BD6CA00EB1FC5 /* NewsViewController.h */,
 				25506D9E156BD6CA00EB1FC5 /* NewsViewController.m */,
+				045DB6B21573DA1600F153B8 /* News.h */,
+				045DB6B31573DA1600F153B8 /* News.m */,
+				045DB6B51573E2EF00F153B8 /* NewsParser.h */,
+				045DB6B61573E2EF00F153B8 /* NewsParser.m */,
+				045DB7161574102A00F153B8 /* Evenements.h */,
+				045DB7171574102A00F153B8 /* Evenements.m */,
+				045DB7191574159300F153B8 /* EvenementsParser.h */,
+				045DB71A1574159300F153B8 /* EvenementsParser.m */,
 				25506D88156BD6C900EB1FC5 /* Supporting Files */,
+				045DB6C21573F7CE00F153B8 /* FirstView.xib */,
 			);
 			path = GrandCercle;
 			sourceTree = "<group>";
@@ -278,6 +325,7 @@
 				04AAF89C15737B97004B0149 /* news.png in Resources */,
 				04AAF89D15737B97004B0149 /* search.png in Resources */,
 				04AAF89E15737B97004B0149 /* settings.png in Resources */,
+				045DB6C31573F7CE00F153B8 /* FirstView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +365,12 @@
 				25506D98156BD6CA00EB1FC5 /* CalendarViewController.m in Sources */,
 				25506D9F156BD6CA00EB1FC5 /* NewsViewController.m in Sources */,
 				25C991DA15717E9800FFD57B /* DealsViewController.m in Sources */,
+				045DB6B41573DA1600F153B8 /* News.m in Sources */,
+				045DB6B71573E2EF00F153B8 /* NewsParser.m in Sources */,
+				045DB6C01573EECF00F153B8 /* TBXML.m in Sources */,
+				045DB6C11573EECF00F153B8 /* TBXML+HTTP.m in Sources */,
+				045DB7181574102A00F153B8 /* Evenements.m in Sources */,
+				045DB71B1574159300F153B8 /* EvenementsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +425,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -382,7 +436,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -396,11 +450,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -414,10 +468,13 @@
 		25506DBC156BD6CA00EB1FC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrandCercle/GrandCercle-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "GrandCercle/GrandCercle-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -426,10 +483,13 @@
 		25506DBD156BD6CA00EB1FC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrandCercle/GrandCercle-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "GrandCercle/GrandCercle-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
