@@ -5,7 +5,7 @@
     android:id="@+id/space" 
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent" 
-    app:default_screen="0">
+    app:default_screen="2">
     <include 
         android:id="@+id/left" 
         layout="@layout/simple_calendar_view"/>
