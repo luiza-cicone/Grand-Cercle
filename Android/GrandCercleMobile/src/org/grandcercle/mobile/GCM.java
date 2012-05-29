@@ -25,7 +25,6 @@ public class GCM extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Intent intent;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
@@ -36,7 +35,7 @@ public class GCM extends TabActivity {
 		
 		// Décommentez la ligne suivante pour séparer vos onglets via une image
         //this.tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
-		intent = new Intent().setClass(this, Tab1.class);
+		Intent intent = new Intent().setClass(this, Tab1.class);
 		//intent.getAction();
 		//tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator( "Evenement",getResources().getDrawable(R.drawable.deals)).setContent(intent));
         setupTab("Evenement", "tab1", new Intent().setClass(this, Tab1.class));

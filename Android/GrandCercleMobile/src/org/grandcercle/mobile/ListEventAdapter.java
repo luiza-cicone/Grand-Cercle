@@ -92,9 +92,9 @@ public class ListEventAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}*/
 		
-		
-		UrlImageViewHelper.setUrlDrawable(ev.thumbnail, listEvent.get(position).getThumbnail(), R.drawable.loading,null);
-		UrlImageViewHelper.setUrlDrawable(ev.logo, listEvent.get(position).getLogo(), R.drawable.loading, null);
+		// thumbnail stocké pendant une semaine, logo stocké de manière infinie
+		UrlImageViewHelper.setUrlDrawable(ev.thumbnail,listEvent.get(position).getThumbnail(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK,null);
+		UrlImageViewHelper.setUrlDrawable(ev.logo,listEvent.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE,null);
 		
 		return convertView;
 	}
