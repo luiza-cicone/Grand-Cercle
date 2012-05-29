@@ -105,10 +105,24 @@ static EvenementsParser *instanceEvent = nil;
         // Récupération du prix sans CVA
         TBXMLElement *priceNoCva = [TBXML childElementNamed:@"paf_sans_cva" parentElement:eventAParser];
         aEvent.priceNoCva = [[TBXML textForElement:priceNoCva] stringByConvertingHTMLToPlainText];
+  
+        // Récupération du la date
+        TBXMLElement *eventDate = [TBXML childElementNamed:@"eventDate" parentElement:eventAParser];        
+        NSString *data = [[TBXML textForElement:eventDate] stringByConvertingHTMLToPlainText];
         
+        data = [data stringByAppendingString:@" 00:00:00 +0000"];
+                
+        NSDateFormatter* firstDateFormatter = [[NSDateFormatter alloc] init];
+        [firstDateFormatter setDateFormat:@"dd-MM-yy hh:mm:ss zzz"];
+
+        aEvent.eventDate = [firstDateFormatter dateFromString:data];
+        NSLog(@"%@ - %@", aEvent.title, aEvent.eventDate);
+        [aEvent.eventDate retain];
+
         // Ajout de la news au tableau
         [arrayEvenements addObject:aEvent];
         [aEvent release];
+        [firstDateFormatter release];
         
         // Obtain next sibling element
 	} while ((eventAParser = eventAParser->nextSibling));
