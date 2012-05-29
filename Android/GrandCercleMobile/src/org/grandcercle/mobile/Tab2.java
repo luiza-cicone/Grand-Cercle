@@ -1,7 +1,6 @@
 package org.grandcercle.mobile;
 
 
-
 import java.util.ArrayList;
 
 import org.grandcercle.mobile.R;
@@ -24,11 +23,9 @@ public class Tab2 extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab2);
-        //recherche = (EditText)findViewById(R.id.recherche);
+        
         ArrayList<News> listNews = ContainerData.getNews();
-        for (News news : listNews) {
-			Log.i("FeedPlayer",news.toString());
-		}
+        
         ListNewsAdapter lfa = new ListNewsAdapter(this,listNews);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
@@ -80,10 +77,16 @@ public class Tab2 extends Activity {
 				//Add the parameters to bundle as
 				bundle.putString("titre",((News)parent.getItemAtPosition(position)).getTitle());
 				bundle.putString("description",((News)parent.getItemAtPosition(position)).getDescription());
+				bundle.putString("auteur",((News)parent.getItemAtPosition(position)).getAuthor());
+				bundle.putString("datepublication",((News)parent.getItemAtPosition(position)).getPubDate());
+				bundle.putString("group",((News)parent.getItemAtPosition(position)).getGroup());
+				bundle.putString("logo",((News)parent.getItemAtPosition(position)).getLogo());
+				//bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
 				Tab2.this.startActivity(intent);
 			}
 	    };
+	    
 }

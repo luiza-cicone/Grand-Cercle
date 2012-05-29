@@ -1,155 +1,30 @@
 package org.grandcercle.mobile;
 
-import java.util.ArrayList;
-
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 
-public class ParserXMLHandler extends DefaultHandler {
+public abstract class ParserXMLHandler extends DefaultHandler {
 
 	// nom des tags XML
-	private final String NODE = "node";
-	private final String TITLE = "title";
-	private final String DESCRIPTION = "description";
-	private final String LINK = "link";
-	private final String PUBDATE = "pubDate";
-	private final String AUTHOR = "author";
-	private final String GROUP = "group";
-	private final String LOGO = "logo";
-	
-	// Array list de feeds	
-	private ArrayList<News> news;
-	
-	// Boolean permettant de savoir si nous sommes à l'intérieur d'un item
-	private boolean inItem;
-	
-	// Feed courant
-	private News currentFeed;
+	protected final String NODE = "node";
+	protected final String TITLE = "title";
+	protected final String DESCRIPTION = "description";
+	protected final String LINK = "link";
+	protected final String PUBDATE = "pubDate";
+	protected final String AUTHOR = "author";
+	protected final String GROUP = "group";
+	protected final String LOGO = "logo";
 	
 	// Buffer permettant de contenir les données d'un tag XML
-	private StringBuffer buffer;
-	
-	public ParserXMLHandler() {
-		super();		
-	}
+	protected StringBuffer buffer;
 	
 	@Override
 	public void processingInstruction(String target, String data) throws SAXException {		
 		super.processingInstruction(target, data);
 	}
 	
-	/* Cette méthode est appelée par le parser une et une seule  
-	 * fois au démarrage de l'analyse de votre flux xml. 
-	 * Elle est appelée avant toutes les autres méthodes de l'interface,  
-	 * à l'exception unique, évidemment, de la méthode setDocumentLocator. 
-	 * Cet événement devrait vous permettre d'initialiser tout ce qui doit 
-	 * l'être avant le début du parcours du document.
-	 */ 
-	 
-	@Override
-	public void startDocument() throws SAXException {
-		super.startDocument();
-		news = new ArrayList<News>();
-	}
-
-	/* 
-	 * Fonction étant déclenchée lorsque le parser trouve un tag XML
-	 * C'est cette méthode que nous allons utiliser pour instancier un nouveau feed
- 	*/
-	@Override
-	public void startElement(String uri, String localName, String name,	Attributes attributes) throws SAXException {
-		// Nous réinitialisons le buffer a chaque fois qu'il rencontre un item
-		buffer = new StringBuffer();		
-		
-		// Ci dessous, localName contient le nom du tag rencontré
-		
-		// Nous avons rencontré un tag ITEM, il faut donc instancier un nouveau feed		
-		if (localName.equalsIgnoreCase(NODE)){			
-			this.currentFeed = new News();
-			inItem = true;
-		}
-		
-		/* Pour tous les autres tags, on ne fait aucun traitement pour le moment
-		if (localName.equalsIgnoreCase(TITLE)){
-			// Nothing to do	
-		}
-		if (localName.equalsIgnoreCase(LINK)){
-			// Nothing to do	
-		}
-		if (localName.equalsIgnoreCase(PUBDATE)){	
-			// Nothing to do	
-		}
-		if (localName.equalsIgnoreCase(CREATOR)){
-			// Nothing to do
-		}
-		if(localName.equalsIgnoreCase(DESCRIPTION)){
-			// Nothing to do	
-		}
-		*/
-	}
 	
-	 
-	/* Fonction étant déclenchée lorsque le parser à parsé 	
-	 * l'intérieur de la balise XML La méthode characters  
-	 * a donc fait son ouvrage et tous les caractères inclus 
-	 * dans la balise en cours sont copiés dans le buffer 
-	 * On peut donc tranquillement les récupérer pour compléter
-	 * notre objet currentFeed
-	 */
-	@Override
-	public void endElement(String uri, String localName, String name) throws SAXException {		
-		
-		if (localName.equalsIgnoreCase(TITLE)){
-			if(inItem){				
-				// Les caractères sont dans l'objet buffer
-				this.currentFeed.setTitle(buffer.toString());				
-				buffer = null;
-			}
-		}
-		if(localName.equalsIgnoreCase(DESCRIPTION)){
-			if(inItem){				
-				this.currentFeed.setDescription(buffer.toString());				
-				buffer = null;
-			}
-		}
-		if (localName.equalsIgnoreCase(LINK)){
-			if(inItem){				
-				this.currentFeed.setLink(buffer.toString());				
-				buffer = null;
-			}
-		}
-		if (localName.equalsIgnoreCase(PUBDATE)){	
-			if(inItem){				
-				this.currentFeed.setPubDate(buffer.toString());
-				buffer = null;
-			}
-		}
-		if (localName.equalsIgnoreCase(AUTHOR)){
-			if(inItem){				
-				this.currentFeed.setAuthor(buffer.toString());				
-				buffer = null;	
-			}
-		}
-		if (localName.equalsIgnoreCase(GROUP)){
-			if(inItem){				
-				this.currentFeed.setGroup(buffer.toString());				
-				buffer = null;	
-			}
-		}
-		if (localName.equalsIgnoreCase(LOGO)){
-			if(inItem){				
-				this.currentFeed.setLogo(buffer.toString());				
-				buffer = null;	
-			}
-		}
-		if (localName.equalsIgnoreCase(NODE)){		
-			news.add(currentFeed);
-			inItem = false;
-		}
-	}
-
 	/* Tout ce qui est dans l'arborescence mais n'est pas partie  
 	 * intégrante d'un tag, déclenche la levée de cet événement.  
 	 * En général, cet événement est donc levé tout simplement 
@@ -161,11 +36,5 @@ public class ParserXMLHandler extends DefaultHandler {
 		if (buffer != null) {
 			buffer.append(lecture);      		
 		}
-	}
-	
-	
-	// cette méthode nous permettra de récupérer les données
-	public ArrayList<News> getNews(){
-		return news;
 	}
 }

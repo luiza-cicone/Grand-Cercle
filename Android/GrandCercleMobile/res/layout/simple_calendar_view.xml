@@ -6,9 +6,6 @@
 	android:layout_height="fill_parent"
 	android:background="@drawable/bg">
 
-	
-
-
 	<Button
 		android:id="@+id/selectedDayMonthYear"
 		android:textColor="#FFFFFF"

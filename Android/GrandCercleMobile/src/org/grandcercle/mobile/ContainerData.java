@@ -10,12 +10,12 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import android.content.Context;
-import android.util.Log;
 
 public class ContainerData {	
 	
 	static public Context context;
 	static private ArrayList<News> listNews;
+	private static ArrayList<Event> listEvent;
 	
 	public ContainerData() {
 
@@ -36,9 +36,16 @@ public class ContainerData {
 		}
 		
 		// On définit l'url du fichier XML
-		URL url = null;
+		URL urlNews = null;
 		try {
-			url = new URL("http://www.grandcercle.org/news/data.xml");
+			urlNews = new URL("http://www.grandcercle.org/news/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL urlEvent = null;
+		try {
+			urlEvent = new URL("http://www.grandcercle.org/evenements/data.xml");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
@@ -47,16 +54,27 @@ public class ContainerData {
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
 		 * des opérations de parsing.
 		 */
-		DefaultHandler handler = new ParserXMLHandler();
+		DefaultHandler handlerNews = new ParserXMLHandlerNews();
 		try {
 			// On parse le fichier XML
-			parseur.parse(url.openConnection().getInputStream(), handler);
+			parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
 			
 			// On récupère directement la liste des feeds
-			listNews = ((ParserXMLHandler) handler).getNews();
-			for (News news : listNews) {
-				Log.i("Container Data News",news.toString());
-			}
+			listNews = ((ParserXMLHandlerNews) handlerNews).getListNews();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		DefaultHandler handlerEvent = new ParserXMLHandlerEvent();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
+			
+			// On récupère directement la liste des feeds
+			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -94,6 +112,11 @@ public class ContainerData {
 
 	public static ArrayList<News> getNews() {
 		return listNews;
+	}
+
+
+	public static ArrayList<Event> getEvent() {
+		return listEvent;
 	}
 }
 
