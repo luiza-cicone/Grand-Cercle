@@ -26,20 +26,22 @@ public class PageEvent extends Activity {
 		((TextView)findViewById(R.id.lieu)).setText(param.getString("lieu"));
 		((TextView)findViewById(R.id.group)).setText(param.getString("group"));
 		
-		ImageView logo = (ImageView)findViewById(R.id.logo);
+		/*ImageView logo = (ImageView)findViewById(R.id.logo);
 		try {
 			SaveImageFromUrl.setImage(logo,param.getString("logo"));
 		} catch (IOException e) {
 			e.printStackTrace();	
 
-		}
+		}*/
 		
-		ImageView image = (ImageView)findViewById(R.id.image);
+		/*ImageView image = (ImageView)findViewById(R.id.image);
 		try {
 			SaveImageFromUrl.setImage(image,param.getString("image"));
 		} catch (IOException e) {
 			e.printStackTrace();	
 
-		}
+		}*/
+		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image), param.getString("image"), R.drawable.loading,null);
+		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"), R.drawable.loading, null);
 	}
 }

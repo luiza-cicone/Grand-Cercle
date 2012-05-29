@@ -7,7 +7,7 @@
 	android:orientation="horizontal"
 	android:minHeight="60dp">
 	<ImageView 
-	    android:id="@id/logo"
+	    android:id="@+id/logo"
 		android:layout_width="50dp"
 	    android:layout_height="50dp"
 	    android:layout_marginRight="10dp"

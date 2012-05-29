@@ -23,11 +23,9 @@ public class Tab2 extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab2);
-        //recherche = (EditText)findViewById(R.id.recherche);
+        
         ArrayList<News> listNews = ContainerData.getNews();
-        for (News news : listNews) {
-			Log.i("FeedPlayer",news.toString());
-		}
+        
         ListNewsAdapter lfa = new ListNewsAdapter(this,listNews);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);

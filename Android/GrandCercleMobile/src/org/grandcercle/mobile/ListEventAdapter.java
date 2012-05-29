@@ -75,21 +75,26 @@ public class ListEventAdapter extends BaseAdapter {
 
 		} else {
 			ev = (EventView) convertView.getTag();
-		}						
+		}
+		
 		ev.group.setText(listEvent.get(position).getGroup());
 		ev.title.setText(listEvent.get(position).getTitle());
 		ev.lieu.setText(listEvent.get(position).getLieu());
 		ev.time.setText(listEvent.get(position).getTime());
-		try {
+		/*try {
 			SaveImageFromUrl.setImage(ev.logo,listEvent.get(position).getLogo());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		try {
+		}*/
+		/*try {
 			SaveImageFromUrl.setImage(ev.thumbnail,listEvent.get(position).getThumbnail());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
+		
+		UrlImageViewHelper.setUrlDrawable(ev.thumbnail, listEvent.get(position).getThumbnail(), R.drawable.loading,null);
+		UrlImageViewHelper.setUrlDrawable(ev.logo, listEvent.get(position).getLogo(), R.drawable.loading, null);
 		
 		return convertView;
 	}
