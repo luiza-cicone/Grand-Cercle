@@ -39,7 +39,7 @@ public class PageEvent extends Activity {
 			e.printStackTrace();	
 
 		}*/
-		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image), param.getString("image"), R.drawable.loading,null);
-		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"), R.drawable.loading, null);
+		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image),param.getString("image"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);
+		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 	}
 }
