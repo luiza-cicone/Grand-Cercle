@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventsViewController : UIViewController
+@interface EventsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    IBOutlet UITableViewCell *eventCell;
+    NSMutableArray *eventArray;
+}
+
+@property (retain, nonatomic) IBOutlet UITableViewCell *eventCell;
+@property (retain, nonatomic) NSMutableArray *eventArray;
 
 @end

@@ -29,9 +29,7 @@
     return self;
 }
 	
-- (void)viewDidAppear:(BOOL)animated {
-    
-    NSLog(@"did appear");
+- (void)viewDidAppear:(BOOL)animated {    
     newsArray = [[NewsParser instance] arrayNews];
 }
 
