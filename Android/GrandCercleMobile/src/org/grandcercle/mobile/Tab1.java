@@ -116,7 +116,7 @@ public class Tab1 extends Activity {
 						{
 							month--;
 						}
-					Log.d(tag, "Setting Prev Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
+					//Log.d(tag, "Setting Prev Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
 					setGridCellAdapterToDate(month, year);
 				}
 			if (v == nextMonth)
@@ -130,7 +130,7 @@ public class Tab1 extends Activity {
 						{
 							month++;
 						}
-					Log.d(tag, "Setting Next Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
+					//Log.d(tag, "Setting Next Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
 					setGridCellAdapterToDate(month, year);
 				}
 	
@@ -192,13 +192,13 @@ public class Tab1 extends Activity {
 				this.month = month;
 				this.year = year;
 
-				Log.d(tag, "==> Passed in Date FOR Month: " + month + " " + "Year: " + year);
+				//Log.d(tag, "==> Passed in Date FOR Month: " + month + " " + "Year: " + year);
 				Calendar calendar = Calendar.getInstance();
 				setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
 				setCurrentWeekDay(calendar.get(Calendar.DAY_OF_WEEK));
-				Log.d(tag, "New Calendar:= " + calendar.getTime().toString());
-				Log.d(tag, "CurrentDayOfWeek :" + getCurrentWeekDay());
-				Log.d(tag, "CurrentDayOfMonth :" + getCurrentDayOfMonth());
+				//Log.d(tag, "New Calendar:= " + calendar.getTime().toString());
+				//Log.d(tag, "CurrentDayOfWeek :" + getCurrentWeekDay());
+				//Log.d(tag, "CurrentDayOfMonth :" + getCurrentDayOfMonth());
 
 				// Print Month
 				printMonth(month, year);
@@ -255,11 +255,11 @@ public class Tab1 extends Activity {
 				String currentMonthName = getMonthAsString(currentMonth);
 				daysInMonth = getNumberOfDaysOfMonth(currentMonth);
 
-				Log.d(tag, "Current Month: " + " " + currentMonthName + " having " + daysInMonth + " days.");
+				//Log.d(tag, "Current Month: " + " " + currentMonthName + " having " + daysInMonth + " days.");
 
 				// Gregorian Calendar : MINUS 1, set to FIRST OF MONTH
 				GregorianCalendar cal = new GregorianCalendar(yy, currentMonth, 1);
-				Log.d(tag, "Gregorian Calendar:= " + cal.getTime().toString());
+				//Log.d(tag, "Gregorian Calendar:= " + cal.getTime().toString());
 
 				if (currentMonth == 11)
 					{
@@ -268,7 +268,7 @@ public class Tab1 extends Activity {
 						nextMonth = 0;
 						prevYear = yy;
 						nextYear = yy + 1;
-						Log.d(tag, "*->PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
+						//Log.d(tag, "*->PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 					}
 				else if (currentMonth == 0)
 					{
@@ -277,7 +277,7 @@ public class Tab1 extends Activity {
 						nextYear = yy;
 						daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
 						nextMonth = 1;
-						Log.d(tag, "**--> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
+						//Log.d(tag, "**--> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 					}
 				else
 					{
@@ -286,7 +286,7 @@ public class Tab1 extends Activity {
 						nextYear = yy;
 						prevYear = yy;
 						daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
-						Log.d(tag, "***---> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
+						//Log.d(tag, "***---> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 					}
 
 				// Compute how much to leave before before the first day of the
@@ -295,9 +295,9 @@ public class Tab1 extends Activity {
 				int currentWeekDay = cal.get(Calendar.DAY_OF_WEEK) - 1;
 				trailingSpaces = currentWeekDay;
 
-				Log.d(tag, "Week Day:" + currentWeekDay + " is " + getWeekDayAsString(currentWeekDay));
-				Log.d(tag, "No. Trailing space to Add: " + trailingSpaces);
-				Log.d(tag, "No. of Days in Previous Month: " + daysInPrevMonth);
+				//Log.d(tag, "Week Day:" + currentWeekDay + " is " + getWeekDayAsString(currentWeekDay));
+				//Log.d(tag, "No. Trailing space to Add: " + trailingSpaces);
+				//Log.d(tag, "No. of Days in Previous Month: " + daysInPrevMonth);
 
 				if (cal.isLeapYear(cal.get(Calendar.YEAR)) && mm == 1)
 					{
@@ -307,14 +307,14 @@ public class Tab1 extends Activity {
 				// Trailing Month days
 				for (int i = 0; i < trailingSpaces; i++)
 					{
-						Log.d(tag, "PREV MONTH:= " + prevMonth + " => " + getMonthAsString(prevMonth) + " " + String.valueOf((daysInPrevMonth - trailingSpaces + DAY_OFFSET) + i));
+						//Log.d(tag, "PREV MONTH:= " + prevMonth + " => " + getMonthAsString(prevMonth) + " " + String.valueOf((daysInPrevMonth - trailingSpaces + DAY_OFFSET) + i));
 						list.add(String.valueOf((daysInPrevMonth - trailingSpaces + DAY_OFFSET) + i) + "-GREY" + "-" + getMonthAsString(prevMonth) + "-" + prevYear);
 					}
 
 				// Current Month Days
 				for (int i = 1; i <= daysInMonth; i++)
 					{
-						Log.d(currentMonthName, String.valueOf(i) + " " + getMonthAsString(currentMonth) + " " + yy);
+						//Log.d(currentMonthName, String.valueOf(i) + " " + getMonthAsString(currentMonth) + " " + yy);
 						if (i == getCurrentDayOfMonth())
 							{
 								list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
@@ -328,7 +328,7 @@ public class Tab1 extends Activity {
 				// Leading Month days
 				for (int i = 0; i < list.size() % 7; i++)
 					{
-						Log.d(tag, "NEXT MONTH:= " + getMonthAsString(nextMonth));
+						//Log.d(tag, "NEXT MONTH:= " + getMonthAsString(nextMonth));
 						list.add(String.valueOf(i + 1) + "-GREY" + "-" + getMonthAsString(nextMonth) + "-" + nextYear);
 					}
 			}
@@ -384,7 +384,7 @@ public class Tab1 extends Activity {
 
 				// ACCOUNT FOR SPACING
 
-				Log.d(tag, "Current Day: " + getCurrentDayOfMonth());
+				//Log.d(tag, "Current Day: " + getCurrentDayOfMonth());
 				String[] day_color = list.get(position).split("-");
 				String theday = day_color[0];
 				String themonth = day_color[2];
@@ -402,7 +402,7 @@ public class Tab1 extends Activity {
 				// Set the Day GridCell
 				gridcell.setText(theday);
 				gridcell.setTag(theday + "-" + themonth + "-" + theyear);
-				Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-" + theyear);
+				//Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-" + theyear);
 
 				if (day_color[1].equals("GREY"))
 					{
@@ -433,7 +433,7 @@ public class Tab1 extends Activity {
 				try
 					{
 						Date parsedDate = dateFormatter.parse(date_month_year);
-						Log.d(tag, "Parsed Date: " + parsedDate.toString());
+						//Log.d(tag, "Parsed Date: " + parsedDate.toString());
 
 					}
 				catch (ParseException e)
