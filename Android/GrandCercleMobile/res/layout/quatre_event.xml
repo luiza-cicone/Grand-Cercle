@@ -1,10 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-   
+    android:layout_height="fill_parent" >
+    <LinearLayout 
+    	android:orientation="vertical"
+	 	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal|center_vertical"
+		android:layout_marginBottom="30dp"
+		android:gravity="center" >
 
+	    <!-- Ligne 1 : haut -->
+	     <LinearLayout
+	    	android:orientation="horizontal"
+	 		android:layout_width="wrap_content"
+			android:layout_height="wrap_content" >
+			<!-- Case en haut à gauche -->
+			<LinearLayout
+		   		android:orientation="vertical"
+	  			android:layout_width="wrap_content"
+	 			android:layout_height="wrap_content"
+	 			android:layout_marginRight="10dp" >
+	        	<TextView
+					android:id="@+id/date0"  
+					android:layout_width="wrap_content" 
+			  		android:layout_height="wrap_content"
+			  		android:textSize="14dp"
+			  		android:gravity="center"
+			  		android:textAppearance="?android:attr/textAppearanceMedium"
+			  	/>
+		 		<ImageButton
+					android:id="@+id/image0"
+					android:layout_width="100dp"
+					android:layout_height="140dp"
+					android:gravity="center"
+				/>
+			</LinearLayout>
+		
+			<!-- Case en haut à droite -->
+			<LinearLayout
+		    	android:orientation="vertical"
+	  			android:layout_width="wrap_content"
+	 			android:layout_height="wrap_content"
+	 			android:layout_marginLeft="10dp" >
+		       	<TextView
+					android:id="@+id/date1"  
+					android:layout_width="wrap_content" 
+			  		android:layout_height="wrap_content"
+			  		android:layout_gravity="center_horizontal|center_vertical"
+			  		android:textSize="14dp"
+			  		android:gravity="center"
+			  		android:textAppearance="?android:attr/textAppearanceMedium"
+			  	/>
+				<ImageButton
+					android:id="@+id/image1"
+					android:layout_width="100dp"
+					android:layout_height="140dp"
+					android:gravity="center"
+				/>
+			</LinearLayout>
+		</LinearLayout>
+	 
+	    <!-- Ligne 2 : bas -->
+	     <LinearLayout
+	    	android:orientation="horizontal"
+	 		android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_marginTop="30dp"
+			android:gravity="center" >
+			<!-- Case en bas à gauche -->
+			<LinearLayout
+		   		android:orientation="vertical"
+	  			android:layout_width="wrap_content"
+	 			android:layout_height="wrap_content" 
+	 			android:gravity="left"
+	 			android:layout_marginRight="10dp">
+	        	<TextView
+					android:id="@+id/date2"  
+					android:layout_width="wrap_content" 
+			  		android:layout_height="wrap_content"
+			  		android:textSize="14dp"
+			  		android:gravity="center"
+			  		android:textAppearance="?android:attr/textAppearanceMedium"
+			  	/>
+		 		<ImageButton
+					android:id="@+id/image2"
+					android:layout_width="100dp"
+					android:layout_height="140dp"
+					android:gravity="center"
+					android:layout_marginRight="10dp"
+				/>
+			</LinearLayout>
+		
+			<!-- Case en bas à droite -->
+			<LinearLayout
+		    	android:orientation="vertical"
+	  			android:layout_width="wrap_content"
+	 			android:layout_height="wrap_content"
+	 			android:gravity="right" 
+	 			android:layout_marginLeft="10dp">
+		       	<TextView
+					android:id="@+id/date3"  
+					android:layout_width="wrap_content" 
+			  		android:layout_height="wrap_content"
+			  		android:layout_gravity="center_horizontal|center_vertical"
+			  		android:textSize="14dp"
+			  		android:gravity="center"
+			  		android:textAppearance="?android:attr/textAppearanceMedium"
+			  	/>
+				<ImageButton
+					android:id="@+id/image3"
+					android:layout_width="100dp"
+					android:layout_height="140dp"
+					android:gravity="center"
+					android:layout_marginLeft="10dp"
+				/>
+			</LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
 </LinearLayout>

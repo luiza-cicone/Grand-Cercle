@@ -23,9 +23,9 @@ public class Tab2 extends Activity {
         
         ArrayList<News> listNews = ContainerData.getNews();
         
-        ListNewsAdapter lfa = new ListNewsAdapter(this,listNews);
+        ListNewsAdapter lna = new ListNewsAdapter(this,listNews);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-        ((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
+        ((ListView)findViewById(R.id.listFeed)).setAdapter(lna);
         feedListView.setOnItemClickListener(clickListenerFeed);
 	 }
 	 
