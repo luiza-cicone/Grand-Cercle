@@ -30,6 +30,9 @@ import android.widget.TextView;
 
 public class Tab1 extends Activity {
 	
+	private ListEventAdapter lea;
+	private ArrayList<ImageView> images;
+	
 	private static final String tag = "SimpleCalendarViewActivity";
 	private ImageView calendarToJournalButton;
 	private Button selectedDayMonthYearButton;
@@ -52,9 +55,9 @@ public class Tab1 extends Activity {
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		
 		// Attributs de la liste
-		ListEventAdapter lfa = new ListEventAdapter(this,listEvent);
+		lea = new ListEventAdapter(this,listEvent);
 		ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-		((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
+		((ListView)findViewById(R.id.listFeed)).setAdapter(lea);
 		feedListView.setOnItemClickListener(clickListenerFeed);
 		
 		// Attributs des 4 prochains evenements
@@ -65,7 +68,7 @@ public class Tab1 extends Activity {
 		dates.add(2,(TextView)findViewById(R.id.date2));
 		dates.add(3,(TextView)findViewById(R.id.date3));
 		// tableau des image* a attribuer
-		ArrayList<ImageView> images = new ArrayList<ImageView>(4);
+		images = new ArrayList<ImageView>(4);
 		images.add(0,(ImageView)findViewById(R.id.image0));
 		images.add(1,(ImageView)findViewById(R.id.image1));
 		images.add(2,(ImageView)findViewById(R.id.image2));
@@ -77,6 +80,7 @@ public class Tab1 extends Activity {
 			currentEvent = listEvent.get(eventNumber);
 			dates.get(eventNumber).setText(currentEvent.getDate());
 			UrlImageViewHelper.setUrlDrawable(images.get(eventNumber),currentEvent.getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_THREE_DAYS);
+			images.get(eventNumber).setOnClickListener(imageClicked);
 			eventNumber += 1;
 		}
 		
@@ -106,7 +110,7 @@ public class Tab1 extends Activity {
 		calendarView.setAdapter(adapter);
 		if (!ev) {
 			ListView feedListViewDay = ((ListView)findViewById(R.id.listFeedDay));
-			((ListView)findViewById(R.id.listFeedDay)).setAdapter(lfa);
+			((ListView)findViewById(R.id.listFeedDay)).setAdapter(lea);
 			feedListViewDay.setOnItemClickListener(clickListenerFeed);
 		}
 		
@@ -176,6 +180,29 @@ public class Tab1 extends Activity {
 			bundle.putString("lieu",((Event)parent.getItemAtPosition(position)).getLieu());
 			bundle.putString("logo",((Event)parent.getItemAtPosition(position)).getLogo());
 			bundle.putString("group",((Event)parent.getItemAtPosition(position)).getGroup());
+			//Ajout du Bundle
+			intent.putExtras(bundle);
+			
+			Tab1.this.startActivity(intent);
+		}
+	};
+	
+	private View.OnClickListener imageClicked = new View.OnClickListener() {
+		public void onClick(View v) {
+			// Ouverture nouvelle activity
+			Intent intent = new Intent(Tab1.this,PageEvent.class);
+			// Passage des paramètres
+			Bundle bundle = new Bundle();
+			//Add the parameters to bundle as
+			bundle.putString("titre",lea.getItem(images.indexOf(v)).getTitle());
+			bundle.putString("description",lea.getItem(images.indexOf(v)).getDescription());
+			bundle.putString("image",lea.getItem(images.indexOf(v)).getImage());
+			bundle.putString("day",lea.getItem(images.indexOf(v)).getDay());
+			bundle.putString("date",lea.getItem(images.indexOf(v)).getDate());
+			bundle.putString("time",lea.getItem(images.indexOf(v)).getTime());
+			bundle.putString("lieu",lea.getItem(images.indexOf(v)).getLieu());
+			bundle.putString("logo",lea.getItem(images.indexOf(v)).getLogo());
+			bundle.putString("group",lea.getItem(images.indexOf(v)).getGroup());
 			//Ajout du Bundle
 			intent.putExtras(bundle);
 			
