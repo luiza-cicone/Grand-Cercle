@@ -45,6 +45,7 @@ public class Tab1 extends Activity {
 	private int month, year;
 	private final DateFormat dateFormatter = new DateFormat();
 	private static final String dateTemplate = "MMMM yyyy";
+	private static boolean ev=false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,13 +67,13 @@ public class Tab1 extends Activity {
 		selectedDayMonthYearButton.setText("Selected: ");
 
 		prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
-		//prevMonth.setOnClickListener(prevMonthClicked);
+		prevMonth.setOnClickListener(prevORnextMonthClicked);
 
 		currentMonth = (Button) this.findViewById(R.id.currentMonth);
 		currentMonth.setText(dateFormatter.format(dateTemplate, _calendar.getTime()));
 
 		nextMonth = (ImageView) this.findViewById(R.id.nextMonth);
-		//nextMonth.setOnClickListener(this);
+		nextMonth.setOnClickListener(prevORnextMonthClicked);
 
 		calendarView = (GridView) this.findViewById(R.id.calendar);
 
@@ -80,8 +81,11 @@ public class Tab1 extends Activity {
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
 		adapter.notifyDataSetChanged();
 		calendarView.setAdapter(adapter);
-		
-		
+		if (!ev) {
+			ListView feedListViewDay = ((ListView)findViewById(R.id.listFeedDay));
+			((ListView)findViewById(R.id.listFeedDay)).setAdapter(lfa);
+			feedListViewDay.setOnItemClickListener(clickListenerFeed);
+		}
 		
 		//autres attributs des deux fichiers xml à "remplir" + listeners
 	}
@@ -97,7 +101,41 @@ public class Tab1 extends Activity {
 
 	
 	
-	//private View.OnClickListener prevMonthClicked
+	private View.OnClickListener prevORnextMonthClicked = new View.OnClickListener() {
+		
+		public void onClick(View v)
+		{
+			if (v == prevMonth)
+				{
+					if (month <= 1)
+						{
+							month = 12;
+							year--;
+						}
+					else
+						{
+							month--;
+						}
+					Log.d(tag, "Setting Prev Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
+					setGridCellAdapterToDate(month, year);
+				}
+			if (v == nextMonth)
+				{
+					if (month > 11)
+						{
+							month = 1;
+							year++;
+						}
+					else
+						{
+							month++;
+						}
+					Log.d(tag, "Setting Next Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
+					setGridCellAdapterToDate(month, year);
+				}
+	
+		}
+	};
 	
 	private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -385,6 +423,12 @@ public class Tab1 extends Activity {
 			{
 				String date_month_year = (String) view.getTag();
 				selectedDayMonthYearButton.setText("Selected: " + date_month_year);
+				if (date_month_year.equalsIgnoreCase("2-June-2012")) {
+					ev = true;
+					Intent intent = new Intent(Tab1.this,Tab1.class);
+					Tab1.this.startActivity(intent);
+					selectedDayMonthYearButton.setText("Selected: " + date_month_year);
+				}
 
 				try
 					{
