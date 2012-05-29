@@ -48,6 +48,11 @@
 		2595EAF8157405EB00CA27B3 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF3157405EB00CA27B3 /* DealsViewController.m */; };
 		2595EAF9157405EB00CA27B3 /* InfosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF5157405EB00CA27B3 /* InfosViewController.m */; };
 		2595EAFA157405EB00CA27B3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF7157405EB00CA27B3 /* SettingsViewController.m */; };
+		25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */; };
+		25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E25D15751736009B8921 /* libTapkuLibrary.a */; };
+		25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29615751DBC009B8921 /* QuartzCore.framework */; };
+		25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29815751DC2009B8921 /* MapKit.framework */; };
+		25E0E29C157520C0009B8921 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E0E29B157520C0009B8921 /* ImageCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2595EA981573FA9000CA27B3;
 			remoteInfo = "Grand Cercle";
+		};
+		25E0E25C15751736009B8921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = TapkuLibrary;
+		};
+		25E0E25E15751736009B8921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3B45DDF1134C736600D24C1A;
+			remoteInfo = LogicTests;
+		};
+		25E0E29315751DA1009B8921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = TapkuLibrary;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -121,6 +147,12 @@
 		2595EAF5157405EB00CA27B3 /* InfosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfosViewController.m; sourceTree = "<group>"; };
 		2595EAF6157405EB00CA27B3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		2595EAF7157405EB00CA27B3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapkuLibrary.xcodeproj; path = ../tapkulibrary/src/TapkuLibrary.xcodeproj; sourceTree = "<group>"; };
+		25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TapkuLibrary.bundle; path = ../tapkulibrary/src/TapkuLibrary.bundle; sourceTree = "<group>"; };
+		25E0E29615751DBC009B8921 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		25E0E29815751DC2009B8921 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		25E0E29A157520C0009B8921 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		25E0E29B157520C0009B8921 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +160,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */,
+				25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */,
+				25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */,
 				2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */,
 				2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */,
 				2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */,
@@ -158,8 +193,6 @@
 				255C813C157428A000E6ECC3 /* TBXML.m */,
 				255C8143157428A000E6ECC3 /* TBXML+HTTP.h */,
 				255C8141157428A000E6ECC3 /* TBXML+HTTP.m */,
-				0435F48E1574F2E7009F23CD /* Items.h */,
-				0435F48F1574F2E7009F23CD /* Items.m */,
 			);
 			name = TBXML;
 			sourceTree = "<group>";
@@ -167,6 +200,8 @@
 		2595EA8E1573FA9000CA27B3 = {
 			isa = PBXGroup;
 			children = (
+				25E0E29A157520C0009B8921 /* ImageCache.h */,
+				25E0E29B157520C0009B8921 /* ImageCache.m */,
 				2595EAA31573FA9000CA27B3 /* Grand Cercle */,
 				2595EACF1573FA9000CA27B3 /* Grand CercleTests */,
 				2595EA9C1573FA9000CA27B3 /* Frameworks */,
@@ -186,6 +221,10 @@
 		2595EA9C1573FA9000CA27B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25E0E29815751DC2009B8921 /* MapKit.framework */,
+				25E0E29615751DBC009B8921 /* QuartzCore.framework */,
+				25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */,
+				25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */,
 				2595EA9D1573FA9000CA27B3 /* UIKit.framework */,
 				2595EA9F1573FA9000CA27B3 /* Foundation.framework */,
 				2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */,
@@ -197,13 +236,10 @@
 		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
 			isa = PBXGroup;
 			children = (
+				25E0E2601575174C009B8921 /* Models */,
 				255C8148157428A300E6ECC3 /* TBXML */,
 				255C8140157428A000E6ECC3 /* NewsParser.h */,
 				255C813D157428A000E6ECC3 /* NewsParser.m */,
-				255C813E157428A000E6ECC3 /* News.h */,
-				255C813F157428A000E6ECC3 /* News.m */,
-				0435F4911574F4B3009F23CD /* Evenements.h */,
-				0435F4921574F4B3009F23CD /* Evenements.m */,
 				0435F4931574F4B3009F23CD /* EvenementsParser.h */,
 				0435F4941574F4B3009F23CD /* EvenementsParser.m */,
 				2595EAE11573FABD00CA27B3 /* UI */,
@@ -285,6 +321,28 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		25E0E25515751735009B8921 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				25E0E25D15751736009B8921 /* libTapkuLibrary.a */,
+				25E0E25F15751736009B8921 /* LogicTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		25E0E2601575174C009B8921 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0435F4911574F4B3009F23CD /* Evenements.h */,
+				0435F4921574F4B3009F23CD /* Evenements.m */,
+				255C813E157428A000E6ECC3 /* News.h */,
+				255C813F157428A000E6ECC3 /* News.m */,
+				0435F48E1574F2E7009F23CD /* Items.h */,
+				0435F48F1574F2E7009F23CD /* Items.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +357,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				25E0E29415751DA1009B8921 /* PBXTargetDependency */,
 			);
 			name = "Grand Cercle";
 			productName = "Grand Cercle";
@@ -343,6 +402,12 @@
 			mainGroup = 2595EA8E1573FA9000CA27B3;
 			productRefGroup = 2595EA9A1573FA9000CA27B3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 25E0E25515751735009B8921 /* Products */;
+					ProjectRef = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2595EA981573FA9000CA27B3 /* Grand Cercle */,
@@ -350,6 +415,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		25E0E25D15751736009B8921 /* libTapkuLibrary.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTapkuLibrary.a;
+			remoteRef = 25E0E25C15751736009B8921 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		25E0E25F15751736009B8921 /* LogicTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LogicTests.octest;
+			remoteRef = 25E0E25E15751736009B8921 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2595EA971573FA9000CA27B3 /* Resources */ = {
@@ -373,6 +455,7 @@
 				255C80A615740EE900E6ECC3 /* SettingsViewController.xib in Resources */,
 				255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */,
 				0435F4981574FDF3009F23CD /* EventCell.xib in Resources */,
+				25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +506,7 @@
 				0435F4901574F2E7009F23CD /* Items.m in Sources */,
 				0435F4951574F4B3009F23CD /* Evenements.m in Sources */,
 				0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */,
+				25E0E29C157520C0009B8921 /* ImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +525,11 @@
 			isa = PBXTargetDependency;
 			target = 2595EA981573FA9000CA27B3 /* Grand Cercle */;
 			targetProxy = 2595EACD1573FA9000CA27B3 /* PBXContainerItemProxy */;
+		};
+		25E0E29415751DA1009B8921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TapkuLibrary;
+			targetProxy = 25E0E29315751DA1009B8921 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -561,8 +650,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
+				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
 				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -573,8 +667,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
+				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
 				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

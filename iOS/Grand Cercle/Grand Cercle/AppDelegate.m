@@ -15,6 +15,7 @@
 #import "SettingsViewController.h"
 
 #import "NewsParser.h"
+#import "EvenementsParser.h"
 
 
 @implementation AppDelegate
@@ -35,6 +36,11 @@
     // On parse les news
     NewsParser *np = [NewsParser instance];
     [np loadNews];
+    
+    // On parse les événements
+    EvenementsParser *ep = [EvenementsParser instance];
+    [ep loadEvenements];
+    
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
