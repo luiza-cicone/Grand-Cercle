@@ -5,9 +5,11 @@
     android:layout_height="fill_parent" >
     <LinearLayout 
     	android:orientation="vertical"
-	 	android:layout_width="wrap_content"
+	 	android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal|center_vertical" >
+		android:layout_gravity="center_horizontal|center_vertical"
+		android:layout_marginBottom="30dp"
+		android:gravity="center" >
 
 	    <!-- Ligne 1 : haut -->
 	     <LinearLayout
@@ -27,7 +29,7 @@
 			  		android:gravity="center"
 			  		android:textAppearance="?android:attr/textAppearanceMedium"
 			  	/>
-		 		<ImageView
+		 		<ImageButton
 					android:id="@+id/image0"
 					android:layout_width="100dp"
 					android:layout_height="140dp"
@@ -49,7 +51,7 @@
 			  		android:gravity="center"
 			  		android:textAppearance="?android:attr/textAppearanceMedium"
 			  	/>
-				<ImageView
+				<ImageButton
 					android:id="@+id/image1"
 					android:layout_width="100dp"
 					android:layout_height="140dp"
@@ -61,13 +63,16 @@
 	    <!-- Ligne 2 : bas -->
 	     <LinearLayout
 	    	android:orientation="horizontal"
-	 		android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
+	 		android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_marginTop="30dp"
+			android:gravity="center" >
 			<!-- Case en bas à gauche -->
 			<LinearLayout
 		   		android:orientation="vertical"
 	  			android:layout_width="wrap_content"
-	 			android:layout_height="wrap_content" >
+	 			android:layout_height="wrap_content" 
+	 			android:gravity="left">
 	        	<TextView
 					android:id="@+id/date2"  
 					android:layout_width="wrap_content" 
@@ -76,7 +81,7 @@
 			  		android:gravity="center"
 			  		android:textAppearance="?android:attr/textAppearanceMedium"
 			  	/>
-		 		<ImageView
+		 		<ImageButton
 					android:id="@+id/image2"
 					android:layout_width="100dp"
 					android:layout_height="140dp"
@@ -88,7 +93,8 @@
 			<LinearLayout
 		    	android:orientation="vertical"
 	  			android:layout_width="wrap_content"
-	 			android:layout_height="wrap_content" >
+	 			android:layout_height="wrap_content"
+	 			android:gravity="right" >
 		       	<TextView
 					android:id="@+id/date3"  
 					android:layout_width="wrap_content" 
@@ -98,7 +104,7 @@
 			  		android:gravity="center"
 			  		android:textAppearance="?android:attr/textAppearanceMedium"
 			  	/>
-				<ImageView
+				<ImageButton
 					android:id="@+id/image3"
 					android:layout_width="100dp"
 					android:layout_height="140dp"
