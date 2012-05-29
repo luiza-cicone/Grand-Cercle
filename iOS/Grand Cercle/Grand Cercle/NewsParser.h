@@ -21,8 +21,9 @@
 
 @property(nonatomic, retain) NSMutableArray *arrayNews;
 
-// Méthode récupérant l'ensemble des news
+// Unique instance du parser
 + (NewsParser *) instance;
+// Méthode récupérant l'ensemble des news
 - (void) loadNews;
 - (void) treatementNews:(TBXMLElement *)element;
 
