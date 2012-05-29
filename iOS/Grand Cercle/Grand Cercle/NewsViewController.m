@@ -17,7 +17,8 @@
 
 @implementation NewsViewController
 @synthesize newsCell;
-@synthesize newsArray;
+@synthesize tView;
+@synthesize newsArray, urlArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,23 +27,64 @@
         self.title = NSLocalizedString(@"News", @"News");
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
     }
+    newsArray = [[NewsParser instance] arrayNews];
+    
+    urlArray = [[NSMutableArray alloc] initWithCapacity:[newsArray count]];
+    
+    for (int i = 0; i < [newsArray count]; i++) {
+        News *n = [newsArray objectAtIndex:i];
+        [urlArray addObject:[n logo]];
+    }
+	
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
+	imageCache.notificationName = @"newImageCache";
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
+    
     return self;
 }
+
+- (void) newImageRetrieved:(NSNotification*)sender{
+    
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tView indexPathsForVisibleRows];
+
+    
+    for(NSIndexPath *path in paths) {
+        
+    	NSInteger index = path.row;
+    
+        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
+        UIImageView *imageView;
+        imageView = (UIImageView *)[cell viewWithTag:1];
+    	if(imageView.image == nil && tag == index){
+            
+            imageView.image = [dict objectForKey:@"image"];
+            [cell setNeedsLayout];
+        }
+    }
+}
+
 	
 - (void)viewDidAppear:(BOOL)animated {    
-    newsArray = [[NewsParser instance] arrayNews];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 }
 
 - (void)viewDidUnload
 {
     [self setNewsCell:nil];
     [newsCell release];
-    newsCell = nil;
+    [urlArray release];
+    [newsArray release];
+	[imageCache release];
+    [tView release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -90,9 +132,11 @@
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
     
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[n logo]]];
-    UIImage *myimage = [[UIImage alloc] initWithData:imageData];
-    [imageView setImage:myimage];
+//    UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[n logo]]]];
+
+    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", index] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
+
+    [imageView setImage:img];
     
     UILabel *label;
     label = (UILabel *)[cell viewWithTag:2];
@@ -161,7 +205,9 @@
 
 - (void)dealloc {
     [newsCell release];
-    [newsCell release];
+    [urlArray release];
+    [newsArray release];
+	[imageCache release];
     [super dealloc];
 }
 @end

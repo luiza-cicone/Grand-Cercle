@@ -28,12 +28,13 @@
 }
 	
 -(void)viewDidAppear:(BOOL)animated {
-    eventArray = [[EvenementsParser instance] arrayEvenements];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    eventArray = [[EvenementsParser instance] arrayEvenements];
+
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -61,13 +62,16 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [eventArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [eventArray count];
+    return 1;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [[eventArray objectAtIndex:section] title];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,8 +87,7 @@
         self.eventCell = nil;
     }
     
-    Evenements *e = (Evenements *)[eventArray objectAtIndex:[indexPath row]];
-    NSLog(@"%@", e.title);
+    Evenements *e = (Evenements *)[eventArray objectAtIndex:[indexPath section]];
     
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];

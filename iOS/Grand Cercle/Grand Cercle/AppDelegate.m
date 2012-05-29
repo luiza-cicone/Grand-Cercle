@@ -41,6 +41,7 @@
     EvenementsParser *ep = [EvenementsParser instance];
     [ep loadEvenements];
     
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // Override point for customization after application launch.
@@ -50,7 +51,7 @@
     UIViewController *viewController4 = [[[InfosViewController alloc] initWithNibName:@"InfosViewController" bundle:nil] autorelease];
     UIViewController *viewController5 = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController3, viewController2, viewController1, viewController4, viewController5, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, viewController3, viewController4, viewController5, nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
