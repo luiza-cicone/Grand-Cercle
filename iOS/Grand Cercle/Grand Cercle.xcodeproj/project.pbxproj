@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0435F4891574EF29009F23CD /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4881574EF29009F23CD /* NSString+HTML.m */; };
+		0435F48D1574EFF3009F23CD /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F48C1574EFF3009F23CD /* GTMNSString+HTML.m */; };
+		0435F4901574F2E7009F23CD /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F48F1574F2E7009F23CD /* Items.m */; };
+		0435F4951574F4B3009F23CD /* Evenements.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4921574F4B3009F23CD /* Evenements.m */; };
+		0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4941574F4B3009F23CD /* EvenementsParser.m */; };
+		0435F4981574FDF3009F23CD /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0435F4971574FDF3009F23CD /* EventCell.xib */; };
 		255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 255C809A15740E0100E6ECC3 /* Localizable.strings */; };
 		255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C809E15740EE900E6ECC3 /* DealsViewController.xib */; };
 		255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80A015740EE900E6ECC3 /* InfosViewController.xib */; };
@@ -55,6 +61,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0435F4871574EF29009F23CD /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		0435F4881574EF29009F23CD /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		0435F48B1574EFF3009F23CD /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		0435F48C1574EFF3009F23CD /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		0435F48E1574F2E7009F23CD /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
+		0435F48F1574F2E7009F23CD /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
+		0435F4911574F4B3009F23CD /* Evenements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Evenements.h; sourceTree = "<group>"; };
+		0435F4921574F4B3009F23CD /* Evenements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Evenements.m; sourceTree = "<group>"; };
+		0435F4931574F4B3009F23CD /* EvenementsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvenementsParser.h; sourceTree = "<group>"; };
+		0435F4941574F4B3009F23CD /* EvenementsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvenementsParser.m; sourceTree = "<group>"; };
+		0435F4971574FDF3009F23CD /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		255C809B15740E0100E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Grand Cercle/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		255C809F15740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DealsViewController.xib; sourceTree = "<group>"; };
 		255C80A115740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfosViewController.xib; sourceTree = "<group>"; };
@@ -133,10 +150,16 @@
 		255C8148157428A300E6ECC3 /* TBXML */ = {
 			isa = PBXGroup;
 			children = (
+				0435F48B1574EFF3009F23CD /* GTMNSString+HTML.h */,
+				0435F48C1574EFF3009F23CD /* GTMNSString+HTML.m */,
+				0435F4871574EF29009F23CD /* NSString+HTML.h */,
+				0435F4881574EF29009F23CD /* NSString+HTML.m */,
 				255C8142157428A000E6ECC3 /* TBXML.h */,
 				255C813C157428A000E6ECC3 /* TBXML.m */,
 				255C8143157428A000E6ECC3 /* TBXML+HTTP.h */,
 				255C8141157428A000E6ECC3 /* TBXML+HTTP.m */,
+				0435F48E1574F2E7009F23CD /* Items.h */,
+				0435F48F1574F2E7009F23CD /* Items.m */,
 			);
 			name = TBXML;
 			sourceTree = "<group>";
@@ -179,6 +202,10 @@
 				255C813D157428A000E6ECC3 /* NewsParser.m */,
 				255C813E157428A000E6ECC3 /* News.h */,
 				255C813F157428A000E6ECC3 /* News.m */,
+				0435F4911574F4B3009F23CD /* Evenements.h */,
+				0435F4921574F4B3009F23CD /* Evenements.m */,
+				0435F4931574F4B3009F23CD /* EvenementsParser.h */,
+				0435F4941574F4B3009F23CD /* EvenementsParser.m */,
 				2595EAE11573FABD00CA27B3 /* UI */,
 				2595EAE01573FAAB00CA27B3 /* images */,
 				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
@@ -253,6 +280,7 @@
 				2595EABD1573FA9000CA27B3 /* EventsViewController.xib */,
 				2595EAC01573FA9000CA27B3 /* NewsViewController.xib */,
 				255C80AA157411AD00E6ECC3 /* NewsCell.xib */,
+				0435F4971574FDF3009F23CD /* EventCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -344,6 +372,7 @@
 				255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */,
 				255C80A615740EE900E6ECC3 /* SettingsViewController.xib in Resources */,
 				255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */,
+				0435F4981574FDF3009F23CD /* EventCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +418,11 @@
 				255C8145157428A000E6ECC3 /* NewsParser.m in Sources */,
 				255C8146157428A000E6ECC3 /* News.m in Sources */,
 				255C8147157428A000E6ECC3 /* TBXML+HTTP.m in Sources */,
+				0435F4891574EF29009F23CD /* NSString+HTML.m in Sources */,
+				0435F48D1574EFF3009F23CD /* GTMNSString+HTML.m in Sources */,
+				0435F4901574F2E7009F23CD /* Items.m in Sources */,
+				0435F4951574F4B3009F23CD /* Evenements.m in Sources */,
+				0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

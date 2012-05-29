@@ -32,11 +32,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
+    // On parse les news
     NewsParser *np = [NewsParser instance];
     [np loadNews];
-    NSLog(@"np %d", [[np arrayNews] count]);
-
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     

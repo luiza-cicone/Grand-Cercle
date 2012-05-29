@@ -1,14 +1,9 @@
 package org.grandcercle.mobile;
 
-
-
-import java.io.IOException;
 import java.util.ArrayList;
-
 import org.grandcercle.mobile.R;
-
-
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +37,7 @@ public class ListEventAdapter extends BaseAdapter {
 	}
 
 	// Permet de retourner un objet contenu dans la liste
-	public Object getItem(int index) {
+	public Event getItem(int index) {
 		return listEvent.get(index);
 	}
 
@@ -63,18 +58,18 @@ public class ListEventAdapter extends BaseAdapter {
 		
 		if (convertView == null) {
 			ev = new EventView();
-			convertView = inflater.inflate(R.layout.list_event, null);
+			convertView = inflater.inflate(R.layout.cell_event,null);
 
 			ev.group = (TextView)convertView.findViewById(R.id.group);			
 			ev.title = (TextView)convertView.findViewById(R.id.title);
 			ev.lieu = (TextView)convertView.findViewById(R.id.lieu);
 			ev.time = (TextView)convertView.findViewById(R.id.time);
 			ev.logo = (ImageView)convertView.findViewById(R.id.logo);
-			ev.thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
+			ev.image = (ImageView)convertView.findViewById(R.id.image);
 			convertView.setTag(ev);
 
 		} else {
-			ev = (EventView) convertView.getTag();
+			ev = (EventView)convertView.getTag();
 		}
 		
 		ev.group.setText(listEvent.get(position).getGroup());
@@ -91,10 +86,11 @@ public class ListEventAdapter extends BaseAdapter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
-		
-		// thumbnail stocké pendant une semaine, logo stocké de manière infinie
-		UrlImageViewHelper.setUrlDrawable(ev.thumbnail,listEvent.get(position).getThumbnail(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK,null);
-		UrlImageViewHelper.setUrlDrawable(ev.logo,listEvent.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE,null);
+		Log.i("thumbnail",listEvent.get(position).getThumbnail());
+		Log.i("logo",listEvent.get(position).getLogo());
+		// image stockée pendant une semaine, logo stocké de manière infinie
+		UrlImageViewHelper.setUrlDrawable(ev.image,listEvent.get(position).getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);
+		UrlImageViewHelper.setUrlDrawable(ev.logo,listEvent.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 		return convertView;
 	}

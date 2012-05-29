@@ -7,26 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Items.h"
 
-@interface News : NSObject {
-    // Titre
-    NSString *title;
-    // Déscription
-    NSString *description;
-    // Lien
-    NSURL *theLink;
-    // Date de publication
-    NSString *pubDate;
-    // Auteur
-    NSString *author;
-    // Groupe de l'auteur
-    NSString *group;
-    // Logo de l'association
-    NSURL *logo;
-}
-
-@property (nonatomic, retain) NSString *title, *description, *pubDate, *author, *group;
-@property (nonatomic, retain) NSURL *theLink, *logo;
-
+@interface News : Items
 
 @end
