@@ -110,12 +110,13 @@ containing a value of this type.
         public static final int list_news=0x7f030006;
         public static final int main=0x7f030007;
         public static final int quatre_event=0x7f030008;
-        public static final int simple_calendar_view=0x7f030009;
-        public static final int tab2=0x7f03000a;
-        public static final int tab3=0x7f03000b;
-        public static final int tab4=0x7f03000c;
-        public static final int tab5=0x7f03000d;
-        public static final int tab_item=0x7f03000e;
+        public static final int quatre_event2=0x7f030009;
+        public static final int simple_calendar_view=0x7f03000a;
+        public static final int tab2=0x7f03000b;
+        public static final int tab3=0x7f03000c;
+        public static final int tab4=0x7f03000d;
+        public static final int tab5=0x7f03000e;
+        public static final int tab_item=0x7f03000f;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

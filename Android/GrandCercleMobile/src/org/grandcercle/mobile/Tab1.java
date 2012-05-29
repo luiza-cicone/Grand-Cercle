@@ -71,13 +71,14 @@ public class Tab1 extends Activity {
 		images.add(2,(ImageView)findViewById(R.id.image2));
 		images.add(3,(ImageView)findViewById(R.id.image3));
 		
-		/*int eventNumber = 0;
+		int eventNumber = 0;
 		Event currentEvent;
-		while (eventNumber < 4 && eventNumber < listEvent.size()-1) {
+		while (eventNumber < 4 && eventNumber < listEvent.size()) {
 			currentEvent = listEvent.get(eventNumber);
 			dates.get(eventNumber).setText(currentEvent.getDate());
 			UrlImageViewHelper.setUrlDrawable(images.get(eventNumber),currentEvent.getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_THREE_DAYS);
-		}*/
+			eventNumber += 1;
+		}
 		
 		// Attributs du calendrier
 		_calendar = Calendar.getInstance(Locale.getDefault());

@@ -14,5 +14,5 @@
         layout="@layout/list_news"/>
     <include 
         android:id="@+id/right" 
-        layout="@layout/quatre_event"/>
+        layout="@layout/quatre_event2"/>
 </org.grandcercle.mobile.DragableSpace>
