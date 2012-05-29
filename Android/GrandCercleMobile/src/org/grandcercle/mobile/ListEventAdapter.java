@@ -58,7 +58,7 @@ public class ListEventAdapter extends BaseAdapter {
 		
 		if (convertView == null) {
 			ev = new EventView();
-			convertView = inflater.inflate(R.layout.list_event,null);
+			convertView = inflater.inflate(R.layout.cell_event,null);
 
 			ev.group = (TextView)convertView.findViewById(R.id.group);			
 			ev.title = (TextView)convertView.findViewById(R.id.title);

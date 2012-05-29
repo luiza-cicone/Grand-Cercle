@@ -93,7 +93,7 @@ public class Tab3 extends Activity implements OnClickListener{
 				calendarView.setAdapter(adapter);
 			}
 
-		
+		// private View.OnClickListener case_cal_clicked = new View.OnClickListener() {
 		public void onClick(View v)
 			{
 				if (v == prevMonth)

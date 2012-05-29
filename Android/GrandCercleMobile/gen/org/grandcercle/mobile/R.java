@@ -9,6 +9,14 @@ package org.grandcercle.mobile;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int default_screen=0x7f010000;
     }
     public static final class color {
         public static final int black=0x7f040001;
@@ -56,44 +64,50 @@ public final class R {
         public static final int tab_text_selector=0x7f020021;
     }
     public static final class id {
-        public static final int PubDate=0x7f07000b;
-        public static final int calendar=0x7f070012;
-        public static final int calendar_day_gridcell=0x7f070000;
-        public static final int calendarheader=0x7f070011;
-        public static final int currentMonth=0x7f07000f;
-        public static final int date=0x7f070005;
-        public static final int day=0x7f070004;
-        public static final int description=0x7f07000a;
-        public static final int group=0x7f070009;
-        public static final int icone=0x7f070015;
-        public static final int image=0x7f070002;
-        public static final int lieu=0x7f070007;
-        public static final int listFeed=0x7f070013;
-        public static final int logo=0x7f070008;
-        public static final int nextMonth=0x7f070010;
-        public static final int num_events_per_day=0x7f070001;
-        public static final int prevMonth=0x7f07000e;
+        public static final int PubDate=0x7f070010;
+        public static final int calendar=0x7f070017;
+        public static final int calendar_day_gridcell=0x7f070004;
+        public static final int calendarheader=0x7f070016;
+        public static final int center=0x7f070002;
+        public static final int currentMonth=0x7f070014;
+        public static final int date=0x7f07000e;
+        public static final int day=0x7f07000d;
+        public static final int description=0x7f07000f;
+        public static final int group=0x7f070008;
+        public static final int icone=0x7f070019;
+        public static final int image=0x7f070006;
+        public static final int left=0x7f070001;
+        public static final int lieu=0x7f07000a;
+        public static final int listFeed=0x7f070011;
+        public static final int logo=0x7f07000b;
+        public static final int nextMonth=0x7f070015;
+        public static final int num_events_per_day=0x7f070005;
+        public static final int prevMonth=0x7f070013;
         public static final int pub_date=0x7f07000c;
-        public static final int selectedDayMonthYear=0x7f07000d;
-        public static final int tabsLayout=0x7f070014;
-        public static final int tabsText=0x7f070016;
-        public static final int time=0x7f070006;
-        public static final int title=0x7f070003;
+        public static final int right=0x7f070003;
+        public static final int selectedDayMonthYear=0x7f070012;
+        public static final int space=0x7f070000;
+        public static final int tabsLayout=0x7f070018;
+        public static final int tabsText=0x7f07001a;
+        public static final int time=0x7f070009;
+        public static final int title=0x7f070007;
     }
     public static final class layout {
-        public static final int calendar_day_gridcell=0x7f030000;
-        public static final int description_event=0x7f030001;
-        public static final int description_news=0x7f030002;
-        public static final int list_event=0x7f030003;
-        public static final int list_news=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int simple_calendar_view=0x7f030006;
-        public static final int tab1=0x7f030007;
-        public static final int tab2=0x7f030008;
-        public static final int tab3=0x7f030009;
-        public static final int tab4=0x7f03000a;
-        public static final int tab5=0x7f03000b;
-        public static final int tab_item=0x7f03000c;
+        public static final int affichage_event=0x7f030000;
+        public static final int calendar_day_gridcell=0x7f030001;
+        public static final int cell_event=0x7f030002;
+        public static final int cell_news=0x7f030003;
+        public static final int description_event=0x7f030004;
+        public static final int description_news=0x7f030005;
+        public static final int list_news=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int quatre_event=0x7f030008;
+        public static final int simple_calendar_view=0x7f030009;
+        public static final int tab2=0x7f03000a;
+        public static final int tab3=0x7f03000b;
+        public static final int tab4=0x7f03000c;
+        public static final int tab5=0x7f03000d;
+        public static final int tab_item=0x7f03000e;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
@@ -101,4 +115,33 @@ public final class R {
     public static final class style {
         public static final int calendar_event_style=0x7f060000;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a DragableSpace.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #DragableSpace_default_screen org.grandcercle.mobile:default_screen}</code></td><td></td></tr>
+           </table>
+           @see #DragableSpace_default_screen
+         */
+        public static final int[] DragableSpace = {
+            0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.grandcercle.mobile.R.attr#default_screen}
+          attribute's value can be found in the {@link #DragableSpace} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:default_screen
+        */
+        public static final int DragableSpace_default_screen = 0;
+    };
 }

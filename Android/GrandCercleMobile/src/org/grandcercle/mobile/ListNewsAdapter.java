@@ -57,7 +57,7 @@ public class ListNewsAdapter extends BaseAdapter {
 		
 		if (convertView == null) {
 			nv = new NewsView();
-			convertView = inflater.inflate(R.layout.list_news, null);
+			convertView = inflater.inflate(R.layout.cell_news, null);
 
 			nv.title = (TextView)convertView.findViewById(R.id.title);
 			nv.pubDate = (TextView)convertView.findViewById(R.id.pub_date);
