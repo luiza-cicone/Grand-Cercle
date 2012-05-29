@@ -92,7 +92,7 @@
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
     
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e logo]]];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e imageSmall]]];
     UIImage *myimage = [[UIImage alloc] initWithData:imageData];
     [imageView setImage:myimage];
     
@@ -101,7 +101,19 @@
     [label setText: [e title]];
     
     label = (UILabel *)[cell viewWithTag:3];
-    [label setText:[e pubDate]];
+    [label setText:[e group]];
+    
+    label = (UILabel *)[cell viewWithTag:4];
+    [label setText:[e time]];
+    
+    label = (UILabel *)[cell viewWithTag:5];
+    [label setText:[e place]];
+    
+    imageView = (UIImageView *)[cell viewWithTag:6];
+    
+    imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e logo]]];
+    myimage = [[UIImage alloc] initWithData:imageData];
+    [imageView setImage:myimage];
     
     return cell;
 }
