@@ -1,14 +1,10 @@
 package org.grandcercle.mobile;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class PageNews extends Activity {
@@ -32,7 +28,7 @@ public class PageNews extends Activity {
 			e.printStackTrace();	
 
 		}*/
-		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"), R.drawable.loading, null);
+		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 	}
 	

@@ -9,5 +9,5 @@ public class EventView {
 	public TextView title;
 	public TextView group;
 	public ImageView logo;
-	public ImageView thumbnail;
+	public ImageView image;
 }

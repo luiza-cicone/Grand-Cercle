@@ -17,7 +17,6 @@ public class Tab1 extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab1);
-		//recherche = (EditText)findViewById(R.id.recherche);
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		
 		ListEventAdapter lfa = new ListEventAdapter(this,listEvent);

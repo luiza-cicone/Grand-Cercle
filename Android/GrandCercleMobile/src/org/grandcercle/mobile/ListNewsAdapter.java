@@ -36,7 +36,7 @@ public class ListNewsAdapter extends BaseAdapter {
 	}
 
 	// Permet de retourner un objet contenu dans la liste
-	public Object getItem(int index) {
+	public News getItem(int index) {
 		return listNews.get(index);
 	}
 
@@ -76,7 +76,7 @@ public class ListNewsAdapter extends BaseAdapter {
 		}*/
 		
 		// logo stocké dans le cache pour une durée infinie
-		UrlImageViewHelper.setUrlDrawable(nv.logo,listNews.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE,null);
+		UrlImageViewHelper.setUrlDrawable(nv.logo,listNews.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 		return convertView;
 	}
