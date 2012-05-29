@@ -19,10 +19,23 @@
     laPage.currentPage = page;
 }
 
+- (EvenementsParser *)getNewsParser
+{
+	if (!evenementsParser) {
+		evenementsParser = [[EvenementsParser alloc] init];
+	}
+	return evenementsParser;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [[self getNewsParser] loadEvenements];
+    
+    
     
     /* Bout de code du site du zéro, permettant l'affichage de différentes pages de couleurs à scroller */
     NSArray *couleurs = [NSArray arrayWithObjects:[UIColor blackColor], [UIColor blackColor], [UIColor blackColor],nil];

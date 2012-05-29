@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EvenementsParser.h"
 
 @interface CalendarViewController : UIViewController <UIScrollViewDelegate> {
     IBOutlet UIScrollView *sv;
+    EvenementsParser *evenementsParser;
 }
 @property (nonatomic, retain) IBOutlet UIScrollView *sv;
 @property (nonatomic, retain) IBOutlet UIPageControl *laPage;
