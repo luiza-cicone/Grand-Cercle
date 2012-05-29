@@ -77,7 +77,7 @@ containing a value of this type.
         public static final int day=0x7f07000d;
         public static final int description=0x7f07000f;
         public static final int group=0x7f070008;
-        public static final int icone=0x7f070021;
+        public static final int icone=0x7f070022;
         public static final int image=0x7f070006;
         public static final int image0=0x7f070013;
         public static final int image1=0x7f070015;
@@ -86,6 +86,7 @@ containing a value of this type.
         public static final int left=0x7f070001;
         public static final int lieu=0x7f07000a;
         public static final int listFeed=0x7f070011;
+        public static final int listFeedDay=0x7f070020;
         public static final int logo=0x7f07000b;
         public static final int nextMonth=0x7f07001d;
         public static final int num_events_per_day=0x7f070005;
@@ -94,8 +95,8 @@ containing a value of this type.
         public static final int right=0x7f070003;
         public static final int selectedDayMonthYear=0x7f07001a;
         public static final int space=0x7f070000;
-        public static final int tabsLayout=0x7f070020;
-        public static final int tabsText=0x7f070022;
+        public static final int tabsLayout=0x7f070021;
+        public static final int tabsText=0x7f070023;
         public static final int time=0x7f070009;
         public static final int title=0x7f070007;
     }
