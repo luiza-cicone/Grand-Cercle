@@ -9,9 +9,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import org.grandcercle.mobile.Tab3.GridCellAdapter;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -50,13 +47,38 @@ public class Tab1 extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.affichage_event);
+		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		
+		// Attributs de la liste
 		ListEventAdapter lfa = new ListEventAdapter(this,listEvent);
 		ListView feedListView = ((ListView)findViewById(R.id.listFeed));
 		((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);
 		feedListView.setOnItemClickListener(clickListenerFeed);
 		
+		// Attributs des 4 prochains evenements
+		// tableau des date* a attribuer
+		ArrayList<TextView> dates = new ArrayList<TextView>(4);
+		dates.add(0,(TextView)findViewById(R.id.date0));
+		dates.add(1,(TextView)findViewById(R.id.date1));
+		dates.add(2,(TextView)findViewById(R.id.date2));
+		dates.add(3,(TextView)findViewById(R.id.date3));
+		// tableau des image* a attribuer
+		ArrayList<ImageView> images = new ArrayList<ImageView>(4);
+		images.add(0,(ImageView)findViewById(R.id.image0));
+		images.add(1,(ImageView)findViewById(R.id.image1));
+		images.add(2,(ImageView)findViewById(R.id.image2));
+		images.add(3,(ImageView)findViewById(R.id.image3));
+		
+		/*int eventNumber = 0;
+		Event currentEvent;
+		while (eventNumber < 4 && eventNumber < listEvent.size()-1) {
+			currentEvent = listEvent.get(eventNumber);
+			dates.get(eventNumber).setText(currentEvent.getDate());
+			UrlImageViewHelper.setUrlDrawable(images.get(eventNumber),currentEvent.getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_THREE_DAYS);
+		}*/
+		
+		// Attributs du calendrier
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
