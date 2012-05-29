@@ -75,7 +75,7 @@ public class ListNewsAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}*/
 		
-		// logo stocké dans le cache infinie
+		// logo stocké dans le cache pour une durée infinie
 		UrlImageViewHelper.setUrlDrawable(nv.logo,listNews.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE,null);
 		
 		return convertView;
