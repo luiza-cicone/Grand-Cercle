@@ -7,18 +7,19 @@
 //
 
 #import "NewsParser.h"
+#import "NSString+HTML.h"
 
 @implementation NewsParser
-static NewsParser *instance = nil;
+static NewsParser *instanceNews = nil;
 
 @synthesize arrayNews;
 
 // singleton
 + (NewsParser *) instance {
-    if (instance == nil) {
-        instance = [[self alloc] init];
+    if (instanceNews == nil) {
+        instanceNews = [[self alloc] init];
     }
-    return instance;
+    return instanceNews;
 }
 
 - (void) treatementNews:(TBXMLElement *)newsAParser {
@@ -30,37 +31,36 @@ static NewsParser *instance = nil;
         
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsAParser];
-        aNews.title = [TBXML textForElement:title];
+        aNews.title = [[TBXML textForElement:title]  stringByConvertingHTMLToPlainText];
         
         // Récupération de la description
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:newsAParser];
-        aNews.description = [TBXML textForElement:description];
+        aNews.description = [[TBXML textForElement:description]  stringByConvertingHTMLToPlainText];
         
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:newsAParser];
-        aNews.theLink = (NSURL*)[TBXML textForElement:link];
+        aNews.theLink = (NSURL*)[[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
         
         // Récupération de la date de publication
         TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:newsAParser];
-        aNews.pubDate = [TBXML textForElement:pubDate];
+        aNews.pubDate = [[TBXML textForElement:pubDate] stringByConvertingHTMLToPlainText];
         
         // Récupération de l'auteur
         TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:newsAParser];
-        aNews.author = [TBXML textForElement:author];
+        aNews.author = [[TBXML textForElement:author]  stringByConvertingHTMLToPlainText];
         
         // Récupération du groupe
         TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:newsAParser];
-        aNews.group = [TBXML textForElement:group];
+        aNews.group = [[TBXML textForElement:group]  stringByConvertingHTMLToPlainText];
         
         // Récupération du logo
         TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:newsAParser];
-        aNews.logo = (NSURL*)[TBXML textForElement:logo];
+        aNews.logo = (NSURL*)[[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
         
         // Ajout de la news au tableau
         [arrayNews addObject:aNews];
         [aNews release];
         
-        // Obtain next sibling element
 	} while ((newsAParser = newsAParser->nextSibling));
     NSLog(@"interieur %d", [arrayNews count]);
 }

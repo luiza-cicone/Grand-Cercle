@@ -92,7 +92,7 @@
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
     
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[n logo]]];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[n logo]]];
     UIImage *myimage = [[UIImage alloc] initWithData:imageData];
     [imageView setImage:myimage];
     
