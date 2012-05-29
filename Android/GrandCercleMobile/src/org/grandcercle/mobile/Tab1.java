@@ -19,9 +19,7 @@ public class Tab1 extends Activity {
 		setContentView(R.layout.tab1);
 		//recherche = (EditText)findViewById(R.id.recherche);
 		ArrayList<Event> listEvent = ContainerData.getEvent();
-		for (Event event : listEvent) {
-			Log.i("FeedPlayer",event.toString());
-		}
+		
 		ListEventAdapter lfa = new ListEventAdapter(this,listEvent);
 		ListView feedListView = ((ListView)findViewById(R.id.listFeed));
 		((ListView)findViewById(R.id.listFeed)).setAdapter(lfa);

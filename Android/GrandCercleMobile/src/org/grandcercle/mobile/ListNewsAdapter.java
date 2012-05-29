@@ -74,7 +74,9 @@ public class ListNewsAdapter extends BaseAdapter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
-		UrlImageViewHelper.setUrlDrawable(nv.logo, listNews.get(position).getLogo(), R.drawable.loading, null);
+		
+		// logo stocké dans le cache infinie
+		UrlImageViewHelper.setUrlDrawable(nv.logo,listNews.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE,null);
 		
 		return convertView;
 	}

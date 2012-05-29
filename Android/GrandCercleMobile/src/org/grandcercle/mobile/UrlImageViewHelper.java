@@ -61,7 +61,6 @@ public final class UrlImageViewHelper {
     private static BitmapDrawable loadDrawableFromStream(Context context, InputStream stream) {
         prepareResources(context);
         final Bitmap bitmap = BitmapFactory.decodeStream(stream);
-        //Log.i(LOGTAG, String.format("Loaded bitmap (%dx%d).", bitmap.getWidth(), bitmap.getHeight()));
         return new BitmapDrawable(mResources, bitmap);
     }
 
@@ -110,7 +109,7 @@ public final class UrlImageViewHelper {
     }
 
     public static void setUrlDrawable(final ImageView imageView, final String url, int defaultResource, UrlImageViewCallback callback) {
-        setUrlDrawable(imageView.getContext(), imageView, url, defaultResource, CACHE_DURATION_THREE_DAYS, callback);
+        setUrlDrawable(imageView.getContext(), imageView, url, defaultResource, CACHE_DURATION_ONE_WEEK, callback);
     }
 
     public static void setUrlDrawable(final ImageView imageView, final String url, UrlImageViewCallback callback) {
@@ -192,7 +191,6 @@ public final class UrlImageViewHelper {
         final UrlImageCache cache = UrlImageCache.getInstance();
         Drawable drawable = cache.get(url);
         if (drawable != null) {
-            //Log.i(LOGTAG, "Cache hit on: " + url);
             if (imageView != null)
                 imageView.setImageDrawable(drawable);
             if (callback != null)
@@ -206,7 +204,6 @@ public final class UrlImageViewHelper {
         if (file.exists()) {
             try {
                 if (cacheDurationMs == CACHE_DURATION_INFINITE || System.currentTimeMillis() < file.lastModified() + cacheDurationMs) {
-                    //Log.i(LOGTAG, "File Cache hit on: " + url + ". " + (System.currentTimeMillis() - file.lastModified()) + "ms old.");
                     FileInputStream fis = context.openFileInput(filename);
                     drawable = loadDrawableFromStream(context, fis);
                     fis.close();
@@ -265,11 +262,9 @@ public final class UrlImageViewHelper {
                     HttpResponse resp = client.execute(get);
                     int status = resp.getStatusLine().getStatusCode();
                     if(status != HttpURLConnection.HTTP_OK){
-// Log.i(LOGTAG, "Couldn't download image from Server: " + url + " Reason: " + resp.getStatusLine().getReasonPhrase() + " / " + status);
                         return null;
                     }
                     HttpEntity entity = resp.getEntity();
-// Log.i(LOGTAG, url + " Image Content Length: " + entity.getContentLength());
                     InputStream is = entity.getContent();
                     FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
                     copyStream(is, fos);
@@ -279,7 +274,6 @@ public final class UrlImageViewHelper {
                     return loadDrawableFromStream(context, fis);
                 }
                 catch (Exception ex) {
-// Log.e(LOGTAG, "Exception during Image download of " + url, ex);
                     return null;
                 }
                 finally {
@@ -297,7 +291,6 @@ public final class UrlImageViewHelper {
                     // validate the url it is waiting for
                     String pendingUrl = mPendingViews.get(iv);
                     if (!url.equals(pendingUrl)) {
-                        //Log.i(LOGTAG, "Ignoring out of date request to update view for " + url);
                         continue;
                     }
                     mPendingViews.remove(iv);
