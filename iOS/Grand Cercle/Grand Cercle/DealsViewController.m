@@ -10,7 +10,8 @@
 #import "BonsPlansParser.h"
 
 @implementation DealsViewController
-@synthesize bonsPlansCell, arrayBonsPlans;
+@synthesize tview;
+@synthesize bonsPlansCell, arrayBonsPlans, urlArray, imageCache;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -20,14 +21,54 @@
         self.title = NSLocalizedString(@"Deals", @"");
         self.tabBarItem.image = [UIImage imageNamed:@"deals"];
     }
+    
+    arrayBonsPlans = [[BonsPlansParser instance] arrayBonsPlans];
+
+    // configure image cache
+    
+    urlArray = [[NSMutableArray alloc] initWithCapacity:[arrayBonsPlans count]];
+    
+    for (int i = 0; i < [arrayBonsPlans count]; i++) {
+        BonsPlans *bp = [arrayBonsPlans objectAtIndex:i];
+        [urlArray addObject:[bp logo]];
+    }
+	
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"logo"];
+	imageCache.notificationName = @"newLogoCache";
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
+
     return self;
 }
+
+- (void) newImageRetrieved:(NSNotification*)sender{
+    
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tview indexPathsForVisibleRows];
+    
+    
+    for(NSIndexPath *path in paths) {
+        
+    	NSInteger index = path.row;
+    
+        UITableViewCell *cell = [self.tview cellForRowAtIndexPath:path];
+        UIImageView *imageView;
+        imageView = (UIImageView *)[cell viewWithTag:1];
+    	if(imageView.image == nil && tag == index){
+            
+            imageView.image = [dict objectForKey:@"logo"];
+            [cell setNeedsLayout];
+        }
+    }
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    arrayBonsPlans = [[BonsPlansParser instance] arrayBonsPlans];
 }
 
 - (void)viewDidUnload
@@ -35,6 +76,9 @@
     [bonsPlansCell release];
     bonsPlansCell = nil;
     [self setBonsPlansCell:nil];
+    [tview release];
+    tview = nil;
+    [self setTview:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -43,7 +87,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 85;
+    return 80;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -76,13 +120,15 @@
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
     
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[b logo]]];
-    UIImage *myimage = [[UIImage alloc] initWithData:imageData];
-    [imageView setImage:myimage];
-    
+    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [indexPath row]] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row]; 
+    [imageView setImage:img];
+
     UILabel *label;
     label = (UILabel *)[cell viewWithTag:2];
     [label setText: [b title]];
+    
+    label = (UILabel *)[cell viewWithTag:3];
+    [label setText: [b description]];
     
     return cell;
 }
@@ -142,6 +188,8 @@
 - (void)dealloc {
     [bonsPlansCell release];
     [bonsPlansCell release];
+    [tview release];
+    [tview release];
     [super dealloc];
 }
 @end

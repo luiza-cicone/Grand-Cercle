@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "EventTableViewController.h"
+#import "EventsTableViewController.h"
 #import "Evenements.h"
 #import "EvenementsParser.h"
 
-@interface EventTableViewController ()
+@interface EventsTableViewController ()
 
 @end
 
-@implementation EventTableViewController
+@implementation EventsTableViewController
 
 @synthesize eventCell, eventArray, dico;
 
@@ -77,7 +77,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 72;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
