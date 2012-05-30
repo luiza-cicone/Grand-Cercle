@@ -12,7 +12,6 @@
 		0435F4901574F2E7009F23CD /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F48F1574F2E7009F23CD /* Items.m */; };
 		0435F4951574F4B3009F23CD /* Evenements.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4921574F4B3009F23CD /* Evenements.m */; };
 		0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4941574F4B3009F23CD /* EvenementsParser.m */; };
-		0435F4981574FDF3009F23CD /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0435F4971574FDF3009F23CD /* EventCell.xib */; };
 		047EB1DB1575383800F2F59B /* EventTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047EB1DA1575383800F2F59B /* EventTop.xib */; };
 		047EB1F11576099400F2F59B /* BonsPlans.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F01576099400F2F59B /* BonsPlans.m */; };
 		047EB1F4157609D200F2F59B /* BonsPlansParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F3157609D200F2F59B /* BonsPlansParser.m */; };
@@ -27,6 +26,7 @@
 		255C8145157428A000E6ECC3 /* NewsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813D157428A000E6ECC3 /* NewsParser.m */; };
 		255C8146157428A000E6ECC3 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813F157428A000E6ECC3 /* News.m */; };
 		255C8147157428A000E6ECC3 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C8141157428A000E6ECC3 /* TBXML+HTTP.m */; };
+		256217401576A2AC00667661 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2562173E1576A2AC00667661 /* EventCell.xib */; };
 		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
 		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
 		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
@@ -53,7 +53,7 @@
 		2595EAF8157405EB00CA27B3 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF3157405EB00CA27B3 /* DealsViewController.m */; };
 		2595EAF9157405EB00CA27B3 /* InfosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF5157405EB00CA27B3 /* InfosViewController.m */; };
 		2595EAFA157405EB00CA27B3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF7157405EB00CA27B3 /* SettingsViewController.m */; };
-		25D7C0FE15760BDB00C2B988 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D7C0FD15760BDB00C2B988 /* EventTableViewController.m */; };
+		25D7C0FE15760BDB00C2B988 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */; };
 		25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */; };
 		25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E25D15751736009B8921 /* libTapkuLibrary.a */; };
 		25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29615751DBC009B8921 /* QuartzCore.framework */; };
@@ -102,7 +102,6 @@
 		0435F4921574F4B3009F23CD /* Evenements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Evenements.m; sourceTree = "<group>"; };
 		0435F4931574F4B3009F23CD /* EvenementsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvenementsParser.h; sourceTree = "<group>"; };
 		0435F4941574F4B3009F23CD /* EvenementsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvenementsParser.m; sourceTree = "<group>"; };
-		0435F4971574FDF3009F23CD /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		047EB1DA1575383800F2F59B /* EventTop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTop.xib; sourceTree = "<group>"; };
 		047EB1EF1576099400F2F59B /* BonsPlans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonsPlans.h; sourceTree = "<group>"; };
 		047EB1F01576099400F2F59B /* BonsPlans.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlans.m; sourceTree = "<group>"; };
@@ -124,6 +123,7 @@
 		255C8141157428A000E6ECC3 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
 		255C8142157428A000E6ECC3 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		255C8143157428A000E6ECC3 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
+		2562173F1576A2AC00667661 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EventCell.xib; sourceTree = "<group>"; };
 		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -160,8 +160,8 @@
 		2595EAF5157405EB00CA27B3 /* InfosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfosViewController.m; sourceTree = "<group>"; };
 		2595EAF6157405EB00CA27B3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		2595EAF7157405EB00CA27B3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		25D7C0FC15760BDB00C2B988 /* EventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewController.h; sourceTree = "<group>"; };
-		25D7C0FD15760BDB00C2B988 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewController.m; sourceTree = "<group>"; };
+		25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EventsTableViewController.h; sourceTree = "<group>"; };
+		25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsTableViewController.m; sourceTree = "<group>"; };
 		25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapkuLibrary.xcodeproj; path = ../tapkulibrary/src/TapkuLibrary.xcodeproj; sourceTree = "<group>"; };
 		25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TapkuLibrary.bundle; path = ../tapkulibrary/src/TapkuLibrary.bundle; sourceTree = "<group>"; };
 		25E0E29615751DBC009B8921 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -255,8 +255,8 @@
 				2595EAE01573FAAB00CA27B3 /* images */,
 				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
 				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
-				25D7C0FC15760BDB00C2B988 /* EventTableViewController.h */,
-				25D7C0FD15760BDB00C2B988 /* EventTableViewController.m */,
+				25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */,
+				25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */,
 				2595EAAF1573FA9000CA27B3 /* EventsViewController.h */,
 				2595EAB01573FA9000CA27B3 /* EventsViewController.m */,
 				2595EAB61573FA9000CA27B3 /* NewsViewController.h */,
@@ -327,9 +327,9 @@
 				2595EABD1573FA9000CA27B3 /* EventsViewController.xib */,
 				2595EAC01573FA9000CA27B3 /* NewsViewController.xib */,
 				255C80AA157411AD00E6ECC3 /* NewsCell.xib */,
-				0435F4971574FDF3009F23CD /* EventCell.xib */,
 				047EB1DA1575383800F2F59B /* EventTop.xib */,
 				047EB1F515761A7300F2F59B /* BonPlanCell.xib */,
+				2562173E1576A2AC00667661 /* EventCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -475,10 +475,10 @@
 				255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */,
 				255C80A615740EE900E6ECC3 /* SettingsViewController.xib in Resources */,
 				255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */,
-				0435F4981574FDF3009F23CD /* EventCell.xib in Resources */,
 				25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */,
 				047EB1DB1575383800F2F59B /* EventTop.xib in Resources */,
 				047EB1F615761A7300F2F59B /* BonPlanCell.xib in Resources */,
+				256217401576A2AC00667661 /* EventCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +529,7 @@
 				0435F4901574F2E7009F23CD /* Items.m in Sources */,
 				0435F4951574F4B3009F23CD /* Evenements.m in Sources */,
 				0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */,
-				25D7C0FE15760BDB00C2B988 /* EventTableViewController.m in Sources */,
+				25D7C0FE15760BDB00C2B988 /* EventsTableViewController.m in Sources */,
 				25284D8915761DD400FF278C /* TestViewController.m in Sources */,
 				047EB1F11576099400F2F59B /* BonsPlans.m in Sources */,
 				047EB1F4157609D200F2F59B /* BonsPlansParser.m in Sources */,
@@ -591,6 +591,14 @@
 				255C80A315740EE900E6ECC3 /* en */,
 			);
 			name = SettingsViewController.xib;
+			sourceTree = "<group>";
+		};
+		2562173E1576A2AC00667661 /* EventCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2562173F1576A2AC00667661 /* en */,
+			);
+			name = EventCell.xib;
 			sourceTree = "<group>";
 		};
 		2595EAA61573FA9000CA27B3 /* InfoPlist.strings */ = {
