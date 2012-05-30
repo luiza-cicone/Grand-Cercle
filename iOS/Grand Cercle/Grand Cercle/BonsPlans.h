@@ -1,13 +1,14 @@
 //
-//  ImageCache.h
+//  BonsPlans.h
 //  Grand Cercle
 //
-//  Created by Luiza Cicone on 29/5/12.
+//  Created by Jérémy Krein on 30/05/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "Items.h"
 
-@interface ImageCache : NSObject
+@interface BonsPlans : Items
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "NewsParser.h"
-#import "NSString+HTML.h"
 
 @implementation NewsParser
 static NewsParser *instanceNews = nil;
@@ -23,7 +22,6 @@ static NewsParser *instanceNews = nil;
 }
 
 - (void) treatementNews:(TBXMLElement *)newsAParser {
-    NSLog(@"ca rentre");
 	do {
 
         // Définition de la news à récupérer
@@ -62,7 +60,6 @@ static NewsParser *instanceNews = nil;
         [aNews release];
         
 	} while ((newsAParser = newsAParser->nextSibling));
-    NSLog(@"interieur %d", [arrayNews count]);
 }
 
 - (void)loadNews { 
@@ -87,8 +84,6 @@ static NewsParser *instanceNews = nil;
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/news/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
-
-    NSLog(@"fin %d", [arrayNews count]);
 
 }
 

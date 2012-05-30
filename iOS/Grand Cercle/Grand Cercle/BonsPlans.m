@@ -1,16 +1,14 @@
 //
-//  Items.m
+//  BonsPlans.m
 //  Grand Cercle
 //
-//  Created by Jérémy Krein on 29/05/12.
+//  Created by Jérémy Krein on 30/05/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "Items.h"
+#import "BonsPlans.h"
 
-@implementation Items
-
-@synthesize title, description, theLink, logo;
+@implementation BonsPlans
 
 - (id) init {
     self = [super init];

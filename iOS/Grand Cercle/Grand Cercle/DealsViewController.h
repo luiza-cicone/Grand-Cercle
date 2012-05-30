@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <TapkuLibrary/TapkuLibrary.h>
 
-@interface DealsViewController : UIViewController
+@interface DealsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSMutableArray *arrayBonsPlans;
+    IBOutlet UITableViewCell *bonsPlansCell;
+    NSMutableArray *urlArray;
+    TKImageCache *imageCache;
+    IBOutlet UITableView *tview;
+}
+
+@property (retain, nonatomic) NSMutableArray *arrayBonsPlans, *urlArray;
+@property (retain, nonatomic) IBOutlet UITableViewCell *bonsPlansCell;
+@property (retain, nonatomic) TKImageCache *imageCache;
+@property (retain, nonatomic) IBOutlet UITableView *tview;
 
 @end

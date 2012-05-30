@@ -7,7 +7,6 @@
 //
 
 #import "EvenementsParser.h"
-#import "NSString+HTML.h"
 
 @implementation EvenementsParser
 @synthesize arrayEvenements;
@@ -127,7 +126,6 @@ static EvenementsParser *instanceEvent = nil;
         // Obtain next sibling element
 	} while ((eventAParser = eventAParser->nextSibling));
     
-    NSLog(@"%d", [arrayEvenements count]);
 }
 
 - (void)loadEvenements { 
