@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -16,6 +18,7 @@ public class ContainerData {
 	static public Context context;
 	static private ArrayList<News> listNews;
 	private static ArrayList<Event> listEvent;
+	private static HashMap<String,ArrayList<Event>> hashEvent;
 	
 	public ContainerData() {
 
@@ -75,38 +78,12 @@ public class ContainerData {
 			
 			// On récupère directement la liste des feeds
 			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
+			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		/*XMLReader xmlReader = null;
-		try {
-			xmlReader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DefaultHandler handler = new ParserXMLHandler();
-		xmlReader.setContentHandler(handler);
-		try {
-			xmlReader.parse(new InputSource(url.openConnection().getInputStream()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		listNews = ((ParserXMLHandler)xmlReader.getContentHandler()).getNews();*/
 	}
 
 
@@ -117,6 +94,10 @@ public class ContainerData {
 
 	public static ArrayList<Event> getEvent() {
 		return listEvent;
+	}
+	
+	public static HashMap<String,ArrayList<Event>> getEventInHashMap() {
+		return hashEvent;
 	}
 }
 
