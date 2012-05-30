@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventTableViewController : UITableViewController {
+@interface EventsTableViewController : UITableViewController {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
     NSMutableDictionary *dico;
