@@ -79,7 +79,7 @@ public class TabEvent extends Activity {
 			dates.get(eventNumber).setText(currentEvent.getDate());
 			UrlImageViewHelper.setUrlDrawable(images.get(eventNumber),currentEvent.getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_THREE_DAYS);
 			images.get(eventNumber).setOnClickListener(imageClicked);
-			eventNumber += 1;
+			eventNumber ++;
 		}
 		
 		// Attributs du calendrier
