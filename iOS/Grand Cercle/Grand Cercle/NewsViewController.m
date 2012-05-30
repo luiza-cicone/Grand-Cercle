@@ -132,7 +132,7 @@
     
 //    UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[n logo]]]];
 
-    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", index] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
+    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [indexPath row]] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
 
     [imageView setImage:img];
     
