@@ -29,6 +29,8 @@
     }
     newsArray = [[NewsParser instance] arrayNews];
     
+    // configure image cache
+
     urlArray = [[NSMutableArray alloc] initWithCapacity:[newsArray count]];
     
     for (int i = 0; i < [newsArray count]; i++) {
@@ -40,6 +42,7 @@
 	imageCache.notificationName = @"newImageCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
+
     
     return self;
 }

@@ -34,9 +34,12 @@
     NSString *priceCva;
     // Prix sans cva
     NSString *priceNoCva;
+    // Date event
+    NSDate *eventDate;
 }
 
 @property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva, *pubDate, *author, *group;
 @property (nonatomic, retain) NSURL *imageSmall, *image;
+@property (nonatomic, assign) NSDate *eventDate;
 
 @end
