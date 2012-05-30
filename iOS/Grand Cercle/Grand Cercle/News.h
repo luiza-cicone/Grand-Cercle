@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "Items.h"
 
-@interface News : Items
+@interface News : Items {
+    // Date de publication
+    NSString *pubDate;
+    // Auteur
+    NSString *author;
+    // Groupe de l'auteur
+    NSString *group;
+}
+
+@property (nonatomic, retain) NSString *pubDate, *author, *group;
 
 @end

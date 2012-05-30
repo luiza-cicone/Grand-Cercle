@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="40dp"
+	android:padding="3dp"
+	android:orientation="vertical"
+	android:background="@drawable/tab_bg_selector"
+	>
+	<ImageView
+	    	android:id="@+id/tabBPIcone"
+			android:layout_width="fill_parent"
+			android:layout_height="20dp"
+			android:gravity="right" 
+			android:src="@+drawable/deals">
+	</ImageView>
+	    
+	<TextView 
+	    android:id="@+id/tabBPText"
+	    android:text="@string/tabBP"
+	    android:layout_width="fill_parent"
+		android:layout_height="20dp"
+		android:gravity="center"
+		android:textSize="10dp"
+		android:textColor="@drawable/tab_text_selector"
+	/>
+</LinearLayout>

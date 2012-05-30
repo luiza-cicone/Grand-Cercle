@@ -121,8 +121,7 @@ int kNumberOfPages = 2;
 - (IBAction)changePage:(id)sender {
 
     int page = pageControl.currentPage;
-    
-    
+   
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];

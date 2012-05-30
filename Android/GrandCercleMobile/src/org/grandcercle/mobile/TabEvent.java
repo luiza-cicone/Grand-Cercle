@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +27,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class Tab1 extends Activity {
+public class TabEvent extends Activity {
 	
 	private ListEventAdapter lea;
 	private ArrayList<ImageView> images;
+	private HashMap<String,ArrayList<Event>> hashMapEvent;
 	
 	private static final String tag = "SimpleCalendarViewActivity";
 	private ImageView calendarToJournalButton;
@@ -43,8 +43,6 @@ public class Tab1 extends Activity {
 	private GridCellAdapter adapter;
 	private Calendar _calendar;
 	private int month, year;
-	private final DateFormat dateFormatter = new DateFormat();
-	private static final String dateTemplate = "MMMM yyyy";
 	private static boolean ev=false;
 	
 	@Override
@@ -85,6 +83,8 @@ public class Tab1 extends Activity {
 		}
 		
 		// Attributs du calendrier
+		hashMapEvent = ContainerData.getEventInHashMap();
+		
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
@@ -97,7 +97,10 @@ public class Tab1 extends Activity {
 		prevMonth.setOnClickListener(prevORnextMonthClicked);
 
 		currentMonth = (Button) this.findViewById(R.id.currentMonth);
-		currentMonth.setText(dateFormatter.format(dateTemplate, _calendar.getTime()));
+		SimpleDateFormat s;
+		s = new SimpleDateFormat("MMMM yyyy",Locale.FRANCE)	;	
+		
+		currentMonth.setText(s.format(_calendar.getTime()));
 
 		nextMonth = (ImageView) this.findViewById(R.id.nextMonth);
 		nextMonth.setOnClickListener(prevORnextMonthClicked);
@@ -121,7 +124,9 @@ public class Tab1 extends Activity {
 	{
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
 		_calendar.set(year, month - 1, _calendar.get(Calendar.DAY_OF_MONTH));
-		currentMonth.setText(dateFormatter.format(dateTemplate, _calendar.getTime()));
+		SimpleDateFormat s;
+		s = new SimpleDateFormat("MMMM yyyy",Locale.FRANCE)	;	
+		currentMonth.setText(s.format(_calendar.getTime()));
 		adapter.notifyDataSetChanged();
 		calendarView.setAdapter(adapter);
 	}
@@ -167,7 +172,7 @@ public class Tab1 extends Activity {
 	private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// Ouverture nouvelle activity
-			Intent intent = new Intent(Tab1.this,PageEvent.class);
+			Intent intent = new Intent(TabEvent.this,PageEvent.class);
 			// Passage des paramètres
 			Bundle bundle = new Bundle();
 			//Add the parameters to bundle as
@@ -183,14 +188,14 @@ public class Tab1 extends Activity {
 			//Ajout du Bundle
 			intent.putExtras(bundle);
 			
-			Tab1.this.startActivity(intent);
+			TabEvent.this.startActivity(intent);
 		}
 	};
 	
 	private View.OnClickListener imageClicked = new View.OnClickListener() {
 		public void onClick(View v) {
 			// Ouverture nouvelle activity
-			Intent intent = new Intent(Tab1.this,PageEvent.class);
+			Intent intent = new Intent(TabEvent.this,PageEvent.class);
 			// Passage des paramètres
 			Bundle bundle = new Bundle();
 			//Add the parameters to bundle as
@@ -206,7 +211,7 @@ public class Tab1 extends Activity {
 			//Ajout du Bundle
 			intent.putExtras(bundle);
 			
-			Tab1.this.startActivity(intent);
+			TabEvent.this.startActivity(intent);
 		}
 	};
 	
@@ -222,7 +227,7 @@ public class Tab1 extends Activity {
 		private final List<String> list;
 		private static final int DAY_OFFSET = 1;
 		private final String[] weekdays = new String[]{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-		private final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+		private final String[] months = {"Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"};
 		private final int[] daysOfMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		private final int month, year;
 		private int daysInMonth, prevMonthDays;
@@ -475,8 +480,8 @@ public class Tab1 extends Activity {
 				selectedDayMonthYearButton.setText("Selected: " + date_month_year);
 				if (date_month_year.equalsIgnoreCase("2-June-2012")) {
 					ev = true;
-					Intent intent = new Intent(Tab1.this,Tab1.class);
-					Tab1.this.startActivity(intent);
+					Intent intent = new Intent(TabEvent.this,TabEvent.class);
+					TabEvent.this.startActivity(intent);
 					selectedDayMonthYearButton.setText("Selected: " + date_month_year);
 				}
 

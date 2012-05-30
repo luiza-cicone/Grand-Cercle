@@ -1,6 +1,8 @@
 package org.grandcercle.mobile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -14,9 +16,13 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	private final String LIEU = "lieu";
 	private final String PAF = "paf";
 	private final String PAFSANSCVA = "pafSansCVA";
+	private final String EVENTDATE = "eventDate";
 	
 	// Array list d'evenements
 	private ArrayList<Event> listEvent;
+	
+	// HashMap qui permet de lister les événements par jour
+	private HashMap<String,ArrayList<Event>> hashEvent;
 	
 	// Boolean permettant de savoir si nous sommes à l'intérieur d'une news
 	private boolean inEvent;
@@ -36,6 +42,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	public void startDocument() throws SAXException {
 		super.startDocument();
 		listEvent = new ArrayList<Event>();
+		hashEvent = new HashMap<String,ArrayList<Event>>();
 	}
 	
 	/* 
@@ -164,13 +171,32 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 				buffer = null;
 			}
 		}
+		if (localName.equalsIgnoreCase(EVENTDATE)) {
+			if (inEvent) {
+				this.currentEvent.setEventDate(buffer.toString());
+				buffer = null;
+			}
+		}
 		if (localName.equalsIgnoreCase(NODE)){		
 			listEvent.add(currentEvent);
+			if (hashEvent.containsKey(currentEvent.getEventDate())) {
+				ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());
+				listEventDay.add(currentEvent);
+				hashEvent.put(currentEvent.getEventDate(),listEventDay);
+			} else {
+				ArrayList<Event> listEventDay = new ArrayList<Event>();
+				listEventDay.add(currentEvent);
+				hashEvent.put(currentEvent.getEventDate(),listEventDay);
+			}
 			inEvent = false;
 		}
 	}
 	// cette méthode nous permettra de récupérer les données
 	public ArrayList<Event> getListEvent(){
 		return listEvent;
+	}
+	
+	public HashMap<String,ArrayList<Event>> getHashEvent() {
+		return hashEvent;
 	}
 }

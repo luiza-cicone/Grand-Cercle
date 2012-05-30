@@ -1,27 +1,21 @@
 package org.grandcercle.mobile;
 
-
 import org.grandcercle.mobile.R;
-import org.grandcercle.mobile.Tab1;
-import org.grandcercle.mobile.Tab2;
+import org.grandcercle.mobile.TabEvent;
+import org.grandcercle.mobile.TabNews;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-
-
 import android.widget.TabHost;
-
-
-import android.widget.TextView;
 
 public class GCM extends TabActivity {
     /** Called when the activity is first created. */
 
-	
 	private TabHost tabHost;
+	private int [] layoutTab;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,56 +25,33 @@ public class GCM extends TabActivity {
 		ContainerData.ParseFiles();
 		
 		tabHost = getTabHost();
+		layoutTab = new int[5];
+		layoutTab[0] = R.layout.tab_event;
+		layoutTab[1] = R.layout.tab_news;
+		layoutTab[2] = R.layout.tab_bons_plans;
+		layoutTab[3] = R.layout.tab_infos;
+		layoutTab[4] = R.layout.tab_param;
+		
 		
 		// Décommentez la ligne suivante pour séparer vos onglets via une image
-        //this.tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
-		Intent intent = new Intent().setClass(this, Tab1.class);
-		//intent.getAction();
-		//tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator( "Evenement",getResources().getDrawable(R.drawable.deals)).setContent(intent));
-        setupTab("Evenement", "tab1", new Intent().setClass(this, Tab1.class));
-		//intent = new Intent().setClass(this, Tab2.class);
-		//tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator( "News",getResources().getDrawable(R.drawable.news)).setContent(intent));
-        setupTab("News", "tab2", new Intent().setClass(this, Tab2.class));
-		//intent = new Intent().setClass(this, Tab3.class);
-		//tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator( "Calendrier",getResources().getDrawable(R.drawable.calendar)).setContent(intent));
-        setupTab("Calendrier", "tab3", new Intent().setClass(this, Tab3.class));
-		//intent = new Intent().setClass(this, Tab4.class);
-		//tabHost.addTab(tabHost.newTabSpec("tab4").setIndicator( "Boutique",getResources().getDrawable(R.drawable.settings)).setContent(intent));
-        setupTab("Boutique", "tab4", new Intent().setClass(this, Tab4.class));
-		//intent = new Intent().setClass(this, Tab5.class);
-		//tabHost.addTab(tabHost.newTabSpec("tab5").setIndicator( "Info",getResources().getDrawable(R.drawable.search)).setContent(intent));
-        setupTab("Infos", "tab5", new Intent().setClass(this, Tab5.class));
-        
-        
-        /*tabHost.setOnTabChangedListener(
-        		new TabHost.OnTabChangeListener (){
-        		public void onTabChanged(String tabId){
-        			Toast.makeText(GCM.this, "L’onglet avec l’identifiant : "+ tabId + " a été cliqué", Toast.LENGTH_SHORT).show();
-
-        		}
-        	}
-        );*/
-
+        //this.tabHost.getTabWidget().setDividerDrawable(R.drawable.separateur);
+		
+        setupTab("TabEvent", new Intent().setClass(this, TabEvent.class),0);
+        setupTab("TabNews", new Intent().setClass(this, TabNews.class),1);
+        setupTab("TabBP", new Intent().setClass(this, Tab3.class),2);
+		setupTab("TabInfos", new Intent().setClass(this, Tab4.class),3);
+		setupTab("TapParam", new Intent().setClass(this, Tab5.class),4);
 	}
 	
-	  private void setupTab(String name, String tag, Intent intent) {
-			tabHost.addTab(tabHost.newTabSpec(tag).setIndicator( createTabView(tabHost.getContext(), name)).setContent(intent));
-		}
+	private void setupTab(String tag, Intent intent, int layoutTabIndex) {
+		tabHost.addTab(tabHost.newTabSpec(tag).setIndicator( createTabView(tabHost.getContext(), layoutTabIndex)).setContent(intent));
+	}
 	  
-	  private static View createTabView(final Context context, final String text) {
-			View view = LayoutInflater.from(context).inflate(R.layout.tab_item, null);	
-			TextView tv = (TextView) view.findViewById(R.id.tabsText);
-			//ImageView im = (ImageView) view.findViewById(R.drawable.calendar);
-			tv.setText(text);
-			//(im.getResources().getIdentifier(text, "drawable", "org.grandcercle.mobile"));
-			return view;
-		}
-	  
-/*	private OnClickListener clickListenerTab = new OnClickListener() {
-		public void onClick(View v) {
-			setContentView(R.layout.tab);
-		}
-	};*/
+	private View createTabView(final Context context, int layoutTabIndex) {
+		View view = LayoutInflater.from(context).inflate(layoutTab[layoutTabIndex], null);	
+		return view;
+	}
+
 }
 
 

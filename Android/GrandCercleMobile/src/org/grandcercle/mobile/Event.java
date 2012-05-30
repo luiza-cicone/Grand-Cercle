@@ -10,10 +10,11 @@ public class Event extends Item {
 	private String lieu;
 	private String paf;
 	private String pafSansCVA;
+	private String eventDate;
 	
 	public Event(long id, String title, String description, String link, String pubDate, String author, 
 			String group, String logo, String type, String day, String date, String time, 
-			String thumbnail, String image, String lieu, String paf, String pafSansCVA) {
+			String thumbnail, String image, String lieu, String paf, String pafSansCVA, String eventDate) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -32,6 +33,7 @@ public class Event extends Item {
 		this.lieu = lieu;
 		this.paf = paf;
 		this.pafSansCVA = pafSansCVA;
+		this.eventDate = eventDate;
 	}
 	
 	public Event() {
@@ -110,6 +112,14 @@ public class Event extends Item {
 		this.pafSansCVA = pafSansCVA;
 	}
 	
+	public String getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(String eventDate) {
+		this.eventDate = eventDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Event [type=" + type + ", day=" + day + ", date=" + date + ", time=" + time + 

@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DealsViewController : UIViewController <UIScrollViewDelegate> {
-
+@interface DealsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSMutableArray *arrayBonsPlans;
+    IBOutlet UITableViewCell *bonsPlansCell;
 }
+
+@property (retain, nonatomic) NSMutableArray *arrayBonsPlans;
+@property (retain, nonatomic) IBOutlet UITableViewCell *bonsPlansCell;
 
 @end

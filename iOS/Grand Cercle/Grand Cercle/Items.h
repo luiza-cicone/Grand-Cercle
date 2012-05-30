@@ -16,17 +16,11 @@
     NSString *description;
     // Lien
     NSURL *theLink;
-    // Date de publication
-    NSString *pubDate;
-    // Auteur
-    NSString *author;
-    // Groupe de l'auteur
-    NSString *group;
-    // Logo de l'association
+    // Logo de l'association ou visuel du bon plan
     NSURL *logo;
 }
 
-@property (nonatomic, retain) NSString *title, *description, *pubDate, *author, *group;
+@property (nonatomic, retain) NSString *title, *description;
 @property (nonatomic, retain) NSURL *theLink, *logo;
 
 @end

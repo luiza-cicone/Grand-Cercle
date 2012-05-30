@@ -15,11 +15,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class Tab2 extends Activity {
+public class TabNews extends Activity {
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab2);
+        setContentView(R.layout.affichage_news);
         
         ArrayList<News> listNews = ContainerData.getNews();
         
@@ -68,7 +68,7 @@ public class Tab2 extends Activity {
 				
 				
 				// Ouverture nouvelle activity
-				Intent intent = new Intent(Tab2.this,PageNews.class);
+				Intent intent = new Intent(TabNews.this,PageNews.class);
 				// Passage des paramètres
 				Bundle bundle = new Bundle();
 				//Add the parameters to bundle as
@@ -82,7 +82,7 @@ public class Tab2 extends Activity {
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
-				Tab2.this.startActivity(intent);
+				TabNews.this.startActivity(intent);
 			}
 	    };
 	    
