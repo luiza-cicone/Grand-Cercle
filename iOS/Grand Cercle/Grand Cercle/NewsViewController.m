@@ -10,23 +10,18 @@
 #import "DealsViewController.h"
 #import "NewsParser.h"
 
-
-@interface NewsViewController ()
-
-@end
-
 @implementation NewsViewController
 @synthesize newsCell;
 @synthesize tView;
 @synthesize newsArray, urlArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"News", @"News");
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
     }
+    
     newsArray = [[NewsParser instance] arrayNews];
     
     // configure image cache
