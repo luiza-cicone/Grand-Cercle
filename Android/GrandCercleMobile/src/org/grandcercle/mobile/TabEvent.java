@@ -472,8 +472,7 @@ public class TabEvent extends Activity {
 			public void onClick(View view) {
 				String date_month_year = (String) view.getTag();
 				selectedDayMonthYearButton.setText(date_month_year);
-				
-				Log.d("format date", date_month_year);
+				ArrayList<Event> listEvent = hashMapEvent.get(date_month_year);
 				if (date_month_year.equalsIgnoreCase("2-June-2012")) {
 					ev = true;
 					Intent intent = new Intent(TabEvent.this,TabEvent.class);
