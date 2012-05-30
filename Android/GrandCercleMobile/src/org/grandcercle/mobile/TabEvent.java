@@ -1,29 +1,22 @@
 package org.grandcercle.mobile;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -36,7 +29,7 @@ public class TabEvent extends Activity {
 	
 	private ListEventAdapter lea;
 	private ArrayList<ImageView> images;
-	private HashMap<String,ArrayList<Event>> hashMapEvent;
+	private static HashMap<String,ArrayList<Event>> hashMapEvent;
 	private static Set<String> setDates;
 	
 	private static final String tag = "SimpleCalendarViewActivity";
@@ -49,7 +42,6 @@ public class TabEvent extends Activity {
 	private GridCellAdapter adapter;
 	private Calendar _calendar;
 	private int month, year;
-	private static boolean ev=false;
 
 	
 	@Override
@@ -120,11 +112,8 @@ public class TabEvent extends Activity {
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
 		adapter.notifyDataSetChanged();
 		calendarView.setAdapter(adapter);
-		if (!ev) {
-			ListView feedListViewDay = ((ListView)findViewById(R.id.listFeedDay));
-			((ListView)findViewById(R.id.listFeedDay)).setAdapter(lea);
-			feedListViewDay.setOnItemClickListener(clickListenerFeed);
-		}
+		
+		
 		
 	}
 	
@@ -469,11 +458,6 @@ public class TabEvent extends Activity {
 		}
 
 		/**
-		 * NOTE: YOU NEED TO IMPLEMENT THIS PART Given the YEAR, MONTH, retrieve
-		 * ALL entries from a SQLite database for that month. Iterate over the
-		 * List of All entries, and get the dateCreated, which is converted into
-		 * day.
-		 * 
 		 * @param year
 		 * @param month
 		 * @return
@@ -534,12 +518,6 @@ public class TabEvent extends Activity {
 			//Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-" + theyear);
 
 			
-			// convert string "dd-Month-yyyy" to format "dd-MM-yyyy"
-			/*String date = theday + "-" + this.getMonthNumberAsString(themonth) + "-" + theyear;
-			Log.d("date = ",date);
-			if (dateEvents.contains(date)) {
-				gridcell.setTextColor(Color.RED);
-			} else {*/
 			if (day_color[1].equals("GREY")) {
 				gridcell.setTextColor(Color.LTGRAY);
 			}
@@ -560,22 +538,66 @@ public class TabEvent extends Activity {
 		
 		private View.OnClickListener dayClicked = new View.OnClickListener() {
 			public void onClick(View view) {
-				String date_month_year = (String) view.getTag();
-				selectedDayMonthYearButton.setText(date_month_year);
-				ArrayList<Event> listEvent = hashMapEvent.get(date_month_year);
-				if (date_month_year.equalsIgnoreCase("2-June-2012")) {
-					ev = true;
-					Intent intent = new Intent(TabEvent.this,TabEvent.class);
-					TabEvent.this.startActivity(intent);
-					selectedDayMonthYearButton.setText(date_month_year);
+				String dayMonthYear = (String)view.getTag();
+				int index0 = dayMonthYear.indexOf("-");
+				String sub = dayMonthYear.substring(index0+1);
+				int index1 = sub.indexOf("-");
+				String day = dayMonthYear.substring(0,index0);
+				String month = dayMonthYear.substring(index0+1,index0+index1+1);
+				String year = dayMonthYear.substring(index0+index1+2,dayMonthYear.length());
+				selectedDayMonthYearButton.setText(dayMonthYear);
+				
+				if (day.length() == 1) {
+					day = "0"+day;
 				}
-	
-				try {
-					Date parsedDate = dateFormatter.parse(date_month_year);
-					//Log.d(tag, "Parsed Date: " + parsedDate.toString());
-	
-				} catch (ParseException e) {
-					e.printStackTrace();
+				
+				if (month.equalsIgnoreCase("Janvier")) {
+					month = "01";
+				}
+				if (month.equalsIgnoreCase("Fevrier")) {
+					month = "02";
+				}
+				if (month.equalsIgnoreCase("Mars")) {
+					month = "03";
+				}
+				if (month.equalsIgnoreCase("Avril")) {
+					month = "04";
+				}
+				if (month.equalsIgnoreCase("Mai")) {
+					month = "05";
+				}
+				if (month.equalsIgnoreCase("Juin")) {
+					month = "06";
+				}
+				if (month.equalsIgnoreCase("Juillet")) {
+					month = "07";
+				}
+				if (month.equalsIgnoreCase("Août")) {
+					month = "08";
+				}
+				if (month.equalsIgnoreCase("Septembre")) {
+					month = "09";
+				}
+				if (month.equalsIgnoreCase("Octobre")) {
+					month = "10";
+				}
+				if (month.equalsIgnoreCase("Novembre")) {
+					month = "11";
+				}
+				if (month.equalsIgnoreCase("Decembre")) {
+					month = "12";
+				}
+				
+				String date = day+"-"+month+"-"+year;
+				if (hashMapEvent.containsKey(date)) {
+					// diplays list of events
+					ArrayList<Event> listEvCal = hashMapEvent.get(date);
+					ListEventAdapter listCalAdapter = new ListEventAdapter(view.getContext(),listEvCal);
+					ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
+					((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
+					feedListViewCal.setOnItemClickListener(clickListenerFeed);
+				} else {
+					((ListView)findViewById(R.id.listFeedDay)).setAdapter(null);
 				}
 			}
 		};
