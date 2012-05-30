@@ -76,18 +76,6 @@ public class ListEventAdapter extends BaseAdapter {
 		ev.title.setText(listEvent.get(position).getTitle());
 		ev.lieu.setText(listEvent.get(position).getLieu());
 		ev.time.setText(listEvent.get(position).getTime());
-		/*try {
-			SaveImageFromUrl.setImage(ev.logo,listEvent.get(position).getLogo());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-		/*try {
-			SaveImageFromUrl.setImage(ev.thumbnail,listEvent.get(position).getThumbnail());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-		Log.i("thumbnail",listEvent.get(position).getThumbnail());
-		Log.i("logo",listEvent.get(position).getLogo());
 		// image stockée pendant une semaine, logo stocké de manière infinie
 		UrlImageViewHelper.setUrlDrawable(ev.image,listEvent.get(position).getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);
 		UrlImageViewHelper.setUrlDrawable(ev.logo,listEvent.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);

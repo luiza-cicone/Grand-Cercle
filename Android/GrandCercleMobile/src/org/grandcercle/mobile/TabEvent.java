@@ -93,10 +93,6 @@ public class TabEvent extends Activity {
 		// Attributs du calendrier
 		hashMapEvent = ContainerData.getEventInHashMap();
 		setDates = hashMapEvent.keySet();
-		Iterator<String> it = setDates.iterator();
-		while (it.hasNext()) {
-			Log.d("avant recup",it.next());
-		}
 		
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
@@ -130,7 +126,6 @@ public class TabEvent extends Activity {
 			feedListViewDay.setOnItemClickListener(clickListenerFeed);
 		}
 		
-		//adapter.colorsCalendarDays();
 	}
 	
 	public static Set<String> getSetDates() {
@@ -239,12 +234,18 @@ public class TabEvent extends Activity {
 		private final int month, year;
 		private int daysInMonth, prevMonthDays;
 		private int currentDayOfMonth;
+		private int currentMonth;
+		private int currentYear;
 		private int currentWeekDay;
 		private Button gridcell;
 		private TextView num_events_per_day;
 		private final HashMap eventsPerMonthMap;
 		private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
 		private Set<String> dateEvents;
+		private String currentDayNumber;
+		private String currentMonthNumber;
+		private String currentYearNumber;
+		private String currentDate; // dd-MM-yyyy
 
 		// Days in Current Month
 		public GridCellAdapter(Context context, int textViewResourceId, int month, int year) {
@@ -254,15 +255,28 @@ public class TabEvent extends Activity {
 			this.month = month;
 			this.year = year;
 			this.dateEvents = getSetDates();
-			Iterator<String> it = dateEvents.iterator();
-			while (it.hasNext()) {
-				Log.d("après recup",it.next());
-			}
 
 			//Log.d(tag, "==> Passed in Date FOR Month: " + month + " " + "Year: " + year);
 			Calendar calendar = Calendar.getInstance();
 			setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
+			setCurrentMonth(calendar.get(Calendar.MONTH));
+			setCurrentYear(calendar.get(Calendar.YEAR));
 			setCurrentWeekDay(calendar.get(Calendar.DAY_OF_WEEK));
+			
+			currentDayNumber = String.valueOf(getCurrentDayOfMonth());
+			if (currentDayNumber.length() == 1) {
+				currentDayNumber = "0"+currentDayNumber;
+			}
+			currentMonthNumber = String.valueOf(getCurrentMonth()+1);
+			if (currentMonthNumber.length() == 1) {
+				currentMonthNumber = "0"+currentMonthNumber;
+			}
+			currentYearNumber = String.valueOf(getCurrentYear());
+			if (currentYearNumber.length() == 1) {
+				currentYearNumber = "0"+currentYearNumber;
+			}
+			currentDate = currentDayNumber+"-"+currentMonthNumber+"-"+currentYearNumber;
+			
 			//Log.d(tag, "New Calendar:= " + calendar.getTime().toString());
 			//Log.d(tag, "CurrentDayOfWeek :" + getCurrentWeekDay());
 			//Log.d(tag, "CurrentDayOfMonth :" + getCurrentDayOfMonth());
@@ -294,6 +308,44 @@ public class TabEvent extends Activity {
 		public int getCount() {
 			return list.size();
 		}
+		
+		public String getMonthNumberAsString(String m) {
+			if (m.equalsIgnoreCase("Janvier")) {
+				return "01";
+			}
+			if (m.equalsIgnoreCase("Fevrier")) {
+				return "02";
+			}
+			if (m.equalsIgnoreCase("Mars")) {
+				return "03";
+			}
+			if (m.equalsIgnoreCase("Avril")) {
+				return "04";
+			}
+			if (m.equalsIgnoreCase("Mai")) {
+				return "05";
+			}
+			if (m.equalsIgnoreCase("Juin")) {
+				return "06";
+			}
+			if (m.equalsIgnoreCase("Juillet")) {
+				return "07";
+			}
+			if (m.equalsIgnoreCase("Août")) {
+				return "08";
+			}
+			if (m.equalsIgnoreCase("Septembre")) {
+				return "09";
+			}
+			if (m.equalsIgnoreCase("Octobre")) {
+				return "10";
+			}
+			if (m.equalsIgnoreCase("Novembre")) {
+				return "11";
+			}
+			return "12";
+			
+		}
 
 		/**
 		 * Prints Month
@@ -311,9 +363,26 @@ public class TabEvent extends Activity {
 			int prevYear = 0;
 			int nextMonth = 0;
 			int nextYear = 0;
+			boolean blue = false;
 
 			int currentMonth = mm - 1;
 			String currentMonthName = getMonthAsString(currentMonth);
+			
+			// current date with "dd-MM-yyyy" format
+			String today = this.getCurrentDate();
+			
+			String monthNumber = String.valueOf(mm);
+			if (monthNumber.length() == 1) {
+				monthNumber = "0"+monthNumber;
+			}
+			String yearNumber = String.valueOf(yy);
+			
+			String month = monthNumber+"-"+yearNumber;
+			if (today.contains(month)) {
+				// today is contained in the month that is printed
+				blue = true;
+			}
+			
 			daysInMonth = getNumberOfDaysOfMonth(currentMonth);
 
 			//Log.d(tag, "Current Month: " + " " + currentMonthName + " having " + daysInMonth + " days.");
@@ -450,20 +519,19 @@ public class TabEvent extends Activity {
 
 			
 			// convert string "dd-Month-yyyy" to format "dd-MM-yyyy"
-			String date = null;
+			/*String date = theday + "-" + this.getMonthNumberAsString(themonth) + "-" + theyear;
+			Log.d("date = ",date);
 			if (dateEvents.contains(date)) {
-				/*the day is an event's day*/
 				gridcell.setTextColor(Color.RED);
-			} else {
-				if (day_color[1].equals("GREY")) {
-					gridcell.setTextColor(Color.LTGRAY);
-				}
-				if (day_color[1].equals("WHITE")) {
-					gridcell.setTextColor(Color.WHITE);
-				}
-				if (day_color[1].equals("BLUE")) {
-					gridcell.setTextColor(getResources().getColor(R.color.static_text_color));
-				}
+			} else {*/
+			if (day_color[1].equals("GREY")) {
+				gridcell.setTextColor(Color.LTGRAY);
+			}
+			if (day_color[1].equals("WHITE")) {
+				gridcell.setTextColor(Color.WHITE);
+			}
+			if (day_color[1].equals("BLUE")) {
+				gridcell.setTextColor(getResources().getColor(R.color.static_text_color));
 			}
 			return row;
 		}
@@ -495,12 +563,32 @@ public class TabEvent extends Activity {
 			this.currentDayOfMonth = currentDayOfMonth;
 		}
 		
+		public int getCurrentMonth() {
+			return currentMonth;
+		}
+
+		private void setCurrentMonth(int currentMonth) {
+			this.currentMonth = currentMonth;
+		}
+		
+		public int getCurrentYear() {
+			return currentYear;
+		}
+
+		private void setCurrentYear(int currentYear) {
+			this.currentYear = currentYear;
+		}
+		
 		public void setCurrentWeekDay(int currentWeekDay) {
 			this.currentWeekDay = currentWeekDay;
 		}
 		
 		public int getCurrentWeekDay() {
 			return currentWeekDay;
+		}
+		
+		public String getCurrentDate() {
+			return currentDate;
 		}
 	}
 }
