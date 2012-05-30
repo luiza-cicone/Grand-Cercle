@@ -1,26 +1,24 @@
 //
-//  SecondViewController.m
+//  TestViewController.m
 //  Grand Cercle
 //
-//  Created by Luiza Cicone on 28/5/12.
+//  Created by Luiza Cicone on 30/5/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "DealsViewController.h"
+#import "TestViewController.h"
 
-@interface DealsViewController ()
+@interface TestViewController ()
 
 @end
 
-@implementation DealsViewController
-
+@implementation TestViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Deals", @"");
-        self.tabBarItem.image = [UIImage imageNamed:@"deals"];
+        // Custom initialization
     }
     return self;
 }
@@ -28,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload
@@ -39,8 +37,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end
-

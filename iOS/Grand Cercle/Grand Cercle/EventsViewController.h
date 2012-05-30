@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-    IBOutlet UITableViewCell *eventCell;
-    NSMutableArray *eventArray;
-    NSMutableDictionary *dico;
+@interface EventsViewController : UIViewController <UIScrollViewDelegate> {
+    
+    IBOutlet UIScrollView *scrollView;
+    IBOutlet UIPageControl *pageControl;
+    NSMutableArray *viewControllers;
+    BOOL pageControlUsed;
+    
 }
 
-@property (retain, nonatomic) IBOutlet UITableViewCell *eventCell;
-@property (retain, nonatomic) NSMutableArray *eventArray;
-@property (retain, nonatomic) NSMutableDictionary *dico;
+@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) UIPageControl *pageControl;
+@property (nonatomic, retain) NSMutableArray *viewControllers;
+
+- (IBAction)changePage:(id)sender;
+
 
 @end

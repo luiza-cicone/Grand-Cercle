@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DealsViewController : UIViewController
+@interface DealsViewController : UIViewController <UIScrollViewDelegate> {
+
+}
 
 @end
