@@ -78,7 +78,7 @@ containing a value of this type.
         public static final int day=0x7f07000e;
         public static final int description=0x7f070010;
         public static final int group=0x7f070009;
-        public static final int icone=0x7f070022;
+        public static final int icone=0x7f070028;
         public static final int image=0x7f070007;
         public static final int image0=0x7f070013;
         public static final int image1=0x7f070017;
@@ -96,8 +96,18 @@ containing a value of this type.
         public static final int right=0x7f070003;
         public static final int selectedDayMonthYear=0x7f07001a;
         public static final int space=0x7f070000;
-        public static final int tabsLayout=0x7f070021;
-        public static final int tabsText=0x7f070023;
+        public static final int tabBPIcone=0x7f070021;
+        public static final int tabBPText=0x7f070022;
+        public static final int tabEventIcone=0x7f070023;
+        public static final int tabEventText=0x7f070024;
+        public static final int tabInfosIcone=0x7f070025;
+        public static final int tabInfosText=0x7f070026;
+        public static final int tabNewsIcone=0x7f07002a;
+        public static final int tabNewsText=0x7f07002b;
+        public static final int tabParamIcone=0x7f07002c;
+        public static final int tabParamText=0x7f07002d;
+        public static final int tabsLayout=0x7f070027;
+        public static final int tabsText=0x7f070029;
         public static final int time=0x7f07000a;
         public static final int title=0x7f070008;
     }
@@ -116,10 +126,20 @@ containing a value of this type.
         public static final int tab3=0x7f03000b;
         public static final int tab4=0x7f03000c;
         public static final int tab5=0x7f03000d;
-        public static final int tab_item=0x7f03000e;
+        public static final int tab_bons_plans=0x7f03000e;
+        public static final int tab_event=0x7f03000f;
+        public static final int tab_infos=0x7f030010;
+        public static final int tab_item=0x7f030011;
+        public static final int tab_news=0x7f030012;
+        public static final int tab_param=0x7f030013;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int tabBP=0x7f050003;
+        public static final int tabEvent=0x7f050001;
+        public static final int tabInfos=0x7f050004;
+        public static final int tabNews=0x7f050002;
+        public static final int tabParam=0x7f050005;
     }
     public static final class style {
         public static final int calendar_event_style=0x7f060000;
