@@ -10,6 +10,12 @@
 #import "Items.h"
 
 @interface Evenements : Items {
+    // Date de publication
+    NSString *pubDate;
+    // Auteur
+    NSString *author;
+    // Groupe de l'auteur
+    NSString *group;
     // Jour
     NSString *day;
     // Date
@@ -30,7 +36,7 @@
     NSString *priceNoCva;
 }
 
-@property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva;
+@property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva, *pubDate, *author, *group;
 @property (nonatomic, retain) NSURL *imageSmall, *image;
 
 @end

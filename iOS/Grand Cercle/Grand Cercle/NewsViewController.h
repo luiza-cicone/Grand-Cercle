@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <TapkuLibrary/TapkuLibrary.h>
 
-@interface NewsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface NewsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableViewCell *newsCell;
     NSMutableArray *newsArray;
     NSMutableArray *urlArray;

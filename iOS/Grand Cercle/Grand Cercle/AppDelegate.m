@@ -16,6 +16,7 @@
 
 #import "NewsParser.h"
 #import "EvenementsParser.h"
+#import "BonsPlansParser.h"
 
 
 @implementation AppDelegate
@@ -40,6 +41,10 @@
     // On parse les événements
     EvenementsParser *ep = [EvenementsParser instance];
     [ep loadEvenements];
+    
+    // On parse les bons plans
+    BonsPlansParser *bp = [BonsPlansParser instance];
+    [bp loadBonsPlans];
     
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];

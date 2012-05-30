@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "TBXML+HTTP.h"
 #import "TBXML.h"
+#import "NSString+HTML.h"
+
 #import "News.h"
 
 @interface NewsParser : NSObject {

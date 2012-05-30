@@ -9,6 +9,7 @@
 #import "News.h"
 
 @implementation News
+@synthesize pubDate, author, group;
     
     - (id) init {
         self = [super init];

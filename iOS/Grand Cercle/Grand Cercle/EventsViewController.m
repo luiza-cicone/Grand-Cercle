@@ -104,10 +104,7 @@
     [label setText:[e group]];
     
     label = (UILabel *)[cell viewWithTag:4];
-    [label setText:[e time]];
-    
-    label = (UILabel *)[cell viewWithTag:5];
-    [label setText:[e place]];
+    [label setText:[[[e time] stringByAppendingString:@" - "] stringByAppendingString:[e place]]];
     
     imageView = (UIImageView *)[cell viewWithTag:6];
     
@@ -176,4 +173,5 @@
     [eventCell release];
     [super dealloc];
 }
+
 @end
