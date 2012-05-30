@@ -426,7 +426,7 @@ public class TabEvent extends Activity {
 
 			// Get a reference to the Day gridcell
 			gridcell = (Button) row.findViewById(R.id.calendar_day_gridcell);
-			gridcell.setOnClickListener(this);
+			gridcell.setOnClickListener(dayClicked);
 
 			// ACCOUNT FOR SPACING
 
@@ -468,24 +468,28 @@ public class TabEvent extends Activity {
 			return row;
 		}
 		
-		public void onClick(View view) {
-			String date_month_year = (String) view.getTag();
-			selectedDayMonthYearButton.setText(date_month_year);
-			if (date_month_year.equalsIgnoreCase("2-June-2012")) {
-				ev = true;
-				Intent intent = new Intent(TabEvent.this,TabEvent.class);
-				TabEvent.this.startActivity(intent);
+		private View.OnClickListener dayClicked = new View.OnClickListener() {
+			public void onClick(View view) {
+				String date_month_year = (String) view.getTag();
 				selectedDayMonthYearButton.setText(date_month_year);
+				
+				Log.d("format date", date_month_year);
+				if (date_month_year.equalsIgnoreCase("2-June-2012")) {
+					ev = true;
+					Intent intent = new Intent(TabEvent.this,TabEvent.class);
+					TabEvent.this.startActivity(intent);
+					selectedDayMonthYearButton.setText(date_month_year);
+				}
+	
+				try {
+					Date parsedDate = dateFormatter.parse(date_month_year);
+					//Log.d(tag, "Parsed Date: " + parsedDate.toString());
+	
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
-
-			try {
-				Date parsedDate = dateFormatter.parse(date_month_year);
-				//Log.d(tag, "Parsed Date: " + parsedDate.toString());
-
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
+		};
 
 		public int getCurrentDayOfMonth() {
 			return currentDayOfMonth;
@@ -501,6 +505,11 @@ public class TabEvent extends Activity {
 		
 		public int getCurrentWeekDay() {
 			return currentWeekDay;
+		}
+
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 }
