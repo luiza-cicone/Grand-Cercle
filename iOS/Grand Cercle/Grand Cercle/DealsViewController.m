@@ -42,7 +42,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 85;
+    return 80;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -82,6 +82,9 @@
     UILabel *label;
     label = (UILabel *)[cell viewWithTag:2];
     [label setText: [b title]];
+    
+    label = (UILabel *)[cell viewWithTag:3];
+    [label setText: [b description]];
     
     return cell;
 }
