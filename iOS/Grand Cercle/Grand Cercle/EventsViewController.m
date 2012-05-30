@@ -7,7 +7,7 @@
 //
 
 #import "EventsViewController.h"
-#import "EventTableViewController.h"
+#import "EventsTableViewController.h"
 
 @interface EventsViewController ()
 
@@ -40,7 +40,7 @@ return self;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)dealloc {
@@ -49,7 +49,7 @@ return self;
 
 #pragma mark - Scroll View
 
-int kNumberOfPages = 2;
+int kNumberOfPages = 3;
 
 - (void)viewDidLoad
 {
@@ -80,9 +80,9 @@ int kNumberOfPages = 2;
     if (page < 0) return;
     if (page >= kNumberOfPages) return;
     
-    EventTableViewController *controller = [viewControllers objectAtIndex:page];
+    EventsTableViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
-        controller = [[EventTableViewController alloc] init];
+        controller = [[EventsTableViewController alloc] init];
         [viewControllers replaceObjectAtIndex:page withObject:controller];
         [controller release];
     }
