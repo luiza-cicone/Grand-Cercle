@@ -15,7 +15,7 @@
 @end
 
 @implementation EventsViewController
-@synthesize eventCell, eventArray;
+@synthesize eventCell, eventArray, dico;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,6 +24,30 @@
         self.title = NSLocalizedString(@"Events", @"Evenements");
         self.tabBarItem.image = [UIImage imageNamed:@"events"];
     }
+    
+    eventArray = [[EvenementsParser instance] arrayEvenements];
+
+    //configure sections
+    dico = [[NSMutableDictionary alloc] init];
+    
+    for (int i = 0; i < [eventArray count]; i++) {
+        Evenements *event = [eventArray objectAtIndex:i];
+
+        NSMutableArray *eventsOnThisDay = [dico objectForKey:event.eventDate];
+        if (eventsOnThisDay == nil) {
+            eventsOnThisDay = [NSMutableArray array];
+            
+            [dico setObject:eventsOnThisDay forKey:event.eventDate];
+        }
+            [eventsOnThisDay addObject:event];
+
+    }
+    // print
+    for (id key in dico) {
+        NSLog(@"key: %@, value: %@", key, [dico objectForKey:key]);
+    }
+    
+    
     return self;
 }
 	
@@ -33,8 +57,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    eventArray = [[EvenementsParser instance] arrayEvenements];
-
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -62,16 +84,43 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [eventArray count];
+    return [dico count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    NSArray *keys = [dico allKeys];
+    id aKey = [keys objectAtIndex:[keys count] - section - 1];
+    id anObject = [dico objectForKey:aKey];
+    return [anObject count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [[eventArray objectAtIndex:section] title];
+    
+    NSArray *keys = [dico allKeys];
+    id aKey = [keys objectAtIndex:[keys count] - section - 1];
+    id anObject = [dico objectForKey:aKey];
+    Evenements *e = [anObject objectAtIndex:0];
+    
+    NSDate *curentDate = [NSDate date];
+    NSDate *eventDate = [e eventDate];
+
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* compoNents = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:curentDate]; // Get necessary date components
+    
+    int curMonth = [compoNents month]; //gives you month
+    int curDay = [compoNents day]; //gives you day
+    int curYear = [compoNents year]; // gives you year
+    
+    compoNents = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:eventDate]; // Get necessary date components
+
+    if (curDay == [compoNents day] && curMonth == [compoNents month] && curYear == [compoNents year]) {
+        return @"Aujourd'hui";
+    }
+    else if (curDay == [compoNents day] - 1 && curMonth == [compoNents month] && curYear == [compoNents year]) {
+        return @"Demain";
+    }
+    else return [e date];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,8 +135,10 @@
         cell = eventCell;
         self.eventCell = nil;
     }
-    
-    Evenements *e = (Evenements *)[eventArray objectAtIndex:[indexPath section]];
+    NSArray *keys = [dico allKeys];
+    id aKey = [keys objectAtIndex:[keys count] - 1 - [indexPath section]];
+    id anObject = [dico objectForKey:aKey];
+    Evenements *e = (Evenements *)[anObject objectAtIndex:[indexPath row]];
     
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];

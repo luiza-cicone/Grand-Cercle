@@ -11,9 +11,11 @@
 @interface EventsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
+    NSMutableDictionary *dico;
 }
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *eventCell;
 @property (retain, nonatomic) NSMutableArray *eventArray;
+@property (retain, nonatomic) NSMutableDictionary *dico;
 
 @end
