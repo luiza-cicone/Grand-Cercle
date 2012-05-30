@@ -26,8 +26,8 @@
         <activity 
             android:name=".Event">
         </activity>
-        <activity android:name=".Tab1"></activity>
-        <activity android:name=".Tab2"></activity>
+        <activity android:name=".TabEvent"></activity>
+        <activity android:name=".TabNews"></activity>
 		<activity android:name=".Tab3"></activity>
 		<activity android:name=".Tab4"></activity>
 		<activity android:name=".Tab5"></activity>
