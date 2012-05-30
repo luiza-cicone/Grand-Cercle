@@ -32,6 +32,7 @@ public class TabEvent extends Activity {
 	
 	private ListEventAdapter lea;
 	private ArrayList<ImageView> images;
+	private HashMap<String,ArrayList<Event>> hashMapEvent;
 	
 	private static final String tag = "SimpleCalendarViewActivity";
 	private ImageView calendarToJournalButton;
@@ -85,6 +86,8 @@ public class TabEvent extends Activity {
 		}
 		
 		// Attributs du calendrier
+		hashMapEvent = ContainerData.getEventInHashMap();
+		
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
