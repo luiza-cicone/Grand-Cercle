@@ -12,7 +12,7 @@
 @interface EventsTableViewController : UINavigationController {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
-    NSMutableDictionary *dico;
+    NSMutableDictionary *eventDico;
     NSMutableArray *urlArray, *urlArray2;
     TKImageCache *imageCache, *imageCache2;
     IBOutlet UITableView *tView;

@@ -9,7 +9,7 @@
 #import "EventsTableViewController.h"
 #import "Evenements.h"
 #import "EvenementsParser.h"
-#import "EventDetailViewController.h"
+//#import "EventDetailViewController.h"
 
 
 @implementation EventsTableViewController
@@ -163,6 +163,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+
     NSArray *dates = [dico allKeys];
     id theDate = [dates objectAtIndex:[dates count] - section - 1];
     id eventList = [dico objectForKey:theDate];
@@ -171,7 +172,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
     NSArray *keys = [dico allKeys];
-    id aKey = [keys objectAtIndex:[keys count] - section - 1];
+    id aKey = [keys objectAtIndex:section];
     id anObject = [dico objectForKey:aKey];
     Evenements *e = [anObject objectAtIndex:0];
     
@@ -186,7 +187,7 @@
     int curYear = [compoNents year]; // gives you year
     
     compoNents = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:eventDate]; // Get necessary date components
-    
+
     if (curDay == [compoNents day] && curMonth == [compoNents month] && curYear == [compoNents year]) {
         return @"Aujourd'hui";
     }
@@ -210,6 +211,7 @@
     }
     NSArray *keys = [dico allKeys];
     id aKey = [keys objectAtIndex:[keys count] - 1 - indexPath.section];
+
     id anObject = [dico objectForKey:aKey];
     Evenements *e = (Evenements *)[anObject objectAtIndex:indexPath.row];
     
