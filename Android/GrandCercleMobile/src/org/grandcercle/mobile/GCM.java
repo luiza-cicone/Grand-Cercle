@@ -45,7 +45,7 @@ public class GCM extends TabActivity {
 		
         setupTab("TabEvent", new Intent().setClass(this, TabEvent.class),0);
         setupTab("TabNews", new Intent().setClass(this, TabNews.class),1);
-        setupTab("TabBP", new Intent().setClass(this, Tab3.class),2);
+        setupTab("TabBP", new Intent().setClass(this, TabBP.class),2);
 		setupTab("TabInfos", new Intent().setClass(this, Tab4.class),3);
 		setupTab("TapParam", new Intent().setClass(this, Preferences.class),4);
 	}

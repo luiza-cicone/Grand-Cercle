@@ -22,7 +22,7 @@
 		    	android:orientation="vertical"
 		 		android:layout_width="162dp"
 				android:layout_height="fill_parent"
-				android:layout_marginTop="28dp"
+				android:layout_marginTop="10dp"
 				android:gravity="center_horizontal"
 				android:layout_weight="1">
 				<!-- Case en haut à gauche -->
@@ -98,7 +98,7 @@
 		    	android:orientation="vertical"
 		 		android:layout_width="162dp"
 				android:layout_height="fill_parent"
-				android:layout_marginTop="28dp"
+				android:layout_marginTop="10dp"
 				android:gravity="center_horizontal"
 				android:layout_weight="1" >
 				<!-- Case en haut à droite -->
