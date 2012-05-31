@@ -14,12 +14,16 @@
     IBOutlet UIPageControl *pageControl;
     NSMutableArray *viewControllers;
     BOOL pageControlUsed;
-    
+ 
+    UINavigationController *myNav;
+
 }
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UIPageControl *pageControl;
 @property (nonatomic, retain) NSMutableArray *viewControllers;
+
+@property (retain, nonatomic) UINavigationController *myNav;
 
 - (IBAction)changePage:(id)sender;
 

@@ -1,6 +1,8 @@
 package org.grandcercle.mobile;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -20,8 +22,6 @@ public class DragableSpace extends ViewGroup {
 
     private float mLastMotionX;
 
-    private static final String LOG_TAG = "DragableSpace";
-
     private static final int SNAP_VELOCITY = 1000;
 
     private final static int TOUCH_STATE_REST = 0;
@@ -34,7 +34,6 @@ public class DragableSpace extends ViewGroup {
     public DragableSpace(Context context) {
    
         super(context);
-        Log.d("debug", "DragableSpace(context)");
         mScroller = new Scroller(context);
 
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
@@ -73,10 +72,9 @@ public class DragableSpace extends ViewGroup {
          */
     	Log.d("debug", "onInterceptTouchEvent(MotionEvent ev)");
         final int action = ev.getAction();
-        if ((action == MotionEvent.ACTION_MOVE)
-                && (mTouchState != TOUCH_STATE_REST)) {
-            return true;
-                }
+        if ((action == MotionEvent.ACTION_MOVE) && (mTouchState != TOUCH_STATE_REST)) {
+        	return true;
+        }
 
         final float x = ev.getX();
 
@@ -129,7 +127,6 @@ public class DragableSpace extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-    	Log.d("debug", "onTouchEvent(MotionEvent event)");
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
@@ -140,7 +137,6 @@ public class DragableSpace extends ViewGroup {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                Log.i(LOG_TAG, "event : down");
                 /*
                  * If being flinged and user touches, stop the fling. isFinished
                  * will be false if being flinged.
@@ -153,13 +149,10 @@ public class DragableSpace extends ViewGroup {
                 mLastMotionX = x;
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.i(LOG_TAG,"event : move");
-                // if (mTouchState == TOUCH_STATE_SCROLLING) {
                 // Scroll to follow the motion event
                 final int deltaX = (int) (mLastMotionX - x);
                 mLastMotionX = x;
 
-                Log.i(LOG_TAG, "event : move, deltaX " + deltaX + ", mScrollX " + mScrollX);
 
                 if (deltaX < 0) {
                     if (mScrollX > 0) {
@@ -173,11 +166,8 @@ public class DragableSpace extends ViewGroup {
                         scrollBy(Math.min(availableToScroll, deltaX), 0);
                     }
                 }
-                // }
                 break;
             case MotionEvent.ACTION_UP:
-                Log.d(LOG_TAG, "event : up");
-                // if (mTouchState == TOUCH_STATE_SCROLLING) {
                 final VelocityTracker velocityTracker = mVelocityTracker;
                 velocityTracker.computeCurrentVelocity(1000);
                 int velocityX = (int) velocityTracker.getXVelocity();
@@ -196,11 +186,9 @@ public class DragableSpace extends ViewGroup {
                     mVelocityTracker.recycle();
                     mVelocityTracker = null;
                 }
-                // }
                 mTouchState = TOUCH_STATE_REST;
                 break;
             case MotionEvent.ACTION_CANCEL:
-                Log.i(LOG_TAG, "event : cancel");
                 mTouchState = TOUCH_STATE_REST;
         }
         mScrollX = this.getScrollX();
@@ -209,16 +197,12 @@ public class DragableSpace extends ViewGroup {
     }
 
     private void snapToDestination() {
-    	Log.d("debug", "snapToDestination()");
         final int screenWidth = getWidth();
         final int whichScreen = (mScrollX + (screenWidth / 2)) / screenWidth;
-        Log.i(LOG_TAG, "from des");
         snapToScreen(whichScreen);
     }
 
     public void snapToScreen(int whichScreen) {     
-    	Log.d("debug", "snapToScreen(int whichScreen)");
-       // Log.d(LOG_TAG, "snap To Screen " + whichScreen);
         mCurrentScreen = whichScreen;
         final int newX = whichScreen * getWidth();
         final int delta = newX - mScrollX;
@@ -227,7 +211,6 @@ public class DragableSpace extends ViewGroup {
     }
 
     public void setToScreen(int whichScreen) {
-        Log.d(LOG_TAG, "set To Screen " + whichScreen);
         mCurrentScreen = whichScreen;
         final int newX = whichScreen * getWidth();
         mScroller.startScroll(newX, 0, 0, 0, 10);             
@@ -237,7 +220,6 @@ public class DragableSpace extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childLeft = 0;
-        Log.d("debug", "onLayout(boolean changed, int l, int t, int r, int b)");
         final int count = getChildCount();
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -254,7 +236,6 @@ public class DragableSpace extends ViewGroup {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.d("debug", "onMeasure(int widthMeasureSpec, int heightMeasureSpec)");
         final int width = MeasureSpec.getSize(widthMeasureSpec);
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         if (widthMode != MeasureSpec.EXACTLY) {
@@ -271,17 +252,93 @@ public class DragableSpace extends ViewGroup {
         for (int i = 0; i < count; i++) {
             getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
         }
-        Log.i(LOG_TAG, "moving to screen "+mCurrentScreen);
         scrollTo(mCurrentScreen * width, 0);      
     }  
 
     @Override
     public void computeScroll() {
-    	Log.d("debug", "computeScroll()");
         if (mScroller.computeScrollOffset()) {
             mScrollX = mScroller.getCurrX();
             scrollTo(mScrollX, 0);
             postInvalidate();
         }
     }
+ 
+    /**
+     * Return the parceable instance to be saved
+     */
+    @Override
+    protected Parcelable onSaveInstanceState() {
+    	final SavedState state = new SavedState(super.onSaveInstanceState());
+    	state.currentScreen = mCurrentScreen;
+    	return state;
+    }
+
+
+    /**
+     * Restore the previous saved current screen
+     */
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+    	SavedState savedState = (SavedState) state;
+    	super.onRestoreInstanceState(savedState.getSuperState());
+    	if (savedState.currentScreen != -1) {
+    		mCurrentScreen = savedState.currentScreen;
+    	}
+    }
+
+    // ========================= INNER CLASSES ==============================
+
+    public interface onViewChangedEvent{      
+    	void onViewChange (int currentViewIndex);
+    }
+
+    /**
+     * A SavedState which save and load the current screen
+     */
+    public static class SavedState extends BaseSavedState {
+    	int currentScreen = -1;
+
+      	/**
+       	* Internal constructor
+       	* 
+       	* @param superState
+       	*/
+      	SavedState(Parcelable superState) {
+      		super(superState);
+      	}
+
+      	/**
+      	 * Private constructor
+      	 * 
+      	 * @param in
+      	 */
+      	private SavedState(Parcel in) {
+      		super(in);
+        	currentScreen = in.readInt();
+      	}
+
+      	/**
+       	* Save the current screen
+       	*/
+      	@Override
+      	public void writeToParcel(Parcel out, int flags) {
+    	  	super.writeToParcel(out, flags);
+        	out.writeInt(currentScreen);
+      	}
+
+		/**
+		 * Return a Parcelable creator
+		 */
+      	public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+    	  	public SavedState createFromParcel(Parcel in) {
+    	  		return new SavedState(in);
+        	}
+
+        	public SavedState[] newArray(int size) {
+        		return new SavedState[size];
+        	}
+      	};
+    }
+
 }

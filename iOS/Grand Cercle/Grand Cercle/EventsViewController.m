@@ -15,7 +15,7 @@
 @end
 
 @implementation EventsViewController
-@synthesize viewControllers, pageControl, scrollView;
+@synthesize viewControllers, pageControl, scrollView, myNav;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

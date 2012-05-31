@@ -9,14 +9,12 @@
 #import "EventsTableViewController.h"
 #import "Evenements.h"
 #import "EvenementsParser.h"
+//#import "EventDetailViewController.h"
 
-@interface EventsTableViewController ()
-
-@end
 
 @implementation EventsTableViewController
 
-@synthesize eventCell, eventArray, dico;
+@synthesize eventCell, eventArray, dico, tView, urlArray, urlArray2, imageCache, imageCache2;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -24,6 +22,7 @@
     if (self) {
         // Custom initialization
     }    
+    
     eventArray = [[EvenementsParser instance] arrayEvenements];
     
     //configure sections
@@ -41,13 +40,88 @@
         [eventsOnThisDay addObject:event];
         
     }
+    
     // print
 //    for (id key in dico) {
 //        NSLog(@"key: %@, value: %@", key, [dico objectForKey:key]);
 //    }
+    
+    // Préparation du cache
+    
+    urlArray = [[NSMutableArray alloc] initWithCapacity:[eventArray count]];
+    
+    for (int i = 0; i < [eventArray count]; i++) {
+        Evenements *e = [eventArray objectAtIndex:i];
+        [urlArray addObject:[e imageSmall]];
+    }
+	
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"imageSmall"];
+	imageCache.notificationName = @"newImageSmallCache";
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageSmallCache" object:nil];
+    
+    urlArray2 = [[NSMutableArray alloc] initWithCapacity:[eventArray count]];
+    
+    for (int i = 0; i < [eventArray count]; i++) {
+        Evenements *e = [eventArray objectAtIndex:i];
+        [urlArray2 addObject:[e logo]];
+    }
+	
+	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"logoEvent"];
+	imageCache2.notificationName = @"newLogoEventCache";
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved2:) name:@"newLogoEventCache" object:nil];
 
     return self;
 
+}
+
+- (void) newImageRetrieved:(NSNotification*)sender{
+    
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tView indexPathsForVisibleRows];
+    
+    
+    
+    for(NSIndexPath *path in paths) {
+        
+
+        NSInteger index = path.row;
+        
+        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
+        UIImageView *imageView;
+        imageView = (UIImageView *)[cell viewWithTag:1];
+    	if(imageView.image == nil && tag == index){
+            
+            imageView.image = [dict objectForKey:@"imageSmall"];
+            [cell setNeedsLayout];
+        }
+    }
+}
+
+- (void) newImageRetrieved2:(NSNotification*)sender{
+    
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tView indexPathsForVisibleRows];
+    
+    
+    for(NSIndexPath *path in paths) {
+        
+    	NSInteger index = path.row;
+        
+        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
+        UIImageView *imageView;
+        imageView = (UIImageView *)[cell viewWithTag:1];
+    	if(imageView.image == nil && tag == index){
+            
+            imageView.image = [dict objectForKey:@"logoEvent"];
+            [cell setNeedsLayout];
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -89,10 +163,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSArray *keys = [dico allKeys];
-    id aKey = [keys objectAtIndex:section];
-    id anObject = [dico objectForKey:aKey];
-    return [anObject count];
+
+    NSArray *dates = [dico allKeys];
+    id theDate = [dates objectAtIndex:[dates count] - section - 1];
+    id eventList = [dico objectForKey:theDate];
+    return [eventList count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
@@ -135,16 +210,16 @@
         self.eventCell = nil;
     }
     NSArray *keys = [dico allKeys];
-    id aKey = [keys objectAtIndex:indexPath.section];
+    id aKey = [keys objectAtIndex:[keys count] - 1 - indexPath.section];
+
     id anObject = [dico objectForKey:aKey];
-    Evenements *e = (Evenements *)[anObject objectAtIndex:[indexPath row]];
+    Evenements *e = (Evenements *)[anObject objectAtIndex:indexPath.row];
     
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
     
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e imageSmall]]];
-    UIImage *myimage = [[UIImage alloc] initWithData:imageData];
-    [imageView setImage:myimage];
+    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
+    [imageView setImage:img];
     
     UILabel *label;
     label = (UILabel *)[cell viewWithTag:2];
@@ -161,9 +236,8 @@
     
     imageView = (UIImageView *)[cell viewWithTag:6];
     
-    imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e logo]]];
-    myimage = [[UIImage alloc] initWithData:imageData];
-    [imageView setImage:myimage];
+    img = [imageCache2 imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray2 objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
+    [imageView setImage:img];
     
     return cell;
 }
@@ -210,17 +284,16 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSLog(@"EVENEMENT SELECTIONNE");
+//    
+//    Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
+//    EventDetailViewController *detailEventController = [[EventsDetailViewController alloc] initWithNibName:@"EventsDetailView" bundle:[NSBundle mainBundle]];
+//    detailEventController.selectedEvent = selectedEvent;
+//    [self.navigationController pushViewController:detailEventController animated:YES];
+//
+//    [detailEventController release];
+//    detailEventController = nil;
 }
-
 
 @end

@@ -6,13 +6,16 @@ import org.grandcercle.mobile.TabNews;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 public class GCM extends TabActivity {
-    /** Called when the activity is first created. */
 
 	private TabHost tabHost;
 	private int [] layoutTab;
@@ -21,8 +24,12 @@ public class GCM extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
 		//Parsing des fichiers XML
 		ContainerData.ParseFiles();
+		
+
 		
 		tabHost = getTabHost();
 		layoutTab = new int[5];
@@ -38,11 +45,18 @@ public class GCM extends TabActivity {
 		
         setupTab("TabEvent", new Intent().setClass(this, TabEvent.class),0);
         setupTab("TabNews", new Intent().setClass(this, TabNews.class),1);
-        setupTab("TabBP", new Intent().setClass(this, Tab3.class),2);
+        setupTab("TabBP", new Intent().setClass(this, TabBP.class),2);
 		setupTab("TabInfos", new Intent().setClass(this, Tab4.class),3);
-		setupTab("TapParam", new Intent().setClass(this, Tab5.class),4);
+		setupTab("TapParam", new Intent().setClass(this, Preferences.class),4);
 	}
 	
+	@Override
+	public void onDestroy() {
+	    super.onDestroy();
+	    System.runFinalizersOnExit(true);
+	    System.exit(0);
+	}
+
 	private void setupTab(String tag, Intent intent, int layoutTabIndex) {
 		tabHost.addTab(tabHost.newTabSpec(tag).setIndicator( createTabView(tabHost.getContext(), layoutTabIndex)).setContent(intent));
 	}

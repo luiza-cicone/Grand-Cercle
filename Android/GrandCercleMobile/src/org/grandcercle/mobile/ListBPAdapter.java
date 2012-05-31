@@ -11,10 +11,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListEventAdapter extends BaseAdapter {
+public class ListBPAdapter extends BaseAdapter {
 
 	// les données à afficher
-	private ArrayList<Event> listEvent;
+	private ArrayList<BP> listBP;
 	
 	/* Le LayoutInflater permet de parser un layout XML et de 
 	 * le transcoder en IHM Android. Pour respecter la classe 
@@ -22,9 +22,9 @@ public class ListEventAdapter extends BaseAdapter {
 	 */
 	private LayoutInflater inflater;
 	
-	public ListEventAdapter(Context context,ArrayList<Event> listEvent) {
+	public ListBPAdapter(Context context,ArrayList<BP> listBP) {
 		inflater = LayoutInflater.from(context);
-		this.listEvent = listEvent;
+		this.listBP = listBP;
 	}
 	
 	/* il nous faut spécifier la méthode "getCount()". 
@@ -33,16 +33,16 @@ public class ListEventAdapter extends BaseAdapter {
 	 * de personnes contenus dans "mListP".
 	 */
 	public int getCount() {
-		return listEvent.size();
+		return listBP.size();
 	}
 
 	// Permet de retourner un objet contenu dans la liste
-	public Event getItem(int index) {
-		return listEvent.get(index);
+	public BP getItem(int index) {
+		return listBP.get(index);
 	}
 
 	public long getItemId(int index) {
-		return this.listEvent.get(index).getId();
+		return this.listBP.get(index).getId();
 		
 	}
 	
@@ -54,31 +54,25 @@ public class ListEventAdapter extends BaseAdapter {
 	 * notre layout XML, sinon on le réutilise
 	 */
 	public View getView(int position, View convertView, ViewGroup parent){
-		EventView ev;		
+		BPView bpv;		
 		
 		if (convertView == null) {
-			ev = new EventView();
-			convertView = inflater.inflate(R.layout.cell_event,null);
+			bpv = new BPView();
+			convertView = inflater.inflate(R.layout.cell_bons_plans,null);
 
-			ev.group = (TextView)convertView.findViewById(R.id.group);			
-			ev.title = (TextView)convertView.findViewById(R.id.title);
-			ev.lieu = (TextView)convertView.findViewById(R.id.lieu);
-			ev.time = (TextView)convertView.findViewById(R.id.time);
-			ev.logo = (ImageView)convertView.findViewById(R.id.logo);
-			ev.image = (ImageView)convertView.findViewById(R.id.image);
-			convertView.setTag(ev);
+			bpv.title = (TextView)convertView.findViewById(R.id.title);			
+			bpv.description = (TextView)convertView.findViewById(R.id.description);
+			bpv.image = (ImageView)convertView.findViewById(R.id.image);
+			convertView.setTag(bpv);
 
 		} else {
-			ev = (EventView)convertView.getTag();
+			bpv = (BPView)convertView.getTag();
 		}
 		
-		ev.group.setText(listEvent.get(position).getGroup());
-		ev.title.setText(listEvent.get(position).getTitle());
-		ev.lieu.setText(listEvent.get(position).getLieu());
-		ev.time.setText(listEvent.get(position).getTime());
-		// image stockée pendant une semaine, logo stocké de manière infinie
-		UrlImageViewHelper.setUrlDrawable(ev.image,listEvent.get(position).getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);
-		UrlImageViewHelper.setUrlDrawable(ev.logo,listEvent.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
+		bpv.title.setText(listBP.get(position).getTitle());
+		bpv.description.setText(listBP.get(position).getDescription());
+		// image stockée infiniement, car BP ont une grande durée de vie
+		UrlImageViewHelper.setUrlDrawable(bpv.image,listBP.get(position).getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 		return convertView;
 	}

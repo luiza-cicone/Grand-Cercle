@@ -1,6 +1,10 @@
 package org.grandcercle.mobile;
 
 public class Event extends Item {
+	private String pubDate;
+	private String author;
+	private String group;
+	private String logo;
 	private String type;
 	private String day;
 	private String date;
@@ -40,6 +44,45 @@ public class Event extends Item {
 		super();
 	}
 
+	public String getPubDate() {
+		return pubDate;
+	}
+
+
+	public void setPubDate(String pubDate) {
+		this.pubDate = pubDate;
+	}
+
+
+	public String getAuthor() {
+		return author;
+	}
+
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+
+	public String getGroup() {
+		return group;
+	}
+
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+
+	public String getLogo() {
+		return logo;
+	}
+
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	
 	public String getType() {
 		return type;
 	}

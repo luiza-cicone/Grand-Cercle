@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <TapkuLibrary/TapkuLibrary.h>
 
-@interface EventsTableViewController : UITableViewController {
+@interface EventsTableViewController : UINavigationController {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
     NSMutableDictionary *eventDico;
+    NSMutableArray *urlArray, *urlArray2;
+    TKImageCache *imageCache, *imageCache2;
+    IBOutlet UITableView *tView;
 
 }
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *eventCell;
-@property (retain, nonatomic) NSMutableArray *eventArray;
+@property (retain, nonatomic) NSMutableArray *eventArray, *urlArray, *urlArray2;
 @property (retain, nonatomic) NSMutableDictionary *dico;
+@property (retain, nonatomic) TKImageCache *imageCache, *imageCache2;
+@property (retain, nonatomic) IBOutlet UITableView *tView;
 
 @end
