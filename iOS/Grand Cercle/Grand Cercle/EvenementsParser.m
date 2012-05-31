@@ -115,7 +115,6 @@ static EvenementsParser *instanceEvent = nil;
         [firstDateFormatter setDateFormat:@"dd-MM-yy hh:mm:ss zzz"];
 
         aEvent.eventDate = [firstDateFormatter dateFromString:data];
-        NSLog(@"%@ - %@", aEvent.title, aEvent.eventDate);
         [aEvent.eventDate retain];
 
         // Ajout de la news au tableau

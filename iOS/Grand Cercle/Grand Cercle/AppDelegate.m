@@ -34,13 +34,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    // On parse les news
-    NewsParser *np = [NewsParser instance];
-    [np loadNews];
-    
     // On parse les événements
     EvenementsParser *ep = [EvenementsParser instance];
     [ep loadEvenements];
+    
+    // On parse les news
+    NewsParser *np = [NewsParser instance];
+    [np loadNews];
     
     // On parse les bons plans
     BonsPlansParser *bp = [BonsPlansParser instance];

@@ -43,13 +43,13 @@
 - (void) loadView{
 	[super loadView];
 	self.tableView.backgroundColor = [UIColor whiteColor];
-	
+	[self.view setBackgroundColor:[UIColor whiteColor]];
 	float y,height;
 	y = self.monthView.frame.origin.y + self.monthView.frame.size.height;
 	height = self.view.frame.size.height - y;
 		
 	
-	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y, self.view.bounds.size.width, height) style:UITableViewStylePlain];
+	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y+10, self.view.bounds.size.width, height) style:UITableViewStylePlain];
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	_tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -97,7 +97,7 @@
 
 	
 	float y = self.monthView.frame.origin.y + self.monthView.frame.size.height;
-	self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, y, self.tableView.frame.size.width, self.view.frame.size.height - y );
+	self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, y+10, self.tableView.frame.size.width, self.view.frame.size.height - y );
 	
 	if(animated) [UIView commitAnimations];
 }

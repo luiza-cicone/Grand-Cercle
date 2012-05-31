@@ -11,7 +11,7 @@
 @interface EventsTableViewController : UITableViewController {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
-    NSMutableDictionary *dico;
+    NSMutableDictionary *eventDico;
 
 }
 

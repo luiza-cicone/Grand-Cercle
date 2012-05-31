@@ -1,10 +1,10 @@
 //
-//  DaterViewController.m
-//  Created by Devin Ross on 7/28/09.
+//  DemoCalendarMonth.h
+//  Created by Devin Ross on 10/31/09.
 //
 /*
  
- tapku.com || http://github.com/devinross/tapkulibrary
+ tapku.com || https://github.com/devinross/tapkulibrary
  
  Permission is hereby granted, free of charge, to any person
  obtaining a copy of this software and associated documentation
@@ -27,53 +27,24 @@
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
  
-*/
-#import "TKCalendarMonthViewController.h"
-#import "TKCalendarMonthView.h"
+ */
+
+#import <TapkuLibrary/TapkuLibrary.h>
+#import <UIKit/UIKit.h>
 
 
-@interface TKCalendarMonthViewController () {
-	BOOL _sundayFirst;
+@interface DemoCalendarMonth : TKCalendarMonthTableViewController {
+	NSMutableArray *dataArray; 
+	NSMutableDictionary *dataDictionary;
+    
+    IBOutlet UITableViewCell *eventCell;
 }
 
-@end
-
-@implementation TKCalendarMonthViewController
-@synthesize monthView = _monthView;
-
-- (id) init{
-	return [self initWithSunday:NO];
-}
-- (id) initWithSunday:(BOOL)sundayFirst{
-	if(!(self = [super init])) return nil;
-	_sundayFirst = sundayFirst;
-	return self;
-}
-
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return NO;
-}
-
-- (void) viewDidUnload {
-	self.monthView = nil;
-}
+@property (retain,nonatomic) NSMutableArray *dataArray;
+@property (retain,nonatomic) NSMutableDictionary *dataDictionary;
+@property (retain,nonatomic) IBOutlet UITableViewCell *eventCell;
 
 
-- (void) loadView{
-	[super loadView];
-	
-	_monthView = [[TKCalendarMonthView alloc] initWithSundayAsFirst:_sundayFirst];
-	_monthView.delegate = self;
-	_monthView.dataSource = self;
-	[self.view addSubview:_monthView];
-	[_monthView reload];
-	
-}
-
-
-- (NSArray*) calendarMonthView:(TKCalendarMonthView*)monthView marksFromDate:(NSDate*)startDate toDate:(NSDate*)lastDate{
-	return nil;
-}
-
+- (void) generateRandomDataForStartDate:(NSDate*)start endDate:(NSDate*)end;
 
 @end
