@@ -558,7 +558,7 @@ public class TabEvent extends Activity {
 					t = Toast.makeText(TabEvent.this, "Aucun événement pour le jour sélectionné", Toast.LENGTH_SHORT);
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(null);
 				}
-				t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 145);
+				t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 170);
 				t.show();
 			}
 		};
