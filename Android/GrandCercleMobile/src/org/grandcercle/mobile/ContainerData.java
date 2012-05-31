@@ -18,6 +18,7 @@ public class ContainerData {
 	static public Context context;
 	static private ArrayList<News> listNews;
 	private static ArrayList<Event> listEvent;
+	private static ArrayList<BP> listBP;
 	private static HashMap<String,ArrayList<Event>> hashEvent;
 	
 	public ContainerData() {
@@ -53,6 +54,13 @@ public class ContainerData {
 			e1.printStackTrace();
 		}
 		
+		URL urlBP = null;
+		try {
+			urlBP = new URL("http://www.grandcercle.org/bons-plans/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
 		/* 
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
 		 * des opérations de parsing.
@@ -84,6 +92,19 @@ public class ContainerData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		DefaultHandler handlerBP = new ParserXMLHandlerBP();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
+			
+			// On récupère directement la liste des feeds
+			listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -98,6 +119,10 @@ public class ContainerData {
 	
 	public static HashMap<String,ArrayList<Event>> getEventInHashMap() {
 		return hashEvent;
+	}
+	
+	public static ArrayList<BP> getlistBP() {
+		return listBP;
 	}
 }
 
