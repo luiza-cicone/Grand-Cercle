@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabEvent extends Activity {
 	
@@ -589,6 +591,7 @@ public class TabEvent extends Activity {
 				}
 				
 				String date = day+"-"+month+"-"+year;
+				Toast t;
 				if (hashMapEvent.containsKey(date)) {
 					// diplays list of events
 					ArrayList<Event> listEvCal = hashMapEvent.get(date);
@@ -596,9 +599,18 @@ public class TabEvent extends Activity {
 					ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
 					feedListViewCal.setOnItemClickListener(clickListenerFeed);
+					if (listEvCal.size() > 1) {
+						
+						t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);
+					} else {
+						t = Toast.makeText(TabEvent.this, "1 événement pour le jour séléctionné", Toast.LENGTH_SHORT);
+					}
 				} else {
+					t = Toast.makeText(TabEvent.this, "Aucun événement pour le jour sélectionné", Toast.LENGTH_SHORT);
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(null);
 				}
+				t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 145);
+				t.show();
 			}
 		};
 
