@@ -36,10 +36,14 @@
     NSString *priceNoCva;
     // Date event
     NSDate *eventDate;
+    
+    // Indice pour le cache
+    NSInteger indice;
 }
 
 @property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva, *pubDate, *author, *group;
 @property (nonatomic, retain) NSURL *imageSmall, *image;
 @property (nonatomic, assign) NSDate *eventDate;
+@property (nonatomic, assign) NSInteger indice;
 
 @end

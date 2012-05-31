@@ -43,7 +43,7 @@
 							<object class="IBUIImageView" id="939682122">
 								<reference key="NSNextResponder" ref="635611844"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{10, 4}, {79, 112}}</string>
+								<string key="NSFrame">{{5, 5}, {79, 112}}</string>
 								<reference key="NSSuperview" ref="635611844"/>
 								<reference key="NSNextKeyView" ref="503910881"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -55,7 +55,7 @@
 							<object class="IBUILabel" id="503910881">
 								<reference key="NSNextResponder" ref="635611844"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{125, 14}, {175, 28}}</string>
+								<string key="NSFrame">{{100, 14}, {175, 28}}</string>
 								<reference key="NSSuperview" ref="635611844"/>
 								<reference key="NSNextKeyView" ref="537287013"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -90,7 +90,7 @@
 							<object class="IBUILabel" id="537287013">
 								<reference key="NSNextResponder" ref="635611844"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{124, 50}, {175, 21}}</string>
+								<string key="NSFrame">{{100, 50}, {175, 21}}</string>
 								<reference key="NSSuperview" ref="635611844"/>
 								<reference key="NSNextKeyView" ref="275704320"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -120,7 +120,7 @@
 							<object class="IBUILabel" id="275704320">
 								<reference key="NSNextResponder" ref="635611844"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{124, 79}, {150, 21}}</string>
+								<string key="NSFrame">{{100, 79}, {150, 21}}</string>
 								<reference key="NSSuperview" ref="635611844"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -164,7 +164,16 @@
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords"/>
+			<array class="NSMutableArray" key="connectionRecords">
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">topCell</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="664664148"/>
+					</object>
+					<int key="connectionID">10</int>
+				</object>
+			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
 					<object class="IBObjectRecord">
@@ -218,6 +227,7 @@
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
+				<string key="-1.CustomClassName">EventsDetail</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -231,7 +241,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">8</int>
+			<int key="maxID">10</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

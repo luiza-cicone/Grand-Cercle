@@ -14,7 +14,7 @@
 @end
 
 @implementation EventsViewController
-@synthesize viewControllers, pageControl, scrollView;
+@synthesize viewControllers, pageControl, scrollView, myNav;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -83,7 +83,9 @@ int kNumberOfPages = 3;
     EventsTableViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
         controller = [[EventsTableViewController alloc] init];
-        [viewControllers replaceObjectAtIndex:page withObject:controller];
+        UINavigationController *navController =[[UINavigationController alloc] initWithRootViewController:controller];
+
+        [viewControllers replaceObjectAtIndex:page withObject:navController];
         [controller release];
     }
     
