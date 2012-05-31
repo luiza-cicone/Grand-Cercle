@@ -6,4 +6,11 @@
     <string name="tabBP">Bons Plans</string>
     <string name="tabInfos">Infos</string>
     <string name="tabParam">Parametres</string>
+    <string-array name="prefentries">
+        <item >Item 1</item>
+        <item >Item 2</item>
+    </string-array>
+    <string-array name="prefvalues">
+        <item >Item 3</item>
+    </string-array>
 </resources>

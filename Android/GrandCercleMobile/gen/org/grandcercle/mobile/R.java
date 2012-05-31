@@ -8,6 +8,10 @@
 package org.grandcercle.mobile;
 
 public final class R {
+    public static final class array {
+        public static final int prefentries=0x7f070000;
+        public static final int prefvalues=0x7f070001;
+    }
     public static final class attr {
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -19,13 +23,13 @@ containing a value of this type.
         public static final int default_screen=0x7f010000;
     }
     public static final class color {
-        public static final int black=0x7f040001;
-        public static final int journal_entry_listitem_text_color=0x7f040005;
-        public static final int note_text_disabled=0x7f040006;
-        public static final int reaction_color_selected=0x7f040003;
-        public static final int static_text_color=0x7f040004;
-        public static final int symptom_color_selected=0x7f040002;
-        public static final int white=0x7f040000;
+        public static final int black=0x7f050001;
+        public static final int journal_entry_listitem_text_color=0x7f050005;
+        public static final int note_text_disabled=0x7f050006;
+        public static final int reaction_color_selected=0x7f050003;
+        public static final int static_text_color=0x7f050004;
+        public static final int symptom_color_selected=0x7f050002;
+        public static final int white=0x7f050000;
     }
     public static final class drawable {
         public static final int bg=0x7f020000;
@@ -55,58 +59,64 @@ containing a value of this type.
         public static final int loading=0x7f020018;
         public static final int logo_gc=0x7f020019;
         public static final int news=0x7f02001a;
-        public static final int search=0x7f02001b;
-        public static final int settings=0x7f02001c;
-        public static final int tab_bg_selected=0x7f02001d;
-        public static final int tab_bg_selector=0x7f02001e;
-        public static final int tab_bg_unselected=0x7f02001f;
-        public static final int tab_text_selector=0x7f020020;
-        public static final int transparent=0x7f020021;
+        public static final int position_center_ecran=0x7f02001b;
+        public static final int position_ecran=0x7f02001c;
+        public static final int position_right_screen=0x7f02001d;
+        public static final int search=0x7f02001e;
+        public static final int settings=0x7f02001f;
+        public static final int tab_bg_selected=0x7f020020;
+        public static final int tab_bg_selector=0x7f020021;
+        public static final int tab_bg_unselected=0x7f020022;
+        public static final int tab_text_selector=0x7f020023;
+        public static final int transparent=0x7f020024;
     }
     public static final class id {
-        public static final int PubDate=0x7f070011;
-        public static final int calendar=0x7f07001f;
-        public static final int calendar_day_gridcell=0x7f070005;
-        public static final int calendarheader=0x7f07001e;
-        public static final int center=0x7f070002;
-        public static final int currentMonth=0x7f07001c;
-        public static final int date=0x7f07000f;
-        public static final int date0=0x7f070012;
-        public static final int date1=0x7f070016;
-        public static final int date2=0x7f070014;
-        public static final int date3=0x7f070018;
-        public static final int day=0x7f07000e;
-        public static final int description=0x7f070010;
-        public static final int group=0x7f070009;
-        public static final int image=0x7f070007;
-        public static final int image0=0x7f070013;
-        public static final int image1=0x7f070017;
-        public static final int image2=0x7f070015;
-        public static final int image3=0x7f070019;
-        public static final int left=0x7f070001;
-        public static final int lieu=0x7f07000b;
-        public static final int listFeed=0x7f070004;
-        public static final int listFeedDay=0x7f070020;
-        public static final int logo=0x7f07000c;
-        public static final int nextMonth=0x7f07001d;
-        public static final int num_events_per_day=0x7f070006;
-        public static final int prevMonth=0x7f07001b;
-        public static final int pub_date=0x7f07000d;
-        public static final int right=0x7f070003;
-        public static final int selectedDayMonthYear=0x7f07001a;
-        public static final int space=0x7f070000;
-        public static final int tabBPIcone=0x7f070021;
-        public static final int tabBPText=0x7f070022;
-        public static final int tabEventIcone=0x7f070023;
-        public static final int tabEventText=0x7f070024;
-        public static final int tabInfosIcone=0x7f070025;
-        public static final int tabInfosText=0x7f070026;
-        public static final int tabNewsIcone=0x7f070027;
-        public static final int tabNewsText=0x7f070028;
-        public static final int tabParamIcone=0x7f070029;
-        public static final int tabParamText=0x7f07002a;
-        public static final int time=0x7f07000a;
-        public static final int title=0x7f070008;
+        public static final int PubDate=0x7f090011;
+        public static final int calendar=0x7f090022;
+        public static final int calendar_day_gridcell=0x7f090005;
+        public static final int calendarheader=0x7f090021;
+        public static final int center=0x7f090002;
+        public static final int currentMonth=0x7f09001f;
+        public static final int date=0x7f09000f;
+        public static final int date0=0x7f090014;
+        public static final int date1=0x7f090018;
+        public static final int date2=0x7f090016;
+        public static final int date3=0x7f09001a;
+        public static final int day=0x7f09000e;
+        public static final int description=0x7f090010;
+        public static final int group=0x7f090009;
+        public static final int image=0x7f090007;
+        public static final int image0=0x7f090015;
+        public static final int image1=0x7f090019;
+        public static final int image2=0x7f090017;
+        public static final int image3=0x7f09001b;
+        public static final int left=0x7f090001;
+        public static final int lieu=0x7f09000b;
+        public static final int listFeed=0x7f090004;
+        public static final int listFeedDay=0x7f090023;
+        public static final int logo=0x7f09000c;
+        public static final int nextMonth=0x7f090020;
+        public static final int num_events_per_day=0x7f090006;
+        public static final int position=0x7f090013;
+        public static final int position_center_ecran=0x7f090012;
+        public static final int position_ecran=0x7f09001c;
+        public static final int prevMonth=0x7f09001e;
+        public static final int pub_date=0x7f09000d;
+        public static final int right=0x7f090003;
+        public static final int selectedDayMonthYear=0x7f09001d;
+        public static final int space=0x7f090000;
+        public static final int tabBPIcone=0x7f090024;
+        public static final int tabBPText=0x7f090025;
+        public static final int tabEventIcone=0x7f090026;
+        public static final int tabEventText=0x7f090027;
+        public static final int tabInfosIcone=0x7f090028;
+        public static final int tabInfosText=0x7f090029;
+        public static final int tabNewsIcone=0x7f09002a;
+        public static final int tabNewsText=0x7f09002b;
+        public static final int tabParamIcone=0x7f09002c;
+        public static final int tabParamText=0x7f09002d;
+        public static final int time=0x7f09000a;
+        public static final int title=0x7f090008;
     }
     public static final class layout {
         public static final int affichage_event=0x7f030000;
@@ -130,15 +140,18 @@ containing a value of this type.
         public static final int tab_param=0x7f030012;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int tabBP=0x7f050003;
-        public static final int tabEvent=0x7f050001;
-        public static final int tabInfos=0x7f050004;
-        public static final int tabNews=0x7f050002;
-        public static final int tabParam=0x7f050005;
+        public static final int app_name=0x7f060000;
+        public static final int tabBP=0x7f060003;
+        public static final int tabEvent=0x7f060001;
+        public static final int tabInfos=0x7f060004;
+        public static final int tabNews=0x7f060002;
+        public static final int tabParam=0x7f060005;
     }
     public static final class style {
-        public static final int calendar_event_style=0x7f060000;
+        public static final int calendar_event_style=0x7f080000;
+    }
+    public static final class xml {
+        public static final int prefs=0x7f040000;
     }
     public static final class styleable {
         /** Attributes that can be used with a DragableSpace.
