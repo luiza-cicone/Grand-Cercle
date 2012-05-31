@@ -45,9 +45,9 @@ public class TabBP extends Activity {
         setContentView(R.layout.affichage_bons_plans);
         ArrayList<BP> listBP = ContainerData.getlistBP();
         
-        ListBPAdapter lna = new ListBPAdapter(this,listBP);
+        ListBPAdapter lbpa = new ListBPAdapter(this,listBP);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-        ((ListView)findViewById(R.id.listFeed)).setAdapter(lna);
+        ((ListView)findViewById(R.id.listFeed)).setAdapter(lbpa);
         //feedListView.setOnItemClickListener(clickListenerFeed);
 		
 	 }

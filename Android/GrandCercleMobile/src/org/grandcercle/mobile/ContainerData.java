@@ -96,7 +96,7 @@ public class ContainerData {
 		DefaultHandler handlerBP = new ParserXMLHandlerBP();
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
+			parseur.parse(urlBP.openConnection().getInputStream(), handlerBP);
 			
 			// On récupère directement la liste des feeds
 			listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
@@ -111,7 +111,6 @@ public class ContainerData {
 	public static ArrayList<News> getNews() {
 		return listNews;
 	}
-
 
 	public static ArrayList<Event> getEvent() {
 		return listEvent;
