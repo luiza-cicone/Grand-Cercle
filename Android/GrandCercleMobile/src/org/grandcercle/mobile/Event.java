@@ -1,5 +1,8 @@
 package org.grandcercle.mobile;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Event extends Item {
 	private String type;
 	private String day;

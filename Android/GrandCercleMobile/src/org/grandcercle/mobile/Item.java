@@ -1,6 +1,9 @@
 package org.grandcercle.mobile;
 
-public abstract class Item {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public abstract class Item implements Parcelable {
 	protected long id;
 	protected String title;
 	protected String description;
@@ -9,6 +12,12 @@ public abstract class Item {
 	protected String author;
 	protected String group;
 	protected String logo;
+	
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {}
 	
 	public long getId() {
 		return id;

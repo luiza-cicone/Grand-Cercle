@@ -93,7 +93,6 @@ public class TabEvent extends Activity {
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
-		Log.d(tag, "Calendar Instance:= " + "Month: " + month + " " + "Year: " + year);
 
 		selectedDayMonthYearButton = (Button) this.findViewById(R.id.selectedDayMonthYear);
 		//selectedDayMonthYearButton.setText("");
@@ -124,7 +123,6 @@ public class TabEvent extends Activity {
 
 	
 	private void setGridCellAdapterToDate(int month, int year) {
-		// ici, month = vrai mois : Mai = 5
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
 		_calendar.set(year,month-1,1);
 		SimpleDateFormat s;
@@ -146,7 +144,6 @@ public class TabEvent extends Activity {
 				} else {
 					month--;
 				}
-				//Log.d(tag, "Setting Prev Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
 				setGridCellAdapterToDate(month, year);
 			}
 			if (v == nextMonth) {
@@ -154,11 +151,8 @@ public class TabEvent extends Activity {
 					month = 1;
 					year++;
 				} else {
-					Log.d("Click","mois avant="+month);
 					month++;
-					Log.d("Click","mois après="+month);
 				}
-				//Log.d(tag, "Setting Next Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
 				setGridCellAdapterToDate(month, year);
 			}
 		}
@@ -369,11 +363,11 @@ public class TabEvent extends Activity {
 			
 			daysInMonth = getNumberOfDaysOfMonth(currentMonth);
 
-			//Log.d(tag, "Current Month: " + " " + currentMonthName + " having " + daysInMonth + " days.");
+			
 
 			// Gregorian Calendar : MINUS 1, set to FIRST OF MONTH
 			GregorianCalendar cal = new GregorianCalendar(yy, currentMonth, 1);
-			//Log.d(tag, "Gregorian Calendar:= " + cal.getTime().toString());
+			
 
 			if (currentMonth == 11) {
 				prevMonth = currentMonth - 1;
@@ -381,22 +375,18 @@ public class TabEvent extends Activity {
 				nextMonth = 0;
 				prevYear = yy;
 				nextYear = yy + 1;
-				//Log.d(tag, "*->PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
-			}
-			else if (currentMonth == 0) {
+			} else if (currentMonth == 0) {
 				prevMonth = 11;
 				prevYear = yy - 1;
 				nextYear = yy;
 				daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
 				nextMonth = 1;
-				//Log.d(tag, "**--> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 			} else {
 				prevMonth = currentMonth - 1;
 				nextMonth = currentMonth + 1;
 				nextYear = yy;
 				prevYear = yy;
 				daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
-				//Log.d(tag, "***---> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 			}
 
 			// Compute how much to leave before before the first day of the
@@ -469,7 +459,6 @@ public class TabEvent extends Activity {
 
 			// ACCOUNT FOR SPACING
 
-			//Log.d(tag, "Current Day: " + getCurrentDayOfMonth());
 			String[] day_color = list.get(position).split("-");
 			String theday = day_color[0];
 			String themonth = day_color[2];
@@ -478,7 +467,6 @@ public class TabEvent extends Activity {
 			// Set the Day GridCell
 			gridcell.setText(theday);
 			gridcell.setTag(theday + "-" + themonth + "-" + theyear);
-			//Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-" + theyear);
 
 			
 			if (day_color[1].equals("GREY")) {
