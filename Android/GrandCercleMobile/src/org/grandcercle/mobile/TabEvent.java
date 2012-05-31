@@ -3,6 +3,7 @@ package org.grandcercle.mobile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabEvent extends Activity {
 	
@@ -89,7 +93,6 @@ public class TabEvent extends Activity {
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
-		Log.d(tag, "Calendar Instance:= " + "Month: " + month + " " + "Year: " + year);
 
 		selectedDayMonthYearButton = (Button) this.findViewById(R.id.selectedDayMonthYear);
 		//selectedDayMonthYearButton.setText("");
@@ -112,9 +115,6 @@ public class TabEvent extends Activity {
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
 		adapter.notifyDataSetChanged();
 		calendarView.setAdapter(adapter);
-		
-		
-		
 	}
 	
 	public static Set<String> getSetDates() {
@@ -122,12 +122,11 @@ public class TabEvent extends Activity {
 	}
 
 	
-	private void setGridCellAdapterToDate(int month, int year)
-	{
+	private void setGridCellAdapterToDate(int month, int year) {
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
-		_calendar.set(year, month - 1, _calendar.get(Calendar.DAY_OF_MONTH));
+		_calendar.set(year,month-1,1);
 		SimpleDateFormat s;
-		s = new SimpleDateFormat("MMMM yyyy",Locale.FRANCE)	;	
+		s = new SimpleDateFormat("MMMM yyyy",Locale.FRANCE)	;
 		currentMonth.setText(s.format(_calendar.getTime()));
 		adapter.notifyDataSetChanged();
 		calendarView.setAdapter(adapter);
@@ -145,7 +144,6 @@ public class TabEvent extends Activity {
 				} else {
 					month--;
 				}
-				//Log.d(tag, "Setting Prev Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
 				setGridCellAdapterToDate(month, year);
 			}
 			if (v == nextMonth) {
@@ -155,7 +153,6 @@ public class TabEvent extends Activity {
 				} else {
 					month++;
 				}
-				//Log.d(tag, "Setting Next Month in GridCellAdapter: " + "Month: " + month + " Year: " + year);
 				setGridCellAdapterToDate(month, year);
 			}
 		}
@@ -228,7 +225,6 @@ public class TabEvent extends Activity {
 		private int currentWeekDay;
 		private Button gridcell;
 		private TextView num_events_per_day;
-		private final HashMap eventsPerMonthMap;
 		private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
 		private Set<String> dateEvents;
 		private String currentDayNumber;
@@ -245,7 +241,6 @@ public class TabEvent extends Activity {
 			this.year = year;
 			this.dateEvents = getSetDates();
 
-			//Log.d(tag, "==> Passed in Date FOR Month: " + month + " " + "Year: " + year);
 			Calendar calendar = Calendar.getInstance();
 			setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
 			setCurrentMonth(calendar.get(Calendar.MONTH));
@@ -265,16 +260,9 @@ public class TabEvent extends Activity {
 				currentYearNumber = "0"+currentYearNumber;
 			}
 			currentDate = currentDayNumber+"-"+currentMonthNumber+"-"+currentYearNumber;
-			
-			//Log.d(tag, "New Calendar:= " + calendar.getTime().toString());
-			//Log.d(tag, "CurrentDayOfWeek :" + getCurrentWeekDay());
-			//Log.d(tag, "CurrentDayOfMonth :" + getCurrentDayOfMonth());
 
 			// Print Month
 			printMonth(month, year);
-
-			// Find Number of Events
-			eventsPerMonthMap = findNumberOfEventsPerMonth(year, month);
 		}
 		
 		private String getMonthAsString(int i) {
@@ -375,11 +363,11 @@ public class TabEvent extends Activity {
 			
 			daysInMonth = getNumberOfDaysOfMonth(currentMonth);
 
-			//Log.d(tag, "Current Month: " + " " + currentMonthName + " having " + daysInMonth + " days.");
+			
 
 			// Gregorian Calendar : MINUS 1, set to FIRST OF MONTH
 			GregorianCalendar cal = new GregorianCalendar(yy, currentMonth, 1);
-			//Log.d(tag, "Gregorian Calendar:= " + cal.getTime().toString());
+			
 
 			if (currentMonth == 11) {
 				prevMonth = currentMonth - 1;
@@ -387,22 +375,18 @@ public class TabEvent extends Activity {
 				nextMonth = 0;
 				prevYear = yy;
 				nextYear = yy + 1;
-				//Log.d(tag, "*->PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
-			}
-			else if (currentMonth == 0) {
+			} else if (currentMonth == 0) {
 				prevMonth = 11;
 				prevYear = yy - 1;
 				nextYear = yy;
 				daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
 				nextMonth = 1;
-				//Log.d(tag, "**--> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 			} else {
 				prevMonth = currentMonth - 1;
 				nextMonth = currentMonth + 1;
 				nextYear = yy;
 				prevYear = yy;
 				daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
-				//Log.d(tag, "***---> PrevYear: " + prevYear + " PrevMonth:" + prevMonth + " NextMonth: " + nextMonth + " NextYear: " + nextYear);
 			}
 
 			// Compute how much to leave before before the first day of the
@@ -457,30 +441,6 @@ public class TabEvent extends Activity {
 			return dayNumber+"-"+monthNumber+"-"+yearNumber;
 		}
 
-		/**
-		 * @param year
-		 * @param month
-		 * @return
-		 */
-		private HashMap findNumberOfEventsPerMonth(int year, int month) {
-			HashMap map = new HashMap<String, Integer>();
-			// DateFormat dateFormatter2 = new DateFormat();
-			//						
-			// String day = dateFormatter2.format("dd", dateCreated).toString();
-			//
-			// if (map.containsKey(day))
-			// {
-			// Integer val = (Integer) map.get(day) + 1;
-			// map.put(day, val);
-			// }
-			// else
-			// {
-			// map.put(day, 1);
-			// }
-			return map;
-		}
-
-		
 		public long getItemId(int position) {
 			return position;
 		}
@@ -499,23 +459,14 @@ public class TabEvent extends Activity {
 
 			// ACCOUNT FOR SPACING
 
-			//Log.d(tag, "Current Day: " + getCurrentDayOfMonth());
 			String[] day_color = list.get(position).split("-");
 			String theday = day_color[0];
 			String themonth = day_color[2];
 			String theyear = day_color[3];
-			if ((!eventsPerMonthMap.isEmpty()) && (eventsPerMonthMap != null)) {
-				if (eventsPerMonthMap.containsKey(theday)) {
-						num_events_per_day = (TextView) row.findViewById(R.id.num_events_per_day);
-						Integer numEvents = (Integer) eventsPerMonthMap.get(theday);
-						num_events_per_day.setText(numEvents.toString());
-				}
-			}
 
 			// Set the Day GridCell
 			gridcell.setText(theday);
 			gridcell.setTag(theday + "-" + themonth + "-" + theyear);
-			//Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-" + theyear);
 
 			
 			if (day_color[1].equals("GREY")) {
@@ -589,6 +540,7 @@ public class TabEvent extends Activity {
 				}
 				
 				String date = day+"-"+month+"-"+year;
+				Toast t;
 				if (hashMapEvent.containsKey(date)) {
 					// diplays list of events
 					ArrayList<Event> listEvCal = hashMapEvent.get(date);
@@ -596,9 +548,18 @@ public class TabEvent extends Activity {
 					ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
 					feedListViewCal.setOnItemClickListener(clickListenerFeed);
+					if (listEvCal.size() > 1) {
+						
+						t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);
+					} else {
+						t = Toast.makeText(TabEvent.this, "1 événement pour le jour séléctionné", Toast.LENGTH_SHORT);
+					}
 				} else {
+					t = Toast.makeText(TabEvent.this, "Aucun événement pour le jour sélectionné", Toast.LENGTH_SHORT);
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(null);
 				}
+				t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 170);
+				t.show();
 			}
 		};
 
