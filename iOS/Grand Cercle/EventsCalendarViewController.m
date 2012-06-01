@@ -70,12 +70,12 @@
     
 - (UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"SmallEventCell";
+    static NSString *CellIdentifier = @"EventSmallCell";
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:CellIdentifier];
     
     
     if (cell == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"SmallEventCell" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"EventSmallCell" owner:self options:nil];
         cell = eventCell;
         self.eventCell = nil;
     }
@@ -122,9 +122,7 @@
 	// this function sets up dataArray & dataDictionary
 	// dataArray: has boolean markers for each day to pass to the calendar view (via the delegate function)
 	// dataDictionary: has items that are associated with date keys (for tableview)
-	
-    NSLog(@"######## enter generate data");
-    
+	    
     NSMutableArray *theDates = [[EvenementsParser instance] arrayEvenements];
 //	self.dataArray = [NSMutableArray array];
 	self.dataDictionary = [NSMutableDictionary dictionary];

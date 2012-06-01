@@ -15,6 +15,7 @@
 @implementation EventsTableViewController
 
 @synthesize eventCell, eventArray, dico, tView, urlArray, urlArray2, imageCache, imageCache2;
+@synthesize superController;
 
 //- (id)initWithStyle:(UITableViewStyle)style {
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -265,14 +266,17 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
-//    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//    detailEventController.event = selectedEvent;
-//    [self.navigationController pushViewController:detailEventController animated:YES];
-//
-//    [detailEventController release];
-//    detailEventController = nil;
+    
+    NSLog(@"event selected");
+    Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
+    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        
+    
+    detailEventController.event = selectedEvent;
+    [self.superController.navigationController pushViewController:detailEventController animated:YES];
+
+    [detailEventController release];
+    detailEventController = nil;
 }
 
 @end

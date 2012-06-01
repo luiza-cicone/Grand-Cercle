@@ -83,12 +83,13 @@ int kNumberOfPages = 3;
     
     UIViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
-        if (page == 1) {
+        if (page == 0) {
             controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
+            [(EventsTableViewController *)controller setSuperController: self];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }
-        else if (page == 0){
+        else if (page == 1){
             controller = [[EventsCalendarViewController alloc] init];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];

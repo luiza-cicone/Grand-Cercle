@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <TapkuLibrary/TapkuLibrary.h>
+#import "EventsViewController.h"
 
 @interface EventsTableViewController : UIViewController {
     IBOutlet UITableViewCell *eventCell;
@@ -16,6 +17,7 @@
     NSMutableArray *urlArray, *urlArray2;
     TKImageCache *imageCache, *imageCache2;
     IBOutlet UITableView *tView;
+    EventsViewController *superController;
 
 }
 
@@ -24,5 +26,5 @@
 @property (retain, nonatomic) NSMutableDictionary *dico;
 @property (retain, nonatomic) TKImageCache *imageCache, *imageCache2;
 @property (retain, nonatomic) IBOutlet UITableView *tView;
-
+@property (retain, nonatomic) EventsViewController *superController;
 @end
