@@ -22,6 +22,8 @@
 		04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */; };
 		04F4CBD71578C58000A49037 /* cellNewsDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD61578C58000A49037 /* cellNewsDescription.xib */; };
 		04F4CBD91578C73300A49037 /* NewsTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD81578C73300A49037 /* NewsTopCell.xib */; };
+		04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBDF157915C000A49037 /* EventFourNextViewController.m */; };
+		04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */; };
 		255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 255C809A15740E0100E6ECC3 /* Localizable.strings */; };
 		255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C809E15740EE900E6ECC3 /* DealsViewController.xib */; };
 		255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80A015740EE900E6ECC3 /* InfosViewController.xib */; };
@@ -100,8 +102,8 @@
 
 /* Begin PBXFileReference section */
 		04060ABC1577AF6700852A3D /* EventsTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableView.xib; sourceTree = "<group>"; };
-		04060ABE1577B50B00852A3D /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
-		04060ABF1577B50B00852A3D /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		04060ABE1577B50B00852A3D /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailViewController.h; path = ../EventDetailViewController.h; sourceTree = "<group>"; };
+		04060ABF1577B50B00852A3D /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailViewController.m; path = ../EventDetailViewController.m; sourceTree = "<group>"; };
 		0435F4871574EF29009F23CD /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		0435F4881574EF29009F23CD /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		0435F48B1574EFF3009F23CD /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
@@ -119,10 +121,13 @@
 		047EB1F3157609D200F2F59B /* BonsPlansParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlansParser.m; sourceTree = "<group>"; };
 		047EB1F515761A7300F2F59B /* BonPlanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BonPlanCell.xib; sourceTree = "<group>"; };
 		04F4CBD11578B6C400A49037 /* EventDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionCell.xib; sourceTree = "<group>"; };
-		04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
-		04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
-		04F4CBD61578C58000A49037 /* cellNewsDescription.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cellNewsDescription.xib; sourceTree = "<group>"; };
-		04F4CBD81578C73300A49037 /* NewsTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsTopCell.xib; sourceTree = "<group>"; };
+		04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailViewController.h; path = ../NewsDetailViewController.h; sourceTree = "<group>"; };
+		04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailViewController.m; path = ../NewsDetailViewController.m; sourceTree = "<group>"; };
+		04F4CBD61578C58000A49037 /* cellNewsDescription.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = cellNewsDescription.xib; path = ../cellNewsDescription.xib; sourceTree = "<group>"; };
+		04F4CBD81578C73300A49037 /* NewsTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsTopCell.xib; path = ../NewsTopCell.xib; sourceTree = "<group>"; };
+		04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventFourNextViewController.h; sourceTree = "<group>"; };
+		04F4CBDF157915C000A49037 /* EventFourNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventFourNextViewController.m; sourceTree = "<group>"; };
+		04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventFourNextViewController.xib; sourceTree = "<group>"; };
 		255C809B15740E0100E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Grand Cercle/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		255C809F15740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DealsViewController.xib; sourceTree = "<group>"; };
 		255C80A115740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfosViewController.xib; sourceTree = "<group>"; };
@@ -229,12 +234,9 @@
 		2595EA8E1573FA9000CA27B3 = {
 			isa = PBXGroup;
 			children = (
-				04060ABE1577B50B00852A3D /* EventDetailViewController.h */,
-				04060ABF1577B50B00852A3D /* EventDetailViewController.m */,
-				04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */,
-				04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */,
-				04F4CBD61578C58000A49037 /* cellNewsDescription.xib */,
-				04F4CBD81578C73300A49037 /* NewsTopCell.xib */,
+				04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */,
+				04F4CBDF157915C000A49037 /* EventFourNextViewController.m */,
+				04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */,
 				2595EAA31573FA9000CA27B3 /* Grand Cercle */,
 				2595EACF1573FA9000CA27B3 /* Grand CercleTests */,
 				2595EA9C1573FA9000CA27B3 /* Frameworks */,
@@ -279,6 +281,10 @@
 				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
 				25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */,
 				25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */,
+				04060ABE1577B50B00852A3D /* EventDetailViewController.h */,
+				04060ABF1577B50B00852A3D /* EventDetailViewController.m */,
+				04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */,
+				04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */,
 				2595EAAF1573FA9000CA27B3 /* EventsViewController.h */,
 				2595EAB01573FA9000CA27B3 /* EventsViewController.m */,
 				2595EAB61573FA9000CA27B3 /* NewsViewController.h */,
@@ -351,6 +357,8 @@
 				2595EAC01573FA9000CA27B3 /* NewsViewController.xib */,
 				255C80AA157411AD00E6ECC3 /* NewsCell.xib */,
 				047EB1DA1575383800F2F59B /* EventTop.xib */,
+				04F4CBD61578C58000A49037 /* cellNewsDescription.xib */,
+				04F4CBD81578C73300A49037 /* NewsTopCell.xib */,
 				04F4CBD11578B6C400A49037 /* EventDescriptionCell.xib */,
 				047EB1F515761A7300F2F59B /* BonPlanCell.xib */,
 				2562173E1576A2AC00667661 /* EventCell.xib */,
@@ -509,6 +517,7 @@
 				04F4CBD21578B6C400A49037 /* EventDescriptionCell.xib in Resources */,
 				04F4CBD71578C58000A49037 /* cellNewsDescription.xib in Resources */,
 				04F4CBD91578C73300A49037 /* NewsTopCell.xib in Resources */,
+				04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +574,7 @@
 				04060AC01577B50B00852A3D /* EventDetailViewController.m in Sources */,
 				25ECD56015775F2A006E4652 /* DemoCalendarMonth.m in Sources */,
 				04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */,
+				04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
