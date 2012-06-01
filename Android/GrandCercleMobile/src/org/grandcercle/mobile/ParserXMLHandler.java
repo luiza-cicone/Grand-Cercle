@@ -6,7 +6,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public abstract class ParserXMLHandler extends DefaultHandler {
 
-	// nom des tags XML
 	protected final String NODE = "node";
 	protected final String TITLE = "title";
 	protected final String DESCRIPTION = "description";

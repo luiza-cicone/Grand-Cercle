@@ -9,19 +9,20 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
-	private ArrayList<String> listGroup;
+	private static ArrayList<String> listCercles;
+	private static ArrayList<String> listClubs;
 	SharedPreferences pref;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		//setContentView(R.layout.main);
 		
-		 	
+		listCercles = ContainerData.getListCercles();
+		listClubs = ContainerData.getListClubs();
 		//addPreferencesFromResource(R.xml.prefs);
 		//pref = getPreferenceManager().getSharedPreferences();
 		//pref.registerOnSharedPreferenceChangeListener(this);
@@ -33,16 +34,12 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 	
 	
 
-	private PreferenceScreen createPreferenceHierarchy() {
-		// TODO Auto-generated method stub
-		listGroup = new ArrayList<String>();
-        listGroup.add("Ense3");
-        listGroup.add("Ensimag");
+	private PreferenceScreen createPreferenceHierarchy() { 
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
         inlinePrefCat.setTitle("Liste préférence");
         root.addPreference(inlinePrefCat);
-        Iterator<String> it = listGroup.iterator();
+        Iterator<String> it = listCercles.iterator();
         String Temp;
         while (it.hasNext()) {
 	        CheckBoxPreference checkboxPref = new CheckBoxPreference(this);
