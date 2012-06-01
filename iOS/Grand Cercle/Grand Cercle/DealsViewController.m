@@ -33,7 +33,7 @@
         [urlArray addObject:[bp logo]];
     }
 	
-	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"logo"];
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"logos"];
 	imageCache.notificationName = @"newLogoCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
@@ -58,7 +58,7 @@
         imageView = (UIImageView *)[cell viewWithTag:1];
     	if(imageView.image == nil && tag == index){
             
-            imageView.image = [dict objectForKey:@"logo"];
+            imageView.image = [dict objectForKey:@"image"];
             [cell setNeedsLayout];
         }
     }

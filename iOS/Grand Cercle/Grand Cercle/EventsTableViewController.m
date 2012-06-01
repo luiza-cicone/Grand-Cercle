@@ -9,21 +9,22 @@
 #import "EventsTableViewController.h"
 #import "Evenements.h"
 #import "EvenementsParser.h"
-//#import "EventDetailViewController.h"
+#import "EventDetailViewController.h"
 
 
 @implementation EventsTableViewController
 
 @synthesize eventCell, eventArray, dico, tView, urlArray, urlArray2, imageCache, imageCache2;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+//- (id)initWithStyle:(UITableViewStyle)style {
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }    
     
     eventArray = [[EvenementsParser instance] arrayEvenements];
+    
     
     //configure sections
     dico = [[NSMutableDictionary alloc] init];
@@ -70,7 +71,7 @@
 	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"logoEvent"];
 	imageCache2.notificationName = @"newLogoEventCache";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved2:) name:@"newLogoEventCache" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoEventCache" object:nil];
 
     return self;
 
@@ -83,42 +84,21 @@
     
     NSArray *paths = [self.tView indexPathsForVisibleRows];
     
-    
-    
     for(NSIndexPath *path in paths) {
         
-
         NSInteger index = path.row;
-        
-        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
-        UIImageView *imageView;
-        imageView = (UIImageView *)[cell viewWithTag:1];
-    	if(imageView.image == nil && tag == index){
-            
-            imageView.image = [dict objectForKey:@"imageSmall"];
-            [cell setNeedsLayout];
-        }
-    }
-}
 
-- (void) newImageRetrieved2:(NSNotification*)sender{
-    
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    
-    NSArray *paths = [self.tView indexPathsForVisibleRows];
-    
-    
-    for(NSIndexPath *path in paths) {
-        
-    	NSInteger index = path.row;
-        
         UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
         UIImageView *imageView;
-        imageView = (UIImageView *)[cell viewWithTag:1];
+        if ([[(NSNotification *) sender name] isEqualToString:@"newLogoEventCache"]) {
+            imageView = (UIImageView *)[cell viewWithTag:6];
+        }
+        else {
+            imageView = (UIImageView *)[cell viewWithTag:1];
+        }
     	if(imageView.image == nil && tag == index){
             
-            imageView.image = [dict objectForKey:@"logoEvent"];
+            imageView.image = [dict objectForKey:@"image"];
             [cell setNeedsLayout];
         }
     }
@@ -285,11 +265,10 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"EVENEMENT SELECTIONNE");
 //    
 //    Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
-//    EventDetailViewController *detailEventController = [[EventsDetailViewController alloc] initWithNibName:@"EventsDetailView" bundle:[NSBundle mainBundle]];
-//    detailEventController.selectedEvent = selectedEvent;
+//    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//    detailEventController.event = selectedEvent;
 //    [self.navigationController pushViewController:detailEventController animated:YES];
 //
 //    [detailEventController release];

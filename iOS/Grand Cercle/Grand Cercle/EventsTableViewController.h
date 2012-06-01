@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <TapkuLibrary/TapkuLibrary.h>
 
-@interface EventsTableViewController : UINavigationController {
+@interface EventsTableViewController : UIViewController {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
     NSMutableDictionary *eventDico;

@@ -7,7 +7,7 @@
 //
 
 #import "EventsViewController.h"
-#import "DemoCalendarMonth.h"
+#import "EventsCalendarViewController.h"
 #import "EventsTableViewController.h"
 
 @interface EventsViewController ()
@@ -83,21 +83,21 @@ int kNumberOfPages = 3;
     
     UIViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
-//        if (page == 1) {
-//            controller = [[EventsTableViewController alloc] initWithStyle:UITableViewStylePlain];
-//            [viewControllers replaceObjectAtIndex:page withObject:controller];
-//            [controller release];
-//        }
-//        else if (page == 0){
-            controller = [[DemoCalendarMonth alloc] init];
+        if (page == 1) {
+            controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
-//        }
-//        else {
-//            controller = [[EventsTableViewController alloc] initWithStyle:UITableViewStylePlain];
-//            [viewControllers replaceObjectAtIndex:page withObject:controller];
-//            [controller release];
-//        }
+        }
+        else if (page == 0){
+            controller = [[EventsCalendarViewController alloc] init];
+            [viewControllers replaceObjectAtIndex:page withObject:controller];
+            [controller release];
+        }
+        else {
+            controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
+            [viewControllers replaceObjectAtIndex:page withObject:controller];
+            [controller release];
+        }
 
     }
     

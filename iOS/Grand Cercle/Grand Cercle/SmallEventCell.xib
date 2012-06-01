@@ -221,7 +221,7 @@
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">DemoCalendarMonth</string>
+				<string key="-1.CustomClassName">EventsCalendarViewController</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -240,7 +240,7 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">DemoCalendarMonth</string>
+					<string key="className">EventsCalendarViewController</string>
 					<string key="superclassName">TKCalendarMonthTableViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">eventCell</string>
@@ -255,7 +255,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/DemoCalendarMonth.h</string>
+						<string key="minorKey">./Classes/EventsCalendarViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
