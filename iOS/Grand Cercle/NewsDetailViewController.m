@@ -30,6 +30,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = news.group;
 }
 
 - (void)viewDidUnload
@@ -52,14 +53,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 1;
 }
@@ -94,22 +93,22 @@
             [label setText:[news pubDate]];
             break;
             
-        case 1:
-            CellIdentifier = @"Cercle";
-            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            [cell.textLabel setText : news.group];
-            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
-            [cell.imageView setImage: img];
-            break;
+//        case 1:
+//            CellIdentifier = @"Cercle";
+//            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//            if (!cell) {
+//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//            }
+//            [cell.textLabel setText : news.group];
+//            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
+//            [cell.imageView setImage: img];
+//            break;
             
-        case 2:
-            CellIdentifier = @"cellNewsDescription";
+        case 1:
+            CellIdentifier = @"NewsDescription";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"cellNewsDescription" owner:self options:nil];
+                [[NSBundle mainBundle] loadNibNamed:@"NewsDescription" owner:self options:nil];
                 cell = cellNewsDescription;
                 self.cellNewsDescription = nil;
             }
@@ -132,11 +131,11 @@
             return 121;
             break;
             
+//        case 1 :
+//            return 44;
+//            break;
+//            
         case 1 :
-            return 44;
-            break;
-            
-        case 2 :
             return 165;
             break;
             
