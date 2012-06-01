@@ -18,6 +18,7 @@
 		047EB1F11576099400F2F59B /* BonsPlans.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F01576099400F2F59B /* BonsPlans.m */; };
 		047EB1F4157609D200F2F59B /* BonsPlansParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F3157609D200F2F59B /* BonsPlansParser.m */; };
 		047EB1F615761A7300F2F59B /* BonPlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047EB1F515761A7300F2F59B /* BonPlanCell.xib */; };
+		04F4CBD21578B6C400A49037 /* EventDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD11578B6C400A49037 /* EventDescriptionCell.xib */; };
 		255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 255C809A15740E0100E6ECC3 /* Localizable.strings */; };
 		255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C809E15740EE900E6ECC3 /* DealsViewController.xib */; };
 		255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80A015740EE900E6ECC3 /* InfosViewController.xib */; };
@@ -114,6 +115,7 @@
 		047EB1F2157609D200F2F59B /* BonsPlansParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonsPlansParser.h; sourceTree = "<group>"; };
 		047EB1F3157609D200F2F59B /* BonsPlansParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlansParser.m; sourceTree = "<group>"; };
 		047EB1F515761A7300F2F59B /* BonPlanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BonPlanCell.xib; sourceTree = "<group>"; };
+		04F4CBD11578B6C400A49037 /* EventDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionCell.xib; sourceTree = "<group>"; };
 		255C809B15740E0100E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Grand Cercle/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		255C809F15740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DealsViewController.xib; sourceTree = "<group>"; };
 		255C80A115740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfosViewController.xib; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				2595EAC01573FA9000CA27B3 /* NewsViewController.xib */,
 				255C80AA157411AD00E6ECC3 /* NewsCell.xib */,
 				047EB1DA1575383800F2F59B /* EventTop.xib */,
+				04F4CBD11578B6C400A49037 /* EventDescriptionCell.xib */,
 				047EB1F515761A7300F2F59B /* BonPlanCell.xib */,
 				2562173E1576A2AC00667661 /* EventCell.xib */,
 				25ECD56115777F81006E4652 /* SmallEventCell.xib */,
@@ -492,6 +495,7 @@
 				256217401576A2AC00667661 /* EventCell.xib in Resources */,
 				04060ABD1577AF6700852A3D /* EventsTableView.xib in Resources */,
 				25ECD56215777F81006E4652 /* SmallEventCell.xib in Resources */,
+				04F4CBD21578B6C400A49037 /* EventDescriptionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

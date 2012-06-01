@@ -11,8 +11,10 @@
 
 @interface EventDetailViewController : UITableViewController {
     Evenements *event;
+    IBOutlet UITableViewCell *cellEventDescription;
+    IBOutlet UITableViewCell *cellEventTop;
 }
 
 @property (retain, nonatomic) Evenements *event;
-
+@property (retain, nonatomic) IBOutlet UITableViewCell *cellEventTop, *cellEventDescription;
 @end

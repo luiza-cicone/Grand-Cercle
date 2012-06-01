@@ -7,10 +7,10 @@
 //
 
 #import "EventDetailViewController.h"
-
+#import "NSString+HTML.h"
 
 @implementation EventDetailViewController
-@synthesize event;
+@synthesize event, cellEventTop, cellEventDescription;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,6 +34,10 @@
 
 - (void)viewDidUnload
 {
+    [cellEventTop release];
+    cellEventTop = nil;
+    [cellEventDescription release];
+    cellEventDescription = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -65,6 +69,30 @@
     
     switch (indexPath.section) {
         case 0:
+            CellIdentifier = @"EventTop";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                [[NSBundle mainBundle] loadNibNamed:@"EventTop" owner:self options:nil];
+                cell = cellEventTop;
+                self.cellEventTop = nil;
+            }
+            
+            UIImageView *imageView;
+            imageView = (UIImageView *)[cell viewWithTag:1];
+            
+            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[event image]]]];
+            [imageView setImage:myimage];
+            
+            UILabel *label;
+            label = (UILabel *)[cell viewWithTag:2];
+            [label setText: [event title]];
+            
+            label = (UILabel *)[cell viewWithTag:3];
+            [label setText:[event date]];
+            
+            label = (UILabel *)[cell viewWithTag:4];
+            [label setText:[[[event place] stringByAppendingString: @" - "] stringByAppendingString: event.time]];
+            
             break;
             
         case 1:
@@ -79,23 +107,44 @@
             break;
             
         case 2:
-            CellIdentifier = @"Description";
+            CellIdentifier = @"EventDescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell){
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            if (!cell) {
+                [[NSBundle mainBundle] loadNibNamed:@"EventDescriptionCell" owner:self options:nil];
+                cell = cellEventDescription;
+                self.cellEventDescription = nil;
             }
-            [cell.textLabel setText:event.description];
+            
+            UITextView *textView;
+            textView = (UITextView *)[cell viewWithTag:1];
+            [textView setText: [[event description] stringByConvertingHTMLToPlainText]];
             break;
-            
-            
             
         default:
             break;
     }
-    
-    // Configure the cell...
-    
+        
     return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0 :
+            return 121;
+            break;
+        
+        case 1 :
+            return 44;
+            break;
+            
+        case 2 :
+            return 155;
+            break;
+            
+        default :
+            return 44;
+            break;
+    }
 }
 
 /*
@@ -151,4 +200,9 @@
      */
 }
 
+- (void)dealloc {
+    [cellEventTop release];
+    [cellEventDescription release];
+    [super dealloc];
+}
 @end
