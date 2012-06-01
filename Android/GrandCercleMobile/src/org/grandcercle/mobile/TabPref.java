@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
@@ -16,9 +17,12 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		addPreferencesFromResource(R.xml.prefs);
 		pref = getPreferenceManager().getSharedPreferences();
 		pref.registerOnSharedPreferenceChangeListener(this);
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		String myString = preferences.getString("maPref", "");
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		Toast.makeText(this, key + ":" + sharedPreferences.getString(key, ""), Toast.LENGTH_LONG).show();
+		ContainerData.parseFiles();
+		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
 }

@@ -18,7 +18,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     if (self) {
         // Custom initialization
     }    

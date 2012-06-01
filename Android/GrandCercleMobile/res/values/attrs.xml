@@ -3,5 +3,10 @@
     <declare-styleable name="DragableSpace">
         <attr name="default_screen" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="ListPreferenceMultiSelect">
+    	<attr format="string" name="checkAll" />
+    	<attr format="string" name="separator" />
+    </declare-styleable>
+
         
 </resources>

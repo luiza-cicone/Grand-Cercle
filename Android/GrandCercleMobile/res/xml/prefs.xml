@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     
- 	<PreferenceScreen android:title="ecran 1">
- 	    <PreferenceCategory android:title="Categorie 1">
- 	         <EditTextPreference android:title="EditText 2" android:key="edit2"/>
- 	         <CheckBoxPreference android:title="CheckBox" android:key="check"
- 	             android:summaryOn="On"
- 	             android:summaryOff="Off"
- 	             />
- 	         <ListPreference android:title="List" android:key="list" android:summary="List summary"
- 	             android:entries="@array/prefentries"
- 	             android:entryValues="@array/prefvalues"/>
- 	         <RingtonePreference android:title="Ringtone" android:key="ringtone" android:summary="Ringtone summary"/>
- 	        
- 	    </PreferenceCategory >
- 	</PreferenceScreen>
- 	
- 	<PreferenceScreen android:title="ecran 2">
- 	    <PreferenceCategory android:title="Categorie 1">
- 	        <EditTextPreference android:title="EditText 1" android:key="edit2"></EditTextPreference>
+	
+		<org.grandcercle.mobile.ListPreferenceMultiSelect 
+		    android:key="@string/prefList"
+		    android:title="Centres d'interêts"
+		    android:summary="Choisis les associations pour lesquelles tu souhaites être informé"
+		    android:entries="@array/prefListentries"
+		    android:entryValues="@array/prefListvalues"/>
+
+	 
+ 	<PreferenceScreen android:title="Design">
+ 	    <PreferenceCategory android:title="Couleur de fond">
+ 	        <ListPreference
+                        android:title="Liste Preference"
+                        android:summary="This preference allows to select an item in a array"
+                        android:key="listPref"
+                        android:defaultValue="digiGreen"
+                        android:entries="@array/listArray"
+                        android:entryValues="@array/listValues" />
  	    </PreferenceCategory>
  	</PreferenceScreen>
 </PreferenceScreen>
