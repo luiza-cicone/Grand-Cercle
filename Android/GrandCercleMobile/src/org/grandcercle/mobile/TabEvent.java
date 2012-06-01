@@ -53,51 +53,51 @@ public class TabEvent extends Activity {
 
 		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
+		hashMapEvent = ContainerData.getEventInHashMap();
 		
 		// Attributs de la liste
-
-		lea = new ListEventAdapter(this,listEvent);
-		ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-		((ListView)findViewById(R.id.listFeed)).setAdapter(lea);
-		feedListView.setOnItemClickListener(clickListenerFeed);
-		
-		// Attributs des 4 prochains evenements
-		// tableau des date* a attribuer
-		ArrayList<TextView> dates = new ArrayList<TextView>(4);
-		dates.add(0,(TextView)findViewById(R.id.date0));
-		dates.add(1,(TextView)findViewById(R.id.date1));
-		dates.add(2,(TextView)findViewById(R.id.date2));
-		dates.add(3,(TextView)findViewById(R.id.date3));
-		// tableau des image* a attribuer
-		images = new ArrayList<ImageView>(4);
-		images.add(0,(ImageView)findViewById(R.id.image0));
-		images.add(1,(ImageView)findViewById(R.id.image1));
-		images.add(2,(ImageView)findViewById(R.id.image2));
-		images.add(3,(ImageView)findViewById(R.id.image3));
-		
-		int eventNumber = 0;
-		Event currentEvent;
-		while (eventNumber < 4 && eventNumber < listEvent.size()) {
-			currentEvent = listEvent.get(eventNumber);
-			dates.get(eventNumber).setText(currentEvent.getDate());
-			UrlImageViewHelper.setUrlDrawable(images.get(eventNumber),currentEvent.getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_THREE_DAYS);
-			images.get(eventNumber).setOnClickListener(imageClicked);
-			eventNumber ++;
+		if (listEvent != null) {
+			lea = new ListEventAdapter(this,listEvent);
+			ListView feedListView = ((ListView)findViewById(R.id.listFeed));
+			((ListView)findViewById(R.id.listFeed)).setAdapter(lea);
+			feedListView.setOnItemClickListener(clickListenerFeed);
+			
+			// Attributs des 4 prochains evenements
+			// tableau des date* a attribuer
+			ArrayList<TextView> dates = new ArrayList<TextView>(4);
+			dates.add(0,(TextView)findViewById(R.id.date0));
+			dates.add(1,(TextView)findViewById(R.id.date1));
+			dates.add(2,(TextView)findViewById(R.id.date2));
+			dates.add(3,(TextView)findViewById(R.id.date3));
+			// tableau des image* a attribuer
+			images = new ArrayList<ImageView>(4);
+			images.add(0,(ImageView)findViewById(R.id.image0));
+			images.add(1,(ImageView)findViewById(R.id.image1));
+			images.add(2,(ImageView)findViewById(R.id.image2));
+			images.add(3,(ImageView)findViewById(R.id.image3));
+			
+			int eventNumber = 0;
+			Event currentEvent;
+			while (eventNumber < 4 && eventNumber < listEvent.size()) {
+				currentEvent = listEvent.get(eventNumber);
+				dates.get(eventNumber).setText(currentEvent.getDate());
+				UrlImageViewHelper.setUrlDrawable(images.get(eventNumber),currentEvent.getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_THREE_DAYS);
+				images.get(eventNumber).setOnClickListener(imageClicked);
+				eventNumber ++;
+			}
+			
+			setDates = hashMapEvent.keySet();
+		} else {
+			Toast.makeText(TabEvent.this,"Pas d'événements !",Toast.LENGTH_LONG).show();
 		}
-			
-		
-			
 		// Attributs du calendrier
-		hashMapEvent = ContainerData.getEventInHashMap();
-		setDates = hashMapEvent.keySet();
-
+		
 		
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
 
 		selectedDayMonthYearButton = (Button) this.findViewById(R.id.selectedDayMonthYear);
-		//selectedDayMonthYearButton.setText("");
 
 		prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
 		prevMonth.setOnClickListener(prevORnextMonthClicked);
@@ -244,7 +244,6 @@ public class TabEvent extends Activity {
 			
 			this.dateEvents = getSetDates();
 			
-
 			Calendar calendar = Calendar.getInstance();
 			setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
 			setCurrentMonth(calendar.get(Calendar.MONTH));
@@ -266,8 +265,7 @@ public class TabEvent extends Activity {
 			currentDate = currentDayNumber+"-"+currentMonthNumber+"-"+currentYearNumber;
 
 			// Print Month
-			printMonth(month, year);
-
+			printMonth(month, year);	
 		}
 		
 		private String getMonthAsString(int i) {
@@ -416,16 +414,25 @@ public class TabEvent extends Activity {
 					cour = true;
 				}
 				
-				if (cour && dateEvents.contains(date)) {
-					list.add(String.valueOf(i) + "-RED" + "-" + getMonthAsString(currentMonth) + "-" + yy);
-					cour = false;
-				} else if (cour) {
-					list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
-					cour = false;
-				} else if (dateEvents.contains(date)) {
-					list.add(String.valueOf(i) + "-ORANGE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+				if (dateEvents != null) {
+					if (cour && dateEvents.contains(date)) {
+						list.add(String.valueOf(i) + "-RED" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+						cour = false;
+					} else if (cour) {
+						list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+						cour = false;
+					} else if (dateEvents.contains(date)) {
+						list.add(String.valueOf(i) + "-ORANGE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					} else {
+						list.add(String.valueOf(i) + "-WHITE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					}
 				} else {
-					list.add(String.valueOf(i) + "-WHITE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					if (cour) {
+						list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+						cour = false;
+					} else {
+						list.add(String.valueOf(i) + "-WHITE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					}
 				}
 			}
 			// Leading Month days
@@ -548,21 +555,25 @@ public class TabEvent extends Activity {
 				
 				String date = day+"-"+month+"-"+year;
 				Toast t;
-				if (hashMapEvent.containsKey(date)) {
-					// diplays list of events
-					ArrayList<Event> listEvCal = hashMapEvent.get(date);
-					ListEventAdapter listCalAdapter = new ListEventAdapter(view.getContext(),listEvCal);
-					ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
-					((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
-					feedListViewCal.setOnItemClickListener(clickListenerFeed);
-					if (listEvCal.size() > 1) {
-						t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);
+				if (dateEvents != null) {
+					if (hashMapEvent.containsKey(date)) {
+						// diplays list of events
+						ArrayList<Event> listEvCal = hashMapEvent.get(date);
+						ListEventAdapter listCalAdapter = new ListEventAdapter(view.getContext(),listEvCal);
+						ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
+						((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
+						feedListViewCal.setOnItemClickListener(clickListenerFeed);
+						if (listEvCal.size() > 1) {
+							t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);
+						} else {
+							t = Toast.makeText(TabEvent.this, "1 événement pour le jour séléctionné", Toast.LENGTH_SHORT);
+						}
 					} else {
-						t = Toast.makeText(TabEvent.this, "1 événement pour le jour séléctionné", Toast.LENGTH_SHORT);
+						t = Toast.makeText(TabEvent.this, "Aucun événement pour le jour sélectionné", Toast.LENGTH_SHORT);
+						((ListView)findViewById(R.id.listFeedDay)).setAdapter(null);
 					}
 				} else {
 					t = Toast.makeText(TabEvent.this, "Aucun événement pour le jour sélectionné", Toast.LENGTH_SHORT);
-					((ListView)findViewById(R.id.listFeedDay)).setAdapter(null);
 				}
 				t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 170);
 				t.show();
