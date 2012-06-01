@@ -55,6 +55,7 @@ public class TabEvent extends Activity {
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		
 		// Attributs de la liste
+
 		lea = new ListEventAdapter(this,listEvent);
 		ListView feedListView = ((ListView)findViewById(R.id.listFeed));
 		((ListView)findViewById(R.id.listFeed)).setAdapter(lea);
@@ -83,10 +84,13 @@ public class TabEvent extends Activity {
 			images.get(eventNumber).setOnClickListener(imageClicked);
 			eventNumber ++;
 		}
+			
 		
+			
 		// Attributs du calendrier
 		hashMapEvent = ContainerData.getEventInHashMap();
 		setDates = hashMapEvent.keySet();
+
 		
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
@@ -108,8 +112,8 @@ public class TabEvent extends Activity {
 		nextMonth.setOnClickListener(prevORnextMonthClicked);
 
 		calendarView = (GridView) this.findViewById(R.id.calendar);
-
-		// Initialised
+	
+		
 		adapter = new GridCellAdapter(getApplicationContext(), R.id.calendar_day_gridcell, month, year);
 		adapter.notifyDataSetChanged();
 		calendarView.setAdapter(adapter);
@@ -237,7 +241,9 @@ public class TabEvent extends Activity {
 			this.list = new ArrayList<String>();
 			this.month = month;
 			this.year = year;
+			
 			this.dateEvents = getSetDates();
+			
 
 			Calendar calendar = Calendar.getInstance();
 			setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
@@ -261,6 +267,7 @@ public class TabEvent extends Activity {
 
 			// Print Month
 			printMonth(month, year);
+
 		}
 		
 		private String getMonthAsString(int i) {

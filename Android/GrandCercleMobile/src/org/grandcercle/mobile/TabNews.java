@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TabNews extends Activity {
 	 @Override
@@ -23,11 +24,16 @@ public class TabNews extends Activity {
         
         ArrayList<News> listNews = ContainerData.getNews();
         
-        ListNewsAdapter lna = new ListNewsAdapter(this,listNews);
-        ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-        ((ListView)findViewById(R.id.listFeed)).setAdapter(lna);
-        feedListView.setOnItemClickListener(clickListenerFeed);
-	 }
+        if (listNews != null) {
+        	ListNewsAdapter lna = new ListNewsAdapter(this,listNews);
+        	ListView feedListView = ((ListView)findViewById(R.id.listFeed));
+	        ((ListView)findViewById(R.id.listFeed)).setAdapter(lna);
+	        feedListView.setOnItemClickListener(clickListenerFeed);
+        } else {
+        	Toast.makeText(TabNews.this,"Pas de news !",Toast.LENGTH_LONG).show();
+        }
+        
+	}
 	 
 	 private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
