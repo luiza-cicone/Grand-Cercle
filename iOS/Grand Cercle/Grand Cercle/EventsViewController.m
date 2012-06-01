@@ -7,6 +7,7 @@
 //
 
 #import "EventsViewController.h"
+#import "DemoCalendarMonth.h"
 #import "EventsTableViewController.h"
 
 @interface EventsViewController ()
@@ -14,7 +15,7 @@
 @end
 
 @implementation EventsViewController
-@synthesize viewControllers, pageControl, scrollView;
+@synthesize viewControllers, pageControl, scrollView, myNav;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -80,11 +81,24 @@ int kNumberOfPages = 3;
     if (page < 0) return;
     if (page >= kNumberOfPages) return;
     
-    EventsTableViewController *controller = [viewControllers objectAtIndex:page];
+    UIViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
-        controller = [[EventsTableViewController alloc] init];
-        [viewControllers replaceObjectAtIndex:page withObject:controller];
-        [controller release];
+//        if (page == 1) {
+//            controller = [[EventsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+//            [viewControllers replaceObjectAtIndex:page withObject:controller];
+//            [controller release];
+//        }
+//        else if (page == 0){
+            controller = [[DemoCalendarMonth alloc] init];
+            [viewControllers replaceObjectAtIndex:page withObject:controller];
+            [controller release];
+//        }
+//        else {
+//            controller = [[EventsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+//            [viewControllers replaceObjectAtIndex:page withObject:controller];
+//            [controller release];
+//        }
+
     }
     
     if (nil == controller.view.superview) {

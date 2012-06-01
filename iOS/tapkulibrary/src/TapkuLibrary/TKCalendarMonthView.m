@@ -47,6 +47,9 @@
 
 @end
 
+int rectWidth = 40;
+int rectHeight = 34;
+
 
 #pragma mark -
 
@@ -154,8 +157,8 @@
 @end
 
 #pragma mark -
-#define dotFontSize 18.0
-#define dateFontSize 22.0
+#define dotFontSize 16.0
+#define dateFontSize 20.0
 @interface TKCalendarMonthTiles (private)
 @property (strong,nonatomic) UIImageView *selectedImageView;
 @property (strong,nonatomic) UILabel *currentDay;
@@ -244,8 +247,6 @@
 		lastDate = lastInMonth;
 	}
 	
-	
-	
 	return [NSArray arrayWithObjects:firstDate,lastDate,nil];
 }
 
@@ -277,7 +278,7 @@
 	NSArray *dates = [TKCalendarMonthTiles rangeOfDatesInMonthGrid:date startOnSunday:sunday];
 	NSUInteger numberOfDaysBetween = [[dates objectAtIndex:0] daysBetweenDate:[dates lastObject]];
 	NSUInteger scale = (numberOfDaysBetween / 7) + 1;
-	CGFloat h = 44.0f * scale;
+	CGFloat h = rectHeight * 1.0f * scale;
 	
 	
 	TKDateInformation todayInfo = [[NSDate date] dateInformation];
@@ -318,7 +319,7 @@
 	int row = index / 7;
 	int col = index % 7;
 	
-	return CGRectMake(col*46, row*44+6, 47, 45);
+	return CGRectMake(col * rectWidth, row * rectHeight + 6, rectWidth + 1, rectHeight + 1);
 }
 - (void) drawTileInRect:(CGRect)r day:(int)day mark:(BOOL)mark font:(UIFont*)f1 font2:(UIFont*)f2{
 	
@@ -347,7 +348,7 @@
 	
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	UIImage *tile = [UIImage imageWithContentsOfFile:TKBUNDLE(@"TapkuLibrary.bundle/Images/calendar/Month Calendar Date Tile.png")];
-	CGRect r = CGRectMake(0, 0, 46, 44);
+	CGRect r = CGRectMake(0, 0, rectWidth, rectHeight);
 	CGContextDrawTiledImage(context, r, tile.CGImage);
 	
 	if(today > 0){
@@ -456,8 +457,8 @@
 	}
 	
 	CGRect r = self.selectedImageView.frame;
-	r.origin.x = (column*46);
-	r.origin.y = (row*44)-1;
+	r.origin.x = (column*rectWidth);
+	r.origin.y = (row*rectHeight)-1;
 	self.selectedImageView.frame = r;
 	
 	
@@ -486,10 +487,10 @@
 	CGPoint p = [touch locationInView:self];
 	if(p.y > self.bounds.size.height || p.y < 0) return;
 	
-	int column = p.x / 46, row = p.y / 44;
+	int column = p.x / rectWidth, row = p.y / rectHeight;
 	int day = 1, portion = 0;
 	
-	if(row == (int) (self.bounds.size.height / 44)) row --;
+	if(row == (int) (self.bounds.size.height / rectHeight)) row --;
 	
 	int fir = firstWeekday - 1;
 	if(!startOnSunday && fir == 0) fir = 7;
@@ -542,8 +543,8 @@
 	
 	
 	CGRect r = self.selectedImageView.frame;
-	r.origin.x = (column*46);
-	r.origin.y = (row*44)-1;
+	r.origin.x = (column*rectWidth);
+	r.origin.y = (row*rectHeight)-1;
 	self.selectedImageView.frame = r;
 	
 	if(day == selectedDay && selectedPortion == portion) return;
@@ -576,7 +577,7 @@
 - (UILabel *) currentDay{
 	if(currentDay==nil){
 		CGRect r = self.selectedImageView.bounds;
-		r.origin.y -= 2;
+		r.origin.y += 1;
 		currentDay = [[UILabel alloc] initWithFrame:r];
 		currentDay.text = @"1";
 		currentDay.textColor = [UIColor whiteColor];
@@ -609,6 +610,8 @@
 	if(selectedImageView==nil){
 		selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamedTK:@"TapkuLibrary.bundle/Images/calendar/Month Calendar Date Tile Selected"]];
 	}
+    [selectedImageView setFrame:CGRectMake(selectedImageView.frame.origin.x, selectedImageView.frame.origin.y, rectWidth + 1, rectHeight + 1)];
+    [selectedImageView setContentMode:UIViewContentModeScaleToFill];
 	return selectedImageView;
 }
 
@@ -637,13 +640,13 @@
 }
 - (id) initWithSundayAsFirst:(BOOL)s{
 	if (!(self = [super initWithFrame:CGRectZero])) return nil;
-	self.backgroundColor = [UIColor grayColor];
+	self.backgroundColor = [UIColor colorWithRed:.86 green:.86 blue:.86 alpha:1];
 
 	sunday = s;
 	currentTile = [[TKCalendarMonthTiles alloc] initWithMonth:[[NSDate date] firstOfMonth] marks:nil startDayOnSunday:sunday];
 	[currentTile setTarget:self action:@selector(tile:)];
 	
-	CGRect r = CGRectMake(0, 0, self.tileBox.bounds.size.width, self.tileBox.bounds.size.height + self.tileBox.frame.origin.y);
+	CGRect r = CGRectMake(0, 0, 320, self.tileBox.bounds.size.height + self.tileBox.frame.origin.y);
 	self.frame = r;
 	
 	[self addSubview:self.topBackground];
@@ -703,7 +706,7 @@
 	
 	int i = 0;
 	for(NSString *s in ar){
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(46 * i, 29, 46, 15)];
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(21 + rectWidth * i, 29, rectWidth, 15)];
 		[self addSubview:label];
 		label.text = s;
 		label.textAlignment = UITextAlignmentCenter;
@@ -748,9 +751,9 @@
 	int overlap =  0;
 	
 	if(isNext){
-		overlap = [newTile.monthDate isEqualToDate:[dates objectAtIndex:0]] ? 0 : 44;
+		overlap = [newTile.monthDate isEqualToDate:[dates objectAtIndex:0]] ? 0 : rectHeight;
 	}else{
-		overlap = [currentTile.monthDate compare:[dates lastObject]] !=  NSOrderedDescending ? 44 : 0;
+		overlap = [currentTile.monthDate compare:[dates lastObject]] !=  NSOrderedDescending ? rectHeight : 0;
 	}
 	
 	float y = isNext ? currentTile.bounds.size.height - overlap : newTile.bounds.size.height * -1 + overlap +2;
@@ -822,9 +825,6 @@
 	
 	if ([self.delegate respondsToSelector:@selector(calendarMonthView:monthWillChange:animated:)] ) 
 		[self.delegate calendarMonthView:self monthWillChange:newDate animated:YES];
-	
-
-	
 	
 	[self changeMonthAnimation:sender];
 	if([self.delegate respondsToSelector:@selector(calendarMonthView:monthDidChange:animated:)])
@@ -948,11 +948,11 @@
 }
 - (UILabel *) monthYear{
 	if(monthYear==nil){
-		monthYear = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tileBox.frame.size.width, 38)];
+		monthYear = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 38)];
 		
 		monthYear.textAlignment = UITextAlignmentCenter;
 		monthYear.backgroundColor = [UIColor clearColor];
-		monthYear.font = [UIFont boldSystemFontOfSize:22];
+		monthYear.font = [UIFont boldSystemFontOfSize:18];
 		monthYear.textColor = [UIColor colorWithRed:59/255. green:73/255. blue:88/255. alpha:1];
 	}
 	return monthYear;
@@ -979,7 +979,7 @@
 }
 - (UIScrollView *) tileBox{
 	if(tileBox==nil){
-		tileBox = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, currentTile.frame.size.height)];
+		tileBox = [[UIScrollView alloc] initWithFrame:CGRectMake(rectWidth/2, 44, 320-rectWidth + 1, currentTile.frame.size.height)];
 	}
 	return tileBox;
 }

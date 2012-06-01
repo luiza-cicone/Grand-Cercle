@@ -22,6 +22,7 @@ static EvenementsParser *instanceEvent = nil;
 
 - (void) treatementEvenements:(TBXMLElement *)eventAParser {
     
+    NSInteger indice = 0;
 	do {
         
         // Définition de la news à récupérer
@@ -115,9 +116,12 @@ static EvenementsParser *instanceEvent = nil;
         [firstDateFormatter setDateFormat:@"dd-MM-yy hh:mm:ss zzz"];
 
         aEvent.eventDate = [firstDateFormatter dateFromString:data];
-        NSLog(@"%@ - %@", aEvent.title, aEvent.eventDate);
         [aEvent.eventDate retain];
 
+        // Indication de l'indice
+        aEvent.indice = indice;
+        indice++;
+        
         // Ajout de la news au tableau
         [arrayEvenements addObject:aEvent];
         [aEvent release];

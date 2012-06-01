@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
-public class Preferences extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
 	SharedPreferences pref;
 	
