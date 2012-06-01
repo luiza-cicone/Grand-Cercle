@@ -13,7 +13,7 @@ import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
-	private static ArrayList<String> listCercles;
+	private ArrayList<String> listCercles;
 	private static ArrayList<String> listClubs;
 	SharedPreferences pref;
 	
@@ -23,10 +23,10 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		
 		listCercles = ContainerData.getListCercles();
 		listClubs = ContainerData.getListClubs();
-		//addPreferencesFromResource(R.xml.prefs);
-		//pref = getPreferenceManager().getSharedPreferences();
-		//pref.registerOnSharedPreferenceChangeListener(this);
-	     setPreferenceScreen(createPreferenceHierarchy());
+		addPreferencesFromResource(R.xml.prefs);
+		pref = getPreferenceManager().getSharedPreferences();
+		pref.registerOnSharedPreferenceChangeListener(this);
+	    // setPreferenceScreen(createPreferenceHierarchy());
 
 		//SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		//String myString = preferences.getString("PrefList", "");
@@ -57,4 +57,9 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		ContainerData.parseFiles();
 		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
+	
+	public ArrayList<String> getListCercles() {
+			return listCercles;
+	}
+	
 }
