@@ -30,6 +30,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = NSLocalizedString(@"Events", @"Events");
 }
 
 - (void)viewDidUnload
@@ -69,10 +70,10 @@
     
     switch (indexPath.section) {
         case 0:
-            CellIdentifier = @"EventTop";
+            CellIdentifier = @"EventTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"EventTop" owner:self options:nil];
+                [[NSBundle mainBundle] loadNibNamed:@"EventTopCell" owner:self options:nil];
                 cell = cellEventTop;
                 self.cellEventTop = nil;
             }
@@ -80,8 +81,8 @@
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[event image]]]];
-            [imageView setImage:myimage];
+//            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[event image]]]];
+//            [imageView setImage:myimage];
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
@@ -102,15 +103,15 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             [cell.textLabel setText : event.group];
-            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
-            [cell.imageView setImage: img2];
+//            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
+//            [cell.imageView setImage: img2];
             break;
             
         case 2:
-            CellIdentifier = @"EventDescriptionCell";
+            CellIdentifier = @"DescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"EventDescriptionCell" owner:self options:nil];
+                [[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:self options:nil];
                 cell = cellEventDescription;
                 self.cellEventDescription = nil;
             }

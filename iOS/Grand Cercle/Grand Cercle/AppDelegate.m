@@ -50,13 +50,36 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // Override point for customization after application launch.
+    UINavigationController *navigationController1 = [[UINavigationController alloc] init];
     UIViewController *viewController1 = [[[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil] autorelease];
+    navigationController1.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    navigationController1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
+
     UIViewController *viewController2 = [[[NewsViewController alloc] initWithNibName:@"NewsViewController" bundle:nil] autorelease];
+    UINavigationController *navigationController2 = [[UINavigationController alloc] init];
+    navigationController2.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    navigationController2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
+    
     UIViewController *viewController3 = [[[DealsViewController alloc] initWithNibName:@"DealsViewController" bundle:nil] autorelease];
+    UINavigationController *navigationController3 = [[UINavigationController alloc] init];
+    navigationController3.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    navigationController3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
+    
     UIViewController *viewController4 = [[[InfosViewController alloc] initWithNibName:@"InfosViewController" bundle:nil] autorelease];
+    UINavigationController *navigationController4 = [[UINavigationController alloc] init];
+    navigationController4.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    navigationController4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
+    
     UIViewController *viewController5 = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, viewController3, viewController4, viewController5, nil];
+    UINavigationController *navigationController5 = [[UINavigationController alloc] init];
+    navigationController5.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    navigationController5.viewControllers = [NSArray arrayWithObjects:viewController5, nil];
+    
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController1, navigationController2, navigationController3, navigationController4, navigationController5, nil];
+//    [navigationController2 release]; navigationController2 = nil;
+//    [navigationController1 release]; navigationController1 = nil;
+    
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

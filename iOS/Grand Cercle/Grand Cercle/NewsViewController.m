@@ -7,7 +7,7 @@
 //
 
 #import "NewsViewController.h"
-#import "DealsViewController.h"
+#import "NewsDetailViewController.h"
 #import "NewsParser.h"
 
 @implementation NewsViewController
@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"News", @"News");
+        self.tabBarItem.title = NSLocalizedString(@"News", @"News");
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
     }
     
@@ -193,7 +194,9 @@
     NSLog(@"selected");
     // Navigation logic may go here. Create and push another view controller.
     
-     DealsViewController *detailViewController = [[DealsViewController alloc] initWithNibName:@"DealsViewController" bundle:nil];
+    NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    News *n = [newsArray objectAtIndex:[indexPath row]];
+    detailViewController.news = n;
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];

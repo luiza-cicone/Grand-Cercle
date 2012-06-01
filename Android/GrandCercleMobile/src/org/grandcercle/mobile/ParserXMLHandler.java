@@ -6,15 +6,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public abstract class ParserXMLHandler extends DefaultHandler {
 
-	// nom des tags XML
 	protected final String NODE = "node";
 	protected final String TITLE = "title";
 	protected final String DESCRIPTION = "description";
 	protected final String LINK = "link";
-	protected final String PUBDATE = "pubDate";
-	protected final String AUTHOR = "author";
-	protected final String GROUP = "group";
-	protected final String LOGO = "logo";
+	
 	
 	// Buffer permettant de contenir les données d'un tag XML
 	protected StringBuffer buffer;

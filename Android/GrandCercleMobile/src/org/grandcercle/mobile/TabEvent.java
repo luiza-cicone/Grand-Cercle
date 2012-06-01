@@ -3,19 +3,17 @@ package org.grandcercle.mobile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -551,7 +549,6 @@ public class TabEvent extends Activity {
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
 					feedListViewCal.setOnItemClickListener(clickListenerFeed);
 					if (listEvCal.size() > 1) {
-						
 						t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);
 					} else {
 						t = Toast.makeText(TabEvent.this, "1 événement pour le jour séléctionné", Toast.LENGTH_SHORT);

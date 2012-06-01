@@ -1,0 +1,1177 @@
+TGrand Cercle
+v7
+r1
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk
+c000000004FC8A9700000000000000110
+t1338550640
+s272
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004D54CFFA00000000002999B0
+t1297403898
+s2726320
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D54CFE5000000000029DA70
+t1297403877
+s2742896
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D54CFB80000000000001466
+t1297403832
+s5222
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/MapKit.framework/Headers/MapKit.h
+c000000004D5C9BDB00000000000002FE
+t1297914843
+s766
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/MapKit.framework/MapKit
+c000000004D5C9BEB000000000018CAB0
+t1297914859
+s1624752
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h
+c000000004D54D2DD00000000000000C4
+t1297404637
+s196
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004D54D4200000000000162C50
+t1297404960
+s1453136
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D5615B40000000000000AA1
+t1297487284
+s2721
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004D5616030000000000766870
+t1297487363
+s7759984
+
+N/Developer/xcode-3.2.4/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/usr/include/Availability.h
+c000000004D4F7A2B0000000000001B19
+t1297054251
+s6937
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/../tapkulibrary/src/TapkuLibrary.bundle
+c000000004FC4E23E0000000000000066
+t1338303038
+s102
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/EventDetailViewController.h
+c000000004FC79555000000000000015B
+t1338479957
+s347
+i<UIKit/UIKit.h>
+i"Evenements.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/EventDetailViewController.m
+c000000004FC7C1280000000000001206
+t1338491176
+s4614
+i"EventDetailViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/EventsCalendarViewController.h
+c000000004FC87ABB00000000000002AF
+t1338538683
+s687
+i<TapkuLibrary/TapkuLibrary.h>
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/../EventDetailViewController.h
+c000000004FC79555000000000000015B
+t1338479957
+s347
+i<UIKit/UIKit.h>
+i"Evenements.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/../EventsCalendarViewController.h
+c000000004FC87ABB00000000000002AF
+t1338538683
+s687
+i<TapkuLibrary/TapkuLibrary.h>
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/../EventsCalendarViewController.m
+c000000004FC87EDF0000000000001416
+t1338539743
+s5142
+i"EventsCalendarViewController.h"
+i"EvenementsParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/../Grand Cercle/en.lproj/Localizable.strings
+c000000004FC3D8FF0000000000000103
+t1338235135
+s259
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/AppDelegate.h
+c000000004FC7B557000000000000017B
+t1338488151
+s379
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/AppDelegate.m
+c000000004FC7F8A40000000000001674
+t1338505380
+s5748
+i"AppDelegate.h"
+i"EventsViewController.h"
+i"NewsViewController.h"
+i"DealsViewController.h"
+i"InfosViewController.h"
+i"SettingsViewController.h"
+i"NewsParser.h"
+i"EvenementsParser.h"
+i"BonsPlansParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonPlanCell.xib
+c000000004FC668DB0000000000002DD0
+t1338403035
+s11728
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonsPlans.h
+c000000004FC6303600000000000000E3
+t1338388534
+s227
+i<Foundation/Foundation.h>
+i"Items.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonsPlans.m
+c000000004FC6303600000000000000FD
+t1338388534
+s253
+i"BonsPlans.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonsPlansParser.h
+c000000004FC6303600000000000002A3
+t1338388534
+s675
+i<Foundation/Foundation.h>
+i"TBXML+HTTP.h"
+i"TBXML.h"
+i"NSString+HTML.h"
+i"BonsPlans.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonsPlansParser.m
+c000000004FC630360000000000000B61
+t1338388534
+s2913
+i"BonsPlansParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/DealsViewController.h
+c000000004FC6735200000000000002ED
+t1338405714
+s749
+i<UIKit/UIKit.h>
+i<TapkuLibrary/TapkuLibrary.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/DealsViewController.m
+c000000004FC877E900000000000015C5
+t1338537961
+s5573
+i"DealsViewController.h"
+i"BonsPlansParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Evenements.h
+c000000004FC795550000000000000435
+t1338479957
+s1077
+i<Foundation/Foundation.h>
+i"Items.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Evenements.m
+c000000004FC79555000000000000017E
+t1338479957
+s382
+i"Evenements.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EvenementsParser.h
+c000000004FC63036000000000000029C
+t1338388534
+s668
+i<Foundation/Foundation.h>
+i"TBXML+HTTP.h"
+i"TBXML.h"
+i"NSString+HTML.h"
+i"Evenements.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EvenementsParser.m
+c000000004FC795550000000000001953
+t1338479957
+s6483
+i"EvenementsParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventTop.xib
+c000000004FC795550000000000002E6A
+t1338479957
+s11882
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsTableViewController.h
+c000000004FC7A910000000000000034B
+t1338485008
+s843
+i<UIKit/UIKit.h>
+i<TapkuLibrary/TapkuLibrary.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsTableViewController.m
+c000000004FC8813B000000000000248D
+t1338540347
+s9357
+i"EventsTableViewController.h"
+i"Evenements.h"
+i"EvenementsParser.h"
+i"EventDetailViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsTableViewController.xib
+c000000004FC7C0620000000000001C88
+t1338490978
+s7304
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsViewController.h
+c000000004FC7955500000000000002CE
+t1338479957
+s718
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsViewController.m
+c000000004FC87A8D0000000000001019
+t1338538637
+s4121
+i"EventsViewController.h"
+i"EventsCalendarViewController.h"
+i"EventsTableViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/GTMNSString+HTML.h
+c000000004FC4D57000000000000008F0
+t1338299760
+s2288
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/GTMNSString+HTML.m
+c000000004FC4D57000000000000036C3
+t1338299760
+s14019
+i"GTMNSString+HTML.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Grand Cercle-Prefix.pch
+c000000004FC3C3100000000000000147
+t1338229520
+s327
+i<Availability.h>
+i<UIKit/UIKit.h>
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/InfosViewController.h
+c000000004FC3D27200000000000000E4
+t1338233458
+s228
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/InfosViewController.m
+c000000004FC3D2A500000000000003E6
+t1338233509
+s998
+i"InfosViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Items.h
+c000000004FC6303600000000000001FD
+t1338388534
+s509
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Items.m
+c000000004FC630360000000000000121
+t1338388534
+s289
+i"Items.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NSString+HTML.h
+c000000004FC4D5700000000000000B60
+t1338299760
+s2912
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NSString+HTML.m
+c000000004FC4D5700000000000002B1A
+t1338299760
+s11034
+i"NSString+HTML.h"
+i"GTMNSString+HTML.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/News.h
+c000000004FC6303600000000000001A4
+t1338388534
+s420
+i<Foundation/Foundation.h>
+i"Items.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/News.m
+c000000004FC630360000000000000125
+t1338388534
+s293
+i"News.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsCell.xib
+c000000004FC672060000000000002E19
+t1338405382
+s11801
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsParser.h
+c000000004FC630360000000000000267
+t1338388534
+s615
+i<Foundation/Foundation.h>
+i"TBXML+HTTP.h"
+i"TBXML.h"
+i"NSString+HTML.h"
+i"News.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsParser.m
+c000000004FC630360000000000000D6F
+t1338388534
+s3439
+i"NewsParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsViewController.h
+c000000004FC7BA1A00000000000002CE
+t1338489370
+s718
+i<UIKit/UIKit.h>
+i<TapkuLibrary/TapkuLibrary.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsViewController.m
+c000000004FC7BB0F00000000000017A9
+t1338489615
+s6057
+i"NewsViewController.h"
+i"DealsViewController.h"
+i"NewsParser.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/SettingsViewController.h
+c000000004FC3D28600000000000000E7
+t1338233478
+s231
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/SettingsViewController.m
+c000000004FC3D29B00000000000003F8
+t1338233499
+s1016
+i"SettingsViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/SmallEventCell.xib
+c000000004FC87A9500000000000033C0
+t1338538645
+s13248
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/TBXML+HTTP.h
+c000000004FC38B3C00000000000003C3
+t1338215228
+s963
+i"TBXML.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/TBXML+HTTP.m
+c000000004FC4DA290000000000000CF8
+t1338300969
+s3320
+i"TBXML+HTTP.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/TBXML.h
+c000000004FC38B3C00000000000023C4
+t1338215228
+s9156
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/TBXML.m
+c000000004FC3EE1D0000000000007C6F
+t1338240541
+s31855
+i"TBXML.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/deals.png
+c000000004FC3CB780000000000001137
+t1338231672
+s4407
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/deals@2x.png
+c000000004FC3CB64000000000000184C
+t1338231652
+s6220
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/DealsViewController.xib
+c000000004FC877AE000000000000221E
+t1338537902
+s8734
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/EventCell.xib
+c000000004FC66D72000000000000374B
+t1338404210
+s14155
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/EventsViewController.xib
+c000000004FC7BF4100000000000026A1
+t1338490689
+s9889
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/InfoPlist.strings
+c000000004FC3D6A2000000000000002D
+t1338234530
+s45
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/InfosViewController.xib
+c000000004FC7C0270000000000002631
+t1338490919
+s9777
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/NewsViewController.xib
+c000000004FC7C00400000000000021A6
+t1338490884
+s8614
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/SettingsViewController.xib
+c000000004FC7C032000000000000263A
+t1338490930
+s9786
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/events.png
+c000000004FC3C6B5000000000000135D
+t1338230453
+s4957
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/infos.png
+c000000004FC3C6810000000000000C75
+t1338230401
+s3189
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/infos@2x.png
+c000000004FC3C9860000000000000E1F
+t1338231174
+s3615
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/main.m
+c000000004FC3C3100000000000000152
+t1338229520
+s338
+i<UIKit/UIKit.h>
+i"AppDelegate.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/news.png
+c000000004FC143C80000000000001292
+t1338065864
+s4754
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/settings.png
+c000000004FC3CBD80000000000001424
+t1338231768
+s5156
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/settings@2x.png
+c000000004FC3CBC300000000000021D6
+t1338231747
+s8662
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app.dSYM
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/BonPlanCell.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/EventTop.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/EventsTableViewController.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/Grand Cercle
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/Info.plist
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/NewsCell.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/PkgInfo
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/SmallEventCell.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/TapkuLibrary.bundle
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/deals.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/deals@2x.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/DealsViewController.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/EventCell.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/EventsViewController.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/InfoPlist.strings
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/InfosViewController.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/Localizable.strings
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/NewsViewController.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/SettingsViewController.nib
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/events.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/infos.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/infos@2x.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/news.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/settings.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/settings@2x.png
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/AppDelegate.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/BonsPlans.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/BonsPlansParser.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/DealsViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/Evenements.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EvenementsParser.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventDetailViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventsCalendarViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventsTableViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventsViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/GTMNSString+HTML.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/Grand Cercle.LinkFileList
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/InfosViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/Items.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/NSString+HTML.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/News.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/NewsParser.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/NewsViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/SettingsViewController.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/TBXML+HTTP.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/TBXML.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/main.o
+t2
+s0
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/NSArray+TKCategory.h
+c000000004FC4E23E0000000000000676
+t1338303038
+s1654
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/NSDate+TKCategory.h
+c000000004FC4E23E0000000000000AAD
+t1338303038
+s2733
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/NSMutableURLRequest+TKCategory.h
+c000000004FC4E23E00000000000005B1
+t1338303038
+s1457
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/NSString+TKCategory.h
+c000000004FC4E23E0000000000000924
+t1338303038
+s2340
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKAlertCenter.h
+c000000004FC4E23E0000000000000832
+t1338303038
+s2098
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKAppDelegate.h
+c000000004FC4E23E000000000000079C
+t1338303038
+s1948
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKButtonCell.h
+c000000004FC4E23E0000000000000517
+t1338303038
+s1303
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCalendarDayEventView.h
+c000000004FC4E23E0000000000000857
+t1338303038
+s2135
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+i"TapDetectingView.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCalendarDayTimelineView.h
+c000000004FC4E23E0000000000000C63
+t1338303038
+s3171
+i<UIKit/UIKit.h>
+i"TKCalendarDayEventView.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCalendarDayViewController.h
+c000000004FC4E23E00000000000005DF
+t1338303038
+s1503
+i<UIKit/UIKit.h>
+i"TKCalendarDayTimelineView.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCalendarMonthTableViewController.h
+c000000004FC4E23E000000000000070D
+t1338303038
+s1805
+i<UIKit/UIKit.h>
+i"TKCalendarMonthViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCalendarMonthView.h
+c000000004FC4E23E0000000000001305
+t1338303038
+s4869
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCalendarMonthViewController.h
+c000000004FC4E23E000000000000084F
+t1338303038
+s2127
+i<UIKit/UIKit.h>
+i"TKCalendarMonthView.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCoverflowCoverView.h
+c000000004FC4E23E00000000000007D9
+t1338303038
+s2009
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKCoverflowView.h
+c000000004FC4E23E00000000000014F2
+t1338303038
+s5362
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKEmptyView.h
+c000000004FC4E23E0000000000000F40
+t1338303038
+s3904
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+i"TKGradientView.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKGlobal.h
+c000000004FC4E23E0000000000000821
+t1338303038
+s2081
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKGradientView.h
+c000000004FC4E23E000000000000089A
+t1338303038
+s2202
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKHTTPRequest.h
+c000000004FC4E23E0000000000001BE1
+t1338303038
+s7137
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKImageCache.h
+c000000004FC4E23E00000000000014F9
+t1338303038
+s5369
+i<Foundation/Foundation.h>
+i<TapkuLibrary/TapkuLibrary.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKIndicatorCell.h
+c000000004FC4E23E0000000000000578
+t1338303038
+s1400
+i"TKTableViewCell.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKLabelCell.h
+c000000004FC4E23E0000000000000643
+t1338303038
+s1603
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKLabelFieldCell.h
+c000000004FC4E23E000000000000055D
+t1338303038
+s1373
+i"TKLabelCell.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKLabelSwitchCell.h
+c000000004FC4E23E0000000000000560
+t1338303038
+s1376
+i"TKLabelCell.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKLabelTextFieldCell.h
+c000000004FC4E23E0000000000000584
+t1338303038
+s1412
+i"TKLabelCell.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKLabelTextViewCell.h
+c000000004FC4E23E000000000000056C
+t1338303038
+s1388
+i"TKLabelCell.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKMapPlace.h
+c000000004FC4E23E00000000000005B0
+t1338303038
+s1456
+i<Foundation/Foundation.h>
+i<MapKit/MapKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKMapView.h
+c000000004FC4E23E00000000000006D5
+t1338303038
+s1749
+i<UIKit/UIKit.h>
+i<MapKit/MapKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKNetworkQueue.h
+c000000004FC4E23E0000000000000675
+t1338303038
+s1653
+i<Foundation/Foundation.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKProgressAlertView.h
+c000000004FC4E23E00000000000007B3
+t1338303038
+s1971
+i<UIKit/UIKit.h>
+i"TKProgressBarView.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKProgressBarView.h
+c000000004FC4E23E0000000000000797
+t1338303038
+s1943
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKProgressCircleView.h
+c000000004FC4E23E000000000000076C
+t1338303038
+s1900
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKSwitchCell.h
+c000000004FC4E23E0000000000000555
+t1338303038
+s1365
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKTableViewCell.h
+c000000004FC4E23E0000000000000539
+t1338303038
+s1337
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKTableViewController.h
+c000000004FC4E23E0000000000000BF8
+t1338303038
+s3064
+i<UIKit/UIKit.h>
+i"TKViewController.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKTextViewCell.h
+c000000004FC4E23E0000000000000558
+t1338303038
+s1368
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKViewController.h
+c000000004FC4E23E0000000000000988
+t1338303038
+s2440
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TKWindow.h
+c000000004FC4E23E000000000000063D
+t1338303038
+s1597
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TapDetectingView.h
+c000000004FC4E23E0000000000000DC0
+t1338303038
+s3520
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/TapkuLibrary.h
+c000000004FC4E23E00000000000009B1
+t1338303038
+s2481
+i"TKGlobal.h"
+i"NSString+TKCategory.h"
+i"NSDate+TKCategory.h"
+i"NSArray+TKCategory.h"
+i"UIView+TKCategory.h"
+i"UIImage+TKCategory.h"
+i"UIColor+TKCategory.h"
+i"UIImageView+TKCategory.h"
+i"UIScrollview+TKCategory.h"
+i"UIButton+TKCategory.h"
+i"UIViewController+TKCategory.h"
+i"NSMutableURLRequest+TKCategory.h"
+i"TKWindow.h"
+i"TKViewController.h"
+i"TKTableViewController.h"
+i"TKEmptyView.h"
+i"TKAppDelegate.h"
+i"TKGradientView.h"
+i"TKNetworkQueue.h"
+i"TKHTTPRequest.h"
+i"TKImageCache.h"
+i"TKLabelCell.h"
+i"TKLabelTextViewCell.h"
+i"TKLabelTextFieldCell.h"
+i"TKLabelFieldCell.h"
+i"TKLabelSwitchCell.h"
+i"TKButtonCell.h"
+i"TKTextViewCell.h"
+i"TKSwitchCell.h"
+i"TKIndicatorCell.h"
+i"TKTableViewCell.h"
+i"TKAlertCenter.h"
+i"TKProgressBarView.h"
+i"TKProgressAlertView.h"
+i"TKProgressCircleView.h"
+i"TKCalendarMonthViewController.h"
+i"TKCalendarMonthTableViewController.h"
+i"TKCalendarMonthView.h"
+i"TKCalendarDayViewController.h"
+i"TKCoverflowView.h"
+i"TKCoverflowCoverView.h"
+i"TKMapView.h"
+i"TKMapPlace.h"
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIButton+TKCategory.h
+c000000004FC4E23E0000000000000DB6
+t1338303038
+s3510
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIColor+TKCategory.h
+c000000004FC4E23E000000000000077E
+t1338303038
+s1918
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIImage+TKCategory.h
+c000000004FC4E23E000000000000060D
+t1338303038
+s1549
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIImageView+TKCategory.h
+c000000004FC4E23E00000000000006BE
+t1338303038
+s1726
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIScrollview+TKCategory.h
+c000000004FC4E23E0000000000000573
+t1338303038
+s1395
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIView+TKCategory.h
+c000000004FC4E23E00000000000006CF
+t1338303038
+s1743
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/TapkuLibrary/UIViewController+TKCategory.h
+c000000004FC4E23E0000000000001222
+t1338303038
+s4642
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/tapkulibrary/src/build/Debug-iphonesimulator/libTapkuLibrary.a
+c00000000000000000000000000000000
+t2
+s0
+
+N/var/folders/6s/8c4vscld68j6kr041r364cm80000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/Grand Cercle-Prefix-bcqlgmgtwwiqmceaosbiyakiefcl/Grand Cercle-Prefix.pch.gch
+t2
+s0
+
+NGrand Cercle/Grand Cercle-Info.plist
+c000000004FC5DB8B0000000000000494
+t1338366859
+s1172
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/AppDelegate.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/AppDelegate.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/BonsPlans.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonsPlans.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/BonsPlansParser.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonsPlansParser.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/DealsViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/DealsViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/Evenements.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Evenements.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EvenementsParser.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EvenementsParser.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventDetailViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/EventDetailViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventsCalendarViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/../EventsCalendarViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventsTableViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsTableViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/EventsViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/GTMNSString+HTML.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/GTMNSString+HTML.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/InfosViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/InfosViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/Items.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/Items.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/NSString+HTML.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NSString+HTML.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/News.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/News.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/NewsParser.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsParser.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/NewsViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/SettingsViewController.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/SettingsViewController.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/TBXML+HTTP.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/TBXML+HTTP.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/TBXML.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/TBXML.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC "build/Grand Cercle.build/Debug-iphonesimulator/Grand Cercle.build/Objects-normal/i386/main.o" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/main.m" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/BonPlanCell.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventTop.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/EventsTableViewController.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/NewsCell.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/SmallEventCell.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/DealsViewController.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/EventCell.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/EventsViewController.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/InfosViewController.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/NewsViewController.xib"
+r0
+
+CCompileXIB "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/Grand Cercle/en.lproj/SettingsViewController.xib"
+r0
+
+CCopyStringsFile "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/InfoPlist.strings" "Grand Cercle/en.lproj/InfoPlist.strings"
+r0
+
+CCopyStringsFile "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/en.lproj/Localizable.strings" "Grand Cercle/../Grand Cercle/en.lproj/Localizable.strings"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/TapkuLibrary.bundle" ../tapkulibrary/src/TapkuLibrary.bundle
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/deals.png" "Grand Cercle/deals.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/deals@2x.png" "Grand Cercle/deals@2x.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/events.png" "Grand Cercle/events.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/infos.png" "Grand Cercle/infos.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/infos@2x.png" "Grand Cercle/infos@2x.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/news.png" "Grand Cercle/news.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/settings.png" "Grand Cercle/settings.png"
+r0
+
+CCpResource "build/Debug-iphonesimulator/Grand Cercle.app/settings@2x.png" "Grand Cercle/settings@2x.png"
+r0
+
+CGenerateDSYMFile "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app.dSYM" "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/Grand Cercle"
+r0
+
+CLd "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/Grand Cercle" normal i386
+r0
+
+CProcessInfoPlistFile "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app/Info.plist" "Grand Cercle/Grand Cercle-Info.plist"
+r0
+
+CProcessPCH "/var/folders/6s/8c4vscld68j6kr041r364cm80000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/Grand Cercle-Prefix-bcqlgmgtwwiqmceaosbiyakiefcl/Grand Cercle-Prefix.pch.gch" "Grand Cercle/Grand Cercle-Prefix.pch" normal i386 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CTouch "/Users/luiza/Documents/Projet_de_spe/GC_Mobile/iOS/Grand Cercle/build/Debug-iphonesimulator/Grand Cercle.app"
+r0
+

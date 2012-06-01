@@ -20,13 +20,15 @@ public class ContainerData {
 	private static ArrayList<Event> listEvent;
 	private static ArrayList<BP> listBP;
 	private static HashMap<String,ArrayList<Event>> hashEvent;
+	private static ArrayList<String> listCercles;
+	private static ArrayList<String> listClubs;
 	
 	public ContainerData() {
 
 	}
 
 	
-	public static void ParseFiles(){
+	public static void parseFiles(){
 		// On passe par une classe factory pour obtenir une instance de sax
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
 		SAXParser parseur = null;
@@ -39,7 +41,7 @@ public class ContainerData {
 			e.printStackTrace();
 		}
 		
-		// On définit l'url du fichier XML
+		// On définit les url des fichiers XML
 		URL urlNews = null;
 		try {
 			urlNews = new URL("http://www.grandcercle.org/news/data.xml");
@@ -57,6 +59,20 @@ public class ContainerData {
 		URL urlBP = null;
 		try {
 			urlBP = new URL("http://www.grandcercle.org/bons-plans/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL urlCercles = null;
+		try {
+			urlCercles = new URL("http://www.grandcercle.org/cercles/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL urlClubs = null;
+		try {
+			urlClubs = new URL("http://www.grandcercle.org/clubs/data.xml");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
@@ -105,6 +121,32 @@ public class ContainerData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		DefaultHandler handlerCercles = new ParserXMLHandlerAsso();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlCercles.openConnection().getInputStream(), handlerCercles);
+			
+			// On récupère directement la liste des feeds
+			listCercles = ((ParserXMLHandlerAsso) handlerCercles).getListAssos();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerClubs = new ParserXMLHandlerAsso();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlClubs.openConnection().getInputStream(), handlerClubs);
+			
+			// On récupère directement la liste des feeds
+			listClubs = ((ParserXMLHandlerAsso) handlerClubs).getListAssos();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -122,6 +164,14 @@ public class ContainerData {
 	
 	public static ArrayList<BP> getlistBP() {
 		return listBP;
+	}
+
+	public static ArrayList<String> getListCercles() {
+		return listCercles;
+	}
+
+	public static ArrayList<String> getListClubs() {
+		return listClubs;
 	}
 }
 
