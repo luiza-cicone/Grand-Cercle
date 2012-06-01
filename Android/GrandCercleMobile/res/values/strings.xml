@@ -13,4 +13,5 @@
     <string-array name="prefvalues">
         <item >Item 3</item>
     </string-array>
+    <string name="lien">Pour plus d\'informations, rendez-vous sur: </string>
 </resources>
