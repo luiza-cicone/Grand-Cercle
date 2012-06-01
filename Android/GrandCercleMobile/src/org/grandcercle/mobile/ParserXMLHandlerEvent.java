@@ -183,7 +183,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
-			//if (currentEvent.getGroup() == "Grand Cercle") {
+			//if (currentEvent.getGroup() == "Grand Cercle") {  // donne l'organisateur
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
 					ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());
