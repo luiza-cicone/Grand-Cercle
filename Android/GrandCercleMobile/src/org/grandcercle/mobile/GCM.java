@@ -24,9 +24,8 @@ public class GCM extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
 		//Parsing des fichiers XML
-		ContainerData.ParseFiles();
+		//ContainerData.parseFiles();
 		
 
 		

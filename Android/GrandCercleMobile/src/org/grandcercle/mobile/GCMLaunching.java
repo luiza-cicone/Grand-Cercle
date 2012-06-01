@@ -15,7 +15,7 @@ public class GCMLaunching extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loading);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 		progressBar = (ProgressBar)findViewById(R.id.progressBar);
 		progressBar.setProgress(0);
 		new LoadingPage().execute((Void)null);
@@ -25,7 +25,7 @@ public class GCMLaunching extends Activity {
 		
 		@Override
 	    protected Void doInBackground(Void... params) {
-			ContainerData.ParseFiles();
+			ContainerData.parseFiles();
 			return null;
 	    }
 
