@@ -413,8 +413,10 @@ public class TabEvent extends Activity {
 				
 				if (cour && dateEvents.contains(date)) {
 					list.add(String.valueOf(i) + "-RED" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					cour = false;
 				} else if (cour) {
 					list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					cour = false;
 				} else if (dateEvents.contains(date)) {
 					list.add(String.valueOf(i) + "-ORANGE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
 				} else {

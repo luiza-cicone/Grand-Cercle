@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
-public class Preferences extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
 	SharedPreferences pref;
 	
@@ -19,8 +19,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		Toast.makeText(this, key + ":" + sharedPreferences.getString(key, ""), Toast.LENGTH_LONG).show();
-		
+		Toast.makeText(this, key + ":" + sharedPreferences.getString(key, ""), Toast.LENGTH_LONG).show();	
 	}
 
 }

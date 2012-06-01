@@ -3,38 +3,14 @@ package org.grandcercle.mobile;
 
 
 
-import java.util.Calendar;
-import java.util.Locale;
-
-import org.grandcercle.mobile.R;
-
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
 public class TabBP extends Activity {
@@ -48,9 +24,27 @@ public class TabBP extends Activity {
         ListBPAdapter lbpa = new ListBPAdapter(this,listBP);
         ListView feedListView = ((ListView)findViewById(R.id.listFeed));
         ((ListView)findViewById(R.id.listFeed)).setAdapter(lbpa);
-        //feedListView.setOnItemClickListener(clickListenerFeed);
+        feedListView.setOnItemClickListener(clickListenerBP);
 		
 	 }
-
+	 private AdapterView.OnItemClickListener clickListenerBP = new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(TabBP.this,PageBP.class);
+				// Passage des paramètres
+				Bundle bundle = new Bundle();
+				//Add the parameters to bundle as
+				bundle.putString("titre",((BP)parent.getItemAtPosition(position)).getTitle());
+				bundle.putString("description",((BP)parent.getItemAtPosition(position)).getDescription());
+				bundle.putString("image",((BP)parent.getItemAtPosition(position)).getImage());
+				bundle.putString("link",((BP)parent.getItemAtPosition(position)).getLink());
+				
+				//bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
+				//Ajout du Bundle
+				intent.putExtras(bundle);
+				
+				TabBP.this.startActivity(intent);
+			}
+	 };
 	
 }
+			
