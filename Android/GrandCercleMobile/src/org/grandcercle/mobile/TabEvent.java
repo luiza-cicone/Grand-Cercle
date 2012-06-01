@@ -413,8 +413,10 @@ public class TabEvent extends Activity {
 				
 				if (cour && dateEvents.contains(date)) {
 					list.add(String.valueOf(i) + "-RED" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					cour = false;
 				} else if (cour) {
 					list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					cour = false;
 				} else if (dateEvents.contains(date)) {
 					list.add(String.valueOf(i) + "-ORANGE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
 				} else {
@@ -549,7 +551,6 @@ public class TabEvent extends Activity {
 					((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
 					feedListViewCal.setOnItemClickListener(clickListenerFeed);
 					if (listEvCal.size() > 1) {
-						
 						t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);
 					} else {
 						t = Toast.makeText(TabEvent.this, "1 événement pour le jour séléctionné", Toast.LENGTH_SHORT);

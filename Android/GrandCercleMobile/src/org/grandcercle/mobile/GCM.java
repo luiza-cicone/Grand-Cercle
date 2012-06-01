@@ -24,12 +24,6 @@ public class GCM extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		
-		//Parsing des fichiers XML
-		ContainerData.ParseFiles();
-		
-
 		
 		tabHost = getTabHost();
 		layoutTab = new int[5];
@@ -47,7 +41,7 @@ public class GCM extends TabActivity {
         setupTab("TabNews", new Intent().setClass(this, TabNews.class),1);
         setupTab("TabBP", new Intent().setClass(this, TabBP.class),2);
 		setupTab("TabInfos", new Intent().setClass(this, Tab4.class),3);
-		setupTab("TapParam", new Intent().setClass(this, Preferences.class),4);
+		setupTab("TabPref", new Intent().setClass(this, TabPref.class),4);
 	}
 	
 	@Override

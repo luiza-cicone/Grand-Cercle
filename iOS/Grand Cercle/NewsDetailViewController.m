@@ -1,22 +1,22 @@
 //
-//  EventDetailViewController.m
+//  NewsDetailViewController.m
 //  Grand Cercle
 //
-//  Created by Jérémy Krein on 31/05/12.
+//  Created by Jérémy Krein on 01/06/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "EventDetailViewController.h"
+#import "NewsDetailViewController.h"
 #import "NSString+HTML.h"
 
-@implementation EventDetailViewController
-@synthesize event, cellEventTop, cellEventDescription;
+@implementation NewsDetailViewController
+@synthesize news, cellNewsDescription, cellNewsTop;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-
+        // Custom initialization
     }
     return self;
 }
@@ -34,10 +34,10 @@
 
 - (void)viewDidUnload
 {
-    [cellEventTop release];
-    cellEventTop = nil;
-    [cellEventDescription release];
-    cellEventDescription = nil;
+    [cellNewsDescription release];
+    cellNewsDescription = nil;
+    [cellNewsTop release];
+    cellNewsTop = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -52,12 +52,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 1;
 }
@@ -68,31 +70,28 @@
     UITableViewCell *cell;
     
     switch (indexPath.section) {
+            
         case 0:
-            CellIdentifier = @"EventTop";
+            CellIdentifier = @"NewsTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"EventTop" owner:self options:nil];
-                cell = cellEventTop;
-                self.cellEventTop = nil;
+                [[NSBundle mainBundle] loadNibNamed:@"NewsTopCell" owner:self options:nil];
+                cell = cellNewsTop;
+                self.cellNewsTop = nil;
             }
             
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[event image]]]];
-            [imageView setImage:myimage];
+            UIImage *myimage2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[news logo]]]];
+            [imageView setImage:myimage2];
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
-            [label setText: [event title]];
+            [label setText: [news title]];
             
             label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[event date]];
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            [label setText:[[[event place] stringByAppendingString: @" - "] stringByAppendingString: event.time]];
-            
+            [label setText:[news pubDate]];
             break;
             
         case 1:
@@ -101,29 +100,29 @@
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            [cell.textLabel setText : event.group];
-            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
-            [cell.imageView setImage: img2];
+            [cell.textLabel setText : news.group];
+            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
+            [cell.imageView setImage: img];
             break;
             
         case 2:
-            CellIdentifier = @"EventDescriptionCell";
+            CellIdentifier = @"cellNewsDescription";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"EventDescriptionCell" owner:self options:nil];
-                cell = cellEventDescription;
-                self.cellEventDescription = nil;
+                [[NSBundle mainBundle] loadNibNamed:@"cellNewsDescription" owner:self options:nil];
+                cell = cellNewsDescription;
+                self.cellNewsDescription = nil;
             }
             
             UITextView *textView;
             textView = (UITextView *)[cell viewWithTag:1];
-            [textView setText: [[event description] stringByConvertingHTMLToPlainText]];
+            [textView setText: [[news description] stringByConvertingHTMLToPlainText]];
             break;
             
         default:
             break;
     }
-        
+    
     return cell;
 }
 
@@ -132,13 +131,13 @@
         case 0 :
             return 121;
             break;
-        
+            
         case 1 :
             return 44;
             break;
             
         case 2 :
-            return 155;
+            return 165;
             break;
             
         default :
@@ -201,8 +200,8 @@
 }
 
 - (void)dealloc {
-    [cellEventTop release];
-    [cellEventDescription release];
+    [cellNewsDescription release];
+    [cellNewsTop release];
     [super dealloc];
 }
 @end

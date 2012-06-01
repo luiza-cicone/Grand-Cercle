@@ -26,7 +26,7 @@ public class ContainerData {
 	}
 
 	
-	public static void ParseFiles(){
+	public static void parseFiles(){
 		// On passe par une classe factory pour obtenir une instance de sax
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
 		SAXParser parseur = null;

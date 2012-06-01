@@ -9,28 +9,69 @@
         android:minSdkVersion="7" 
     />
 	<uses-permission android:name="android.permission.INTERNET" /> 
-    	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <application
         android:icon="@drawable/logo_gc"
         android:label="@string/app_name" >
         <activity
             android:name=".GCMLaunching"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GCM"></activity>
-        <activity android:name=".TabEvent"></activity>
-        <activity android:name=".TabNews"></activity>
-		<activity android:name=".TabBP"></activity>
-		<activity android:name=".Tab4"></activity>
-		<activity android:name=".Preferences"></activity>
-		<activity android:name=".PageNews"></activity>
-		<activity android:name=".PageEvent"></activity>
+        <activity 
+            android:name=".GCM"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity 
+            android:name=".TabEvent"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity 
+            android:name=".TabNews"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+		<activity 
+		    android:name=".TabBP"
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity 
+		    android:name=".Tab4" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity 
+		    android:name=".TabPref" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity 
+		    android:name=".PageNews" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity 
+		    android:name="PageBP" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity 
+		    android:name=".PageEvent" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
     </application>
     
 

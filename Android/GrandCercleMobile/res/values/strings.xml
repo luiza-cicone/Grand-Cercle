@@ -13,4 +13,33 @@
     <string-array name="prefvalues">
         <item >Item 3</item>
     </string-array>
+    <string-array name="prefListentries">
+		<item>Cercle E3</item>
+		<item>Cercle Phelma</item>
+		<item>Cercle Papet</item>
+		<item>Cercle Ensimag</item>
+		<item>Cercle GI</item>
+		<item>Cercle Esisar</item>
+	</string-array>
+	<string-array name="prefListvalues">
+		<item>Cercle E3</item>
+		<item>Cercle Phelma</item>
+		<item>Cercle Papet</item>
+		<item>Cercle Ensimag</item>
+		<item>Cercle GI</item>
+		<item>Cercle Esisar</item>
+	</string-array> 
+    <string name="lien">Pour plus d\'informations, rendez-vous sur: </string>
+    <string name="addCal">Ajouter à mon calendrier</string>
+    <string name="prefList">changements sauvegardés</string>
+ 	<string-array name="listArray">
+	    <item>Rouge</item>
+	   <item>Vert</item>
+	   <item>Bleu</item>
+	</string-array> 
+	<string-array name="listValues">
+	   <item>1</item>
+	   <item>2</item>
+   	   <item>3</item>
+	</string-array> 
 </resources>

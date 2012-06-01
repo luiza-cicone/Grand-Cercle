@@ -6,6 +6,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class ParserXMLHandlerNews extends ParserXMLHandler {
+	private final String PUBDATE = "pubDate";
+	private final String AUTHOR = "author";
+	private final String GROUP = "group";
+	private final String LOGO = "logo";
 	
 	// Array list d'evenements
 	private ArrayList<News> listNews;

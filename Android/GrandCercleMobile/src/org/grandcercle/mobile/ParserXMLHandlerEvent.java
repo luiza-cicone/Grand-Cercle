@@ -7,6 +7,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class ParserXMLHandlerEvent extends ParserXMLHandler {
+	private final String PUBDATE = "pubDate";
+	private final String AUTHOR = "author";
+	private final String GROUP = "group";
+	private final String LOGO = "logo";
 	private final String TYPE = "type";
 	private final String DAY = "day";
 	private final String DATE = "date";
@@ -56,7 +60,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		
 		// Ci dessous, localName contient le nom du tag rencontré
 		
-		// Nous avons rencontré un tag NADE, il faut donc instancier un nouvel Event		
+		// Nous avons rencontré un tag NODE, il faut donc instancier un nouvel Event		
 		if (localName.equalsIgnoreCase(NODE)){
 			this.currentEvent = new Event();
 			inEvent = true;
@@ -177,17 +181,20 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 				buffer = null;
 			}
 		}
-		if (localName.equalsIgnoreCase(NODE)){		
-			listEvent.add(currentEvent);
-			if (hashEvent.containsKey(currentEvent.getEventDate())) {
-				ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());
-				listEventDay.add(currentEvent);
-				hashEvent.put(currentEvent.getEventDate(),listEventDay);
-			} else {
-				ArrayList<Event> listEventDay = new ArrayList<Event>();
-				listEventDay.add(currentEvent);
-				hashEvent.put(currentEvent.getEventDate(),listEventDay);
-			}
+		if (localName.equalsIgnoreCase(NODE)){
+			// correspond aux préférences ?
+			//if (currentEvent.getGroup() == "Grand Cercle") {
+				listEvent.add(currentEvent);
+				if (hashEvent.containsKey(currentEvent.getEventDate())) {
+					ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());
+					listEventDay.add(currentEvent);
+					hashEvent.put(currentEvent.getEventDate(),listEventDay);
+				} else {
+					ArrayList<Event> listEventDay = new ArrayList<Event>();
+					listEventDay.add(currentEvent);
+					hashEvent.put(currentEvent.getEventDate(),listEventDay);
+				}
+			//}
 			inEvent = false;
 		}
 	}
