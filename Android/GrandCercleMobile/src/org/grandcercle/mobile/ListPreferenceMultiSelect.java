@@ -15,43 +15,26 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ListView;
 
-/**
- * 
- * @author declanshanaghy
- * http://blog.350nice.com/wp/archives/240
- * MultiChoice Preference Widget for Android
- *
- * @contributor matiboy
- * Added support for check all/none and custom separator defined in XML.
- * IMPORTANT: The following attributes MUST be defined (probably inside attr.xml) for the code to even compile
- * <declare-styleable name="ListPreferenceMultiSelect">
-    	<attr format="string" name="checkAll" />
-    	<attr format="string" name="separator" />
-    </declare-styleable>
- *  Whether you decide to then use those attributes is up to you.
- *
- */
 public class ListPreferenceMultiSelect extends ListPreference {
 	private String separator;
 	private static final String DEFAULT_SEPARATOR = "OV=I=XseparatorX=I=VO"; 
-	private static final String LOG_TAG = "ListPreferenceMultiSelect";
 	private String checkAllKey = null;
 	private boolean[] mClickedDialogEntryIndices;
-	private ArrayList<String> l = ContainerData.getListCercles();
+	private ArrayList<String> lCercles = ContainerData.getListCercles();
 	
 	// Constructor
 	public ListPreferenceMultiSelect(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ListPreferenceMultiSelect);
-        checkAllKey = a.getString( R.styleable.ListPreferenceMultiSelect_checkAll );
-        String s = a.getString(R.styleable.ListPreferenceMultiSelect_separator );
-        if( s != null ) {
+        super(context,attrs);
+        TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.ListPreferenceMultiSelect);
+        checkAllKey = a.getString(R.styleable.ListPreferenceMultiSelect_checkAll);
+        String s = a.getString(R.styleable.ListPreferenceMultiSelect_separator);
+        if (s != null) {
         	separator = s;
         } else {
         	separator = DEFAULT_SEPARATOR;
         }
-     // Initialize the array of boolean to the same size as number of entries
-        mClickedDialogEntryIndices = new boolean[l.size()];
+        // Initialize the array of boolean to the same size as number of entries
+        mClickedDialogEntryIndices = new boolean[lCercles.size()];
     }
 	
 	@Override
@@ -67,11 +50,9 @@ public class ListPreferenceMultiSelect extends ListPreference {
 
     @Override
     protected void onPrepareDialogBuilder(Builder builder) {
-    	
-    	CharSequence[] entries = new String[l.size()];
-;
-    	CharSequence[] entryValues = new String[l.size()];
-    	Iterator<String> it = l.iterator();
+    	CharSequence[] entries = new String[lCercles.size()];
+    	CharSequence[] entryValues = new String[lCercles.size()];
+    	Iterator<String> it = lCercles.iterator();
     	int i = 0;
     	Log.d("essai1", "passé");
     	while (it.hasNext()) {
