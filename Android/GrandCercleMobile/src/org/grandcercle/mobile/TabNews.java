@@ -36,43 +36,7 @@ public class TabNews extends Activity {
 	}
 	 
 	 private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				 /* Get the notification manager  */
-		         NotificationManager mNotManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-		         /* Create a notification */
-		         String MyText = "Grand Cercle : Alerte événement !";
-		         Notification mNotification = new Notification(
-		                R.drawable.icon,                // An Icon to display
-		                MyText,                         // the text to display in the ticker
-		                System.currentTimeMillis()       ); // the time for the notification
-
-		         /* Starting an intent */
-		         String MyNotifyTitle = "Firstdroid Rocks!!!";
-		         String MyNotifiyText  = "Firstdroid: our forum at www.firstdroid.com";
-		         //Intent MyIntent = new Intent(getApplicationContext(),parser.class);
-		         Intent MyIntent = new Intent();
-		         MyIntent.putExtra("extendedTitle", MyNotifyTitle);
-		         MyIntent.putExtra("extendedText" , MyNotifiyText);
-		         PendingIntent StartIntent = PendingIntent.getActivity(  getApplicationContext(),
-		                                                   0,
-		                                                   MyIntent,
-		                                                   0);
-
-		         /* Set notification message */
-		         mNotification.setLatestEventInfo(   getApplicationContext(),
-		                                    MyNotifyTitle,
-		                                    MyNotifiyText,
-		                                    StartIntent);
-
-		         mNotification.ledOnMS  = 200;    //Set led blink (Off in ms)
-		         mNotification.ledOffMS = 200;    //Set led blink (Off in ms)
-		         mNotification.ledARGB = 40;   	//Set led color
-
-		         /* Sent Notification to notification bar */
-		         mNotManager.notify(  0 , mNotification );
-				
-				
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {				
 				// Ouverture nouvelle activity
 				Intent intent = new Intent(TabNews.this,PageNews.class);
 				// Passage des paramètres
