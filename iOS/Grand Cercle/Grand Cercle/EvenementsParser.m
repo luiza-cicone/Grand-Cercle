@@ -9,7 +9,7 @@
 #import "EvenementsParser.h"
 
 @implementation EvenementsParser
-@synthesize arrayEvenements;
+@synthesize arrayEvents, arrayOldEvents;
 static EvenementsParser *instanceEvent = nil;
 
 // singleton
@@ -20,94 +20,93 @@ static EvenementsParser *instanceEvent = nil;
     return instanceEvent;
 }
 
-- (void) treatementEvenements:(TBXMLElement *)eventAParser {
+- (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
     
     NSInteger indice = 0;
 	do {
-        
         // Définition de la news à récupérer
         Evenements *aEvent = [[Evenements alloc] init];
         
         // Récupération du titre
-        TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:eventAParser];
+        TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:eventsToParse];
         aEvent.title = [[TBXML textForElement:title] stringByConvertingHTMLToPlainText];
         
         // Récupération de la description
-        TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:eventAParser];
+        TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:eventsToParse];
         aEvent.description = [[TBXML textForElement:description] stringByConvertingHTMLToPlainText];
 
                 
         // Récupération du lien
-        TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:eventAParser];
-        aEvent.theLink = (NSURL*)[[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
+        TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:eventsToParse];
+        aEvent.theLink = [[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
 
         
         // Récupération de la date de publication
-        TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:eventAParser];
+        TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:eventsToParse];
         aEvent.pubDate = [[TBXML textForElement:pubDate] stringByConvertingHTMLToPlainText];
 
         
         // Récupération de l'auteur
-        TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:eventAParser];
+        TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:eventsToParse];
         aEvent.author = [[TBXML textForElement:author] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du groupe
-        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventAParser];
+        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
         aEvent.group = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du logo
-        TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:eventAParser];
-        aEvent.logo = (NSURL*)[[TBXML textForElement:logo] stringByConvertingHTMLToPlainText];
+        TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:eventsToParse];
+        aEvent.logo = [[TBXML textForElement:logo] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du jour
-        TBXMLElement *day = [TBXML childElementNamed:@"day" parentElement:eventAParser];
+        TBXMLElement *day = [TBXML childElementNamed:@"day" parentElement:eventsToParse];
         aEvent.day = [[TBXML textForElement:day] stringByConvertingHTMLToPlainText];
 
         
         // Récupération de la date
-        TBXMLElement *date = [TBXML childElementNamed:@"date" parentElement:eventAParser];
+        TBXMLElement *date = [TBXML childElementNamed:@"date" parentElement:eventsToParse];
         aEvent.date = [[TBXML textForElement:date] stringByConvertingHTMLToPlainText];
 
         
         // Récupération de l'heure du début
-        TBXMLElement *time = [TBXML childElementNamed:@"time" parentElement:eventAParser];
+        TBXMLElement *time = [TBXML childElementNamed:@"time" parentElement:eventsToParse];
         aEvent.time = [[TBXML textForElement:time] stringByConvertingHTMLToPlainText];
 
         
         // Récupération de la petite image
-        TBXMLElement *imageSmall = [TBXML childElementNamed:@"thumbnail" parentElement:eventAParser];
-        aEvent.imageSmall = (NSURL*)[[TBXML textForElement:imageSmall] stringByConvertingHTMLToPlainText];
+        TBXMLElement *imageSmall = [TBXML childElementNamed:@"thumbnail" parentElement:eventsToParse];
+        aEvent.imageSmall = [[TBXML textForElement:imageSmall] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du type
-        TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventAParser];
+        TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventsToParse];
         aEvent.type = [[TBXML textForElement:type] stringByConvertingHTMLToPlainText];
 
         
         // Récupération de la petite image
-        TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:eventAParser];
-        aEvent.image = (NSURL*)[[TBXML textForElement:image] stringByConvertingHTMLToPlainText];
+        TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:eventsToParse];
+        aEvent.image = [[TBXML textForElement:image] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du lieu
-        TBXMLElement *place = [TBXML childElementNamed:@"lieu" parentElement:eventAParser];
+        TBXMLElement *place = [TBXML childElementNamed:@"lieu" parentElement:eventsToParse];
         aEvent.place = [[TBXML textForElement:place] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du prix avec CVA
-        TBXMLElement *priceCVA = [TBXML childElementNamed:@"paf" parentElement:eventAParser];
+        TBXMLElement *priceCVA = [TBXML childElementNamed:@"paf" parentElement:eventsToParse];
         aEvent.priceCva = [[TBXML textForElement:priceCVA] stringByConvertingHTMLToPlainText];
 
         
         // Récupération du prix sans CVA
-        TBXMLElement *priceNoCva = [TBXML childElementNamed:@"paf_sans_cva" parentElement:eventAParser];
+        TBXMLElement *priceNoCva = [TBXML childElementNamed:@"paf_sans_cva" parentElement:eventsToParse];
         aEvent.priceNoCva = [[TBXML textForElement:priceNoCva] stringByConvertingHTMLToPlainText];
   
         // Récupération du la date
-        TBXMLElement *eventDate = [TBXML childElementNamed:@"eventDate" parentElement:eventAParser];        
+        TBXMLElement *eventDate = [TBXML childElementNamed:@"eventDate" parentElement:eventsToParse];        
         NSString *data = [[TBXML textForElement:eventDate] stringByConvertingHTMLToPlainText];
         
         data = [data stringByAppendingString:@" 00:00:00 +0000"];
@@ -123,27 +122,32 @@ static EvenementsParser *instanceEvent = nil;
         indice++;
         
         // Ajout de la news au tableau
-        [arrayEvenements addObject:aEvent];
+        [array addObject:aEvent];
         [aEvent release];
         [firstDateFormatter release];
         
         // Obtain next sibling element
-	} while ((eventAParser = eventAParser->nextSibling));
+	} while ((eventsToParse = eventsToParse->nextSibling));
     
 }
 
 - (void)loadEvenements { 
     
     // Initialisation du tableau contenant les News
-    arrayEvenements = [[NSMutableArray alloc] initWithCapacity:10];
+    arrayEvents = [[NSMutableArray alloc] initWithCapacity:10];
+    arrayOldEvents = [[NSMutableArray alloc] initWithCapacity:10];
     
     // Create a success block to be called when the async request completes
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
         // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self treatementEvenements:tbxmlDocument.rootXMLElement->firstChild];
+            [self handleEvents:tbxmlDocument.rootXMLElement->firstChild toArray:arrayEvents];
     };
-    
+    TBXMLSuccessBlock successBlock2 = ^(TBXML *tbxmlDocument) {
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxmlDocument.rootXMLElement)
+            [self handleEvents:tbxmlDocument.rootXMLElement->firstChild toArray:arrayOldEvents];
+    };
     // Create a failure block that gets called if something goes wrong
     TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
@@ -153,6 +157,8 @@ static EvenementsParser *instanceEvent = nil;
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
-    
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data-old.xml"] 
+                               success:successBlock2 
+                               failure:failureBlock];
 }
 @end

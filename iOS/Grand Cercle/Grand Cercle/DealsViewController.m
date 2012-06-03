@@ -104,13 +104,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"BonPlanCell";
+    static NSString *CellIdentifier = @"DealCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     
     if (cell == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"BonPlanCell" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"DealCell" owner:self options:nil];
         cell = bonsPlansCell;
         self.bonsPlansCell = nil;
     }

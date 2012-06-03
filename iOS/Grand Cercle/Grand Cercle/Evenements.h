@@ -23,11 +23,11 @@
     // Heure de début
     NSString *time;
     // Image petite
-    NSURL *imageSmall;
+    NSString *imageSmall;
     //Type
     NSString *type;
     // Image
-    NSURL *image;
+    NSString *image;
     // Lieu
     NSString *place;
     // Prix avec cva
@@ -41,8 +41,7 @@
     NSInteger indice;
 }
 
-@property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva, *pubDate, *author, *group;
-@property (nonatomic, retain) NSURL *imageSmall, *image;
+@property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva, *pubDate, *author, *group, *imageSmall, *image;
 @property (nonatomic, assign) NSDate *eventDate;
 @property (nonatomic, assign) NSInteger indice;
 

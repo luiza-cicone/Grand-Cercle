@@ -61,6 +61,10 @@
 		2595EAF9157405EB00CA27B3 /* InfosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF5157405EB00CA27B3 /* InfosViewController.m */; };
 		2595EAFA157405EB00CA27B3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF7157405EB00CA27B3 /* SettingsViewController.m */; };
 		25D7C0FE15760BDB00C2B988 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */; };
+		25D8AD7315791F240065C038 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7215791F240065C038 /* icon.png */; };
+		25D8AD7515791F2D0065C038 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7415791F2D0065C038 /* icon@2x.png */; };
+		25D8AD7C157921860065C038 /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7A157921860065C038 /* default@2x.png */; };
+		25D8AD7D157921860065C038 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7B157921860065C038 /* default.png */; };
 		25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */; };
 		25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E25D15751736009B8921 /* libTapkuLibrary.a */; };
 		25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29615751DBC009B8921 /* QuartzCore.framework */; };
@@ -180,6 +184,10 @@
 		2595EAF7157405EB00CA27B3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
 		25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsTableViewController.m; sourceTree = "<group>"; };
+		25D8AD7215791F240065C038 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		25D8AD7415791F2D0065C038 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		25D8AD7A157921860065C038 /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
+		25D8AD7B157921860065C038 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapkuLibrary.xcodeproj; path = ../tapkulibrary/src/TapkuLibrary.xcodeproj; sourceTree = "<group>"; };
 		25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TapkuLibrary.bundle; path = ../tapkulibrary/src/TapkuLibrary.bundle; sourceTree = "<group>"; };
 		25E0E29615751DBC009B8921 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -261,6 +269,10 @@
 		2595EA8E1573FA9000CA27B3 = {
 			isa = PBXGroup;
 			children = (
+				25D8AD7A157921860065C038 /* default@2x.png */,
+				25D8AD7B157921860065C038 /* default.png */,
+				25D8AD7415791F2D0065C038 /* icon@2x.png */,
+				25D8AD7215791F240065C038 /* icon.png */,
 				04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */,
 				04F4CBDF157915C000A49037 /* EventFourNextViewController.m */,
 				04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */,
@@ -298,6 +310,7 @@
 		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
 			isa = PBXGroup;
 			children = (
+				25F41CC0157AC76E002C15C3 /* Parser */,
 				25E0E2601575174C009B8921 /* Models */,
 				255C8148157428A300E6ECC3 /* TBXML */,
 				2595EAE11573FABD00CA27B3 /* UI */,
@@ -403,14 +416,21 @@
 				0435F48F1574F2E7009F23CD /* Items.m */,
 				047EB1EF1576099400F2F59B /* BonsPlans.h */,
 				047EB1F01576099400F2F59B /* BonsPlans.m */,
-				047EB1F2157609D200F2F59B /* BonsPlansParser.h */,
-				047EB1F3157609D200F2F59B /* BonsPlansParser.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		25F41CC0157AC76E002C15C3 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
 				255C8140157428A000E6ECC3 /* NewsParser.h */,
 				255C813D157428A000E6ECC3 /* NewsParser.m */,
+				047EB1F2157609D200F2F59B /* BonsPlansParser.h */,
+				047EB1F3157609D200F2F59B /* BonsPlansParser.m */,
 				0435F4931574F4B3009F23CD /* EvenementsParser.h */,
 				0435F4941574F4B3009F23CD /* EvenementsParser.m */,
 			);
-			name = Models;
+			name = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -533,6 +553,10 @@
 				04F4CBD21578B6C400A49037 /* DescriptionCell.xib in Resources */,
 				04F4CBD71578C58000A49037 /* NewsDescription.xib in Resources */,
 				04F4CBD91578C73300A49037 /* NewsTopCell.xib in Resources */,
+				25D8AD7315791F240065C038 /* icon.png in Resources */,
+				25D8AD7515791F2D0065C038 /* icon@2x.png in Resources */,
+				25D8AD7C157921860065C038 /* default@2x.png in Resources */,
+				25D8AD7D157921860065C038 /* default.png in Resources */,
 				04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

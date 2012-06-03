@@ -37,7 +37,7 @@ static NewsParser *instanceNews = nil;
         
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:newsAParser];
-        aNews.theLink = (NSURL*)[[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
+        aNews.theLink = [[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
         
         // Récupération de la date de publication
         TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:newsAParser];
@@ -53,7 +53,7 @@ static NewsParser *instanceNews = nil;
         
         // Récupération du logo
         TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:newsAParser];
-        aNews.logo = (NSURL*)[[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
+        aNews.logo = [[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
         
         // Ajout de la news au tableau
         [arrayNews addObject:aNews];

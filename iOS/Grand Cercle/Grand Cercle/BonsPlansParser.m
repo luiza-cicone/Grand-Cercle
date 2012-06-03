@@ -37,11 +37,11 @@ static BonsPlansParser *instanceBonsPlans = nil;
         
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:bonsPlansAParser];
-        aBonsPlans.theLink = (NSURL*)[[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
+        aBonsPlans.theLink = [[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
         
         // Récupération du logo
         TBXMLElement *logo = [TBXML childElementNamed:@"image" parentElement:bonsPlansAParser];
-        aBonsPlans.logo = (NSURL*)[[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
+        aBonsPlans.logo = [[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
         
         // Ajout de la news au tableau
         [arrayBonsPlans addObject:aBonsPlans];

@@ -9,6 +9,7 @@
 #import "EventsViewController.h"
 #import "EventsCalendarViewController.h"
 #import "EventsTableViewController.h"
+#import "EventFourNextViewController.h"
 
 @interface EventsViewController ()
 
@@ -18,14 +19,13 @@
 @synthesize viewControllers, pageControl, scrollView, myNav;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Events", @"Evenements");
         self.tabBarItem.image = [UIImage imageNamed:@"events"];
     }
-return self;
+    return self;
 }
 	
 -(void)viewDidAppear:(BOOL)animated {
@@ -95,7 +95,7 @@ int kNumberOfPages = 3;
             [controller release];
         }
         else {
-            controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
+            controller = [[EventFourNextViewController alloc] initWithNibName:@"EventFourNextViewController" bundle:nil];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }

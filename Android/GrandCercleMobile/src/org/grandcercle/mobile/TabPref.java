@@ -30,18 +30,18 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		pref.registerOnSharedPreferenceChangeListener(this);
 	    //setPreferenceScreen(createPreferenceHierarchy());
 
+
 		//SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		//String myString = preferences.getString("PrefList", "");
 	}
 	
 	
-
 	/*private PreferenceScreen createPreferenceHierarchy() { 
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
-        inlinePrefCat.setTitle("Liste préférence");
+        inlinePrefCat.setTitle(name);
         root.addPreference(inlinePrefCat);
-        Iterator<String> it = listCercles.iterator();
+        Iterator<String> it = list.iterator();
         String Temp;
         while (it.hasNext()) {
 	        CheckBoxPreference checkboxPref = new CheckBoxPreference(this);

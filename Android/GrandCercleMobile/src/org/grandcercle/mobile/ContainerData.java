@@ -21,8 +21,10 @@ public class ContainerData {
 	static public Context context;
 	static private ArrayList<News> listNews;
 	private static ArrayList<Event> listEvent;
+	private static ArrayList<Event> listEventOld;
 	private static ArrayList<BP> listBP;
 	private static HashMap<String,ArrayList<Event>> hashEvent;
+	private static HashMap<String,ArrayList<Event>> hashEventOld;
 	private static ArrayList<String> listCercles;
 	private static ArrayList<String> listClubs;
 	
@@ -55,6 +57,13 @@ public class ContainerData {
 		URL urlEvent = null;
 		try {
 			urlEvent = new URL("http://www.grandcercle.org/evenements/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL urlEventOld = null;
+		try {
+			urlEventOld = new URL("http://www.grandcercle.org/evenements/data-old.xml");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
@@ -112,6 +121,20 @@ public class ContainerData {
 			e.printStackTrace();
 		}
 		
+		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
+			
+			// On récupère directement la liste des feeds
+			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
+			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		DefaultHandler handlerBP = new ParserXMLHandlerBP();
 		try {
 			// On parse le fichier XML
@@ -161,7 +184,16 @@ public class ContainerData {
 		return listEvent;
 	}
 	
+	public static ArrayList<Event> getEventOld() {
+		return listEventOld;
+	}
+	
 	public static HashMap<String,ArrayList<Event>> getEventInHashMap() {
+		if (hashEventOld != null && hashEvent != null) {
+			hashEvent.putAll(hashEventOld);
+		} else if (hashEventOld != null) {
+			return hashEventOld;
+		}
 		return hashEvent;
 	}
 	

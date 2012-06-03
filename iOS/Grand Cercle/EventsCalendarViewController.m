@@ -13,12 +13,53 @@
 @implementation EventsCalendarViewController
 @synthesize dataArray, dataDictionary;
 @synthesize eventCell;
+@synthesize imageCache, imageCache2;
 
 - (void) viewDidLoad{
 	[super viewDidLoad];
+    
 	[self.monthView selectDate:[NSDate date]];
-
+    
+    // Préparation du cache
+	
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
+	imageCache.notificationName = @"newImageSmallCacheCalendar";
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageSmallCacheCalendar" object:nil];
+	
+	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
+	imageCache2.notificationName = @"newLogoCacheCalendar";
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCacheCalendar" object:nil];
+    
 }
+
+- (void) newImageRetrieved:(NSNotification*)sender{
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tableView indexPathsForVisibleRows];
+    
+    for(NSIndexPath *path in paths) {
+        
+        NSInteger index = path.section * 1000 + path.row;
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+        UIImageView *imageView;
+        if ([[(NSNotification *) sender name] isEqualToString:@"newLogoCacheCalendar"]) {
+            imageView = (UIImageView *)[cell viewWithTag:6];
+        }
+        else {
+            imageView = (UIImageView *)[cell viewWithTag:1];
+        }
+    	if(imageView.image == nil && tag == index){
+            
+            imageView.image = [dict objectForKey:@"image"];
+            [cell setNeedsLayout];
+        }
+    }
+}
+
 - (void) viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
 	
@@ -69,12 +110,12 @@
 }
     
 - (UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"EventSmallCell";
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:CellIdentifier];
     
     
     if (cell == nil) {
+        NSLog(@"CELL IS NIL");
         [[NSBundle mainBundle] loadNibNamed:@"EventSmallCell" owner:self options:nil];
         cell = eventCell;
         self.eventCell = nil;
@@ -93,9 +134,10 @@
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e imageSmall]]];
-            UIImage *myimage = [[UIImage alloc] initWithData:imageData];
-            [imageView setImage:myimage];
+            UIImage *img;
+            img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
+            [imageView setImage:img];
+            
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
@@ -107,9 +149,9 @@
             
             imageView = (UIImageView *)[cell viewWithTag:4];
             
-            imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[e logo]]];
-            myimage = [[UIImage alloc] initWithData:imageData];
-            [imageView setImage:myimage];
+            img = [imageCache2 imageForKey:[NSString stringWithFormat:@"%d", [e.logo hash]] url:[NSURL URLWithString: e.logo] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
+            [imageView setImage:img];
+
             
         }
     }
@@ -123,7 +165,10 @@
 	// dataArray: has boolean markers for each day to pass to the calendar view (via the delegate function)
 	// dataDictionary: has items that are associated with date keys (for tableview)
 	    
-    NSMutableArray *theDates = [[EvenementsParser instance] arrayEvenements];
+    NSArray *theDates = [[EvenementsParser instance] arrayEvents];     
+    theDates = [theDates arrayByAddingObjectsFromArray:[[EvenementsParser instance] arrayOldEvents]];
+
+    
 //	self.dataArray = [NSMutableArray array];
 	self.dataDictionary = [NSMutableDictionary dictionary];
     

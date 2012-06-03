@@ -24,7 +24,7 @@
         // Custom initialization
     }    
     
-    eventArray = [[EvenementsParser instance] arrayEvenements];
+    eventArray = [[EvenementsParser instance] arrayEvents];
     
     
     //configure sections
@@ -49,30 +49,16 @@
 //    }
     
     // Préparation du cache
-    
-    urlArray = [[NSMutableArray alloc] initWithCapacity:[eventArray count]];
-    
-    for (int i = 0; i < [eventArray count]; i++) {
-        Evenements *e = [eventArray objectAtIndex:i];
-        [urlArray addObject:[e imageSmall]];
-    }
 	
-	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"imageSmall"];
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
 	imageCache.notificationName = @"newImageSmallCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageSmallCache" object:nil];
-    
-    urlArray2 = [[NSMutableArray alloc] initWithCapacity:[eventArray count]];
-    
-    for (int i = 0; i < [eventArray count]; i++) {
-        Evenements *e = [eventArray objectAtIndex:i];
-        [urlArray2 addObject:[e logo]];
-    }
 	
-	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"logoEvent"];
-	imageCache2.notificationName = @"newLogoEventCache";
+	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
+	imageCache2.notificationName = @"newLogoCache";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoEventCache" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
 
     return self;
 
@@ -87,11 +73,11 @@
     
     for(NSIndexPath *path in paths) {
         
-        NSInteger index = path.row;
+        NSInteger index = path.section * 1000 + path.row;
 
         UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
         UIImageView *imageView;
-        if ([[(NSNotification *) sender name] isEqualToString:@"newLogoEventCache"]) {
+        if ([[(NSNotification *) sender name] isEqualToString:@"newLogoCache"]) {
             imageView = (UIImageView *)[cell viewWithTag:6];
         }
         else {
@@ -137,7 +123,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
+//    int count = 0;
+//    for (id key in dico) {
+//        if ([(NSDate *)key compare:[NSDate date]] == NSOrderedDescending) {
+//            count++;
+//        }
+//    }
+//    return count;
     return [dico count];
 }
 
@@ -145,17 +137,17 @@
 {
     // Return the number of rows in the section.
 
-    NSArray *dates = [dico allKeys];
-    id theDate = [dates objectAtIndex:[dates count] - section - 1];
+    NSArray *dates = [[dico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    id theDate = [dates objectAtIndex:section];
     id eventList = [dico objectForKey:theDate];
     return [eventList count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *keys = [dico allKeys];
-    id aKey = [keys objectAtIndex:section];
-    id anObject = [dico objectForKey:aKey];
-    Evenements *e = [anObject objectAtIndex:0];
+    NSArray *dates = [[dico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    id theDate = [dates objectAtIndex:section];
+    id eventList = [dico objectForKey:theDate];
+    Evenements *e = [eventList objectAtIndex:0];
     
     NSDate *curentDate = [NSDate date];
     NSDate *eventDate = [e eventDate];
@@ -190,17 +182,19 @@
         cell = eventCell;
         self.eventCell = nil;
     }
-    NSArray *keys = [dico allKeys];
-    id aKey = [keys objectAtIndex:[keys count] - 1 - indexPath.section];
+    NSArray *dates = [[dico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    id theDate = [dates objectAtIndex:indexPath.section];
 
-    id anObject = [dico objectForKey:aKey];
-    Evenements *e = (Evenements *)[anObject objectAtIndex:indexPath.row];
+    id eventList = [dico objectForKey:theDate];
+    Evenements *e = (Evenements *)[eventList objectAtIndex:indexPath.row];
     
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
     
-    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
+    UIImage *img;
+    img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
     [imageView setImage:img];
+    
     
     UILabel *label;
     label = (UILabel *)[cell viewWithTag:2];
@@ -217,8 +211,10 @@
     
     imageView = (UIImageView *)[cell viewWithTag:6];
     
-    img = [imageCache2 imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray2 objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
+    img = [imageCache2 imageForKey:[NSString stringWithFormat:@"%d", [e.logo hash]] url:[NSURL URLWithString: e.logo] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
+
     [imageView setImage:img];
+
     
     return cell;
 }

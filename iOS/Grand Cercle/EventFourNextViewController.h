@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventFourNextViewController : UIViewController
+@interface EventFourNextViewController : UIViewController {
+    NSMutableArray *tabImage;
+    NSMutableArray *tabLabel;
+}
+
+@property (retain, nonatomic) NSMutableArray *tabLabel, *tabImage;
 
 @end

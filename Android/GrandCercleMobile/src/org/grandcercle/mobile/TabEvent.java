@@ -53,7 +53,15 @@ public class TabEvent extends Activity {
 
 		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
+		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();
+		
+		if (listEvent == null && listEventOld == null) {
+			Toast.makeText(TabEvent.this,"Pas d'événements !",Toast.LENGTH_LONG).show();
+		} else if (listEvent == null) {
+			Toast.makeText(TabEvent.this,"Pas d'événements à venir !",Toast.LENGTH_LONG).show();
+		}
+		
 		
 		// Attributs de la liste
 		if (listEvent != null) {
@@ -86,12 +94,13 @@ public class TabEvent extends Activity {
 				eventNumber ++;
 			}
 			
-			setDates = hashMapEvent.keySet();
-		} else {
-			Toast.makeText(TabEvent.this,"Pas d'événements !",Toast.LENGTH_LONG).show();
+			
 		}
 		// Attributs du calendrier
 		
+		if (listEvent != null || listEventOld != null) {
+			setDates = hashMapEvent.keySet();
+		}
 		
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
