@@ -21,6 +21,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
 	private String checkAllKey = null;
 	private boolean[] mClickedDialogEntryIndices;
 	private ArrayList<String> lCercles = ContainerData.getListCercles();
+	private ArrayList<String> lClubs = ContainerData.getListClubs();
 	
 	// Constructor
 	public ListPreferenceMultiSelect(Context context, AttributeSet attrs) {
