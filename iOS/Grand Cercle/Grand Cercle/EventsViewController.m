@@ -9,6 +9,7 @@
 #import "EventsViewController.h"
 #import "EventsCalendarViewController.h"
 #import "EventsTableViewController.h"
+#import "EventFourNextViewController.h"
 
 @interface EventsViewController ()
 
@@ -95,7 +96,7 @@ int kNumberOfPages = 3;
             [controller release];
         }
         else {
-            controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
+            controller = [[EventFourNextViewController alloc] initWithNibName:@"EventFourNextViewController" bundle:nil];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }
