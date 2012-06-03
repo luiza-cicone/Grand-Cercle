@@ -1,5 +1,6 @@
 package org.grandcercle.mobile;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -37,7 +38,11 @@ public class ListPreferenceMultiSelect extends ListPreference {
 	private static final String LOG_TAG = "ListPreferenceMultiSelect";
 	private String checkAllKey = null;
 	private boolean[] mClickedDialogEntryIndices;
-	private ArrayList<String> l = ContainerData.getListCercles();
+	private ArrayList<String> list;
+	private CharSequence[] entryValues; 
+	private CharSequence[] entries;
+	
+	
 	
 	// Constructor
 	public ListPreferenceMultiSelect(Context context, AttributeSet attrs) {
@@ -50,15 +55,28 @@ public class ListPreferenceMultiSelect extends ListPreference {
         } else {
         	separator = DEFAULT_SEPARATOR;
         }
+        String cle = this.getKey();
+    	if (cle.equals("ListPrefClubs")) {
+    		list = ContainerData.getListClubs();
+    	} else if (cle.equals("ListPrefCercles")) {
+    		list = ContainerData.getListCercles();
+    	}
+    	entries= new String[list.size()];
+    	entryValues = new String[list.size()];
      // Initialize the array of boolean to the same size as number of entries
-        mClickedDialogEntryIndices = new boolean[l.size()];
+        mClickedDialogEntryIndices = new boolean[list.size()];
+       
     }
 	
 	@Override
     public void setEntries(CharSequence[] entries) {
     	super.setEntries(entries);
     	// Initialize the array of boolean to the same size as number of entries
-        mClickedDialogEntryIndices = new boolean[entries.length];
+        mClickedDialogEntryIndices = new boolean[list.size()];
+        for (int i= 0; i<list.size(); i++) {
+        	mClickedDialogEntryIndices[i]=true;
+        
+        }
     }
     
     public ListPreferenceMultiSelect(Context context) {
@@ -68,41 +86,49 @@ public class ListPreferenceMultiSelect extends ListPreference {
     @Override
     protected void onPrepareDialogBuilder(Builder builder) {
     	
-    	CharSequence[] entries = new String[l.size()];
-;
-    	CharSequence[] entryValues = new String[l.size()];
-    	Iterator<String> it = l.iterator();
-    	int i = 0;
-    	Log.d("essai1", "passé");
-    	while (it.hasNext()) {
-            entries[i] = it.next();
-            entryValues[i] = Integer.toString(i);
-            i++;
-        }
-    	Log.d("essai2", "passé");
-    	//CharSequence[] entries = getEntries();
-    	//CharSequence[] entryValues = getEntryValues();
+    	entryValues = BuildEntryValuesCercles();
+    	entries = BuildEntriesCercles();
         if (entries == null || entryValues == null || entries.length != entryValues.length ) {
             throw new IllegalStateException(
                     "ListPreference requires an entries array and an entryValues array which are both the same length");
         }
 
-       // restoreCheckedEntries();
+        restoreCheckedEntries();
         builder.setMultiChoiceItems(entries, mClickedDialogEntryIndices, 
                 new DialogInterface.OnMultiChoiceClickListener() {
 					public void onClick(DialogInterface dialog, int which, boolean val) {
-						/*if( isCheckAllValue( which ) == true ) {
+						if( isCheckAllValue( which ) == true ) {
 							checkAll( dialog, val );
-						}*/
+						}
 						mClickedDialogEntryIndices[which] = val;
 					}
         });
     }
+    private CharSequence[] BuildEntriesCercles() {
+    	CharSequence[] e = new String[list.size()];
+    	Iterator<String> it = list.iterator();
+    	int i = 0;
+    	while (it.hasNext()) {
+            e[i] = it.next();
+            i++;
+        }
+    	return e;
+    }
+    
+    private CharSequence[] BuildEntryValuesCercles() {
+    	CharSequence[] temp = new String[list.size()];
+    	int i = 0;
+    	while (i<list.size()) {
+            temp[i] = Integer.toString(i);
+            i++;
+        }
+    	return temp;
+    }
     
     private boolean isCheckAllValue( int which ){
-    	final CharSequence[] entryValues = getEntryValues();
+    	final CharSequence[] entry = getEntryValues();
     	if(checkAllKey != null) {
-			return entryValues[which].equals(checkAllKey);
+			return entry[which].equals(checkAllKey);
 		}
     	return false;
     }
@@ -126,7 +152,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
     }
     
     private void restoreCheckedEntries() {
-    	CharSequence[] entryValues = getEntryValues();
+    	CharSequence[] entryV = getEntryValues();
     	
     	// Explode the string read in sharedpreferences
     	String[] vals = parseStoredValue(getValue());
@@ -136,8 +162,8 @@ public class ListPreferenceMultiSelect extends ListPreference {
 //        	for ( int j=0; j<vals.length; j++ ) {
 //    		TODO: Check why the trimming... Can there be some random spaces added somehow? What if we want a value with trailing spaces, is that an issue?
 //        		String val = vals[j].trim();
-        	for ( int i=0; i<entryValues.length; i++ ) {
-        		CharSequence entry = entryValues[i];
+        	for ( int i=0; i<entryV.length; i++ ) {
+        		CharSequence entry = entryV[i];
             	if ( valuesList.contains(entry) ) {
         			mClickedDialogEntryIndices[i] = true;
         		}
@@ -151,12 +177,12 @@ public class ListPreferenceMultiSelect extends ListPreference {
 //        super.onDialogClosed(positiveResult);
 		ArrayList<String> values = new ArrayList<String>();
         
-    	CharSequence[] entryValues = getEntryValues();
-        if (positiveResult && entryValues != null) {
-        	for ( int i=0; i<entryValues.length; i++ ) {
+    	CharSequence[] entry = getEntryValues();
+        if (positiveResult && entry != null) {
+        	for ( int i=0; i<entry.length; i++ ) {
         		if ( mClickedDialogEntryIndices[i] == true ) {
         			// Don't save the state of check all option - if any
-        			String val = (String) entryValues[i];
+        			String val = (String) entry[i];
         			if( checkAllKey == null || (val.equals(checkAllKey) == false) ) {
         				values.add(val);
         			}

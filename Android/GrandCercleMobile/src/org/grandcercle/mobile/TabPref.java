@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
@@ -24,9 +25,10 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		listCercles = ContainerData.getListCercles();
 		listClubs = ContainerData.getListClubs();
 		addPreferencesFromResource(R.xml.prefs);
+		PreferenceManager.setDefaultValues(TabPref.this, R.xml.prefs, false);
 		pref = getPreferenceManager().getSharedPreferences();
 		pref.registerOnSharedPreferenceChangeListener(this);
-	    // setPreferenceScreen(createPreferenceHierarchy());
+	    //setPreferenceScreen(createPreferenceHierarchy());
 
 		//SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		//String myString = preferences.getString("PrefList", "");
@@ -34,7 +36,7 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 	
 	
 
-	private PreferenceScreen createPreferenceHierarchy() { 
+	/*private PreferenceScreen createPreferenceHierarchy() { 
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
         inlinePrefCat.setTitle("Liste préférence");
@@ -49,7 +51,7 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 	        inlinePrefCat.addPreference(checkboxPref);
         }
 		return root;
-	}
+	}*/
 
 
 
@@ -62,4 +64,7 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 			return listCercles;
 	}
 	
+	public ArrayList<String> getListClub() {
+		return listClubs;
+}
 }
