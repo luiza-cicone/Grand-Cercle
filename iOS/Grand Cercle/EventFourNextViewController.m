@@ -15,15 +15,15 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     EvenementsParser *ep = [EvenementsParser instance];
-    int borneSup = MIN(4, [ep.arrayEvenements count]);
+    int borneSup = MIN(4, [ep.arrayEvents count]);
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         tabLabel = [[[NSMutableArray alloc] initWithCapacity:4] autorelease];
         tabImage = [[[NSMutableArray alloc] initWithCapacity:4] autorelease];
         
         for (int i = 0; i < borneSup; i++) {
-            [tabImage addObject:[[ep.arrayEvenements objectAtIndex:i] image]];
-            [tabLabel addObject:[[ep.arrayEvenements objectAtIndex:i] date]];
+            [tabImage addObject:[[ep.arrayEvents objectAtIndex:i] image]];
+            [tabLabel addObject:[[ep.arrayEvents objectAtIndex:i] date]];
         }
     }
     
