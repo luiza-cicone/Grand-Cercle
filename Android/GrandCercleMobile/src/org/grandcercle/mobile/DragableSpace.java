@@ -3,7 +3,6 @@ package org.grandcercle.mobile;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -45,7 +44,6 @@ public class DragableSpace extends ViewGroup {
 
     public DragableSpace(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.d("debug", "DragableSpace(Context context, AttributeSet attrs)");
         mScroller = new Scroller(context);
 
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
@@ -70,7 +68,6 @@ public class DragableSpace extends ViewGroup {
          * Shortcut the most recurring case: the user is in the dragging state
          * and he is moving his finger. We want to intercept this motion.
          */
-    	Log.d("debug", "onInterceptTouchEvent(MotionEvent ev)");
         final int action = ev.getAction();
         if ((action == MotionEvent.ACTION_MOVE) && (mTouchState != TOUCH_STATE_REST)) {
         	return true;

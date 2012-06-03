@@ -22,6 +22,8 @@
 		04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */; };
 		04F4CBD71578C58000A49037 /* NewsDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD61578C58000A49037 /* NewsDescription.xib */; };
 		04F4CBD91578C73300A49037 /* NewsTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD81578C73300A49037 /* NewsTopCell.xib */; };
+		04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBDF157915C000A49037 /* EventFourNextViewController.m */; };
+		04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */; };
 		255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 255C809A15740E0100E6ECC3 /* Localizable.strings */; };
 		255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C809E15740EE900E6ECC3 /* DealsViewController.xib */; };
 		255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80A015740EE900E6ECC3 /* InfosViewController.xib */; };
@@ -127,6 +129,9 @@
 		04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailViewController.m; path = ../NewsDetailViewController.m; sourceTree = "<group>"; };
 		04F4CBD61578C58000A49037 /* NewsDescription.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsDescription.xib; path = ../NewsDescription.xib; sourceTree = "<group>"; };
 		04F4CBD81578C73300A49037 /* NewsTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsTopCell.xib; path = ../NewsTopCell.xib; sourceTree = "<group>"; };
+		04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventFourNextViewController.h; sourceTree = "<group>"; };
+		04F4CBDF157915C000A49037 /* EventFourNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventFourNextViewController.m; sourceTree = "<group>"; };
+		04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventFourNextViewController.xib; sourceTree = "<group>"; };
 		255C809B15740E0100E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Grand Cercle/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		255C809F15740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DealsViewController.xib; sourceTree = "<group>"; };
 		255C80A115740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfosViewController.xib; sourceTree = "<group>"; };
@@ -268,6 +273,9 @@
 				25D8AD7B157921860065C038 /* default.png */,
 				25D8AD7415791F2D0065C038 /* icon@2x.png */,
 				25D8AD7215791F240065C038 /* icon.png */,
+				04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */,
+				04F4CBDF157915C000A49037 /* EventFourNextViewController.m */,
+				04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */,
 				2595EAA31573FA9000CA27B3 /* Grand Cercle */,
 				2595EACF1573FA9000CA27B3 /* Grand CercleTests */,
 				2595EA9C1573FA9000CA27B3 /* Frameworks */,
@@ -549,6 +557,7 @@
 				25D8AD7515791F2D0065C038 /* icon@2x.png in Resources */,
 				25D8AD7C157921860065C038 /* default@2x.png in Resources */,
 				25D8AD7D157921860065C038 /* default.png in Resources */,
+				04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +614,7 @@
 				04060AC01577B50B00852A3D /* EventDetailViewController.m in Sources */,
 				25ECD56015775F2A006E4652 /* EventsCalendarViewController.m in Sources */,
 				04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */,
+				04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
