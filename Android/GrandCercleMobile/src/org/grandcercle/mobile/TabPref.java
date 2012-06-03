@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
-	private static ArrayList<String> listCercles;
+	private ArrayList<String> listCercles;
 	private static ArrayList<String> listClubs;
 	SharedPreferences pref;
 	
@@ -24,22 +25,23 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		listCercles = ContainerData.getListCercles();
 		listClubs = ContainerData.getListClubs();
 		//addPreferencesFromResource(R.xml.prefs);
-		//pref = getPreferenceManager().getSharedPreferences();
-		//pref.registerOnSharedPreferenceChangeListener(this);
-	     setPreferenceScreen(createPreferenceHierarchy());
-
+		pref = getPreferenceManager().getSharedPreferences();
+		pref.registerOnSharedPreferenceChangeListener(this);
+	    setPreferenceScreen(createPreferenceHierarchy("cercles",listCercles));
+	    setPreferenceScreen(createPreferenceHierarchy("clubs et assos",listClubs));
+	    
 		//SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		//String myString = preferences.getString("PrefList", "");
 	}
 	
 	
 
-	private PreferenceScreen createPreferenceHierarchy() { 
+	private PreferenceScreen createPreferenceHierarchy(String name, ArrayList<String> list) { 
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
-        inlinePrefCat.setTitle("Liste préférence");
+        inlinePrefCat.setTitle(name);
         root.addPreference(inlinePrefCat);
-        Iterator<String> it = listCercles.iterator();
+        Iterator<String> it = list.iterator();
         String Temp;
         while (it.hasNext()) {
 	        CheckBoxPreference checkboxPref = new CheckBoxPreference(this);
@@ -57,4 +59,9 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		ContainerData.parseFiles();
 		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
+	
+	public ArrayList<String> getListCercles() {
+			return listCercles;
+	}
+	
 }

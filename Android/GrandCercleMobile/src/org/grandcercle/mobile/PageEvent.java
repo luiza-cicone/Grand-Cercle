@@ -1,5 +1,7 @@
 package org.grandcercle.mobile;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -40,10 +42,8 @@ public class PageEvent extends Activity {
 		((Button)findViewById(R.id.addCal)).setOnClickListener(addCalClicked);
 	}
 	
-	/*
-	 * Determines if we need to use a pre 2.2 calendar Uri, or a 2.2 calendar Uri, and returns the base Uri
-	 */
-	private Uri getCalendarUriBase(String calName) {
+	// Cherche le "chemin" du calendrier calName dans la mémoire du téléphone
+	public Uri getCalendarUriBase(String calName) {
 	    Uri calendars = Uri.parse(BASE_CALENDAR_URI_PRE_2_2 + "/calendars/" + calName);
 	    try {
 	        Cursor managedCursor = managedQuery(calendars, null, null, null, null);
@@ -63,31 +63,38 @@ public class PageEvent extends Activity {
 	    return null; // No working calendar URI found
 	}
 	
-	/*public void getUserCalendars() {
+	public ArrayList<UserCalendar> getUserCalendars() {
 		String[] projection = new String[] { "_id", "name" };
 		Uri calendars = getCalendarUriBase("events");
-		Cursor managedCursor = managedQuery(calendars, projection,"selected=1", null, null);
-		//Cursor managedCursor = managedQuery(calendars, projection, null, null, null);
-		
+		//Cursor managedCursor = managedQuery(calendars, projection,"selected=1", null, null);
+		Cursor managedCursor = managedQuery(calendars, projection, null, null, null);
+		ArrayList<UserCalendar> listCal = null;
 		if (managedCursor.moveToFirst()) {
-			String calName; 
-			String calId; 
+			UserCalendar uCal = new UserCalendar();
 			int nameColumn = managedCursor.getColumnIndex("name"); 
 			int idColumn = managedCursor.getColumnIndex("_id");
+			listCal = new ArrayList<UserCalendar>();
 			do {
-			   calName = managedCursor.getString(nameColumn);
-			   calId = managedCursor.getString(idColumn);
+				uCal.name = managedCursor.getString(nameColumn);
+				uCal.id = Integer.parseInt(managedCursor.getString(idColumn));
+				listCal.add(uCal);
 			} while (managedCursor.moveToNext());
 		}
-	}*/
+		return listCal;
+	}
 
 	
 	
 	private View.OnClickListener addCalClicked = new View.OnClickListener() {
 		public void onClick(View v) {
 			
+			// récupération noms + ids calendriers
+			ArrayList<UserCalendar> listCal = getUserCalendars();
+			
+			// choix utilisateur. Par défaut : case 0 de l'ArrayList
+			
 			ContentValues event = new ContentValues();
-			event.put("calendar_id", 0);
+			event.put("calendar_id", listCal.get(0).id);
 			event.put("title", "Event Title");
 			event.put("description", "Event Desc");
 			event.put("eventLocation", "Event Location");
@@ -95,10 +102,10 @@ public class PageEvent extends Activity {
 			long endTime = 20000;
 			event.put("dtstart", startTime);
 			event.put("dtend", endTime);
-			
 			try {
-				Uri eventsUri = getCalendarUriBase("Mon calendrier");
+				Uri eventsUri = getCalendarUriBase(listCal.get(0).name);
 				getContentResolver().insert(eventsUri,event);
+				Toast.makeText(PageEvent.this,"Ajout au calendrier : " + listCal.get(0).name,Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
 				Toast.makeText(PageEvent.this,"Aucun calendrier disponible !",Toast.LENGTH_SHORT).show();
 			}

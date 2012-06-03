@@ -92,6 +92,9 @@ public class ParserXMLHandlerBP extends ParserXMLHandler {
 	}
 	// cette méthode nous permettra de récupérer les données
 	public ArrayList<BP> getListBP(){
+		if (listBP.isEmpty()) {
+			return null;
+		}
 		return listBP;
 	}
 }

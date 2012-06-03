@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class TabBP extends Activity {
@@ -21,10 +22,14 @@ public class TabBP extends Activity {
         setContentView(R.layout.affichage_bons_plans);
         ArrayList<BP> listBP = ContainerData.getlistBP();
         
-        ListBPAdapter lbpa = new ListBPAdapter(this,listBP);
-        ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-        ((ListView)findViewById(R.id.listFeed)).setAdapter(lbpa);
-        feedListView.setOnItemClickListener(clickListenerBP);
+        if (listBP != null) {
+	        ListBPAdapter lbpa = new ListBPAdapter(this,listBP);
+	        ListView feedListView = ((ListView)findViewById(R.id.listFeed));
+	        ((ListView)findViewById(R.id.listFeed)).setAdapter(lbpa);
+	        feedListView.setOnItemClickListener(clickListenerBP);
+        } else {
+        	Toast.makeText(TabBP.this,"Pas de bons plans !",Toast.LENGTH_LONG).show();
+        }
 		
 	 }
 	 private AdapterView.OnItemClickListener clickListenerBP = new AdapterView.OnItemClickListener() {

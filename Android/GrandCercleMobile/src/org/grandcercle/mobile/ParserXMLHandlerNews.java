@@ -132,6 +132,9 @@ public class ParserXMLHandlerNews extends ParserXMLHandler {
 	}
 	// cette méthode nous permettra de récupérer les données
 	public ArrayList<News> getListNews(){
+		if (listNews.isEmpty()) {
+			return null;
+		}
 		return listNews;
 	}
 }
