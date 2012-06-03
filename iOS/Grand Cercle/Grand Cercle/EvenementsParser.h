@@ -16,15 +16,15 @@
     // Parser
     TBXML *tbxml;
     // Ensemble des Evénements
-	NSMutableArray *arrayEvenements;
+	NSMutableArray *arrayEvents, *arrayOldEvents;
 }
 
-@property (nonatomic, retain) NSMutableArray *arrayEvenements;
+@property (nonatomic, retain) NSMutableArray *arrayEvents, *arrayOldEvents;
 
 // Unique instance du parser
 + (EvenementsParser *) instance;
 // Méthode récupérant l'ensemble des news
 - (void)loadEvenements;
-- (void) treatementEvenements:(TBXMLElement *)element;
+- (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
 
 @end

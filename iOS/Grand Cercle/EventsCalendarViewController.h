@@ -15,11 +15,15 @@
 	NSMutableDictionary *dataDictionary;
     
     IBOutlet UITableViewCell *eventCell;
+    
+    TKImageCache *imageCache, *imageCache2;
+
 }
 
 @property (retain,nonatomic) NSMutableArray *dataArray;
 @property (retain,nonatomic) NSMutableDictionary *dataDictionary;
 @property (retain,nonatomic) IBOutlet UITableViewCell *eventCell;
+@property (retain, nonatomic) TKImageCache *imageCache, *imageCache2;
 
 
 - (void) generateRandomDataForStartDate:(NSDate*)start endDate:(NSDate*)end;

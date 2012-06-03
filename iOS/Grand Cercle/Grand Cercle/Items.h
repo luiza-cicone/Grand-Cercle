@@ -15,12 +15,11 @@
     // Déscription
     NSString *description;
     // Lien
-    NSURL *theLink;
+    NSString *theLink;
     // Logo de l'association ou visuel du bon plan
-    NSURL *logo;
+    NSString *logo;
 }
 
-@property (nonatomic, retain) NSString *title, *description;
-@property (nonatomic, retain) NSURL *theLink, *logo;
+@property (nonatomic, retain) NSString *title, *description, *theLink, *logo;
 
 @end

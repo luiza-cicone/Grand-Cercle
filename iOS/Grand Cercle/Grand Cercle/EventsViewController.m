@@ -18,14 +18,13 @@
 @synthesize viewControllers, pageControl, scrollView, myNav;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Events", @"Evenements");
         self.tabBarItem.image = [UIImage imageNamed:@"events"];
     }
-return self;
+    return self;
 }
 	
 -(void)viewDidAppear:(BOOL)animated {
