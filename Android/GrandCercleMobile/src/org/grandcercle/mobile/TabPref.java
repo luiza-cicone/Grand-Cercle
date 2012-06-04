@@ -1,31 +1,19 @@
 package org.grandcercle.mobile;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
-	private ArrayList<String> listCercles;
-	private static ArrayList<String> listClubs;
 	SharedPreferences pref;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		//setContentView(R.layout.main);
-		
-		listCercles = ContainerData.getListCercles();
-		listClubs = ContainerData.getListClubs();
 		addPreferencesFromResource(R.xml.prefs);
-		PreferenceManager.setDefaultValues(TabPref.this, R.xml.prefs, false);
+		//PreferenceManager.setDefaultValues(TabPref.this, R.xml.prefs, false);
 		pref = getPreferenceManager().getSharedPreferences();
 		pref.registerOnSharedPreferenceChangeListener(this);
 	    //setPreferenceScreen(createPreferenceHierarchy());
@@ -60,11 +48,4 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
 	
-	public ArrayList<String> getListCercles() {
-			return listCercles;
-	}
-	
-	public ArrayList<String> getListClub() {
-		return listClubs;
-}
 }
