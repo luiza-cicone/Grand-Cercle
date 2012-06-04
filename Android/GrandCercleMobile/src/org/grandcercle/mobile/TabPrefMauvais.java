@@ -16,7 +16,7 @@ public class TabPrefMauvais extends PreferenceActivity implements OnSharedPrefer
 
 		pref = getPreferenceManager().getSharedPreferences();
 		pref.registerOnSharedPreferenceChangeListener(this);
-		addPreferencesFromResource(R.xml.prefs);
+		addPreferencesFromResource(R.layout.prefs);
 		int c = pref.getInt("numRun",0);
 		c++;
 		pref.edit().putInt("numRun",c).commit();
