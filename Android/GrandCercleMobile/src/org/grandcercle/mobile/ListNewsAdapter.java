@@ -1,7 +1,7 @@
 package org.grandcercle.mobile;
 
 import java.util.ArrayList;
-import org.grandcercle.mobile.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
