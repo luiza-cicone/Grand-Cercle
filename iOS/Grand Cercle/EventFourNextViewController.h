@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventsViewController.h"
 
 @interface EventFourNextViewController : UIViewController {
     NSMutableArray *tabImage;
     NSMutableArray *tabLabel;
+    EventsViewController *superController;
 }
 
 @property (retain, nonatomic) NSMutableArray *tabLabel, *tabImage;
+@property (retain, nonatomic) EventsViewController *superController;
+
+- (IBAction)imageButtonAction:(id)sender;
 
 @end
