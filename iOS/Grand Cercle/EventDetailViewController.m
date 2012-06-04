@@ -229,11 +229,13 @@
     EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
     
     myEvent.title     = event.title;
-    myEvent.startDate = [[NSDate alloc] init];
-    myEvent.endDate   = [[NSDate alloc] init];
+    myEvent.startDate = event.eventDate;
+    myEvent.endDate   = event.eventDate;
     myEvent.allDay = YES;
     
+    // Choix du calendrier
     [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
+    
     NSError *err;
     [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
     if (err == noErr) {
@@ -247,8 +249,7 @@
         [alert release];
     }
     
-    [myEvent.startDate release];
-    [myEvent.endDate release];
+    [myEvent release];
     
 }
 
