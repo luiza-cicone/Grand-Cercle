@@ -11,6 +11,8 @@
 
 #define FILTER_ASSOS 0
 #define FILTER_TYPE 1
+#define CERCLES 0
+#define CLUBS 1
 
 @interface SettingsDetailViewController ()
 
@@ -29,8 +31,22 @@
         if (filter == FILTER_ASSOS) {
             cerclesArray = [[AssociationParser instance] arrayCercles];
             clubsArray = [[AssociationParser instance] arrayClubs];
-            NSLog(@"%d", [cerclesArray count]);
-            NSLog(@"%@", [cerclesArray objectAtIndex:0]);
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+            NSDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
+            NSDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+
+            
+            cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
+            clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
+            for (NSString *cercle in cerclesArray) {
+                [cerclesChoice addObject:[cerclesDico objectForKey:cercle]];
+            }
+            for (NSString *club in clubsArray) {
+                [clubsChoice addObject:[clubsDico objectForKey:club]];
+            }
+            NSLog(@"%@", [cerclesChoice objectAtIndex:2]);
+            NSLog(@"%@", [clubsChoice objectAtIndex:2]);
             
         }
     }
@@ -78,10 +94,10 @@
 {
     // Return the number of rows in the section.
     if (filter == FILTER_ASSOS) {
-        if (section == 0) {
+        if (section == CERCLES) {
             return [cerclesArray count];
         }
-        else if (section == 1){
+        else if (section == CLUBS){
             return [clubsArray count];
         }
     }
@@ -109,15 +125,16 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     BOOL checked;
-    if (indexPath.section == 0) {
-        [cell.textLabel setText:(NSString *)[cerclesArray objectAtIndex:indexPath.row]];
-         checked = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
+    if (filter == FILTER_ASSOS) {
+        if (indexPath.section == CERCLES) {
+            [cell.textLabel setText:(NSString *)[cerclesArray objectAtIndex:indexPath.row]];
+             checked = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
+        }
+        else if (indexPath.section == CLUBS){
+            [cell.textLabel setText:[clubsArray objectAtIndex:indexPath.row]];
+            checked = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
+        }
     }
-    else if (indexPath.section == 1){
-        [cell.textLabel setText:[clubsArray objectAtIndex:indexPath.row]];
-        checked = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
-    }
-    
     cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
     
     return cell;
@@ -166,14 +183,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if (filter == FILTER_ASSOS) {
+        if (indexPath.section == CERCLES) {
+            BOOL value = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
+            value = 1 - value;
+            [cerclesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
+        }
+        else if (indexPath.section == CLUBS) {
+            BOOL value = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
+            value = 1 - value;
+            [clubsChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
+        }
+    }
+    [tableView reloadData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
+    NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+    
+    for (int i = 0; i < [cerclesArray count]; i++) {
+        [cerclesDico setObject:[cerclesChoice objectAtIndex:i] forKey:[cerclesArray objectAtIndex:i]];
+    }
+    for (int i = 0; i < [cerclesArray count]; i++) {
+        [clubsDico setObject:[clubsChoice objectAtIndex:i] forKey:[clubsArray objectAtIndex:i]];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

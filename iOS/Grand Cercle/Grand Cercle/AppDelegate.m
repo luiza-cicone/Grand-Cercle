@@ -35,8 +35,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // On parse les événements
     EvenementsParser *ep = [EvenementsParser instance];
@@ -56,16 +54,19 @@
     
     if (![defaults objectForKey:@"firstRun"]) {
         [defaults setObject:[NSDate date] forKey:@"firstRun"];
-        NSMutableDictionary *cercleDico = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
         for (NSString *cercle in [ap arrayCercles]) {
-            [cercleDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
+            [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
         }
-        // print
-        for (id key in cercleDico) {
-            NSLog(@"key: %@, value: %@", key, [cercleDico objectForKey:key]);
+        [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+        NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
+        for (NSString *clubs in [ap arrayClubs]) {
+            [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
         }
+        [defaults setObject:clubsDico forKey:@"filtreClubs"];
     }
-    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // Override point for customization after application launch.
