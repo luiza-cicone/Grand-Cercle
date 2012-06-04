@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import android.content.Context;
+
 public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	private final String PUBDATE = "pubDate";
 	private final String AUTHOR = "author";
@@ -34,6 +36,9 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	// Event courant
 	private Event currentEvent;
 	
+	// Liste des group autorisés dans les préférences
+	private ArrayList<String> listPref;
+	private DataBase dataBase;
 	
 	/* Cette méthode est appelée par le parser une et une seule  
 	 * fois au démarrage de l'analyse de votre flux xml. 
@@ -42,11 +47,31 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	 * Cet événement devrait vous permettre d'initialiser tout ce qui doit 
 	 * l'être avant le début du parcours du document.
 	 */ 
+	public ParserXMLHandlerEvent(Context ctx) {
+		listPref = getPreferences(ctx);
+	}
+	
 	@Override
 	public void startDocument() throws SAXException {
 		super.startDocument();
 		listEvent = new ArrayList<Event>();
 		hashEvent = new HashMap<String,ArrayList<Event>>();
+	}
+	
+	public ArrayList<String> getPreferences(Context ctx) {
+		dataBase = DataBase.getInstance();
+		ArrayList <String> listCercle = dataBase.getAllPref("prefCercle");
+		ArrayList<String> listClub = dataBase.getAllPref("prefClub");
+		if (listCercle != null && listClub != null) {
+			listCercle.addAll(listClub);
+			return listCercle;
+		} else if (listCercle != null) {
+			return listCercle;
+		} else if (listClub != null) {
+			return listClub;
+		} else {
+			return new ArrayList<String>();
+		}
 	}
 	
 	/* 
@@ -183,7 +208,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
-			//if (currentEvent.getGroup() == "Grand Cercle") {  // donne l'organisateur
+			if (listPref.contains(currentEvent.getGroup())) {  // donne l'organisateur
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
 					ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());
@@ -194,7 +219,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 					listEventDay.add(currentEvent);
 					hashEvent.put(currentEvent.getEventDate(),listEventDay);
 				}
-			//}
+			}
 			inEvent = false;
 		}
 	}

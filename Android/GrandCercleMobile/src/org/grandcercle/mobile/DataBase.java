@@ -18,8 +18,17 @@ public class DataBase extends SQLiteOpenHelper {
 	private ArrayList<String> preferedClub;
 	
 	/** Create a helper object for the Events database */
-	public DataBase(Context ctx) {
-		super(ctx, "GCM_DB", null, 2);
+	private DataBase() {
+		
+		super(ContainerData.getAppContext(), "GCM_DB", null, 2);
+	}
+	
+	private static class DataBaseHolder { 
+		public static final DataBase instance = new DataBase();
+	}
+		 
+	public static DataBase getInstance() {
+		return DataBaseHolder.instance;
 	}
 	
 	@Override
@@ -32,8 +41,8 @@ public class DataBase extends SQLiteOpenHelper {
 				" (type VARCHAR NOT NULL PRIMARY KEY);");
 		preferedCercle = ContainerData.getListCercles();
 		preferedClub = ContainerData.getListClubs();
-		this.addListPref(TABLE_CERCLE,"cercle",preferedCercle);
-		this.addListPref(TABLE_CLUB,"club",preferedClub);
+		//this.addListPref(TABLE_CERCLE,"cercle",preferedCercle);
+		//this.addListPref(TABLE_CLUB,"club",preferedClub);
 	}
 	
 	@Override
@@ -44,13 +53,13 @@ public class DataBase extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	public void addPref(String table, String key, String name) {
+	/*public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues value = new ContentValues();
 		value.put(key,name);
 		db.insert(table,null,value);
 		db.close();
-	}
+	}*/
 	
 	public void addListPref(String table, String key, ArrayList<String> listName) {
 		SQLiteDatabase db = this.getWritableDatabase();
