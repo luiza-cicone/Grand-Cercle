@@ -48,7 +48,7 @@ public class TabPrefMauvais extends PreferenceActivity implements OnSharedPrefer
 	}*/
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		ContainerData.parseFiles();
+		//ContainerData.parseFiles();
 		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
 	
