@@ -223,9 +223,39 @@
      */
 }
 
+- (IBAction)exportCalendar:(id)sender {
+    
+    EKEventStore *eventDB = [[EKEventStore alloc] init];    
+    EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
+    
+    myEvent.title     = event.title;
+    myEvent.startDate = [[NSDate alloc] init];
+    myEvent.endDate   = [[NSDate alloc] init];
+    myEvent.allDay = YES;
+    
+    [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
+    NSError *err;
+    [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
+    if (err == noErr) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Event Created"
+                              message:@"Yay!"
+                              delegate:nil
+                              cancelButtonTitle:@"Okay"
+                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    
+    [myEvent.startDate release];
+    [myEvent.endDate release];
+    
+}
+
 - (void)dealloc {
     [cellEventTop release];
     [cellEventDescription release];
     [super dealloc];
 }
+
 @end
