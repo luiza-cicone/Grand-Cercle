@@ -33,8 +33,8 @@
             clubsArray = [[AssociationParser instance] arrayClubs];
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-            NSDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
-            NSDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+            NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
+            NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
 
             
             cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
@@ -200,15 +200,17 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
-    NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+    NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
+    NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreClubs"]];
     
     for (int i = 0; i < [cerclesArray count]; i++) {
         [cerclesDico setObject:[cerclesChoice objectAtIndex:i] forKey:[cerclesArray objectAtIndex:i]];
     }
-    for (int i = 0; i < [cerclesArray count]; i++) {
+    for (int i = 0; i < [clubsArray count]; i++) {
         [clubsDico setObject:[clubsChoice objectAtIndex:i] forKey:[clubsArray objectAtIndex:i]];
     }
+    [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+    [defaults setObject:clubsDico forKey:@"filtreClubs"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

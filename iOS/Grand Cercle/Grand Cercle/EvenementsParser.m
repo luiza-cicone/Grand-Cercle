@@ -32,18 +32,20 @@ static EvenementsParser *instanceEvent = nil;
         // Récupération des préférences
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];        
         NSDictionary *filtreCercles = [defaults objectForKey:@"filtreCercles"]; 
-        NSDictionary *filtreType = [defaults objectForKey:@"filtreType"]; 
         NSDictionary *filtreClubs = [defaults objectForKey:@"filtreClubs"]; 
-
+//        NSDictionary *filtreType = [defaults objectForKey:@"filtreType"]; 
         
-        if (![filtreCercles objectForKey:[TBXML textForElement:group]])
-            continue;
+        NSString *groupName = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
+        if (![groupName isEqualToString:@"Grand Cercle"] && ![groupName isEqualToString:@"Elus étudiants"]) {
+            if (![[filtreCercles objectForKey:groupName] boolValue] && ![[filtreClubs objectForKey:[TBXML textForElement:group]] boolValue])
+                continue;
             
-        if (![filtreType objectForKey:[TBXML textForElement:type]])
-            continue;
-        
-        if (![filtreClubs objectForKey:[TBXML textForElement:group]])
-            continue; 
+            //        if (![filtreType objectForKey:[TBXML textForElement:type]])
+            //            continue;
+            
+
+        }
+
         
         // Définition de l'événement à récupérer
         Evenements *aEvent = [[Evenements alloc] init];

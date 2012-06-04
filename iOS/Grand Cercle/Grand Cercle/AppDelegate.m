@@ -36,23 +36,12 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     
-    // On parse les événements
-    EvenementsParser *ep = [EvenementsParser instance];
-    [ep loadEvenements];
-    
-    // On parse les news
-    NewsParser *np = [NewsParser instance];
-    [np loadNews];
-    
-    // On parse les bons plans
-    BonsPlansParser *bp = [BonsPlansParser instance];
-    [bp loadBonsPlans];
-    
     // On parse les associations
     AssociationParser *ap = [AssociationParser instance];
     [ap loadAssociations];
     
     if (![defaults objectForKey:@"firstRun"]) {
+        NSLog(@"first run");
         [defaults setObject:[NSDate date] forKey:@"firstRun"];
         NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
         for (NSString *cercle in [ap arrayCercles]) {
@@ -66,6 +55,19 @@
         [defaults setObject:clubsDico forKey:@"filtreClubs"];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    // On parse les événements
+    EvenementsParser *ep = [EvenementsParser instance];
+    [ep loadEvenements];
+    
+    // On parse les news
+    NewsParser *np = [NewsParser instance];
+    [np loadNews];
+    
+    // On parse les bons plans
+    BonsPlansParser *bp = [BonsPlansParser instance];
+    [bp loadBonsPlans];
 
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     

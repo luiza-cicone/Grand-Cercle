@@ -9,10 +9,10 @@
 #import "EventDetailViewController.h"
 #import "NSString+HTML.h"
 
-#define TITRE 0
-#define INFOS 1
-#define ORGANISATION 2
-#define DESCRIPTION 3
+//#define TITRE 0
+#define INFOS 0
+#define ORGANISATION 1
+#define DESCRIPTION 2
 
 @implementation EventDetailViewController
 @synthesize event, cellEventTop, cellEventDescription;
@@ -149,9 +149,9 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case TITRE:
-            return 30;
-            break;
+//        case TITRE:
+//            return 30;
+//            break;
         case INFOS :
             return 120;
             break;

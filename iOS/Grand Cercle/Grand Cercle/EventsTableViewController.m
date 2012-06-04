@@ -262,16 +262,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"event selected");
     Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        
     
     detailEventController.event = selectedEvent;
     [self.superController.navigationController pushViewController:detailEventController animated:YES];
 
-    [detailEventController release];
-    detailEventController = nil;
 }
 
 @end
