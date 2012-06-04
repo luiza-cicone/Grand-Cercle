@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     
-	
+	<PreferenceScreen android:title = "Préférences Centres D'intérêts" >
 		<org.grandcercle.mobile.ListPreferenceMultiSelect 
 		    android:key="ListPrefCercles"
-		    android:title="Centres d'interêts"
-		    android:summary="Choisis les associations pour lesquelles tu souhaites être informé"
+		    android:title="Cercles"
+		    android:summary="Choisis les cercles pour lesquelles tu souhaites être informé"
 		    android:entries="@array/prefListentries"
 	    	android:entryValues="@array/prefListvalues"
 	    	android:defaultValue="true"/>
@@ -13,12 +13,20 @@
 		<org.grandcercle.mobile.ListPreferenceMultiSelect
 		    android:key="ListPrefClubs"
 		    android:title="Clubs"
-		    android:summary="Choisis les associations pour lesquelles tu souhaites être informé"
+		    android:summary="Choisis les clubs et associations pour lesquels tu souhaites être informé"
 		    android:entries="@array/prefListentries"
 	    	android:entryValues="@array/prefListvalues"
 	    	android:defaultValue="true"/>
+		
+		<org.grandcercle.mobile.ListPreferenceMultiSelect
+		    android:key="ListPrefTypes"
+		    android:title="Types"
+		    android:summary="Choisis les événements pour lesquels tu souhaites être informé"
+		    android:entries="@array/prefListTypes"
+	    	android:entryValues="@array/prefListValuesTypes"
+	    	android:defaultValue="true"/>
 
-	 
+	 	</PreferenceScreen>
  	<PreferenceScreen android:title="Design">
  	    <PreferenceCategory android:title="Couleur de fond">
  	        <ListPreference
