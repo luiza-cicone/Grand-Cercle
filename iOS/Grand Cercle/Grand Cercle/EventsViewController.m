@@ -98,7 +98,7 @@ int kNumberOfPages = 3;
         }
         else {
             controller = [[EventFourNextViewController alloc] initWithNibName:@"EventFourNextViewController" bundle:nil];
-//            [(EventsTableViewController *)controller setSuperController: self];
+            [(EventFourNextViewController *)controller setSuperController: self];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }
