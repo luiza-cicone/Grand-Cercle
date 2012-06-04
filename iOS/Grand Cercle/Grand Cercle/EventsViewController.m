@@ -76,6 +76,11 @@ int kNumberOfPages = 3;
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
     [self loadScrollViewWithPage:2];
+        
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [backButton release];
+
 }
 
 - (void)loadScrollViewWithPage:(int)page {

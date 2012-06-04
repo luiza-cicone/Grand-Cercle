@@ -34,8 +34,13 @@
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addToCalendar)];
+    self.navigationItem.rightBarButtonItem = plusButton;
     self.title = NSLocalizedString(@"Events", @"Events");
+
+}
+-(void) addToCalendar {
+    NSLog(@"aadd");
 }
 
 - (void)viewDidUnload
@@ -242,14 +247,16 @@
     [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
     if (err == noErr) {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Information"
-                              message:@"exportation réussie!"
+                              initWithTitle:@"Exportation iCal"
+                              message:@"Exportation éffectuée avec succés"
                               delegate:nil
-                              cancelButtonTitle:@"ok"
+                              cancelButtonTitle:@"Ok"
                               otherButtonTitles:nil];
         [alert show];
         [alert release];
     }
+    
+   // [myEvent release];
 }
 
 - (void)dealloc {
