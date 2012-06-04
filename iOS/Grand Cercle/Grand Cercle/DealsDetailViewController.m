@@ -103,17 +103,18 @@
             //            break;
             
         case 1:
-//            CellIdentifier = @"NewsDescription";
-//            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//            if (!cell) {
-//                [[NSBundle mainBundle] loadNibNamed:@"NewsDescription" owner:self options:nil];
-//                cell = cellBonPlanDescription;
-//                self.cellBonPlanDescription = nil;
-//            }
-//            
-//            UITextView *textView;
-//            textView = (UITextView *)[cell viewWithTag:1];
-//            [textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
+
+            CellIdentifier = @"DealsDescriptionCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
+                cell = cellBonPlanDescription;
+                self.cellBonPlanDescription = nil;
+            }
+            
+            UITextView *textView;
+            textView = (UITextView *)[cell viewWithTag:1];
+            [textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
             break;
             
         default:
@@ -121,6 +122,22 @@
     }
     
     return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0 :
+            return 121;
+            break;
+            
+        case 1 :
+            return 165;
+            break;
+            
+        default :
+            return 44;
+            break;
+    }
 }
 
 /*
