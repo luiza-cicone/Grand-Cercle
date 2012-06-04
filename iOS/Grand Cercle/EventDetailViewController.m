@@ -40,7 +40,41 @@
 
 }
 -(void) addToCalendar {
-    NSLog(@"aadd");
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Exporter dans mon calendrier", @"Partager", @"Retour", nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    actionSheet.destructiveButtonIndex = 2;
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        EKEventStore *eventDB = [[EKEventStore alloc] init];    
+        EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
+    
+        myEvent.title     = event.title;
+        myEvent.startDate = event.eventDate;
+        myEvent.endDate   = event.eventDate;
+        myEvent.allDay = YES;
+        myEvent.notes = [event.description stringByConvertingHTMLToPlainText];
+        myEvent.location = event.place;
+    
+        // Choix du calendrier
+        [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
+    
+        NSError *err;
+        [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
+        if (err == noErr) {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@"Exportation iCal"
+                                  message:@"Exportation éffectuée avec succés"
+                                  delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+        }
+    }
 }
 
 - (void)viewDidUnload
@@ -226,37 +260,6 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-}
-
-- (IBAction)exportCalendar:(id)sender {
-    
-    EKEventStore *eventDB = [[EKEventStore alloc] init];    
-    EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
-    
-    myEvent.title     = event.title;
-    myEvent.startDate = event.eventDate;
-    myEvent.endDate   = event.eventDate;
-    myEvent.allDay = YES;
-    myEvent.notes = [event.description stringByConvertingHTMLToPlainText];
-    myEvent.location = event.place;
-    
-    // Choix du calendrier
-    [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
-    
-    NSError *err;
-    [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
-    if (err == noErr) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Exportation iCal"
-                              message:@"Exportation éffectuée avec succés"
-                              delegate:nil
-                              cancelButtonTitle:@"Ok"
-                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-    
-   // [myEvent release];
 }
 
 - (void)dealloc {
