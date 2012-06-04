@@ -24,19 +24,19 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		
 		listCercles = ContainerData.getListCercles();
 		listClubs = ContainerData.getListClubs();
-		//addPreferencesFromResource(R.xml.prefs);
+		addPreferencesFromResource(R.xml.prefs);
+		PreferenceManager.setDefaultValues(TabPref.this, R.xml.prefs, false);
 		pref = getPreferenceManager().getSharedPreferences();
 		pref.registerOnSharedPreferenceChangeListener(this);
-	    setPreferenceScreen(createPreferenceHierarchy("cercles",listCercles));
-	    setPreferenceScreen(createPreferenceHierarchy("clubs et assos",listClubs));
-	    
+	    //setPreferenceScreen(createPreferenceHierarchy());
+
+
 		//SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		//String myString = preferences.getString("PrefList", "");
 	}
 	
 	
-
-	private PreferenceScreen createPreferenceHierarchy(String name, ArrayList<String> list) { 
+	/*private PreferenceScreen createPreferenceHierarchy() { 
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
         inlinePrefCat.setTitle(name);
@@ -51,7 +51,7 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 	        inlinePrefCat.addPreference(checkboxPref);
         }
 		return root;
-	}
+	}*/
 
 
 
@@ -64,4 +64,7 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 			return listCercles;
 	}
 	
+	public ArrayList<String> getListClub() {
+		return listClubs;
+}
 }

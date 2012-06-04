@@ -3,11 +3,20 @@
     
 	
 		<org.grandcercle.mobile.ListPreferenceMultiSelect 
-		    android:key="@string/prefList"
+		    android:key="ListPrefCercles"
 		    android:title="Centres d'interêts"
 		    android:summary="Choisis les associations pour lesquelles tu souhaites être informé"
 		    android:entries="@array/prefListentries"
-		    android:entryValues="@array/prefListvalues"/>
+	    	android:entryValues="@array/prefListvalues"
+	    	android:defaultValue="true"/>
+		
+		<org.grandcercle.mobile.ListPreferenceMultiSelect
+		    android:key="ListPrefClubs"
+		    android:title="Clubs"
+		    android:summary="Choisis les associations pour lesquelles tu souhaites être informé"
+		    android:entries="@array/prefListentries"
+	    	android:entryValues="@array/prefListvalues"
+	    	android:defaultValue="true"/>
 
 	 
  	<PreferenceScreen android:title="Design">
@@ -18,7 +27,8 @@
                         android:key="listPref"
                         android:defaultValue="digiGreen"
                         android:entries="@array/listArray"
-                        android:entryValues="@array/listValues" />
+                        android:entryValues="@array/listValues" 
+                        />
  	    </PreferenceCategory>
  	</PreferenceScreen>
 </PreferenceScreen>
