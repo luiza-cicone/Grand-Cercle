@@ -41,18 +41,24 @@
     [ap loadAssociations];
     
     if (![defaults objectForKey:@"firstRun"]) {
-        NSLog(@"first run");
         [defaults setObject:[NSDate date] forKey:@"firstRun"];
         NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
         for (NSString *cercle in [ap arrayCercles]) {
             [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
         }
         [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+        
         NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
         for (NSString *clubs in [ap arrayClubs]) {
             [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
         }
         [defaults setObject:clubsDico forKey:@"filtreClubs"];
+        
+        NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
+        for (NSString *type in [ap arrayTypes]) {
+            [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
+        }
+        [defaults setObject:typesDico forKey:@"filtreTypes"];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     

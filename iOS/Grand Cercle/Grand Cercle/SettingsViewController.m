@@ -141,7 +141,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SettingsDetailViewController *detailViewController = [[SettingsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    [detailViewController setFilter:indexPath.row];
+    detailViewController.filter = indexPath.row;
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
 }
