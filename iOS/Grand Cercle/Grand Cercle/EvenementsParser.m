@@ -24,7 +24,7 @@ static EvenementsParser *instanceEvent = nil;
     
     NSInteger indice = 0;
 	do {
-        // Définition de la news à récupérer
+        // Définition de l'événement à récupérer
         Evenements *aEvent = [[Evenements alloc] init];
         
         // Récupération du titre

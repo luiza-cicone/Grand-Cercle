@@ -18,6 +18,7 @@
 		047EB1F11576099400F2F59B /* BonsPlans.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F01576099400F2F59B /* BonsPlans.m */; };
 		047EB1F4157609D200F2F59B /* BonsPlansParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F3157609D200F2F59B /* BonsPlansParser.m */; };
 		047EB1F615761A7300F2F59B /* DealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047EB1F515761A7300F2F59B /* DealCell.xib */; };
+		04D8262F157CA88D0049A41C /* AssociationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8262E157CA88D0049A41C /* AssociationParser.m */; };
 		04F4CBD21578B6C400A49037 /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD11578B6C400A49037 /* DescriptionCell.xib */; };
 		04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */; };
 		04F4CBD71578C58000A49037 /* NewsDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD61578C58000A49037 /* NewsDescription.xib */; };
@@ -124,6 +125,8 @@
 		047EB1F2157609D200F2F59B /* BonsPlansParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonsPlansParser.h; sourceTree = "<group>"; };
 		047EB1F3157609D200F2F59B /* BonsPlansParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlansParser.m; sourceTree = "<group>"; };
 		047EB1F515761A7300F2F59B /* DealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealCell.xib; sourceTree = "<group>"; };
+		04D8262D157CA88D0049A41C /* AssociationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssociationParser.h; sourceTree = "<group>"; };
+		04D8262E157CA88D0049A41C /* AssociationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssociationParser.m; sourceTree = "<group>"; };
 		04F4CBD11578B6C400A49037 /* DescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionCell.xib; sourceTree = "<group>"; };
 		04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailViewController.h; path = ../NewsDetailViewController.h; sourceTree = "<group>"; };
 		04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailViewController.m; path = ../NewsDetailViewController.m; sourceTree = "<group>"; };
@@ -423,6 +426,8 @@
 		25F41CC0157AC76E002C15C3 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				04D8262D157CA88D0049A41C /* AssociationParser.h */,
+				04D8262E157CA88D0049A41C /* AssociationParser.m */,
 				255C8140157428A000E6ECC3 /* NewsParser.h */,
 				255C813D157428A000E6ECC3 /* NewsParser.m */,
 				047EB1F2157609D200F2F59B /* BonsPlansParser.h */,
@@ -615,6 +620,7 @@
 				25ECD56015775F2A006E4652 /* EventsCalendarViewController.m in Sources */,
 				04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */,
 				04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */,
+				04D8262F157CA88D0049A41C /* AssociationParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
