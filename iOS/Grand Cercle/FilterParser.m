@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "AssociationParser.h"
+#import "FilterParser.h"
 
-@implementation AssociationParser
+@implementation FilterParser
 @synthesize arrayClubs, arrayCercles, arrayTypes;
-static AssociationParser *instanceAssociation = nil;
+static FilterParser *instanceAssociation = nil;
 
 // singleton
-+ (AssociationParser *) instance {
++ (FilterParser *) instance {
     if (instanceAssociation == nil) {
         instanceAssociation = [[self alloc] init];
     }
@@ -29,7 +29,6 @@ static AssociationParser *instanceAssociation = nil;
         
         // Ajout de la news au tableau
         [array addObject:nomAssociation];
-        [nomAssociation release];
         
         // Obtain next sibling element
 	} while ((eventsToParse = eventsToParse->nextSibling));
@@ -74,6 +73,7 @@ static AssociationParser *instanceAssociation = nil;
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/types/data.xml"] 
                                success:successBlock3 
                                failure:failureBlock];
+    
 }
 @end
 

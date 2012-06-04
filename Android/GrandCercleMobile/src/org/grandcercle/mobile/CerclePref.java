@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -35,7 +36,7 @@ public class CerclePref extends Activity {
 				checkBox.setChecked(false);
 			}
 			checkBox.setOnCheckedChangeListener(checkChanged);
-			((LinearLayout) linearLayout).addView(checkBox);
+			((ViewGroup) linearLayout).addView(checkBox);
 		}
 		LinearLayout lin = new LinearLayout(this);
 		lin.setOrientation(0); // horizontal

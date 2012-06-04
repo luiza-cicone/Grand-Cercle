@@ -39,7 +39,7 @@
 		256217401576A2AC00667661 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2562173E1576A2AC00667661 /* EventCell.xib */; };
 		258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D3694157CA8DE0001E64E /* SettingsViewController.m */; };
 		258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D369F157CAD910001E64E /* SettingsDetailViewController.m */; };
-		258D36A6157CB1260001E64E /* AssociationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D36A5157CB1260001E64E /* AssociationParser.m */; };
+		258D36A6157CB1260001E64E /* FilterParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D36A5157CB1260001E64E /* FilterParser.m */; };
 		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
 		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
 		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
@@ -131,8 +131,6 @@
 		047EB1F2157609D200F2F59B /* BonsPlansParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonsPlansParser.h; sourceTree = "<group>"; };
 		047EB1F3157609D200F2F59B /* BonsPlansParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlansParser.m; sourceTree = "<group>"; };
 		047EB1F515761A7300F2F59B /* DealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealCell.xib; sourceTree = "<group>"; };
-		04D8262D157CA88D0049A41C /* AssociationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssociationParser.h; sourceTree = "<group>"; };
-		04D8262E157CA88D0049A41C /* AssociationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssociationParser.m; sourceTree = "<group>"; };
 		04D8263A157CB7980049A41C /* DealsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsDetailViewController.h; sourceTree = "<group>"; };
 		04D8263B157CB7980049A41C /* DealsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsDetailViewController.m; sourceTree = "<group>"; };
 		04D8263D157CBBFD0049A41C /* bonPlanTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = bonPlanTopCell.xib; sourceTree = "<group>"; };
@@ -161,8 +159,8 @@
 		258D3694157CA8DE0001E64E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		258D369E157CAD910001E64E /* SettingsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsDetailViewController.h; path = ../SettingsDetailViewController.h; sourceTree = "<group>"; };
 		258D369F157CAD910001E64E /* SettingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsDetailViewController.m; path = ../SettingsDetailViewController.m; sourceTree = "<group>"; };
-		258D36A5157CB1260001E64E /* AssociationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssociationParser.m; path = ../AssociationParser.m; sourceTree = "<group>"; };
-		258D36A7157CB12F0001E64E /* AssociationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssociationParser.h; path = ../AssociationParser.h; sourceTree = "<group>"; };
+		258D36A5157CB1260001E64E /* FilterParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterParser.m; path = ../FilterParser.m; sourceTree = "<group>"; };
+		258D36A7157CB12F0001E64E /* FilterParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterParser.h; path = ../FilterParser.h; sourceTree = "<group>"; };
 		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -477,16 +475,14 @@
 		25F41CC0157AC76E002C15C3 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				04D8262D157CA88D0049A41C /* AssociationParser.h */,
-				04D8262E157CA88D0049A41C /* AssociationParser.m */,
 				255C8140157428A000E6ECC3 /* NewsParser.h */,
 				255C813D157428A000E6ECC3 /* NewsParser.m */,
 				047EB1F2157609D200F2F59B /* BonsPlansParser.h */,
 				047EB1F3157609D200F2F59B /* BonsPlansParser.m */,
 				0435F4931574F4B3009F23CD /* EvenementsParser.h */,
 				0435F4941574F4B3009F23CD /* EvenementsParser.m */,
-				258D36A7157CB12F0001E64E /* AssociationParser.h */,
-				258D36A5157CB1260001E64E /* AssociationParser.m */,
+				258D36A7157CB12F0001E64E /* FilterParser.h */,
+				258D36A5157CB1260001E64E /* FilterParser.m */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -675,7 +671,7 @@
 				04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */,
 				258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */,
 				258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */,
-				258D36A6157CB1260001E64E /* AssociationParser.m in Sources */,
+				258D36A6157CB1260001E64E /* FilterParser.m in Sources */,
 				04D8263C157CB7980049A41C /* DealsDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
