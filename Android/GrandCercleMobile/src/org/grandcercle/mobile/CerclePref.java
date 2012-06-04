@@ -19,7 +19,7 @@ public class CerclePref extends Activity {
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.cercle_pref);
 		dataBase = new DataBase(this);
 		
 		ArrayList<String> prefered = dataBase.getAllPref("prefCercle");
