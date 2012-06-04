@@ -8,6 +8,7 @@
 
 #import "EventDetailViewController.h"
 #import "NSString+HTML.h"
+#import "AppDelegate.h"
 
 //#define TITRE 0
 #define INFOS 0
@@ -40,10 +41,12 @@
 
 }
 -(void) addToCalendar {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Exporter dans mon calendrier", @"Partager", @"Retour", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Retour" destructiveButtonTitle:nil otherButtonTitles:@"Exporter dans mon calendrier", @"Partager", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     actionSheet.destructiveButtonIndex = 2;
-    [actionSheet showInView:self.view];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [actionSheet showInView:appDelegate.window];
+    [actionSheet release]; 
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
