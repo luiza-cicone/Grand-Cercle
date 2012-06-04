@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040404F7157CD8CD00157FD4 /* DealsDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040404F6157CD8CD00157FD4 /* DealsDescriptionCell.xib */; };
+		040404FB157D068D00157FD4 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040404FA157D068D00157FD4 /* EventKit.framework */; };
 		04060ABD1577AF6700852A3D /* EventsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04060ABC1577AF6700852A3D /* EventsTableViewController.xib */; };
 		04060AC01577B50B00852A3D /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04060ABF1577B50B00852A3D /* EventDetailViewController.m */; };
 		0435F4891574EF29009F23CD /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4881574EF29009F23CD /* NSString+HTML.m */; };
@@ -110,6 +111,7 @@
 
 /* Begin PBXFileReference section */
 		040404F6157CD8CD00157FD4 /* DealsDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealsDescriptionCell.xib; sourceTree = "<group>"; };
+		040404FA157D068D00157FD4 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		04060ABC1577AF6700852A3D /* EventsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewController.xib; sourceTree = "<group>"; };
 		04060ABE1577B50B00852A3D /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailViewController.h; path = ../EventDetailViewController.h; sourceTree = "<group>"; };
 		04060ABF1577B50B00852A3D /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailViewController.m; path = ../EventDetailViewController.m; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040404FB157D068D00157FD4 /* EventKit.framework in Frameworks */,
 				25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */,
 				25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */,
 				25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */,
@@ -350,6 +353,7 @@
 		2595EA9C1573FA9000CA27B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				040404FA157D068D00157FD4 /* EventKit.framework */,
 				25E0E29815751DC2009B8921 /* MapKit.framework */,
 				25E0E29615751DBC009B8921 /* QuartzCore.framework */,
 				25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */,
