@@ -10,18 +10,20 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
 public class ListPreferenceMultiSelect extends ListPreference {
 	private String separator;
-	private static final String DEFAULT_SEPARATOR = "OV=I=XseparatorX=I=VO";
+	private static final String DEFAULT_SEPARATOR = "OV=I=XseparatorX=I=VO"; 
 	private String checkAllKey = null;
 	private boolean[] mClickedDialogEntryIndices;
 	private ArrayList<String> list;
-	private CharSequence[] entryValues;
+	private CharSequence[] entryValues; 
 	private CharSequence[] entries;
 
 	
@@ -45,10 +47,17 @@ public class ListPreferenceMultiSelect extends ListPreference {
     	}
     	entries= new String[list.size()];
     	entryValues = new String[list.size()];
-     // Initialize the array of boolean to the same size as number of entries
+    	// Initialize the array of boolean to the same size as number of entries
         mClickedDialogEntryIndices = new boolean[list.size()];
-        //restoreCheckedEntries();
-
+       
+        // counts the number of launching of the application to initialize the array of boolean
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        int c = prefs.getInt("numRun",0);
+        if (c == 1) {
+        	for (int i = 0; i<list.size(); i++) {
+        		mClickedDialogEntryIndices[i] = true;
+        	}
+        }
     }
 	
 	@Override
@@ -58,6 +67,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
         mClickedDialogEntryIndices = new boolean[list.size()];
         for (int i= 0; i<list.size(); i++) {
         	mClickedDialogEntryIndices[i]=true;
+        
         }
     }
     
@@ -75,6 +85,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
             throw new IllegalStateException(
                     "ListPreference requires an entries array and an entryValues array which are both the same length");
         }
+
         restoreCheckedEntries();
         builder.setMultiChoiceItems(entries, mClickedDialogEntryIndices, 
                 new DialogInterface.OnMultiChoiceClickListener() {
@@ -156,7 +167,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
 
 	@Override
     protected void onDialogClosed(boolean positiveResult) {
-		//super.onDialogClosed(positiveResult);
+//        super.onDialogClosed(positiveResult);
 		ArrayList<String> values = new ArrayList<String>();
         
     	CharSequence[] entry = getEntryValues();

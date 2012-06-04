@@ -10,7 +10,6 @@
 	    	android:entryValues="@array/prefListvalues"
 	    	android:defaultValue="true"/>
 		
-		
 		<org.grandcercle.mobile.ListPreferenceMultiSelect
 		    android:key="ListPrefClubs"
 		    android:title="Clubs"

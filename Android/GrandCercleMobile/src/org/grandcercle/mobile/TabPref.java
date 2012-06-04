@@ -7,24 +7,29 @@ import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
 public class TabPref extends PreferenceActivity implements OnSharedPreferenceChangeListener {
-	SharedPreferences pref;
+	static SharedPreferences pref;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
-		//setContentView(R.layout.main);
-		addPreferencesFromResource(R.xml.prefs);
-		//PreferenceManager.setDefaultValues(TabPref.this, R.xml.prefs, false);
+
 		pref = getPreferenceManager().getSharedPreferences();
 		pref.registerOnSharedPreferenceChangeListener(this);
-	    //setPreferenceScreen(createPreferenceHierarchy());
-
-
-		//SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		//String myString = preferences.getString("PrefList", "");
+	    
+		int c = pref.getInt("numRun",0);
+		c++;
+		pref.edit().putInt("numRun",c).commit();
+		addPreferencesFromResource(R.xml.prefs);
 	}
 	
-	
-	/*private PreferenceScreen createPreferenceHierarchy() { 
+	protected void OnPause() {
+		if(!isFinishing()){
+			int c = pref.getInt("numRun",0);
+			c--;
+			pref.edit().putInt("numRun",c).commit();
+		}
+	}
+
+	/*private PreferenceScreen createPreferenceHierarchy(String name, ArrayList<String> list) { 
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
         inlinePrefCat.setTitle(name);
@@ -41,11 +46,8 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 		return root;
 	}*/
 
-
-
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		ContainerData.parseFiles();
 		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
-	
 }
