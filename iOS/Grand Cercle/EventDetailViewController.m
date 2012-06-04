@@ -232,6 +232,7 @@
     myEvent.startDate = event.eventDate;
     myEvent.endDate   = event.eventDate;
     myEvent.allDay = YES;
+    myEvent.notes = event.description;
     
     // Choix du calendrier
     [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
@@ -240,10 +241,10 @@
     [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
     if (err == noErr) {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Event Created"
-                              message:@"Yay!"
+                              initWithTitle:@"Événement exporté"
+                              message:@"exportation réussie!"
                               delegate:nil
-                              cancelButtonTitle:@"Okay"
+                              cancelButtonTitle:@"ok"
                               otherButtonTitles:nil];
         [alert show];
         [alert release];
