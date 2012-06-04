@@ -241,9 +241,9 @@
 			isa = PBXGroup;
 			children = (
 				04D8263B157CB7980049A41C /* DealsDetailViewController.m */,
+				04D8263A157CB7980049A41C /* DealsDetailViewController.h */,
 				2595EAF2157405EA00CA27B3 /* DealsViewController.h */,
 				2595EAF3157405EB00CA27B3 /* DealsViewController.m */,
-				04D8263A157CB7980049A41C /* DealsDetailViewController.h */,
 			);
 			name = Deals;
 			sourceTree = "<group>";
