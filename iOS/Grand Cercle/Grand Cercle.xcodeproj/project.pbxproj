@@ -284,6 +284,7 @@
 				047EB1DA1575383800F2F59B /* EventTopCell.xib */,
 				2562173E1576A2AC00667661 /* EventCell.xib */,
 				25ECD56115777F81006E4652 /* EventSmallCell.xib */,
+				04F4CBD11578B6C400A49037 /* DescriptionCell.xib */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -437,7 +438,6 @@
 				2595EAC01573FA9000CA27B3 /* NewsViewController.xib */,
 				255C80AA157411AD00E6ECC3 /* NewsCell.xib */,
 				04F4CBD81578C73300A49037 /* NewsTopCell.xib */,
-				04F4CBD11578B6C400A49037 /* DescriptionCell.xib */,
 				255C809E15740EE900E6ECC3 /* DealsViewController.xib */,
 				255C80A015740EE900E6ECC3 /* InfosViewController.xib */,
 				047EB1F515761A7300F2F59B /* DealCell.xib */,

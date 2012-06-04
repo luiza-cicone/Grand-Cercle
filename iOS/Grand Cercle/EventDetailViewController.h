@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <EventKit/EventKit.h>
 #import "Evenements.h"
 
 @interface EventDetailViewController : UITableViewController {
@@ -17,4 +18,7 @@
 
 @property (retain, nonatomic) Evenements *event;
 @property (retain, nonatomic) IBOutlet UITableViewCell *cellEventTop, *cellEventDescription;
+
+- (IBAction)exportCalendar:(id)sender;
+
 @end

@@ -223,9 +223,39 @@
      */
 }
 
+- (IBAction)exportCalendar:(id)sender {
+    
+    EKEventStore *eventDB = [[EKEventStore alloc] init];    
+    EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
+    
+    myEvent.title     = event.title;
+    myEvent.startDate = event.eventDate;
+    myEvent.endDate   = event.eventDate;
+    myEvent.allDay = YES;
+    myEvent.notes = [event.description stringByConvertingHTMLToPlainText];
+    myEvent.location = event.place;
+    
+    // Choix du calendrier
+    [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
+    
+    NSError *err;
+    [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
+    if (err == noErr) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Information"
+                              message:@"exportation réussie!"
+                              delegate:nil
+                              cancelButtonTitle:@"ok"
+                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
 - (void)dealloc {
     [cellEventTop release];
     [cellEventDescription release];
     [super dealloc];
 }
+
 @end
