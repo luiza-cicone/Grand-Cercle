@@ -17,6 +17,7 @@
 #import "NewsParser.h"
 #import "EvenementsParser.h"
 #import "BonsPlansParser.h"
+#import "AssociationParser.h"
 
 
 @implementation AppDelegate
@@ -33,6 +34,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    
+    // On parse les associations
+    AssociationParser *ap = [AssociationParser instance];
+    [ap loadAssociations];
+    
+    if (![defaults objectForKey:@"firstRun"]) {
+        NSLog(@"first run");
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
+        for (NSString *cercle in [ap arrayCercles]) {
+            [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
+        }
+        [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+        NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
+        for (NSString *clubs in [ap arrayClubs]) {
+            [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
+        }
+        [defaults setObject:clubsDico forKey:@"filtreClubs"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
     // On parse les événements
     EvenementsParser *ep = [EvenementsParser instance];
@@ -45,8 +68,7 @@
     // On parse les bons plans
     BonsPlansParser *bp = [BonsPlansParser instance];
     [bp loadBonsPlans];
-    
-    
+
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // Override point for customization after application launch.
@@ -70,7 +92,7 @@
     navigationController4.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
     
-    UIViewController *viewController5 = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    UIViewController *viewController5 = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     UINavigationController *navigationController5 = [[UINavigationController alloc] init];
     navigationController5.navigationBar.barStyle = UIBarStyleBlackOpaque;

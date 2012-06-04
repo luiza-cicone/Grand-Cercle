@@ -8,7 +8,7 @@
 
 #import <TapkuLibrary/TapkuLibrary.h>
 #import <UIKit/UIKit.h>
-
+#import "EventsViewController.h"
 
 @interface EventsCalendarViewController : TKCalendarMonthTableViewController {
 	NSMutableArray *dataArray; 
@@ -17,6 +17,8 @@
     IBOutlet UITableViewCell *eventCell;
     
     TKImageCache *imageCache, *imageCache2;
+    
+    EventsViewController *superController;
 
 }
 
@@ -24,8 +26,8 @@
 @property (retain,nonatomic) NSMutableDictionary *dataDictionary;
 @property (retain,nonatomic) IBOutlet UITableViewCell *eventCell;
 @property (retain, nonatomic) TKImageCache *imageCache, *imageCache2;
+@property (retain, nonatomic) EventsViewController *superController;
 
-
-- (void) generateRandomDataForStartDate:(NSDate*)start endDate:(NSDate*)end;
+- (void) generateDataForStartDate:(NSDate*)start endDate:(NSDate*)end;
 
 @end

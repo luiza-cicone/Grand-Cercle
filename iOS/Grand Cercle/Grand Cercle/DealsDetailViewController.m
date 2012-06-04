@@ -1,27 +1,23 @@
 //
-//  EventDetailViewController.m
+//  DealsDetailViewController.m
 //  Grand Cercle
 //
-//  Created by Jérémy Krein on 31/05/12.
+//  Created by Jérémy Krein on 04/06/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "EventDetailViewController.h"
+#import "DealsDetailViewController.h"
 #import "NSString+HTML.h"
 
-//#define TITRE 0
-#define INFOS 0
-#define ORGANISATION 1
-#define DESCRIPTION 2
 
-@implementation EventDetailViewController
-@synthesize event, cellEventTop, cellEventDescription;
+@implementation DealsDetailViewController
+@synthesize bonPlan, cellBonPlanTop, cellBonPlanDescription;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-
+        // Custom initialization
     }
     return self;
 }
@@ -35,15 +31,14 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.title = NSLocalizedString(@"Events", @"Events");
 }
 
 - (void)viewDidUnload
 {
-    [cellEventTop release];
-    cellEventTop = nil;
-    [cellEventDescription release];
-    cellEventDescription = nil;
+    [cellBonPlanDescription release];
+    cellBonPlanDescription = nil;
+    [cellBonPlanTop release];
+    cellBonPlanTop = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -59,7 +54,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -68,100 +63,75 @@
     return 1;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case ORGANISATION:
-            return @"Organisateur";
-            break;
-        case DESCRIPTION:
-            return @"Description";
-            break;
-        default:
-            break;
-    }
-    return @"";
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier;
     UITableViewCell *cell;
     
     switch (indexPath.section) {
-        case INFOS:
-            CellIdentifier = @"EventTopCell";
+            
+        case 0:
+            CellIdentifier = @"bonPlanTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"EventTopCell" owner:self options:nil];
-                cell = cellEventTop;
-                self.cellEventTop = nil;
+                [[NSBundle mainBundle] loadNibNamed:@"bonPlanTopCell" owner:self options:nil];
+                cell = cellBonPlanTop;
+                self.cellBonPlanTop = nil;
             }
             
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event imageSmall]]]];
-            [imageView setImage:myimage];
+            UIImage *myimage2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[bonPlan logo]]]];
+            [imageView setImage:myimage2];
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
-            [label setText: [event title]];
-            
-            label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[event date]];
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            [label setText:[[[event place] stringByAppendingString: @" - "] stringByAppendingString: event.time]];
+            [label setText: [bonPlan title]];
             
             break;
             
-        case ORGANISATION:
-            CellIdentifier = @"Cercle";
-            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            [cell.textLabel setText : event.group];
-            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
-            [cell.imageView setImage: img2];
-            break;
+            //        case 1:
+            //            CellIdentifier = @"Cercle";
+            //            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            //            if (!cell) {
+            //                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            //            }
+            //            [cell.textLabel setText : news.group];
+            //            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
+            //            [cell.imageView setImage: img];
+            //            break;
             
-        case DESCRIPTION:
-            CellIdentifier = @"DescriptionCell";
+        case 1:
+
+            CellIdentifier = @"DealsDescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:self options:nil];
-                cell = cellEventDescription;
-                self.cellEventDescription = nil;
+                [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
+                cell = cellBonPlanDescription;
+                self.cellBonPlanDescription = nil;
             }
             
             UITextView *textView;
             textView = (UITextView *)[cell viewWithTag:1];
-            [textView setText: [[event description] stringByConvertingHTMLToPlainText]];
+            [textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
             break;
             
         default:
             break;
     }
-        
+    
     return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-//        case TITRE:
-//            return 30;
-//            break;
-        case INFOS :
-            return 120;
-            break;
-        
-        case ORGANISATION :
-            return 30;
+        case 0 :
+            return 90;
             break;
             
-        case DESCRIPTION :
-            return 155;
+        case 1 :
+            return 165;
             break;
             
         default :
@@ -223,9 +193,4 @@
      */
 }
 
-- (void)dealloc {
-    [cellEventTop release];
-    [cellEventDescription release];
-    [super dealloc];
-}
 @end

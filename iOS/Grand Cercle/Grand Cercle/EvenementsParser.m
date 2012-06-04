@@ -23,9 +23,38 @@ static EvenementsParser *instanceEvent = nil;
 - (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
     
     NSInteger indice = 0;
+    
 	do {
-        // Définition de la news à récupérer
+        
+        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
+        TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventsToParse];
+        
+        // Récupération des préférences
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];        
+        NSDictionary *filtreCercles = [defaults objectForKey:@"filtreCercles"]; 
+        NSDictionary *filtreClubs = [defaults objectForKey:@"filtreClubs"]; 
+//        NSDictionary *filtreType = [defaults objectForKey:@"filtreType"]; 
+        
+        NSString *groupName = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
+        if (![groupName isEqualToString:@"Grand Cercle"] && ![groupName isEqualToString:@"Elus étudiants"]) {
+            if (![[filtreCercles objectForKey:groupName] boolValue] && ![[filtreClubs objectForKey:[TBXML textForElement:group]] boolValue])
+                continue;
+            
+            //        if (![filtreType objectForKey:[TBXML textForElement:type]])
+            //            continue;
+            
+
+        }
+
+        
+        // Définition de l'événement à récupérer
         Evenements *aEvent = [[Evenements alloc] init];
+        
+        // Récupération du type
+        aEvent.type = [[TBXML textForElement:type] stringByConvertingHTMLToPlainText];
+            
+        // Récupération du groupe
+        aEvent.group = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
         
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:eventsToParse];
@@ -35,72 +64,50 @@ static EvenementsParser *instanceEvent = nil;
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:eventsToParse];
         aEvent.description = [[TBXML textForElement:description] stringByConvertingHTMLToPlainText];
 
-                
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:eventsToParse];
         aEvent.theLink = [[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
-
         
         // Récupération de la date de publication
         TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:eventsToParse];
         aEvent.pubDate = [[TBXML textForElement:pubDate] stringByConvertingHTMLToPlainText];
-
         
         // Récupération de l'auteur
         TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:eventsToParse];
         aEvent.author = [[TBXML textForElement:author] stringByConvertingHTMLToPlainText];
-
-        
-        // Récupération du groupe
-        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
-        aEvent.group = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
-
         
         // Récupération du logo
         TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:eventsToParse];
         aEvent.logo = [[TBXML textForElement:logo] stringByConvertingHTMLToPlainText];
-
         
         // Récupération du jour
         TBXMLElement *day = [TBXML childElementNamed:@"day" parentElement:eventsToParse];
         aEvent.day = [[TBXML textForElement:day] stringByConvertingHTMLToPlainText];
-
         
         // Récupération de la date
         TBXMLElement *date = [TBXML childElementNamed:@"date" parentElement:eventsToParse];
         aEvent.date = [[TBXML textForElement:date] stringByConvertingHTMLToPlainText];
 
-        
         // Récupération de l'heure du début
         TBXMLElement *time = [TBXML childElementNamed:@"time" parentElement:eventsToParse];
         aEvent.time = [[TBXML textForElement:time] stringByConvertingHTMLToPlainText];
 
-        
         // Récupération de la petite image
         TBXMLElement *imageSmall = [TBXML childElementNamed:@"thumbnail" parentElement:eventsToParse];
         aEvent.imageSmall = [[TBXML textForElement:imageSmall] stringByConvertingHTMLToPlainText];
 
-        
-        // Récupération du type
-        TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventsToParse];
-        aEvent.type = [[TBXML textForElement:type] stringByConvertingHTMLToPlainText];
-
-        
         // Récupération de la petite image
         TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:eventsToParse];
         aEvent.image = [[TBXML textForElement:image] stringByConvertingHTMLToPlainText];
 
-        
         // Récupération du lieu
         TBXMLElement *place = [TBXML childElementNamed:@"lieu" parentElement:eventsToParse];
         aEvent.place = [[TBXML textForElement:place] stringByConvertingHTMLToPlainText];
 
-        
         // Récupération du prix avec CVA
         TBXMLElement *priceCVA = [TBXML childElementNamed:@"paf" parentElement:eventsToParse];
         aEvent.priceCva = [[TBXML textForElement:priceCVA] stringByConvertingHTMLToPlainText];
 
-        
         // Récupération du prix sans CVA
         TBXMLElement *priceNoCva = [TBXML childElementNamed:@"paf_sans_cva" parentElement:eventsToParse];
         aEvent.priceNoCva = [[TBXML textForElement:priceNoCva] stringByConvertingHTMLToPlainText];
@@ -108,12 +115,9 @@ static EvenementsParser *instanceEvent = nil;
         // Récupération du la date
         TBXMLElement *eventDate = [TBXML childElementNamed:@"eventDate" parentElement:eventsToParse];        
         NSString *data = [[TBXML textForElement:eventDate] stringByConvertingHTMLToPlainText];
-        
         data = [data stringByAppendingString:@" 00:00:00 +0000"];
-                
         NSDateFormatter* firstDateFormatter = [[NSDateFormatter alloc] init];
         [firstDateFormatter setDateFormat:@"dd-MM-yy hh:mm:ss zzz"];
-
         aEvent.eventDate = [firstDateFormatter dateFromString:data];
         [aEvent.eventDate retain];
 
@@ -123,9 +127,10 @@ static EvenementsParser *instanceEvent = nil;
         
         // Ajout de la news au tableau
         [array addObject:aEvent];
-        [aEvent release];
         [firstDateFormatter release];
+        [aEvent release];
         
+
         // Obtain next sibling element
 	} while ((eventsToParse = eventsToParse->nextSibling));
     

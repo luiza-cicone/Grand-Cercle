@@ -14,10 +14,9 @@
 
 @implementation EventsTableViewController
 
-@synthesize eventCell, eventArray, dico, tView, urlArray, urlArray2, imageCache, imageCache2;
+@synthesize eventCell, eventArray, eventDico, tView, imageCache, imageCache2;
 @synthesize superController;
 
-//- (id)initWithStyle:(UITableViewStyle)style {
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -28,24 +27,24 @@
     
     
     //configure sections
-    dico = [[NSMutableDictionary alloc] init];
+    eventDico = [[NSMutableDictionary alloc] init];
     
     for (int i = 0; i < [eventArray count]; i++) {
         Evenements *event = [eventArray objectAtIndex:i];
         
-        NSMutableArray *eventsOnThisDay = [dico objectForKey:event.eventDate];
+        NSMutableArray *eventsOnThisDay = [eventDico objectForKey:event.eventDate];
         if (eventsOnThisDay == nil) {
             eventsOnThisDay = [NSMutableArray array];
             
-            [dico setObject:eventsOnThisDay forKey:event.eventDate];
+            [eventDico setObject:eventsOnThisDay forKey:event.eventDate];
         }
         [eventsOnThisDay addObject:event];
         
     }
     
     // print
-//    for (id key in dico) {
-//        NSLog(@"key: %@, value: %@", key, [dico objectForKey:key]);
+//    for (id key in eventDico) {
+//        NSLog(@"key: %@, value: %@", key, [eventDico objectForKey:key]);
 //    }
     
     // Préparation du cache
@@ -53,18 +52,18 @@
 	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
 	imageCache.notificationName = @"newImageSmallCache";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageSmallCache" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTableImageRetrieved:) name:@"newImageSmallCache" object:nil];
 	
 	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
 	imageCache2.notificationName = @"newLogoCache";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTableImageRetrieved:) name:@"newLogoCache" object:nil];
 
     return self;
 
 }
 
-- (void) newImageRetrieved:(NSNotification*)sender{
+- (void) newTableImageRetrieved:(NSNotification*)sender{
     
 	NSDictionary *dict = [sender userInfo];
     NSInteger tag = [[dict objectForKey:@"tag"] intValue];
@@ -105,8 +104,15 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [imageCache release];
+    imageCache = nil;
+    [imageCache2 release];
+    imageCache2 = nil;
+    [eventDico release];
+    eventDico = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -123,30 +129,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    int count = 0;
-//    for (id key in dico) {
-//        if ([(NSDate *)key compare:[NSDate date]] == NSOrderedDescending) {
-//            count++;
-//        }
-//    }
-//    return count;
-    return [dico count];
+    return [eventDico count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
 
-    NSArray *dates = [[dico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
     id theDate = [dates objectAtIndex:section];
-    id eventList = [dico objectForKey:theDate];
+    id eventList = [eventDico objectForKey:theDate];
     return [eventList count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *dates = [[dico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
     id theDate = [dates objectAtIndex:section];
-    id eventList = [dico objectForKey:theDate];
+    id eventList = [eventDico objectForKey:theDate];
     Evenements *e = [eventList objectAtIndex:0];
     
     NSDate *curentDate = [NSDate date];
@@ -182,10 +181,10 @@
         cell = eventCell;
         self.eventCell = nil;
     }
-    NSArray *dates = [[dico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
     id theDate = [dates objectAtIndex:indexPath.section];
 
-    id eventList = [dico objectForKey:theDate];
+    id eventList = [eventDico objectForKey:theDate];
     Evenements *e = (Evenements *)[eventList objectAtIndex:indexPath.row];
     
     UIImageView *imageView;
@@ -263,16 +262,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"event selected");
     Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        
     
     detailEventController.event = selectedEvent;
     [self.superController.navigationController pushViewController:detailEventController animated:YES];
 
-    [detailEventController release];
-    detailEventController = nil;
 }
 
 @end

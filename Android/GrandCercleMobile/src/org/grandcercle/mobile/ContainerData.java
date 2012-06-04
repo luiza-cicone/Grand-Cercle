@@ -14,6 +14,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class ContainerData {	
 	
@@ -173,6 +176,20 @@ public class ContainerData {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/*public static void sortDatas() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		ListPreferenceMultiSelect listPrefCercle = (ListPreferenceMultiSelect) TabPref.findPreferenceByKey(prefs,"listPrefCercles");
+		boolean[] clickedCercles = listPrefCercle.getClicked();
+		for (int i=0; i<6; i++) {
+			if (clickedCercles[i]) {
+				Log.d("ContainerData","cliqué !");
+			} else {
+				Log.d("ContainerData","non cliqué !");
+			}
+		}
+	}*/
 
 
 	public static ArrayList<News> getNews() {
