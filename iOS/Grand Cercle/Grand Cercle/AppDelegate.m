@@ -17,6 +17,7 @@
 #import "NewsParser.h"
 #import "EvenementsParser.h"
 #import "BonsPlansParser.h"
+#import "AssociationParser.h"
 
 
 @implementation AppDelegate
@@ -33,6 +34,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // On parse les événements
     EvenementsParser *ep = [EvenementsParser instance];
@@ -46,6 +50,20 @@
     BonsPlansParser *bp = [BonsPlansParser instance];
     [bp loadBonsPlans];
     
+    AssociationParser *ap = [AssociationParser instance];
+    [ap loadAssociations];
+    
+    if (![defaults objectForKey:@"firstRun"]) {
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        NSMutableDictionary *cercleDico = [[NSMutableDictionary alloc] init];
+        for (NSString *cercle in [ap arrayCercles]) {
+            [cercleDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
+        }
+        // print
+        for (id key in cercleDico) {
+            NSLog(@"key: %@, value: %@", key, [cercleDico objectForKey:key]);
+        }
+    }
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
@@ -70,7 +88,7 @@
     navigationController4.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
     
-    UIViewController *viewController5 = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    UIViewController *viewController5 = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     UINavigationController *navigationController5 = [[UINavigationController alloc] init];
     navigationController5.navigationBar.barStyle = UIBarStyleBlackOpaque;

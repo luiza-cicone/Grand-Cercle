@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsDetailViewController : UITableViewController
+@interface SettingsDetailViewController : UITableViewController {
+    NSArray *clubsArray, *cerclesArray, *typeArray;
+    NSArray *clubsChoice, *cerclesChoice;
+    NSInteger filter;
+}
+
+@property (nonatomic, retain) NSArray *clubsArray, *cerclesArray, *typeArray;
+@property (nonatomic, retain) NSArray *clubsChoice, *cerclesChoice;
+@property (nonatomic, assign) NSInteger filter;
 
 @end

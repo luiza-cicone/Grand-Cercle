@@ -29,7 +29,6 @@ static AssociationParser *instanceAssociation = nil;
         
         // Ajout de la news au tableau
         [array addObject:nomAssociation];
-        [nomAssociation release]; 
         
         // Obtain next sibling element
 	} while ((eventsToParse = eventsToParse->nextSibling));

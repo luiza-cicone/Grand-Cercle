@@ -9,6 +9,11 @@
 #import "EventDetailViewController.h"
 #import "NSString+HTML.h"
 
+#define TITRE 0
+#define INFOS 1
+#define ORGANISATION 2
+#define DESCRIPTION 3
+
 @implementation EventDetailViewController
 @synthesize event, cellEventTop, cellEventDescription;
 
@@ -63,13 +68,27 @@
     return 1;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case ORGANISATION:
+            return @"Organisateur";
+            break;
+        case DESCRIPTION:
+            return @"Description";
+            break;
+        default:
+            break;
+    }
+    return @"";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier;
     UITableViewCell *cell;
     
     switch (indexPath.section) {
-        case 0:
+        case INFOS:
             CellIdentifier = @"EventTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -81,8 +100,8 @@
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-//            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[event image]]]];
-//            [imageView setImage:myimage];
+            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event imageSmall]]]];
+            [imageView setImage:myimage];
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
@@ -96,18 +115,18 @@
             
             break;
             
-        case 1:
+        case ORGANISATION:
             CellIdentifier = @"Cercle";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             [cell.textLabel setText : event.group];
-//            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
-//            [cell.imageView setImage: img2];
+            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
+            [cell.imageView setImage: img2];
             break;
             
-        case 2:
+        case DESCRIPTION:
             CellIdentifier = @"DescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -130,15 +149,18 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case 0 :
-            return 121;
+        case TITRE:
+            return 30;
+            break;
+        case INFOS :
+            return 120;
             break;
         
-        case 1 :
-            return 44;
+        case ORGANISATION :
+            return 30;
             break;
             
-        case 2 :
+        case DESCRIPTION :
             return 155;
             break;
             

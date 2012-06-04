@@ -7,6 +7,10 @@
 //
 
 #import "SettingsDetailViewController.h"
+#import "AssociationParser.h"
+
+#define FILTER_ASSOS 0
+#define FILTER_TYPE 1
 
 @interface SettingsDetailViewController ()
 
@@ -14,11 +18,21 @@
 
 @implementation SettingsDetailViewController
 
+@synthesize cerclesArray, clubsArray, typeArray;
+@synthesize clubsChoice, cerclesChoice;
+@synthesize filter;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        if (filter == FILTER_ASSOS) {
+            cerclesArray = [[AssociationParser instance] arrayCercles];
+            clubsArray = [[AssociationParser instance] arrayClubs];
+            NSLog(@"%d", [cerclesArray count]);
+            NSLog(@"%@", [cerclesArray objectAtIndex:0]);
+            
+        }
     }
     return self;
 }
@@ -50,16 +64,40 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
+    if (filter == FILTER_ASSOS) {
+        return 2;
+    }
+    else if (filter == FILTER_TYPE) {
+        return 1;
+    }
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
+    if (filter == FILTER_ASSOS) {
+        if (section == 0) {
+            return [cerclesArray count];
+        }
+        else if (section == 1){
+            return [clubsArray count];
+        }
+    }
     return 0;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (filter == FILTER_ASSOS) {
+        if (section == 0) {
+            return @"Cercles";
+        }
+        else {
+            return @"Clubs et associations";
+        }
+    }
+    return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,7 +105,20 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    BOOL checked;
+    if (indexPath.section == 0) {
+        [cell.textLabel setText:(NSString *)[cerclesArray objectAtIndex:indexPath.row]];
+         checked = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
+    }
+    else if (indexPath.section == 1){
+        [cell.textLabel setText:[clubsArray objectAtIndex:indexPath.row]];
+        checked = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
+    }
+    
+    cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
     
     return cell;
 }
