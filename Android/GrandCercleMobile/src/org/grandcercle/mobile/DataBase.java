@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase extends SQLiteOpenHelper {
+	private static String TABLE_NUMRUN = "numRun";
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
 	
-	private ArrayList<String> preferedCercle;
-	private ArrayList<String> preferedClub;
-	
 	/** Create a helper object for the Events database */
-	private DataBase() {
-		
+	private DataBase() {		
 		super(ContainerData.getAppContext(), "GCM_DB", null, 2);
 	}
 	
@@ -33,16 +29,14 @@ public class DataBase extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		db.execSQL("CREATE TABLE "+TABLE_NUMRUN+" (id INTEGER PRIMARY KEY AUTOINCREMENT, cpt INTEGER);");
+		db.execSQL("INSERT INTO " + TABLE_NUMRUN + "(cpt) values(1)");
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (cercle VARCHAR NOT NULL PRIMARY KEY);");
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
 				" (club VARCHAR NOT NULL PRIMARY KEY);");
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (type VARCHAR NOT NULL PRIMARY KEY);");
-		preferedCercle = ContainerData.getListCercles();
-		preferedClub = ContainerData.getListClubs();
-		//this.addListPref(TABLE_CERCLE,"cercle",preferedCercle);
-		//this.addListPref(TABLE_CLUB,"club",preferedClub);
 	}
 	
 	@Override
@@ -53,13 +47,33 @@ public class DataBase extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	/*public void addPref(String table, String key, String name) {
+	public void incrementNumRun() {
+		int cpt = getNumRun();
+		cpt++;
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues value = new ContentValues();
+		value.put("cpt",cpt);
+		db.insert(TABLE_NUMRUN,null,value);
+		db.close();
+	}
+	
+	public int getNumRun() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "SELECT MAX(cpt) FROM numRun";
+		Cursor cursor = db.rawQuery(query,null);
+		if (cursor.moveToNext()) {
+			return cursor.getInt(0);
+		}
+		return 0;
+	}
+	
+	public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues value = new ContentValues();
 		value.put(key,name);
 		db.insert(table,null,value);
 		db.close();
-	}*/
+	}
 	
 	public void addListPref(String table, String key, ArrayList<String> listName) {
 		SQLiteDatabase db = this.getWritableDatabase();

@@ -7,6 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+import android.util.Log;
 
 public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	private final String PUBDATE = "pubDate";
@@ -208,7 +209,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
-			if (listPref.contains(currentEvent.getGroup())) {  // donne l'organisateur
+			if (dataBase.getNumRun() == 1 || listPref.contains(currentEvent.getGroup())) {  // donne l'organisateur
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
 					ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());

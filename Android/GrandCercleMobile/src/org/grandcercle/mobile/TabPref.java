@@ -8,14 +8,14 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class TabPref extends Activity {
-
+	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.prefs);
 		TextView cercle = (TextView)findViewById(R.id.Cercles);
 		cercle.setOnClickListener((OnClickListener) clickListenerPref);
-	
-}
+	}
+
 	
 	private View.OnClickListener clickListenerPref = new View.OnClickListener() {
 		public void onClick(View view) {	

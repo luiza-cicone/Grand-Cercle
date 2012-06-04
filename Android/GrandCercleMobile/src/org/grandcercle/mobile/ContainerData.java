@@ -27,7 +27,6 @@ public class ContainerData {
 	private static ArrayList<String> listCercles;
 	private static ArrayList<String> listClubs;
 	private static Context appContext;
-	private static DataBase dataBase;
 	
 	public ContainerData() {
 	}
@@ -35,7 +34,6 @@ public class ContainerData {
 	
 	public static void parseFiles(Context ctx){
 		appContext = ctx;
-		dataBase = DataBase.getInstance();
 		
 		// On passe par une classe factory pour obtenir une instance de sax
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
