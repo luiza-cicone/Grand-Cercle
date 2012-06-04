@@ -25,6 +25,7 @@ public class GCMLaunching extends Activity {
 		@Override
 	    protected Void doInBackground(Void... params) {
 			ContainerData.parseFiles();
+			//ContainerData.sortDatas();
 			return null;
 	    }
 

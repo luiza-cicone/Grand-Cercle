@@ -34,9 +34,6 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	// Event courant
 	private Event currentEvent;
 	
-	// liste des "group" autorisés dans les préférences
-	//private ArrayList<String> listGroup;
-	
 	
 	/* Cette méthode est appelée par le parser une et une seule  
 	 * fois au démarrage de l'analyse de votre flux xml. 
@@ -50,8 +47,6 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		super.startDocument();
 		listEvent = new ArrayList<Event>();
 		hashEvent = new HashMap<String,ArrayList<Event>>();
-		//listGroup = new ArrayList<String>();
-		
 	}
 	
 	/* 

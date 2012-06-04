@@ -25,6 +25,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
 	private ArrayList<String> list;
 	private CharSequence[] entryValues; 
 	private CharSequence[] entries;
+	//private DataBase dataBase;
 
 	
 	// Constructor
@@ -67,7 +68,6 @@ public class ListPreferenceMultiSelect extends ListPreference {
         mClickedDialogEntryIndices = new boolean[list.size()];
         for (int i= 0; i<list.size(); i++) {
         	mClickedDialogEntryIndices[i]=true;
-        
         }
     }
     
@@ -97,6 +97,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
 					}
         });
     }
+    
     private CharSequence[] BuildEntriesCercles() {
     	CharSequence[] e = new String[list.size()];
     	Iterator<String> it = list.iterator();
@@ -151,18 +152,33 @@ public class ListPreferenceMultiSelect extends ListPreference {
     	String[] vals = parseStoredValue(getValue());
     	
     	if ( vals != null ) {
-    		List<String> valuesList = Arrays.asList(vals);
-//        	for ( int j=0; j<vals.length; j++ ) {
-//    		TODO: Check why the trimming... Can there be some random spaces added somehow? What if we want a value with trailing spaces, is that an issue?
-//        		String val = vals[j].trim();
+    		List<String> valuesList = Arrays.asList(vals);		
         	for ( int i=0; i<entryV.length; i++ ) {
         		CharSequence entry = entryV[i];
             	if ( valuesList.contains(entry) ) {
         			mClickedDialogEntryIndices[i] = true;
         		}
         	}
-//        	}
     	}
+    	/*CharSequence[] entryV = getEntryValues();
+    	String[] vals = parseStoredValue(getValue());
+    	
+    	
+    	ArrayList<String> listChecked = null;
+    	String key = getKey();
+    	if (key.equalsIgnoreCase("ListPrefCercles")) {
+    		listChecked = dataBase.getAllPref("prefCercle");
+    	} else if (key.equalsIgnoreCase("ListPrefClubs")) {
+    		listChecked = dataBase.getAllPref("prefClub");
+    	}
+    	if (listChecked != null && vals != null) {
+    		for (int i = 0; i<listChecked.size(); i++) {
+    			CharSequence entry = entryV[i];
+    			if (listChecked.contains(entry)) {
+    				mClickedDialogEntryIndices[i] = true;
+    			}
+    		}
+    	}*/
     }
 
 	@Override
@@ -173,7 +189,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
     	CharSequence[] entry = getEntryValues();
         if (positiveResult && entry != null) {
         	for ( int i=0; i<entry.length; i++ ) {
-        		if ( mClickedDialogEntryIndices[i] == true ) {
+        		if (mClickedDialogEntryIndices[i] == true) {
         			// Don't save the state of check all option - if any
         			String val = (String) entry[i];
         			if( checkAllKey == null || (val.equals(checkAllKey) == false) ) {
@@ -184,6 +200,12 @@ public class ListPreferenceMultiSelect extends ListPreference {
 
             if (callChangeListener(values)) {
         		setValue(join(values, separator));
+            	/*String key = getKey();
+            	if (key.equalsIgnoreCase("ListPrefCercles")) {
+            		dataBase.addListPref("prefCercle","cercle",values);
+            	} else if (key.equalsIgnoreCase("ListPrefClubs")) {
+            		dataBase.addListPref("prefClub","club",values);
+            	}*/
             }
         }
     }
