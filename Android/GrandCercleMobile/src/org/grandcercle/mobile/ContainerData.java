@@ -203,9 +203,16 @@ public class ContainerData {
 	public static ArrayList<String> getListCercles() {
 		return listCercles;
 	}
-
 	public static ArrayList<String> getListClubs() {
 		return listClubs;
 	}
+	public static ArrayList<String> getListTypes() {
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add("Soirées");
+		temp.add("Evénements sportifs");
+		temp.add("Autres");
+		return temp;
+	}
+	
 }
 

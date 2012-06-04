@@ -48,6 +48,6 @@ public class TabPref extends PreferenceActivity implements OnSharedPreferenceCha
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		ContainerData.parseFiles();
-		Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
+		//Toast.makeText(this,  key , Toast.LENGTH_LONG).show();	
 	}
 }

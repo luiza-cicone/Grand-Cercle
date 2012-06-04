@@ -10,11 +10,13 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ListView;
 
 public class ListPreferenceMultiSelect extends ListPreference {
@@ -44,6 +46,8 @@ public class ListPreferenceMultiSelect extends ListPreference {
     		list = ContainerData.getListClubs();
     	} else if (cle.equals("ListPrefCercles")) {
     		list = ContainerData.getListCercles();
+    	} else {
+    		list = ContainerData.getListTypes();
     	}
     	entries= new String[list.size()];
     	entryValues = new String[list.size()];
@@ -65,10 +69,6 @@ public class ListPreferenceMultiSelect extends ListPreference {
     	super.setEntries(entries);
     	// Initialize the array of boolean to the same size as number of entries
         mClickedDialogEntryIndices = new boolean[list.size()];
-        for (int i= 0; i<list.size(); i++) {
-        	mClickedDialogEntryIndices[i]=true;
-        
-        }
     }
     
     public ListPreferenceMultiSelect(Context context) {
@@ -78,14 +78,13 @@ public class ListPreferenceMultiSelect extends ListPreference {
     @Override
     protected void onPrepareDialogBuilder(Builder builder) {
 
-    	entryValues = BuildEntryValuesCercles();
-    	entries = BuildEntriesCercles();
+    	entryValues = BuildEntryValues();
+    	entries = BuildEntries();
 
         if (entries == null || entryValues == null || entries.length != entryValues.length ) {
             throw new IllegalStateException(
                     "ListPreference requires an entries array and an entryValues array which are both the same length");
         }
-
         restoreCheckedEntries();
         builder.setMultiChoiceItems(entries, mClickedDialogEntryIndices, 
                 new DialogInterface.OnMultiChoiceClickListener() {
@@ -97,7 +96,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
 					}
         });
     }
-    private CharSequence[] BuildEntriesCercles() {
+    private CharSequence[] BuildEntries() {
     	CharSequence[] e = new String[list.size()];
     	Iterator<String> it = list.iterator();
     	int i = 0;
@@ -108,7 +107,7 @@ public class ListPreferenceMultiSelect extends ListPreference {
     	return e;
     }
     
-    private CharSequence[] BuildEntryValuesCercles() {
+    private CharSequence[] BuildEntryValues() {
     	CharSequence[] temp = new String[list.size()];
     	int i = 0;
     	while (i<list.size()) {
