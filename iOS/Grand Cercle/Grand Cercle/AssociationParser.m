@@ -9,7 +9,7 @@
 #import "AssociationParser.h"
 
 @implementation AssociationParser
-@synthesize arrayClubs, arrayCercles;
+@synthesize arrayClubs, arrayCercles, arrayTypes;
 static AssociationParser *instanceAssociation = nil;
 
 // singleton
@@ -29,7 +29,7 @@ static AssociationParser *instanceAssociation = nil;
         
         // Ajout de la news au tableau
         [array addObject:nomAssociation];
-        [nomAssociation release]; 
+        [nomAssociation release];
         
         // Obtain next sibling element
 	} while ((eventsToParse = eventsToParse->nextSibling));
@@ -53,6 +53,11 @@ static AssociationParser *instanceAssociation = nil;
         if (tbxmlDocument.rootXMLElement)
             [self handleAssociations:tbxmlDocument.rootXMLElement->firstChild toArray:arrayClubs];
     };
+    TBXMLSuccessBlock successBlock3 = ^(TBXML *tbxmlDocument) {
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxmlDocument.rootXMLElement)
+            [self handleAssociations:tbxmlDocument.rootXMLElement->firstChild toArray:arrayTypes];
+    };
     
     // Create a failure block that gets called if something goes wrong
     TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
@@ -65,6 +70,9 @@ static AssociationParser *instanceAssociation = nil;
                                failure:failureBlock];
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/clubs/data.xml"] 
                                success:successBlock2 
+                               failure:failureBlock];
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/types/data.xml"] 
+                               success:successBlock3 
                                failure:failureBlock];
 }
 @end

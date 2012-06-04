@@ -25,7 +25,6 @@
     
     eventArray = [[EvenementsParser instance] arrayEvents];
     
-    
     //configure sections
     eventDico = [[NSMutableDictionary alloc] init];
     
@@ -262,7 +261,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Evenements *selectedEvent = [eventArray objectAtIndex:indexPath.row];
+    NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    id theDate = [dates objectAtIndex:indexPath.section];
+    NSArray *listeEvent = [eventDico objectForKey:theDate];
+    Evenements *selectedEvent = [listeEvent objectAtIndex:indexPath.row];
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     detailEventController.event = selectedEvent;

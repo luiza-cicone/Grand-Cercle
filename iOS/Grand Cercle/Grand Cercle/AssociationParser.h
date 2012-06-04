@@ -15,10 +15,10 @@
     // Parser
     TBXML *tbxml;
     // Ensemble des cercles et des clubs
-	NSMutableArray *arrayCercles, *arrayClubs;
+	NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
 }
 
-@property (nonatomic, retain) NSMutableArray *arrayCercles, *arrayClubs;
+@property (nonatomic, retain) NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
 
     // Unique instance du parser
     + (AssociationParser *) instance;
