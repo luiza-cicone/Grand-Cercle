@@ -6,19 +6,25 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "PreferencesViewController.h"
+#import "SettingsViewController.h"
+#import "SettingsDetailViewController.h"
 
-@interface PreferencesViewController ()
+#define FILTER_EVENT 0
+#define FILTER_NEWS 1
+
+@interface SettingsViewController ()
 
 @end
 
-@implementation PreferencesViewController
+@implementation SettingsViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.title = NSLocalizedString(@"Settings", @"Settings");
+        self.tabBarItem.image = [UIImage imageNamed:@"settings"];
     }
     return self;
 }
@@ -50,16 +56,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == FILTER_EVENT) {
+        return @"Filtrer les événements par";
+    }
+    return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,7 +78,21 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    
+    if (indexPath.section == FILTER_EVENT && indexPath.row == 0) {
+        [cell.textLabel setText:@"Association"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+
+    }
+    else if (indexPath.section == FILTER_EVENT && indexPath.row == 1) {
+        [cell.textLabel setText:@"Type"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    }
     
     return cell;
 }
@@ -115,14 +140,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    SettingsViewController *detailViewController = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    [detailViewController release];
 }
 
 @end

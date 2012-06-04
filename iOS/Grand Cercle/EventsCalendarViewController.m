@@ -8,12 +8,14 @@
 
 #import "EventsCalendarViewController.h"
 #import "EvenementsParser.h"
+#import "EventDetailViewController.h"
 
 
 @implementation EventsCalendarViewController
 @synthesize dataArray, dataDictionary;
 @synthesize eventCell;
 @synthesize imageCache, imageCache2;
+@synthesize superController;
 
 - (void) viewDidLoad{
 	[super viewDidLoad];
@@ -25,33 +27,33 @@
 	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
 	imageCache.notificationName = @"newImageSmallCacheCalendar";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageSmallCacheCalendar" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newImageSmallCacheCalendar" object:nil];
 	
 	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
 	imageCache2.notificationName = @"newLogoCacheCalendar";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCacheCalendar" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newLogoCacheCalendar" object:nil];
     
 }
 
-- (void) newImageRetrieved:(NSNotification*)sender{
+- (void) newCalendarImageRetrieved:(NSNotification*)sender{
 	NSDictionary *dict = [sender userInfo];
     NSInteger tag = [[dict objectForKey:@"tag"] intValue];
     
     NSArray *paths = [self.tableView indexPathsForVisibleRows];
-    
     for(NSIndexPath *path in paths) {
-        
         NSInteger index = path.section * 1000 + path.row;
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+
         UIImageView *imageView;
         if ([[(NSNotification *) sender name] isEqualToString:@"newLogoCacheCalendar"]) {
-            imageView = (UIImageView *)[cell viewWithTag:6];
+            imageView = (UIImageView *)[cell viewWithTag:4];
         }
-        else {
+        else if ([[(NSNotification *) sender name] isEqualToString:@"newImageSmallCacheCalendar"]) {
             imageView = (UIImageView *)[cell viewWithTag:1];
         }
+        else return;
     	if(imageView.image == nil && tag == index){
             
             imageView.image = [dict objectForKey:@"image"];
@@ -72,7 +74,7 @@
 }
 
 - (NSArray*) calendarMonthView:(TKCalendarMonthView*)monthView marksFromDate:(NSDate*)startDate toDate:(NSDate*)lastDate{
-	[self generateRandomDataForStartDate:startDate endDate:lastDate];
+	[self generateDataForStartDate:startDate endDate:lastDate];
 	return dataArray;
 }
 - (void) calendarMonthView:(TKCalendarMonthView*)monthView didSelectDate:(NSDate*)date{
@@ -81,7 +83,7 @@
 	TKDateInformation info = [date dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:3600]];
 	NSDate *myTimeZoneDay = [NSDate dateFromDateInformation:info timeZone:[NSTimeZone systemTimeZone]];
 	
-	NSLog(@"Date Selected: %@",myTimeZoneDay);
+	NSLog(@"Date Selected: %@", myTimeZoneDay);
 	
 	[self.tableView reloadData];
 }
@@ -102,7 +104,7 @@
             return [[dataDictionary objectForKey:[self.monthView dateSelected]] count];
         }
     }    
-    return 1;
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -115,7 +117,6 @@
     
     
     if (cell == nil) {
-        NSLog(@"CELL IS NIL");
         [[NSBundle mainBundle] loadNibNamed:@"EventSmallCell" owner:self options:nil];
         cell = eventCell;
         self.eventCell = nil;
@@ -160,7 +161,23 @@
 }
 
 
-- (void) generateRandomDataForStartDate:(NSDate*)start endDate:(NSDate*)end{
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Evenements *selectedEvent  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
+    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    
+    
+    detailEventController.event = selectedEvent;
+    [self.superController.navigationController pushViewController:detailEventController animated:YES];
+    
+    [detailEventController release];
+    detailEventController = nil;
+}
+
+
+- (void) generateDataForStartDate:(NSDate*)start endDate:(NSDate*)end{
 	// this function sets up dataArray & dataDictionary
 	// dataArray: has boolean markers for each day to pass to the calendar view (via the delegate function)
 	// dataDictionary: has items that are associated with date keys (for tableview)
