@@ -232,7 +232,8 @@
     myEvent.startDate = event.eventDate;
     myEvent.endDate   = event.eventDate;
     myEvent.allDay = YES;
-    myEvent.notes = event.description;
+    myEvent.notes = [event.description stringByConvertingHTMLToPlainText];
+    myEvent.location = event.place;
     
     // Choix du calendrier
     [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
@@ -241,7 +242,7 @@
     [eventDB saveEvent:myEvent span:EKSpanThisEvent error:&err];
     if (err == noErr) {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Événement exporté"
+                              initWithTitle:@"Information"
                               message:@"exportation réussie!"
                               delegate:nil
                               cancelButtonTitle:@"ok"
@@ -249,9 +250,6 @@
         [alert show];
         [alert release];
     }
-    
-    [myEvent release];
-    
 }
 
 - (void)dealloc {
