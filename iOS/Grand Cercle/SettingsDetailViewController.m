@@ -20,8 +20,8 @@
 
 @implementation SettingsDetailViewController
 
-@synthesize cerclesArray, clubsArray, typeArray;
-@synthesize clubsChoice, cerclesChoice;
+@synthesize cerclesArray, clubsArray, typesArray;
+@synthesize clubsChoice, cerclesChoice, typesChoice;
 @synthesize filter;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -45,9 +45,18 @@
             for (NSString *club in clubsArray) {
                 [clubsChoice addObject:[clubsDico objectForKey:club]];
             }
-            NSLog(@"%@", [cerclesChoice objectAtIndex:2]);
-            NSLog(@"%@", [clubsChoice objectAtIndex:2]);
             
+        }
+        else if (filter == FILTER_TYPE) {
+            typesArray = [[AssociationParser instance] arrayTypes];
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+            NSMutableDictionary *typesDico = [defaults objectForKey:@"filtreTypes"];
+            
+            typesChoice = [[NSMutableArray alloc] initWithCapacity:[typesArray count]];
+            for (NSString *type in typesArray) {
+                [typesChoice addObject:[typesDico objectForKey:type]];
+            }
         }
     }
     return self;
@@ -101,6 +110,9 @@
             return [clubsArray count];
         }
     }
+    else if (filter == FILTER_TYPE) {
+        return [typesArray count];
+    }
     return 0;
 }
 
@@ -112,6 +124,9 @@
         else {
             return @"Clubs et associations";
         }
+    }
+    else if (filter == FILTER_TYPE) {
+        return @"Types d'événements";
     }
     return @"";
 }
@@ -134,6 +149,10 @@
             [cell.textLabel setText:[clubsArray objectAtIndex:indexPath.row]];
             checked = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
         }
+    }
+    else if (filter == FILTER_TYPE){
+        [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
+        checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
     }
     cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
     
@@ -195,6 +214,12 @@
             [clubsChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
         }
     }
+    else if (filter == FILTER_TYPE) {
+        BOOL value = [[typesChoice objectAtIndex:indexPath.row] boolValue];
+        value = 1 - value;
+        [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
+
+    }
     [tableView reloadData];
 }
 
@@ -202,6 +227,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
     NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreClubs"]];
+    NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreTypes"]];
     
     for (int i = 0; i < [cerclesArray count]; i++) {
         [cerclesDico setObject:[cerclesChoice objectAtIndex:i] forKey:[cerclesArray objectAtIndex:i]];
@@ -209,8 +235,12 @@
     for (int i = 0; i < [clubsArray count]; i++) {
         [clubsDico setObject:[clubsChoice objectAtIndex:i] forKey:[clubsArray objectAtIndex:i]];
     }
+    for (int i = 0; i < [typesArray count]; i++) {
+        [clubsDico setObject:[typesChoice objectAtIndex:i] forKey:[typesArray objectAtIndex:i]];
+    }
     [defaults setObject:cerclesDico forKey:@"filtreCercles"];
     [defaults setObject:clubsDico forKey:@"filtreClubs"];
+    [defaults setObject:typesDico forKey:@"filtreTypes"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
