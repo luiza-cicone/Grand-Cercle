@@ -136,9 +136,14 @@
             imageView = (UIImageView *)[cell viewWithTag:1];
             
             UIImage *img;
-            img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
-            [imageView setImage:img];
-            
+            if (![e.imageSmall isEqualToString:@""]) {
+                img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
+                [imageView setImage:img];
+            }
+            else {
+                [imageView setImage:nil];
+            }
+                        
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
