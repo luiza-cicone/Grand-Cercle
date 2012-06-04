@@ -28,11 +28,14 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	// HashMap qui permet de lister les événements par jour
 	private HashMap<String,ArrayList<Event>> hashEvent;
 	
-	// Boolean permettant de savoir si nous sommes à l'intérieur d'une news
+	// Boolean permettant de savoir si nous sommes à l'intérieur d'un event
 	private boolean inEvent;
 
-	// Feed courant
+	// Event courant
 	private Event currentEvent;
+	
+	// liste des "group" autorisés dans les préférences
+	//private ArrayList<String> listGroup;
 	
 	
 	/* Cette méthode est appelée par le parser une et une seule  
@@ -47,6 +50,8 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		super.startDocument();
 		listEvent = new ArrayList<Event>();
 		hashEvent = new HashMap<String,ArrayList<Event>>();
+		//listGroup = new ArrayList<String>();
+		
 	}
 	
 	/* 

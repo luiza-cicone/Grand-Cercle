@@ -10,10 +10,11 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ListView;
 
 public class ListPreferenceMultiSelect extends ListPreference {
@@ -46,10 +47,17 @@ public class ListPreferenceMultiSelect extends ListPreference {
     	}
     	entries= new String[list.size()];
     	entryValues = new String[list.size()];
-     // Initialize the array of boolean to the same size as number of entries
+    	// Initialize the array of boolean to the same size as number of entries
         mClickedDialogEntryIndices = new boolean[list.size()];
        
-
+        // counts the number of launching of the application to initialize the array of boolean
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        int c = prefs.getInt("numRun",0);
+        if (c == 1) {
+        	for (int i = 0; i<list.size(); i++) {
+        		mClickedDialogEntryIndices[i] = true;
+        	}
+        }
     }
 	
 	@Override
