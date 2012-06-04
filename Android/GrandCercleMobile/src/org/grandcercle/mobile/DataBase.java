@@ -14,6 +14,9 @@ public class DataBase extends SQLiteOpenHelper {
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
 	
+	private ArrayList<String> preferedCercle;
+	private ArrayList<String> preferedClub;
+	
 	/** Create a helper object for the Events database */
 	public DataBase(Context ctx) {
 		super(ctx, "GCM_DB", null, 2);
@@ -27,6 +30,10 @@ public class DataBase extends SQLiteOpenHelper {
 				" (club VARCHAR NOT NULL PRIMARY KEY);");
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (type VARCHAR NOT NULL PRIMARY KEY);");
+		preferedCercle = ContainerData.getListCercles();
+		preferedClub = ContainerData.getListClubs();
+		this.addListPref(TABLE_CERCLE,"cercle",preferedCercle);
+		this.addListPref(TABLE_CLUB,"club",preferedClub);
 	}
 	
 	@Override
@@ -57,7 +64,7 @@ public class DataBase extends SQLiteOpenHelper {
 	}
 	
 	public void deletePref(String table, String key, String name) {
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		String query = "DELETE FROM " + table + " WHERE " + key +"='"+name+"';";
 		db.execSQL(query);
 		db.close();
@@ -66,7 +73,7 @@ public class DataBase extends SQLiteOpenHelper {
 	public ArrayList<String> getAllPref(String table) {
 		ArrayList<String> list = new ArrayList<String>();
 		String query = "SELECT * FROM " + table;
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query,null);
 		
 		if (cursor.moveToFirst()) {
@@ -86,5 +93,11 @@ public class DataBase extends SQLiteOpenHelper {
 		return cursor.getCount();
 	}
 	
+	public void deleteAll(String table){
+	    SQLiteDatabase db = this.getWritableDatabase();
+	    String delete = "DELETE FROM " + table + ";";
+	    db.rawQuery(delete, null);
+	}
+
 	
 }

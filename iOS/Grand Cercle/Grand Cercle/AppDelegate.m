@@ -17,8 +17,8 @@
 #import "NewsParser.h"
 #import "EvenementsParser.h"
 #import "BonsPlansParser.h"
-#import "AssociationParser.h"
 
+#import "FilterParser.h"
 
 @implementation AppDelegate
 
@@ -37,7 +37,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     
     // On parse les associations
-    AssociationParser *ap = [AssociationParser instance];
+    FilterParser *ap = [FilterParser instance];
     [ap loadAssociations];
     
     if (![defaults objectForKey:@"firstRun"]) {

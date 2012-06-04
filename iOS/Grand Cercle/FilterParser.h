@@ -11,7 +11,7 @@
 #import "TBXML.h"
 #import "NSString+HTML.h"
 
-@interface AssociationParser : NSObject {
+@interface FilterParser : NSObject {
     // Parser
     TBXML *tbxml;
     // Ensemble des cercles et des clubs
@@ -20,11 +20,11 @@
 
 @property (nonatomic, retain) NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
 
-    // Unique instance du parser
-    + (AssociationParser *) instance;
-    // Méthode récupérant l'ensemble des news
-    - (void)loadAssociations;
-    - (void) handleAssociations:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
+// Unique instance du parser
++ (FilterParser *) instance;
+// Méthode récupérant l'ensemble des news
+- (void)loadAssociations;
+- (void) handleAssociations:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
 
 @end
 

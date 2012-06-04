@@ -7,7 +7,7 @@
 //
 
 #import "SettingsDetailViewController.h"
-#import "AssociationParser.h"
+#import "FilterParser.h"
 
 #define FILTER_ASSOS 0
 #define FILTER_TYPE 1
@@ -29,8 +29,8 @@
     self = [super initWithStyle:style];
     if (self) {
         if (filter == FILTER_ASSOS) {
-            cerclesArray = [[AssociationParser instance] arrayCercles];
-            clubsArray = [[AssociationParser instance] arrayClubs];
+            cerclesArray = [[FilterParser instance] arrayCercles];
+            clubsArray = [[FilterParser instance] arrayClubs];
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
             NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
