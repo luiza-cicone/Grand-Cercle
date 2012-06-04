@@ -30,6 +30,7 @@ static FilterParser *instanceAssociation = nil;
         // Ajout de la news au tableau
         [array addObject:nomAssociation];
         
+        
         // Obtain next sibling element
 	} while ((eventsToParse = eventsToParse->nextSibling));
     
@@ -38,8 +39,9 @@ static FilterParser *instanceAssociation = nil;
 - (void)loadAssociations { 
     
     // Initialisation du tableau contenant les News
-    arrayCercles = [[NSMutableArray alloc] initWithCapacity:10];
-    arrayClubs = [[NSMutableArray alloc] initWithCapacity:10];
+    arrayCercles = [[NSMutableArray alloc] initWithCapacity:3];
+    arrayClubs = [[NSMutableArray alloc] initWithCapacity:3];
+    arrayTypes = [[NSMutableArray alloc] initWithCapacity:3];
     
     // Create a success block to be called when the async request completes
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
@@ -74,6 +76,9 @@ static FilterParser *instanceAssociation = nil;
                                success:successBlock3 
                                failure:failureBlock];
     
+    for (NSString * n in arrayTypes) {
+        NSLog(@"%@", n);
+    }
 }
 @end
 

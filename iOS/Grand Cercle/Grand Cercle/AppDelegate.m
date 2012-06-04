@@ -54,11 +54,11 @@
         }
         [defaults setObject:clubsDico forKey:@"filtreClubs"];
         
-        NSMutableDictionary *filtresDico = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
         for (NSString *type in [ap arrayTypes]) {
-            [filtresDico setValue:[NSNumber numberWithBool:YES] forKey:type];
+            [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
         }
-        [defaults setObject:clubsDico forKey:@"filtreClubs"];
+        [defaults setObject:typesDico forKey:@"filtreTypes"];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     

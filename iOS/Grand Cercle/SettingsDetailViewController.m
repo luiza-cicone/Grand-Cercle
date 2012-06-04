@@ -28,36 +28,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        if (filter == FILTER_ASSOS) {
-            cerclesArray = [[FilterParser instance] arrayCercles];
-            clubsArray = [[FilterParser instance] arrayClubs];
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-            NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
-            NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
-
-            
-            cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
-            clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
-            for (NSString *cercle in cerclesArray) {
-                [cerclesChoice addObject:[cerclesDico objectForKey:cercle]];
-            }
-            for (NSString *club in clubsArray) {
-                [clubsChoice addObject:[clubsDico objectForKey:club]];
-            }
-            
-        }
-        else if (filter == FILTER_TYPE) {
-            typesArray = [[AssociationParser instance] arrayTypes];
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-            NSMutableDictionary *typesDico = [defaults objectForKey:@"filtreTypes"];
-            
-            typesChoice = [[NSMutableArray alloc] initWithCapacity:[typesArray count]];
-            for (NSString *type in typesArray) {
-                [typesChoice addObject:[typesDico objectForKey:type]];
-            }
-        }
     }
     return self;
 }
@@ -65,9 +35,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (filter == FILTER_ASSOS) {
+        cerclesArray = [[FilterParser instance] arrayCercles];
+        clubsArray = [[FilterParser instance] arrayClubs];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+        NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
+        NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+        
+        
+        cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
+        clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
+        for (NSString *cercle in cerclesArray) {
+            [cerclesChoice addObject:[cerclesDico objectForKey:cercle]];
+        }
+        for (NSString *club in clubsArray) {
+            [clubsChoice addObject:[clubsDico objectForKey:club]];
+        }
+        
+    }
+    else if (filter == FILTER_TYPE) {
+        typesArray = [[FilterParser instance] arrayTypes];
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+        NSMutableDictionary *typesDico = [defaults objectForKey:@"filtreTypes"];
+        
+        for (NSString * n in typesArray) {
+        
+        }
+        
+        typesChoice = [[NSMutableArray alloc] initWithCapacity:[typesArray count]];
+        for (NSString *type in typesArray) {
+            [typesChoice addObject:[typesDico objectForKey:type]];
+        }
+    }
+
 
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -242,6 +248,7 @@
     [defaults setObject:clubsDico forKey:@"filtreClubs"];
     [defaults setObject:typesDico forKey:@"filtreTypes"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self viewDidUnload];
 }
 
 @end
