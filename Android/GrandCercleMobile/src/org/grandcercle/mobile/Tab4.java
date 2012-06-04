@@ -3,11 +3,7 @@ package org.grandcercle.mobile;
 
 
 
-import org.grandcercle.mobile.R;
-
-
 import android.app.Activity;
-
 import android.os.Bundle;
 
 

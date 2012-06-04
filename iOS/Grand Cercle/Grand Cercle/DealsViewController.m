@@ -8,6 +8,7 @@
 
 #import "DealsViewController.h"
 #import "BonsPlansParser.h"
+#import "DealsDetailViewController.h"
 
 @implementation DealsViewController
 @synthesize tview;
@@ -176,8 +177,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    
+    // Navigation logic may go here. Create and push another view controller.
+    DealsDetailViewController *detailViewController = [[DealsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    BonsPlans *b = [arrayBonsPlans objectAtIndex:[indexPath row]];
+    detailViewController.bonPlan = b;
+    // ...
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    [detailViewController release];    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

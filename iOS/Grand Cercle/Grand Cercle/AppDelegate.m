@@ -50,6 +50,7 @@
     BonsPlansParser *bp = [BonsPlansParser instance];
     [bp loadBonsPlans];
     
+    // On parse les associations
     AssociationParser *ap = [AssociationParser instance];
     [ap loadAssociations];
     
