@@ -8,15 +8,21 @@
 
 #import "EventFourNextViewController.h"
 #import "EvenementsParser.h"
+#import "Evenements.h"
+#import "EventDetailViewController.h"
 
 @implementation EventFourNextViewController
-@synthesize tabImage, tabLabel;
+@synthesize tabImage, tabLabel, superController;
+
+int borneSup = 0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    EvenementsParser *ep = [EvenementsParser instance];
-    int borneSup = MIN(4, [ep.arrayEvents count]);
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    EvenementsParser *ep = [EvenementsParser instance];
+    borneSup = MIN(4, [ep.arrayEvents count]);
+    
     if (self) {
         tabLabel = [[[NSMutableArray alloc] initWithCapacity:4] autorelease];
         tabImage = [[[NSMutableArray alloc] initWithCapacity:4] autorelease];
@@ -25,26 +31,27 @@
             [tabImage addObject:[[ep.arrayEvents objectAtIndex:i] image]];
             [tabLabel addObject:[[ep.arrayEvents objectAtIndex:i] date]];
         }
-    }
-    
-    UILabel *label;
-    for (int i = 0; i < borneSup; i++) {
-        label = (UILabel *)[self.view viewWithTag:i+5];
-        [label setText: [tabLabel objectAtIndex:i]];
-        UIImageView *imageView;
-        imageView = (UIImageView *)[self.view viewWithTag:i+1];
         
-        UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[tabImage objectAtIndex:i]]]];
-        
-//        UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
-        [imageView setImage:myimage];
-        
+        UILabel *label;
+        for (int i = 0; i < borneSup; i++) {
+            label = (UILabel *)[self.view viewWithTag:i+5];
+            [label setText: [tabLabel objectAtIndex:i]];
+            UIImageView *imageView;
+            UIButton *button;
+            imageView = (UIImageView *)[self.view viewWithTag:i+1];
+            button = (UIButton *)[self.view viewWithTag:i+9];
+            [button setHidden:NO];
+            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[tabImage objectAtIndex:i]]]];
+            [imageView setImage:myimage];
+            
+        }
         for (int i = borneSup; i < 4; i++) {
             label = (UILabel *)[self.view viewWithTag:i+5];
             [label setText: @""];
         }
-        
+
     }
+    
     return self;
 }
 
@@ -66,4 +73,28 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)imageButtonAction:(id)sender {
+    
+    Evenements *selectedEvent = nil;
+    if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:9] && borneSup > 0) {
+        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:0];
+    } else if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:10] && borneSup > 1) {
+        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:1];
+    } else if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:11] && borneSup > 2) {
+        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:2];
+    } else if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:12] && borneSup > 3) {
+        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:3];
+    }
+    
+    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    detailEventController.event = selectedEvent;
+    [self.superController.navigationController pushViewController:detailEventController animated:YES];
+    [detailEventController release];
+    detailEventController = nil;
+}
+
+- (void)dealloc {
+
+    [super dealloc];
+}
 @end
