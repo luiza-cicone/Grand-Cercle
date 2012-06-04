@@ -14,11 +14,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
-public class ContainerData {	
+public class ContainerData {
 	
 	static public Context context;
 	static private ArrayList<News> listNews;
@@ -29,13 +26,17 @@ public class ContainerData {
 	private static HashMap<String,ArrayList<Event>> hashEventOld;
 	private static ArrayList<String> listCercles;
 	private static ArrayList<String> listClubs;
+	private static Context appContext;
+	private static DataBase dataBase;
 	
 	public ContainerData() {
-
 	}
 
 	
-	public static void parseFiles(){
+	public static void parseFiles(Context ctx){
+		appContext = ctx;
+		dataBase = DataBase.getInstance();
+		
 		// On passe par une classe factory pour obtenir une instance de sax
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
 		SAXParser parseur = null;
@@ -49,6 +50,20 @@ public class ContainerData {
 		}
 		
 		// On définit les url des fichiers XML
+		URL urlCercles = null;
+		try {
+			urlCercles = new URL("http://www.grandcercle.org/cercles/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL urlClubs = null;
+		try {
+			urlClubs = new URL("http://www.grandcercle.org/clubs/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
 		URL urlNews = null;
 		try {
 			urlNews = new URL("http://www.grandcercle.org/news/data.xml");
@@ -77,78 +92,10 @@ public class ContainerData {
 			e1.printStackTrace();
 		}
 		
-		URL urlCercles = null;
-		try {
-			urlCercles = new URL("http://www.grandcercle.org/cercles/data.xml");
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-		
-		URL urlClubs = null;
-		try {
-			urlClubs = new URL("http://www.grandcercle.org/clubs/data.xml");
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-		
 		/* 
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
 		 * des opérations de parsing.
 		 */
-		DefaultHandler handlerNews = new ParserXMLHandlerNews();
-		try {
-			// On parse le fichier XML
-			parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
-			
-			// On récupère directement la liste des feeds
-			listNews = ((ParserXMLHandlerNews) handlerNews).getListNews();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		DefaultHandler handlerEvent = new ParserXMLHandlerEvent();
-		try {
-			// On parse le fichier XML
-			parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
-			
-			// On récupère directement la liste des feeds
-			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
-			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent();
-		try {
-			// On parse le fichier XML
-			parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
-			
-			// On récupère directement la liste des feeds
-			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
-			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		DefaultHandler handlerBP = new ParserXMLHandlerBP();
-		try {
-			// On parse le fichier XML
-			parseur.parse(urlBP.openConnection().getInputStream(), handlerBP);
-			
-			// On récupère directement la liste des feeds
-			listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		DefaultHandler handlerCercles = new ParserXMLHandlerAsso();
 		try {
@@ -175,22 +122,65 @@ public class ContainerData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	/*public static void sortDatas() {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		ListPreferenceMultiSelect listPrefCercle = (ListPreferenceMultiSelect) TabPref.findPreferenceByKey(prefs,"listPrefCercles");
-		boolean[] clickedCercles = listPrefCercle.getClicked();
-		for (int i=0; i<6; i++) {
-			if (clickedCercles[i]) {
-				Log.d("ContainerData","cliqué !");
-			} else {
-				Log.d("ContainerData","non cliqué !");
-			}
-		}
-	}*/
 
+		
+		
+		DefaultHandler handlerNews = new ParserXMLHandlerNews();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
+			
+			// On récupère directement la liste des feeds
+			listNews = ((ParserXMLHandlerNews) handlerNews).getListNews();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
+			
+			// On récupère directement la liste des feeds
+			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
+			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent(appContext);
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
+			
+			// On récupère directement la liste des feeds
+			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
+			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerBP = new ParserXMLHandlerBP();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlBP.openConnection().getInputStream(), handlerBP);
+			
+			// On récupère directement la liste des feeds
+			listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public static ArrayList<News> getNews() {
 		return listNews;
@@ -220,15 +210,21 @@ public class ContainerData {
 	public static ArrayList<String> getListCercles() {
 		return listCercles;
 	}
+	
 	public static ArrayList<String> getListClubs() {
 		return listClubs;
 	}
+	
 	public static ArrayList<String> getListTypes() {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add("Soirées");
 		temp.add("Evénements sportifs");
 		temp.add("Autres");
 		return temp;
+	}
+	
+	public static Context getAppContext() {
+		return appContext;
 	}
 	
 }

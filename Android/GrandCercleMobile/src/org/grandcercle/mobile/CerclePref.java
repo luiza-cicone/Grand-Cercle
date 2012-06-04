@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,8 +22,9 @@ public class CerclePref extends Activity {
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.cercle_pref);
-		dataBase = new DataBase(this);
-		
+		//dataBase = new DataBase(this);
+		dataBase = DataBase.getInstance();
+		listCercleChecked = new ArrayList<String>();
 		ArrayList<String> prefered = dataBase.getAllPref("prefCercle");
 		
         View linearLayout =  findViewById(R.id.cercle);
@@ -49,10 +51,12 @@ public class CerclePref extends Activity {
 		
 		lin.addView(buttonOK);
 		lin.addView(buttonCancel);
+		((ViewGroup) linearLayout).addView(lin);
 	}
 	
 	private OnCheckedChangeListener checkChanged = new OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			Log.d("Cercle","buttonView"+buttonView);
 			if (isChecked) {
 				listCercleChecked.add((String) buttonView.getText());
 			} else {
