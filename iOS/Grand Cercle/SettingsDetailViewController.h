@@ -1,5 +1,5 @@
 //
-//  PreferencesViewController.h
+//  SettingsDetailViewController.h
 //  Grand Cercle
 //
 //  Created by Luiza Cicone on 4/6/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UITableViewController
+@interface SettingsDetailViewController : UITableViewController
 
 @end

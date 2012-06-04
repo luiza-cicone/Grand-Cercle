@@ -75,6 +75,7 @@ int kNumberOfPages = 3;
     
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
+    [self loadScrollViewWithPage:2];
 }
 
 - (void)loadScrollViewWithPage:(int)page {
@@ -83,14 +84,15 @@ int kNumberOfPages = 3;
     
     UIViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
-        if (page == 0) {
+        if (page == 1) {
             controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
             [(EventsTableViewController *)controller setSuperController: self];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }
-        else if (page == 1){
+        else if (page == 0){
             controller = [[EventsCalendarViewController alloc] init];
+            [(EventsCalendarViewController *)controller setSuperController:self];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }

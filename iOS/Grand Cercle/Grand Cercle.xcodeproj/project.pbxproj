@@ -28,13 +28,15 @@
 		255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 255C809A15740E0100E6ECC3 /* Localizable.strings */; };
 		255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C809E15740EE900E6ECC3 /* DealsViewController.xib */; };
 		255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80A015740EE900E6ECC3 /* InfosViewController.xib */; };
-		255C80A615740EE900E6ECC3 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80A215740EE900E6ECC3 /* SettingsViewController.xib */; };
 		255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80AA157411AD00E6ECC3 /* NewsCell.xib */; };
 		255C8144157428A000E6ECC3 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813C157428A000E6ECC3 /* TBXML.m */; };
 		255C8145157428A000E6ECC3 /* NewsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813D157428A000E6ECC3 /* NewsParser.m */; };
 		255C8146157428A000E6ECC3 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813F157428A000E6ECC3 /* News.m */; };
 		255C8147157428A000E6ECC3 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C8141157428A000E6ECC3 /* TBXML+HTTP.m */; };
 		256217401576A2AC00667661 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2562173E1576A2AC00667661 /* EventCell.xib */; };
+		258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D3694157CA8DE0001E64E /* SettingsViewController.m */; };
+		258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D369F157CAD910001E64E /* SettingsDetailViewController.m */; };
+		258D36A6157CB1260001E64E /* AssociationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D36A5157CB1260001E64E /* AssociationParser.m */; };
 		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
 		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
 		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
@@ -60,7 +62,6 @@
 		2595EAF11574055200CA27B3 /* deals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2595EAE91574055200CA27B3 /* deals@2x.png */; };
 		2595EAF8157405EB00CA27B3 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF3157405EB00CA27B3 /* DealsViewController.m */; };
 		2595EAF9157405EB00CA27B3 /* InfosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF5157405EB00CA27B3 /* InfosViewController.m */; };
-		2595EAFA157405EB00CA27B3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2595EAF7157405EB00CA27B3 /* SettingsViewController.m */; };
 		25D7C0FE15760BDB00C2B988 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */; };
 		25D8AD7315791F240065C038 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7215791F240065C038 /* icon.png */; };
 		25D8AD7515791F2D0065C038 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7415791F2D0065C038 /* icon@2x.png */; };
@@ -138,7 +139,6 @@
 		255C809B15740E0100E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Grand Cercle/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		255C809F15740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DealsViewController.xib; sourceTree = "<group>"; };
 		255C80A115740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfosViewController.xib; sourceTree = "<group>"; };
-		255C80A315740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsViewController.xib; sourceTree = "<group>"; };
 		255C80AA157411AD00E6ECC3 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		255C813C157428A000E6ECC3 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		255C813D157428A000E6ECC3 /* NewsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsParser.m; sourceTree = "<group>"; };
@@ -149,6 +149,12 @@
 		255C8142157428A000E6ECC3 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		255C8143157428A000E6ECC3 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
 		2562173F1576A2AC00667661 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EventCell.xib; sourceTree = "<group>"; };
+		258D3693157CA8DE0001E64E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		258D3694157CA8DE0001E64E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		258D369E157CAD910001E64E /* SettingsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsDetailViewController.h; path = ../SettingsDetailViewController.h; sourceTree = "<group>"; };
+		258D369F157CAD910001E64E /* SettingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsDetailViewController.m; path = ../SettingsDetailViewController.m; sourceTree = "<group>"; };
+		258D36A5157CB1260001E64E /* AssociationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssociationParser.m; path = ../AssociationParser.m; sourceTree = "<group>"; };
+		258D36A7157CB12F0001E64E /* AssociationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssociationParser.h; path = ../AssociationParser.h; sourceTree = "<group>"; };
 		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,8 +189,6 @@
 		2595EAF3157405EB00CA27B3 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsViewController.m; sourceTree = "<group>"; };
 		2595EAF4157405EB00CA27B3 /* InfosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfosViewController.h; sourceTree = "<group>"; };
 		2595EAF5157405EB00CA27B3 /* InfosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfosViewController.m; sourceTree = "<group>"; };
-		2595EAF6157405EB00CA27B3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		2595EAF7157405EB00CA27B3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
 		25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsTableViewController.m; sourceTree = "<group>"; };
 		25D8AD7215791F240065C038 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -272,6 +276,28 @@
 			name = TBXML;
 			sourceTree = "<group>";
 		};
+		258D36A1157CAD9B0001E64E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				258D3693157CA8DE0001E64E /* SettingsViewController.h */,
+				258D3694157CA8DE0001E64E /* SettingsViewController.m */,
+				258D369E157CAD910001E64E /* SettingsDetailViewController.h */,
+				258D369F157CAD910001E64E /* SettingsDetailViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		258D36A2157CADD30001E64E /* News */ = {
+			isa = PBXGroup;
+			children = (
+				2595EAB61573FA9000CA27B3 /* NewsViewController.h */,
+				2595EAB71573FA9000CA27B3 /* NewsViewController.m */,
+				04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */,
+				04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */,
+			);
+			name = News;
+			sourceTree = "<group>";
+		};
 		2595EA8E1573FA9000CA27B3 = {
 			isa = PBXGroup;
 			children = (
@@ -321,16 +347,12 @@
 				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
 				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
 				251FA64E157903E3005B7318 /* Events */,
-				2595EAB61573FA9000CA27B3 /* NewsViewController.h */,
-				2595EAB71573FA9000CA27B3 /* NewsViewController.m */,
-				04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */,
-				04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */,
+				258D36A2157CADD30001E64E /* News */,
 				2595EAF2157405EA00CA27B3 /* DealsViewController.h */,
 				2595EAF3157405EB00CA27B3 /* DealsViewController.m */,
 				2595EAF4157405EB00CA27B3 /* InfosViewController.h */,
 				2595EAF5157405EB00CA27B3 /* InfosViewController.m */,
-				2595EAF6157405EB00CA27B3 /* SettingsViewController.h */,
-				2595EAF7157405EB00CA27B3 /* SettingsViewController.m */,
+				258D36A1157CAD9B0001E64E /* Settings */,
 				2595EAA41573FA9000CA27B3 /* Supporting Files */,
 			);
 			path = "Grand Cercle";
@@ -392,7 +414,6 @@
 				04F4CBD11578B6C400A49037 /* DescriptionCell.xib */,
 				255C809E15740EE900E6ECC3 /* DealsViewController.xib */,
 				255C80A015740EE900E6ECC3 /* InfosViewController.xib */,
-				255C80A215740EE900E6ECC3 /* SettingsViewController.xib */,
 				047EB1F515761A7300F2F59B /* DealCell.xib */,
 				04F4CBD61578C58000A49037 /* NewsDescription.xib */,
 			);
@@ -434,6 +455,8 @@
 				047EB1F3157609D200F2F59B /* BonsPlansParser.m */,
 				0435F4931574F4B3009F23CD /* EvenementsParser.h */,
 				0435F4941574F4B3009F23CD /* EvenementsParser.m */,
+				258D36A7157CB12F0001E64E /* AssociationParser.h */,
+				258D36A5157CB1260001E64E /* AssociationParser.m */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -547,7 +570,6 @@
 				255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */,
 				255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */,
 				255C80A515740EE900E6ECC3 /* InfosViewController.xib in Resources */,
-				255C80A615740EE900E6ECC3 /* SettingsViewController.xib in Resources */,
 				255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */,
 				25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */,
 				047EB1DB1575383800F2F59B /* EventTopCell.xib in Resources */,
@@ -603,7 +625,6 @@
 				2595EAB81573FA9000CA27B3 /* NewsViewController.m in Sources */,
 				2595EAF8157405EB00CA27B3 /* DealsViewController.m in Sources */,
 				2595EAF9157405EB00CA27B3 /* InfosViewController.m in Sources */,
-				2595EAFA157405EB00CA27B3 /* SettingsViewController.m in Sources */,
 				255C8144157428A000E6ECC3 /* TBXML.m in Sources */,
 				255C8145157428A000E6ECC3 /* NewsParser.m in Sources */,
 				255C8146157428A000E6ECC3 /* News.m in Sources */,
@@ -620,7 +641,9 @@
 				25ECD56015775F2A006E4652 /* EventsCalendarViewController.m in Sources */,
 				04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */,
 				04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */,
-				04D8262F157CA88D0049A41C /* AssociationParser.m in Sources */,
+				258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */,
+				258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */,
+				258D36A6157CB1260001E64E /* AssociationParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,14 +694,6 @@
 				255C80A115740EE900E6ECC3 /* en */,
 			);
 			name = InfosViewController.xib;
-			sourceTree = "<group>";
-		};
-		255C80A215740EE900E6ECC3 /* SettingsViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				255C80A315740EE900E6ECC3 /* en */,
-			);
-			name = SettingsViewController.xib;
 			sourceTree = "<group>";
 		};
 		2562173E1576A2AC00667661 /* EventCell.xib */ = {
@@ -778,7 +793,7 @@
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
 				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-fobjc-arc",
@@ -797,7 +812,7 @@
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
 				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-fobjc-arc",
