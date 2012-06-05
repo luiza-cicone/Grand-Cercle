@@ -75,10 +75,6 @@ static FilterParser *instanceAssociation = nil;
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/types/data.xml"] 
                                success:successBlock3 
                                failure:failureBlock];
-    
-    for (NSString * n in arrayTypes) {
-        NSLog(@"%@", n);
-    }
 }
 @end
 
