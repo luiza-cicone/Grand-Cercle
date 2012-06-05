@@ -52,7 +52,6 @@ public class TypesPref extends Activity {
 	}
 	private OnCheckedChangeListener checkChanged = new OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			//Log.d("Cercle","buttonView"+buttonView);
 			if (isChecked) {
 				listTypesChecked.add((String) buttonView.getText());
 			} else {
