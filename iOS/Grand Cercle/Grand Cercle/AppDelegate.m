@@ -53,7 +53,6 @@
     return YES;
 }
 - (void)startParse {
-    NSLog(@"FIN");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
 
     // On parse les associations
@@ -78,7 +77,11 @@
         for (NSString *type in [ap arrayTypes]) {
             [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
         }
-        [defaults setObject:typesDico forKey:@"filtreTypes"];        
+        [defaults setObject:typesDico forKey:@"filtreTypes"];
+        
+        NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
+        [defaults setObject:colorArray forKey:@"theme"];
+        
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     

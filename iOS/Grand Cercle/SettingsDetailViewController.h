@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingsDetailViewController : UITableViewController {
-    NSArray *clubsArray, *cerclesArray, *typesArray;
+    NSArray *clubsArray, *cerclesArray, *typesArray, *themesArray;
     NSMutableArray *clubsChoice, *cerclesChoice, *typesChoice;
-    NSInteger filter;
+    UIColor *themeChoice;
+    NSIndexPath *filter;
 }
 
-@property (nonatomic, retain) NSArray *clubsArray, *cerclesArray, *typesArray;
+@property (nonatomic, retain) NSArray *clubsArray, *cerclesArray, *typesArray, *themesArray;
 @property (nonatomic, retain) NSMutableArray *clubsChoice, *cerclesChoice, *typesChoice;
-@property (nonatomic, assign) NSInteger filter;
+@property (nonatomic, retain) NSIndexPath *filter;
+@property (nonatomic, retain) UIColor *themeChoice;
 
 @end
