@@ -151,7 +151,7 @@
             
             
             label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[e place]];
+            [label setText:[[[e time] stringByAppendingString:@" - "] stringByAppendingString : [e place]]];
             
             imageView = (UIImageView *)[cell viewWithTag:4];
             
