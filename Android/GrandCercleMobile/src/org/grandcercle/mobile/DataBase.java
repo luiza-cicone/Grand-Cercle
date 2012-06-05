@@ -7,9 +7,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DataBase extends SQLiteOpenHelper {
-	private static String TABLE_NUMRUN = "numRun";
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
@@ -36,28 +36,36 @@ public class DataBase extends SQLiteOpenHelper {
 		// Initialisation des listes
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
+		Iterator<String> it0 = listClub.iterator();
+		while (it0.hasNext()) {
+			Log.d("DB",it0.next());
+		}
 		listType = ContainerData.getListTypes();
+		ContentValues value = new ContentValues();
 		
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
-		/*Iterator<String> itCercle = listCercle.iterator();
+		Iterator<String> itCercle = listCercle.iterator();
 		while (itCercle.hasNext()) {
-			db.execSQL("INSERT INTO " + TABLE_CERCLE + "(cercle) values("+itCercle.next()+")");
-		}*/
+			value.put("cercle",itCercle.next());
+			db.insert(TABLE_CERCLE,null,value);
+		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
-		/*Iterator<String> itClub = listClub.iterator();
+		Iterator<String> itClub = listClub.iterator();
 		while (itClub.hasNext()) {
-			db.execSQL("INSERT INTO " + TABLE_CLUB + "(club) values("+itClub.next()+")");
-		}*/
+			value.put("club",itClub.next());
+			db.insert(TABLE_CLUB,null,value);
+		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
-		/*Iterator<String> itType = listType.iterator();
+		Iterator<String> itType = listType.iterator();
 		while (itType.hasNext()) {
-			db.execSQL("INSERT INTO " + TABLE_TYPE + "(type) values("+itType.next()+")");
-		}*/
+			value.put("type",itType.next());
+			db.insert(TABLE_TYPE,null,value);
+		}
 	}
 	
 	@Override
