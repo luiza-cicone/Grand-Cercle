@@ -26,13 +26,13 @@ public class ClubPref extends Activity {
 		//dataBase = new DataBase(this);
 		dataBase = DataBase.getInstance();
 		listClubChecked = new ArrayList<String>();
-		ArrayList<String> prefered = dataBase.getAllPref("prefClub");
+		ArrayList<String> prefered = dataBase.getAllPref("prefClub","club");
 		
         View scrollview =  findViewById(R.id.club);
         listClub = ContainerData.getListClubs();
 		for (int i = 0; i < listClub.size(); i++) {
 			CheckBox checkBox = new CheckBox(this);
-			checkBox.setPadding(100, 0, 0, 0);
+			checkBox.setPadding(80, 0, 0, 0);
 			checkBox.setWidth(470);
 			checkBox.setText(listClub.get(i));
 			
@@ -63,7 +63,7 @@ public class ClubPref extends Activity {
 	
 	private OnClickListener OKClicked = new OnClickListener() {
 		public void onClick(View v) {
-			dataBase.deleteAll("prefCercle");
+			dataBase.deleteAll("prefClub");
 			dataBase.addListPref("prefClub","club",listClubChecked);
 			finish();
 		}

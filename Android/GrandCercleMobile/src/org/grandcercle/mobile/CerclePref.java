@@ -30,7 +30,7 @@ public class CerclePref extends Activity {
         listCheckBox = new ArrayList<CheckBox>();
 		for (int i = 0; i < listCercle.size(); i++) {
 			CheckBox checkBox = new CheckBox(this);
-			checkBox.setPadding(100, 0, 0, 0);
+			checkBox.setPadding(80, 0, 0, 0);
 			checkBox.setWidth(470);
 			checkBox.setText(listCercle.get(i));
 			
@@ -44,8 +44,6 @@ public class CerclePref extends Activity {
 			listCheckBox.add(checkBox);
 			((ViewGroup) linearLayout).addView(checkBox);
 		}
-		//LinearLayout lin = new LinearLayout(this);
-		//lin.setOrientation(0); // horizontal
 		View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
 		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
@@ -61,7 +59,6 @@ public class CerclePref extends Activity {
 			}
 			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
 			dataBase.incrementNumRun();
-			//ContainerData.parseFiles(ContainerData.getAppContext());
 			ContainerData.parseEvent();
 			finish();
 		}
