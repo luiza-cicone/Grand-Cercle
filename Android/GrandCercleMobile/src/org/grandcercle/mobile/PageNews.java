@@ -21,13 +21,7 @@ public class PageNews extends Activity {
 		((TextView)findViewById(R.id.group)).setText(param.getString("group"));
 		((TextView)findViewById(R.id.PubDate)).setText(param.getString("datepublication"));
 
-		/*ImageView logo = (ImageView)findViewById(R.id.logo);
-		try {
-			SaveImageFromUrl.setImage(logo,param.getString("logo"));
-		} catch (IOException e) {
-			e.printStackTrace();	
-
-		}*/
+		// Récupération du logo du groupe publiant la news.
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 	}

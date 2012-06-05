@@ -33,9 +33,6 @@ public class TabEvent extends Activity {
 	private ArrayList<ImageView> images;
 	private static HashMap<String,ArrayList<Event>> hashMapEvent;
 	private static Set<String> setDates;
-	
-	private static final String tag = "SimpleCalendarViewActivity";
-	private ImageView calendarToJournalButton;
 	private Button selectedDayMonthYearButton;
 	private Button currentMonth;
 	private ImageView prevMonth;
@@ -52,9 +49,9 @@ public class TabEvent extends Activity {
 		setContentView(R.layout.affichage_event);
 	}
 	
+	// Méthode rappelé quand on revient sur l'onglet événements après avoir touché aux préférences
 	public void onResume() {
 		super.onResume();
-		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();
@@ -223,7 +220,6 @@ public class TabEvent extends Activity {
 	
 	
 	public class GridCellAdapter extends BaseAdapter {
-		private static final String tag = "GridCellAdapter";
 		private final Context _context;
 
 		private final List<String> list;
@@ -237,16 +233,14 @@ public class TabEvent extends Activity {
 		private int currentMonth;
 		private int currentYear;
 		private int currentWeekDay;
-		private Button gridcell;
-		private TextView num_events_per_day;
-		private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+		private Button gridcell;	
 		private Set<String> dateEvents;
 		private String currentDayNumber;
 		private String currentMonthNumber;
 		private String currentYearNumber;
 		private String currentDate; // dd-MM-yyyy
 
-		// Days in Current Month
+		// Jour du mois courant
 		public GridCellAdapter(Context context, int textViewResourceId, int month, int year) {
 			super();
 			this._context = context;
@@ -256,6 +250,7 @@ public class TabEvent extends Activity {
 			
 			this.dateEvents = getSetDates();
 			
+			// nouvelle instance du calendrier
 			Calendar calendar = Calendar.getInstance();
 			setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
 			setCurrentMonth(calendar.get(Calendar.MONTH));
@@ -276,16 +271,12 @@ public class TabEvent extends Activity {
 			}
 			currentDate = currentDayNumber+"-"+currentMonthNumber+"-"+currentYearNumber;
 
-			// Print Month
+			// Affichage du mois
 			printMonth(month, year);	
 		}
 		
 		private String getMonthAsString(int i) {
 			return months[i];
-		}
-
-		private String getWeekDayAsString(int i) {
-			return weekdays[i];
 		}
 
 		private int getNumberOfDaysOfMonth(int i) {
@@ -349,7 +340,6 @@ public class TabEvent extends Activity {
 			// The number of days to leave blank at
 			// the start of this month.
 			int trailingSpaces = 0;
-			int leadSpaces = 0;
 			int daysInPrevMonth = 0;
 			int prevMonth = 0;
 			int prevYear = 0;
@@ -359,9 +349,8 @@ public class TabEvent extends Activity {
 			boolean cour = false;
 
 			int currentMonth = mm - 1;
-			String currentMonthName = getMonthAsString(currentMonth);
 			
-			// current date with "dd-MM-yyyy" format
+			// date courante sous le format "dd-MM-yyyy"
 			String today = this.getCurrentDate();
 			
 			String monthNumber = String.valueOf(mm);
@@ -372,7 +361,6 @@ public class TabEvent extends Activity {
 			
 			String month = monthNumber+"-"+yearNumber;
 			if (today.contains(month)) {
-				// today is contained in the month that is currently printed
 				todayInActualMonth = true;
 			}
 			
@@ -513,6 +501,7 @@ public class TabEvent extends Activity {
 			return row;
 		}
 		
+		
 		private View.OnClickListener dayClicked = new View.OnClickListener() {
 			public void onClick(View view) {
 				String dayMonthYear = (String)view.getTag();
@@ -569,9 +558,10 @@ public class TabEvent extends Activity {
 				Toast t;
 				if (dateEvents != null) {
 					if (hashMapEvent.containsKey(date)) {
-						// diplays list of events
+						// affichage de la liste des événements
 						ArrayList<Event> listEvCal = hashMapEvent.get(date);
 						ListEventAdapter listCalAdapter = new ListEventAdapter(view.getContext(),listEvCal);
+						// On récupère la vue contenant les événements
 						ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
 						((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
 						feedListViewCal.setOnItemClickListener(clickListenerFeed);

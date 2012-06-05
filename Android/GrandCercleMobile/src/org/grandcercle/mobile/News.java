@@ -6,6 +6,7 @@ public class News extends Item {
 	private String group;
 	private String logo;
 	
+	//Constructeur
 	public News(long id, String title, String description, String link, String pubDate, 
 			String author, String group, String logo) {
 		super();

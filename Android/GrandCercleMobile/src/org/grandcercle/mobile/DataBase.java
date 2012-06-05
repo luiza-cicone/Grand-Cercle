@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -36,35 +37,34 @@ public class DataBase extends SQLiteOpenHelper {
 		// Initialisation des listes
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
-		Iterator<String> it0 = listClub.iterator();
-		while (it0.hasNext()) {
-			Log.d("DB",it0.next());
-		}
 		listType = ContainerData.getListTypes();
-		ContentValues value = new ContentValues();
-		
+
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
+		ContentValues valueCercle = new ContentValues();
 		while (itCercle.hasNext()) {
-			value.put("cercle",itCercle.next());
-			db.insert(TABLE_CERCLE,null,value);
+			valueCercle.put("cercle",itCercle.next());
+			db.insert(TABLE_CERCLE,null,valueCercle);
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
 		Iterator<String> itClub = listClub.iterator();
+		ContentValues valueClub = new ContentValues();
 		while (itClub.hasNext()) {
-			value.put("club",itClub.next());
-			db.insert(TABLE_CLUB,null,value);
+			valueClub.put("club",itClub.next());
+			db.insert(TABLE_CLUB,null,valueClub);
 		}
+		
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
 		Iterator<String> itType = listType.iterator();
+		ContentValues valueType = new ContentValues();
 		while (itType.hasNext()) {
-			value.put("type",itType.next());
-			db.insert(TABLE_TYPE,null,value);
+			valueType.put("type",itType.next());
+			db.insert(TABLE_TYPE,null,valueType);
 		}
 	}
 	
@@ -137,19 +137,9 @@ public class DataBase extends SQLiteOpenHelper {
 		return list;
 	}
 	
-	/*public int getNumber(String table) {
-		String countQuery = "SELECT * FROM" + table;
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(countQuery,null);
-		cursor.close();
-		return cursor.getCount();
-	}*/
-	
 	public void deleteAll(String table){
 	    SQLiteDatabase db = this.getWritableDatabase();
-	    String delete = "DELETE FROM " + table + ";";
-	    db.rawQuery(delete, null);
+	    db.delete(table,null,null);
 	}
 
-	
 }

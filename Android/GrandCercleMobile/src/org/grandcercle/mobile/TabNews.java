@@ -19,6 +19,7 @@ public class TabNews extends Activity {
         
         ArrayList<News> listNews = ContainerData.getNews();
         
+        // Construction de la liste de news
         if (listNews != null) {
         	ListNewsAdapter lna = new ListNewsAdapter(this,listNews);
         	ListView feedListView = ((ListView)findViewById(R.id.listFeed));

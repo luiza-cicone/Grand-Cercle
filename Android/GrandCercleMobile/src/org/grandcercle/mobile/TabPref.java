@@ -12,21 +12,24 @@ public class TabPref extends Activity {
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.prefs);
-		// onglet Cercles
+		
+		// layout Cercles
 		TextView cercle = (TextView)findViewById(R.id.Cercles);
 		cercle.setOnClickListener((OnClickListener) clickListenerPrefCercle);
 		
-		// onglet Clubs
+		// layout Clubs
 		TextView club = (TextView)findViewById(R.id.Clubs);
 		club.setOnClickListener((OnClickListener) clickListenerPrefClub);
 		
-		// onglet Types
+		// layout Types
 		TextView type = (TextView)findViewById(R.id.Types);
 		type.setOnClickListener((OnClickListener) clickListenerPrefType);
 	}
 
+	
 	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {
-		public void onClick(View view) {	
+		public void onClick(View view) {
+			// lancement de l'activité correspondant aux préférences liées aux cercles
 			Intent intent = new Intent(TabPref.this,CerclePref.class);		
 			TabPref.this.startActivity(intent);
 		}
@@ -34,12 +37,14 @@ public class TabPref extends Activity {
     
     private View.OnClickListener clickListenerPrefClub = new View.OnClickListener() {
 		public void onClick(View view) {	
+			// lancement de l'activité correspondant aux préférences liées aux clubs
 			Intent intent = new Intent(TabPref.this,ClubPref.class);		
 			TabPref.this.startActivity(intent);
 		}
     };
     private View.OnClickListener clickListenerPrefType = new View.OnClickListener() {
 		public void onClick(View view) {	
+			// lancement de l'activité correspondant aux préférences liées aux types d'événements
 			Intent intent = new Intent(TabPref.this,TypesPref.class);		
 			TabPref.this.startActivity(intent);
 		}

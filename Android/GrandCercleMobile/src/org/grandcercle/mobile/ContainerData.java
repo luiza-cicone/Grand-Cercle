@@ -27,7 +27,9 @@ public class ContainerData {
 	private static HashMap<String,ArrayList<Event>> hashEventOld;
 	private static ArrayList<String> listCercles;
 	private static ArrayList<String> listClubs;
+	private static ArrayList<String> listTypes;
 	private static Context appContext;
+	
 	
 	public ContainerData() {
 	}
@@ -59,6 +61,13 @@ public class ContainerData {
 		URL urlClubs = null;
 		try {
 			urlClubs = new URL("http://www.grandcercle.org/clubs/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL urlTypes = null;
+		try {
+			urlTypes = new URL("http://www.grandcercle.org/types/data.xml");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
@@ -122,7 +131,19 @@ public class ContainerData {
 			e.printStackTrace();
 		}
 
-		
+		DefaultHandler handlerTypes = new ParserXMLHandlerType();
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlTypes.openConnection().getInputStream(), handlerTypes);
+			
+			// On récupère directement la liste des feeds
+			listTypes = ((ParserXMLHandlerType) handlerTypes).getListType();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		
 		DefaultHandler handlerNews = new ParserXMLHandlerNews();
 		try {
@@ -243,9 +264,6 @@ public class ContainerData {
 	}
 
 	public static ArrayList<Event> getEvent() {
-		for (int i = 0; i < listEvent.size();i++) {
-			Log.d("ParserEvent",listEvent.get(i).getGroup());
-		}
 		return listEvent;
 	}
 	
@@ -275,11 +293,7 @@ public class ContainerData {
 	}
 	
 	public static ArrayList<String> getListTypes() {
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("Soirées");
-		temp.add("Evénements sportifs");
-		temp.add("Autres");
-		return temp;
+		return listTypes;
 	}
 	
 	public static Context getAppContext() {
