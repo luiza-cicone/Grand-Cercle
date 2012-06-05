@@ -40,6 +40,7 @@ public class GCM extends TabActivity {
 	
 	@Override
 	public void onDestroy() {
+		//DataBase.getInstance().incrementNumRun();
 	    super.onDestroy();
 	    System.runFinalizersOnExit(true);
 	    System.exit(0);

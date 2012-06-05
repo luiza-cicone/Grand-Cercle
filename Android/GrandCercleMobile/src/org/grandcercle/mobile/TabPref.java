@@ -8,34 +8,31 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class TabPref extends Activity {
-
+	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.prefs);
 		TextView cercle = (TextView)findViewById(R.id.Cercles);
-		cercle.setOnClickListener((OnClickListener) clickListenerPref);
+
+		cercle.setOnClickListener((OnClickListener) clickListenerPrefCercle);
+		TextView club = (TextView)findViewById(R.id.Clubs);
+		club.setOnClickListener((OnClickListener) clickListenerPrefClub);
+		
 	
-}
+	}
+
+
 	
-	private View.OnClickListener clickListenerPref = new View.OnClickListener() {
+	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {
 		public void onClick(View view) {	
-			Intent intent = new Intent(TabPref.this,CerclePref.class);
-			// Ouverture nouvelle activity
-			/*if (position == 0) { 
-				Intent intent = new Intent(TabPref.this,.class);
-			// Passage des paramètres
-			Bundle bundle = new Bundle();
-			//Add the parameters to bundle as
-			bundle.putString("titre",((News)parent.getItemAtPosition(position)).getTitle());
-			bundle.putString("description",((News)parent.getItemAtPosition(position)).getDescription());
-			bundle.putString("auteur",((News)parent.getItemAtPosition(position)).getAuthor());
-			bundle.putString("datepublication",((News)parent.getItemAtPosition(position)).getPubDate());
-			bundle.putString("group",((News)parent.getItemAtPosition(position)).getGroup());
-			bundle.putString("logo",((News)parent.getItemAtPosition(position)).getLogo());
-			//bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
-			//Ajout du Bundle
-			intent.putExtras(bundle);*/
-			
+			Intent intent = new Intent(TabPref.this,CerclePref.class);		
+			TabPref.this.startActivity(intent);
+		}
+    };
+    
+    private View.OnClickListener clickListenerPrefClub = new View.OnClickListener() {
+		public void onClick(View view) {	
+			Intent intent = new Intent(TabPref.this,ClubPref.class);		
 			TabPref.this.startActivity(intent);
 		}
     };
