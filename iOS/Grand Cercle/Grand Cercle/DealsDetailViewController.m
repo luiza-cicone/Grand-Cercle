@@ -31,6 +31,20 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    
+//    [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
+//    UITextView *_textView = (UITextView *)[cellBonPlanDescription viewWithTag:1];
+//    
+//    CGRect frame = _textView.frame;
+//    [_textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
+//    frame.size.height = _textView.contentSize.height;
+//    _textView.frame = frame;
+    [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
+
+    UIWebView *webView;
+    webView = (UIWebView *)[cellBonPlanDescription viewWithTag:1];
+    webView.delegate = self;
+    [webView loadHTMLString:bonPlan.description baseURL:nil];
 }
 
 - (void)viewDidUnload
@@ -91,17 +105,6 @@
             
             break;
             
-            //        case 1:
-            //            CellIdentifier = @"Cercle";
-            //            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            //            if (!cell) {
-            //                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            //            }
-            //            [cell.textLabel setText : news.group];
-            //            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
-            //            [cell.imageView setImage: img];
-            //            break;
-            
         case 1:
 
             CellIdentifier = @"DealsDescriptionCell";
@@ -112,9 +115,17 @@
                 self.cellBonPlanDescription = nil;
             }
             
-            UITextView *textView;
-            textView = (UITextView *)[cell viewWithTag:1];
-            [textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
+            UIWebView *webView;
+            webView = (UIWebView *)[cell viewWithTag:1];
+            webView.delegate = self;
+            [webView loadHTMLString:bonPlan.description baseURL:nil];
+            [webView sizeToFit];
+
+//            CGRect frame = textView.frame;
+//            [textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
+//            frame.size.height = textView.contentSize.height;
+//            textView.frame = frame;
+            
             break;
             
         default:
@@ -123,19 +134,45 @@
     
     return cell;
 }
+int webViewHeight = 0;
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+
+    [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
+    NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
+    [webView setFrame:CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, [output intValue])];
+    if (webViewHeight == 0) {
+        webViewHeight = [output intValue];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    webViewHeight = 0;
+}
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
+}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     switch (indexPath.section) {
         case 0 :
-            return 90;
+            return 60;
             break;
             
         case 1 :
-            return 165;
+            return webViewHeight + 10;
             break;
             
         default :
-            return 44;
+            return 0;
             break;
     }
 }

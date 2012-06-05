@@ -40,6 +40,7 @@
 		258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D3694157CA8DE0001E64E /* SettingsViewController.m */; };
 		258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D369F157CAD910001E64E /* SettingsDetailViewController.m */; };
 		258D36A6157CB1260001E64E /* FilterParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D36A5157CB1260001E64E /* FilterParser.m */; };
+		258D370D157E29930001E64E /* EventInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 258D370C157E29930001E64E /* EventInfoCell.xib */; };
 		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
 		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
 		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
@@ -161,6 +162,7 @@
 		258D369F157CAD910001E64E /* SettingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsDetailViewController.m; path = ../SettingsDetailViewController.m; sourceTree = "<group>"; };
 		258D36A5157CB1260001E64E /* FilterParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterParser.m; path = ../FilterParser.m; sourceTree = "<group>"; };
 		258D36A7157CB12F0001E64E /* FilterParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterParser.h; path = ../FilterParser.h; sourceTree = "<group>"; };
+		258D370C157E29930001E64E /* EventInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoCell.xib; sourceTree = "<group>"; };
 		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -241,10 +243,10 @@
 		040404F8157CDB6A00157FD4 /* Deals */ = {
 			isa = PBXGroup;
 			children = (
-				04D8263B157CB7980049A41C /* DealsDetailViewController.m */,
-				04D8263A157CB7980049A41C /* DealsDetailViewController.h */,
 				2595EAF2157405EA00CA27B3 /* DealsViewController.h */,
 				2595EAF3157405EB00CA27B3 /* DealsViewController.m */,
+				04D8263A157CB7980049A41C /* DealsDetailViewController.h */,
+				04D8263B157CB7980049A41C /* DealsDetailViewController.m */,
 			);
 			name = Deals;
 			sourceTree = "<group>";
@@ -285,6 +287,7 @@
 				2562173E1576A2AC00667661 /* EventCell.xib */,
 				25ECD56115777F81006E4652 /* EventSmallCell.xib */,
 				04F4CBD11578B6C400A49037 /* DescriptionCell.xib */,
+				258D370C157E29930001E64E /* EventInfoCell.xib */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */,
 				04D8263E157CBBFD0049A41C /* bonPlanTopCell.xib in Resources */,
 				040404F7157CD8CD00157FD4 /* DealsDescriptionCell.xib in Resources */,
+				258D370D157E29930001E64E /* EventInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

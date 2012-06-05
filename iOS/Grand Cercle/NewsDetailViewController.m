@@ -9,6 +9,9 @@
 #import "NewsDetailViewController.h"
 #import "NSString+HTML.h"
 
+#define TITRE 0
+#define DESCRIPTION 1
+
 @implementation NewsDetailViewController
 @synthesize news, cellNewsDescription, cellNewsTop;
 
@@ -30,7 +33,19 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.title = NSLocalizedString(@"News", @"News");}
+    self.title = NSLocalizedString(@"News", @"News");
+
+    
+    [[NSBundle mainBundle] loadNibNamed:@"NewsDescription" owner:self options:nil];
+    UITextView *_textView = (UITextView *)[cellNewsDescription viewWithTag:1];
+    
+    CGRect frame = _textView.frame;
+    [_textView setText: [[news description] stringByConvertingHTMLToPlainText]];
+    frame.size.height = _textView.contentSize.height;
+    _textView.frame = frame;
+}
+
+
 
 - (void)viewDidUnload
 {
@@ -69,7 +84,7 @@
     
     switch (indexPath.section) {
             
-        case 0:
+        case TITRE:
             CellIdentifier = @"NewsTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -92,18 +107,7 @@
             [label setText:[news pubDate]];
             break;
             
-//        case 1:
-//            CellIdentifier = @"Cercle";
-//            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//            if (!cell) {
-//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//            }
-//            [cell.textLabel setText : news.group];
-//            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
-//            [cell.imageView setImage: img];
-//            break;
-            
-        case 1:
+        case DESCRIPTION:
             CellIdentifier = @"NewsDescription";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -114,7 +118,11 @@
             
             UITextView *textView;
             textView = (UITextView *)[cell viewWithTag:1];
+            CGRect frame = textView.frame;
             [textView setText: [[news description] stringByConvertingHTMLToPlainText]];
+            frame.size.height = textView.contentSize.height;
+            textView.frame = frame;
+            
             break;
             
         default:
@@ -125,21 +133,19 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITextView *_textView = (UITextView *)[cellNewsDescription viewWithTag:1];
+
     switch (indexPath.section) {
-        case 0 :
-            return 121;
+        case TITRE :
+            return 85;
             break;
-            
-//        case 1 :
-//            return 44;
-//            break;
-//            
-        case 1 :
-            return 165;
+         
+        case DESCRIPTION :
+            return _textView.frame.size.height;
             break;
             
         default :
-            return 44;
+            return 0;
             break;
     }
 }

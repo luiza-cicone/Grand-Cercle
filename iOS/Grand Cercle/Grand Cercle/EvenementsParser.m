@@ -157,7 +157,7 @@ static EvenementsParser *instanceEvent = nil;
     };
     
     // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
-    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/test/test3.xml"] 
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data-old.xml"] 

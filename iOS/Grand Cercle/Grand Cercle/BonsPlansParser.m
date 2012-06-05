@@ -31,9 +31,14 @@ static BonsPlansParser *instanceBonsPlans = nil;
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:bonsPlansAParser];
         aBonsPlans.title = [[TBXML textForElement:title]  stringByConvertingHTMLToPlainText];
         
+        // Récupération du sommaire
+        TBXMLElement *summary = [TBXML childElementNamed:@"summary" parentElement:bonsPlansAParser];
+        aBonsPlans.summary = [[TBXML textForElement:summary]  stringByConvertingHTMLToPlainText];   
+        
+        
         // Récupération de la description
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:bonsPlansAParser];
-        aBonsPlans.description = [[TBXML textForElement:description]  stringByConvertingHTMLToPlainText];
+        aBonsPlans.description = [[TBXML textForElement:description] stringByDecodingHTMLEntities];
         
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:bonsPlansAParser];

@@ -133,7 +133,7 @@
     [label setText: [b title]];
     
     label = (UILabel *)[cell viewWithTag:3];
-    [label setText: [b description]];
+    [label setText: [b summary]];
     
     return cell;
 }

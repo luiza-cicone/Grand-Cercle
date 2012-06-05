@@ -10,19 +10,19 @@
 #import "NSString+HTML.h"
 #import "AppDelegate.h"
 
-//#define TITRE 0
-#define INFOS 0
+#define TITRE 0
+#define INFOS 2
 #define ORGANISATION 1
-#define DESCRIPTION 2
+#define DESCRIPTION 3
 
 @implementation EventDetailViewController
-@synthesize event, cellEventTop, cellEventDescription;
+@synthesize event, cellEventTop, cellEventDescription, cellEventInfo;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-
+//        self.tableView.scrollEnabled = NO;
     }
     return self;
 }
@@ -39,6 +39,17 @@
     self.navigationItem.rightBarButtonItem = plusButton;
     self.title = NSLocalizedString(@"Events", @"Events");
 
+    [[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:self options:nil];
+    UITextView *_textView = (UITextView *)[cellEventDescription viewWithTag:1];
+
+    CGRect frame = _textView.frame;
+    [_textView setText: [[event description] stringByConvertingHTMLToPlainText]];
+    frame.size.height = _textView.contentSize.height;
+    _textView.frame = frame;
+
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
 }
 
 -(void) addToCalendar {
@@ -46,7 +57,7 @@
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     actionSheet.destructiveButtonIndex = 2;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [actionSheet showInView:appDelegate.window];
+    [actionSheet showInView: appDelegate.window];
     [actionSheet release]; 
 }
 
@@ -102,19 +113,29 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    switch (section) {
+        case INFOS:
+            return 2;
+            break;
+        default:
+            break;
+    }
     return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case ORGANISATION:
-            return @"Organisateur";
+            return @"Assosciation";
+            break;
+        case INFOS:
+            return @"Infos";
             break;
         case DESCRIPTION:
             return @"Description";
@@ -125,13 +146,16 @@
     return @"";
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier;
     UITableViewCell *cell;
-    
+    UIImageView *imageView;
+    UILabel *label;
+
     switch (indexPath.section) {
-        case INFOS:
+        case TITRE:
             CellIdentifier = @"EventTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -140,22 +164,36 @@
                 self.cellEventTop = nil;
             }
             
-            UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event imageSmall]]]];
+            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event image]]]];
             [imageView setImage:myimage];
             
-            UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [event title]];
             
-            label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[event date]];
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            [label setText:[[[event place] stringByAppendingString: @" - "] stringByAppendingString: event.time]];
-            
+            break;
+        
+        case INFOS:            
+            CellIdentifier = @"EventInfoCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                [[NSBundle mainBundle] loadNibNamed:@"EventInfoCell" owner:self options:nil];
+                cell = cellEventInfo;
+                self.cellEventInfo = nil;
+            }
+            UILabel *label2;
+            label = (UILabel *)[cell viewWithTag:1];
+            label2 = (UILabel *)[cell viewWithTag:2];
+            if (indexPath.row == 0) {
+                [label setText:@"Date"];
+                [label2 setText:[NSString stringWithFormat:@"%@, %@ - %@", [event day], [event date], [event time]]];
+            }
+            else if (indexPath.row == 1) {
+                [label setText:@"Lieu"];
+                [label2 setText:[event place]];
+            }
+                        
             break;
             
         case ORGANISATION:
@@ -180,7 +218,11 @@
             
             UITextView *textView;
             textView = (UITextView *)[cell viewWithTag:1];
+            CGRect frame = textView.frame;
             [textView setText: [[event description] stringByConvertingHTMLToPlainText]];
+            frame.size.height = textView.contentSize.height;
+            textView.frame = frame;
+            
             break;
             
         default:
@@ -191,26 +233,30 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITextView *_textView = (UITextView *)[cellEventDescription viewWithTag:1];
+
     switch (indexPath.section) {
-//        case TITRE:
-//            return 30;
-//            break;
+        case TITRE:
+            if (indexPath.row == 0) return 80;
+            if (indexPath.row == 1) return 30;
+            break;
         case INFOS :
-            return 120;
+            return 28;
             break;
         
         case ORGANISATION :
-            return 30;
+            return 28;
             break;
             
-        case DESCRIPTION :
-            return 155;
+        case DESCRIPTION : 
+            return _textView.frame.size.height;
             break;
             
         default :
             return 44;
             break;
     }
+    return 0;
 }
 
 /*

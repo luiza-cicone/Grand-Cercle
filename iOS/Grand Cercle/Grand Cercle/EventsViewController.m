@@ -24,11 +24,15 @@
     if (self) {
         self.title = NSLocalizedString(@"Events", @"Evenements");
         self.tabBarItem.image = [UIImage imageNamed:@"events"];
+
     }
     return self;
 }
 	
 -(void)viewDidAppear:(BOOL)animated {
+//    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.6 green:0.2 blue:0.2 alpha:1]];
+//    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:.6 green:0.2 blue:0.2 alpha:1]];
+    
 }
 
 

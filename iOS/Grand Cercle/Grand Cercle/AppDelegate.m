@@ -52,8 +52,9 @@
 
     return YES;
 }
+
 - (void)startParse {
-    NSLog(@"FIN");
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
 
     // On parse les associations

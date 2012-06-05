@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Items.h"
 
-@interface BonsPlans : Items
+@interface BonsPlans : Items {
+    // 
+    NSString *summary;
+}
+
+@property (nonatomic, retain) NSString *summary; 
 
 @end

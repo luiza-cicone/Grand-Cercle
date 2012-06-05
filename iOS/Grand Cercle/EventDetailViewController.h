@@ -14,9 +14,10 @@
     Evenements *event;
     IBOutlet UITableViewCell *cellEventDescription;
     IBOutlet UITableViewCell *cellEventTop;
+    IBOutlet UITableViewCell *cellEventInfo;
 }
 
 @property (retain, nonatomic) Evenements *event;
-@property (retain, nonatomic) IBOutlet UITableViewCell *cellEventTop, *cellEventDescription;
+@property (retain, nonatomic) IBOutlet UITableViewCell *cellEventTop, *cellEventDescription, *cellEventInfo;
 
 @end
