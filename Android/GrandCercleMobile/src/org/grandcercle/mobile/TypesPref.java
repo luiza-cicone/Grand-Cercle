@@ -4,41 +4,47 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ScrollView;
 
-public class CerclePref extends Activity {
-	private ArrayList<String> listCercle;
-	private ArrayList<String> listCercleChecked;
+public class TypesPref extends Activity {
+	private ArrayList<String> listTypes;
+	private ArrayList<String> listTypesChecked;
 	private DataBase dataBase;
 	private ArrayList<CheckBox> listCheckBox;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
-		setContentView(R.layout.cercle_pref);
-
+		setContentView(R.layout.type_pref);
+		//dataBase = new DataBase(this);
 		dataBase = DataBase.getInstance();
-		listCercleChecked = new ArrayList<String>();
-		ArrayList<String> prefered = dataBase.getAllPref("prefCercle","cercle");
+		listTypesChecked = new ArrayList<String>();
+		ArrayList<String> prefered = dataBase.getAllPref("prefType","type");
 		
-        View linearLayout = findViewById(R.id.cercle);
-        listCercle = ContainerData.getListCercles();
+        View linearlayout =  findViewById(R.id.type);
+        listTypes = ContainerData.getListTypes();
         listCheckBox = new ArrayList<CheckBox>();
-		for (int i = 0; i < listCercle.size(); i++) {
+        for (int i = 0; i < listTypes.size(); i++) {
 			CheckBox checkBox = new CheckBox(this);
 			checkBox.setPadding(80, 0, 0, 0);
 			checkBox.setWidth(470);
-			checkBox.setText(listCercle.get(i));
+			checkBox.setText(listTypes.get(i));
 			
-			if (prefered.contains(listCercle.get(i))) {
+			if (prefered.contains(listTypes.get(i))) {
 				checkBox.setChecked(true);
 			} else {
 				checkBox.setChecked(false);
 			}
 			listCheckBox.add(checkBox);
-			((ViewGroup) linearLayout).addView(checkBox);
+			((ViewGroup) linearlayout).addView(checkBox);
 		}
 		View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
@@ -50,10 +56,10 @@ public class CerclePref extends Activity {
 		public void onClick(View v) {
 			for (int i=0; i<listCheckBox.size(); i++) {
 				if (listCheckBox.get(i).isChecked()) {
-					listCercleChecked.add(listCercle.get(i));
+					listTypesChecked.add(listTypes.get(i));
 				}
 			}
-			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
+			dataBase.addListPref("prefType","type",listTypesChecked);
 			ContainerData.parseEvent();
 			finish();
 		}

@@ -50,7 +50,10 @@ public class TabEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.affichage_event);
-
+	}
+	
+	public void onResume() {
+		super.onResume();
 		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
