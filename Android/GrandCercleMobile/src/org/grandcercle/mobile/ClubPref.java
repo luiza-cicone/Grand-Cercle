@@ -48,6 +48,7 @@ public class ClubPref extends Activity {
 		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
 		buttonCancel.setOnClickListener(CancelClicked);
 	}
+
 	
 	private OnClickListener OKClicked = new OnClickListener() {
 		public void onClick(View v) {

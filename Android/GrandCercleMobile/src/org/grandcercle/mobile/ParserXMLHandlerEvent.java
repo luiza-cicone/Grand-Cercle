@@ -39,6 +39,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	
 	// Liste des group autorisés dans les préférences
 	private ArrayList<String> listPref;
+	private ArrayList<String> listType;
 	private DataBase dataBase;
 	
 	/* Cette méthode est appelée par le parser une et une seule  
@@ -50,6 +51,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	 */ 
 	public ParserXMLHandlerEvent(Context ctx) {
 		listPref = getPreferences(ctx);
+		listType = getTypePreferences(ctx);
 	}
 	
 	@Override
@@ -70,6 +72,16 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 			return listCercle;
 		} else if (listClub != null) {
 			return listClub;
+		} else {
+			return new ArrayList<String>();
+		}
+	}
+	
+	public ArrayList<String> getTypePreferences(Context ctx) {
+		dataBase = DataBase.getInstance();
+		ArrayList<String> listT = dataBase.getAllPref("prefType", "type");
+		if (listT != null) {
+			return listT;
 		} else {
 			return new ArrayList<String>();
 		}
@@ -209,7 +221,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
-			if (dataBase.getNumRun() == 1 || listPref.contains(currentEvent.getGroup())) {
+			if (dataBase.getNumRun() == 1 || listPref.contains(currentEvent.getGroup()) || listType.contains(currentEvent.getType())) {
 				Log.d("ParserEvent",currentEvent.getGroup());
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
