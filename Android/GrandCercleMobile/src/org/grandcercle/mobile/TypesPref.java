@@ -4,36 +4,40 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ScrollView;
 
-public class ClubPref extends Activity {
-	private ArrayList<String> listClub;
-	private ArrayList<String> listClubChecked;
+public class TypesPref extends Activity {
+	private ArrayList<String> listTypes;
+	private ArrayList<String> listTypesChecked;
 	private DataBase dataBase;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
-		setContentView(R.layout.club_pref);
+		setContentView(R.layout.type_pref);
 		//dataBase = new DataBase(this);
 		dataBase = DataBase.getInstance();
-		listClubChecked = new ArrayList<String>();
-		ArrayList<String> prefered = dataBase.getAllPref("prefClub","club");
+		listTypesChecked = new ArrayList<String>();
+		ArrayList<String> prefered = dataBase.getAllPref("prefType","type");
 		
-        View scrollview =  findViewById(R.id.club);
-        listClub = ContainerData.getListClubs();
-		for (int i = 0; i < listClub.size(); i++) {
+        View scrollview =  findViewById(R.id.type);
+        listTypes = ContainerData.getListTypes();
+		for (int i = 0; i < listTypes.size(); i++) {
 			CheckBox checkBox = new CheckBox(this);
 			checkBox.setPadding(80, 0, 0, 0);
 			checkBox.setWidth(470);
-			checkBox.setText(listClub.get(i));
+			checkBox.setText(listTypes.get(i));
 			
 			
-			if (prefered.contains(listClub.get(i))) {
+			if (prefered.contains(listTypes.get(i))) {
 				checkBox.setChecked(true);
 			} else {
 				checkBox.setChecked(false);
@@ -50,17 +54,17 @@ public class ClubPref extends Activity {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			//Log.d("Cercle","buttonView"+buttonView);
 			if (isChecked) {
-				listClubChecked.add((String) buttonView.getText());
+				listTypesChecked.add((String) buttonView.getText());
 			} else {
-				listClubChecked.remove(buttonView.getText());
+				listTypesChecked.remove(buttonView.getText());
 			}
 		}
 	};
 	
 	private OnClickListener OKClicked = new OnClickListener() {
 		public void onClick(View v) {
-			dataBase.deleteAll("prefClub");
-			dataBase.addListPref("prefClub","club",listClubChecked);
+			dataBase.deleteAll("prefType");
+			dataBase.addListPref("prefType","type",listTypesChecked);
 			finish();
 		}
 	};

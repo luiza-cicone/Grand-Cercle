@@ -40,8 +40,9 @@
     self.title = NSLocalizedString(@"Events", @"Events");
 
 }
+
 -(void) addToCalendar {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Retour" destructiveButtonTitle:nil otherButtonTitles:@"Exporter dans mon calendrier", @"Partager", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Retour" destructiveButtonTitle:nil otherButtonTitles:@"Exporter dans iCal", @"Partager", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     actionSheet.destructiveButtonIndex = 2;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -52,7 +53,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        EKEventStore *eventDB = [[EKEventStore alloc] init];    
+        EKEventStore *eventDB = [[[EKEventStore alloc] init] autorelease];    
         EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
     
         myEvent.title     = event.title;

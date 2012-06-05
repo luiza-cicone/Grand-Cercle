@@ -33,19 +33,17 @@ static EvenementsParser *instanceEvent = nil;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];        
         NSDictionary *filtreCercles = [defaults objectForKey:@"filtreCercles"]; 
         NSDictionary *filtreClubs = [defaults objectForKey:@"filtreClubs"]; 
-//        NSDictionary *filtreType = [defaults objectForKey:@"filtreType"]; 
+        NSDictionary *filtreTypes = [defaults objectForKey:@"filtreTypes"]; 
         
-        NSString *groupName = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
-        if (![groupName isEqualToString:@"Grand Cercle"] && ![groupName isEqualToString:@"Elus étudiants"]) {
-            if (![[filtreCercles objectForKey:groupName] boolValue] && ![[filtreClubs objectForKey:[TBXML textForElement:group]] boolValue])
+        NSString *groupString = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
+        NSString *typeString = [[TBXML textForElement:type] stringByConvertingHTMLToPlainText];
+        if (![groupString isEqualToString:@"Grand Cercle"] && ![groupString isEqualToString:@"Elus étudiants"]) {
+            if (![[filtreCercles objectForKey:groupString] boolValue] && ![[filtreClubs objectForKey:[TBXML textForElement:group]] boolValue])
                 continue;
-            
-            //        if (![filtreType objectForKey:[TBXML textForElement:type]])
-            //            continue;
-            
-
+            if (![[filtreTypes objectForKey:typeString] boolValue]) {
+                continue;
+            }
         }
-
         
         // Définition de l'événement à récupérer
         Evenements *aEvent = [[Evenements alloc] init];
@@ -159,7 +157,7 @@ static EvenementsParser *instanceEvent = nil;
     };
     
     // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
-    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data.xml"] 
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/test/test3.xml"] 
                                success:successBlock 
                                failure:failureBlock];
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data-old.xml"] 

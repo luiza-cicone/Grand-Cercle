@@ -11,7 +11,6 @@
 @implementation FilterParser
 @synthesize arrayClubs, arrayCercles, arrayTypes;
 static FilterParser *instanceAssociation = nil;
-
 // singleton
 + (FilterParser *) instance {
     if (instanceAssociation == nil) {
@@ -25,6 +24,7 @@ static FilterParser *instanceAssociation = nil;
 	do {
         // Récupération du nom de l'association
         TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
+
         NSString *nomAssociation = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
         
         // Ajout de la news au tableau
@@ -62,7 +62,17 @@ static FilterParser *instanceAssociation = nil;
     
     // Create a failure block that gets called if something goes wrong
     TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        UIAlertView *xmlError = [[UIAlertView alloc] initWithTitle:@"Erreur"
+                                              message:@"Une erreur a intervenu dans la mise a jour des informations"
+                                             delegate:self
+                                    cancelButtonTitle:@"OK"
+                                    otherButtonTitles:@"Reesayer", nil];
+        [xmlError show];
+        });
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+
     };
     
     // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
@@ -73,11 +83,15 @@ static FilterParser *instanceAssociation = nil;
                                success:successBlock2 
                                failure:failureBlock];
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/types/data.xml"] 
-                               success:successBlock3 
-                               failure:failureBlock];
+                                   success:successBlock3 
+                                   failure:failureBlock];   
+
     
-    for (NSString * n in arrayTypes) {
-        NSLog(@"%@", n);
+}
+#pragma mark - Alert View Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [self loadAssociations];
     }
 }
 @end

@@ -38,6 +38,10 @@
 	imageCache.notificationName = @"newLogoCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [backButton release];
 
     return self;
 }
@@ -177,21 +181,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"BLABLA");
     // Navigation logic may go here. Create and push another view controller.
     DealsDetailViewController *detailViewController = [[DealsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    NSLog(@"BLABLA");
     BonsPlans *b = [arrayBonsPlans objectAtIndex:[indexPath row]];
-    NSLog(@"BLABLA");
     detailViewController.bonPlan = b;
-    NSLog(@"BLABLA");
 
     // ...
     // Pass the selected object to the new view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
-    NSLog(@"BLABLA");
     [detailViewController release]; 
-    NSLog(@"BLABLA");
 
 }
 

@@ -15,8 +15,14 @@ public class TabPref extends Activity {
 		TextView cercle = (TextView)findViewById(R.id.Cercles);
 
 		cercle.setOnClickListener((OnClickListener) clickListenerPrefCercle);
+		
+		// onglet Clubs
 		TextView club = (TextView)findViewById(R.id.Clubs);
 		club.setOnClickListener((OnClickListener) clickListenerPrefClub);
+		
+		// onglet Types
+		TextView type = (TextView)findViewById(R.id.Types);
+		type.setOnClickListener((OnClickListener) clickListenerPrefType);
 	}
 	
 	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {
@@ -29,6 +35,12 @@ public class TabPref extends Activity {
     private View.OnClickListener clickListenerPrefClub = new View.OnClickListener() {
 		public void onClick(View view) {	
 			Intent intent = new Intent(TabPref.this,ClubPref.class);		
+			TabPref.this.startActivity(intent);
+		}
+    };
+    private View.OnClickListener clickListenerPrefType = new View.OnClickListener() {
+		public void onClick(View view) {	
+			Intent intent = new Intent(TabPref.this,TypesPref.class);		
 			TabPref.this.startActivity(intent);
 		}
     };
