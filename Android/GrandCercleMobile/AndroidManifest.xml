@@ -77,6 +77,11 @@
 		    android:screenOrientation="portrait"
 		    android:configChanges="keyboardHidden|orientation" >
 		</activity>
+		<activity 
+		    android:name=".ClubPref" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
     </application>
     
 
