@@ -33,9 +33,6 @@ public class TabEvent extends Activity {
 	private ArrayList<ImageView> images;
 	private static HashMap<String,ArrayList<Event>> hashMapEvent;
 	private static Set<String> setDates;
-	
-	private static final String tag = "SimpleCalendarViewActivity";
-	private ImageView calendarToJournalButton;
 	private Button selectedDayMonthYearButton;
 	private Button currentMonth;
 	private ImageView prevMonth;
@@ -223,7 +220,6 @@ public class TabEvent extends Activity {
 	
 	
 	public class GridCellAdapter extends BaseAdapter {
-		private static final String tag = "GridCellAdapter";
 		private final Context _context;
 
 		private final List<String> list;
@@ -237,9 +233,7 @@ public class TabEvent extends Activity {
 		private int currentMonth;
 		private int currentYear;
 		private int currentWeekDay;
-		private Button gridcell;
-		private TextView num_events_per_day;
-		private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+		private Button gridcell;	
 		private Set<String> dateEvents;
 		private String currentDayNumber;
 		private String currentMonthNumber;
@@ -283,10 +277,6 @@ public class TabEvent extends Activity {
 		
 		private String getMonthAsString(int i) {
 			return months[i];
-		}
-
-		private String getWeekDayAsString(int i) {
-			return weekdays[i];
 		}
 
 		private int getNumberOfDaysOfMonth(int i) {
@@ -350,7 +340,6 @@ public class TabEvent extends Activity {
 			// The number of days to leave blank at
 			// the start of this month.
 			int trailingSpaces = 0;
-			int leadSpaces = 0;
 			int daysInPrevMonth = 0;
 			int prevMonth = 0;
 			int prevYear = 0;
@@ -360,7 +349,6 @@ public class TabEvent extends Activity {
 			boolean cour = false;
 
 			int currentMonth = mm - 1;
-			String currentMonthName = getMonthAsString(currentMonth);
 			
 			// date courante sous le format "dd-MM-yyyy"
 			String today = this.getCurrentDate();
