@@ -59,7 +59,6 @@ public class CerclePref extends Activity {
 				}
 			}
 			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
-			dataBase.incrementNumRun();
 			ContainerData.parseEvent();
 			finish();
 		}
