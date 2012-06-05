@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,12 +50,11 @@ public class TabEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.affichage_event);
-		
 	}
 	
-	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
+		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();
@@ -66,7 +64,8 @@ public class TabEvent extends Activity {
 		} else if (listEvent == null) {
 			Toast.makeText(TabEvent.this,"Pas d'événements à venir !",Toast.LENGTH_LONG).show();
 		}
-			
+		
+		
 		// Attributs de la liste
 		if (listEvent != null) {
 			lea = new ListEventAdapter(this,listEvent);

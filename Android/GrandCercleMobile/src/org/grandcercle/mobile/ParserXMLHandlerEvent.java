@@ -221,8 +221,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
-			if (dataBase.getNumRun() == 1 || listPref.contains(currentEvent.getGroup()) || listType.contains(currentEvent.getType())) {
-				Log.d("ParserEvent",currentEvent.getGroup());
+			if (listPref.contains(currentEvent.getGroup()) || listType.contains(currentEvent.getType())) {
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
 					ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());
