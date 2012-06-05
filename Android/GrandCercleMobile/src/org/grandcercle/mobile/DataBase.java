@@ -13,7 +13,7 @@ public class DataBase extends SQLiteOpenHelper {
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
-	
+
 	/** Create a helper object for the Events database */
 	private DataBase() {		
 		super(ContainerData.getAppContext(), "GCM_DB", null, 2);

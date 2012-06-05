@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="/home/paul/android-sdks/platforms/android-8/android.jar"/>
+	<classpathentry kind="lib" path="/home/luquet/android-sdks/platforms/android-8/android.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
