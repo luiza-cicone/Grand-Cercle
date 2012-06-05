@@ -12,6 +12,7 @@ public class TabPref extends Activity {
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.prefs);
+		
 		// onglet Cercles
 		TextView cercle = (TextView)findViewById(R.id.Cercles);
 		cercle.setOnClickListener((OnClickListener) clickListenerPrefCercle);
@@ -24,11 +25,8 @@ public class TabPref extends Activity {
 		TextView type = (TextView)findViewById(R.id.Types);
 		type.setOnClickListener((OnClickListener) clickListenerPrefType);
 	}
-	
-	public void onPause() {
-		super.onPause();
-		DataBase.getInstance().incrementNumRun();
-	}
+
+
 	
 	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {
 		public void onClick(View view) {	
