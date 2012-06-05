@@ -9,8 +9,9 @@
 #import "SettingsDetailViewController.h"
 #import "FilterParser.h"
 
-#define FILTER_ASSOS 0
-#define FILTER_TYPE 1
+#define FILTER_CERCLES 0
+#define FILTER_CLUBS 1
+#define FILTER_TYPE 2
 #define CERCLES 0
 #define CLUBS 1
 
@@ -36,22 +37,25 @@
 {
     [super viewDidLoad];
     
-    if (filter == FILTER_ASSOS) {
+    if (filter == FILTER_CERCLES) {
         cerclesArray = [[FilterParser instance] arrayCercles];
-        clubsArray = [[FilterParser instance] arrayClubs];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
-        NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
-        
         
         cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
-        clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
         for (NSString *cercle in cerclesArray) {
             [cerclesChoice addObject:[cerclesDico objectForKey:cercle]];
         }
+        
+    } else if (filter == FILTER_CLUBS) {
+        clubsArray = [[FilterParser instance] arrayClubs];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+        NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+        clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
         for (NSString *club in clubsArray) {
             [clubsChoice addObject:[clubsDico objectForKey:club]];
+            
         }
         
     }
@@ -69,7 +73,10 @@
         for (NSString *type in typesArray) {
             [typesChoice addObject:[typesDico objectForKey:type]];
         }
+        
     }
+
+    self.title = NSLocalizedString(@"Settings", @"Settings");
 
 
     // Uncomment the following line to preserve selection between presentations.
@@ -96,42 +103,30 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    if (filter == FILTER_ASSOS) {
-        return 2;
-    }
-    else if (filter == FILTER_TYPE) {
+    if (filter == FILTER_CERCLES || filter == FILTER_CLUBS || filter == FILTER_TYPE) {
         return 1;
-    }
-    return 0;
+    } else return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (filter == FILTER_ASSOS) {
-        if (section == CERCLES) {
-            return [cerclesArray count];
-        }
-        else if (section == CLUBS){
-            return [clubsArray count];
-        }
-    }
-    else if (filter == FILTER_TYPE) {
+    if (filter == FILTER_CERCLES) {
+        return [cerclesArray count];
+    } else if (filter == FILTER_CLUBS) {
+        return [clubsArray count];
+    } else if (filter == FILTER_TYPE) {
         return [typesArray count];
     }
     return 0;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (filter == FILTER_ASSOS) {
-        if (section == 0) {
-            return @"Cercles";
-        }
-        else {
-            return @"Clubs et associations";
-        }
-    }
-    else if (filter == FILTER_TYPE) {
+    if (filter == FILTER_CERCLES) {
+        return @"Cercles";
+    } else if (filter == FILTER_CLUBS) {
+            return @"Clubs & Associations";
+    } else if (filter == FILTER_TYPE) {
         return @"Types d'événements";
     }
     return @"";
@@ -146,22 +141,18 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     BOOL checked;
-    if (filter == FILTER_ASSOS) {
-        if (indexPath.section == CERCLES) {
+    if (filter == FILTER_CERCLES) {
             [cell.textLabel setText:(NSString *)[cerclesArray objectAtIndex:indexPath.row]];
              checked = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
-        }
-        else if (indexPath.section == CLUBS){
+    } else if (filter == FILTER_CLUBS) {
             [cell.textLabel setText:[clubsArray objectAtIndex:indexPath.row]];
             checked = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
-        }
-    }
-    else if (filter == FILTER_TYPE){
+    } else if (filter == FILTER_TYPE) {
         [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
         checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
     }
-    cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
     
+    cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
     return cell;
 }
 
@@ -208,23 +199,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (filter == FILTER_ASSOS) {
-        if (indexPath.section == CERCLES) {
+    if (filter == FILTER_CERCLES) {
             BOOL value = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
             value = 1 - value;
             [cerclesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
-        }
-        else if (indexPath.section == CLUBS) {
+    } else if (filter == FILTER_CLUBS) {
             BOOL value = [[clubsChoice objectAtIndex:indexPath.row] boolValue];
             value = 1 - value;
             [clubsChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
-        }
-    }
-    else if (filter == FILTER_TYPE) {
+    } else if (filter == FILTER_TYPE) {
         BOOL value = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
     }
+    
     [tableView reloadData];
 }
 

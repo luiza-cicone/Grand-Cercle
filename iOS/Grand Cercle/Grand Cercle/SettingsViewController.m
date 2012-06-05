@@ -66,7 +66,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -86,12 +86,15 @@
     }
     
     if (indexPath.section == FILTER_EVENT && indexPath.row == 0) {
-        [cell.textLabel setText:@"Association"];
+        [cell.textLabel setText:@"Cercles"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+    } else if (indexPath.section == FILTER_EVENT && indexPath.row == 1) {
+        [cell.textLabel setText:@"Clubs & Associations"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-
     }
-    else if (indexPath.section == FILTER_EVENT && indexPath.row == 1) {
+    else if (indexPath.section == FILTER_EVENT && indexPath.row == 2) {
         [cell.textLabel setText:@"Type"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
