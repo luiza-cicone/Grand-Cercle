@@ -28,6 +28,7 @@ public class GCM extends TabActivity {
 		
 		
 		// Décommentez la ligne suivante pour séparer vos onglets via une image
+		
         //this.tabHost.getTabWidget().setDividerDrawable(R.drawable.separateur);
 		
         setupTab("TabEvent", new Intent().setClass(this, TabEvent.class),0);
@@ -40,16 +41,17 @@ public class GCM extends TabActivity {
 	
 	@Override
 	public void onDestroy() {
-		//DataBase.getInstance().incrementNumRun();
 	    super.onDestroy();
 	    System.runFinalizersOnExit(true);
 	    System.exit(0);
 	}
-
+	
+	// inclut l'onglet dans la barre d'onglets en haut de l'écran
 	private void setupTab(String tag, Intent intent, int layoutTabIndex) {
 		tabHost.addTab(tabHost.newTabSpec(tag).setIndicator( createTabView(tabHost.getContext(), layoutTabIndex)).setContent(intent));
 	}
-	  
+	 
+	// créé la vue associée à l'onglet considéré
 	private View createTabView(final Context context, int layoutTabIndex) {
 		View view = LayoutInflater.from(context).inflate(layoutTab[layoutTabIndex], null);	
 		return view;

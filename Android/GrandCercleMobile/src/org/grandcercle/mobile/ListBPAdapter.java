@@ -40,6 +40,7 @@ public class ListBPAdapter extends BaseAdapter {
 		return listBP.get(index);
 	}
 
+	// Permet de retourner l'id d'un objet contenu dans la liste
 	public long getItemId(int index) {
 		return this.listBP.get(index).getId();
 		
@@ -48,7 +49,7 @@ public class ListBPAdapter extends BaseAdapter {
 	/* Le paramètre "convertView" permet de recycler les élements 
 	 * de notre liste. En effet, l'opération pour convertir un layout 
 	 * XML en IHM standard est très couteuse pour la plateforme Android. 
-	 * On nous propose ici de réutiliser des occurences créées qui ne sont 
+	 * On propose ici de réutiliser des occurences créées qui ne sont 
 	 * plus affichées. Donc si ce paramètre est "null" alors, il faut "inflater" 
 	 * notre layout XML, sinon on le réutilise
 	 */

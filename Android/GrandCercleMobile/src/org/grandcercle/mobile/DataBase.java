@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -37,8 +38,7 @@ public class DataBase extends SQLiteOpenHelper {
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
 		listType = ContainerData.getListTypes();
-		
-		
+
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
@@ -56,6 +56,7 @@ public class DataBase extends SQLiteOpenHelper {
 			valueClub.put("club",itClub.next());
 			db.insert(TABLE_CLUB,null,valueClub);
 		}
+		
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
@@ -135,14 +136,6 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		return list;
 	}
-	
-	/*public int getNumber(String table) {
-		String countQuery = "SELECT * FROM" + table;
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(countQuery,null);
-		cursor.close();
-		return cursor.getCount();
-	}*/
 	
 	public void deleteAll(String table){
 	    SQLiteDatabase db = this.getWritableDatabase();

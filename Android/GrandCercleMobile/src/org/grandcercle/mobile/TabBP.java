@@ -22,6 +22,7 @@ public class TabBP extends Activity {
         setContentView(R.layout.affichage_bons_plans);
         ArrayList<BP> listBP = ContainerData.getlistBP();
         
+        // On construit la liste de news
         if (listBP != null) {
 	        ListBPAdapter lbpa = new ListBPAdapter(this,listBP);
 	        ListView feedListView = ((ListView)findViewById(R.id.listFeed));
@@ -37,13 +38,12 @@ public class TabBP extends Activity {
 				Intent intent = new Intent(TabBP.this,PageBP.class);
 				// Passage des paramètres
 				Bundle bundle = new Bundle();
-				//Add the parameters to bundle as
+				//Ajout des paramètres dans le bundle
 				bundle.putString("titre",((BP)parent.getItemAtPosition(position)).getTitle());
 				bundle.putString("description",((BP)parent.getItemAtPosition(position)).getDescription());
 				bundle.putString("image",((BP)parent.getItemAtPosition(position)).getImage());
 				bundle.putString("link",((BP)parent.getItemAtPosition(position)).getLink());
 				
-				//bundle.putString("link",((News)parent.getItemAtPosition(position)).getLink());
 				//Ajout du Bundle
 				intent.putExtras(bundle);
 				
