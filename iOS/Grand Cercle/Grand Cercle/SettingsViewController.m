@@ -11,6 +11,7 @@
 
 #define FILTER_EVENT 0
 #define FILTER_NEWS 1
+#define PERSO 2
 
 @interface SettingsViewController ()
 
@@ -60,20 +61,29 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    if (section == FILTER_EVENT) {
+        return 3;
+    } else if (section == FILTER_NEWS) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == FILTER_EVENT) {
         return @"Filtrer les événements par";
-    }
-    return @"";
+    } else if (section == FILTER_NEWS) {
+        return @"Filtrer les news par";
+    } else if (section == PERSO) {
+        return @"Personnaliser votre interface";
+    } else return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,21 +95,38 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    if (indexPath.section == FILTER_EVENT && indexPath.row == 0) {
-        [cell.textLabel setText:@"Cercles"];
+    if (indexPath.section == FILTER_EVENT) { 
+    
+        if (indexPath.row == 0) {
+            [cell.textLabel setText:@"Cercles"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        } else if (indexPath.row == 1) {
+            [cell.textLabel setText:@"Clubs & Associations"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+        } else if (indexPath.row == 2) {
+            [cell.textLabel setText:@"Type"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+        }
+        
+    } else if (indexPath.section == FILTER_NEWS) {
+        
+        if (indexPath.row == 0) {
+            [cell.textLabel setText:@"Cercles"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+        } else if (indexPath.row == 1) {
+            [cell.textLabel setText:@"Clubs & Associations"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+    } else if (indexPath.section == PERSO) {
+        [cell.textLabel setText:@"Choix du thème"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-    } else if (indexPath.section == FILTER_EVENT && indexPath.row == 1) {
-        [cell.textLabel setText:@"Clubs & Associations"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-    }
-    else if (indexPath.section == FILTER_EVENT && indexPath.row == 2) {
-        [cell.textLabel setText:@"Type"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-    }
-    
+    }    
     return cell;
 }
 
@@ -147,7 +174,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SettingsDetailViewController *detailViewController = [[SettingsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    detailViewController.filter = indexPath.row;
+    detailViewController.filter = indexPath;
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
 }

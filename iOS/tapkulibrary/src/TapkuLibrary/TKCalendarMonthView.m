@@ -325,7 +325,7 @@ int rectHeight = 34;
 	
 	NSString *str = [NSString stringWithFormat:@"%d",day];
 	
-	
+    r.origin.y -= 2;
 	r.size.height -= 2;
 	[str drawInRect: r
 		   withFont: f1
@@ -334,7 +334,7 @@ int rectHeight = 34;
 	
 	if(mark){
 		r.size.height = 10;
-		r.origin.y += 18;
+		r.origin.y += 14;
 		
 		[@"•" drawInRect: r
 				withFont: f2
@@ -577,7 +577,7 @@ int rectHeight = 34;
 - (UILabel *) currentDay{
 	if(currentDay==nil){
 		CGRect r = self.selectedImageView.bounds;
-		r.origin.y += 1;
+		r.origin.y -= 1;
 		currentDay = [[UILabel alloc] initWithFrame:r];
 		currentDay.text = @"1";
 		currentDay.textColor = [UIColor whiteColor];

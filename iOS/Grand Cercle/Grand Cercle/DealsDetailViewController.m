@@ -45,6 +45,8 @@
     webView = (UIWebView *)[cellBonPlanDescription viewWithTag:1];
     webView.delegate = self;
     [webView loadHTMLString:bonPlan.description baseURL:nil];
+    
+    self.title = NSLocalizedString(@"Deals", @"Deals");
 }
 
 - (void)viewDidUnload
