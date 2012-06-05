@@ -23,7 +23,7 @@ public class CerclePref extends Activity {
 
 		dataBase = DataBase.getInstance();
 		listCercleChecked = new ArrayList<String>();
-		ArrayList<String> prefered = dataBase.getAllPref("prefCercle");
+		ArrayList<String> prefered = dataBase.getAllPref("prefCercle","cercle");
 		
         View linearLayout = findViewById(R.id.cercle);
         listCercle = ContainerData.getListCercles();
@@ -67,7 +67,8 @@ public class CerclePref extends Activity {
 			}
 			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
 			dataBase.incrementNumRun();
-			ContainerData.parseFiles(ContainerData.getAppContext());
+			//ContainerData.parseFiles(ContainerData.getAppContext());
+			ContainerData.parseEvent();
 			finish();
 		}
 	};

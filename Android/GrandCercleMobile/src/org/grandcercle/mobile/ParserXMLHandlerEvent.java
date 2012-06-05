@@ -61,8 +61,8 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	
 	public ArrayList<String> getPreferences(Context ctx) {
 		dataBase = DataBase.getInstance();
-		ArrayList <String> listCercle = dataBase.getAllPref("prefCercle");
-		ArrayList<String> listClub = dataBase.getAllPref("prefClub");
+		ArrayList <String> listCercle = dataBase.getAllPref("prefCercle","cercle");
+		ArrayList<String> listClub = dataBase.getAllPref("prefClub","club");
 		if (listCercle != null && listClub != null) {
 			listCercle.addAll(listClub);
 			return listCercle;
@@ -209,7 +209,8 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
-			if (dataBase.getNumRun() == 1 || listPref.contains(currentEvent.getGroup())) {  // donne l'organisateur
+			if (dataBase.getNumRun() == 1 || listPref.contains(currentEvent.getGroup())) {
+				Log.d("ParserEvent",currentEvent.getGroup());
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
 					ArrayList<Event> listEventDay = hashEvent.get(currentEvent.getEventDate());

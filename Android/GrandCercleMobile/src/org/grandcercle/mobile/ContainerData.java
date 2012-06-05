@@ -179,6 +179,63 @@ public class ContainerData {
 		}
 		
 	}
+	
+	public static void parseEvent(){
+		// On passe par une classe factory pour obtenir une instance de sax
+		SAXParserFactory fabrique = SAXParserFactory.newInstance();
+		SAXParser parseur = null;
+		try {
+			// On "fabrique" une instance de SAXParser
+			parseur = fabrique.newSAXParser();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
+		
+		// On définit les url des fichiers XML
+		URL urlEvent = null;
+		try {
+			urlEvent = new URL("http://www.grandcercle.org/evenements/data.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		// On définit les url des fichiers XML
+		URL urlEventOld = null;
+		try {
+			urlEventOld = new URL("http://www.grandcercle.org/evenements/data-old.xml");
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
+			
+			// On récupère directement la liste des feeds
+			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
+			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent(appContext);
+		try {
+			// On parse le fichier XML
+			parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
+			
+			// On récupère directement la liste des feeds
+			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
+			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	public static ArrayList<News> getNews() {
 		return listNews;

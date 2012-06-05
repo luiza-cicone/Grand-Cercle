@@ -32,11 +32,11 @@ public class DataBase extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE "+TABLE_NUMRUN+" (id INTEGER PRIMARY KEY AUTOINCREMENT, cpt INTEGER);");
 		db.execSQL("INSERT INTO " + TABLE_NUMRUN + "(cpt) values(1)");
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
-				" (cercle VARCHAR NOT NULL PRIMARY KEY);");
+				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
-				" (club VARCHAR NOT NULL PRIMARY KEY);");
+				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
-				" (type VARCHAR NOT NULL PRIMARY KEY);");
+				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
 	}
 	
 	@Override
@@ -93,9 +93,9 @@ public class DataBase extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public ArrayList<String> getAllPref(String table) {
+	public ArrayList<String> getAllPref(String table, String key) {
 		ArrayList<String> list = new ArrayList<String>();
-		String query = "SELECT * FROM " + table;
+		String query = "SELECT DISTINCT " + key + " FROM " + table;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query,null);
 		
@@ -108,13 +108,13 @@ public class DataBase extends SQLiteOpenHelper {
 		return list;
 	}
 	
-	public int getNumber(String table) {
+	/*public int getNumber(String table) {
 		String countQuery = "SELECT * FROM" + table;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(countQuery,null);
 		cursor.close();
 		return cursor.getCount();
-	}
+	}*/
 	
 	public void deleteAll(String table){
 	    SQLiteDatabase db = this.getWritableDatabase();
