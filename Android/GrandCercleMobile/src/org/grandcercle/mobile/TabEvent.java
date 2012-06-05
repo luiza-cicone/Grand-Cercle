@@ -52,9 +52,9 @@ public class TabEvent extends Activity {
 		setContentView(R.layout.affichage_event);
 	}
 	
+	// Méthode rappelé quand on revient sur l'onglet événements après avoir touché aux préférences
 	public void onResume() {
 		super.onResume();
-		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();
@@ -246,7 +246,7 @@ public class TabEvent extends Activity {
 		private String currentYearNumber;
 		private String currentDate; // dd-MM-yyyy
 
-		// Days in Current Month
+		// Jour du mois courant
 		public GridCellAdapter(Context context, int textViewResourceId, int month, int year) {
 			super();
 			this._context = context;
@@ -256,6 +256,7 @@ public class TabEvent extends Activity {
 			
 			this.dateEvents = getSetDates();
 			
+			// nouvelle instance du calendrier
 			Calendar calendar = Calendar.getInstance();
 			setCurrentDayOfMonth(calendar.get(Calendar.DAY_OF_MONTH));
 			setCurrentMonth(calendar.get(Calendar.MONTH));
@@ -276,7 +277,7 @@ public class TabEvent extends Activity {
 			}
 			currentDate = currentDayNumber+"-"+currentMonthNumber+"-"+currentYearNumber;
 
-			// Print Month
+			// Affichage du mois
 			printMonth(month, year);	
 		}
 		
@@ -361,7 +362,7 @@ public class TabEvent extends Activity {
 			int currentMonth = mm - 1;
 			String currentMonthName = getMonthAsString(currentMonth);
 			
-			// current date with "dd-MM-yyyy" format
+			// date courante sous le format "dd-MM-yyyy"
 			String today = this.getCurrentDate();
 			
 			String monthNumber = String.valueOf(mm);
@@ -372,7 +373,6 @@ public class TabEvent extends Activity {
 			
 			String month = monthNumber+"-"+yearNumber;
 			if (today.contains(month)) {
-				// today is contained in the month that is currently printed
 				todayInActualMonth = true;
 			}
 			
@@ -513,6 +513,7 @@ public class TabEvent extends Activity {
 			return row;
 		}
 		
+		
 		private View.OnClickListener dayClicked = new View.OnClickListener() {
 			public void onClick(View view) {
 				String dayMonthYear = (String)view.getTag();
@@ -569,9 +570,10 @@ public class TabEvent extends Activity {
 				Toast t;
 				if (dateEvents != null) {
 					if (hashMapEvent.containsKey(date)) {
-						// diplays list of events
+						// affichage de la liste des événements
 						ArrayList<Event> listEvCal = hashMapEvent.get(date);
 						ListEventAdapter listCalAdapter = new ListEventAdapter(view.getContext(),listEvCal);
+						// On récupère la vue contenant les événements
 						ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
 						((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
 						feedListViewCal.setOnItemClickListener(clickListenerFeed);

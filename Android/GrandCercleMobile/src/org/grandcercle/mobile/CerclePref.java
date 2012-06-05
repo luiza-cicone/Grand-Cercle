@@ -53,7 +53,7 @@ public class CerclePref extends Activity {
 					listCercleChecked.add(listCercle.get(i));
 				}
 			}
-			//dataBase.deleteAll("prefCercle");
+			dataBase.deleteAll("prefCercle");
 			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
 			ContainerData.parseEvent();
 			finish();

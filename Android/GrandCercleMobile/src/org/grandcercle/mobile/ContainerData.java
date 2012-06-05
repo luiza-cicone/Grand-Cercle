@@ -243,9 +243,6 @@ public class ContainerData {
 	}
 
 	public static ArrayList<Event> getEvent() {
-		for (int i = 0; i < listEvent.size();i++) {
-			Log.d("ParserEvent",listEvent.get(i).getGroup());
-		}
 		return listEvent;
 	}
 	

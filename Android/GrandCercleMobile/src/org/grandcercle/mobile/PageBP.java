@@ -20,13 +20,6 @@ public class PageBP extends Activity {
 		((TextView)findViewById(R.id.description)).setText(markedUp);
 		((TextView)findViewById(R.id.link)).setText(param.getString("link"));
 
-		/*ImageView logo = (ImageView)findViewById(R.id.logo);
-		try {
-			SaveImageFromUrl.setImage(logo,param.getString("logo"));
-		} catch (IOException e) {
-			e.printStackTrace();	
-
-		}*/
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image),param.getString("image"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 	}

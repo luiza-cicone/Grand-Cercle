@@ -19,7 +19,6 @@ public class ClubPref extends Activity {
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.club_pref);
-		//dataBase = new DataBase(this);
 		dataBase = DataBase.getInstance();
 		listClubChecked = new ArrayList<String>();
 		ArrayList<String> prefered = dataBase.getAllPref("prefClub","club");
@@ -55,6 +54,7 @@ public class ClubPref extends Activity {
 					listClubChecked.add(listClub.get(i));
 				}
 			}
+			dataBase.deleteAll("prefClub");
 			dataBase.addListPref("prefClub","club",listClubChecked);
 			ContainerData.parseEvent();
 			finish();

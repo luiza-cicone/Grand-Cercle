@@ -4,16 +4,10 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ScrollView;
 
 public class TypesPref extends Activity {
 	private ArrayList<String> listTypes;
@@ -24,12 +18,16 @@ public class TypesPref extends Activity {
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
 		setContentView(R.layout.type_pref);
-		//dataBase = new DataBase(this);
+		
+		// récupération de l'instance de l'unique base de données
 		dataBase = DataBase.getInstance();
 		listTypesChecked = new ArrayList<String>();
+		// récupération de la liste de préférence
 		ArrayList<String> prefered = dataBase.getAllPref("prefType","type");
 		
+		// récupération du layout associé aux types
         View linearlayout =  findViewById(R.id.type);
+        
         listTypes = ContainerData.getListTypes();
         listCheckBox = new ArrayList<CheckBox>();
         for (int i = 0; i < listTypes.size(); i++) {
@@ -37,7 +35,8 @@ public class TypesPref extends Activity {
 			checkBox.setPadding(80, 0, 0, 0);
 			checkBox.setWidth(470);
 			checkBox.setText(listTypes.get(i));
-			
+			// comparaison entre la liste complète des types et
+			// la liste des préférences
 			if (prefered.contains(listTypes.get(i))) {
 				checkBox.setChecked(true);
 			} else {
@@ -59,13 +58,16 @@ public class TypesPref extends Activity {
 					listTypesChecked.add(listTypes.get(i));
 				}
 			}
-			dataBase.addListPref("prefType","type",listTypesChecked);
+			dataBase.deleteAll("prefType");
+			// on rentre dans la base de données la liste des préférences
+			dataBase.addListPref("prefType","type",listTypesChecked); 
+			// on parse les données en fonction des préférences
 			ContainerData.parseEvent();
 			finish();
 		}
 	};
 	
-	
+	// Listener du bouton annuler
 	private OnClickListener CancelClicked = new OnClickListener() {
 		public void onClick(View v) {
 			finish();

@@ -60,7 +60,7 @@ public class PageEvent extends Activity {
 	        }
 	    } catch (Exception e) { /* eat any exceptions */ }
 
-	    return null; // No working calendar URI found
+	    return null; // Aucun calendrier URI trouvé
 	}
 	
 	public ArrayList<UserCalendar> getUserCalendars() {
@@ -92,7 +92,6 @@ public class PageEvent extends Activity {
 			ArrayList<UserCalendar> listCal = getUserCalendars();
 			
 			// choix utilisateur. Par défaut : case 0 de l'ArrayList
-			
 			ContentValues event = new ContentValues();
 			event.put("calendar_id", listCal.get(0).id);
 			event.put("title", "Event Title");
