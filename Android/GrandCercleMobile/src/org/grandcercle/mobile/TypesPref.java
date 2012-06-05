@@ -38,9 +38,7 @@ public class TypesPref extends Activity {
 			checkBox.setWidth(470);
 			checkBox.setText(listTypes.get(i));
 			
-			if (dataBase.getNumRun() == 1) {
-				checkBox.setChecked(true);
-			} else if (prefered.contains(listTypes.get(i))) {
+			if (prefered.contains(listTypes.get(i))) {
 				checkBox.setChecked(true);
 			} else {
 				checkBox.setChecked(false);

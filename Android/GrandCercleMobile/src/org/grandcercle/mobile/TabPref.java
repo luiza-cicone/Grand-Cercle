@@ -26,7 +26,6 @@ public class TabPref extends Activity {
 		type.setOnClickListener((OnClickListener) clickListenerPrefType);
 	}
 
-
 	
 	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {
 		public void onClick(View view) {	

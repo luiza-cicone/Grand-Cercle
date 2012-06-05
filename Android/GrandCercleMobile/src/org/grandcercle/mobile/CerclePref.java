@@ -3,14 +3,11 @@ package org.grandcercle.mobile;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 
 public class CerclePref extends Activity {
 	private ArrayList<String> listCercle;
@@ -35,9 +32,7 @@ public class CerclePref extends Activity {
 			checkBox.setWidth(470);
 			checkBox.setText(listCercle.get(i));
 			
-			if (dataBase.getNumRun() == 1) {
-				checkBox.setChecked(true);
-			} else if (prefered.contains(listCercle.get(i))) {
+			if (prefered.contains(listCercle.get(i))) {
 				checkBox.setChecked(true);
 			} else {
 				checkBox.setChecked(false);

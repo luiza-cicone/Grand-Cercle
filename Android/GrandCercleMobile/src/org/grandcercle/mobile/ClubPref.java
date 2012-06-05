@@ -33,9 +33,7 @@ public class ClubPref extends Activity {
 			checkBox.setWidth(470);
 			checkBox.setText(listClub.get(i));
 			
-			if (dataBase.getNumRun() == 1) {
-				checkBox.setChecked(true);
-			} else if (prefered.contains(listClub.get(i))) {
+			if (prefered.contains(listClub.get(i))) {
 				checkBox.setChecked(true);
 			} else {
 				checkBox.setChecked(false);

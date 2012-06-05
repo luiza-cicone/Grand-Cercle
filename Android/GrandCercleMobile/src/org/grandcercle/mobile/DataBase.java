@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -13,6 +14,10 @@ public class DataBase extends SQLiteOpenHelper {
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
+	
+	private ArrayList<String> listCercle;
+	private ArrayList<String> listClub;
+	private ArrayList<String> listType;
 
 	/** Create a helper object for the Events database */
 	private DataBase() {		
@@ -29,14 +34,31 @@ public class DataBase extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE "+TABLE_NUMRUN+" (id INTEGER PRIMARY KEY AUTOINCREMENT, cpt INTEGER);");
-		db.execSQL("INSERT INTO " + TABLE_NUMRUN + "(cpt) values(1)");
+		// Initialisation des listes
+		listCercle = ContainerData.getListCercles();
+		listClub = ContainerData.getListClubs();
+		listType = ContainerData.getListTypes();
+		
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
+		Iterator<String> itCercle = listCercle.iterator();
+		while (itCercle.hasNext()) {
+				db.execSQL("INSERT INTO " + TABLE_CERCLE + "(cercle) VALUES("+itCercle.next()+");" );
+		}
+		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
+		Iterator<String> itClub = listClub.iterator();
+		while (itClub.hasNext()) {
+				db.execSQL("INSERT INTO " + TABLE_CLUB + "(club) VALUES("+itClub.next()+");" );
+		}
+		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
+		Iterator<String> itType = listType.iterator();
+		while (itType.hasNext()) {
+			db.execSQL("INSERT INTO " + TABLE_TYPE + "(type) VALUES("+itType.next()+ ");" );
+		}
 	}
 	
 	@Override
@@ -47,7 +69,7 @@ public class DataBase extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	public void incrementNumRun() {
+	/*public void incrementNumRun() {
 		int cpt = getNumRun();
 		cpt++;
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -65,7 +87,7 @@ public class DataBase extends SQLiteOpenHelper {
 			return cursor.getInt(0);
 		}
 		return 0;
-	}
+	}*/
 	
 	public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
