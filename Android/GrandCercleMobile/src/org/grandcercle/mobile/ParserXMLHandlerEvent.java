@@ -227,6 +227,9 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	}
 	// cette méthode nous permettra de récupérer les données
 	public ArrayList<Event> getListEvent(){
+		for (int i = 0; i < listEvent.size();i++) {
+			Log.d("ParserEvent",listEvent.get(i).getGroup());
+		}
 		return listEvent;
 	}
 	

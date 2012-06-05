@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
+import android.util.Log;
 
 public class ContainerData {
 	
@@ -242,6 +243,9 @@ public class ContainerData {
 	}
 
 	public static ArrayList<Event> getEvent() {
+		for (int i = 0; i < listEvent.size();i++) {
+			Log.d("ParserEvent",listEvent.get(i).getGroup());
+		}
 		return listEvent;
 	}
 	

@@ -17,11 +17,7 @@ public class TabPref extends Activity {
 		cercle.setOnClickListener((OnClickListener) clickListenerPrefCercle);
 		TextView club = (TextView)findViewById(R.id.Clubs);
 		club.setOnClickListener((OnClickListener) clickListenerPrefClub);
-		
-	
 	}
-
-
 	
 	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {
 		public void onClick(View view) {	

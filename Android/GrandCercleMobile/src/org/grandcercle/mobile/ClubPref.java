@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ScrollView;
 
 public class ClubPref extends Activity {
 	private ArrayList<String> listClub;
@@ -26,7 +22,7 @@ public class ClubPref extends Activity {
 		//dataBase = new DataBase(this);
 		dataBase = DataBase.getInstance();
 		listClubChecked = new ArrayList<String>();
-		ArrayList<String> prefered = dataBase.getAllPref("prefClub");
+		ArrayList<String> prefered = dataBase.getAllPref("prefClub","club");
 		
         View scrollview =  findViewById(R.id.club);
         listClub = ContainerData.getListClubs();
