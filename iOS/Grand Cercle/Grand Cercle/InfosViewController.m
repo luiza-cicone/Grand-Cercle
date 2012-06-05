@@ -27,7 +27,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	// Do any additional setup after loading the view, typically from a nib. 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    NSArray *c = [defaults objectForKey:@"theme"];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+    
+    //[self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];    
 }
 
 - (void)viewDidUnload
