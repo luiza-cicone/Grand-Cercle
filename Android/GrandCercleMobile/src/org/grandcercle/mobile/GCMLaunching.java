@@ -35,10 +35,8 @@ public class GCMLaunching extends Activity {
 
 		@Override
 	    protected void onPostExecute(Void result) {
-	       
 	        Intent intent = new Intent(GCMLaunching.this,GCM.class);
 	        GCMLaunching.this.startActivity(intent);
-	        
 	    }
 	}
 
