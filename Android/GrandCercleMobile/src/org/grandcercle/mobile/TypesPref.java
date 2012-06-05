@@ -59,6 +59,7 @@ public class TypesPref extends Activity {
 					listTypesChecked.add(listTypes.get(i));
 				}
 			}
+			dataBase.deleteAll("prefType");
 			dataBase.addListPref("prefType","type",listTypesChecked);
 			ContainerData.parseEvent();
 			finish();

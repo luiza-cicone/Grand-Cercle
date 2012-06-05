@@ -1,9 +1,11 @@
 package org.grandcercle.mobile;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -53,7 +55,20 @@ public class CerclePref extends Activity {
 					listCercleChecked.add(listCercle.get(i));
 				}
 			}
+			dataBase.deleteAll("prefCercle");
+			ArrayList<String> prefered = dataBase.getAllPref("prefCercle","cercle");
+			Iterator<String> it = prefered.iterator();
+			Log.d("CerclePref","DELETE !");
+			while (it.hasNext()) {
+				Log.d("CerclePref",it.next());
+			}
 			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
+			prefered = dataBase.getAllPref("prefCercle","cercle");
+			Iterator<String> it0 = prefered.iterator();
+			Log.d("CerclePref","FILL IN !");
+			while (it0.hasNext()) {
+				Log.d("CerclePref",it0.next());
+			}
 			ContainerData.parseEvent();
 			finish();
 		}

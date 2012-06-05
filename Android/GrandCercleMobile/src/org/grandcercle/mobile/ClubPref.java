@@ -55,6 +55,7 @@ public class ClubPref extends Activity {
 					listClubChecked.add(listClub.get(i));
 				}
 			}
+			dataBase.deleteAll("prefClub");
 			dataBase.addListPref("prefClub","club",listClubChecked);
 			ContainerData.parseEvent();
 			finish();
