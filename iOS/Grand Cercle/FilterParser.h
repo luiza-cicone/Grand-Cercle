@@ -11,7 +11,7 @@
 #import "TBXML.h"
 #import "NSString+HTML.h"
 
-@interface FilterParser : NSObject {
+@interface FilterParser : NSObject <UIAlertViewDelegate> {
     // Parser
     TBXML *tbxml;
     // Ensemble des cercles et des clubs
@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic, retain) NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
+
 
 // Unique instance du parser
 + (FilterParser *) instance;

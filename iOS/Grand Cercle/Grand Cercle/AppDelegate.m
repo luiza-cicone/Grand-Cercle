@@ -32,10 +32,30 @@
     [super dealloc];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [activity setFrame:CGRectMake(100, 350, 100, 100)];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.window.frame.size.width, self.window.frame.size.height)];
+    [iv setImage:[UIImage imageNamed:@"default.png"]];
+    [v addSubview:iv];
+    [v addSubview:activity];
+    UIViewController *vc  = [[UIViewController alloc] init];
+    [vc setView: v];
+    self.window.rootViewController = vc;
+
+    [self.window makeKeyAndVisible];
+
+    [activity startAnimating];
+    [self performSelector:@selector(startParse) withObject:nil afterDelay:0.01];
+
+    return YES;
+}
+- (void)startParse {
+    NSLog(@"FIN");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    
+
     // On parse les associations
     FilterParser *ap = [FilterParser instance];
     [ap loadAssociations];
@@ -58,7 +78,7 @@
         for (NSString *type in [ap arrayTypes]) {
             [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
         }
-        [defaults setObject:typesDico forKey:@"filtreTypes"];
+        [defaults setObject:typesDico forKey:@"filtreTypes"];        
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -74,15 +94,13 @@
     // On parse les bons plans
     BonsPlansParser *bp = [BonsPlansParser instance];
     [bp loadBonsPlans];
-
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // Override point for customization after application launch.
     UINavigationController *navigationController1 = [[UINavigationController alloc] init];
     UIViewController *viewController1 = [[[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil] autorelease];
     navigationController1.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
-
+    
     UIViewController *viewController2 = [[[NewsViewController alloc] initWithNibName:@"NewsViewController" bundle:nil] autorelease];
     UINavigationController *navigationController2 = [[UINavigationController alloc] init];
     navigationController2.navigationBar.barStyle = UIBarStyleBlackOpaque;
@@ -105,13 +123,12 @@
     navigationController5.viewControllers = [NSArray arrayWithObjects:viewController5, nil];
     
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController1, navigationController2, navigationController3, navigationController4, navigationController5, nil];
-//    [navigationController2 release]; navigationController2 = nil;
-//    [navigationController1 release]; navigationController1 = nil;
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
-    return YES;
 }
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
