@@ -224,7 +224,6 @@
         BOOL value = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
-
     }
     [tableView reloadData];
 }
@@ -242,7 +241,7 @@
         [clubsDico setObject:[clubsChoice objectAtIndex:i] forKey:[clubsArray objectAtIndex:i]];
     }
     for (int i = 0; i < [typesArray count]; i++) {
-        [clubsDico setObject:[typesChoice objectAtIndex:i] forKey:[typesArray objectAtIndex:i]];
+        [typesDico setObject:[typesChoice objectAtIndex:i] forKey:[typesArray objectAtIndex:i]];
     }
     [defaults setObject:cerclesDico forKey:@"filtreCercles"];
     [defaults setObject:clubsDico forKey:@"filtreClubs"];

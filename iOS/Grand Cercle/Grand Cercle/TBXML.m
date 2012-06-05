@@ -611,9 +611,12 @@
 	// set parent element to nil
 	TBXMLElement * parentXMLElement = nil;
 	
+    if ((elementStart != strstr(elementStart,"<?xml"))) {
+        return;
+    }
+    
 	// find next element start
 	while ((elementStart = strstr(elementStart,"<"))) {
-		
 		// detect comment section
 		if (strncmp(elementStart,"<!--",4) == 0) {
 			elementStart = strstr(elementStart,"-->") + 3;
