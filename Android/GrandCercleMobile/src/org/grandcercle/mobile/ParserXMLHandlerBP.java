@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 
 public class ParserXMLHandlerBP extends ParserXMLHandler {
 	private final String IMAGE = "image";
+	private final String SUMMARY = "summary";
 	
 	// Array list d'evenements
 	private ArrayList<BP> listBP;
@@ -82,6 +83,12 @@ public class ParserXMLHandlerBP extends ParserXMLHandler {
 		if (localName.equalsIgnoreCase(IMAGE)) {
 			if (inBP) {
 				this.currentBP.setImage(buffer.toString());
+				buffer = null;
+			}
+		}
+		if (localName.equalsIgnoreCase(SUMMARY)) {
+			if (inBP) {
+				this.currentBP.setSummary(buffer.toString());
 				buffer = null;
 			}
 		}

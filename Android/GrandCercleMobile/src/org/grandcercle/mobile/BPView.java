@@ -5,6 +5,6 @@ import android.widget.TextView;
 
 public class BPView {
 	public TextView title;
-	public TextView description;
 	public ImageView image;
+	public TextView summary;
 }
