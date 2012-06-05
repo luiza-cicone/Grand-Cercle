@@ -3,17 +3,23 @@ package org.grandcercle.mobile;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class CerclePref extends Activity {
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listCercleChecked;
 	private DataBase dataBase;
 	private ArrayList<CheckBox> listCheckBox;
+	private ProgressBar progressBarParse;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -55,7 +61,16 @@ public class CerclePref extends Activity {
 			}
 			dataBase.deleteAll("prefCercle");
 			dataBase.addListPref("prefCercle","cercle",listCercleChecked);
-			ContainerData.parseEvent();
+	
+			LayoutInflater inflater = getLayoutInflater();
+			View layout = inflater.inflate(R.layout.toast_parse, (ViewGroup) findViewById(R.id.toast_layout_root));
+			Toast toast = new Toast(getApplicationContext());
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.setDuration(Toast.LENGTH_SHORT);
+			toast.setView(layout);
+			toast.show();
+			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
+			new ParsingProcessing().execute((Void)null);
 			finish();
 		}
 	};
@@ -66,5 +81,23 @@ public class CerclePref extends Activity {
 			finish();
 		}
 	};
+	
+	private class ParsingProcessing extends AsyncTask<Void,Integer,Void> {
+		
+		@Override
+	    protected Void doInBackground(Void... params) {
+			ContainerData.parseEvent();
+			return null;
+	    }
+
+		@Override
+	    protected void onProgressUpdate(Integer... progress) {
+	        progressBarParse.setProgress(progress[0]);
+	    }
+
+		@Override
+	    protected void onPostExecute(Void result) {}
+	}
+
 	
 }

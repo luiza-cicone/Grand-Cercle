@@ -50,6 +50,10 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	 */ 
 	public ParserXMLHandlerEvent(Context ctx) {
 		listPref = getPreferences(ctx);
+		// par défaut, Grand Cercle et Elus étudiants ne peuvent pas être enlevé des préférences
+		// C'est le but de l'appli : informer sur ces deux entités.
+		listPref.add("Grand Cercle");
+		listPref.add("Elus étudiants");
 		listType = getTypePreferences(ctx);
 	}
 	

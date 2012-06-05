@@ -42,7 +42,7 @@ public class ParserXMLHandlerAsso extends ParserXMLHandler {
 		
 		// Ci dessous, localName contient le nom du tag rencontré
 		
-		// Nous avons rencontré un tag NADE, il faut donc instancier un nouvel BP		
+		// Nous avons rencontré un tag NODE, il faut donc instancier un nouvel BP		
 		if (localName.equalsIgnoreCase(NODE)){
 			inAsso = true;
 		}
