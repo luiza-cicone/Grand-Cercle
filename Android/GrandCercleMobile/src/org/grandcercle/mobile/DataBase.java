@@ -14,8 +14,6 @@ public class DataBase extends SQLiteOpenHelper {
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
 	
-	private ArrayList<String> preferedCercle;
-	private ArrayList<String> preferedClub;
 	
 	/** Create a helper object for the Events database */
 	private DataBase() {
@@ -39,8 +37,6 @@ public class DataBase extends SQLiteOpenHelper {
 				" (club VARCHAR NOT NULL PRIMARY KEY);");
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
 				" (type VARCHAR NOT NULL PRIMARY KEY);");
-		preferedCercle = ContainerData.getListCercles();
-		preferedClub = ContainerData.getListClubs();
 		//this.addListPref(TABLE_CERCLE,"cercle",preferedCercle);
 		//this.addListPref(TABLE_CLUB,"club",preferedClub);
 	}
