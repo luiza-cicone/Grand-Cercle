@@ -46,6 +46,7 @@ public class ClubPref extends Activity {
 		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
 		buttonCancel.setOnClickListener(CancelClicked);
 	}
+	
 	private OnCheckedChangeListener checkChanged = new OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			//Log.d("Cercle","buttonView"+buttonView);
