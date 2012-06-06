@@ -22,7 +22,7 @@
                 android:id="@+id/Ense3"
                 android:text="Bleu Ense3"/>
             <RadioButton 
-                android:id="@+id/Papet"
+                android:id="@+id/Pagora"
                 android:text="Orange Pagora"/>
             <RadioButton 
                 android:id="@+id/GI"
