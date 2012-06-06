@@ -9,6 +9,9 @@
 #import "NewsDetailViewController.h"
 #import "NSString+HTML.h"
 
+#define TITRE 0
+#define DESCRIPTION 1
+
 @implementation NewsDetailViewController
 @synthesize news, cellNewsDescription, cellNewsTop;
 
@@ -30,7 +33,20 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.title = NSLocalizedString(@"News", @"News");}
+    self.title = NSLocalizedString(@"News", @"News");
+
+    webViewHeight = 0;
+
+    [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
+    
+    UIWebView *webView;
+    webView = (UIWebView *)[cellNewsDescription viewWithTag:1];
+    webView.delegate = self;
+    [webView loadHTMLString:news.description baseURL:nil];
+    
+}
+
+
 
 - (void)viewDidUnload
 {
@@ -69,7 +85,7 @@
     
     switch (indexPath.section) {
             
-        case 0:
+        case TITRE:
             CellIdentifier = @"NewsTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -92,29 +108,21 @@
             [label setText:[news pubDate]];
             break;
             
-//        case 1:
-//            CellIdentifier = @"Cercle";
-//            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//            if (!cell) {
-//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//            }
-//            [cell.textLabel setText : news.group];
-//            UIImage *img = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)news.logo]]];
-//            [cell.imageView setImage: img];
-//            break;
-            
-        case 1:
-            CellIdentifier = @"NewsDescription";
+        case DESCRIPTION:
+            CellIdentifier = @"DescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"NewsDescription" owner:self options:nil];
+                [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
                 cell = cellNewsDescription;
                 self.cellNewsDescription = nil;
             }
             
-            UITextView *textView;
-            textView = (UITextView *)[cell viewWithTag:1];
-            [textView setText: [[news description] stringByConvertingHTMLToPlainText]];
+            UIWebView *webView;
+            webView = (UIWebView *)[cell viewWithTag:1];
+            webView.delegate = self;
+            [webView loadHTMLString:news.description baseURL:nil];
+            [webView sizeToFit];
+            
             break;
             
         default:
@@ -124,22 +132,44 @@
     return cell;
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    
+    [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
+    NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
+    [webView setFrame:CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, [output intValue])];
+    if (webViewHeight == 0) {
+        webViewHeight = [output intValue];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    webViewHeight = 0;
+}
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     switch (indexPath.section) {
-        case 0 :
-            return 121;
+        case TITRE :
+            return 85;
             break;
-            
-//        case 1 :
-//            return 44;
-//            break;
-//            
-        case 1 :
-            return 165;
+         
+        case DESCRIPTION :
+            return webViewHeight + 10;
             break;
             
         default :
-            return 44;
+            return 0;
             break;
     }
 }

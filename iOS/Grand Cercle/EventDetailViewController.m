@@ -10,19 +10,19 @@
 #import "NSString+HTML.h"
 #import "AppDelegate.h"
 
-//#define TITRE 0
-#define INFOS 0
+#define TITRE 0
+#define INFOS 2
 #define ORGANISATION 1
-#define DESCRIPTION 2
+#define DESCRIPTION 3
 
 @implementation EventDetailViewController
-@synthesize event, cellEventTop, cellEventDescription;
+@synthesize event, cellEventTop, cellEventDescription, cellEventInfo;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-
+//        self.tableView.scrollEnabled = NO;
     }
     return self;
 }
@@ -37,8 +37,21 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addToCalendar)];
     self.navigationItem.rightBarButtonItem = plusButton;
+    
     self.title = NSLocalizedString(@"Events", @"Events");
 
+    [[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:self options:nil];
+
+    webViewHeight = 0;
+    
+    UIWebView *webView;
+    webView = (UIWebView *)[cellEventDescription viewWithTag:1];
+    webView.delegate = self;
+    [webView loadHTMLString:event.description baseURL:nil];
+
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
 }
 
 -(void) addToCalendar {
@@ -46,7 +59,7 @@
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     actionSheet.destructiveButtonIndex = 2;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [actionSheet showInView:appDelegate.window];
+    [actionSheet showInView: appDelegate.window];
     [actionSheet release]; 
 }
 
@@ -102,19 +115,29 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    switch (section) {
+        case INFOS:
+            return 2;
+            break;
+        default:
+            break;
+    }
     return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case ORGANISATION:
-            return @"Organisateur";
+            return @"Assosciation";
+            break;
+        case INFOS:
+            return @"Infos";
             break;
         case DESCRIPTION:
             return @"Description";
@@ -125,13 +148,16 @@
     return @"";
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier;
     UITableViewCell *cell;
-    
+    UIImageView *imageView;
+    UILabel *label;
+
     switch (indexPath.section) {
-        case INFOS:
+        case TITRE:
             CellIdentifier = @"EventTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -140,22 +166,36 @@
                 self.cellEventTop = nil;
             }
             
-            UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event imageSmall]]]];
+            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event image]]]];
             [imageView setImage:myimage];
             
-            UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [event title]];
             
-            label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[event date]];
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            [label setText:[[[event place] stringByAppendingString: @" - "] stringByAppendingString: event.time]];
-            
+            break;
+        
+        case INFOS:            
+            CellIdentifier = @"EventInfoCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                [[NSBundle mainBundle] loadNibNamed:@"EventInfoCell" owner:self options:nil];
+                cell = cellEventInfo;
+                self.cellEventInfo = nil;
+            }
+            UILabel *label2;
+            label = (UILabel *)[cell viewWithTag:1];
+            label2 = (UILabel *)[cell viewWithTag:2];
+            if (indexPath.row == 0) {
+                [label setText:@"Date"];
+                [label2 setText:[NSString stringWithFormat:@"%@, %@ - %@", [event day], [event date], [event time]]];
+            }
+            else if (indexPath.row == 1) {
+                [label setText:@"Lieu"];
+                [label2 setText:[event place]];
+            }
+                        
             break;
             
         case ORGANISATION:
@@ -177,10 +217,13 @@
                 cell = cellEventDescription;
                 self.cellEventDescription = nil;
             }
+
+            UIWebView *webView;
+            webView = (UIWebView *)[cell viewWithTag:1];
+            webView.delegate = self;
+            [webView loadHTMLString:event.description baseURL:nil];
+            [webView sizeToFit];
             
-            UITextView *textView;
-            textView = (UITextView *)[cell viewWithTag:1];
-            [textView setText: [[event description] stringByConvertingHTMLToPlainText]];
             break;
             
         default:
@@ -190,27 +233,57 @@
     return cell;
 }
 
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    
+    [[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:self options:nil];
+    NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
+    [webView setFrame:CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, [output intValue])];
+    if (webViewHeight == 0) {
+        webViewHeight = [output intValue];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    webViewHeight = 0;
+}
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     switch (indexPath.section) {
-//        case TITRE:
-//            return 30;
-//            break;
+        case TITRE:
+            if (indexPath.row == 0) return 80;
+            if (indexPath.row == 1) return 30;
+            break;
         case INFOS :
-            return 120;
+            return 28;
             break;
         
         case ORGANISATION :
-            return 30;
+            return 28;
             break;
             
-        case DESCRIPTION :
-            return 155;
+        case DESCRIPTION : 
+            return webViewHeight + 10;
             break;
             
         default :
             return 44;
             break;
     }
+    return 0;
 }
 
 /*

@@ -210,7 +210,6 @@
 
     [imageView setImage:img];
 
-    
     return cell;
 }
 

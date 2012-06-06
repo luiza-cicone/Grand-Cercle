@@ -80,10 +80,10 @@
 - (void) calendarMonthView:(TKCalendarMonthView*)monthView didSelectDate:(NSDate*)date{
 	
 	// CHANGE THE DATE TO YOUR TIMEZONE
-	TKDateInformation info = [date dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:3600]];
-	NSDate *myTimeZoneDay = [NSDate dateFromDateInformation:info timeZone:[NSTimeZone systemTimeZone]];
+//	TKDateInformation info = [date dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:3600]];
+//	NSDate *myTimeZoneDay = [NSDate dateFromDateInformation:info timeZone:[NSTimeZone systemTimeZone]];
 	
-	NSLog(@"Date Selected: %@", myTimeZoneDay);
+//	NSLog(@"Date Selected: %@", myTimeZoneDay);
 	
 	[self.tableView reloadData];
 }
@@ -108,7 +108,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 36;
+    return 40;
 }
     
 - (UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -191,11 +191,22 @@
     theDates = [theDates arrayByAddingObjectsFromArray:[[EvenementsParser instance] arrayOldEvents]];
 
     
-//	self.dataArray = [NSMutableArray array];
+	self.dataArray = [NSMutableArray array];
 	self.dataDictionary = [NSMutableDictionary dictionary];
     
     //configure sections
     self.dataDictionary = [[NSMutableDictionary alloc] init];
+    
+    NSDate *d = start;
+	while(YES){
+        [self.dataArray addObject:[NSNumber numberWithBool:NO]];
+		
+		TKDateInformation info = [d dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+		info.day++;
+		d = [NSDate dateFromDateInformation:info timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+		if([d compare:end]==NSOrderedDescending) break;
+	}
+    
     
     for (int i = 0; i < [theDates count]; i++) {
         Evenements *event = [theDates objectAtIndex:i];
@@ -207,7 +218,22 @@
             [self.dataDictionary setObject:eventsOnThisDay forKey:event.eventDate];
         }
         [eventsOnThisDay addObject:event];
+
         
+        int numDays, numDays2;
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSUInteger unitFlags = NSDayCalendarUnit;
+        NSDateComponents *components = [gregorian components:unitFlags fromDate:start toDate:event.eventDate options:0];
+        NSDateComponents *components2 = [gregorian components:unitFlags fromDate:event.eventDate toDate:end options:0];
+
+        numDays = [components day];
+        numDays2 = [components2 day];
+
+        if (numDays2 > 0 && numDays > 0 && [[self.dataArray objectAtIndex:numDays] boolValue] == 0) {
+            [self.dataArray removeObjectAtIndex:numDays];
+            [self.dataArray insertObject:[NSNumber numberWithBool:YES] atIndex:numDays];
+        }
+        [gregorian release];
     }
 }
 

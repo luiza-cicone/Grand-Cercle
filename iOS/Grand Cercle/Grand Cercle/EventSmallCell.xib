@@ -43,7 +43,7 @@
 							<object class="IBUIImageView" id="38831800">
 								<reference key="NSNextResponder" ref="9678031"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 3}, {30, 30}}</string>
+								<string key="NSFrame">{{5, 5}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="9678031"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="93705560"/>
@@ -55,7 +55,7 @@
 							<object class="IBUIImageView" id="657738543">
 								<reference key="NSNextResponder" ref="9678031"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{288, 6}, {23, 23}}</string>
+								<string key="NSFrame">{{288, 8}, {23, 23}}</string>
 								<reference key="NSSuperview" ref="9678031"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -68,7 +68,7 @@
 							<object class="IBUILabel" id="93705560">
 								<reference key="NSNextResponder" ref="9678031"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{43, -1}, {226, 21}}</string>
+								<string key="NSFrame">{{43, 1}, {226, 21}}</string>
 								<reference key="NSSuperview" ref="9678031"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="490691837"/>
@@ -104,7 +104,7 @@
 							<object class="IBUILabel" id="490691837">
 								<reference key="NSNextResponder" ref="9678031"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{43, 16}, {231, 21}}</string>
+								<string key="NSFrame">{{43, 18}, {231, 21}}</string>
 								<reference key="NSSuperview" ref="9678031"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="657738543"/>
@@ -132,7 +132,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 35}</string>
+						<string key="NSFrameSize">{320, 39}</string>
 						<reference key="NSSuperview" ref="469284971"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="38831800"/>
@@ -148,7 +148,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 36}</string>
+				<string key="NSFrameSize">{320, 40}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="9678031"/>

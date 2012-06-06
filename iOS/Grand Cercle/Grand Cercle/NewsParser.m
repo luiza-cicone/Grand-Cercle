@@ -33,7 +33,7 @@ static NewsParser *instanceNews = nil;
         
         // Récupération de la description
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:newsAParser];
-        aNews.description = [[TBXML textForElement:description]  stringByConvertingHTMLToPlainText];
+        aNews.description = [[TBXML textForElement:description] stringByDecodingHTMLEntities];
         
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:newsAParser];

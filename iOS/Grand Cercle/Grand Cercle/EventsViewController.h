@@ -7,23 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StyledPageControl.h"
 
 @interface EventsViewController : UIViewController <UIScrollViewDelegate> {
     
     IBOutlet UIScrollView *scrollView;
-    IBOutlet UIPageControl *pageControl;
+    StyledPageControl *pageControl;
     NSMutableArray *viewControllers;
     BOOL pageControlUsed;
  
     UINavigationController *myNav;
+    
 
 }
 
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UIPageControl *pageControl;
 @property (nonatomic, retain) NSMutableArray *viewControllers;
 
 @property (retain, nonatomic) UINavigationController *myNav;
+@property (nonatomic, retain) StyledPageControl *pageControl;
+
 
 - (IBAction)changePage:(id)sender;
 

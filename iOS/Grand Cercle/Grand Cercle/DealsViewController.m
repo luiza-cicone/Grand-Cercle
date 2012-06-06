@@ -76,6 +76,28 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    NSArray *c = [defaults objectForKey:@"theme"];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+    
+    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]];
+    
+    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
+        
+        [self.tview setSeparatorColor: [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18]];
+        
+        
+    } else {
+        
+        [self.tview setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5]];
+        
+    }
+    
+}
+
 - (void)viewDidUnload
 {
     [bonsPlansCell release];
@@ -133,7 +155,7 @@
     [label setText: [b title]];
     
     label = (UILabel *)[cell viewWithTag:3];
-    [label setText: [b description]];
+    [label setText: [b summary]];
     
     return cell;
 }

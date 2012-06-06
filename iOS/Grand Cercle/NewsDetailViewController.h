@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 
-@interface NewsDetailViewController : UITableViewController {
+@interface NewsDetailViewController : UITableViewController <UIWebViewDelegate> {
     News *news;
     IBOutlet UITableViewCell *cellNewsTop;
     IBOutlet UITableViewCell *cellNewsDescription;
+    int webViewHeight;
+
 }
 
 @property (retain, nonatomic) News *news;
-@property (retain, nonatomic)     IBOutlet UITableViewCell *cellNewsDescription, *cellNewsTop;
+@property (retain, nonatomic) IBOutlet UITableViewCell *cellNewsDescription, *cellNewsTop;
 @end

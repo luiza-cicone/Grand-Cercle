@@ -61,8 +61,8 @@ public class ListBPAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.cell_bons_plans,null);
 
 			bpv.title = (TextView)convertView.findViewById(R.id.title);			
-			bpv.description = (TextView)convertView.findViewById(R.id.description);
 			bpv.image = (ImageView)convertView.findViewById(R.id.image);
+			bpv.summary = (TextView)convertView.findViewById(R.id.summary);
 			convertView.setTag(bpv);
 
 		} else {
@@ -70,7 +70,7 @@ public class ListBPAdapter extends BaseAdapter {
 		}
 		
 		bpv.title.setText(listBP.get(position).getTitle());
-		bpv.description.setText(listBP.get(position).getDescription());
+		bpv.summary.setText(listBP.get(position).getSummary());
 		// image stockée infiniement, car BP ont une grande durée de vie
 		UrlImageViewHelper.setUrlDrawable(bpv.image,listBP.get(position).getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
