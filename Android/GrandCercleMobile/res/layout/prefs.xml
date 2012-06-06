@@ -3,6 +3,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" >
+ 	<TextView 
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="35dp"
+ 	    android:text="Filtrez les événements par: "
+ 	    android:textAppearance="?android:attr/textAppearanceMedium"
+ 	    android:background="@color/Ensimag"
+ 	    android:layout_marginBottom="10dp"
+ 	    android:layout_marginTop="15dp"
+ 	    android:gravity="center_vertical"/>
  	
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_height="55dp"
@@ -48,5 +57,20 @@
 			android:layout_weight="0" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
  	</LinearLayout>
+ 	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_height="55dp"
+		android:layout_width="fill_parent" android:gravity="center_vertical|left"
+		>
+		<TextView android:layout_height="wrap_content"
+			android:layout_weight="1" android:textAppearance="@style/ListItemTextStyle"
+			android:layout_width="fill_parent" 
+			android:id="@+id/Design"
+			android:text="Design" />
+	 
+		<ImageView android:src="@drawable/list_item_arrow"
+			android:layout_weight="0" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />	
+	</LinearLayout>
 </LinearLayout>
 

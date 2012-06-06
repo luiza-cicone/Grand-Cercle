@@ -24,6 +24,9 @@ public class TabPref extends Activity {
 		// layout Types
 		TextView type = (TextView)findViewById(R.id.Types);
 		type.setOnClickListener((OnClickListener) clickListenerPrefType);
+		
+		TextView design = (TextView)findViewById(R.id.Design);
+		design.setOnClickListener((OnClickListener) clickListenerPrefDesign);
 	}
 
 	
@@ -31,6 +34,14 @@ public class TabPref extends Activity {
 		public void onClick(View view) {
 			// lancement de l'activité correspondant aux préférences liées aux cercles
 			Intent intent = new Intent(TabPref.this,CerclePref.class);		
+			TabPref.this.startActivity(intent);
+		}
+    };
+    
+    private View.OnClickListener clickListenerPrefDesign = new View.OnClickListener() {
+    	public void onClick(View view) {	
+			// lancement de l'activité correspondant aux préférences liées aux clubs
+			Intent intent = new Intent(TabPref.this,DesignPref.class);	
 			TabPref.this.startActivity(intent);
 		}
     };

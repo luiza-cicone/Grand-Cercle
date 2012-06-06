@@ -1,6 +1,7 @@
 package org.grandcercle.mobile;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import android.content.ContentValues;
@@ -10,14 +11,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+
 public class DataBase extends SQLiteOpenHelper {
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
+	private static String TABLE_DESIGN = "prefDesign";
 	
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
+	private String Design;
 
 	/** Create a helper object for the Events database */
 	private DataBase() {		
@@ -38,7 +42,16 @@ public class DataBase extends SQLiteOpenHelper {
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
 		listType = ContainerData.getListTypes();
-
+		ArrayList<String> temp = ContainerData.getListColors();
+		temp.remove(7);
+		temp.remove(6);
+		temp.remove(5);
+		temp.remove(4);
+		temp.remove(3);
+		temp.remove(2);
+		temp.remove(1);
+		Design = temp.get(0);
+	
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
@@ -66,6 +79,12 @@ public class DataBase extends SQLiteOpenHelper {
 			valueType.put("type",itType.next());
 			db.insert(TABLE_TYPE,null,valueType);
 		}
+		
+		db.execSQL("CREATE TABLE "+TABLE_DESIGN+
+				" (id INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
+		ContentValues valueDesign = new ContentValues();
+			valueDesign.put("design",Design);
+			db.insert(TABLE_DESIGN,null,valueDesign);
 	}
 	
 	@Override
@@ -73,6 +92,7 @@ public class DataBase extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CERCLE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLUB);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TYPE);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DESIGN);
 		onCreate(db);
 	}
 	
@@ -135,6 +155,17 @@ public class DataBase extends SQLiteOpenHelper {
 			} while (cursor.moveToNext());
 		}
 		return list;
+	}
+	
+	public String getPref(String table, String key) {
+		String string = new String();
+		String query = "SELECT DISTINCT " + key + " FROM " + table;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query,null);
+		if (cursor.moveToFirst()) {
+			string = cursor.getString(0);
+		}
+		return string;
 	}
 	
 	public void deleteAll(String table){

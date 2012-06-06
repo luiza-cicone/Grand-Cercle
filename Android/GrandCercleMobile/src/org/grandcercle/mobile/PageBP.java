@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class PageBP extends Activity {
@@ -18,8 +19,11 @@ public class PageBP extends Activity {
 		((TextView)findViewById(R.id.title)).setText(param.getString("titre"));
 		Spanned markedUp = Html.fromHtml(param.getString("description"));
 		((TextView)findViewById(R.id.description)).setText(markedUp);
-		((TextView)findViewById(R.id.link)).setText(param.getString("link"));
+		//TextView t2 = (TextView) findViewById(R.id.link);
+	    //t2.setMovementMethod(LinkMovementMethod.getInstance());
 
+		((TextView)findViewById(R.id.link)).setText(param.getString("link"));
+		
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image),param.getString("image"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 	}

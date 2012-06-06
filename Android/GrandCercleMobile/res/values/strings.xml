@@ -7,6 +7,7 @@
     <string name="tabInfos">Infos</string>
     <string name="tabParam">Parametres</string>
     <string name="parsing">Modifications en cours</string>
+    
     <string-array name="prefentries">
         <item >Item 1</item>
         <item >Item 2</item>

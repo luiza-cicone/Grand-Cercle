@@ -296,6 +296,19 @@ public class ContainerData {
 		return listTypes;
 	}
 	
+	public static ArrayList<String> getListColors(){
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add("Noir");
+		temp.add("Ensimag");
+		temp.add("Phelma");
+		temp.add("Ense3");
+		temp.add("Papet");
+		temp.add("GI");
+		temp.add("CPP");
+		temp.add("Esisar");
+		return temp;
+	}
+	
 	public static Context getAppContext() {
 		return appContext;
 	}
