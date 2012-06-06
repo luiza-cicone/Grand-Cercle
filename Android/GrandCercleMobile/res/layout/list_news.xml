@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"  >
     <ImageView
         android:id="@+id/position_center_ecran"
-		android:src="@drawable/position_center_ecran"
+		android:src="@drawable/position_right_screen"
         android:layout_width="wrap_content" 
     	android:layout_height="wrap_content"
      
