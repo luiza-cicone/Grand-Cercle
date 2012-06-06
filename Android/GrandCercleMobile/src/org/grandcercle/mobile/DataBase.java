@@ -198,7 +198,6 @@ public class DataBase extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			string = cursor.getString(0);
 		}
-		db.close();
 		return new ByteArrayInputStream(string.getBytes());
 	}
 
