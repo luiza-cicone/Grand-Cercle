@@ -12,10 +12,10 @@
 #define FILTER_CERCLES 0
 #define FILTER_CLUBS 1
 #define FILTER_TYPE 2
-#define COLOR 0
+#define PERSO_COLOR 0
 #define EVENTS 0
-#define NEWS 1
-#define PERSO 2
+#define NEWS 2
+#define PERSO 1
 
 @implementation SettingsDetailViewController
 
@@ -67,7 +67,7 @@ NSMutableDictionary *themesDico;
             [typesChoice addObject:[typesDico objectForKey:type]];
         }
         
-    } else if (filter.section == PERSO && filter.row == COLOR) {
+    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSArray *c = [defaults objectForKey:@"theme"];
@@ -135,7 +135,7 @@ NSMutableDictionary *themesDico;
         return [clubsArray count];
     } else if (filter.section == EVENTS && filter.row == FILTER_TYPE) {
         return [typesArray count];
-    } else if (filter.section == PERSO && filter.row == COLOR) {
+    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         return [themesArray count];
     }
     return 0;
@@ -148,7 +148,7 @@ NSMutableDictionary *themesDico;
             return @"Clubs & Associations";
     } else if (filter.section == EVENTS && filter.row == FILTER_TYPE) {
         return @"Types d'événements";
-    } else if (filter.section == PERSO && filter.row == COLOR) {
+    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         return @"Thèmes";
     }
     return @"";
@@ -173,7 +173,7 @@ NSMutableDictionary *themesDico;
     } else if (filter.section == EVENTS && filter.row == FILTER_TYPE) {
         [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
         checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
-    } else if (filter.section == PERSO && filter.row == COLOR) {
+    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         
         [cell.textLabel setText:(NSString *)[themesArray objectAtIndex:indexPath.row]];
         checked = ([themeChoice isEqual:[themesDico objectForKey:(NSString *)[themesArray objectAtIndex:indexPath.row]]]);
@@ -242,7 +242,7 @@ NSMutableDictionary *themesDico;
         BOOL value = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
-    } else if (filter.section == PERSO && filter.row == COLOR) {
+    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         themeChoice = [themesDico objectForKey:(NSString *)[themesArray objectAtIndex:indexPath.row]];
         CGFloat* colors = (CGFloat *)CGColorGetComponents(themeChoice.CGColor);
