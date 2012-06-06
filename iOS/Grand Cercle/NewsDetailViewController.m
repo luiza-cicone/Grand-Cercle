@@ -35,14 +35,15 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = NSLocalizedString(@"News", @"News");
 
+    webViewHeight = 0;
+
+    [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
     
-    [[NSBundle mainBundle] loadNibNamed:@"NewsDescription" owner:self options:nil];
-    UITextView *_textView = (UITextView *)[cellNewsDescription viewWithTag:1];
+    UIWebView *webView;
+    webView = (UIWebView *)[cellNewsDescription viewWithTag:1];
+    webView.delegate = self;
+    [webView loadHTMLString:news.description baseURL:nil];
     
-    CGRect frame = _textView.frame;
-    [_textView setText: [[news description] stringByConvertingHTMLToPlainText]];
-    frame.size.height = _textView.contentSize.height;
-    _textView.frame = frame;
 }
 
 
@@ -108,20 +109,19 @@
             break;
             
         case DESCRIPTION:
-            CellIdentifier = @"NewsDescription";
+            CellIdentifier = @"DescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"NewsDescription" owner:self options:nil];
+                [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
                 cell = cellNewsDescription;
                 self.cellNewsDescription = nil;
             }
             
-            UITextView *textView;
-            textView = (UITextView *)[cell viewWithTag:1];
-            CGRect frame = textView.frame;
-            [textView setText: [[news description] stringByConvertingHTMLToPlainText]];
-            frame.size.height = textView.contentSize.height;
-            textView.frame = frame;
+            UIWebView *webView;
+            webView = (UIWebView *)[cell viewWithTag:1];
+            webView.delegate = self;
+            [webView loadHTMLString:news.description baseURL:nil];
+            [webView sizeToFit];
             
             break;
             
@@ -132,8 +132,32 @@
     return cell;
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    
+    [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
+    NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
+    [webView setFrame:CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, [output intValue])];
+    if (webViewHeight == 0) {
+        webViewHeight = [output intValue];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    webViewHeight = 0;
+}
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITextView *_textView = (UITextView *)[cellNewsDescription viewWithTag:1];
 
     switch (indexPath.section) {
         case TITRE :
@@ -141,7 +165,7 @@
             break;
          
         case DESCRIPTION :
-            return _textView.frame.size.height;
+            return webViewHeight + 10;
             break;
             
         default :

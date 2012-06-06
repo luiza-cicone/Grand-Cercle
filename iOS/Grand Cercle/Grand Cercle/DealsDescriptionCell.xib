@@ -45,6 +45,7 @@
 								<string key="NSFrame">{{5, 5}, {290, 60}}</string>
 								<reference key="NSSuperview" ref="348509181"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="1037178453">
 									<int key="NSColorSpace">3</int>
@@ -56,7 +57,7 @@
 								<bool key="IBUIDetectsPhoneNumbers">YES</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{300, 65}</string>
+						<string key="NSFrameSize">{300, 69}</string>
 						<reference key="NSSuperview" ref="14971321"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="371279298"/>
@@ -69,7 +70,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{300, 66}</string>
+				<string key="NSFrameSize">{300, 70}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="348509181"/>

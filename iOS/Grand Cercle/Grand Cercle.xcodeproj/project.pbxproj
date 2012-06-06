@@ -24,7 +24,7 @@
 		04D8263E157CBBFD0049A41C /* bonPlanTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D8263D157CBBFD0049A41C /* bonPlanTopCell.xib */; };
 		04F4CBD21578B6C400A49037 /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD11578B6C400A49037 /* DescriptionCell.xib */; };
 		04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */; };
-		04F4CBD71578C58000A49037 /* NewsDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD61578C58000A49037 /* NewsDescription.xib */; };
+		04F4CBD71578C58000A49037 /* NewsDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD61578C58000A49037 /* NewsDescriptionCell.xib */; };
 		04F4CBD91578C73300A49037 /* NewsTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBD81578C73300A49037 /* NewsTopCell.xib */; };
 		04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBDF157915C000A49037 /* EventFourNextViewController.m */; };
 		04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */; };
@@ -138,7 +138,7 @@
 		04F4CBD11578B6C400A49037 /* DescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionCell.xib; sourceTree = "<group>"; };
 		04F4CBD31578C3CB00A49037 /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailViewController.h; path = ../NewsDetailViewController.h; sourceTree = "<group>"; };
 		04F4CBD41578C3CB00A49037 /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailViewController.m; path = ../NewsDetailViewController.m; sourceTree = "<group>"; };
-		04F4CBD61578C58000A49037 /* NewsDescription.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsDescription.xib; path = ../NewsDescription.xib; sourceTree = "<group>"; };
+		04F4CBD61578C58000A49037 /* NewsDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsDescriptionCell.xib; path = ../NewsDescriptionCell.xib; sourceTree = "<group>"; };
 		04F4CBD81578C73300A49037 /* NewsTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsTopCell.xib; path = ../NewsTopCell.xib; sourceTree = "<group>"; };
 		04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventFourNextViewController.h; path = ../EventFourNextViewController.h; sourceTree = "<group>"; };
 		04F4CBDF157915C000A49037 /* EventFourNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventFourNextViewController.m; path = ../EventFourNextViewController.m; sourceTree = "<group>"; };
@@ -444,7 +444,7 @@
 				255C809E15740EE900E6ECC3 /* DealsViewController.xib */,
 				255C80A015740EE900E6ECC3 /* InfosViewController.xib */,
 				047EB1F515761A7300F2F59B /* DealCell.xib */,
-				04F4CBD61578C58000A49037 /* NewsDescription.xib */,
+				04F4CBD61578C58000A49037 /* NewsDescriptionCell.xib */,
 				040404F6157CD8CD00157FD4 /* DealsDescriptionCell.xib */,
 				04D8263D157CBBFD0049A41C /* bonPlanTopCell.xib */,
 			);
@@ -607,7 +607,7 @@
 				04060ABD1577AF6700852A3D /* EventsTableViewController.xib in Resources */,
 				25ECD56215777F81006E4652 /* EventSmallCell.xib in Resources */,
 				04F4CBD21578B6C400A49037 /* DescriptionCell.xib in Resources */,
-				04F4CBD71578C58000A49037 /* NewsDescription.xib in Resources */,
+				04F4CBD71578C58000A49037 /* NewsDescriptionCell.xib in Resources */,
 				04F4CBD91578C73300A49037 /* NewsTopCell.xib in Resources */,
 				25D8AD7315791F240065C038 /* icon.png in Resources */,
 				25D8AD7515791F2D0065C038 /* icon@2x.png in Resources */,

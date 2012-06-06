@@ -13,6 +13,9 @@
     BonsPlans* bonPlan;
     IBOutlet UITableViewCell *cellBonPlanTop;
     IBOutlet UITableViewCell *cellBonPlanDescription;
+    
+    int webViewHeight;
+
 }
 
 @property (retain, nonatomic) BonsPlans *bonPlan;

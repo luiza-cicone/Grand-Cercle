@@ -39,6 +39,10 @@
 //    [_textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
 //    frame.size.height = _textView.contentSize.height;
 //    _textView.frame = frame;
+    self.title = NSLocalizedString(@"Deals", @"Deals");
+    webViewHeight = 0;
+
+
     [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
 
     UIWebView *webView;
@@ -46,7 +50,6 @@
     webView.delegate = self;
     [webView loadHTMLString:bonPlan.description baseURL:nil];
     
-    self.title = NSLocalizedString(@"Deals", @"Deals");
 }
 
 - (void)viewDidUnload
@@ -109,7 +112,7 @@
             
         case 1:
 
-            CellIdentifier = @"DealsDescriptionCell";
+            CellIdentifier = @"DescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 [[NSBundle mainBundle] loadNibNamed:@"DealsDescriptionCell" owner:self options:nil];
@@ -122,11 +125,6 @@
             webView.delegate = self;
             [webView loadHTMLString:bonPlan.description baseURL:nil];
             [webView sizeToFit];
-
-//            CGRect frame = textView.frame;
-//            [textView setText: [[bonPlan description] stringByConvertingHTMLToPlainText]];
-//            frame.size.height = textView.contentSize.height;
-//            textView.frame = frame;
             
             break;
             
@@ -136,7 +134,6 @@
     
     return cell;
 }
-int webViewHeight = 0;
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
 

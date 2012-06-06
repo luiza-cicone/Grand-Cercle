@@ -60,7 +60,7 @@ static EvenementsParser *instanceEvent = nil;
         
         // Récupération de la description
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:eventsToParse];
-        aEvent.description = [[TBXML textForElement:description] stringByConvertingHTMLToPlainText];
+        aEvent.description = [[TBXML textForElement:description] stringByDecodingHTMLEntities];
 
         // Récupération du lien
         TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:eventsToParse];
