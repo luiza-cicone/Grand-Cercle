@@ -101,7 +101,7 @@
     } else if (section == FILTER_NEWS) {
         return @"Filtrer les news par";
     } else if (section == PERSO) {
-        return @"Personnaliser votre interface";
+        return @"Personnaliser l'interface";
     } else return @"";
 }
 
@@ -142,7 +142,7 @@
         }
         
     } else if (indexPath.section == PERSO) {
-        [cell.textLabel setText:@"Choix du thème"];
+        [cell.textLabel setText:@"Thème"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
     }    
