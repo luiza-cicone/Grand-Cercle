@@ -1,7 +1,10 @@
 package org.grandcercle.mobile;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ProgressBar;
@@ -24,7 +27,12 @@ public class GCMLaunching extends Activity {
 		
 		@Override
 	    protected Void doInBackground(Void... params) {
-			ContainerData.parseFiles(getApplicationContext());
+			//if (this.isConnected()) {
+				ContainerData.parseFiles(getApplicationContext());
+			//} else {
+			//	ContainerData.loadOldData(getApplicationContext());
+			//}
+			
 			return null;
 	    }
 
@@ -38,6 +46,23 @@ public class GCMLaunching extends Activity {
 	        Intent intent = new Intent(GCMLaunching.this,GCM.class);
 	        GCMLaunching.this.startActivity(intent);
 	    }
+		
+		public boolean isConnected() {
+		    boolean connected = false;
+
+		    ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		    if (cm != null) {
+		        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+		        for (NetworkInfo ni : netInfo) {
+		            if ((ni.getTypeName().equalsIgnoreCase("WIFI")
+		                    || ni.getTypeName().equalsIgnoreCase("MOBILE"))
+		                    && ni.isConnected() && ni.isAvailable()) {
+		                connected = true;
+		            }
+		        }
+		    }
+		    return connected;
+		}
 	}
 
 
