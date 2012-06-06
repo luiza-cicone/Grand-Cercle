@@ -16,11 +16,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class DataBase extends SQLiteOpenHelper {
+	// préférences
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
 	private static String TABLE_DESIGN = "prefDesign";
-	private static String TABLE_PARSE = "parsedDatas";
+	
+	// pour le mode hors-connection
+	private static String CERCLES = "cercles";
+	private static String CLUBS = "cercles";
+	private static String CERCLES = "cercles";
+	
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
@@ -80,9 +86,6 @@ public class DataBase extends SQLiteOpenHelper {
 		ContentValues valueDesign = new ContentValues();
 			valueDesign.put("design",design);
 			db.insert(TABLE_DESIGN,null,valueDesign);
-			
-		db.execSQL("CREATE TABLE "+TABLE_PARSE+
-				" (id VARCHAR NOT NULL PRIMARY KEY , data VARCHAR NOT NULL);");
 	}
 	
 	@Override
@@ -152,53 +155,4 @@ public class DataBase extends SQLiteOpenHelper {
 	    db.delete(table,null,null);
 	    db.close();
 	}
-	
-	public void storeTextToDataBase(String url,String key) {
-        URL website = null;
-        StringBuilder response = new StringBuilder();
-		try {
-			website = new URL(url);
-			URLConnection connection = null;
-			connection = website.openConnection();
-			BufferedReader in = null;
-			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-       		String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-			    response.append(inputLine);
-			}
-			in.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		String data = response.toString();
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues value = new ContentValues();
-        value.put(key,data);
-		db.insert(TABLE_PARSE,null,value);
-    }
-	
-	public void deleteEvent() {
-		SQLiteDatabase db = this.getReadableDatabase();
-	    db.delete(TABLE_PARSE,"id=event",null);
-	    db.close();
-	}
-	
-	public void deleteEventOld() {
-		SQLiteDatabase db = this.getReadableDatabase();
-	    db.delete(TABLE_PARSE,"id=eventOld",null);
-	    db.close();
-	}
-	
-	public InputStream getParsed(String key) {
-		String string = new String();
-		String query = "SELECT DISTINCT " + key + " FROM " + TABLE_PARSE;
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(query,null);
-		if (cursor.moveToFirst()) {
-			string = cursor.getString(0);
-		}
-		return new ByteArrayInputStream(string.getBytes());
-	}
-
 }
