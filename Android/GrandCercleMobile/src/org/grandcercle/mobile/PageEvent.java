@@ -1,11 +1,9 @@
 package org.grandcercle.mobile;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -13,26 +11,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PageEvent extends Activity {
-	private final static String BASE_CALENDAR_URI_PRE_2_2 = "content://calendar";
-	private final static String BASE_CALENDAR_URI_2_2 = "content://com.android.calendar";
+	private String title;
+	private Spanned description;
+	private String lieu;
+	private String date;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.description_event);
 		
-		// Recuperation des paramètres
+		// Recuperation des paramÃštres
 		Bundle param = this.getIntent().getExtras();
-		((TextView)findViewById(R.id.title)).setText(param.getString("titre"));
-		Spanned markedUp = Html.fromHtml(param.getString("description"));
-		((TextView)findViewById(R.id.description)).setText(markedUp);
+		title = param.getString("titre");
+		((TextView)findViewById(R.id.title)).setText(title);
+		
+		description = Html.fromHtml(param.getString("description"));
+		((TextView)findViewById(R.id.description)).setText(description);
 		
 		((TextView)findViewById(R.id.day)).setText(param.getString("day"));
-		((TextView)findViewById(R.id.date)).setText(param.getString("date"));
+		
+		date = param.getString("date");
+		((TextView)findViewById(R.id.date)).setText(date);
 		((TextView)findViewById(R.id.time)).setText(param.getString("time"));
-		((TextView)findViewById(R.id.lieu)).setText(param.getString("lieu"));
+		
+		lieu = param.getString("lieu");
+		((TextView)findViewById(R.id.lieu)).setText(lieu);
 		((TextView)findViewById(R.id.group)).setText(param.getString("group"));
 		
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image),param.getString("image"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);
@@ -41,115 +46,68 @@ public class PageEvent extends Activity {
 		
 		((Button)findViewById(R.id.addCal)).setOnClickListener(addCalClicked);
 	}
-	
-	// Cherche le "chemin" du calendrier calName dans la mémoire du téléphone
-	public Uri getCalendarUriBase(String calName) {
-	    Uri calendars = Uri.parse(BASE_CALENDAR_URI_PRE_2_2 + "/calendars/" + calName);
-	    try {
-	        Cursor managedCursor = managedQuery(calendars, null, null, null, null);
-	        if (managedCursor != null) {
-	            return calendars;
-	        }
-	        else {
-	            calendars = Uri.parse(BASE_CALENDAR_URI_2_2 + "/calendars/" + calName);
-	            managedCursor = managedQuery(calendars, null, null, null, null);
 
-	            if (managedCursor != null) {
-	                return calendars;
-	            }
-	        }
-	    } catch (Exception e) { /* eat any exceptions */ }
-
-	    return null; // Aucun calendrier URI trouvé
-	}
-	
-	public ArrayList<UserCalendar> getUserCalendars() {
-		String[] projection = new String[] { "_id", "name" };
-		Uri calendars = getCalendarUriBase("events");
-		//Cursor managedCursor = managedQuery(calendars, projection,"selected=1", null, null);
-		Cursor managedCursor = managedQuery(calendars, projection, null, null, null);
-		ArrayList<UserCalendar> listCal = null;
-		if (managedCursor.moveToFirst()) {
-			UserCalendar uCal = new UserCalendar();
-			int nameColumn = managedCursor.getColumnIndex("name"); 
-			int idColumn = managedCursor.getColumnIndex("_id");
-			listCal = new ArrayList<UserCalendar>();
-			do {
-				uCal.name = managedCursor.getString(nameColumn);
-				uCal.id = Integer.parseInt(managedCursor.getString(idColumn));
-				listCal.add(uCal);
-			} while (managedCursor.moveToNext());
+	public static long convertDateToLong(String d) {
+		int index0 = d.indexOf(" ");
+		String sub = d.substring(index0+1);
+		int index1 = sub.indexOf(" ");
+		String day = d.substring(0,index0);
+		String month = d.substring(index0+1,index0+index1+1);
+		String year = d.substring(index0+index1+2,d.length());
+		if (month.equalsIgnoreCase("Janvier")) {
+			month = "01";
 		}
-		return listCal;
+		if (month.equalsIgnoreCase("Fevrier")) {
+			month = "02";
+		}
+		if (month.equalsIgnoreCase("Mars")) {
+			month = "03";
+		}
+		if (month.equalsIgnoreCase("Avril")) {
+			month = "04";
+		}
+		if (month.equalsIgnoreCase("Mai")) {
+			month = "05";
+		}
+		if (month.equalsIgnoreCase("Juin")) {
+			month = "06";
+		}
+		if (month.equalsIgnoreCase("Juillet")) {
+			month = "07";
+		}
+		if (month.equalsIgnoreCase("Août")) {
+			month = "08";
+		}
+		if (month.equalsIgnoreCase("Septembre")) {
+			month = "09";
+		}
+		if (month.equalsIgnoreCase("Octobre")) {
+			month = "10";
+		}
+		if (month.equalsIgnoreCase("Novembre")) {
+			month = "11";
+		}
+		if (month.equalsIgnoreCase("Decembre")) {
+			month = "12";
+		}
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+		c.set(Calendar.MONTH, Integer.parseInt(month)-1);
+		c.set(Calendar.YEAR, Integer.parseInt(year));
+		return c.getTime().getTime();
 	}
-
-	
 	
 	private View.OnClickListener addCalClicked = new View.OnClickListener() {
 		public void onClick(View v) {
-			
-			// récupération noms + ids calendriers
-			ArrayList<UserCalendar> listCal = getUserCalendars();
-			
-			// choix utilisateur. Par défaut : case 0 de l'ArrayList
-			ContentValues event = new ContentValues();
-			event.put("calendar_id", listCal.get(0).id);
-			event.put("title", "Event Title");
-			event.put("description", "Event Desc");
-			event.put("eventLocation", "Event Location");
-			long startTime = 10000;
-			long endTime = 20000;
-			event.put("dtstart", startTime);
-			event.put("dtend", endTime);
-			try {
-				Uri eventsUri = getCalendarUriBase(listCal.get(0).name);
-				getContentResolver().insert(eventsUri,event);
-				Toast.makeText(PageEvent.this,"Ajout au calendrier : " + listCal.get(0).name,Toast.LENGTH_SHORT).show();
-			} catch (Exception e) {
-				Toast.makeText(PageEvent.this,"Aucun calendrier disponible !",Toast.LENGTH_SHORT).show();
-			}
-			
-			
-			/*ContentResolver cr = getContentResolver();
-			Cursor cursor = cr.query(Uri.parse("content://calendar/calendars"), new String[]{ "_id", "displayname" }, null, null, null);
-			cursor.moveToFirst();
-			String[] CalNames = new String[cursor.getCount()];
-			int[] CalIds = new int[cursor.getCount()];
-			for (int i = 0; i < CalNames.length; i++) {
-			    CalIds[i] = cursor.getInt(0);
-			    CalNames[i] = cursor.getString(1);
-			    cursor.moveToNext();
-			}
-			cursor.close();
-			
-			ContentValues cv = new ContentValues();
-			cv.put("calendar_id", CalIds[0]);
-			cv.put("title", myTitle);
-			cv.put("dtstart", startTime);
-			cv.put("dtend", endTime);
-			cv.put("eventLocation", myLocation);
-			
-			URI newevent = cr.insert(Uri.parse("content://calendar/events"), cv);
-			*/
-			
-			/*
-			ContentResolver cr = getContentResolver();
-			ContentValues values = new ContentValues();
-			values.put(CalendarContract.Events.DTSTART, startMillis);
-			values.put(CalendarContract.Events.DTEND, endMillis);
-			values.put(CalendarContract.Events.TITLE, "Walk The Dog");
-			values.put(CalendarContract.Events.DESCRIPTION, "My dog is bored, so we're going on a really long walk!");
-			values.put(CalendarContract.Events.CALENDAR_ID, 3);
-			Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-			*/
-			
-			// Rappel
-			/*String eventid = newevent.getPathSegments().get(newevent.getPathSegments().size()-1);
-			cv.put("event_id",eventid);
-			cv.put("minutes",interval);
-			cr.insert(Uri.parse(content://calendar/reminders"),cv);
-			=> content://com.android.calendar/events sur Froyo 2.2
-			*/
-		}
+			Intent intent = new Intent(Intent.ACTION_EDIT);
+			intent.setType("vnd.android.cursor.item/event");
+			long beginTime = convertDateToLong(date);
+			intent.putExtra("beginTime",beginTime);
+			intent.putExtra("allDay",true);
+			intent.putExtra("title",title);
+			intent.putExtra("description",description.toString());
+			intent.putExtra("eventLocation",lieu);
+			startActivity(intent);
+		}	
 	};
 }

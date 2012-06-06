@@ -1,15 +1,12 @@
 package org.grandcercle.mobile;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 
 public class DataBase extends SQLiteOpenHelper {
@@ -96,26 +93,6 @@ public class DataBase extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	/*public void incrementNumRun() {
-		int cpt = getNumRun();
-		cpt++;
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues value = new ContentValues();
-		value.put("cpt",cpt);
-		db.insert(TABLE_NUMRUN,null,value);
-		db.close();
-	}
-	
-	public int getNumRun() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String query = "SELECT MAX(cpt) FROM numRun";
-		Cursor cursor = db.rawQuery(query,null);
-		if (cursor.moveToNext()) {
-			return cursor.getInt(0);
-		}
-		return 0;
-	}*/
-	
 	public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues value = new ContentValues();
@@ -154,6 +131,7 @@ public class DataBase extends SQLiteOpenHelper {
 				list.add(name);
 			} while (cursor.moveToNext());
 		}
+		db.close();
 		return list;
 	}
 	
@@ -165,12 +143,14 @@ public class DataBase extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			string = cursor.getString(0);
 		}
+		db.close();
 		return string;
 	}
 	
 	public void deleteAll(String table){
 	    SQLiteDatabase db = this.getWritableDatabase();
 	    db.delete(table,null,null);
+	    db.close();
 	}
 
 }
