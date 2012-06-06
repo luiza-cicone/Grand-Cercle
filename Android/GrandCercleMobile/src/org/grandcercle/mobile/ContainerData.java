@@ -80,6 +80,7 @@ public class ContainerData {
 	}	
 	
 	public static void saveXML(String fromURL, String toFile) {
+		Log.d("ContainerData","saveXML "+toFile);
 		try {
 	        //set the download URL, a url that points to a file on the internet
 	        //this is the file to be downloaded
@@ -96,20 +97,20 @@ public class ContainerData {
 	        urlConnection.connect();
 
 	        //set the path where we want to save the file
-	        //in this case, going to save it on the root directory of the
-	        //sd card.
-	        //File root = new File("/data/data/org.grandcercle.mobile/files/");
-	        File root = new File("data/data/");
-	        root.getParentFile().mkdirs();
-	        root.createNewFile();
+	        File root = new File("/data/data/org.grandcercle.mobile/files/");
+	        if (!root.exists()){
+	        	root.mkdir();
+	        }
 
-	        		//getExternalStorageDirectory();
 	        //create a new file, specifying the path, and the filename
 	        //which we want to save the file as.
 	        File file = new File(root,toFile);
-
+	        if (!file.exists()) {
+	        	file.createNewFile();
+	        }
 	        //this will be used to write the downloaded data into the file we created
 	        FileOutputStream fileOutput = new FileOutputStream(file);
+	        
 	        //this will be used in reading the data from the internet
 	        InputStream inputStream = urlConnection.getInputStream();
 
@@ -132,61 +133,13 @@ public class ContainerData {
 	        //close the output stream when done
 	        fileOutput.close();
 
-		//catch some possible errors...
+
 		} catch (MalformedURLException e) {
 		        e.printStackTrace();
 		} catch (IOException e) {
 		        e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
-		/*URL from = null;
-		try {
-			from = new URL(fromURL);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-		File to = new File(toFile);
-		
-		BufferedInputStream urlin = null;
-		BufferedOutputStream fout = null;
-		  try {
-		      int bufSize = 8 * 1024;
-		      urlin = new BufferedInputStream(
-		              from.openConnection().getInputStream(),
-		              bufSize);
-		      fout = new BufferedOutputStream(new FileOutputStream(to), bufSize);
-		      copyPipe(urlin, fout, bufSize);
-		  }
-		  catch (IOException e) {
-		      e.printStackTrace();
-		  }
-		  catch (SecurityException e) {
-			  e.printStackTrace();
-		  }
-		  finally {
-		      if (urlin != null) {
-		          try {
-		              urlin.close();
-		          }
-		          catch (IOException e) {
-		        	  e.printStackTrace();
-		          }
-		      }
-		      if (fout != null) {
-		          try {
-		              fout.close();
-		          }
-		          catch (IOException e) {
-		        	  e.printStackTrace();
-		          }
-		      }
-		  }*/
-	  }
+	}
 
 	
 	public static void parseFiles(Context ctx){
@@ -205,7 +158,7 @@ public class ContainerData {
 		}
 		
 		// On définit les url des fichiers XML
-		URL urlCercles = null;
+		/*URL urlCercles = null;
 		try {
 			urlCercles = new URL(URL_CERCLES);
 		} catch (MalformedURLException e1) {
@@ -252,7 +205,7 @@ public class ContainerData {
 			urlBP = new URL(URL_BP);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		
 		/* 
 		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
@@ -260,10 +213,11 @@ public class ContainerData {
 		 */
 		
 		DefaultHandler handlerCercles = new ParserXMLHandlerAsso();
+		File fCercles = new File("/data/data/org.grandcercle.mobile/files/cercles.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlCercles.openConnection().getInputStream(), handlerCercles);
-			
+			//parseur.parse(urlCercles.openConnection().getInputStream(), handlerCercles);
+			parseur.parse(fCercles, handlerCercles);
 			// On récupère directement la liste des feeds
 			listCercles = ((ParserXMLHandlerAsso) handlerCercles).getListAssos();
 		} catch (SAXException e) {
@@ -273,10 +227,11 @@ public class ContainerData {
 		}
 		
 		DefaultHandler handlerClubs = new ParserXMLHandlerAsso();
+		File fClubs = new File("/data/data/org.grandcercle.mobile/files/clubs.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlClubs.openConnection().getInputStream(), handlerClubs);
-			
+			//parseur.parse(urlClubs.openConnection().getInputStream(), handlerClubs);
+			parseur.parse(fClubs, handlerClubs);
 			// On récupère directement la liste des feeds
 			listClubs = ((ParserXMLHandlerAsso) handlerClubs).getListAssos();
 		} catch (SAXException e) {
@@ -286,10 +241,11 @@ public class ContainerData {
 		}
 
 		DefaultHandler handlerTypes = new ParserXMLHandlerType();
+		File fTypes = new File("/data/data/org.grandcercle.mobile/files/types.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlTypes.openConnection().getInputStream(), handlerTypes);
-			
+			//parseur.parse(urlTypes.openConnection().getInputStream(), handlerTypes);
+			parseur.parse(fTypes, handlerTypes);
 			// On récupère directement la liste des feeds
 			listTypes = ((ParserXMLHandlerType) handlerTypes).getListType();
 		} catch (SAXException e) {
@@ -300,10 +256,11 @@ public class ContainerData {
 
 		
 		DefaultHandler handlerNews = new ParserXMLHandlerNews();
+		File fNews = new File("/data/data/org.grandcercle.mobile/files/news.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
-			
+			//parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
+			parseur.parse(fNews, handlerNews);
 			// On récupère directement la liste des feeds
 			listNews = ((ParserXMLHandlerNews) handlerNews).getListNews();
 		} catch (SAXException e) {
@@ -314,10 +271,11 @@ public class ContainerData {
 		
 		
 		DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
+		File fEvent = new File("/data/data/org.grandcercle.mobile/files/event.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
-			
+			//parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
+			parseur.parse(fEvent,handlerEvent);
 			// On récupère directement la liste des feeds
 			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
 			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
@@ -328,10 +286,11 @@ public class ContainerData {
 		}
 		
 		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent(appContext);
+		File fEventOld = new File("/data/data/org.grandcercle.mobile/files/eventOld.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
-			
+			//parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
+			parseur.parse(fEventOld,handlerEventOld);
 			// On récupère directement la liste des feeds
 			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
 			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
@@ -342,10 +301,11 @@ public class ContainerData {
 		}
 		
 		DefaultHandler handlerBP = new ParserXMLHandlerBP();
+		File fBP = new File("/data/data/org.grandcercle.mobile/files/BP.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlBP.openConnection().getInputStream(), handlerBP);
-			
+			//parseur.parse(urlBP.openConnection().getInputStream(), handlerBP);
+			parseur.parse(fBP, handlerBP);
 			// On récupère directement la liste des feeds
 			listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
 		} catch (SAXException e) {
@@ -369,7 +329,7 @@ public class ContainerData {
 		}
 		
 		// On définit les url des fichiers XML
-		URL urlEvent = null;
+		/*URL urlEvent = null;
 		try {
 			urlEvent = new URL(URL_EVENT);
 		} catch (MalformedURLException e1) {
@@ -381,12 +341,14 @@ public class ContainerData {
 			urlEventOld = new URL(URL_EVENTOLD);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
-		}
+		}*/
+		
 		DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
+		File fEvent = new File("/data/data/org.grandcercle.mobile/files/event.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
-			
+			//parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
+			parseur.parse(fEvent,handlerEvent);
 			// On récupère directement la liste des feeds
 			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
 			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
@@ -397,10 +359,11 @@ public class ContainerData {
 		}
 		
 		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent(appContext);
+		File fEventOld = new File("/data/data/org.grandcercle.mobile/files/eventOld.gcm");
 		try {
 			// On parse le fichier XML
-			parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
-			
+			//parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
+			parseur.parse(fEventOld,handlerEventOld);
 			// On récupère directement la liste des feeds
 			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
 			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();

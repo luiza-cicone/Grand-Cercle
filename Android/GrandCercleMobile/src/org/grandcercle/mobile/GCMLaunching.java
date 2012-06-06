@@ -29,10 +29,11 @@ public class GCMLaunching extends Activity {
 		@Override
 	    protected Void doInBackground(Void... params) {
 			if (this.isConnected()) {
-				ContainerData.parseFiles(getApplicationContext());
+				ContainerData.saveXMLFiles();
 			} else {
-				ContainerData.loadDatas();
+				Log.d("GCMLaunching","Pas de connection !");
 			}
+			ContainerData.parseFiles(getApplicationContext());
 			return null;
 	    }
 

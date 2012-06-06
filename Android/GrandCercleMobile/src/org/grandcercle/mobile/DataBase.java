@@ -22,11 +22,6 @@ public class DataBase extends SQLiteOpenHelper {
 	private static String TABLE_TYPE = "prefType";
 	private static String TABLE_DESIGN = "prefDesign";
 	
-	// pour le mode hors-connection
-	private static String CERCLES = "cercles";
-	private static String CLUBS = "cercles";
-	private static String CERCLES = "cercles";
-	
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
