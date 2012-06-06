@@ -85,7 +85,16 @@
     
     //[self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
-        [self.tview setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
+        
+        [self.tview setSeparatorColor: [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18]];
+        
+        
+    } else {
+        
+        [self.tview setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5]];
+        
+    }
     
 }
 
