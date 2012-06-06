@@ -30,11 +30,14 @@
 }
 	
 -(void)viewDidAppear:(BOOL)animated {
-//    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.6 green:0.2 blue:0.2 alpha:1]];
-//    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:.6 green:0.2 blue:0.2 alpha:1]];
     
+NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+NSArray *c = [defaults objectForKey:@"theme"];
+    
+[self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+    
+//[self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];    
 }
-
 
 - (void)viewDidUnload
 {

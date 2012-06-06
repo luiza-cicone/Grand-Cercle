@@ -73,13 +73,13 @@ NSMutableDictionary *themesDico;
         NSArray *c = [defaults objectForKey:@"theme"];
         themeChoice = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1];
         UIColor *blackColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
-        UIColor *redColor = [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:0];
-        UIColor *greenColor = [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:1];
-        UIColor *blueColor = [[UIColor alloc] initWithRed:0 green:0 blue:1 alpha:1];
-        UIColor *darkBlueColor = [[UIColor alloc] initWithRed:0 green:0 blue:.5 alpha:1];
-        UIColor *yellowColor = [[UIColor alloc] initWithRed:1 green:1 blue:0 alpha:1];
-        UIColor *orangeColor = [[UIColor alloc] initWithRed:.7 green:.2 blue:0 alpha:1];
-        UIColor *purpleColor = [[UIColor alloc] initWithRed:1 green:0 blue:1 alpha:1];
+        UIColor *redColor = [[UIColor alloc] initWithRed:.75 green:.08 blue:.12 alpha:0];
+        UIColor *greenColor = [[UIColor alloc] initWithRed:.59 green:.74 blue:.06 alpha:1];
+        UIColor *blueColor = [[UIColor alloc] initWithRed:0 green:0.59 blue:0.83 alpha:1];
+        UIColor *darkBlueColor = [[UIColor alloc] initWithRed:0 green:.29 blue:.61 alpha:1];
+        UIColor *yellowColor = [[UIColor alloc] initWithRed:1 green:.80 blue:0 alpha:1];
+        UIColor *orangeColor = [[UIColor alloc] initWithRed:.94 green:.59 blue:0 alpha:1];
+        UIColor *purpleColor = [[UIColor alloc] initWithRed:.59 green:.08 blue:0.49 alpha:1];
         themesDico = [[NSMutableDictionary alloc] initWithCapacity:8];
         [themesDico setObject:blackColor forKey:@"Noir Grand Cercle"];
         [themesDico setObject:darkBlueColor forKey:@"Bleu Ense3"];
@@ -174,8 +174,13 @@ NSMutableDictionary *themesDico;
         [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
         checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
     } else if (filter.section == PERSO && filter.row == COLOR) {
+        
         [cell.textLabel setText:(NSString *)[themesArray objectAtIndex:indexPath.row]];
         checked = ([themeChoice isEqual:[themesDico objectForKey:(NSString *)[themesArray objectAtIndex:indexPath.row]]]);
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+        NSArray *c = [defaults objectForKey:@"theme"];
+        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+        //[self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]]; 
     }
     
     cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
@@ -238,9 +243,13 @@ NSMutableDictionary *themesDico;
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
     } else if (filter.section == PERSO && filter.row == COLOR) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         themeChoice = [themesDico objectForKey:(NSString *)[themesArray objectAtIndex:indexPath.row]];
+        CGFloat* colors = (CGFloat *)CGColorGetComponents(themeChoice.CGColor);
+        NSArray *c = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:colors[0]], [NSNumber numberWithFloat:colors[1]], [NSNumber numberWithFloat:colors[2]], nil];
+        [defaults setObject:c forKey:@"theme"];
+        [c release];
     }
-    
     [tableView reloadData];
 }
 
@@ -248,7 +257,6 @@ NSMutableDictionary *themesDico;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
 
     if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
-
         NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
         for (int i = 0; i < [cerclesArray count]; i++) {
             [cerclesDico setObject:[cerclesChoice objectAtIndex:i] forKey:[cerclesArray objectAtIndex:i]];
@@ -269,12 +277,6 @@ NSMutableDictionary *themesDico;
             [typesDico setObject:[typesChoice objectAtIndex:i] forKey:[typesArray objectAtIndex:i]];
         }
         [defaults setObject:typesDico forKey:@"filtreTypes"];
-
-    } else if (filter.section == PERSO && filter.row == COLOR) {
-        CGFloat* colors = (CGFloat *)CGColorGetComponents(themeChoice.CGColor);
-        NSArray *c = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:colors[0]], [NSNumber numberWithFloat:colors[1]], [NSNumber numberWithFloat:colors[2]], nil];
-        [defaults setObject:c forKey:@"theme"];
-        [c release];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self viewDidUnload];
