@@ -48,7 +48,7 @@ public class DataBase extends SQLiteOpenHelper {
 		design = "Noir";
 	
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
+				" (id0 INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
 		ContentValues valueCercle = new ContentValues();
 		while (itCercle.hasNext()) {
@@ -57,7 +57,7 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
+				" (id1 INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
 		Iterator<String> itClub = listClub.iterator();
 		ContentValues valueClub = new ContentValues();
 		while (itClub.hasNext()) {
@@ -67,7 +67,7 @@ public class DataBase extends SQLiteOpenHelper {
 		
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
+				" (id2 INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
 		Iterator<String> itType = listType.iterator();
 		ContentValues valueType = new ContentValues();
 		while (itType.hasNext()) {
@@ -76,7 +76,7 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_DESIGN+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
+				" (id3 INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
 		ContentValues valueDesign = new ContentValues();
 			valueDesign.put("design",design);
 			db.insert(TABLE_DESIGN,null,valueDesign);
@@ -133,7 +133,6 @@ public class DataBase extends SQLiteOpenHelper {
 				list.add(name);
 			} while (cursor.moveToNext());
 		}
-		db.close();
 		return list;
 	}
 	
@@ -145,7 +144,6 @@ public class DataBase extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			string = cursor.getString(0);
 		}
-		db.close();
 		return string;
 	}
 	
