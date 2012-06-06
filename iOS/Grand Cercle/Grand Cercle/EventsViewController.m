@@ -16,7 +16,10 @@
 @end
 
 @implementation EventsViewController
-@synthesize viewControllers, pageControl, scrollView, myNav;
+@synthesize viewControllers, scrollView, myNav;
+@synthesize pageControl = _pageControl;
+
+int kNumberOfPages = 3;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -24,6 +27,12 @@
     if (self) {
         self.title = NSLocalizedString(@"Events", @"Evenements");
         self.tabBarItem.image = [UIImage imageNamed:@"events"];
+        
+        _pageControl = [[StyledPageControl alloc] initWithFrame:CGRectZero];
+        [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [_pageControl setFrame:CGRectMake(0, 350, 320, 20)];
+
+        [self.view addSubview:_pageControl];
 
     }
     return self;
@@ -57,8 +66,6 @@ NSArray *c = [defaults objectForKey:@"theme"];
 
 #pragma mark - Scroll View
 
-int kNumberOfPages = 3;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -76,8 +83,16 @@ int kNumberOfPages = 3;
     scrollView.scrollsToTop = NO;
     scrollView.delegate = self;
     
-    pageControl.numberOfPages = kNumberOfPages;
-    pageControl.currentPage = 0;
+    [_pageControl setPageControlStyle:PageControlStyleDefault]; 
+    // change gap width
+    [_pageControl setGapWidth:5];
+    // change diameter
+    [_pageControl setDiameter:9];
+    
+    
+    [_pageControl setNumberOfPages:kNumberOfPages];
+    [_pageControl setCurrentPage:0];
+    [_pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
     
     
     [self loadScrollViewWithPage:0];
@@ -136,7 +151,7 @@ int kNumberOfPages = 3;
     
     
 
-    [pageControl setCurrentPage:page];
+    [_pageControl setCurrentPage:page];
     
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
@@ -150,7 +165,7 @@ int kNumberOfPages = 3;
 
 - (IBAction)changePage:(id)sender {
 
-    int page = pageControl.currentPage;
+    int page = _pageControl.currentPage;
    
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];

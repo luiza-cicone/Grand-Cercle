@@ -228,7 +228,7 @@
 
         numDays = [components day];
         numDays2 = [components2 day];
-        NSLog(@"%d", numDays);
+
         if (numDays2 > 0 && numDays > 0 && [[self.dataArray objectAtIndex:numDays] boolValue] == 0) {
             [self.dataArray removeObjectAtIndex:numDays];
             [self.dataArray insertObject:[NSNumber numberWithBool:YES] atIndex:numDays];

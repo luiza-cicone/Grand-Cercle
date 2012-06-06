@@ -41,6 +41,7 @@
 		258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D369F157CAD910001E64E /* SettingsDetailViewController.m */; };
 		258D36A6157CB1260001E64E /* FilterParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D36A5157CB1260001E64E /* FilterParser.m */; };
 		258D370D157E29930001E64E /* EventInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 258D370C157E29930001E64E /* EventInfoCell.xib */; };
+		258D371E157F60DD0001E64E /* StyledPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D371D157F60DC0001E64E /* StyledPageControl.m */; };
 		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
 		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
 		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
@@ -163,6 +164,8 @@
 		258D36A5157CB1260001E64E /* FilterParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterParser.m; path = ../FilterParser.m; sourceTree = "<group>"; };
 		258D36A7157CB12F0001E64E /* FilterParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterParser.h; path = ../FilterParser.h; sourceTree = "<group>"; };
 		258D370C157E29930001E64E /* EventInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoCell.xib; sourceTree = "<group>"; };
+		258D371C157F60DB0001E64E /* StyledPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StyledPageControl.h; path = ../StyledPageControl.h; sourceTree = "<group>"; };
+		258D371D157F60DC0001E64E /* StyledPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StyledPageControl.m; path = ../StyledPageControl.m; sourceTree = "<group>"; };
 		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -263,8 +266,6 @@
 		251FA64E157903E3005B7318 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */,
-				04F4CBDF157915C000A49037 /* EventFourNextViewController.m */,
 				2595EAAF1573FA9000CA27B3 /* EventsViewController.h */,
 				2595EAB01573FA9000CA27B3 /* EventsViewController.m */,
 				25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */,
@@ -273,6 +274,8 @@
 				25ECD55F15775F2A006E4652 /* EventsCalendarViewController.m */,
 				04060ABE1577B50B00852A3D /* EventDetailViewController.h */,
 				04060ABF1577B50B00852A3D /* EventDetailViewController.m */,
+				04F4CBDE157915BD00A49037 /* EventFourNextViewController.h */,
+				04F4CBDF157915C000A49037 /* EventFourNextViewController.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -290,6 +293,15 @@
 				258D370C157E29930001E64E /* EventInfoCell.xib */,
 			);
 			name = Events;
+			sourceTree = "<group>";
+		};
+		251FD3DF157F679C00F93E4F /* StyledPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				258D371C157F60DB0001E64E /* StyledPageControl.h */,
+				258D371D157F60DC0001E64E /* StyledPageControl.m */,
+			);
+			name = StyledPageControl;
 			sourceTree = "<group>";
 		};
 		255C8148157428A300E6ECC3 /* TBXML */ = {
@@ -371,6 +383,7 @@
 		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
 			isa = PBXGroup;
 			children = (
+				251FD3DF157F679C00F93E4F /* StyledPageControl */,
 				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
 				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
 				25F41CC0157AC76E002C15C3 /* Parser */,
@@ -677,6 +690,7 @@
 				258D36A0157CAD910001E64E /* SettingsDetailViewController.m in Sources */,
 				258D36A6157CB1260001E64E /* FilterParser.m in Sources */,
 				04D8263C157CB7980049A41C /* DealsDetailViewController.m in Sources */,
+				258D371E157F60DD0001E64E /* StyledPageControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

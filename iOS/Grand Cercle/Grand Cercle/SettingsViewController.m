@@ -10,8 +10,8 @@
 #import "SettingsDetailViewController.h"
 
 #define FILTER_EVENT 0
-#define FILTER_NEWS 1
-#define PERSO 2
+#define FILTER_NEWS 2
+#define PERSO 1
 
 @interface SettingsViewController ()
 

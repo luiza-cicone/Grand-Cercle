@@ -73,7 +73,7 @@ NSMutableDictionary *themesDico;
         NSArray *c = [defaults objectForKey:@"theme"];
         themeChoice = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1];
         UIColor *blackColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
-        UIColor *redColor = [[UIColor alloc] initWithRed:.75 green:.08 blue:.12 alpha:0];
+        UIColor *redColor = [[UIColor alloc] initWithRed:.75 green:.08 blue:.12 alpha:1];
         UIColor *greenColor = [[UIColor alloc] initWithRed:.59 green:.74 blue:.06 alpha:1];
         UIColor *blueColor = [[UIColor alloc] initWithRed:0 green:0.59 blue:0.83 alpha:1];
         UIColor *darkBlueColor = [[UIColor alloc] initWithRed:0 green:.29 blue:.61 alpha:1];
