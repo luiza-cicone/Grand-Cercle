@@ -3,6 +3,7 @@
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/tab_bg_selector"
     
     >
     <!-- android:background="@drawable/essai" -->
@@ -14,6 +15,7 @@
         
         <TabWidget
             android:id="@android:id/tabs"
+            android:clipChildren="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"

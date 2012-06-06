@@ -4,11 +4,11 @@
 	android:orientation="vertical" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" >
  	<TextView 
+ 	    android:id="@+id/bandeau"
  	    android:layout_width="fill_parent"
  	    android:layout_height="35dp"
  	    android:text="Filtrez les événements par: "
  	    android:textAppearance="?android:attr/textAppearanceMedium"
- 	    android:background="@color/Ensimag"
  	    android:layout_marginBottom="10dp"
  	    android:layout_marginTop="15dp"
  	    android:gravity="center_vertical"/>

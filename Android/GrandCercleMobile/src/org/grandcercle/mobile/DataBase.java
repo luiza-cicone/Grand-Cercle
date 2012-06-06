@@ -21,7 +21,7 @@ public class DataBase extends SQLiteOpenHelper {
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
-	private String Design;
+	private String design;
 
 	/** Create a helper object for the Events database */
 	private DataBase() {		
@@ -42,15 +42,7 @@ public class DataBase extends SQLiteOpenHelper {
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
 		listType = ContainerData.getListTypes();
-		ArrayList<String> temp = ContainerData.getListColors();
-		temp.remove(7);
-		temp.remove(6);
-		temp.remove(5);
-		temp.remove(4);
-		temp.remove(3);
-		temp.remove(2);
-		temp.remove(1);
-		Design = temp.get(0);
+		design = "Noir";
 	
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
@@ -83,7 +75,7 @@ public class DataBase extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE "+TABLE_DESIGN+
 				" (id INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
 		ContentValues valueDesign = new ContentValues();
-			valueDesign.put("design",Design);
+			valueDesign.put("design",design);
 			db.insert(TABLE_DESIGN,null,valueDesign);
 	}
 	
@@ -95,26 +87,7 @@ public class DataBase extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DESIGN);
 		onCreate(db);
 	}
-	
-	/*public void incrementNumRun() {
-		int cpt = getNumRun();
-		cpt++;
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues value = new ContentValues();
-		value.put("cpt",cpt);
-		db.insert(TABLE_NUMRUN,null,value);
-		db.close();
-	}
-	
-	public int getNumRun() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String query = "SELECT MAX(cpt) FROM numRun";
-		Cursor cursor = db.rawQuery(query,null);
-		if (cursor.moveToNext()) {
-			return cursor.getInt(0);
-		}
-		return 0;
-	}*/
+
 	
 	public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
