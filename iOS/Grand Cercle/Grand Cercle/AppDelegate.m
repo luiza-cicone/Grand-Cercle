@@ -17,8 +17,9 @@
 #import "NewsParser.h"
 #import "EvenementsParser.h"
 #import "BonsPlansParser.h"
-
 #import "FilterParser.h"
+
+#import "Reachability.h"
 
 @implementation AppDelegate
 
@@ -55,7 +56,7 @@
 
 - (void)startParse {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-
+    
     // On parse les associations
     FilterParser *ap = [FilterParser instance];
     [ap loadAssociations];
@@ -86,6 +87,17 @@
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    // allocate a reachability object
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.grandcercle.org"];
+    
+    // here we set up a NSNotification observer. The Reachability that caused the notification
+    // is passed in the object parameter
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(reachabilityChanged:) 
+                                                 name:kReachabilityChangedNotification 
+                                               object:nil];
+    
+    [reach startNotifier];
     
     // On parse les événements
     EvenementsParser *ep = [EvenementsParser instance];
@@ -174,5 +186,20 @@
 {
 }
 */
+
+
+-(void)reachabilityChanged:(NSNotification*)note
+{
+    Reachability * reach = [note object];
+    
+    if([reach isReachable])
+    {
+        NSLog(@"Notification Says Reachable");
+    }
+    else
+    {
+        NSLog(@"Notification Says UNReachable");
+    }
+}
 
 @end

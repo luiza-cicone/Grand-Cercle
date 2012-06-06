@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "StyledPageControl.h"
 
-@interface EventsViewController : UIViewController <UIScrollViewDelegate> {
+@interface EventsViewController : UIViewController <UIScrollViewDelegate, UITabBarDelegate> {
     
     IBOutlet UIScrollView *scrollView;
     StyledPageControl *pageControl;
