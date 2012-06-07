@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     
+    
     >
     <!-- android:background="@drawable/essai" -->
     <LinearLayout
@@ -14,6 +15,7 @@
         
         <TabWidget
             android:id="@android:id/tabs"
+            android:clipChildren="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -24,6 +26,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/tab_bg_selector"
         />
     </LinearLayout>
 </TabHost>

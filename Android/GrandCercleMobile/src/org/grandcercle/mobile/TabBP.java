@@ -33,6 +33,14 @@ public class TabBP extends Activity {
         }
 		
 	 }
+	 
+	 public void onResume() {
+		super.onResume();
+		int color = 0xFFFFFFFF;
+		GCM.changeTabHost(color);
+		GCM.oldchild = 2;
+	 }
+	 
 	 private AdapterView.OnItemClickListener clickListenerBP = new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(TabBP.this,PageBP.class);

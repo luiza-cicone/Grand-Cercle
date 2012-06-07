@@ -43,8 +43,8 @@ public class DesignPref extends Activity {
 			radiogroup.check(R.id.Phelma);
 		} else if (prefered.equals("Ense3")) {
 			radiogroup.check(R.id.Ense3);
-		} else if (prefered.equals("Papet")) {
-			radiogroup.check(R.id.Papet);
+		} else if (prefered.equals("Pagora")) {
+			radiogroup.check(R.id.Pagora);
 		} else if (prefered.equals("GI")) {
 			radiogroup.check(R.id.GI);
 		} else if (prefered.equals("CPP")) {
@@ -54,45 +54,21 @@ public class DesignPref extends Activity {
 		}
 		colors = ContainerData.getListColors();
 		position = new Integer[colors.size()];
-		position[0]= R.id.Ensimag;
-		position[1]= R.id.Phelma;
-		position[2]= R.id.Ense3;
-		
-		
-		
+		position[0] = R.id.Noir;
+		position[1]= R.id.Ensimag;
+		position[2]= R.id.Phelma;
+		position[3]= R.id.Ense3;
+		position[4]= R.id.Pagora;
+		position[5]= R.id.GI;
+		position[6]= R.id.CPP;
+		position[7]= R.id.Esisar;
+				
 		//RadioGroup rGroup = (RadioGroup)findViewById(R.id.radiogroup);
 		// This will get the radiobutton in the radiogroup that is checked
 		//RadioButton checkedRadioButton = (RadioButton)rGroup.findViewById(rGroup.getCheckedRadioButtonId());
 
         
         listRadioButton = new ArrayList<RadioButton>();
-        	   
-        	/*RadioButton radiobutton = (RadioButton) findViewById(R.id.Ensimag);
-			if (prefered.contains(colors.get(0))) {
-				radiobutton.setChecked(true);
-			} else {
-				radiobutton.setChecked(false);
-			}
-			listRadioButton.add(radiobutton);
-			((ViewGroup) radiogroup).addView(radiobutton);
-			
-			radiobutton = (RadioButton) findViewById(R.id.Phelma);
-			if (prefered.contains(colors.get(1))) {
-				radiobutton.setChecked(true);
-			} else {
-				radiobutton.setChecked(false);
-			}
-			listRadioButton.add(radiobutton);
-			((ViewGroup) radiogroup).addView(radiobutton);
-			
-			radiobutton = (RadioButton) findViewById(R.id.Ense3);
-			if (prefered.contains(colors.get(2))) {
-				radiobutton.setChecked(true);
-			} else {
-				radiobutton.setChecked(false);
-			}
-			listRadioButton.add(radiobutton);
-			((ViewGroup) radiogroup).addView(radiobutton);*/
         View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
 		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
@@ -118,7 +94,6 @@ public class DesignPref extends Activity {
 			toast.setView(layout);
 			toast.show();
 			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
-			new ParsingProcessing().execute((Void)null);
 			finish();
 		}
 	};
@@ -129,21 +104,6 @@ public class DesignPref extends Activity {
 			finish();
 		}
 	};
-	
-private class ParsingProcessing extends AsyncTask<Void,Integer,Void> {
-		
-		@Override
-	    protected Void doInBackground(Void... params) {
-			ContainerData.parseEvent();
-			return null;
-	    }
 
-		@Override
-	    protected void onProgressUpdate(Integer... progress) {
-	        progressBarParse.setProgress(progress[0]);
-	    }
 
-		@Override
-	    protected void onPostExecute(Void result) {}
-	}
 }

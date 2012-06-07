@@ -16,8 +16,8 @@
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="vertical"
 		android:layout_width="fill_parent"
-		android:layout_height="220dp"
-		android:background="@drawable/bg"
+		android:layout_height="250dp"
+		android:background="@drawable/transparent"
 		>
 		
 
@@ -26,7 +26,7 @@
 			android:textColor="#FFFFFF"
 			android:layout_gravity="center"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:background="@drawable/calendar_top_header"
+			android:background="@drawable/calendar_top_header_phelma"
 			android:layout_width="wrap_content"
 			android:layout_height="24dp"
 			android:layout_marginTop="2dp">
@@ -50,7 +50,7 @@
 				android:layout_weight="0.6"
 				android:textColor="#FFFFFF"
 				android:textAppearance="?android:attr/textAppearanceMedium"
-				android:background="@drawable/calendar_bar"
+				android:background="@drawable/calendar_bar_ense3"
 				android:layout_width="wrap_content"
 				android:layout_height="24dp"
 				android:layout_marginTop="3dp">

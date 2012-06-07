@@ -1,5 +1,11 @@
 package org.grandcercle.mobile;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,6 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class DataBase extends SQLiteOpenHelper {
+	// préférences
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
@@ -18,7 +25,7 @@ public class DataBase extends SQLiteOpenHelper {
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
-	private String Design;
+	private String design;
 
 	/** Create a helper object for the Events database */
 	private DataBase() {		
@@ -39,18 +46,10 @@ public class DataBase extends SQLiteOpenHelper {
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
 		listType = ContainerData.getListTypes();
-		ArrayList<String> temp = ContainerData.getListColors();
-		temp.remove(7);
-		temp.remove(6);
-		temp.remove(5);
-		temp.remove(4);
-		temp.remove(3);
-		temp.remove(2);
-		temp.remove(1);
-		Design = temp.get(0);
+		design = "Noir";
 	
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
+				" (id0 INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
 		ContentValues valueCercle = new ContentValues();
 		while (itCercle.hasNext()) {
@@ -59,7 +58,7 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
+				" (id1 INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
 		Iterator<String> itClub = listClub.iterator();
 		ContentValues valueClub = new ContentValues();
 		while (itClub.hasNext()) {
@@ -69,7 +68,7 @@ public class DataBase extends SQLiteOpenHelper {
 		
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
+				" (id2 INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
 		Iterator<String> itType = listType.iterator();
 		ContentValues valueType = new ContentValues();
 		while (itType.hasNext()) {
@@ -78,9 +77,9 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_DESIGN+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
+				" (id3 INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
 		ContentValues valueDesign = new ContentValues();
-			valueDesign.put("design",Design);
+			valueDesign.put("design",design);
 			db.insert(TABLE_DESIGN,null,valueDesign);
 	}
 	
@@ -92,6 +91,7 @@ public class DataBase extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DESIGN);
 		onCreate(db);
 	}
+
 	
 	public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -131,7 +131,6 @@ public class DataBase extends SQLiteOpenHelper {
 				list.add(name);
 			} while (cursor.moveToNext());
 		}
-		db.close();
 		return list;
 	}
 	
@@ -143,7 +142,6 @@ public class DataBase extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			string = cursor.getString(0);
 		}
-		db.close();
 		return string;
 	}
 	
@@ -152,5 +150,4 @@ public class DataBase extends SQLiteOpenHelper {
 	    db.delete(table,null,null);
 	    db.close();
 	}
-
 }
