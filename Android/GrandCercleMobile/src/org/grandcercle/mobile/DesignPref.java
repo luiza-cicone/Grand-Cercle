@@ -104,8 +104,6 @@ public class DesignPref extends Activity {
 			finish();
 		}
 	};
-	
-
 
 
 }
