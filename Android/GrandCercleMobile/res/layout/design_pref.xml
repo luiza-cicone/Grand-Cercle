@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+  		<RadioGroup 
+			android:layout_width="wrap_content"
+			android:layout_height="435dp"
+			android:orientation="vertical"
+			android:id="@+id/design">
+			<RadioButton
+			    android:id="@+id/Noir"
+               	android:text="Noir GrandCercle"/>
+			<RadioButton 
+			    android:id="@+id/Ensimag"
+               	android:text="Vert Ensimag"/>
+            <RadioButton 
+                android:id="@+id/Phelma"
+                android:text="Rouge Phelma"/>
+            <RadioButton 
+                android:id="@+id/Ense3"
+                android:text="Bleu Ense3"/>
+            <RadioButton 
+                android:id="@+id/Pagora"
+                android:text="Orange Pagora"/>
+            <RadioButton 
+                android:id="@+id/GI"
+                android:text="Bleu GI"/>
+            <RadioButton 
+                android:id="@+id/CPP"
+                android:text="Jaune CPP"/>
+            <RadioButton 
+                android:id="@+id/Esisar"
+                android:text="Violet Esisar"/>
+	    </RadioGroup>
+	    <LinearLayout
+		    	android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:layout_gravity="center_horizontal">
+		    	<Button 
+		    	    android:id="@+id/boutonOk"
+		    	    android:gravity="center_horizontal|center_vertical"
+		    	    android:layout_width="75dp"
+		    	    android:layout_height="wrap_content"
+		    	    android:layout_marginRight="30dp"
+		    	    android:text="Ok"/>
+		    	<Button 
+		    	    android:id="@+id/boutonAnnuler"
+		    	    android:gravity="center_horizontal|center_vertical"
+		    	    android:layout_width="75dp"
+		    	    android:layout_height="wrap_content"
+		    	    android:layout_marginLeft="30dp"
+		    	    android:text="Annuler"/>
+		</LinearLayout>
+</LinearLayout>
+    

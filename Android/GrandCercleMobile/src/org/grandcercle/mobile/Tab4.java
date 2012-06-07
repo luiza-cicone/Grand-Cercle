@@ -13,4 +13,11 @@ public class Tab4 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab4);
 	 }
+	 
+	 public void onResume() {
+		super.onResume();
+		int color = 0xFFFFFFFF;
+		GCM.changeTabHost(color);
+		GCM.oldchild = 3;
+	 }
 }

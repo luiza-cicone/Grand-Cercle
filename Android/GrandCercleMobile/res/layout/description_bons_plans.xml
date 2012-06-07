@@ -5,13 +5,14 @@
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
 	<LinearLayout
+	    android:id="@+id/bandeau"
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center_vertical"
 		android:layout_marginTop="40dp"
-		android:background="@drawable/calendar_tile">
+		>
 		<ImageView
 		    android:id="@+id/image"
 			android:layout_width="60dp"
@@ -33,13 +34,21 @@
 	    xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:layout_marginTop="50dp"
+		android:layout_marginTop="10dp"
 		android:orientation="vertical">
-	    <TextView 
-				android:id="@+id/description"  
+	    <ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="270dp"
+			android:fillViewport="true">
+			<TextView 
+				android:id="@+id/description" 
 				android:layout_width="wrap_content" 
 				android:layout_height="wrap_content"
-				android:textSize="16dp"/>
+				android:textSize="14dp" 				
+				android:layout_marginTop="20dp"
+				android:padding="20dp"
+			/>
+		</ScrollView>
 	    <TextView 
 				android:text="@string/lien"
 				android:layout_width="wrap_content" 
@@ -52,6 +61,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="10dp"
 				android:textColor="#00FF00"
+				android:autoLink="web"
 				android:textSize="16dp"/>
 	</LinearLayout>
 </LinearLayout>

@@ -1,23 +1,31 @@
 package org.grandcercle.mobile;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 public class DataBase extends SQLiteOpenHelper {
+	// préférences
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
+	private static String TABLE_DESIGN = "prefDesign";
 	
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
+	private String design;
 
 	/** Create a helper object for the Events database */
 	private DataBase() {		
@@ -38,9 +46,10 @@ public class DataBase extends SQLiteOpenHelper {
 		listCercle = ContainerData.getListCercles();
 		listClub = ContainerData.getListClubs();
 		listType = ContainerData.getListTypes();
-
+		design = "Noir";
+	
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
+				" (id0 INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
 		ContentValues valueCercle = new ContentValues();
 		while (itCercle.hasNext()) {
@@ -49,7 +58,7 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
+				" (id1 INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
 		Iterator<String> itClub = listClub.iterator();
 		ContentValues valueClub = new ContentValues();
 		while (itClub.hasNext()) {
@@ -59,13 +68,19 @@ public class DataBase extends SQLiteOpenHelper {
 		
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
+				" (id2 INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
 		Iterator<String> itType = listType.iterator();
 		ContentValues valueType = new ContentValues();
 		while (itType.hasNext()) {
 			valueType.put("type",itType.next());
 			db.insert(TABLE_TYPE,null,valueType);
 		}
+		
+		db.execSQL("CREATE TABLE "+TABLE_DESIGN+
+				" (id3 INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
+		ContentValues valueDesign = new ContentValues();
+			valueDesign.put("design",design);
+			db.insert(TABLE_DESIGN,null,valueDesign);
 	}
 	
 	@Override
@@ -73,28 +88,10 @@ public class DataBase extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CERCLE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLUB);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TYPE);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DESIGN);
 		onCreate(db);
 	}
-	
-	/*public void incrementNumRun() {
-		int cpt = getNumRun();
-		cpt++;
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues value = new ContentValues();
-		value.put("cpt",cpt);
-		db.insert(TABLE_NUMRUN,null,value);
-		db.close();
-	}
-	
-	public int getNumRun() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String query = "SELECT MAX(cpt) FROM numRun";
-		Cursor cursor = db.rawQuery(query,null);
-		if (cursor.moveToNext()) {
-			return cursor.getInt(0);
-		}
-		return 0;
-	}*/
+
 	
 	public void addPref(String table, String key, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -137,9 +134,20 @@ public class DataBase extends SQLiteOpenHelper {
 		return list;
 	}
 	
+	public String getPref(String table, String key) {
+		String string = new String();
+		String query = "SELECT DISTINCT " + key + " FROM " + table;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query,null);
+		if (cursor.moveToFirst()) {
+			string = cursor.getString(0);
+		}
+		return string;
+	}
+	
 	public void deleteAll(String table){
 	    SQLiteDatabase db = this.getWritableDatabase();
 	    db.delete(table,null,null);
+	    db.close();
 	}
-
 }

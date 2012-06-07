@@ -3,6 +3,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" >
+ 	<TextView 
+ 	    android:id="@+id/bandeau"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="35dp"
+ 	    android:text="Filtrez les événements par: "
+ 	    android:textAppearance="?android:attr/textAppearanceMedium"
+ 	    android:layout_marginTop="40dp"
+ 	    android:gravity="center_vertical|center_horizontal"/>
  	
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_height="55dp"
@@ -48,5 +56,28 @@
 			android:layout_weight="0" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
  	</LinearLayout>
+ 	<TextView 
+ 	    android:id="@+id/bandeau2"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="35dp"
+ 	    android:text="Choisissez le thème de l'application"
+ 	    android:textAppearance="?android:attr/textAppearanceMedium"
+ 	    android:layout_marginTop="30dp"
+ 	    android:gravity="center_vertical|center_horizontal"/>
+ 	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_height="55dp"
+		android:layout_width="fill_parent" android:gravity="center_vertical|left"
+		>
+		<TextView android:layout_height="wrap_content"
+			android:layout_weight="1" android:textAppearance="@style/ListItemTextStyle"
+			android:layout_width="fill_parent" 
+			android:id="@+id/Design"
+			android:text="Design" />
+	 
+		<ImageView android:src="@drawable/list_item_arrow"
+			android:layout_weight="0" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />	
+	</LinearLayout>
 </LinearLayout>
 

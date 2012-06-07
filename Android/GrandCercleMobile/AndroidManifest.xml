@@ -6,12 +6,13 @@
 
     <uses-sdk 
         android:targetSdkVersion="8"
-        android:minSdkVersion="7" 
+        android:minSdkVersion="4" 
     />
 	<uses-permission android:name="android.permission.INTERNET" /> 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:debuggable="true"
         android:icon="@drawable/logo_gc"
@@ -85,6 +86,11 @@
 		</activity>
 		<activity 
 		    android:name=".TypesPref" 
+		    android:screenOrientation="portrait"
+		    android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity 
+		    android:name=".DesignPref" 
 		    android:screenOrientation="portrait"
 		    android:configChanges="keyboardHidden|orientation" >
 		</activity>
