@@ -1,109 +1,636 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:WidgetGroup" id="1" x="72" y="-32" measuredWidth="396" measuredHeight="790" name="Phone">
-    <widgets xsi:type="model:WidgetGroup" id="2" measuredWidth="396" measuredHeight="790">
-      <widgets xsi:type="model:WidgetGroup" id="3" y="281" measuredWidth="396" measuredHeight="509">
-        <widgets xsi:type="model:Circle" id="4" y="324" width="396" height="185" measuredWidth="396" measuredHeight="185" background="#444444" foreground="#444444">
-          <font/>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:model="http://wireframesketcher.com/1.0/model.ecore" >
+
+    <widgets
+        id="1"
+        name="Phone"
+        measuredHeight="790"
+        measuredWidth="396"
+        x="72"
+        y="-32"
+        xsi:type="model:WidgetGroup" >
+
+        <widgets
+            id="2"
+            measuredHeight="790"
+            measuredWidth="396"
+            xsi:type="model:WidgetGroup" >
+
+            <widgets
+                id="3"
+                measuredHeight="509"
+                measuredWidth="396"
+                y="281"
+                xsi:type="model:WidgetGroup" >
+
+                <widgets
+                    id="4"
+                    background="#444444"
+                    foreground="#444444"
+                    height="185"
+                    measuredHeight="185"
+                    measuredWidth="396"
+                    width="396"
+                    y="324"
+                    xsi:type="model:Circle" >
+
+                    <font />
+                </widgets>
+
+                <widgets
+                    id="5"
+                    background="#444444"
+                    foreground="#444444"
+                    height="415"
+                    measuredHeight="415"
+                    measuredWidth="395"
+                    width="395"
+                    xsi:type="model:Rectangle" >
+
+                    <font />
+                </widgets>
+            </widgets>
+
+            <widgets
+                id="6"
+                measuredHeight="763"
+                measuredWidth="396"
+                xsi:type="model:WidgetGroup" >
+
+                <widgets
+                    id="7"
+                    background="#666666"
+                    foreground="#666666"
+                    height="177"
+                    measuredHeight="177"
+                    measuredWidth="396"
+                    width="396"
+                    y="586"
+                    xsi:type="model:Circle" >
+
+                    <font />
+                </widgets>
+
+                <widgets
+                    id="8"
+                    background="#666666"
+                    foreground="#666666"
+                    height="177"
+                    measuredHeight="177"
+                    measuredWidth="396"
+                    width="396"
+                    xsi:type="model:Circle" >
+
+                    <font />
+                </widgets>
+
+                <widgets
+                    id="9"
+                    background="#666666"
+                    foreground="#666666"
+                    height="585"
+                    measuredHeight="585"
+                    measuredWidth="395"
+                    width="395"
+                    y="86"
+                    xsi:type="model:Rectangle" >
+
+                    <font />
+                </widgets>
+            </widgets>
+
+            <widgets
+                id="10"
+                measuredHeight="674"
+                measuredWidth="376"
+                x="10"
+                y="28"
+                xsi:type="model:WidgetGroup" >
+
+                <widgets
+                    id="11"
+                    background="#000000"
+                    height="92"
+                    measuredHeight="92"
+                    measuredWidth="376"
+                    width="376"
+                    y="582"
+                    xsi:type="model:Circle" >
+
+                    <font />
+                </widgets>
+
+                <widgets
+                    id="12"
+                    background="#000000"
+                    height="115"
+                    measuredHeight="115"
+                    measuredWidth="376"
+                    width="376"
+                    xsi:type="model:Circle" >
+
+                    <font />
+                </widgets>
+
+                <widgets
+                    id="13"
+                    background="#000000"
+                    height="574"
+                    measuredHeight="574"
+                    measuredWidth="375"
+                    width="375"
+                    y="53"
+                    xsi:type="model:Rectangle" >
+
+                    <font />
+                </widgets>
+            </widgets>
+
+            <widgets
+                id="14"
+                background="#999999"
+                border="solid-rounded"
+                height="9"
+                measuredHeight="9"
+                measuredWidth="153"
+                width="153"
+                x="121"
+                y="16"
+                xsi:type="model:Rectangle" >
+
+                <font />
+            </widgets>
+
+            <widgets
+                id="15"
+                background="#999999"
+                height="36"
+                measuredHeight="36"
+                measuredWidth="36"
+                width="36"
+                x="180"
+                y="714"
+                xsi:type="model:Circle" >
+
+                <font />
+            </widgets>
+
+            <widgets
+                id="16"
+                measuredHeight="16"
+                measuredWidth="260"
+                x="70"
+                y="649"
+                xsi:type="model:WidgetGroup" >
+
+                <widgets
+                    id="17"
+                    foreground="#ffffff"
+                    icon="undo (small)"
+                    measuredHeight="16"
+                    measuredWidth="16"
+                    xsi:type="model:Icon" />
+
+                <widgets
+                    id="18"
+                    foreground="#ffffff"
+                    icon="home (small)"
+                    measuredHeight="16"
+                    measuredWidth="16"
+                    x="162"
+                    xsi:type="model:Icon" />
+
+                <widgets
+                    id="19"
+                    foreground="#ffffff"
+                    icon="find (small)"
+                    measuredHeight="16"
+                    measuredWidth="16"
+                    x="244"
+                    xsi:type="model:Icon" />
+
+                <widgets
+                    id="20"
+                    measuredHeight="15"
+                    measuredWidth="14"
+                    x="82"
+                    xsi:type="model:WidgetGroup" >
+
+                    <widgets
+                        id="21"
+                        foreground="#ffffff"
+                        measuredHeight="6"
+                        measuredWidth="14"
+                        width="14"
+                        xsi:type="model:HLine" />
+
+                    <widgets
+                        id="22"
+                        foreground="#ffffff"
+                        measuredHeight="6"
+                        measuredWidth="10"
+                        width="10"
+                        x="4"
+                        y="3"
+                        xsi:type="model:HLine" />
+
+                    <widgets
+                        id="23"
+                        foreground="#ffffff"
+                        measuredHeight="6"
+                        measuredWidth="10"
+                        width="10"
+                        x="4"
+                        y="9"
+                        xsi:type="model:HLine" />
+
+                    <widgets
+                        id="24"
+                        foreground="#ffffff"
+                        measuredHeight="6"
+                        measuredWidth="10"
+                        width="10"
+                        x="4"
+                        y="6"
+                        xsi:type="model:HLine" />
+                </widgets>
+            </widgets>
         </widgets>
-        <widgets xsi:type="model:Rectangle" id="5" width="395" height="415" measuredWidth="395" measuredHeight="415" background="#444444" foreground="#444444">
-          <font/>
-        </widgets>
-      </widgets>
-      <widgets xsi:type="model:WidgetGroup" id="6" measuredWidth="396" measuredHeight="763">
-        <widgets xsi:type="model:Circle" id="7" y="586" width="396" height="177" measuredWidth="396" measuredHeight="177" background="#666666" foreground="#666666">
-          <font/>
-        </widgets>
-        <widgets xsi:type="model:Circle" id="8" width="396" height="177" measuredWidth="396" measuredHeight="177" background="#666666" foreground="#666666">
-          <font/>
-        </widgets>
-        <widgets xsi:type="model:Rectangle" id="9" y="86" width="395" height="585" measuredWidth="395" measuredHeight="585" background="#666666" foreground="#666666">
-          <font/>
-        </widgets>
-      </widgets>
-      <widgets xsi:type="model:WidgetGroup" id="10" x="10" y="28" measuredWidth="376" measuredHeight="674">
-        <widgets xsi:type="model:Circle" id="11" y="582" width="376" height="92" measuredWidth="376" measuredHeight="92" background="#000000">
-          <font/>
-        </widgets>
-        <widgets xsi:type="model:Circle" id="12" width="376" height="115" measuredWidth="376" measuredHeight="115" background="#000000">
-          <font/>
-        </widgets>
-        <widgets xsi:type="model:Rectangle" id="13" y="53" width="375" height="574" measuredWidth="375" measuredHeight="574" background="#000000">
-          <font/>
-        </widgets>
-      </widgets>
-      <widgets xsi:type="model:Rectangle" id="14" x="121" y="16" width="153" height="9" measuredWidth="153" measuredHeight="9" background="#999999" border="solid-rounded">
-        <font/>
-      </widgets>
-      <widgets xsi:type="model:Circle" id="15" x="180" y="714" width="36" height="36" measuredWidth="36" measuredHeight="36" background="#999999">
-        <font/>
-      </widgets>
-      <widgets xsi:type="model:WidgetGroup" id="16" x="70" y="649" measuredWidth="260" measuredHeight="16">
-        <widgets xsi:type="model:Icon" id="17" measuredWidth="16" measuredHeight="16" foreground="#ffffff" icon="undo (small)"/>
-        <widgets xsi:type="model:Icon" id="18" x="162" measuredWidth="16" measuredHeight="16" foreground="#ffffff" icon="home (small)"/>
-        <widgets xsi:type="model:Icon" id="19" x="244" measuredWidth="16" measuredHeight="16" foreground="#ffffff" icon="find (small)"/>
-        <widgets xsi:type="model:WidgetGroup" id="20" x="82" measuredWidth="14" measuredHeight="15">
-          <widgets xsi:type="model:HLine" id="21" width="14" measuredWidth="14" measuredHeight="6" foreground="#ffffff"/>
-          <widgets xsi:type="model:HLine" id="22" x="4" y="3" width="10" measuredWidth="10" measuredHeight="6" foreground="#ffffff"/>
-          <widgets xsi:type="model:HLine" id="23" x="4" y="9" width="10" measuredWidth="10" measuredHeight="6" foreground="#ffffff"/>
-          <widgets xsi:type="model:HLine" id="24" x="4" y="6" width="10" measuredWidth="10" measuredHeight="6" foreground="#ffffff"/>
-        </widgets>
-      </widgets>
+
+        <widgets
+            id="25"
+            border="none"
+            height="536"
+            measuredHeight="536"
+            measuredWidth="320"
+            width="320"
+            x="38"
+            y="89"
+            xsi:type="model:Panel" />
     </widgets>
-    <widgets xsi:type="model:Panel" id="25" x="38" y="89" width="320" height="536" measuredWidth="320" measuredHeight="536" border="none"/>
-  </widgets>
-  <widgets xsi:type="model:TabbedPane" id="26" x="104" y="71" width="329" height="530" text="Evénements,News,Bons Plans, Infos,Paramètres" measuredWidth="329" measuredHeight="530" selection="0">
-    <items x="10" y="0" width="88" height="27" text="Evénements"/>
-    <items x="98" y="0" width="50" height="27" text="News"/>
-    <items x="148" y="0" width="78" height="27" text="Bons Plans"/>
-    <items x="226" y="0" width="47" height="27" text="Infos"/>
-    <items x="273" y="0" width="83" height="27" text="Paramètres"/>
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Master" id="32" x="104" y="44" width="329" measuredWidth="329" measuredHeight="28">
-    <screen xsi:type="model:WidgetGroup" href="Android.screen#Status Bar Landscape"/>
-    <overrides>
-      <widgets ref="214" width="329"/>
-      <widgets ref="215" x="257" width="8"/>
-      <widgets ref="216" x="272" width="8"/>
-      <widgets ref="217" x="287" width="8"/>
-    </overrides>
-  </widgets>
-  <widgets xsi:type="model:VScrollbar" id="33" x="416" y="136" height="465" measuredWidth="17" measuredHeight="465"/>
-  <widgets xsi:type="model:Icon" id="34" x="208" y="99" measuredWidth="32" measuredHeight="32" icon="bullet (large)"/>
-  <widgets xsi:type="model:Icon" id="35" x="248" y="99" measuredWidth="32" measuredHeight="32" icon="unselected (large)"/>
-  <widgets xsi:type="model:Icon" id="36" x="293" y="99" measuredWidth="32" measuredHeight="32" icon="bullet (large)"/>
-  <widgets xsi:type="model:HLine" id="37" x="106" y="488" width="313" measuredWidth="313" measuredHeight="6"/>
-  <widgets xsi:type="model:HLine" id="38" x="105" y="574" width="313" measuredWidth="313" measuredHeight="6"/>
-  <widgets xsi:type="model:Icon" id="39" x="376" y="432" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
-  <widgets xsi:type="model:Icon" id="40" x="376" y="520" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
-  <widgets xsi:type="model:Icon" id="41" x="114" y="424" width="39" height="60" measuredWidth="39" measuredHeight="60" icon="table (xlarge)"/>
-  <widgets xsi:type="model:TextArea" id="42" x="168" y="417" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Organisateur&#xA;heure et lieu&#xA;" measuredWidth="194" measuredHeight="73">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Icon" id="43" x="120" y="506" width="39" height="60" measuredWidth="39" measuredHeight="60" icon="table (xlarge)"/>
-  <widgets xsi:type="model:TextArea" id="44" x="168" y="499" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Organisateur&#xA;heure et lieu&#xA;" measuredWidth="194" measuredHeight="73">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:HLine" id="46" x="106" y="315" width="313" measuredWidth="313" measuredHeight="6"/>
-  <widgets xsi:type="model:HLine" id="47" x="105" y="401" width="313" measuredWidth="313" measuredHeight="6"/>
-  <widgets xsi:type="model:Icon" id="48" x="376" y="259" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
-  <widgets xsi:type="model:Icon" id="49" x="376" y="347" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
-  <widgets xsi:type="model:Icon" id="50" x="114" y="251" width="39" height="60" measuredWidth="39" measuredHeight="60" icon="table (xlarge)"/>
-  <widgets xsi:type="model:TextArea" id="51" x="168" y="244" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Organisateur&#xA;heure et lieu&#xA;" measuredWidth="194" measuredHeight="73">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Icon" id="52" x="120" y="333" width="39" height="60" measuredWidth="39" measuredHeight="60" icon="table (xlarge)"/>
-  <widgets xsi:type="model:TextArea" id="53" x="168" y="326" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Organisateur&#xA;heure et lieu&#xA;" measuredWidth="194" measuredHeight="73">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:HLine" id="54" x="106" y="231" width="313" measuredWidth="313" measuredHeight="6"/>
-  <widgets xsi:type="model:Icon" id="55" x="376" y="175" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
-  <widgets xsi:type="model:Icon" id="56" x="114" y="167" width="39" height="60" measuredWidth="39" measuredHeight="60" icon="table (xlarge)"/>
-  <widgets xsi:type="model:TextArea" id="57" x="168" y="160" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Organisateur&#xA;heure et lieu&#xA;" measuredWidth="194" measuredHeight="73">
-    <font/>
-  </widgets>
-  <hRuler/>
-  <vRuler/>
-  <font size="12px"/>
+
+    <widgets
+        id="26"
+        height="530"
+        measuredHeight="530"
+        measuredWidth="329"
+        selection="0"
+        text="Evénements,News,Bons Plans, Infos,Paramètres"
+        width="329"
+        x="104"
+        y="71"
+        xsi:type="model:TabbedPane" >
+
+        <items
+            height="27"
+            text="Evénements"
+            width="88"
+            x="10"
+            y="0" />
+
+        <items
+            height="27"
+            text="News"
+            width="50"
+            x="98"
+            y="0" />
+
+        <items
+            height="27"
+            text="Bons Plans"
+            width="78"
+            x="148"
+            y="0" />
+
+        <items
+            height="27"
+            text="Infos"
+            width="47"
+            x="226"
+            y="0" />
+
+        <items
+            height="27"
+            text="Paramètres"
+            width="83"
+            x="273"
+            y="0" />
+
+        <font />
+    </widgets>
+
+    <widgets
+        id="32"
+        measuredHeight="28"
+        measuredWidth="329"
+        width="329"
+        x="104"
+        y="44"
+        xsi:type="model:Master" >
+
+        <screen
+            href="Android.screen#Status Bar Landscape"
+            xsi:type="model:WidgetGroup" />
+
+        <overrides>
+
+            <widgets
+                ref="214"
+                width="329" />
+
+            <widgets
+                ref="215"
+                width="8"
+                x="257" />
+
+            <widgets
+                ref="216"
+                width="8"
+                x="272" />
+
+            <widgets
+                ref="217"
+                width="8"
+                x="287" />
+        </overrides>
+    </widgets>
+
+    <widgets
+        id="33"
+        height="465"
+        measuredHeight="465"
+        measuredWidth="17"
+        x="416"
+        y="136"
+        xsi:type="model:VScrollbar" />
+
+    <widgets
+        id="34"
+        icon="bullet (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="208"
+        y="99"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="35"
+        icon="unselected (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="248"
+        y="99"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="36"
+        icon="bullet (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="293"
+        y="99"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="37"
+        measuredHeight="6"
+        measuredWidth="313"
+        width="313"
+        x="106"
+        y="488"
+        xsi:type="model:HLine" />
+
+    <widgets
+        id="38"
+        measuredHeight="6"
+        measuredWidth="313"
+        width="313"
+        x="105"
+        y="574"
+        xsi:type="model:HLine" />
+
+    <widgets
+        id="39"
+        icon="copyright (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="376"
+        y="432"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="40"
+        icon="copyright (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="376"
+        y="520"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="41"
+        height="60"
+        icon="table (xlarge)"
+        measuredHeight="60"
+        measuredWidth="39"
+        width="39"
+        x="114"
+        y="424"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="42"
+        height="73"
+        measuredHeight="73"
+        measuredWidth="194"
+        text="*Titre de l&apos;événement*
+
+Organisateur
+heure et lieu
+"
+        width="194"
+        x="168"
+        y="417"
+        xsi:type="model:TextArea" >
+
+        <font />
+    </widgets>
+
+    <widgets
+        id="43"
+        height="60"
+        icon="table (xlarge)"
+        measuredHeight="60"
+        measuredWidth="39"
+        width="39"
+        x="120"
+        y="506"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="44"
+        height="73"
+        measuredHeight="73"
+        measuredWidth="194"
+        text="*Titre de l&apos;événement*
+
+Organisateur
+heure et lieu
+"
+        width="194"
+        x="168"
+        y="499"
+        xsi:type="model:TextArea" >
+
+        <font />
+    </widgets>
+
+    <widgets
+        id="46"
+        measuredHeight="6"
+        measuredWidth="313"
+        width="313"
+        x="106"
+        y="315"
+        xsi:type="model:HLine" />
+
+    <widgets
+        id="47"
+        measuredHeight="6"
+        measuredWidth="313"
+        width="313"
+        x="105"
+        y="401"
+        xsi:type="model:HLine" />
+
+    <widgets
+        id="48"
+        icon="copyright (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="376"
+        y="259"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="49"
+        icon="copyright (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="376"
+        y="347"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="50"
+        height="60"
+        icon="table (xlarge)"
+        measuredHeight="60"
+        measuredWidth="39"
+        width="39"
+        x="114"
+        y="251"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="51"
+        height="73"
+        measuredHeight="73"
+        measuredWidth="194"
+        text="*Titre de l&apos;événement*
+
+Organisateur
+heure et lieu
+"
+        width="194"
+        x="168"
+        y="244"
+        xsi:type="model:TextArea" >
+
+        <font />
+    </widgets>
+
+    <widgets
+        id="52"
+        height="60"
+        icon="table (xlarge)"
+        measuredHeight="60"
+        measuredWidth="39"
+        width="39"
+        x="120"
+        y="333"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="53"
+        height="73"
+        measuredHeight="73"
+        measuredWidth="194"
+        text="*Titre de l&apos;événement*
+
+Organisateur
+heure et lieu
+"
+        width="194"
+        x="168"
+        y="326"
+        xsi:type="model:TextArea" >
+
+        <font />
+    </widgets>
+
+    <widgets
+        id="54"
+        measuredHeight="6"
+        measuredWidth="313"
+        width="313"
+        x="106"
+        y="231"
+        xsi:type="model:HLine" />
+
+    <widgets
+        id="55"
+        icon="copyright (large)"
+        measuredHeight="32"
+        measuredWidth="32"
+        x="376"
+        y="175"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="56"
+        height="60"
+        icon="table (xlarge)"
+        measuredHeight="60"
+        measuredWidth="39"
+        width="39"
+        x="114"
+        y="167"
+        xsi:type="model:Icon" />
+
+    <widgets
+        id="57"
+        height="73"
+        measuredHeight="73"
+        measuredWidth="194"
+        text="*Titre de l&apos;événement*
+
+Organisateur
+heure et lieu
+"
+        width="194"
+        x="168"
+        y="160"
+        xsi:type="model:TextArea" >
+
+        <font />
+    </widgets>
+
+    <hRuler />
+
+    <vRuler />
+
+    <font size="12px" />
+
 </model:Screen>
