@@ -148,7 +148,8 @@ Le diagramme suivant représente la modélisation objet du domaine d'application
 \end{center}
 \end{figure}
 
-\
+\section{Code}
+La technologie android repose sur la dualité entre la langage Java et le langage xml. A chaque affichage correspond un fichier xml qui met en place les différentes fenêtres qui constituent l'écran, appelées des \og layouts \fg, ainsi qu'un fichier Java qui représente ce qu'on appelle une activité, c'est à dire la fenêtre visible à l'écran. La vue offerte à l'utilisateur est mise en place par la méthode setContentView([fichier].xml). Néanmoins, ce fichier xml en paramètre de la méthode mentionnée correspond à une configuration statique de l'affichage. Ainsi, dès que nous avons besoin de modifier dynamiquement une vue, nous le faisons dans le code Java, grâce à l'identifiant de la vue considérée renseigné dans le code xml: c'est qui fait la dualité Java/xml.
 
 
 \end{document}
