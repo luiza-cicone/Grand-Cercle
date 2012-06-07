@@ -26,7 +26,6 @@ public class GCMLaunching extends Activity {
 	}
 	
 	private class LoadingPage extends AsyncTask<Void,Integer,Void> {
-		private boolean filesExist;
 		@Override
 	    protected Void doInBackground(Void... params) {
 			if (this.isConnected()) {
@@ -75,12 +74,7 @@ public class GCMLaunching extends Activity {
 		    }
 		    return connected;
 		}
-		
-		public void showError() {
-			Toast.makeText(getApplicationContext(), "Connexion internet inexistante ou insuffisante.\n" +
-					"Impossible de passer en mode hors-connexion lors du premier\n" +
-					"lancement de l'application !",Toast.LENGTH_LONG);
-		}
+
 	}
 
 
