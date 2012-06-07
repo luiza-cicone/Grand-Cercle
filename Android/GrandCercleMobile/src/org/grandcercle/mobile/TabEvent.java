@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,7 @@ public class TabEvent extends Activity {
 	private GridCellAdapter adapter;
 	private Calendar _calendar;
 	private int month, year;
-
+	private DataBase dataBase;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,37 @@ public class TabEvent extends Activity {
 		int color = 0xFFFFFFFF;
 		GCM.changeTabHost(color);
 		GCM.oldchild = 0;
+		View view = findViewById(R.id.selectedDayMonthYear);
+		view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ensimag));
+		dataBase = DataBase.getInstance();
+		String prefered = dataBase.getPref("prefDesign","design");
+		if (prefered.equals("Noir")) {
+			color = 0xFF000000;
+			view.setBackgroundColor(color);
+		} else if(prefered.equals("Ensimag")) {
+			color = 0xFF96BE0F;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ensimag));
+		} else if (prefered.equals("Phelma")) {
+			color = 0xFFBE141E;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_phelma));
+		} else if (prefered.equals("Ense3")) {
+			color = 0xFF004B9B;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ense3));
+		} else if (prefered.equals("Pagora")) {
+			color = 0xFFF09600;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_pagora));
+		} else if (prefered.equals("GI")) {
+			color = 0xFF0096D7;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gi));
+		} else if (prefered.equals("CPP")) {
+			color = 0xFFFFCD00;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_cpp));
+		} else if (prefered.equals("Esisar")) {
+			color = 0xFF96147D;
+			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_esisar));
+		}
+		view = findViewById(R.id.currentMonth);
+		view.setBackgroundColor(color);
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();

@@ -90,10 +90,10 @@
     switch (indexPath.section) {
             
         case 0:
-            CellIdentifier = @"bonPlanTopCell";
+            CellIdentifier = @"DealsTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                [[NSBundle mainBundle] loadNibNamed:@"bonPlanTopCell" owner:self options:nil];
+                [[NSBundle mainBundle] loadNibNamed:@"DealsTopCell" owner:self options:nil];
                 cell = cellBonPlanTop;
                 self.cellBonPlanTop = nil;
             }

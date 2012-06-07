@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class GCMLaunching extends Activity {
 	
@@ -25,21 +26,31 @@ public class GCMLaunching extends Activity {
 	}
 	
 	private class LoadingPage extends AsyncTask<Void,Integer,Void> {
-		
+		private boolean filesExist;
 		@Override
 	    protected Void doInBackground(Void... params) {
 			if (this.isConnected()) {
 				ContainerData.saveXMLFiles();
+			} 
+			if (ContainerData.savedFilesExist()) {
+				ContainerData.parseFiles(getApplicationContext());
 			} else {
-				Log.d("GCMLaunching","Pas de connection !");
+				runOnUiThread(new Runnable() {
+			        public void run() {
+			            Toast.makeText(getApplicationContext(),"Connexion internet insuffisante ou inexistante.\n" +
+			            		"impossible de passer en mode hors-connexion au premier\n" +
+			            		"lancement de l'application !", Toast.LENGTH_LONG).show();
+			        }
+			    });
+				System.runFinalizersOnExit(true);
+			    System.exit(0);
 			}
-			ContainerData.parseFiles(getApplicationContext());
 			return null;
 	    }
-
+		
 		@Override
 	    protected void onProgressUpdate(Integer... progress) {
-	        progressBar.setProgress(progress[0]);
+			progressBar.setProgress(progress[0]);
 	    }
 
 		@Override
@@ -63,6 +74,12 @@ public class GCMLaunching extends Activity {
 		        }
 		    }
 		    return connected;
+		}
+		
+		public void showError() {
+			Toast.makeText(getApplicationContext(), "Connexion internet inexistante ou insuffisante.\n" +
+					"Impossible de passer en mode hors-connexion lors du premier\n" +
+					"lancement de l'application !",Toast.LENGTH_LONG);
 		}
 	}
 

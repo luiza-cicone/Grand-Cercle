@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_horizontal"
+	>
+	<ImageView
+        android:id="@+id/position_ecran"
+		android:src="@drawable/calendar_bar_cpp"
+        android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="center_horizontal"/>
+	<Button
+			android:textColor="#FFFFFF"
+			android:layout_gravity="center"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:background="@drawable/calendar_bar_ensimag"
+			android:layout_width="wrap_content"
+			android:layout_height="24dp"
+			android:layout_marginTop="2dp">
+		</Button>
+		<ImageView
+				android:id="@+id/prevMonth"
+				android:src="@drawable/calendar_bar_gi"
+				android:layout_width="wrap_content"
+				android:layout_height="24dp"
+				android:layout_marginTop="3dp">
+			</ImageView>
+		<ImageView
+				android:id="@+id/prevMonth"
+				android:src="@drawable/calendar_bar_pagora"
+				android:layout_width="wrap_content"
+				android:layout_height="24dp"
+				android:layout_marginTop="3dp">
+			</ImageView>	
+		<ImageView
+				android:id="@+id/prevMonth"
+				android:src="@drawable/calendar_bar_esisar"
+				android:layout_width="wrap_content"
+				android:layout_height="24dp"
+				android:layout_marginTop="3dp">
+			</ImageView>
+</LinearLayout>
+		
