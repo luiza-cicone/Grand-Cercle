@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 
 public class GCMLaunching extends Activity {
@@ -27,12 +28,12 @@ public class GCMLaunching extends Activity {
 		
 		@Override
 	    protected Void doInBackground(Void... params) {
-			//if (this.isConnected()) {
-				ContainerData.parseFiles(getApplicationContext());
-			//} else {
-			//	ContainerData.loadOldData(getApplicationContext());
-			//}
-			
+			if (this.isConnected()) {
+				ContainerData.saveXMLFiles();
+			} else {
+				Log.d("GCMLaunching","Pas de connection !");
+			}
+			ContainerData.parseFiles(getApplicationContext());
 			return null;
 	    }
 

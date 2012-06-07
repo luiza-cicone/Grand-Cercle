@@ -16,11 +16,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class DataBase extends SQLiteOpenHelper {
+	// préférences
 	private static String TABLE_CERCLE = "prefCercle";
 	private static String TABLE_CLUB = "prefClub";
 	private static String TABLE_TYPE = "prefType";
 	private static String TABLE_DESIGN = "prefDesign";
-	private static String TABLE_PARSE = "parsedDatas";
+	
 	private ArrayList<String> listCercle;
 	private ArrayList<String> listClub;
 	private ArrayList<String> listType;
@@ -48,7 +49,7 @@ public class DataBase extends SQLiteOpenHelper {
 		design = "Noir";
 	
 		db.execSQL("CREATE TABLE "+TABLE_CERCLE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
+				" (id0 INTEGER PRIMARY KEY AUTOINCREMENT, cercle VARCHAR NOT NULL);");
 		Iterator<String> itCercle = listCercle.iterator();
 		ContentValues valueCercle = new ContentValues();
 		while (itCercle.hasNext()) {
@@ -57,7 +58,7 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_CLUB+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
+				" (id1 INTEGER PRIMARY KEY AUTOINCREMENT, club VARCHAR NOT NULL);");
 		Iterator<String> itClub = listClub.iterator();
 		ContentValues valueClub = new ContentValues();
 		while (itClub.hasNext()) {
@@ -67,7 +68,7 @@ public class DataBase extends SQLiteOpenHelper {
 		
 		
 		db.execSQL("CREATE TABLE "+TABLE_TYPE+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
+				" (id2 INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR NOT NULL);");
 		Iterator<String> itType = listType.iterator();
 		ContentValues valueType = new ContentValues();
 		while (itType.hasNext()) {
@@ -76,13 +77,10 @@ public class DataBase extends SQLiteOpenHelper {
 		}
 		
 		db.execSQL("CREATE TABLE "+TABLE_DESIGN+
-				" (id INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
+				" (id3 INTEGER PRIMARY KEY AUTOINCREMENT, design VARCHAR NOT NULL);");
 		ContentValues valueDesign = new ContentValues();
 			valueDesign.put("design",design);
 			db.insert(TABLE_DESIGN,null,valueDesign);
-			
-		db.execSQL("CREATE TABLE "+TABLE_PARSE+
-				" (id VARCHAR NOT NULL PRIMARY KEY , data VARCHAR NOT NULL);");
 	}
 	
 	@Override
@@ -152,54 +150,4 @@ public class DataBase extends SQLiteOpenHelper {
 	    db.delete(table,null,null);
 	    db.close();
 	}
-	
-	public void storeTextToDataBase(String url,String key) {
-        URL website = null;
-        StringBuilder response = new StringBuilder();
-		try {
-			website = new URL(url);
-			URLConnection connection = null;
-			connection = website.openConnection();
-			BufferedReader in = null;
-			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-       		String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-			    response.append(inputLine);
-			}
-			in.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		String data = response.toString();
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues value = new ContentValues();
-        value.put(key,data);
-		db.insert(TABLE_PARSE,null,value);
-    }
-	
-	public void deleteEvent() {
-		SQLiteDatabase db = this.getReadableDatabase();
-	    db.delete(TABLE_PARSE,"id=event",null);
-	    db.close();
-	}
-	
-	public void deleteEventOld() {
-		SQLiteDatabase db = this.getReadableDatabase();
-	    db.delete(TABLE_PARSE,"id=eventOld",null);
-	    db.close();
-	}
-	
-	public InputStream getParsed(String key) {
-		String string = new String();
-		String query = "SELECT DISTINCT " + key + " FROM " + TABLE_PARSE;
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(query,null);
-		if (cursor.moveToFirst()) {
-			string = cursor.getString(0);
-		}
-		db.close();
-		return new ByteArrayInputStream(string.getBytes());
-	}
-
 }
