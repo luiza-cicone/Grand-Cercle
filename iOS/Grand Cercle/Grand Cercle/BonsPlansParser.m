@@ -55,7 +55,7 @@ static BonsPlansParser *instanceBonsPlans = nil;
 	} while ((bonsPlansAParser = bonsPlansAParser->nextSibling));
 }
 
-- (void)loadBonsPlans { 
+- (void)loadBonsPlansFromURL { 
     
     // Initialisation du tableau contenant les News
     arrayBonsPlans = [[NSMutableArray alloc] initWithCapacity:10];
@@ -79,6 +79,34 @@ static BonsPlansParser *instanceBonsPlans = nil;
         
 }
 
+-(void) loadBonsPlansFromFile {
+    arrayBonsPlans = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    NSError *error = nil;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *filename = @"bons-plans.xml";
+    
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
+    NSData * data = [NSData dataWithContentsOfFile:filePath];    
+    
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+            [self treatementBonsPlans:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
+        }
+    }
+}
 
 @end
 

@@ -25,6 +25,7 @@
 - (void)removeEventsObject:(NSManagedObject *)value;
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
+
 - (void)addNewsObject:(NSManagedObject *)value;
 - (void)removeNewsObject:(NSManagedObject *)value;
 - (void)addNews:(NSSet *)values;

@@ -8,6 +8,7 @@
 
 #import "SettingsDetailViewController.h"
 #import "FilterParser.h"
+#import "EvenementsParser.h"
 
 #define FILTER_CERCLES 0
 #define FILTER_CLUBS 1
@@ -32,6 +33,7 @@ NSMutableDictionary *themesDico;
     }
     return self;
 }
+BOOL changed = 0;
 
 - (void)viewDidLoad
 {
@@ -180,7 +182,7 @@ NSMutableDictionary *themesDico;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSArray *c = [defaults objectForKey:@"theme"];
         [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
-        [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.18]]; 
+//        [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.18]]; 
     }
     
     cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
@@ -250,6 +252,7 @@ NSMutableDictionary *themesDico;
         [defaults setObject:c forKey:@"theme"];
         [c release];
     }
+    changed = 1;
     [tableView reloadData];
 }
 
@@ -260,7 +263,7 @@ NSMutableDictionary *themesDico;
         NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
         for (int i = 0; i < [cerclesArray count]; i++) {
             [cerclesDico setObject:[cerclesChoice objectAtIndex:i] forKey:[cerclesArray objectAtIndex:i]];
-        }
+        }        
         [defaults setObject:cerclesDico forKey:@"filtreCercles"];
         
     } else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS) {
@@ -278,6 +281,13 @@ NSMutableDictionary *themesDico;
         }
         [defaults setObject:typesDico forKey:@"filtreTypes"];
     }
+    if (changed == 1) {
+        [[EvenementsParser instance] loadEventsFromFile];
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"changedEvents"];
+    }
+    changed = 0;
+
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self viewDidUnload];
 }

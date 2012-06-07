@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InfosViewController : UITableViewController
+@interface InfosViewController : UITableViewController {
+    IBOutlet UITableViewCell *topCell, *descriptionCell;
+
+}
+
+@property (nonatomic, retain) IBOutlet UITableViewCell *topCell, *descriptionCell;
 
 @end

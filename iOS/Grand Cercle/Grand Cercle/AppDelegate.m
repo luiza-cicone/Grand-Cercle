@@ -49,43 +49,6 @@
     [self.window makeKeyAndVisible];
 
     [activity startAnimating];
-    [self performSelector:@selector(startParse) withObject:nil afterDelay:0.01];
-
-    return YES;
-}
-
-- (void)startParse {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    
-    // On parse les associations
-    FilterParser *ap = [FilterParser instance];
-    [ap loadAssociations];
-    
-    if (![defaults objectForKey:@"firstRun"]) {
-        [defaults setObject:[NSDate date] forKey:@"firstRun"];
-        NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
-        for (NSString *cercle in [ap arrayCercles]) {
-            [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
-        }
-        [defaults setObject:cerclesDico forKey:@"filtreCercles"];
-        
-        NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
-        for (NSString *clubs in [ap arrayClubs]) {
-            [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
-        }
-        [defaults setObject:clubsDico forKey:@"filtreClubs"];
-        
-        NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
-        for (NSString *type in [ap arrayTypes]) {
-            [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
-        }
-        [defaults setObject:typesDico forKey:@"filtreTypes"];
-        
-        NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
-        [defaults setObject:colorArray forKey:@"theme"];
-        
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // allocate a reachability object
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.grandcercle.org"];
@@ -98,18 +61,12 @@
                                                object:nil];
     
     [reach startNotifier];
+
     
-    // On parse les événements
-    EvenementsParser *ep = [EvenementsParser instance];
-    [ep loadEvenements];
-    
-    // On parse les news
-    NewsParser *np = [NewsParser instance];
-    [np loadNews];
-    
-    // On parse les bons plans
-    BonsPlansParser *bp = [BonsPlansParser instance];
-    [bp loadBonsPlans];
+    return YES;
+}
+
+- (void)startParse {
     
     // Override point for customization after application launch.
     UINavigationController *navigationController1 = [[UINavigationController alloc] init];
@@ -127,7 +84,7 @@
     navigationController3.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
     
-    UIViewController *viewController4 = [[[InfosViewController alloc] initWithNibName:@"InfosViewController" bundle:nil] autorelease];
+    UIViewController *viewController4 = [[[InfosViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
     UINavigationController *navigationController4 = [[UINavigationController alloc] init];
     navigationController4.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
@@ -191,15 +148,102 @@
 -(void)reachabilityChanged:(NSNotification*)note
 {
     Reachability * reach = [note object];
-    
-    if([reach isReachable])
-    {
-        NSLog(@"Notification Says Reachable");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if([reach isReachable]) {
+
+        // On parse les associations
+        FilterParser *ap = [FilterParser instance];
+        [ap loadStuffFromURL];
+        
+        if (![defaults objectForKey:@"firstRun"]) {
+            [defaults setObject:[NSDate date] forKey:@"firstRun"];
+            NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
+            for (NSString *cercle in [ap arrayCercles]) {
+                [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
+            }
+            [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+            
+            NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
+            for (NSString *clubs in [ap arrayClubs]) {
+                [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
+            }
+            [defaults setObject:clubsDico forKey:@"filtreClubs"];
+            
+            NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
+            for (NSString *type in [ap arrayTypes]) {
+                [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
+            }
+            [defaults setObject:typesDico forKey:@"filtreTypes"];
+            
+            NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
+            [defaults setObject:colorArray forKey:@"theme"];
+            
+        }
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        // On parse les événements
+        EvenementsParser *ep = [EvenementsParser instance];
+        [ep loadEventsFromURL];
+        
+        // On parse les news
+        NewsParser *np = [NewsParser instance];
+        [np loadNewsFromURL];
+        
+        // On parse les bons plans
+        BonsPlansParser *bp = [BonsPlansParser instance];
+        [bp loadBonsPlansFromURL];
+
     }
     else
     {
-        NSLog(@"Notification Says UNReachable");
+        
+        // On parse les associations
+        FilterParser *ap = [FilterParser instance];
+        [ap loadStuffFromFile];
+        
+        if (![defaults objectForKey:@"firstRun"]) {
+            [defaults setObject:[NSDate date] forKey:@"firstRun"];
+            NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
+            for (NSString *cercle in [ap arrayCercles]) {
+                [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
+            }
+            [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+            
+            NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
+            for (NSString *clubs in [ap arrayClubs]) {
+                [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
+            }
+            [defaults setObject:clubsDico forKey:@"filtreClubs"];
+            
+            NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
+            for (NSString *type in [ap arrayTypes]) {
+                [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
+            }
+            [defaults setObject:typesDico forKey:@"filtreTypes"];
+            
+            NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
+            [defaults setObject:colorArray forKey:@"theme"];
+            
+        }
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        // On parse les événements
+        EvenementsParser *ep = [EvenementsParser instance];
+        [ep loadEventsFromFile];
+        
+        // On parse les news
+        NewsParser *np = [NewsParser instance];
+        [np loadNewsFromFile];
+        
+        // On parse les bons plans
+        BonsPlansParser *bp = [BonsPlansParser instance];
+        [bp loadBonsPlansFromFile];
+
     }
+    
+    [self performSelector:@selector(startParse) withObject:nil afterDelay:0.01];
+    [reach stopNotifier];
 }
 
 @end

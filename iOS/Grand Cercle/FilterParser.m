@@ -19,7 +19,7 @@ static FilterParser *instanceAssociation = nil;
     return instanceAssociation;
 }
 
-- (void) handleAssociations:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
+- (void) handleStuff:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
     
 	do {
         // Récupération du nom de l'association
@@ -36,7 +36,7 @@ static FilterParser *instanceAssociation = nil;
     
 }
 
-- (void)loadAssociations { 
+- (void)loadStuffFromURL { 
     
     // Initialisation du tableau contenant les News
     arrayCercles = [[NSMutableArray alloc] initWithCapacity:3];
@@ -47,32 +47,22 @@ static FilterParser *instanceAssociation = nil;
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
         // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self handleAssociations:tbxmlDocument.rootXMLElement->firstChild toArray:arrayCercles];
+            [self handleStuff:tbxmlDocument.rootXMLElement->firstChild toArray:arrayCercles];
     };
     TBXMLSuccessBlock successBlock2 = ^(TBXML *tbxmlDocument) {
         // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self handleAssociations:tbxmlDocument.rootXMLElement->firstChild toArray:arrayClubs];
+            [self handleStuff:tbxmlDocument.rootXMLElement->firstChild toArray:arrayClubs];
     };
     TBXMLSuccessBlock successBlock3 = ^(TBXML *tbxmlDocument) {
         // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self handleAssociations:tbxmlDocument.rootXMLElement->firstChild toArray:arrayTypes];
+            [self handleStuff:tbxmlDocument.rootXMLElement->firstChild toArray:arrayTypes];
     };
     
     // Create a failure block that gets called if something goes wrong
     TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-        UIAlertView *xmlError = [[UIAlertView alloc] initWithTitle:@"Erreur"
-                                              message:@"Une erreur a intervenu dans la mise a jour des informations"
-                                             delegate:self
-                                    cancelButtonTitle:@"OK"
-                                    otherButtonTitles:@"Reesayer", nil];
-        [xmlError show];
-        });
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-
     };
     
     // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
@@ -84,15 +74,70 @@ static FilterParser *instanceAssociation = nil;
                                failure:failureBlock];
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/types/data.xml"] 
                                    success:successBlock3 
-                                   failure:failureBlock];   
+                                   failure:failureBlock];
+}
+
+-(void) loadStuffFromFile {
+    arrayCercles = [[NSMutableArray alloc] initWithCapacity:3];
+    arrayClubs = [[NSMutableArray alloc] initWithCapacity:3];
+    arrayTypes = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    NSError *error = nil;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
 
     
-}
-#pragma mark - Alert View Delegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        [self loadAssociations];
+    NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"cercles.xml"]];    
+    NSData * data2 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"clubs.xml"]];    
+    NSData * data3 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"types.xml"]];    
+    
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+            [self handleStuff:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayCercles];
+        }
     }
+    
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data2 error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+            [self handleStuff:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayClubs];
+        }
+    }
+
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data3 error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+            [self handleStuff:[TBXML childElementNamed:@"taxonomy_term_data" parentElement:tbxml.rootXMLElement] toArray:arrayTypes];
+        }
+    }
+
 }
+
 @end
 

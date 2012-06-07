@@ -25,11 +25,11 @@ static NewsParser *instanceNews = nil;
 	do {
 
         // Définition de la news à récupérer
-        News *aNews = [[News alloc] init];
+        NewsOld *aNews = [[NewsOld alloc] init];
         
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsAParser];
-        aNews.title = [[TBXML textForElement:title]  stringByConvertingHTMLToPlainText];
+        aNews.title = [[TBXML textForElement:title] stringByConvertingHTMLToPlainText];
         
         // Récupération de la description
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:newsAParser];
@@ -54,15 +54,14 @@ static NewsParser *instanceNews = nil;
         // Récupération du logo
         TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:newsAParser];
         aNews.logo = [[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
-        
+
         // Ajout de la news au tableau
         [arrayNews addObject:aNews];
         [aNews release];
-        
 	} while ((newsAParser = newsAParser->nextSibling));
 }
 
-- (void)loadNews { 
+- (void)loadNewsFromURL { 
     
     // Initialisation du tableau contenant les News
     arrayNews = [[NSMutableArray alloc] initWithCapacity:10];
@@ -84,7 +83,35 @@ static NewsParser *instanceNews = nil;
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/news/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
+}
 
+-(void) loadNewsFromFile {
+    arrayNews = [[NSMutableArray alloc] initWithCapacity:10];
+
+    NSError *error = nil;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *filename = @"news.xml";
+    
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
+    NSData * data = [NSData dataWithContentsOfFile:filePath];    
+
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+                [self treatementNews:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
+        }
+    }
 }
 
 @end
