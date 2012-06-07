@@ -6,7 +6,7 @@
 	android:padding="3dp"
 	android:orientation="vertical"
 	android:background="@drawable/tab_bg_selector"
-	>
+		>
 	<ImageView
 	    	android:id="@+id/tabEventIcone"
 			android:layout_width="fill_parent"

@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 public class TabNews extends Activity {
+	TabHost tabHost;
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +30,15 @@ public class TabNews extends Activity {
         } else {
         	Toast.makeText(TabNews.this,"Pas de news !",Toast.LENGTH_LONG).show();
         }
+       
         
 	}
+	 public void onResume() {
+		 super.onResume();
+		 int color = 0xFFFFFFFF;
+		 GCM.changeTabHost(color);
+		 GCM.oldchild = 1;
+	 }
 	 
 	 private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {				

@@ -16,9 +16,10 @@ import android.widget.TabHost;
 
 public class GCM extends TabActivity {
 
-	private TabHost tabHost;
+	private static TabHost tabHost;
 	private int [] layoutTab;
-	private DataBase dataBase;
+	private static DataBase dataBase;
+	static int oldchild;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class GCM extends TabActivity {
 		//setupTab("TabPref", new Intent().setClass(this, TabPref.class),4);
 		setupTab("TabPref",new Intent().setClass(this,TabPref.class),4);
 		//this.tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+		
 	}
 	
 	@Override
@@ -52,20 +54,9 @@ public class GCM extends TabActivity {
 	    System.runFinalizersOnExit(true);
 	    System.exit(0);
 	}
-	public class  HexaToInteger{
-		  public void main(String[] args) throws IOException{
-		  BufferedReader read = 
-		  new BufferedReader(new InputStreamReader(System.in));
-		  System.out.println("Enter the hexadecimal value:!");
-		  String s = read.readLine();
-		  int i = Integer.valueOf(s, 16).intValue();
-		  System.out.println("Integer:=" + i);
-		  }
-		}
-	
+
 	public void onResume() {
 		super.onResume();
-		ViewGroup view;
 		tabHost = getTabHost();
 		dataBase = DataBase.getInstance();
 		String prefered = dataBase.getPref("prefDesign","design");
@@ -73,46 +64,81 @@ public class GCM extends TabActivity {
 		int color ;
 		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        
-
 		if (prefered.equals("Noir")) {
 		     color = 0xFF000000;
-				for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-	        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+		     for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
+	        	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if(prefered.equals("Ensimag")) {
 			color = 0xFF96BE0F;
 			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+       		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if (prefered.equals("Phelma")) {
 			color = 0xFFBE141E;
 			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+       		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if (prefered.equals("Ense3")) {
 			color = 0xFF004B9B;
 			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+       		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if (prefered.equals("Pagora")) {
 			color = 0xFFF09600;
 			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+       		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if (prefered.equals("GI")) {
 			color = 0xFF0096D7;
 			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+       		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if (prefered.equals("CPP")) {
 			color = 0xFFFFCD00;
 			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+       		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if (prefered.equals("Esisar")) {
 			color = 0xFF96147D;
-			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        		tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+			for(int i=0;i<tabHost.getTabWidget().getChildCount();i++){
+				tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
+			}
 		}
 		
+		color = 0xFFFFFFFF;
+		tabHost.getCurrentTabView().setBackgroundColor(color);
+		//tabHost.getCurrentTabView().setBackgroundColor()
+		//view.refreshDrawableState();	
+	}
+	
+	public static void changeTabHost(int newcolor) {
+		dataBase = DataBase.getInstance();
+		String prefered = dataBase.getPref("prefDesign","design");
+		//view = tabHost.getCurrentTabView();
+		int color ;
+		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
+	        
+		if (prefered.equals("Noir")) {
+		    color = 0xFF000000;
+	        tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if(prefered.equals("Ensimag")) {
+			color = 0xFF96BE0F;
+        	tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if (prefered.equals("Phelma")) {
+			color = 0xFFBE141E;
+        	tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if (prefered.equals("Ense3")) {
+			color = 0xFF004B9B;
+        	tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if (prefered.equals("Pagora")) {
+			color = 0xFFF09600;
+        	tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if (prefered.equals("GI")) {
+			color = 0xFF0096D7;
+			tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if (prefered.equals("CPP")) {
+			color = 0xFFFFCD00;
+			tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		} else if (prefered.equals("Esisar")) {
+			color = 0xFF96147D;
+			tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
+		}
 		
-		//view.refreshDrawableState();
-		
-		
-			
+		tabHost.getCurrentTabView().setBackgroundColor(newcolor);
 	}
 	
 	// inclut l'onglet dans la barre d'onglets en haut de l'écran

@@ -133,7 +133,6 @@ public class DataBase extends SQLiteOpenHelper {
 				list.add(name);
 			} while (cursor.moveToNext());
 		}
-		db.close();
 		return list;
 	}
 	
@@ -145,7 +144,6 @@ public class DataBase extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			string = cursor.getString(0);
 		}
-		db.close();
 		return string;
 	}
 	

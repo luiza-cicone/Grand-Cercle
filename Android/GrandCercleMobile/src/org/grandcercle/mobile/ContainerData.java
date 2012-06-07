@@ -234,8 +234,8 @@ public class ContainerData {
 		try {
 			String path = "http://www.grandcercle.org/evenements/data.xml";
 			urlEvent = new URL(path);
-			DataBase.getInstance().deleteEvent();
-			DataBase.getInstance().storeTextToDataBase(path,"event");
+			//DataBase.getInstance().deleteEvent();
+			//DataBase.getInstance().storeTextToDataBase(path,"event");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
@@ -244,8 +244,8 @@ public class ContainerData {
 		try {
 			String path = "http://www.grandcercle.org/evenements/data-old.xml";
 			urlEventOld = new URL(path);
-			DataBase.getInstance().deleteEvent();
-			DataBase.getInstance().storeTextToDataBase(path,"eventOld");
+			//DataBase.getInstance().deleteEvent();
+			//DataBase.getInstance().storeTextToDataBase(path,"eventOld");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}

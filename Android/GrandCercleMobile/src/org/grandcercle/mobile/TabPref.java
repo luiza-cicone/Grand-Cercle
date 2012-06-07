@@ -34,8 +34,10 @@ public class TabPref extends Activity {
 
 	public void onResume() {
 		super.onResume();
+		int color = 0xFFFFFFFF;
+		GCM.changeTabHost(color);
+		GCM.oldchild = 4;
 		View view = findViewById(R.id.bandeau);
-		int color ;
 		dataBase = DataBase.getInstance();
 		String prefered = dataBase.getPref("prefDesign","design");
 		if (prefered.equals("Noir")) {
@@ -63,6 +65,8 @@ public class TabPref extends Activity {
 			color = 0xFF96147D;
 			view.setBackgroundColor(color);
 		}
+		view = findViewById(R.id.bandeau2);
+		view.setBackgroundColor(color);
 	}
 	
 	private View.OnClickListener clickListenerPrefCercle = new View.OnClickListener() {

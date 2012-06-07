@@ -47,13 +47,15 @@ public class TabEvent extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("TabEvent", "OnCreate()");
 		setContentView(R.layout.affichage_event);
 	}
 	
 	// Méthode rappelé quand on revient sur l'onglet événements après avoir touché aux préférences
 	public void onResume() {
 		super.onResume();
+		int color = 0xFFFFFFFF;
+		GCM.changeTabHost(color);
+		GCM.oldchild = 0;
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();

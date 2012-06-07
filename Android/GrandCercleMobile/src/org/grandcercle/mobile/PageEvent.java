@@ -17,10 +17,42 @@ public class PageEvent extends Activity {
 	private Spanned description;
 	private String lieu;
 	private String date;
+	private DataBase dataBase;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.description_event);
+		View view = findViewById(R.id.fond_event1);
+		int color  = 0xFFFFFFFF;
+		dataBase = DataBase.getInstance();
+		String prefered = dataBase.getPref("prefDesign","design");
+		if (prefered.equals("Noir")) {
+			color = 0xFF000000;
+			view.setBackgroundColor(color);
+		} else if(prefered.equals("Ensimag")) {
+			color = 0xFF96BE0F;
+			view.setBackgroundColor(color);
+		} else if (prefered.equals("Phelma")) {
+			color = 0xFFBE141E;
+			view.setBackgroundColor(color);
+		} else if (prefered.equals("Ense3")) {
+			color = 0xFF004B9B;
+			view.setBackgroundColor(color);
+		} else if (prefered.equals("Pagora")) {
+			color = 0xFFF09600;
+			view.setBackgroundColor(color);
+		} else if (prefered.equals("GI")) {
+			color = 0xFF0096D7;
+			view.setBackgroundColor(color);
+		} else if (prefered.equals("CPP")) {
+			color = 0xFFFFCD00;
+			view.setBackgroundColor(color);
+		} else if (prefered.equals("Esisar")) {
+			color = 0xFF96147D;
+			view.setBackgroundColor(color);
+		}
+		view = findViewById(R.id.fond_event2);
+		view.setBackgroundColor(color);
 		
 		// Recuperation des paramÃštres
 		Bundle param = this.getIntent().getExtras();
