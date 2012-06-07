@@ -94,7 +94,6 @@ public class DesignPref extends Activity {
 			toast.setView(layout);
 			toast.show();
 			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
-			new ParsingProcessing().execute((Void)null);
 			finish();
 		}
 	};
@@ -106,22 +105,7 @@ public class DesignPref extends Activity {
 		}
 	};
 	
-private class ParsingProcessing extends AsyncTask<Void,Integer,Void> {
-		
-		@Override
-	    protected Void doInBackground(Void... params) {
-			ContainerData.parseEvent();
-			return null;
-	    }
 
-		@Override
-	    protected void onProgressUpdate(Integer... progress) {
-	        progressBarParse.setProgress(progress[0]);
-	    }
-
-		@Override
-	    protected void onPostExecute(Void result) {}
-	}
 
 
 }
