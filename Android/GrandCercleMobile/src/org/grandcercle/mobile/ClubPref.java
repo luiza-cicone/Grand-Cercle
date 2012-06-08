@@ -48,8 +48,6 @@ public class ClubPref extends Activity {
 		}
 		View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
-		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
-		buttonCancel.setOnClickListener(CancelClicked);
 	}
 
 	
@@ -71,13 +69,6 @@ public class ClubPref extends Activity {
 			toast.show();
 			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
 			new ParsingProcessing().execute((Void)null);
-			finish();
-		}
-	};
-	
-	
-	private OnClickListener CancelClicked = new OnClickListener() {
-		public void onClick(View v) {
 			finish();
 		}
 	};

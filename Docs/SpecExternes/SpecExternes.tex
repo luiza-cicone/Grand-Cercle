@@ -203,18 +203,23 @@ $ $\\
 \clearpage
 
 \section{Interface utilisateur abstraite}
+\subsection{Principale}
+\vfill
+\begin{figure}[h!]
+\includegraphics[width=18cm,height=8cm]{IUAprincipale.png}
+\end{figure}
+
 \subsection{Événements}
 \vfill
 \begin{figure}[h!]
 \includegraphics[width=18cm,height=8cm]{IUAevenements.png}
 \end{figure}
+\clearpage
 \subsection{Bons plans et News}
 
 \begin{figure}[h!]
 \includegraphics[width=18cm,height=8cm]{IUAnewsbonsplans.png}
 \end{figure}
-\vfill
-\clearpage
 
 \subsection{Préférences}
 \begin{figure}[h!]
@@ -328,6 +333,9 @@ Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les évé
 \end{figure}
 
 \subsubsection{Pages paramètres}
+
+En ce qui concerne les préférences utilisateurs, tous les choix se feront par le biais de checkbox comme pour l'application Android mais il n'y aura pas de boutton pour valider les choix effectués par les utilisateurs. 
+En effet, les choix de thème seront pris en compte immédiatement après le "check" et les choix de filtre seront pris en compte quand l'utilisateur sortira de la page courante où il formule ses choix.
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
@@ -381,6 +389,7 @@ Les sketching de l'application Android ont été réalisés avec un plugin d'ecl
 \clearpage
 
 \subsubsection{Pages news}
+Dans cette section, l'onglet actif est l'onglet "News".
 \vfill
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.50\linewidth}
@@ -397,6 +406,7 @@ Les sketching de l'application Android ont été réalisés avec un plugin d'ecl
 \end{figure}
 
 \subsubsection{Pages bons plans}
+Dans cette section, l'onglet actif est l'onglet "Bons plans".
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
@@ -414,6 +424,8 @@ Les sketching de l'application Android ont été réalisés avec un plugin d'ecl
 \clearpage
 
 \subsubsection{Page informations}
+Dans cette section, l'onglet actif est l'onglet "Infos".
+La page information présente sur la même page deux liens cliquables et une description du Grand Cercle de Grenoble INP.
 \vfill
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.50\linewidth}
@@ -424,16 +436,24 @@ Les sketching de l'application Android ont été réalisés avec un plugin d'ecl
 \end{figure}
 
 \subsubsection{Pages paramètres}
+Dans cette section, l'onglet actif est l'onglet "Paramètres". 
+Pour sauvegarder ses préférences, il est nécessaire d'appuyer sur le bouton "OK" avant de quitter la fenêtre. La sauvegarde est effectuée au moment de l'appui sur ce bouton
 \begin{figure}[htbp]
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Param.png}
 		\end{center}
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Filtre.png}
+		\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{.32\linewidth}
+		\begin{center}
+			\includegraphics[scale=0.3]{../../Sketch/Android/Design.png}
 		\end{center}
 	\end{minipage}
 \end{figure}
