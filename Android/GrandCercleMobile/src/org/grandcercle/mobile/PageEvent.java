@@ -1,12 +1,14 @@
 package org.grandcercle.mobile;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ public class PageEvent extends Activity {
 	private Spanned description;
 	private String lieu;
 	private String date;
+	private String eventDate;
 	private DataBase dataBase;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class PageEvent extends Activity {
 		((TextView)findViewById(R.id.lieu)).setText(lieu);
 		((TextView)findViewById(R.id.group)).setText(param.getString("group"));
 		
+		eventDate = param.getString("eventDate");
+		
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.image),param.getString("image"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
@@ -80,49 +85,14 @@ public class PageEvent extends Activity {
 	}
 
 	public static long convertDateToLong(String d) {
-		int index0 = d.indexOf(" ");
+		int index0 = d.indexOf("-");
 		String sub = d.substring(index0+1);
-		int index1 = sub.indexOf(" ");
+		int index1 = sub.indexOf("-");
 		String day = d.substring(0,index0);
 		String month = d.substring(index0+1,index0+index1+1);
 		String year = d.substring(index0+index1+2,d.length());
-		if (month.equalsIgnoreCase("Janvier")) {
-			month = "01";
-		}
-		if (month.equalsIgnoreCase("Fevrier")) {
-			month = "02";
-		}
-		if (month.equalsIgnoreCase("Mars")) {
-			month = "03";
-		}
-		if (month.equalsIgnoreCase("Avril")) {
-			month = "04";
-		}
-		if (month.equalsIgnoreCase("Mai")) {
-			month = "05";
-		}
-		if (month.equalsIgnoreCase("Juin")) {
-			month = "06";
-		}
-		if (month.equalsIgnoreCase("Juillet")) {
-			month = "07";
-		}
-		if (month.equalsIgnoreCase("Août")) {
-			month = "08";
-		}
-		if (month.equalsIgnoreCase("Septembre")) {
-			month = "09";
-		}
-		if (month.equalsIgnoreCase("Octobre")) {
-			month = "10";
-		}
-		if (month.equalsIgnoreCase("Novembre")) {
-			month = "11";
-		}
-		if (month.equalsIgnoreCase("Decembre")) {
-			month = "12";
-		}
-		Calendar c = Calendar.getInstance();
+
+		Calendar c = Calendar.getInstance(Locale.FRANCE);
 		c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
 		c.set(Calendar.MONTH, Integer.parseInt(month)-1);
 		c.set(Calendar.YEAR, Integer.parseInt(year));
@@ -133,8 +103,9 @@ public class PageEvent extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(Intent.ACTION_EDIT);
 			intent.setType("vnd.android.cursor.item/event");
-			long beginTime = convertDateToLong(date);
+			long beginTime = convertDateToLong(eventDate);
 			intent.putExtra("beginTime",beginTime);
+			intent.putExtra("endTime",beginTime);
 			intent.putExtra("allDay",true);
 			intent.putExtra("title",title);
 			intent.putExtra("description",description.toString());

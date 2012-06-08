@@ -215,6 +215,7 @@ public class TabEvent extends Activity {
 			bundle.putString("image",((Event)parent.getItemAtPosition(position)).getImage());
 			bundle.putString("day",((Event)parent.getItemAtPosition(position)).getDay());
 			bundle.putString("date",((Event)parent.getItemAtPosition(position)).getDate());
+			bundle.putString("eventDate",((Event)parent.getItemAtPosition(position)).getEventDate());
 			bundle.putString("time",((Event)parent.getItemAtPosition(position)).getTime());
 			bundle.putString("lieu",((Event)parent.getItemAtPosition(position)).getLieu());
 			bundle.putString("logo",((Event)parent.getItemAtPosition(position)).getLogo());
@@ -238,6 +239,7 @@ public class TabEvent extends Activity {
 			bundle.putString("image",lea.getItem(images.indexOf(v)).getImage());
 			bundle.putString("day",lea.getItem(images.indexOf(v)).getDay());
 			bundle.putString("date",lea.getItem(images.indexOf(v)).getDate());
+			bundle.putString("eventDate",lea.getItem(images.indexOf(v)).getEventDate());
 			bundle.putString("time",lea.getItem(images.indexOf(v)).getTime());
 			bundle.putString("lieu",lea.getItem(images.indexOf(v)).getLieu());
 			bundle.putString("logo",lea.getItem(images.indexOf(v)).getLogo());
