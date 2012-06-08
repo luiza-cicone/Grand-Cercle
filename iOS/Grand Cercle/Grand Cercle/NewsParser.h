@@ -11,7 +11,7 @@
 #import "TBXML.h"
 #import "NSString+HTML.h"
 
-#import "News.h"
+#import "NewsOld.h"
 
 @interface NewsParser : NSObject {
 
@@ -26,7 +26,8 @@
 // Unique instance du parser
 + (NewsParser *) instance;
 // Méthode récupérant l'ensemble des news
-- (void) loadNews;
+- (void) loadNewsFromURL;
+- (void) loadNewsFromFile;
 - (void) treatementNews:(TBXMLElement *)element;
 
 @end

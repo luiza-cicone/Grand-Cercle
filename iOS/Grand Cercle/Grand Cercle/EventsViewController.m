@@ -11,6 +11,8 @@
 #import "EventsTableViewController.h"
 #import "EventFourNextViewController.h"
 
+#import "EvenementsParser.h"
+
 @interface EventsViewController ()
 
 @end
@@ -37,15 +39,26 @@ int kNumberOfPages = 3;
     }
     return self;
 }
-	
+
 -(void)viewDidAppear:(BOOL)animated {
     
-NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-NSArray *c = [defaults objectForKey:@"theme"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    if ([[defaults objectForKey:@"changedEvents"] boolValue] == 1) {
+        [self viewDidUnload];
+
+        [self viewDidLoad];
+        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"changedEvents"];
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"reloadEvents"];
+    }
     
-[self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+    NSArray *c = [defaults objectForKey:@"theme"];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
 //[[self.tabBarController tabBar] setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]]; 
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
 }
 
 - (void)viewDidUnload
@@ -57,7 +70,7 @@ NSArray *c = [defaults objectForKey:@"theme"];
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation != UIInterfaceOrientationLandscapeLeft && interfaceOrientation != UIInterfaceOrientationLandscapeRight);
 }
 
 - (void)dealloc {
@@ -69,6 +82,8 @@ NSArray *c = [defaults objectForKey:@"theme"];
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"view did load");
+
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
     for (unsigned i = 0; i < kNumberOfPages; i++) {
         [controllers addObject:[NSNull null]];

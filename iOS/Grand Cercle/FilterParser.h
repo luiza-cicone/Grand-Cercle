@@ -11,7 +11,7 @@
 #import "TBXML.h"
 #import "NSString+HTML.h"
 
-@interface FilterParser : NSObject <UIAlertViewDelegate> {
+@interface FilterParser : NSObject {
     // Parser
     TBXML *tbxml;
     // Ensemble des cercles et des clubs
@@ -24,8 +24,9 @@
 // Unique instance du parser
 + (FilterParser *) instance;
 // Méthode récupérant l'ensemble des news
-- (void)loadAssociations;
-- (void) handleAssociations:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
+- (void)loadStuffFromURL;
+- (void)loadStuffFromFile;
+- (void) handleStuff:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
 
 @end
 

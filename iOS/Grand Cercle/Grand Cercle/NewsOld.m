@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "News.h"
+#import "NewsOld.h"
 
-@implementation News
+@implementation NewsOld
 @synthesize pubDate, author, group;
     
     - (id) init {
