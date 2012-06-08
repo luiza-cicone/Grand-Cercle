@@ -72,6 +72,7 @@ public class ListEventAdapter extends BaseAdapter {
 		}
 		
 		ev.group.setText(listEvent.get(position).getGroup());
+		ev.title.setTextSize(18);
 		ev.title.setText(listEvent.get(position).getTitle());
 		ev.lieu.setText(listEvent.get(position).getLieu());
 		ev.date.setText(listEvent.get(position).getDate());

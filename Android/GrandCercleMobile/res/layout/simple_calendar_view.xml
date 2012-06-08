@@ -19,13 +19,11 @@
 		android:layout_height="250dp"
 		android:background="@drawable/transparent"
 		>
-		
-
 		<Button
 			android:id="@+id/selectedDayMonthYear"
 			android:layout_gravity="center"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:background="@drawable/calendar_top_header_phelma"
+			android:background="@drawable/calendar_bar_gris"
 			android:layout_width="wrap_content"
 			android:layout_height="24dp"
 			android:layout_marginTop="2dp">
@@ -48,7 +46,7 @@
 				android:id="@+id/currentMonth"
 				android:layout_weight="0.6"
 				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:background="@drawable/calendar_bar_ense3"
+				android:background="@drawable/calendar_bar_gris"
 				android:layout_width="wrap_content"
 				android:layout_height="24dp"
 				android:layout_marginTop="3dp">
