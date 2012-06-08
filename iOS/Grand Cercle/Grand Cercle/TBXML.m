@@ -610,11 +610,11 @@
 	
 	// set parent element to nil
 	TBXMLElement * parentXMLElement = nil;
-	
-    if ((elementStart != strstr(elementStart,"<?xml"))) {
-        return;
-    }
-    
+//	
+//    if ((elementStart != strstr(elementStart,"<?xml"))) {
+//        return;
+//    }
+//    
 	// find next element start
 	while ((elementStart = strstr(elementStart,"<"))) {
 		// detect comment section

@@ -24,7 +24,8 @@
 // Unique instance du parser
 + (BonsPlansParser *) instance;
 // Méthode récupérant l'ensemble des bons plans
-- (void) loadBonsPlans;
+- (void) loadBonsPlansFromURL;
+- (void) loadBonsPlansFromFile;
 - (void) treatementBonsPlans:(TBXMLElement *)element;
 
 @end

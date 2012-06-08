@@ -18,7 +18,7 @@ public class PageNews extends Activity {
 		dataBase = DataBase.getInstance();
 		String prefered = dataBase.getPref("prefDesign","design");
 		if (prefered.equals("Noir")) {
-			color = 0xFF000000;
+			color = 0xFF222222;
 			view.setBackgroundColor(color);
 		} else if(prefered.equals("Ensimag")) {
 			color = 0xFF96BE0F;

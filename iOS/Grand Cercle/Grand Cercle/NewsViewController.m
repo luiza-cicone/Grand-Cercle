@@ -30,7 +30,7 @@
     urlArray = [[NSMutableArray alloc] initWithCapacity:[newsArray count]];
     
     for (int i = 0; i < [newsArray count]; i++) {
-        News *n = [newsArray objectAtIndex:i];
+        NewsOld *n = [newsArray objectAtIndex:i];
         [urlArray addObject:[n logo]];
     }
 	
@@ -147,7 +147,7 @@
         self.newsCell = nil;
     }
     
-    News *n = (News *)[newsArray objectAtIndex:[indexPath row]];
+    NewsOld *n = (NewsOld *)[newsArray objectAtIndex:[indexPath row]];
     
     
     UIImageView *imageView;
@@ -215,7 +215,7 @@
 {
     
     NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    News *n = [newsArray objectAtIndex:[indexPath row]];
+    NewsOld *n = [newsArray objectAtIndex:[indexPath row]];
     detailViewController.news = n;
     
     [self.navigationController pushViewController:detailViewController animated:YES];

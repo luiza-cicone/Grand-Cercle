@@ -62,6 +62,7 @@
     }
 }
 
+
 - (void) viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
 	
@@ -166,6 +167,7 @@
 }
 
 
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -181,7 +183,6 @@
     detailEventController = nil;
 }
 
-
 - (void) generateDataForStartDate:(NSDate*)start endDate:(NSDate*)end{
 	// this function sets up dataArray & dataDictionary
 	// dataArray: has boolean markers for each day to pass to the calendar view (via the delegate function)
@@ -190,6 +191,7 @@
     NSArray *theDates = [[EvenementsParser instance] arrayEvents];     
     theDates = [theDates arrayByAddingObjectsFromArray:[[EvenementsParser instance] arrayOldEvents]];
 
+    
     
 	self.dataArray = [NSMutableArray array];
 	self.dataDictionary = [NSMutableDictionary dictionary];

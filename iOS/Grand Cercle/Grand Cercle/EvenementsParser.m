@@ -102,14 +102,6 @@ static EvenementsParser *instanceEvent = nil;
         TBXMLElement *place = [TBXML childElementNamed:@"lieu" parentElement:eventsToParse];
         aEvent.place = [[TBXML textForElement:place] stringByConvertingHTMLToPlainText];
 
-        // Récupération du prix avec CVA
-        TBXMLElement *priceCVA = [TBXML childElementNamed:@"paf" parentElement:eventsToParse];
-        aEvent.priceCva = [[TBXML textForElement:priceCVA] stringByConvertingHTMLToPlainText];
-
-        // Récupération du prix sans CVA
-        TBXMLElement *priceNoCva = [TBXML childElementNamed:@"paf_sans_cva" parentElement:eventsToParse];
-        aEvent.priceNoCva = [[TBXML textForElement:priceNoCva] stringByConvertingHTMLToPlainText];
-  
         // Récupération du la date
         TBXMLElement *eventDate = [TBXML childElementNamed:@"eventDate" parentElement:eventsToParse];        
         NSString *data = [[TBXML textForElement:eventDate] stringByConvertingHTMLToPlainText];
@@ -134,7 +126,7 @@ static EvenementsParser *instanceEvent = nil;
     
 }
 
-- (void)loadEvenements { 
+- (void)loadEventsFromURL { 
     
     // Initialisation du tableau contenant les News
     arrayEvents = [[NSMutableArray alloc] initWithCapacity:10];
@@ -160,8 +152,52 @@ static EvenementsParser *instanceEvent = nil;
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
-    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data-old.xml"] 
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements-old/data.xml"] 
                                success:successBlock2 
                                failure:failureBlock];
+}
+
+-(void) loadEventsFromFile {
+    arrayEvents = [[NSMutableArray alloc] initWithCapacity:10];
+    arrayOldEvents = [[NSMutableArray alloc] initWithCapacity:10];
+
+    NSError *error = nil;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+
+    NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"evenements.xml"]];    
+    NSData * data2 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"evenements-old.xml"]];    
+    
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+            [self handleEvents:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayEvents];
+        }
+    }
+    
+    // error var
+	tbxml = [[TBXML alloc] initWithXMLData:data2 error:&error];
+    
+    // if an error occured, log it    
+    if (error) {
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        
+    } else {
+        
+        // If TBXML found a root node, process element and iterate all children
+        if (tbxml.rootXMLElement){
+            [self handleEvents:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayOldEvents];
+        }
+    }
 }
 @end

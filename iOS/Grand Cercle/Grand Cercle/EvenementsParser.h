@@ -24,7 +24,8 @@
 // Unique instance du parser
 + (EvenementsParser *) instance;
 // Méthode récupérant l'ensemble des news
-- (void)loadEvenements;
+- (void)loadEventsFromFile;
+- (void)loadEventsFromURL;
 - (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
 
 @end

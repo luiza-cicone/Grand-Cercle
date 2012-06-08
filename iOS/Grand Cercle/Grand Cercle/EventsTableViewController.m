@@ -61,6 +61,18 @@
     return self;
 
 }
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    if ([[defaults objectForKey:@"reloadEvents"] boolValue] == 1) {
+        NSLog(@"reload data in table");
+        eventArray = [[EvenementsParser instance] arrayEvents];
+        [self.tView reloadData];
+        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"reloadEvents"];
+    }
+
+}
 
 - (void) newTableImageRetrieved:(NSNotification*)sender{
     

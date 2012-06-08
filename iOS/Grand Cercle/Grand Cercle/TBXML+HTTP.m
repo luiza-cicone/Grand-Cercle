@@ -64,10 +64,21 @@
 			NSURLResponse *response = nil;
 			NSError *error = nil;
 			NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
+
 			if (error) {
 				failureBlock(data,error);
 			} else {
+                // save file
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                
+                NSArray *parts = [[[request URL] path] componentsSeparatedByString:@"/"];
+                NSString *filename = [[parts objectAtIndex:[parts count]-2] stringByAppendingString:@".xml"];
+
+                NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
+                [data writeToFile:filePath atomically:YES];
+                
 				successBlock(data,response);
 			}
 		}		

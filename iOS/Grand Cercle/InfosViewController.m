@@ -8,17 +8,30 @@
 
 #import "InfosViewController.h"
 
+#define GC 0
+
+#define EXTERN 1
+#define MAIL 0
+#define SITE 1
+#define FB 2
+
+#define INFOS 2
+
 @interface InfosViewController ()
 
 @end
 
 @implementation InfosViewController
 
+@synthesize topCell, descriptionCell;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.title = NSLocalizedString(@"Infos", @"Infos");
+        self.tabBarItem.image = [UIImage imageNamed:@"infos"];
     }
     return self;
 }
@@ -26,6 +39,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [super viewDidLoad];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [backButton release]; 
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -50,25 +68,131 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+//    if (section == CONTACTS) {
+//        return 4;
+//    }
+    if (section == GC) {
+        return 1;
+    }
+    else if (section == EXTERN) {
+        return 3;
+    }
+    else if (section == INFOS) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    if (section == CONTACTS) {
+//        return @"Contacts";
+//    }
+//    else 
+    if (section == EXTERN) {
+        return @"Contact";
+    }
+    else if (section == INFOS) {
+        return @"Détails";
+    }
+    else {
+        return @"";
+    }
+}
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch (indexPath.section) {
+        case GC :
+            return 60;
+            break;
+            
+        case EXTERN :
+            return 40;
+            break;
+            
+        case INFOS :
+            return 650;
+            break;
+            
+        default :
+            return 0;
+            break;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    
+    static NSString *CellIdentifier;
+    UITableViewCell *cell;
+//    if (indexPath.section == CONTACTS) {
+//        if (indexPath.row == GC) {
+//            [cell.textLabel setText:@"Grand Cercle"];
+//        }
+//        else if (indexPath.row == ELUS) {
+//            [cell.textLabel setText:@"Elus étudiants"];
+//        }
+//        else if (indexPath.row == CERCLES) {
+//            [cell.textLabel setText:@"Cercles"];
+//        }
+//        else if (indexPath.row == CLUBS) {
+//            [cell.textLabel setText:@"Clubs & associations"];
+//        }
+//    }
+    if (indexPath.section == GC) {
+        CellIdentifier = @"InfosTopCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            [[NSBundle mainBundle] loadNibNamed:@"InfosTopCell" owner:self options:nil];
+            cell = topCell;
+            self.topCell = nil;
+        }
+    }
+    if (indexPath.section == EXTERN) {
+        CellIdentifier = @"Cell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        if (indexPath.row == SITE) {
+            [cell.textLabel setText:@"Site Web"];
+        }
+        else if (indexPath.row == FB) {
+            [cell.textLabel setText:@"Page Facebook"];
+        }
+        else if (indexPath.row == MAIL) {
+            [cell.textLabel setText:@"E-mail"];
+        }
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    }
+    else if (indexPath.section == INFOS) {
+        CellIdentifier = @"DescriptionCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            [[NSBundle mainBundle] loadNibNamed:@"InfosDescriptionCell" owner:self options:nil];
+            cell = descriptionCell;
+            self.descriptionCell = nil;
+        }
+        
+        UIWebView *tv = (UIWebView *)[cell viewWithTag:1];
+        [tv sizeToFit];
+        [tv loadHTMLString:@"<p>Le Grand Cercle, c'est l'un des plus grands BDE de France, à votre service, pour vous offrir des moments inoubliables !</p>\
+         <p>Le GC, c'est une cinquantaine d'étudiants de toutes les écoles de Grenoble INP qui s'occupent d'organiser les plus gros événements de votre année : la soirée d'intégration, la soirée d'Automne, le Gala, et tant d'autres !</p>\
+         <p>Mais son rôle, c'est aussi d'assurer le lien entre les différentes écoles et BDE, les élus et les étudiants de Grenoble INP. N'hésitez pas à nous contacter pour toute information !</p>\
+         <p>Le GC, c'est aussi une représentation nationale grâce au Bureau National des Élèves Ingénieurs (BNEI), en tant qu'administrateur, nous pouvons faire remonter vos idées ou questions !</p>\
+         <p>Enfin, et surtout, le GC, ce sont des gens toujours prêts à vous aider, en toutes circonstances : pour demander un renseignement, pour un coup de pouce sur un projet, ou tout simplement pour faire la fête ;)</p>" baseURL:nil];
+        
+    }
     return cell;
 }
 
@@ -115,14 +239,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if (indexPath.section == EXTERN) {
+        if (indexPath.row == SITE) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://grandcercle.org"]];
+        }
+        else if (indexPath.row == FB) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/grandcercle"]];
+        }
+        else if (indexPath.row == MAIL) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:grandcercle@grandcercle.org"]];            
+
+        }
+
+    }
 }
 
 @end

@@ -41,7 +41,7 @@ public class GCM extends TabActivity {
         setupTab("TabEvent", new Intent().setClass(this, TabEvent.class),0);
         setupTab("TabNews", new Intent().setClass(this, TabNews.class),1);
         setupTab("TabBP", new Intent().setClass(this, TabBP.class),2);
-		setupTab("TabInfos", new Intent().setClass(this, Tab4.class),3);
+		setupTab("TabInfos", new Intent().setClass(this, TabInfos.class),3);
 		//setupTab("TabPref", new Intent().setClass(this, TabPref.class),4);
 		setupTab("TabPref",new Intent().setClass(this,TabPref.class),4);
 		//this.tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
@@ -65,7 +65,7 @@ public class GCM extends TabActivity {
 		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        
 		if (prefered.equals("Noir")) {
-		     color = 0xFF000000;
+		     color = 0xFF222222;
 		     for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if(prefered.equals("Ensimag")) {
@@ -113,7 +113,7 @@ public class GCM extends TabActivity {
 		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        
 		if (prefered.equals("Noir")) {
-		    color = 0xFF000000;
+		    color = 0xFF222222;
 	        tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
 		} else if(prefered.equals("Ensimag")) {
 			color = 0xFF96BE0F;
