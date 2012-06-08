@@ -26,7 +26,7 @@ public class PageEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.description_event);
-		View view = findViewById(R.id.fond_event1);
+		View view = findViewById(R.id.fond_event2);
 		int color  = 0xFFFFFFFF;
 		dataBase = DataBase.getInstance();
 		String prefered = dataBase.getPref("prefDesign","design");
@@ -55,8 +55,6 @@ public class PageEvent extends Activity {
 			color = 0xFF96147D;
 			view.setBackgroundColor(color);
 		}
-		view = findViewById(R.id.fond_event2);
-		view.setBackgroundColor(color);
 		
 		// Recuperation des paramÃštres
 		Bundle param = this.getIntent().getExtras();
