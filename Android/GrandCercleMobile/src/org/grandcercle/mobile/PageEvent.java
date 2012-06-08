@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PageEvent extends Activity {
 	private String title;
@@ -103,13 +104,26 @@ public class PageEvent extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(Intent.ACTION_EDIT);
 			intent.setType("vnd.android.cursor.item/event");
+
 			long beginTime = convertDateToLong(eventDate);
 			intent.putExtra("beginTime",beginTime);
 			intent.putExtra("endTime",beginTime);
 			intent.putExtra("allDay",true);
-			intent.putExtra("title",title);
-			intent.putExtra("description",description.toString());
-			intent.putExtra("eventLocation",lieu);
+			if (title !=null) {
+				intent.putExtra("title",title);
+			} else {
+				intent.putExtra("title", "");
+			}
+			if (description !=null) {
+				intent.putExtra("description",description.toString());
+			} else {
+				intent.putExtra("description", "");
+			}
+			if (lieu !=null) {
+				intent.putExtra("eventLocation",lieu);
+			} else {
+				intent.putExtra("eventLocation", "");
+			}
 			startActivity(intent);
 		}	
 	};

@@ -26,7 +26,7 @@ public class DesignPref extends Activity {
 	private Integer[] position;
 	private String ColorChecked;
 	private ArrayList<RadioButton> listRadioButton;
-	private ProgressBar progressBarParse;
+	//private ProgressBar progressBarParse;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -86,14 +86,14 @@ public class DesignPref extends Activity {
 			ColorChecked =colors.get(i);
 			dataBase.deleteAll("prefDesign");
 			dataBase.addPref("prefDesign","design",ColorChecked);
-			LayoutInflater inflater = getLayoutInflater();
+			/*LayoutInflater inflater = getLayoutInflater();
 			View layout = inflater.inflate(R.layout.toast_parse, (ViewGroup) findViewById(R.id.toast_layout_root));
 			Toast toast = new Toast(getApplicationContext());
 			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.setDuration(Toast.LENGTH_SHORT);
 			toast.setView(layout);
 			toast.show();
-			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
+			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);*/
 			finish();
 		}
 	};
