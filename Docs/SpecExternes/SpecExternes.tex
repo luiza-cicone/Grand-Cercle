@@ -223,21 +223,44 @@ $ $\\
 \newpage
 
 \section{Sketching}
+\subsection{Remarques générales}
+
+\subsubsection{Pages événements}
+
+L'affichage des événements se fait dans trois manières différentes : par calendrier, par liste et les quatre prochaines événements . Ces trois visualisations se trouvent sur des pages distinctes et le changement de page se fait par un mouvement de gauche a droit ou de droit a gauche du doit sur l'écran tactile. Un objet standard composé de 3 indicateurs circulaires permette d'informer l'utilisateur de la page courante et de signaler le changement.
 
 \subsection{Sketching pour l'application iOS}
+Pour l'application iOS, les affichages seront implémentés en utilisant les éléments par défaut d'Apple. L'avantage du point de vue de l'utilisateur est qu'il pourra naviguer facilement dans l'application comme il reconnaîtra les différentes objets.
+
 \subsubsection{Pages événements}
-\vfill
+Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les événements groupés par date, à partir du jour présent. 
+
+
 \begin{figure}[htbp]
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_4_prochains.png}
+			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_calendar.png}
 		\end{center}
+	\caption{Calendrier}
+	\label{calendar}
+
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_liste.png}
 		\end{center}
+	\caption{Liste}
+	\label{even_liste}
+
+	\end{minipage}
+	\begin{minipage}[c]{.32\linewidth}
+		\begin{center}
+			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_4_prochains.png}
+		\end{center}
+	\caption{4 prochains}
+	\label{4_prochains}
+
 	\end{minipage}
 \end{figure}
 
@@ -247,12 +270,14 @@ $ $\\
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_detail.png}
 		\end{center}
+	\caption{Événements détail }
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_detail_plus.png}
 		\end{center}
+	\caption{Événements par liste}
 	\end{minipage}
 \end{figure}
 \vfill
