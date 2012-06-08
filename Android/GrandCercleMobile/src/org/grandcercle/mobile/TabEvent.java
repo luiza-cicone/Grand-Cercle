@@ -61,44 +61,59 @@ public class TabEvent extends Activity {
 		if (prefered.equals("Noir")) {
 			color = 0xFF222222;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gris));
-			((TextView) view).setTextColor(Color.parseColor("#FF96BE0F"));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gris));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 		} else if(prefered.equals("Ensimag")) {
 			color = 0xFF96BE0F;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ensimag));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ensimag));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 		} else if (prefered.equals("Phelma")) {
 			color = 0xFFBE141E;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_phelma));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_phelma));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 		} else if (prefered.equals("Ense3")) {
 			color = 0xFF004B9B;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ense3));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ense3));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 		} else if (prefered.equals("Pagora")) {
 			color = 0xFFF09600;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_pagora));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_pagora));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 		} else if (prefered.equals("GI")) {
 			color = 0xFF0096D7;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gi));
+			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gi));
+			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
 		} else if (prefered.equals("CPP")) {
 			color = 0xFFFFCD00;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_cpp));
+			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_cpp));
+			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
 		} else if (prefered.equals("Esisar")) {
 			color = 0xFF96147D;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_esisar));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_esisar));
+			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
 		}
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
