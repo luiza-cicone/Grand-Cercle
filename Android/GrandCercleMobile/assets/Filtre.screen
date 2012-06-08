@@ -85,10 +85,7 @@
   <widgets xsi:type="model:Label" id="46" x="208" y="435" text="Asso5" measuredWidth="121" measuredHeight="57">
     <font size="43px"/>
   </widgets>
-  <widgets xsi:type="model:Button" id="47" x="152" y="536" width="81" height="41" text="OK" measuredWidth="81" measuredHeight="41">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Button" id="48" x="296" y="536" width="81" height="41" text="Annuler" measuredWidth="81" measuredHeight="41">
+  <widgets xsi:type="model:Button" id="47" x="224" y="536" width="81" height="41" text="OK" measuredWidth="81" measuredHeight="41">
     <font/>
   </widgets>
   <hRuler/>

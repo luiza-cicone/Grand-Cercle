@@ -79,10 +79,7 @@
   <widgets xsi:type="model:Label" id="38" x="188" y="432" text="Couleur5" measuredWidth="181" measuredHeight="57">
     <font size="43px"/>
   </widgets>
-  <widgets xsi:type="model:Button" id="39" x="152" y="536" width="81" height="41" text="OK" measuredWidth="81" measuredHeight="41">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Button" id="40" x="296" y="536" width="81" height="41" text="Annuler" measuredWidth="81" measuredHeight="41">
+  <widgets xsi:type="model:Button" id="39" x="232" y="536" width="81" height="41" text="OK" measuredWidth="81" measuredHeight="41">
     <font/>
   </widgets>
   <widgets xsi:type="model:Icon" id="43" x="128" y="104" measuredWidth="32" measuredHeight="32" icon="cd (large)"/>
