@@ -80,7 +80,7 @@ public class PageEvent extends Activity {
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 		
-		((Button)findViewById(R.id.addCal)).setOnClickListener(addCalClicked);
+		((ImageView)findViewById(R.id.addCal)).setOnClickListener(addCalClicked);
 	}
 
 	public static long convertDateToLong(String d) {
