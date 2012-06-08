@@ -53,8 +53,6 @@ public class TypesPref extends Activity {
 		}
 		View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
-		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
-		buttonCancel.setOnClickListener(CancelClicked);
 	}
 	
 	private OnClickListener OKClicked = new OnClickListener() {
@@ -78,13 +76,6 @@ public class TypesPref extends Activity {
 			toast.show();
 			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
 			new ParsingProcessing().execute((Void)null);
-			finish();
-		}
-	};
-	
-	// Listener du bouton annuler
-	private OnClickListener CancelClicked = new OnClickListener() {
-		public void onClick(View v) {
 			finish();
 		}
 	};
