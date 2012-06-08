@@ -71,8 +71,6 @@ public class DesignPref extends Activity {
         listRadioButton = new ArrayList<RadioButton>();
         View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
-		View buttonCancel = this.findViewById(R.id.boutonAnnuler); 
-		buttonCancel.setOnClickListener(CancelClicked);
 	}
 	
 	private OnClickListener OKClicked = new OnClickListener() {
@@ -97,13 +95,4 @@ public class DesignPref extends Activity {
 			finish();
 		}
 	};
-	
-	
-	private OnClickListener CancelClicked = new OnClickListener() {
-		public void onClick(View v) {
-			finish();
-		}
-	};
-
-
 }
