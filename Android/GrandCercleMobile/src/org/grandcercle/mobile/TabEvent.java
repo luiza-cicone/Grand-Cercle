@@ -61,6 +61,7 @@ public class TabEvent extends Activity {
 		if (prefered.equals("Noir")) {
 			color = 0xFF222222;
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gris));
+			((TextView) view).setTextColor(Color.parseColor("#FF96BE0F"));
 			view = findViewById(R.id.currentMonth);
 			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gris));
 		} else if(prefered.equals("Ensimag")) {

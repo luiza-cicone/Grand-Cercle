@@ -23,7 +23,6 @@
 
 		<Button
 			android:id="@+id/selectedDayMonthYear"
-			android:textColor="#FFFFFF"
 			android:layout_gravity="center"
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:background="@drawable/calendar_top_header_phelma"
