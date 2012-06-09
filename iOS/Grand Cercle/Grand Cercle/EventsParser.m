@@ -6,37 +6,46 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "EvenementsParser.h"
+#import "EventsParser.h"
 
-@implementation EvenementsParser
+@implementation EventsParser
 @synthesize arrayEvents, arrayOldEvents;
-static EvenementsParser *instanceEvent = nil;
 
-// singleton
-+ (EvenementsParser *) instance {
+// Patron singleton, unique instance du parser d'événements
+static EventsParser *instanceEvent = nil;
+
+/********************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser d'événements*
+ *******************************************************************************/
++ (EventsParser *) instance {
     if (instanceEvent == nil) {
         instanceEvent = [[self alloc] init];
     }
     return instanceEvent;
 }
 
+/**************************************************
+ * Méthode récupérant les informations nécessaires*
+ *************************************************/
 - (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
-    
-    NSInteger indice = 0;
-    
+
+    // Tant qu'il y a un événement à traiter
 	do {
         
-        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
-        TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventsToParse];
-        
-        // Récupération des préférences
+        // Récupération des préférences utilisateur concernant le filtre d'événements
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];        
         NSDictionary *filtreCercles = [defaults objectForKey:@"filtreCercles"]; 
         NSDictionary *filtreClubs = [defaults objectForKey:@"filtreClubs"]; 
         NSDictionary *filtreTypes = [defaults objectForKey:@"filtreTypes"]; 
         
+        // Récupération de l'association qui organise et du type d'événement
+        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
+        TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventsToParse];
         NSString *groupString = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
         NSString *typeString = [[TBXML textForElement:type] stringByConvertingHTMLToPlainText];
+        
+        // On récupére automatiquement les informations si c'est un événement GC ou Élus étudiants
+        // Si un événement ne correspond pas au filtre, on saute à la fin du bloc
         if (![groupString isEqualToString:@"Grand Cercle"] && ![groupString isEqualToString:@"Elus étudiants"]) {
             if (![[filtreCercles objectForKey:groupString] boolValue] && ![[filtreClubs objectForKey:[TBXML textForElement:group]] boolValue])
                 continue;
@@ -46,7 +55,7 @@ static EvenementsParser *instanceEvent = nil;
         }
         
         // Définition de l'événement à récupérer
-        Evenements *aEvent = [[Evenements alloc] init];
+        Events *aEvent = [[Events alloc] init];
         
         // Récupération du type
         aEvent.type = [[TBXML textForElement:type] stringByConvertingHTMLToPlainText];
@@ -110,45 +119,44 @@ static EvenementsParser *instanceEvent = nil;
         [firstDateFormatter setDateFormat:@"dd-MM-yy hh:mm:ss zzz"];
         aEvent.eventDate = [firstDateFormatter dateFromString:data];
         [aEvent.eventDate retain];
-
-        // Indication de l'indice
-        aEvent.indice = indice;
-        indice++;
         
-        // Ajout de la news au tableau
+        // Ajout de l'événement dans le tableau
         [array addObject:aEvent];
         [firstDateFormatter release];
         [aEvent release];
-        
 
         // Obtain next sibling element
 	} while ((eventsToParse = eventsToParse->nextSibling));
     
 }
 
+/**************************************************
+ * Méthode de parsage des données du site internet*
+ *************************************************/
 - (void)loadEventsFromURL { 
     
-    // Initialisation du tableau contenant les News
+    // Initialisation des tableaux contenant les événements
     arrayEvents = [[NSMutableArray alloc] initWithCapacity:10];
     arrayOldEvents = [[NSMutableArray alloc] initWithCapacity:10];
     
-    // Create a success block to be called when the async request completes
+    // Si le premier lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
-        // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
             [self handleEvents:tbxmlDocument.rootXMLElement->firstChild toArray:arrayEvents];
     };
+    
+    // Si le deuxième lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock2 = ^(TBXML *tbxmlDocument) {
-        // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
             [self handleEvents:tbxmlDocument.rootXMLElement->firstChild toArray:arrayOldEvents];
     };
-    // Create a failure block that gets called if something goes wrong
+    
+    // Si un des liens des fichiers xml est incorrect, ce block est appelé
     TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
     };
     
-    // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
+    // Initialisation de deux objets TBXML avec les liens des fichiers xml à parser
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/test/evenements/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
@@ -157,47 +165,45 @@ static EvenementsParser *instanceEvent = nil;
                                failure:failureBlock];
 }
 
+/**********************************************************
+ * Méthode de parsage des données de la sauvegarde interne*
+ **********************************************************/
 -(void) loadEventsFromFile {
+    
+    // Initialisation des tableaux contenant les événements
     arrayEvents = [[NSMutableArray alloc] initWithCapacity:10];
     arrayOldEvents = [[NSMutableArray alloc] initWithCapacity:10];
 
-    NSError *error = nil;
-    
+    // Récupération du chemin de la sauvegarde interne
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
-
+    // Initialisation du fichier TBXML avec le chemin de la sauvegarde interne
+    NSError *error = nil;
     NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"evenements.xml"]];    
-    NSData * data2 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"evenements-old.xml"]];    
-    
-    // error var
 	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
     
-    // if an error occured, log it    
     if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur    
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-        
     } else {
-        
-        // If TBXML found a root node, process element and iterate all children
-        if (tbxml.rootXMLElement){
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
             [self handleEvents:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayEvents];
-        }
     }
     
-    // error var
-	tbxml = [[TBXML alloc] initWithXMLData:data2 error:&error];
-    
-    // if an error occured, log it    
+    // Initialisation du fichier TBXML avec le chemin de la sauvegarde interne
+    NSData * data2 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"evenements-old.xml"]];    
+    tbxml = [[TBXML alloc] initWithXMLData:data2 error:&error];
+
     if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur    
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-        
     } else {
-        
-        // If TBXML found a root node, process element and iterate all children
-        if (tbxml.rootXMLElement){
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
             [self handleEvents:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayOldEvents];
-        }
     }
 }
+
 @end

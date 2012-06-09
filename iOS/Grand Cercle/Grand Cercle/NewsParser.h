@@ -11,23 +11,25 @@
 #import "TBXML.h"
 #import "NSString+HTML.h"
 
-#import "NewsOld.h"
+#import "News.h"
 
 @interface NewsParser : NSObject {
-
     // Parser
     TBXML *tbxml;
-    // Ensemble des News
+    // Tableau contenant les News
 	NSMutableArray *arrayNews;
 }
 
 @property(nonatomic, retain) NSMutableArray *arrayNews;
 
-// Unique instance du parser
+// Patron singleton, unique instance du parser de news
 + (NewsParser *) instance;
-// Méthode récupérant l'ensemble des news
+
+// Méthode récupérant l'ensemble des news depuis le site
 - (void) loadNewsFromURL;
+// Méthode récupérant l'ensemble des news depuis une sauvegarde locale
 - (void) loadNewsFromFile;
-- (void) treatementNews:(TBXMLElement *)element;
+// Méthode appelée par les autres pour récupérer les informations nécéssaires
+- (void) handleNews:(TBXMLElement *)newsToParse;
 
 @end

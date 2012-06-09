@@ -7,8 +7,8 @@
 //
 
 #import "EventsTableViewController.h"
-#import "Evenements.h"
-#import "EvenementsParser.h"
+#import "Events.h"
+#import "EventsParser.h"
 #import "EventDetailViewController.h"
 
 
@@ -23,13 +23,13 @@
         // Custom initialization
     }    
     
-    eventArray = [[EvenementsParser instance] arrayEvents];
+    eventArray = [[EventsParser instance] arrayEvents];
     
     //configure sections
     eventDico = [[NSMutableDictionary alloc] init];
     
     for (int i = 0; i < [eventArray count]; i++) {
-        Evenements *event = [eventArray objectAtIndex:i];
+        Events *event = [eventArray objectAtIndex:i];
         
         NSMutableArray *eventsOnThisDay = [eventDico objectForKey:event.eventDate];
         if (eventsOnThisDay == nil) {
@@ -67,7 +67,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     if ([[defaults objectForKey:@"reloadEvents"] boolValue] == 1) {
         NSLog(@"reload data in table");
-        eventArray = [[EvenementsParser instance] arrayEvents];
+        eventArray = [[EventsParser instance] arrayEvents];
         [self.tView reloadData];
         [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"reloadEvents"];
     }
@@ -157,7 +157,7 @@
     NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
     id theDate = [dates objectAtIndex:section];
     id eventList = [eventDico objectForKey:theDate];
-    Evenements *e = [eventList objectAtIndex:0];
+    Events *e = [eventList objectAtIndex:0];
     
     NSDate *curentDate = [NSDate date];
     NSDate *eventDate = [e eventDate];
@@ -195,7 +195,7 @@
     id theDate = [dates objectAtIndex:indexPath.section];
 
     id eventList = [eventDico objectForKey:theDate];
-    Evenements *e = (Evenements *)[eventList objectAtIndex:indexPath.row];
+    Events *e = (Events *)[eventList objectAtIndex:indexPath.row];
     
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
@@ -273,7 +273,7 @@
     NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
     id theDate = [dates objectAtIndex:indexPath.section];
     NSArray *listeEvent = [eventDico objectForKey:theDate];
-    Evenements *selectedEvent = [listeEvent objectAtIndex:indexPath.row];
+    Events *selectedEvent = [listeEvent objectAtIndex:indexPath.row];
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     detailEventController.event = selectedEvent;

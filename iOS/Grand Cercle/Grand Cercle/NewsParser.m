@@ -9,11 +9,14 @@
 #import "NewsParser.h"
 
 @implementation NewsParser
-static NewsParser *instanceNews = nil;
-
 @synthesize arrayNews;
 
-// singleton
+// Patron singleton, unique instance du parser de news
+static NewsParser *instanceNews = nil;
+
+/***************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser de news*
+ **************************************************************************/
 + (NewsParser *) instance {
     if (instanceNews == nil) {
         instanceNews = [[self alloc] init];
@@ -21,11 +24,15 @@ static NewsParser *instanceNews = nil;
     return instanceNews;
 }
 
-- (void) treatementNews:(TBXMLElement *)newsAParser {
+/**************************************************
+ * Méthode récupérant les informations nécessaires*
+ *************************************************/
+- (void) handleNews:(TBXMLElement *)newsAParser {
+    
+    // Tant qu'il y a une news à traiter
 	do {
-
-        // Définition de la news à récupérer
-        NewsOld *aNews = [[NewsOld alloc] init];
+        // Initialisation de la news à récupérer
+        News *aNews = [[News alloc] init];
         
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsAParser];
@@ -55,61 +62,64 @@ static NewsParser *instanceNews = nil;
         TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:newsAParser];
         aNews.logo = [[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
 
-        // Ajout de la news au tableau
+        // Ajout de la news dans le tableau
         [arrayNews addObject:aNews];
         [aNews release];
+        
 	} while ((newsAParser = newsAParser->nextSibling));
 }
 
+/**************************************************
+ * Méthode de parsage des données du site internet*
+ *************************************************/
 - (void)loadNewsFromURL { 
     
     // Initialisation du tableau contenant les News
     arrayNews = [[NSMutableArray alloc] initWithCapacity:10];
     
-    // Create a success block to be called when the async request completes
+    // Si le lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
-        // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self treatementNews:tbxmlDocument.rootXMLElement->firstChild];
+            [self handleNews:tbxmlDocument.rootXMLElement->firstChild];
     };
 
-    
-    // Create a failure block that gets called if something goes wrong
+    // Si le lien du fichier xml est incorrect, ce block est appelé
     TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
     };
     
-    // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
+    // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/news/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
 }
 
+/**********************************************************
+ * Méthode de parsage des données de la sauvegarde interne*
+ *********************************************************/
 -(void) loadNewsFromFile {
+    
+    // Initialisation du tableau contenant les News
     arrayNews = [[NSMutableArray alloc] initWithCapacity:10];
 
-    NSError *error = nil;
-    
+    // Récupération du chemin de la sauvegarde interne
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    
     NSString *filename = @"news.xml";
-    
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
-    NSData * data = [NSData dataWithContentsOfFile:filePath];    
 
-    // error var
+    // Initialisation du fichier TBXML avec le chemin de la sauvegarde interne
+    NSData * data = [NSData dataWithContentsOfFile:filePath];    
+    NSError *error = nil;
 	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
     
-    // if an error occured, log it    
     if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur    
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-        
     } else {
-        
-        // If TBXML found a root node, process element and iterate all children
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
         if (tbxml.rootXMLElement){
-                [self treatementNews:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
+                [self handleNews:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
         }
     }
 }

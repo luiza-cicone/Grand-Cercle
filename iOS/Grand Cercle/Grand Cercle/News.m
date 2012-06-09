@@ -1,15 +1,15 @@
 //
-//  Evenements.m
+//  news.m
 //  GrandCercle
 //
 //  Created by Jérémy Krein on 28/05/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "Evenements.h"
+#import "News.h"
 
-@implementation Evenements
-@synthesize day, date, time, type, place, priceCva, priceNoCva, image, imageSmall, pubDate, group, author, eventDate, indice;
+@implementation News
+@synthesize pubDate, author, group;
 
 // Constructeur
 - (id) init {
