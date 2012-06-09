@@ -11,7 +11,7 @@
 @implementation Evenements
 @synthesize day, date, time, type, place, priceCva, priceNoCva, image, imageSmall, pubDate, group, author, eventDate, indice;
 
-
+// Constructeur
 - (id) init {
     self = [super init];
     return self;

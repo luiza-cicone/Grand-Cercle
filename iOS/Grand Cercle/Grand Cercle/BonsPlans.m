@@ -12,6 +12,7 @@
 
 @synthesize summary;
 
+// Constructeur
 - (id) init {
     self = [super init];
     return self;

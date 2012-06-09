@@ -108,6 +108,9 @@
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [bonPlan title]];
             
+            label = (UILabel *)[cell viewWithTag:3];
+            [label setText: [bonPlan summary]];
+            
             break;
             
         case 1:
@@ -163,7 +166,7 @@
     
     switch (indexPath.section) {
         case 0 :
-            return 60;
+            return 80;
             break;
             
         case 1 :

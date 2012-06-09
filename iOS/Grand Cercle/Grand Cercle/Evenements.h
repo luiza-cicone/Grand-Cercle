@@ -36,7 +36,6 @@
     NSString *priceNoCva;
     // Date event
     NSDate *eventDate;
-    
     // Indice pour le cache
     NSInteger indice;
 }
