@@ -157,8 +157,9 @@ Dans la technologie android, c'est un fichier appelé AndroidManifest.xml qui g�
 \noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
 \begin{itemize}
 \item récupération des données sur le site
-\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences
-\item initialisation de la base de données nécessaire pour la gestion des préférences
+\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences.
+\item initialisation de toutes les autres structures de données (listes des données relatives aux événements, aux news, aux bons plans).
+\item initialisation de la base de données.
 \end{itemize}
 
 \vspace{0.5cm}
@@ -175,6 +176,8 @@ Une fois la récupération des données et les initialisations effectuées, l'ac
 Au sein de ces onglets, un clic sur les différents boutons lancent d'autres activités à l'aide de \texttt{listeners}.\\
 
 La base de données est utilisée dans la gestion des préférences, pour choisir les différents filtres ainsi que l'apparence ergonomique. Quatre types de préférences sont proposés à l'utilisateur et pour chaque type, les éléments cochés sont sauvegardés dans la base de données. On effectue alors des tests sur ces données dans les autres activités, notamment pour les couleurs de fond et les filtres sur les données récupérées sur le site du Grand Cercle.\\
+
+Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \textt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 
 
