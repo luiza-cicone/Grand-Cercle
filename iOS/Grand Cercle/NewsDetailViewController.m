@@ -161,7 +161,7 @@
 
     switch (indexPath.section) {
         case TITRE :
-            return 85;
+            return 80;
             break;
          
         case DESCRIPTION :
