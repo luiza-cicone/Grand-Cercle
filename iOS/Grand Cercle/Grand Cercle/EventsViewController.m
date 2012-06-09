@@ -11,7 +11,7 @@
 #import "EventsTableViewController.h"
 #import "EventFourNextViewController.h"
 
-#import "EvenementsParser.h"
+#import "EventsParser.h"
 
 @interface EventsViewController ()
 

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BonsPlans.h"
+#import "Deals.h"
 
 @interface DealsDetailViewController : UITableViewController <UIWebViewDelegate> {
-    BonsPlans* bonPlan;
+    Deals* bonPlan;
     IBOutlet UITableViewCell *cellBonPlanTop;
     IBOutlet UITableViewCell *cellBonPlanDescription;
     
@@ -18,7 +18,7 @@
 
 }
 
-@property (retain, nonatomic) BonsPlans *bonPlan;
+@property (retain, nonatomic) Deals *bonPlan;
 @property (retain, nonatomic) IBOutlet UITableViewCell *cellBonPlanDescription, *cellBonPlanTop;
 
 @end

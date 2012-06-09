@@ -172,13 +172,38 @@ Dans la technologie android, c'est un fichier appelé AndroidManifest.xml qui g�
 \noindent Lors de la première utilisation de l'application, un message est affiché à l'utilisateur s'il n'est pas connecté à internet pour lui indiquer qu'aucune donnée n'a pu être chargée (mais l'application se lance correctement).
  Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
-Une fois la récupération des données et les initialisations effectuées, l'activité GCM.java est lancée. La différence avec les autres activités est qu'elle étend la classe TabActivity et non Activity. En effet, cette activité permet de construire les onglets de notre application à l'aide d'un objet appelé \textt{TabHost}. Toutes les vues des différents onglets sont crées dans GCM.java, ce qui permet à l'utilisateur de naviguer rapidement entre les différents onglets.
+Une fois la récupération des données et les initialisations effectuées, l'activité GCM.java est lancée. La différence avec les autres activités est qu'elle étend la classe TabActivity et non Activity. En effet, cette activité permet de construire les onglets de notre application à l'aide d'un objet appelé \texttt{TabHost}. Toutes les vues des différents onglets sont crées dans GCM.java, ce qui permet à l'utilisateur de naviguer rapidement entre les différents onglets.
 Au sein de ces onglets, un clic sur les différents boutons lancent d'autres activités à l'aide de \texttt{listeners}.\\
+
+Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
 La base de données est utilisée dans la gestion des préférences, pour choisir les différents filtres ainsi que l'apparence ergonomique. Quatre types de préférences sont proposés à l'utilisateur et pour chaque type, les éléments cochés sont sauvegardés dans la base de données. On effectue alors des tests sur ces données dans les autres activités, notamment pour les couleurs de fond et les filtres sur les données récupérées sur le site du Grand Cercle.\\
 
 Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \textt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 
+
+
+
+
+\section{Validation}
+Les deux applications ont été validées suivant une démarche commune afin d'assurer un niveau de qualité équivalent d'une application à l'autre.
+
+Certains tests ont été réalisés au fur et à mesure du développement des applications, d'autres ont été effectués sur des prototypes fonctionnels et enfin la version finale des deux application a été évaluée par un panel d'utilisateurs potentiels.
+
+\subsection{Tests unitaires}
+Chaque module a été testé grâce à des tests unitaires. Majoritairement, ces tests consistent à envoyer en entrée du module un cas de test spécifique, de tracer le module afin de vérifier qu'au cours de l’exécution rien d'anormal ne se produit, et de récupérer en sortie un résultat que l'on compare au résultat attendu. Les tests spécifiques sont pour la plupart des tests dits "boite blanche".
+
+Ces tests sont avant tout des tests techniques qui permettent de s'assurer qu'il n'y a pas d'erreur d'analyse et/ou de programmation.
+
+\subsection{Tests d'intégration et de validation informatique}
+Ces tests permettent de tester la cohérence et l'articulation des modules entre eux, de vérifier que les modules communiquent bien entre eux.
+
+Ces tests ont été réalisés de manière similaire aux tests unitaires, à savoir un traçage des opérations effectuées et une comparaison du résultat obtenu avec le résultat attendu.
+
+\subsection{Tests utilisateurs, tests de conformité}
+Afin de vérifier la conformité de nos différents prototypes avec les besoins formulés par les utilisateurs, regroupés dans le cahier des charges, nous avons fait appel à un panel d'utilisateurs potentiels disposant de leur propre smartphone sous iOS ou Android, et ce dans le but de confronter ces applications à des utilisateurs habitués aux pratiques sur ces deux systèmes d'exploitation.
+
+Nous avons mis en place des une procédure qui nous a permis de toujours demander à ces utilisateurs potentiels d'effectuer les mêmes manipulations dans l'application et d'observer leur réactions. Pour prendre en compte leurs remarques et ne pas en oublier, nous avons procédé à des enregistrements vidéo de ces tests.
 
 \end{document}

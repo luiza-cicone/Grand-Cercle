@@ -8,7 +8,7 @@
 
 #import "SettingsDetailViewController.h"
 #import "FilterParser.h"
-#import "EvenementsParser.h"
+#import "EventsParser.h"
 
 #define FILTER_CERCLES 0
 #define FILTER_CLUBS 1
@@ -282,7 +282,7 @@ BOOL changed = 0;
         [defaults setObject:typesDico forKey:@"filtreTypes"];
     }
     if (changed == 1) {
-        [[EvenementsParser instance] loadEventsFromFile];
+        [[EventsParser instance] loadEventsFromFile];
         [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"changedEvents"];
     }
     changed = 0;

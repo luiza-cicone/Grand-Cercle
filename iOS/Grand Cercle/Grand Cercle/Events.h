@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Items.h"
 
-@interface Evenements : Items {
+@interface Events : Items {
     // Date de publication
     NSString *pubDate;
     // Auteur
@@ -22,7 +22,7 @@
     NSString *date;
     // Heure de début
     NSString *time;
-    // Image petite
+    // Image de petite taille
     NSString *imageSmall;
     //Type
     NSString *type;
@@ -36,12 +36,9 @@
     NSString *priceNoCva;
     // Date event
     NSDate *eventDate;
-    // Indice pour le cache
-    NSInteger indice;
 }
 
 @property (nonatomic, retain) NSString *day, *date, *time, *type, *place, *priceCva, *priceNoCva, *pubDate, *author, *group, *imageSmall, *image;
 @property (nonatomic, assign) NSDate *eventDate;
-@property (nonatomic, assign) NSInteger indice;
 
 @end

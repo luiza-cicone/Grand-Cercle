@@ -14,11 +14,11 @@
 		0435F4891574EF29009F23CD /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4881574EF29009F23CD /* NSString+HTML.m */; };
 		0435F48D1574EFF3009F23CD /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F48C1574EFF3009F23CD /* GTMNSString+HTML.m */; };
 		0435F4901574F2E7009F23CD /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F48F1574F2E7009F23CD /* Items.m */; };
-		0435F4951574F4B3009F23CD /* Evenements.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4921574F4B3009F23CD /* Evenements.m */; };
-		0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4941574F4B3009F23CD /* EvenementsParser.m */; };
+		0435F4951574F4B3009F23CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4921574F4B3009F23CD /* Events.m */; };
+		0435F4961574F4B3009F23CD /* EventsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435F4941574F4B3009F23CD /* EventsParser.m */; };
 		047EB1DB1575383800F2F59B /* EventTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047EB1DA1575383800F2F59B /* EventTopCell.xib */; };
-		047EB1F11576099400F2F59B /* BonsPlans.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F01576099400F2F59B /* BonsPlans.m */; };
-		047EB1F4157609D200F2F59B /* BonsPlansParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F3157609D200F2F59B /* BonsPlansParser.m */; };
+		047EB1F11576099400F2F59B /* Deals.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F01576099400F2F59B /* Deals.m */; };
+		047EB1F4157609D200F2F59B /* DealsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EB1F3157609D200F2F59B /* DealsParser.m */; };
 		047EB1F615761A7300F2F59B /* DealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047EB1F515761A7300F2F59B /* DealCell.xib */; };
 		04D8263C157CB7980049A41C /* DealsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8263B157CB7980049A41C /* DealsDetailViewController.m */; };
 		04D8263E157CBBFD0049A41C /* DealsTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D8263D157CBBFD0049A41C /* DealsTopCell.xib */; };
@@ -36,7 +36,7 @@
 		255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C80AA157411AD00E6ECC3 /* NewsCell.xib */; };
 		255C8144157428A000E6ECC3 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813C157428A000E6ECC3 /* TBXML.m */; };
 		255C8145157428A000E6ECC3 /* NewsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813D157428A000E6ECC3 /* NewsParser.m */; };
-		255C8146157428A000E6ECC3 /* NewsOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813F157428A000E6ECC3 /* NewsOld.m */; };
+		255C8146157428A000E6ECC3 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813F157428A000E6ECC3 /* News.m */; };
 		255C8147157428A000E6ECC3 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C8141157428A000E6ECC3 /* TBXML+HTTP.m */; };
 		256217401576A2AC00667661 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2562173E1576A2AC00667661 /* EventCell.xib */; };
 		258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D3694157CA8DE0001E64E /* SettingsViewController.m */; };
@@ -127,15 +127,15 @@
 		0435F48C1574EFF3009F23CD /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		0435F48E1574F2E7009F23CD /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
 		0435F48F1574F2E7009F23CD /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
-		0435F4911574F4B3009F23CD /* Evenements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Evenements.h; sourceTree = "<group>"; };
-		0435F4921574F4B3009F23CD /* Evenements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Evenements.m; sourceTree = "<group>"; };
-		0435F4931574F4B3009F23CD /* EvenementsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvenementsParser.h; sourceTree = "<group>"; };
-		0435F4941574F4B3009F23CD /* EvenementsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvenementsParser.m; sourceTree = "<group>"; };
+		0435F4911574F4B3009F23CD /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Events.h; sourceTree = "<group>"; };
+		0435F4921574F4B3009F23CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Events.m; sourceTree = "<group>"; };
+		0435F4931574F4B3009F23CD /* EventsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsParser.h; sourceTree = "<group>"; };
+		0435F4941574F4B3009F23CD /* EventsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsParser.m; sourceTree = "<group>"; };
 		047EB1DA1575383800F2F59B /* EventTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTopCell.xib; sourceTree = "<group>"; };
-		047EB1EF1576099400F2F59B /* BonsPlans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonsPlans.h; sourceTree = "<group>"; };
-		047EB1F01576099400F2F59B /* BonsPlans.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlans.m; sourceTree = "<group>"; };
-		047EB1F2157609D200F2F59B /* BonsPlansParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonsPlansParser.h; sourceTree = "<group>"; };
-		047EB1F3157609D200F2F59B /* BonsPlansParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonsPlansParser.m; sourceTree = "<group>"; };
+		047EB1EF1576099400F2F59B /* Deals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deals.h; sourceTree = "<group>"; };
+		047EB1F01576099400F2F59B /* Deals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deals.m; sourceTree = "<group>"; };
+		047EB1F2157609D200F2F59B /* DealsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsParser.h; sourceTree = "<group>"; };
+		047EB1F3157609D200F2F59B /* DealsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsParser.m; sourceTree = "<group>"; };
 		047EB1F515761A7300F2F59B /* DealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealCell.xib; sourceTree = "<group>"; };
 		04D8263A157CB7980049A41C /* DealsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsDetailViewController.h; sourceTree = "<group>"; };
 		04D8263B157CB7980049A41C /* DealsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsDetailViewController.m; sourceTree = "<group>"; };
@@ -157,8 +157,8 @@
 		255C80AA157411AD00E6ECC3 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		255C813C157428A000E6ECC3 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		255C813D157428A000E6ECC3 /* NewsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsParser.m; sourceTree = "<group>"; };
-		255C813E157428A000E6ECC3 /* NewsOld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsOld.h; sourceTree = "<group>"; };
-		255C813F157428A000E6ECC3 /* NewsOld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsOld.m; sourceTree = "<group>"; };
+		255C813E157428A000E6ECC3 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		255C813F157428A000E6ECC3 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		255C8140157428A000E6ECC3 /* NewsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsParser.h; sourceTree = "<group>"; };
 		255C8141157428A000E6ECC3 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
 		255C8142157428A000E6ECC3 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		258D370C157E29930001E64E /* EventInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoCell.xib; sourceTree = "<group>"; };
 		258D371C157F60DB0001E64E /* StyledPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StyledPageControl.h; path = ../StyledPageControl.h; sourceTree = "<group>"; };
 		258D371D157F60DC0001E64E /* StyledPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StyledPageControl.m; path = ../StyledPageControl.m; sourceTree = "<group>"; };
-		2595EA991573FA9000CA27B3 /* Grand Cercle Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -349,14 +349,14 @@
 		251FD432157FF74100F93E4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0435F4911574F4B3009F23CD /* Evenements.h */,
-				0435F4921574F4B3009F23CD /* Evenements.m */,
-				255C813E157428A000E6ECC3 /* NewsOld.h */,
-				255C813F157428A000E6ECC3 /* NewsOld.m */,
+				0435F4911574F4B3009F23CD /* Events.h */,
+				0435F4921574F4B3009F23CD /* Events.m */,
+				255C813E157428A000E6ECC3 /* News.h */,
+				255C813F157428A000E6ECC3 /* News.m */,
 				0435F48E1574F2E7009F23CD /* Items.h */,
 				0435F48F1574F2E7009F23CD /* Items.m */,
-				047EB1EF1576099400F2F59B /* BonsPlans.h */,
-				047EB1F01576099400F2F59B /* BonsPlans.m */,
+				047EB1EF1576099400F2F59B /* Deals.h */,
+				047EB1F01576099400F2F59B /* Deals.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -415,7 +415,7 @@
 		2595EA9A1573FA9000CA27B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2595EA991573FA9000CA27B3 /* Grand Cercle Mobile.app */,
+				2595EA991573FA9000CA27B3 /* Grand Cercle.app */,
 				2595EAC81573FA9000CA27B3 /* Grand CercleTests.octest */,
 			);
 			name = Products;
@@ -442,13 +442,13 @@
 		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
 			isa = PBXGroup;
 			children = (
+				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
+				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
 				251FD432157FF74100F93E4F /* Models */,
+				25F41CC0157AC76E002C15C3 /* Parser */,
 				251FD3F1157F8E2100F93E4F /* NetworkReachability */,
 				251FD3DF157F679C00F93E4F /* StyledPageControl */,
 				255C8148157428A300E6ECC3 /* TBXML */,
-				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
-				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
-				25F41CC0157AC76E002C15C3 /* Parser */,
 				2595EAE11573FABD00CA27B3 /* UI */,
 				2595EAE01573FAAB00CA27B3 /* images */,
 				251FA64E157903E3005B7318 /* Events */,
@@ -533,10 +533,10 @@
 			children = (
 				255C8140157428A000E6ECC3 /* NewsParser.h */,
 				255C813D157428A000E6ECC3 /* NewsParser.m */,
-				047EB1F2157609D200F2F59B /* BonsPlansParser.h */,
-				047EB1F3157609D200F2F59B /* BonsPlansParser.m */,
-				0435F4931574F4B3009F23CD /* EvenementsParser.h */,
-				0435F4941574F4B3009F23CD /* EvenementsParser.m */,
+				047EB1F2157609D200F2F59B /* DealsParser.h */,
+				047EB1F3157609D200F2F59B /* DealsParser.m */,
+				0435F4931574F4B3009F23CD /* EventsParser.h */,
+				0435F4941574F4B3009F23CD /* EventsParser.m */,
 				258D36A7157CB12F0001E64E /* FilterParser.h */,
 				258D36A5157CB1260001E64E /* FilterParser.m */,
 			);
@@ -561,7 +561,7 @@
 			);
 			name = "Grand Cercle";
 			productName = "Grand Cercle";
-			productReference = 2595EA991573FA9000CA27B3 /* Grand Cercle Mobile.app */;
+			productReference = 2595EA991573FA9000CA27B3 /* Grand Cercle.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2595EAC71573FA9000CA27B3 /* Grand CercleTests */ = {
@@ -712,16 +712,16 @@
 				2595EAF8157405EB00CA27B3 /* DealsViewController.m in Sources */,
 				255C8144157428A000E6ECC3 /* TBXML.m in Sources */,
 				255C8145157428A000E6ECC3 /* NewsParser.m in Sources */,
-				255C8146157428A000E6ECC3 /* NewsOld.m in Sources */,
+				255C8146157428A000E6ECC3 /* News.m in Sources */,
 				255C8147157428A000E6ECC3 /* TBXML+HTTP.m in Sources */,
 				0435F4891574EF29009F23CD /* NSString+HTML.m in Sources */,
 				0435F48D1574EFF3009F23CD /* GTMNSString+HTML.m in Sources */,
 				0435F4901574F2E7009F23CD /* Items.m in Sources */,
-				0435F4951574F4B3009F23CD /* Evenements.m in Sources */,
-				0435F4961574F4B3009F23CD /* EvenementsParser.m in Sources */,
+				0435F4951574F4B3009F23CD /* Events.m in Sources */,
+				0435F4961574F4B3009F23CD /* EventsParser.m in Sources */,
 				25D7C0FE15760BDB00C2B988 /* EventsTableViewController.m in Sources */,
-				047EB1F11576099400F2F59B /* BonsPlans.m in Sources */,
-				047EB1F4157609D200F2F59B /* BonsPlansParser.m in Sources */,
+				047EB1F11576099400F2F59B /* Deals.m in Sources */,
+				047EB1F4157609D200F2F59B /* DealsParser.m in Sources */,
 				04060AC01577B50B00852A3D /* EventDetailViewController.m in Sources */,
 				25ECD56015775F2A006E4652 /* EventsCalendarViewController.m in Sources */,
 				04F4CBD51578C3CB00A49037 /* NewsDetailViewController.m in Sources */,

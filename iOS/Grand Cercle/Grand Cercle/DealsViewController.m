@@ -7,7 +7,7 @@
 //
 
 #import "DealsViewController.h"
-#import "BonsPlansParser.h"
+#import "DealsParser.h"
 #import "DealsDetailViewController.h"
 
 @implementation DealsViewController
@@ -23,14 +23,14 @@
         self.tabBarItem.image = [UIImage imageNamed:@"deals"];
     }
     
-    arrayBonsPlans = [[BonsPlansParser instance] arrayBonsPlans];
+    arrayBonsPlans = [[DealsParser instance] arrayDeals];
 
     // configure image cache
     
     urlArray = [[NSMutableArray alloc] initWithCapacity:[arrayBonsPlans count]];
     
     for (int i = 0; i < [arrayBonsPlans count]; i++) {
-        BonsPlans *bp = [arrayBonsPlans objectAtIndex:i];
+        Deals *bp = [arrayBonsPlans objectAtIndex:i];
         [urlArray addObject:[bp logo]];
     }
 	
@@ -142,7 +142,7 @@
         self.bonsPlansCell = nil;
     }
     
-    BonsPlans *b = (BonsPlans *)[arrayBonsPlans objectAtIndex:[indexPath row]];
+    Deals *b = (Deals *)[arrayBonsPlans objectAtIndex:[indexPath row]];
     
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
@@ -205,7 +205,7 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     DealsDetailViewController *detailViewController = [[DealsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    BonsPlans *b = [arrayBonsPlans objectAtIndex:[indexPath row]];
+    Deals *b = [arrayBonsPlans objectAtIndex:[indexPath row]];
     detailViewController.bonPlan = b;
 
     // ...

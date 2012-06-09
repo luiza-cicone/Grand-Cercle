@@ -10,8 +10,13 @@
 
 @implementation FilterParser
 @synthesize arrayClubs, arrayCercles, arrayTypes;
+
+// Patron singleton, unique instance du parser des noms des cercles, clubs et associations
 static FilterParser *instanceAssociation = nil;
-// singleton
+
+/***************************************************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser des noms des cercles, clubs et associations*
+ **************************************************************************************************************/
 + (FilterParser *) instance {
     if (instanceAssociation == nil) {
         instanceAssociation = [[self alloc] init];
@@ -19,45 +24,51 @@ static FilterParser *instanceAssociation = nil;
     return instanceAssociation;
 }
 
-- (void) handleStuff:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
+/**************************************************
+ * Méthode récupérant les informations nécessaires*
+ *************************************************/
+- (void) handleNames:(TBXMLElement *)listNamesToParse toArray:(NSMutableArray *)array {
     
+    // Tant qu'il y a un événement à traiter
 	do {
-        // Récupération du nom de l'association
-        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:eventsToParse];
-
+        
+        // Récupération du nom du cercle, club ou d'association
+        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:listNamesToParse];
         NSString *nomAssociation = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
         
-        // Ajout de la news au tableau
+        // Ajout du nom au tableau
         [array addObject:nomAssociation];
         
-        
-        // Obtain next sibling element
-	} while ((eventsToParse = eventsToParse->nextSibling));
-    
+	} while ((listNamesToParse = listNamesToParse->nextSibling));
 }
 
+/**************************************************
+ * Méthode de parsage des données du site internet*
+ *************************************************/
 - (void)loadStuffFromURL { 
     
-    // Initialisation du tableau contenant les News
+    // Initialisation du tableau contenant les noms
     arrayCercles = [[NSMutableArray alloc] initWithCapacity:3];
     arrayClubs = [[NSMutableArray alloc] initWithCapacity:3];
     arrayTypes = [[NSMutableArray alloc] initWithCapacity:3];
     
-    // Create a success block to be called when the async request completes
+    // Si le premier lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
-        // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self handleStuff:tbxmlDocument.rootXMLElement->firstChild toArray:arrayCercles];
+            [self handleNames:tbxmlDocument.rootXMLElement->firstChild toArray:arrayCercles];
     };
+    
+    // Si le deuxième lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock2 = ^(TBXML *tbxmlDocument) {
-        // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self handleStuff:tbxmlDocument.rootXMLElement->firstChild toArray:arrayClubs];
+            [self handleNames:tbxmlDocument.rootXMLElement->firstChild toArray:arrayClubs];
     };
+    
+    // Si le troisième lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock3 = ^(TBXML *tbxmlDocument) {
         // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement)
-            [self handleStuff:tbxmlDocument.rootXMLElement->firstChild toArray:arrayTypes];
+            [self handleNames:tbxmlDocument.rootXMLElement->firstChild toArray:arrayTypes];
     };
     
     // Create a failure block that gets called if something goes wrong
@@ -65,7 +76,7 @@ static FilterParser *instanceAssociation = nil;
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
     };
     
-    // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
+    // Si un des liens des fichiers xml est incorrect, ce block est appelé
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/cercles/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
@@ -77,67 +88,59 @@ static FilterParser *instanceAssociation = nil;
                                    failure:failureBlock];
 }
 
+/**********************************************************
+ * Méthode de parsage des données de la sauvegarde interne*
+ **********************************************************/
 -(void) loadStuffFromFile {
+    
+    // Initialisation du tableau contenant les noms
     arrayCercles = [[NSMutableArray alloc] initWithCapacity:3];
     arrayClubs = [[NSMutableArray alloc] initWithCapacity:3];
     arrayTypes = [[NSMutableArray alloc] initWithCapacity:3];
     
-    NSError *error = nil;
-    
+    // Récupération du chemin de la sauvegarde interne
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-
     
+    // Initialisation des fichiers TBXML avec le chemin de la sauvegarde interne
+    NSError *error = nil;
     NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"cercles.xml"]];    
-    NSData * data2 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"clubs.xml"]];    
-    NSData * data3 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"types.xml"]];    
-    
-    // error var
-	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
-    
-    // if an error occured, log it    
+    tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
+
     if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur    
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-        
     } else {
-        
-        // If TBXML found a root node, process element and iterate all children
-        if (tbxml.rootXMLElement){
-            [self handleStuff:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayCercles];
-        }
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
+            [self handleNames:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayCercles];
     }
     
-    // error var
+    // Initialisation des fichiers TBXML avec le chemin de la sauvegarde interne
+    NSData * data2 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"clubs.xml"]];    
 	tbxml = [[TBXML alloc] initWithXMLData:data2 error:&error];
     
-    // if an error occured, log it    
     if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur    
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-        
     } else {
-        
-        // If TBXML found a root node, process element and iterate all children
-        if (tbxml.rootXMLElement){
-            [self handleStuff:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayClubs];
-        }
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
+            [self handleNames:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayClubs];
     }
-
-    // error var
-	tbxml = [[TBXML alloc] initWithXMLData:data3 error:&error];
     
-    // if an error occured, log it    
+    // Initialisation des fichiers TBXML avec le chemin de la sauvegarde interne
+    NSData * data3 = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", documentsDirectory, @"types.xml"]]; 
+    tbxml = [[TBXML alloc] initWithXMLData:data3 error:&error];
+    
     if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur    
         NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-        
     } else {
-        
-        // If TBXML found a root node, process element and iterate all children
-        if (tbxml.rootXMLElement){
-            [self handleStuff:[TBXML childElementNamed:@"taxonomy_term_data" parentElement:tbxml.rootXMLElement] toArray:arrayTypes];
-        }
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
+            [self handleNames:[TBXML childElementNamed:@"taxonomy_term_data" parentElement:tbxml.rootXMLElement] toArray:arrayTypes];
     }
-
 }
 
 @end
-

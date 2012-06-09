@@ -9,7 +9,6 @@
 #import "Items.h"
 
 @implementation Items
-
 @synthesize title, description, theLink, logo;
 
 // Constructeur
