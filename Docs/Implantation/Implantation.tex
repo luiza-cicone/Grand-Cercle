@@ -209,7 +209,7 @@ Nous avons utilisé un thread pour parser les informations du l'\texttt{XML} pou
 
 Pour sauvegarder les préférences nous avons utilisé le dictionnaire par défaut de l'application 
 \texttt{[NSUserDefaults standardUserDefaults]}. A la clé choisie il y q un pointer vers l'objet qui est un dictionnaire pour les filtres et un vecteur pour la choix de thème. Pour le filtre de cercle, club et type nous avons un dictionnaire des booléens où la clé est le nom du cercle, du club ou le type. La couleur de la thème est sauvegardé en RGB dans un vecteur de taille 3. 
-
+ 
 {\bf Cache des images}
 
 Chaque fois quand on trouve une nouvelle image à télécharger, on la met dans une queue et quand elle est disponible elle va être sauvegardé dans la mémoire. On garde un dictionnaire ayant comme clé le hash de l'URL de l'image. Le téléchargement est fait dans un thread et une notification est envoyé pour mettre à jour l'affichage.
