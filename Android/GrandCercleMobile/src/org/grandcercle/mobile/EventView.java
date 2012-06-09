@@ -4,7 +4,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EventView {
-	public TextView lieu;
 	public TextView date;
 	public TextView title;
 	public TextView group;

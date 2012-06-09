@@ -8,12 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PageEvent extends Activity {
 	private String title;
@@ -26,8 +23,9 @@ public class PageEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.description_event);
+		
 		View view = findViewById(R.id.fond_event1);
-		int color  = 0xFFFFFFFF;
+		int color ;
 		dataBase = DataBase.getInstance();
 		String prefered = dataBase.getPref("prefDesign","design");
 		if (prefered.equals("Noir")) {
@@ -55,10 +53,8 @@ public class PageEvent extends Activity {
 			color = 0xFF96147D;
 			view.setBackgroundColor(color);
 		}
-		view = findViewById(R.id.fond_event2);
-		view.setBackgroundColor(color);
 		
-		// Recuperation des paramÃštres
+		// Recuperation des paramètres
 		Bundle param = this.getIntent().getExtras();
 		title = param.getString("titre");
 		((TextView)findViewById(R.id.title)).setText(title);
@@ -82,7 +78,7 @@ public class PageEvent extends Activity {
 		UrlImageViewHelper.setUrlDrawable((ImageView)findViewById(R.id.logo),param.getString("logo"),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);
 		
 		
-		((Button)findViewById(R.id.addCal)).setOnClickListener(addCalClicked);
+		((ImageView)findViewById(R.id.addCal)).setOnClickListener(addCalClicked);
 	}
 
 	public static long convertDateToLong(String d) {

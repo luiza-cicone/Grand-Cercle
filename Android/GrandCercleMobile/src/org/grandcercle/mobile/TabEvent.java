@@ -56,65 +56,10 @@ public class TabEvent extends Activity {
 		GCM.changeTabHost(color);
 		GCM.oldchild = 0;
 		View view = findViewById(R.id.selectedDayMonthYear);
-		dataBase = DataBase.getInstance();
-		String prefered = dataBase.getPref("prefDesign","design");
-		if (prefered.equals("Noir")) {
-			color = 0xFF222222;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gris));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gris));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-		} else if(prefered.equals("Ensimag")) {
-			color = 0xFF96BE0F;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ensimag));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ensimag));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-		} else if (prefered.equals("Phelma")) {
-			color = 0xFFBE141E;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_phelma));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_phelma));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-		} else if (prefered.equals("Ense3")) {
-			color = 0xFF004B9B;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ense3));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_ense3));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-		} else if (prefered.equals("Pagora")) {
-			color = 0xFFF09600;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_pagora));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_pagora));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-		} else if (prefered.equals("GI")) {
-			color = 0xFF0096D7;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gi));
-			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_gi));
-			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
-		} else if (prefered.equals("CPP")) {
-			color = 0xFFFFCD00;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_cpp));
-			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_cpp));
-			((TextView) view).setTextColor(Color.parseColor("#FF222222"));
-		} else if (prefered.equals("Esisar")) {
-			color = 0xFF96147D;
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_esisar));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-			view = findViewById(R.id.currentMonth);
-			view.setBackgroundDrawable(getResources().getDrawable(R.drawable.calendar_bar_esisar));
-			((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
-		}
+		((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
+		view = findViewById(R.id.currentMonth);
+		((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));
+		
 		ArrayList<Event> listEvent = ContainerData.getEvent();
 		ArrayList<Event> listEventOld = ContainerData.getEventOld();
 		hashMapEvent = ContainerData.getEventInHashMap();
@@ -355,44 +300,6 @@ public class TabEvent extends Activity {
 		public int getCount() {
 			return list.size();
 		}
-		
-		public String getMonthNumberAsString(String m) {
-			if (m.equalsIgnoreCase("Janvier")) {
-				return "01";
-			}
-			if (m.equalsIgnoreCase("Fevrier")) {
-				return "02";
-			}
-			if (m.equalsIgnoreCase("Mars")) {
-				return "03";
-			}
-			if (m.equalsIgnoreCase("Avril")) {
-				return "04";
-			}
-			if (m.equalsIgnoreCase("Mai")) {
-				return "05";
-			}
-			if (m.equalsIgnoreCase("Juin")) {
-				return "06";
-			}
-			if (m.equalsIgnoreCase("Juillet")) {
-				return "07";
-			}
-			if (m.equalsIgnoreCase("Août")) {
-				return "08";
-			}
-			if (m.equalsIgnoreCase("Septembre")) {
-				return "09";
-			}
-			if (m.equalsIgnoreCase("Octobre")) {
-				return "10";
-			}
-			if (m.equalsIgnoreCase("Novembre")) {
-				return "11";
-			}
-			return "12";
-			
-		}
 
 		/**
 		 * Prints Month
@@ -479,7 +386,7 @@ public class TabEvent extends Activity {
 				}
 				
 				if (dateEvents != null) {
-					if (cour && dateEvents.contains(date)) {
+					/*if (cour && dateEvents.contains(date)) {
 						list.add(String.valueOf(i) + "-RED" + "-" + getMonthAsString(currentMonth) + "-" + yy);
 						cour = false;
 					} else if (cour) {
@@ -489,10 +396,21 @@ public class TabEvent extends Activity {
 						list.add(String.valueOf(i) + "-ORANGE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
 					} else {
 						list.add(String.valueOf(i) + "-WHITE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					}*/
+					if (cour && dateEvents.contains(date)) {
+						list.add(String.valueOf(i) + "-EVBLACK" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+						cour = false;
+					} else if (cour) {
+						list.add(String.valueOf(i) + "-BLACK" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+						cour = false;
+					} else if (dateEvents.contains(date)) {
+						list.add(String.valueOf(i) + "-ORANGE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+					} else {
+						list.add(String.valueOf(i) + "-WHITE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
 					}
 				} else {
 					if (cour) {
-						list.add(String.valueOf(i) + "-BLUE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
+						list.add(String.valueOf(i) + "-BLACK" + "-" + getMonthAsString(currentMonth) + "-" + yy);
 						cour = false;
 					} else {
 						list.add(String.valueOf(i) + "-WHITE" + "-" + getMonthAsString(currentMonth) + "-" + yy);
@@ -553,15 +471,25 @@ public class TabEvent extends Activity {
 			if (day_color[1].equals("WHITE")) {
 				gridcell.setTextColor(Color.WHITE);
 			}
-			if (day_color[1].equals("BLUE")) {
-				gridcell.setTextColor(getResources().getColor(R.color.static_text_color));
+			if (day_color[1].equals("BLACK")) {
+				//gridcell.setTextColor(getResources().getColor(R.color.static_text_color));
+				gridcell.setTextColor(Color.BLACK);
 			}
 			if (day_color[1].equals("ORANGE")) {
-				gridcell.setTextColor(Color.rgb(255,140,0));
+				gridcell.setText("  "+theday+" *");
+				gridcell.setTextColor(Color.WHITE);
+				//gridcell.setTextColor(Color.rgb(255,140,0));
 			}
-			if (day_color[1].equals("RED")) {
-				gridcell.setTextColor(Color.RED);
+			if (day_color[1].equals("EVBLACK")) {
+				//gridcell.setTextColor(getResources().getColor(R.color.static_text_color));
+				gridcell.setText("  "+theday+" *");
+				gridcell.setTextColor(Color.BLACK);
 			}
+			/*if (day_color[1].equals("RED")) {
+				gridcell.setText("  "+theday+" *");
+				gridcell.setTextColor(Color.WHITE);
+				//gridcell.setTextColor(Color.RED);
+			}*/
 			return row;
 		}
 		
@@ -580,7 +508,7 @@ public class TabEvent extends Activity {
 				if (day.length() == 1) {
 					day = "0"+day;
 				}
-				
+
 				if (month.equalsIgnoreCase("Janvier")) {
 					month = "01";
 				}
@@ -627,7 +555,7 @@ public class TabEvent extends Activity {
 						ListEventAdapter listCalAdapter = new ListEventAdapter(view.getContext(),listEvCal);
 						// On récupère la vue contenant les événements
 						ListView feedListViewCal = ((ListView)findViewById(R.id.listFeedDay));
-						((ListView)findViewById(R.id.listFeedDay)).setAdapter(listCalAdapter);
+						feedListViewCal.setAdapter(listCalAdapter);
 						feedListViewCal.setOnItemClickListener(clickListenerFeed);
 						if (listEvCal.size() > 1) {
 							t = Toast.makeText(TabEvent.this, listEvCal.size() + " événements pour le jour sélectionné", Toast.LENGTH_SHORT);

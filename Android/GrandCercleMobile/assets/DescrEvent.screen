@@ -52,9 +52,6 @@
     </widgets>
     <widgets xsi:type="model:Panel" id="26" x="38" y="89" width="320" height="536" measuredWidth="320" measuredHeight="536" border="none"/>
   </widgets>
-  <widgets xsi:type="model:Rectangle" id="28" x="104" y="80" width="329" height="137" measuredWidth="329" measuredHeight="137">
-    <font/>
-  </widgets>
   <widgets xsi:type="model:Master" id="33" x="104" y="44" width="329" measuredWidth="329" measuredHeight="28">
     <screen xsi:type="model:WidgetGroup" href="Android.screen#Status Bar Landscape"/>
     <overrides>
@@ -65,21 +62,27 @@
     </overrides>
   </widgets>
   <widgets xsi:type="model:VScrollbar" id="34" x="416" y="288" height="305" measuredWidth="17" measuredHeight="305"/>
-  <widgets xsi:type="model:Icon" id="42" x="128" y="92" width="73" height="113" measuredWidth="73" measuredHeight="113" icon="table (xlarge)"/>
-  <widgets xsi:type="model:TextArea" id="43" x="216" y="112" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Date et heure&#xA;Lieu&#xA;" measuredWidth="194" measuredHeight="73">
+  <widgets xsi:type="model:Icon" id="42" x="117" y="112" width="65" height="93" measuredWidth="65" measuredHeight="93" icon="table (xlarge)"/>
+  <widgets xsi:type="model:TextArea" id="43" x="190" y="122" width="194" height="73" text="*Titre de l'événement*&#xA;&#xA;Organisateur&#xA;&#xA;" measuredWidth="194" measuredHeight="73">
     <font/>
   </widgets>
   <widgets xsi:type="model:Rectangle" id="51" x="104" y="224" width="329" height="65" measuredWidth="329" measuredHeight="65">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Icon" id="53" x="128" y="241" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
-  <widgets xsi:type="model:TextField" id="54" x="184" y="245" text="Ecole" measuredWidth="40" measuredHeight="23">
+  <widgets xsi:type="model:Icon" id="53" x="391" y="133" measuredWidth="32" measuredHeight="32" icon="copyright (large)"/>
+  <widgets xsi:type="model:TextField" id="54" x="128" y="232" width="100" text="Jour, date, Heure" measuredWidth="100" measuredHeight="23">
     <font/>
   </widgets>
   <widgets xsi:type="model:Button" id="55" x="260" y="232" height="49" text="Ajouter à mon calendrier" measuredWidth="157" measuredHeight="49">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" id="56" x="117" y="291" width="300" height="300" measuredWidth="300" measuredHeight="300" dummyText="true">
+  <widgets xsi:type="model:Text" id="56" x="117" y="304" width="300" height="287" measuredWidth="300" measuredHeight="287" dummyText="true">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="57" x="128" y="90" text="date" measuredWidth="35" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="58" x="128" y="258" text="Lieu" measuredWidth="33" measuredHeight="23">
     <font/>
   </widgets>
   <hRuler/>

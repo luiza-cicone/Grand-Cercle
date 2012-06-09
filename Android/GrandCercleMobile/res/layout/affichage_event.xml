@@ -8,12 +8,12 @@
     android:layout_height="fill_parent" 
     app:default_screen="0">
      <include 
+        android:id="@+id/right" 
+        layout="@layout/quatre_event"/>
+     <include 
         android:id="@+id/left" 
         layout="@layout/simple_calendar_view"/>
     <include 
         android:id="@+id/center" 
         layout="@layout/list_news"/>
-    <include 
-        android:id="@+id/right" 
-        layout="@layout/quatre_event"/>
 </org.grandcercle.mobile.DragableSpace>

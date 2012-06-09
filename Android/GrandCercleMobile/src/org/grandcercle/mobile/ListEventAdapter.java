@@ -61,8 +61,7 @@ public class ListEventAdapter extends BaseAdapter {
 
 			ev.group = (TextView)convertView.findViewById(R.id.group);			
 			ev.title = (TextView)convertView.findViewById(R.id.title);
-			ev.lieu = (TextView)convertView.findViewById(R.id.lieu);
-			ev.date = (TextView)convertView.findViewById(R.id.date);
+			ev.date = (TextView)convertView.findViewById(R.id.dateEvent);
 			ev.logo = (ImageView)convertView.findViewById(R.id.logo);
 			ev.image = (ImageView)convertView.findViewById(R.id.image);
 			convertView.setTag(ev);
@@ -73,7 +72,6 @@ public class ListEventAdapter extends BaseAdapter {
 		
 		ev.group.setText(listEvent.get(position).getGroup());
 		ev.title.setText(listEvent.get(position).getTitle());
-		ev.lieu.setText(listEvent.get(position).getLieu());
 		ev.date.setText(listEvent.get(position).getDate());
 		// image stockée pendant une semaine, logo stocké de manière infinie
 		UrlImageViewHelper.setUrlDrawable(ev.image,listEvent.get(position).getImage(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_ONE_WEEK);

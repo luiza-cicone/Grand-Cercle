@@ -42,7 +42,7 @@
 		<item>2</item>
 	</string-array>
     <string name="lien">Pour plus d\'informations, rendez-vous sur: </string>
-    <string name="addCal">Ajouter à mon calendrier</string>
+    <string name="addCal">Ajouter</string>
     <string name="prefList">changements sauvegardés</string>
  	<string-array name="listArray">
 	    <item>Rouge</item>
