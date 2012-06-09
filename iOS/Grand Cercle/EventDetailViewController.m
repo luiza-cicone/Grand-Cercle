@@ -10,9 +10,10 @@
 #import "NSString+HTML.h"
 #import "AppDelegate.h"
 
-#define TITRE 0
+#define DATE 0
+#define TITRE 1
 #define INFOS 2
-#define ORGANISATION 1
+//#define ORGANISATION 3
 #define DESCRIPTION 3
 
 @implementation EventDetailViewController
@@ -22,7 +23,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-//        self.tableView.scrollEnabled = NO;
     }
     return self;
 }
@@ -50,9 +50,7 @@
     [webView loadHTMLString:event.description baseURL:nil];
 
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
-}
+
 
 -(void) addToCalendar {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Retour" destructiveButtonTitle:nil otherButtonTitles:@"Exporter dans iCal", @"Partager", nil];
@@ -132,19 +130,13 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case ORGANISATION:
-            return @"Assosciation";
-            break;
-        case INFOS:
-            return @"Infos";
-            break;
-        case DESCRIPTION:
-            return @"Description";
-            break;
-        default:
-            break;
-    }
+//    switch (section) {
+//        case DESCRIPTION:
+//            return @"Détails";
+//            break;
+//        default:
+//            break;
+//    }
     return @"";
 }
 
@@ -170,13 +162,26 @@
             
             UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event image]]]];
             [imageView setImage:myimage];
+//            
+//            UIWebView *wv = (UIWebView *)[cell viewWithTag:7];
+//            
+//            [wv loadHTMLString:[NSString stringWithFormat:@"<p style=\"font-family : Helvetica;\"><b>%@</b></p><p>%@</p>", [event title], [event group]] baseURL:nil];
+            
             
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [event title]];
             
+            label = (UILabel *)[cell viewWithTag:3];
+            [label setText : event.group];
+            
+            imageView = (UIImageView *)[cell viewWithTag:4];
+            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
+            [imageView setImage: img2];
+            
             break;
         
-        case INFOS:            
+        case INFOS:
+        case DATE:            
             CellIdentifier = @"EventInfoCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -187,9 +192,13 @@
             UILabel *label2;
             label = (UILabel *)[cell viewWithTag:1];
             label2 = (UILabel *)[cell viewWithTag:2];
-            if (indexPath.row == 0) {
+            if (indexPath.row == 0 && indexPath.section == DATE) {
                 [label setText:@"Date"];
-                [label2 setText:[NSString stringWithFormat:@"%@, %@ - %@", [event day], [event date], [event time]]];
+                [label2 setText:[NSString stringWithFormat:@"%@, %@", [event day], [event date]]];
+            }
+            else if (indexPath.row == 0) {
+                [label setText:@"Heure"];
+                [label2 setText:[event time]];
             }
             else if (indexPath.row == 1) {
                 [label setText:@"Lieu"];
@@ -197,17 +206,16 @@
             }
                         
             break;
-            
-        case ORGANISATION:
-            CellIdentifier = @"Cercle";
-            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            [cell.textLabel setText : event.group];
-            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
-            [cell.imageView setImage: img2];
-            break;
+//        case ORGANISATION:
+//            CellIdentifier = @"Cercle";
+//            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//            if (!cell) {
+//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//            }
+//            [cell.textLabel setText : event.group];
+//            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
+//            [cell.imageView setImage: img2];
+//            break;
             
         case DESCRIPTION:
             CellIdentifier = @"DescriptionCell";
@@ -259,28 +267,34 @@
     return YES;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     switch (indexPath.section) {
         case TITRE:
-            if (indexPath.row == 0) return 80;
-            if (indexPath.row == 1) return 30;
+            return 80;
             break;
         case INFOS :
+        case DATE :
             return 28;
             break;
         
-        case ORGANISATION :
-            return 28;
-            break;
+//        case ORGANISATION :
+//            return 28;
+//            break;
             
         case DESCRIPTION : 
             return webViewHeight + 10;
             break;
             
         default :
-            return 44;
+            return 0;
             break;
     }
     return 0;

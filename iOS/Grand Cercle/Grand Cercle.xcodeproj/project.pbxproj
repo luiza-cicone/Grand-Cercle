@@ -190,7 +190,7 @@
 		258D370C157E29930001E64E /* EventInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoCell.xib; sourceTree = "<group>"; };
 		258D371C157F60DB0001E64E /* StyledPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StyledPageControl.h; path = ../StyledPageControl.h; sourceTree = "<group>"; };
 		258D371D157F60DC0001E64E /* StyledPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StyledPageControl.m; path = ../StyledPageControl.m; sourceTree = "<group>"; };
-		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2595EA991573FA9000CA27B3 /* Grand Cercle Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -433,7 +433,7 @@
 		2595EA9A1573FA9000CA27B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2595EA991573FA9000CA27B3 /* Grand Cercle.app */,
+				2595EA991573FA9000CA27B3 /* Grand Cercle Mobile.app */,
 				2595EAC81573FA9000CA27B3 /* Grand CercleTests.octest */,
 			);
 			name = Products;
@@ -597,7 +597,7 @@
 			);
 			name = "Grand Cercle";
 			productName = "Grand Cercle";
-			productReference = 2595EA991573FA9000CA27B3 /* Grand Cercle.app */;
+			productReference = 2595EA991573FA9000CA27B3 /* Grand Cercle Mobile.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2595EAC71573FA9000CA27B3 /* Grand CercleTests */ = {
