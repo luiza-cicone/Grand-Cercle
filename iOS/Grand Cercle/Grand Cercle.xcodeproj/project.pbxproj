@@ -30,12 +30,6 @@
 		04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */; };
 		251FD3F4157F8E7E00F93E4F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD3F3157F8E7E00F93E4F /* Reachability.m */; };
 		251FD3F6157F910F00F93E4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251FD3F5157F910F00F93E4F /* SystemConfiguration.framework */; };
-		251FD417157FEB3800F93E4F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 251FD415157FEB3800F93E4F /* Model.xcdatamodeld */; };
-		251FD41D157FF54100F93E4F /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD41C157FF54100F93E4F /* Deal.m */; };
-		251FD423157FF5C900F93E4F /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD422157FF5C800F93E4F /* Association.m */; };
-		251FD426157FF65C00F93E4F /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD425157FF65B00F93E4F /* News.m */; };
-		251FD429157FF67300F93E4F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD428157FF67200F93E4F /* Event.m */; };
-		251FD48B157FFA6C00F93E4F /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD48A157FFA6C00F93E4F /* Item.m */; };
 		251FD48D157FFABD00F93E4F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251FD48C157FFABD00F93E4F /* CoreData.framework */; };
 		255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 255C809A15740E0100E6ECC3 /* Localizable.strings */; };
 		255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255C809E15740EE900E6ECC3 /* DealsViewController.xib */; };
@@ -157,17 +151,6 @@
 		251FD3F2157F8E7E00F93E4F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		251FD3F3157F8E7E00F93E4F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		251FD3F5157F910F00F93E4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		251FD416157FEB3800F93E4F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		251FD41B157FF54100F93E4F /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deal.h; path = Models/Deal.h; sourceTree = "<group>"; };
-		251FD41C157FF54100F93E4F /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deal.m; path = Models/Deal.m; sourceTree = "<group>"; };
-		251FD421157FF5C800F93E4F /* Association.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Association.h; path = Models/Association.h; sourceTree = "<group>"; };
-		251FD422157FF5C800F93E4F /* Association.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Association.m; path = Models/Association.m; sourceTree = "<group>"; };
-		251FD424157FF65B00F93E4F /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = News.h; path = Models/News.h; sourceTree = "<group>"; };
-		251FD425157FF65B00F93E4F /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = News.m; path = Models/News.m; sourceTree = "<group>"; };
-		251FD427157FF67200F93E4F /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../Event.h; sourceTree = "<group>"; };
-		251FD428157FF67200F93E4F /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = ../Event.m; sourceTree = "<group>"; };
-		251FD489157FFA6B00F93E4F /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = Models/Item.h; sourceTree = "<group>"; };
-		251FD48A157FFA6C00F93E4F /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = Models/Item.m; sourceTree = "<group>"; };
 		251FD48C157FFABD00F93E4F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		255C809B15740E0100E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Grand Cercle/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		255C809F15740EE900E6ECC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DealsViewController.xib; sourceTree = "<group>"; };
@@ -363,7 +346,7 @@
 			name = News;
 			sourceTree = "<group>";
 		};
-		251FD432157FF74100F93E4F /* ModelsOld */ = {
+		251FD432157FF74100F93E4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				0435F4911574F4B3009F23CD /* Evenements.h */,
@@ -375,7 +358,7 @@
 				047EB1EF1576099400F2F59B /* BonsPlans.h */,
 				047EB1F01576099400F2F59B /* BonsPlans.m */,
 			);
-			name = ModelsOld;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		255C8148157428A300E6ECC3 /* TBXML */ = {
@@ -418,7 +401,6 @@
 		2595EA8E1573FA9000CA27B3 = {
 			isa = PBXGroup;
 			children = (
-				251FD415157FEB3800F93E4F /* Model.xcdatamodeld */,
 				25D8AD7A157921860065C038 /* default@2x.png */,
 				25D8AD7B157921860065C038 /* default.png */,
 				25D8AD7415791F2D0065C038 /* icon@2x.png */,
@@ -460,13 +442,12 @@
 		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
 			isa = PBXGroup;
 			children = (
-				251FD432157FF74100F93E4F /* ModelsOld */,
+				251FD432157FF74100F93E4F /* Models */,
 				251FD3F1157F8E2100F93E4F /* NetworkReachability */,
 				251FD3DF157F679C00F93E4F /* StyledPageControl */,
 				255C8148157428A300E6ECC3 /* TBXML */,
 				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
 				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
-				25E0E2601575174C009B8921 /* Models */,
 				25F41CC0157AC76E002C15C3 /* Parser */,
 				2595EAE11573FABD00CA27B3 /* UI */,
 				2595EAE01573FAAB00CA27B3 /* images */,
@@ -545,23 +526,6 @@
 				25E0E25F15751736009B8921 /* LogicTests.octest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		25E0E2601575174C009B8921 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				251FD489157FFA6B00F93E4F /* Item.h */,
-				251FD48A157FFA6C00F93E4F /* Item.m */,
-				251FD427157FF67200F93E4F /* Event.h */,
-				251FD428157FF67200F93E4F /* Event.m */,
-				251FD424157FF65B00F93E4F /* News.h */,
-				251FD425157FF65B00F93E4F /* News.m */,
-				251FD421157FF5C800F93E4F /* Association.h */,
-				251FD422157FF5C800F93E4F /* Association.m */,
-				251FD41B157FF54100F93E4F /* Deal.h */,
-				251FD41C157FF54100F93E4F /* Deal.m */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		25F41CC0157AC76E002C15C3 /* Parser */ = {
@@ -768,12 +732,6 @@
 				04D8263C157CB7980049A41C /* DealsDetailViewController.m in Sources */,
 				258D371E157F60DD0001E64E /* StyledPageControl.m in Sources */,
 				251FD3F4157F8E7E00F93E4F /* Reachability.m in Sources */,
-				251FD417157FEB3800F93E4F /* Model.xcdatamodeld in Sources */,
-				251FD41D157FF54100F93E4F /* Deal.m in Sources */,
-				251FD423157FF5C900F93E4F /* Association.m in Sources */,
-				251FD426157FF65C00F93E4F /* News.m in Sources */,
-				251FD429157FF67300F93E4F /* Event.m in Sources */,
-				251FD48B157FFA6C00F93E4F /* Item.m in Sources */,
 				25D13CEA1580EF1B006A4F0C /* InfosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1012,19 +970,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		251FD415157FEB3800F93E4F /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				251FD416157FEB3800F93E4F /* Model.xcdatamodel */,
-			);
-			currentVersion = 251FD416157FEB3800F93E4F /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 2595EA901573FA9000CA27B3 /* Project object */;
 }
