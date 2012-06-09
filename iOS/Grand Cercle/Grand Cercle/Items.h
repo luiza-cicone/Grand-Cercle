@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Items : NSObject {
-    
     // Titre
     NSString *title;
     // Déscription

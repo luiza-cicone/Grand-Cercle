@@ -12,6 +12,7 @@
 
 @synthesize title, description, theLink, logo;
 
+// Constructeur
 - (id) init {
     self = [super init];
     return self;
