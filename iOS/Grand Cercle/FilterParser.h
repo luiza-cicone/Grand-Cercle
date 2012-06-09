@@ -14,19 +14,19 @@
 @interface FilterParser : NSObject {
     // Parser
     TBXML *tbxml;
-    // Ensemble des cercles et des clubs
+    // Tableau contenant les noms des cercles, clubs et associations
 	NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
 }
 
 @property (nonatomic, retain) NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
 
-
-// Unique instance du parser
+// Patron singleton, retourne l'unique instance du parser des noms des cercles, clubs et associations
 + (FilterParser *) instance;
-// Méthode récupérant l'ensemble des news
+// Méthode récupérant l'ensemble des noms des cercles, clubs et associations depuis le site
 - (void)loadStuffFromURL;
+// Méthode récupérant l'ensemble des noms des cercles, clubs et associations depuis une sauvegarde locale
 - (void)loadStuffFromFile;
-- (void) handleStuff:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
+// Méthode appelée par les autres pour récupérer les informations nécéssaires
+- (void) handleNames:(TBXMLElement *)listNamesToParse toArray:(NSMutableArray *) array;
 
 @end
-

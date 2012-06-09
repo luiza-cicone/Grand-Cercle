@@ -7,7 +7,7 @@
 //
 
 #import "EventsCalendarViewController.h"
-#import "EvenementsParser.h"
+#import "EventsParser.h"
 #import "EventDetailViewController.h"
 
 
@@ -131,7 +131,7 @@
     
     for (NSDate * date in ar) {
         if ([date isEqualToDate:[self.monthView dateSelected]] ) {
-            Evenements *e  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
+            Events *e  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
             
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
@@ -172,7 +172,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Evenements *selectedEvent  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
+    Events *selectedEvent  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     
@@ -188,8 +188,8 @@
 	// dataArray: has boolean markers for each day to pass to the calendar view (via the delegate function)
 	// dataDictionary: has items that are associated with date keys (for tableview)
 	    
-    NSArray *theDates = [[EvenementsParser instance] arrayEvents];     
-    theDates = [theDates arrayByAddingObjectsFromArray:[[EvenementsParser instance] arrayOldEvents]];
+    NSArray *theDates = [[EventsParser instance] arrayEvents];     
+    theDates = [theDates arrayByAddingObjectsFromArray:[[EventsParser instance] arrayOldEvents]];
 
     
     
@@ -211,7 +211,7 @@
     
     
     for (int i = 0; i < [theDates count]; i++) {
-        Evenements *event = [theDates objectAtIndex:i];
+        Events *event = [theDates objectAtIndex:i];
         
         NSMutableArray *eventsOnThisDay = [self.dataDictionary objectForKey:event.eventDate];
         if (eventsOnThisDay == nil) {

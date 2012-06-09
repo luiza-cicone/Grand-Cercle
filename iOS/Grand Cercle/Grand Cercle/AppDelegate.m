@@ -15,8 +15,8 @@
 #import "SettingsViewController.h"
 
 #import "NewsParser.h"
-#import "EvenementsParser.h"
-#import "BonsPlansParser.h"
+#import "EventsParser.h"
+#import "DealsParser.h"
 #import "FilterParser.h"
 
 #import "Reachability.h"
@@ -183,7 +183,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         // On parse les événements
-        EvenementsParser *ep = [EvenementsParser instance];
+        EventsParser *ep = [EventsParser instance];
         [ep loadEventsFromURL];
         
         // On parse les news
@@ -191,8 +191,8 @@
         [np loadNewsFromURL];
         
         // On parse les bons plans
-        BonsPlansParser *bp = [BonsPlansParser instance];
-        [bp loadBonsPlansFromURL];
+        DealsParser *bp = [DealsParser instance];
+        [bp loadDealsFromURL];
 
     }
     else
@@ -229,7 +229,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         // On parse les événements
-        EvenementsParser *ep = [EvenementsParser instance];
+        EventsParser *ep = [EventsParser instance];
         [ep loadEventsFromFile];
         
         // On parse les news
@@ -237,8 +237,8 @@
         [np loadNewsFromFile];
         
         // On parse les bons plans
-        BonsPlansParser *bp = [BonsPlansParser instance];
-        [bp loadBonsPlansFromFile];
+        DealsParser *bp = [DealsParser instance];
+        [bp loadDealsFromFile];
 
     }
     

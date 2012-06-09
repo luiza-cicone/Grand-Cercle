@@ -7,8 +7,8 @@
 //
 
 #import "EventFourNextViewController.h"
-#import "EvenementsParser.h"
-#import "Evenements.h"
+#import "EventsParser.h"
+#import "Events.h"
 #import "EventDetailViewController.h"
 
 @implementation EventFourNextViewController
@@ -20,7 +20,7 @@ int borneSup = 0;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
-    EvenementsParser *ep = [EvenementsParser instance];
+    EventsParser *ep = [EventsParser instance];
     borneSup = MIN(4, [ep.arrayEvents count]);
     
     if (self) {
@@ -75,15 +75,15 @@ int borneSup = 0;
 
 - (IBAction)imageButtonAction:(id)sender {
     
-    Evenements *selectedEvent = nil;
+    Events *selectedEvent = nil;
     if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:9] && borneSup > 0) {
-        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:0];
+        selectedEvent = [[[EventsParser instance] arrayEvents ] objectAtIndex:0];
     } else if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:10] && borneSup > 1) {
-        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:1];
+        selectedEvent = [[[EventsParser instance] arrayEvents ] objectAtIndex:1];
     } else if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:11] && borneSup > 2) {
-        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:2];
+        selectedEvent = [[[EventsParser instance] arrayEvents ] objectAtIndex:2];
     } else if ((UIButton*)sender == (UIButton *)[self.view viewWithTag:12] && borneSup > 3) {
-        selectedEvent = [[[EvenementsParser instance] arrayEvents ] objectAtIndex:3];
+        selectedEvent = [[[EventsParser instance] arrayEvents ] objectAtIndex:3];
     }
     
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];

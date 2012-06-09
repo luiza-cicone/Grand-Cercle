@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Items.h"
 
-@interface NewsOld : Items {
+@interface News : Items {
     // Date de publication
     NSString *pubDate;
     // Auteur

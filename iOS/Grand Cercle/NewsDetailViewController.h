@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewsOld.h"
+#import "News.h"
 
 @interface NewsDetailViewController : UITableViewController <UIWebViewDelegate> {
-    NewsOld *news;
+    News *news;
     IBOutlet UITableViewCell *cellNewsTop;
     IBOutlet UITableViewCell *cellNewsDescription;
     int webViewHeight;
 
 }
 
-@property (retain, nonatomic) NewsOld *news;
+@property (retain, nonatomic) News *news;
 @property (retain, nonatomic) IBOutlet UITableViewCell *cellNewsDescription, *cellNewsTop;
 @end

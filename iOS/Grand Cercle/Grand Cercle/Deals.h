@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Items.h"
 
-@interface BonsPlans : Items {
+@interface Deals : Items {
     // Résumé de l'offre
     NSString *summary;
 }

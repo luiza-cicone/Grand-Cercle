@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import "BonsPlans.h"
+#import "Deals.h"
 
-@implementation BonsPlans
-
+@implementation Deals
 @synthesize summary;
 
 // Constructeur

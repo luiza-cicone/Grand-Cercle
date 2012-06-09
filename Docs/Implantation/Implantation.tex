@@ -177,8 +177,9 @@ Dans la technologie android, c'est un fichier appelé AndroidManifest.xml qui g�
 \noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
 \begin{itemize}
 \item récupération des données sur le site
-\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences
-\item initialisation de la base de données nécessaire pour la gestion des préférences
+\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences.
+\item initialisation de toutes les autres structures de données (listes des données relatives aux événements, aux news, aux bons plans).
+\item initialisation de la base de données.
 \end{itemize}
 
 \vspace{0.5cm}
@@ -223,8 +224,10 @@ Reachability
 
 Page Control
 
+
 \subsection{Android}
 
+Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \textt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 
 
