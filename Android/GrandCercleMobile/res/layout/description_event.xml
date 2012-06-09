@@ -97,7 +97,7 @@
     	            android:textAppearance="?android:attr/textAppearanceMedium"/>
     	    </LinearLayout>
     	    <LinearLayout 
-    	        android:layout_width="220dp"
+    	        android:layout_width="240dp"
     	        android:layout_height="wrap_content"
     	        android:orientation="horizontal">
     	        <TextView 
@@ -115,17 +115,40 @@
     	            android:textAppearance="?android:attr/textAppearanceMedium"/>
     	    </LinearLayout>
     	</LinearLayout>
-   	    <ImageButton 
-	       	android:id="@+id/addCal"
-	       	android:layout_width="60dp"
-	       	android:layout_height="60dp"
-	       	android:src="@drawable/add_event_icon"
-	       	android:background="@drawable/transparent"
-	       	android:scaleType="fitCenter"
-	       	android:layout_gravity="center_vertical"
-	       	android:layout_weight="3"
-	       	android:layout_marginRight="10dp"
-	       	android:layout_marginTop="2dp"/>
+    	<LinearLayout 
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="0"
+    	    android:layout_marginLeft="5dp"
+    	    android:orientation="vertical">
+    	   <LinearLayout 
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:orientation="vertical"
+	    	    android:layout_marginLeft="6dp"> 
+	    	    <TextView 
+	    	        android:layout_width="fill_parent"
+	    	        android:layout_height="wrap_content"
+	    	        android:text="Ajouter"
+	    	        android:layout_gravity="center_horizontal"
+	    	        />
+	    	</LinearLayout>
+    		<LinearLayout 
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:orientation="vertical">
+		   	    <ImageButton 
+			       	android:id="@+id/addCal"
+			       	android:layout_width="60dp"
+			       	android:layout_height="60dp"
+			       	android:src="@drawable/add_event_icon"
+			       	android:background="@drawable/transparent"
+			       	android:scaleType="fitCenter"
+			       	android:layout_gravity="center_vertical"
+			       	android:layout_marginRight="10dp"
+			       	android:layout_marginTop="2dp"/>
+		   	    </LinearLayout>
+	    </LinearLayout>
     </LinearLayout>
     
     <!-- fin cadre group, debut description -->

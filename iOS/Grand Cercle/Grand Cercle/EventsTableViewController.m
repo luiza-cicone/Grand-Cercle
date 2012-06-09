@@ -177,11 +177,10 @@
     else if (curDay == [compoNents day] - 1 && curMonth == [compoNents month] && curYear == [compoNents year]) {
         return @"Demain";
     }
-    else return [e date];
+    else return [NSString stringWithFormat:@"%@, %@", [e day], [e date]];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"EventCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -202,8 +201,10 @@
     imageView = (UIImageView *)[cell viewWithTag:1];
     
     UIImage *img;
-    img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
-    [imageView setImage:img];
+    if (![e.imageSmall isEqual:@""]) {
+        img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
+        [imageView setImage:img];
+    }
     
     
     UILabel *label;
@@ -213,9 +214,9 @@
     label = (UILabel *)[cell viewWithTag:3];
     [label setText:[e group]];
     
-    label = (UILabel *)[cell viewWithTag:4];
-    [label setText:[[[e time] stringByAppendingString: @" - "] stringByAppendingString : [e place]]];
-    
+//    label = (UILabel *)[cell viewWithTag:4];
+//    [label setText:[[[e time] stringByAppendingString: @" - "] stringByAppendingString : [e place]]];
+//    
     imageView = (UIImageView *)[cell viewWithTag:6];
     
     img = [imageCache2 imageForKey:[NSString stringWithFormat:@"%d", [e.logo hash]] url:[NSURL URLWithString: e.logo] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];

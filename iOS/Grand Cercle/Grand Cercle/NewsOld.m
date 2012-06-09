@@ -10,10 +10,11 @@
 
 @implementation NewsOld
 @synthesize pubDate, author, group;
-    
-    - (id) init {
-        self = [super init];
-        return self;
-    }
+
+// Constructeur
+- (id) init {
+    self = [super init];
+    return self;
+}
 
 @end

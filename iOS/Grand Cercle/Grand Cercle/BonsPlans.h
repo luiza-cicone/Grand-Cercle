@@ -10,7 +10,7 @@
 #import "Items.h"
 
 @interface BonsPlans : Items {
-    // 
+    // Résumé de l'offre
     NSString *summary;
 }
 
