@@ -14,6 +14,7 @@
 \usepackage{enumerate}
 \usepackage{enumitem}
 \usepackage{eso-pic}
+\usepackage{hyperref}
 
 % \usepackage{needspace}
 
@@ -147,8 +148,29 @@ $ $\\
 Le diagramme suivant représente la modélisation objet du domaine d'application qui guide nos choix de conception.
 
 \subsection{Conception logicielle}
+
 \subsubsection{Architecture logicielle}
 L'architecture utilisé pour les deux applications est l'architecture Modèle-Vue-Contrôleur qui à été facilement mise en œuvre avec les frameworks Android pour Java et Cocoa Touch pour Objective-C.
+
+L'application réalisée ne peut existée sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parsers qui agissent sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.\\
+
+\noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
+\begin{itemize}
+\item récupération des données sur le site
+\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences.
+\item initialisation de toutes les autres structures de données (listes des données relatives aux événements, aux news, aux bons plans).
+\item initialisation des préférences (dictionnaire pour iOS et base de donnée pour Android)
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent Un des points importants de la récupération de donnée est la présence ou non de connexion internet: 
+\begin{itemize}
+\item soit une connexion internet est disponible. Dans ce cas on sauvegarde les fichiers xml en provenance du site dans la mémoire et on parse ces fichiers qui sont alors contenues dans la mémoire interne du téléphone.
+\item soit aucune connexion n'est possible et dans ce cas, on parse les données qui sont dans la mémoire, sauvegardées lors de connexions antérieures.
+\end{itemize}
+
+\noindent Lors de la première utilisation de l'application, un message est affiché à l'utilisateur s'il n'est pas connecté à internet pour lui indiquer qu'aucune donnée n'a pu être chargée (mais l'application se lance correctement).
+ Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
 \subsubsection{iOS}
 Pour Objective-C, les classes sont séparés dans les fichiers header (extension \texttt{.h}) et les fichiers d'implémentation (extension \texttt{.m})
@@ -157,54 +179,46 @@ Les classe du contrôleur sont les classes pour récupérer, parser et filtrer l
 
 {\bf Patrons de conception}
 
-Pour tout les classes contrôleur nous avons utilisé le \texttt{Singleton} pour s'assurer d'avoir une seule instance qui effectue les traitements des données.
+Pour toutes les classes contrôleur nous avons utilisé le \texttt{Singleton} pour s'assurer d'avoir une seule instance qui effectue les traitements des données.
 
 Nous avons utilisé aussi quelques autres patrons de conception fournis par le framework et par Xcode. \\
 \begin{itemize}
 	\item {\bf Composite} est le patron utilisé pour la hiérarchie des éléments de la vue. Chaque élément est une sous-classe de \texttt{UIView} donc il hérite tous ses méthodes.
 En utilisant l'interface graphique, nous avons ajouté des objets à la vue en suivant une hiérarchie\\
-	\item {\bf Commande} est le patron utilisé pour rédiger l'exécution quand un événement apparaisse. Cela à été fait toujours à l'aide de l'interface graphique, en reliant un objet avec une méthode.\\
+	\item {\bf Commande} est le patron utilisé pour rédiger l'exécution quand un événement apparaît. Cela à été fait toujours à l'aide de l'interface graphique, en reliant un objet avec une méthode.\\
 	\item {\bf Observateur} est le patron qui fournit la mise à jour facile entre les vues et les modèles. Nous avons utilisé \texttt{Notification Center} pour informer la vue des changements du modèle et vice-versa.
 \end{itemize}
 
 
 
-\subsubsection{Android - Présentation technologie}
-La technologie android repose sur la dualité entre la langage Java et le langage xml. A chaque affichage correspond un fichier xml qui met en place les différentes fenêtres qui constituent l'écran, appelées des \og layouts \fg, ainsi qu'un fichier Java qui représente ce qu'on appelle une activité, c'est à dire la fenêtre visible à l'écran. La vue offerte à l'utilisateur est mise en place par la méthode setContentView([fichier].xml). Néanmoins, ce fichier xml en paramètre de la méthode mentionnée correspond à une configuration statique de l'affichage. Ainsi, dès que nous avons besoin de modifier dynamiquement une vue, nous le faisons dans le code Java, grâce à l'identifiant de la vue considérée renseigné dans le code xml: c'est ce qui fait la dualité Java/xml. Néanmoins, le placement des différents objets dans les layouts est moins facile en Java que dans un fichier xml, c'est pourquoi nous sommes passé par les fichiers xml dès que cela était possible.\\
+\subsubsection{Android}
+La technologie Android repose sur la dualité entre la langage \texttt{Java} et le langage \texttt{xml}. A chaque affichage correspond un fichier \texttt{xml} qui met en place les différentes fenêtres qui constituent l'écran, appelées des \og layouts \fg, ainsi qu'un fichier Java qui représente ce qu'on appelle une activité, c'est à dire la fenêtre visible à l'écran. La vue offerte à l'utilisateur est mise en place par la méthode setContentView([fichier xml]). Néanmoins, ce fichier xml en paramètre de la méthode mentionnée correspond à une configuration statique de l'affichage. Ainsi, dès que nous avons besoin de modifier dynamiquement une vue, nous le faisons dans le code Java, grâce à l'identifiant de la vue considérée renseigné dans le code xml : c'est ce qui fait la dualité Java/xml. \'Etant donné que le positionnement des différents objets dans les layouts est moins facile en Java que dans un fichier xml, il est avantageux d'utiliser le xml dès que cela est possible.
 
-Dans la technologie android, c'est un fichier appelé AndroidManifest.xml qui gère les différentes activités de l'application. La première activité lancée est celle contenue dans un label \og intent-filter \fg. Dans notre cas, c'est le fichier GCMLaunching.java qui constitue l'activité de démarrage. Ce dernier fait appel à la méthode \texttt{parseFiles(Context context)} , qui utilise une classe factory pour obtenir une instance d'un SAXParser, nécessaire pour la récupération des données. En effet, l'application réalisée ne peut exister sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parser, appelés par la méthode \texttt{parseFiles(Context context)}
- sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.\\
+{\bf Patrons de conception}
 
-\noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
 \begin{itemize}
-\item récupération des données sur le site
-\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences.
-\item initialisation de toutes les autres structures de données (listes des données relatives aux événements, aux news, aux bons plans).
-\item initialisation de la base de données.
+	\item {\bf Singleton} a été mis en œuvre pour notre base de donnée, afin de s'assurer qu'elle n'est instanciée qu'une seule fois et ainsi d'assurer un traitement des données cohérent pour toute l'application.\\
+	\item {\bf Commande} est le patron utilisé pour rédiger l'exécution quand un événement apparaît (exemple : appuie sur une zone de l'écran, sur un bouton, \dots)\\
+	\item {\bf Observateur} est utilisé lorsque les préférences sont modifiées par l'utilisateur. Il se résume a un seul appel à la méthode \texttt{ParseEvent()} afin d'actualiser les données affichée et stockées, étant donné que les données qui ne correspondent pas aux préférences n'ont pas de raison d'être stockées dans les structures de données appropriées.
+	\item {\bf Fabrique} est nécéssaire pour construire une instance du parser SAX qui permet de récupérer les données.
 \end{itemize}
+Dans l'application Android, nous avons préféré utilisé un parser SAX plutôt qu'un DOM, puisque le SAX est plus rapide que le DOM (cf \href{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}).
 
-\vspace{0.5cm}
-\noindent Un des points importants de la récupération de donnée est la présence ou non de connexion internet: 
-\begin{itemize}
-\item soit une connexion internet est disponible. Dans ce cas on sauvegarde les fichiers xml en provenance du site dans la mémoire et on parse ces données.\\
-\item soit aucune connexion n'est possible et dans ce cas, on parse les données qui sont dans la mémoire, sauvegardées lors de connexions antérieures.\\
-\end{itemize}
 
-\noindent Lors de la première utilisation de l'application, un message est affiché à l'utilisateur s'il n'est pas connecté à internet pour lui indiquer qu'aucune donnée n'a pu être chargée (mais l'application se lance correctement).
- Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
-Une fois la récupération des données et les initialisations effectuées, l'activité GCM.java est lancée. La différence avec les autres activités est qu'elle étend la classe TabActivity et non Activity. En effet, cette activité permet de construire les onglets de notre application à l'aide d'un objet appelé \texttt{TabHost}. Toutes les vues des différents onglets sont crées dans GCM.java, ce qui permet à l'utilisateur de naviguer rapidement entre les différents onglets.
-Au sein de ces onglets, un clic sur les différents boutons lancent d'autres activités à l'aide de \texttt{listeners}.\\
 
-Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
-La base de données est utilisée dans la gestion des préférences, pour choisir les différents filtres ainsi que l'apparence ergonomique. Quatre types de préférences sont proposés à l'utilisateur et pour chaque type, les éléments cochés sont sauvegardés dans la base de données. On effectue alors des tests sur ces données dans les autres activités, notamment pour les couleurs de fond et les filtres sur les données récupérées sur le site du Grand Cercle.\\
+
+
+
+
+
 
 \section{Mise en œuvre}
 
 \subsection{iOS}
 {\bf Parser}
-Nous avons utilisé un thread pour parser les informations du l'\texttt{XML} pour ne pas bloquer l'interface utilisateur. Quand l'information est disponible un notification est envoyé et la mise à jour de l'affichage est faite.
+Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pour ne pas bloquer l'interface utilisateur. Quand l'information est disponible une notification est envoyé et la mise à jour de l'affichage est faite.
 
 
 {\bf Préférences}
@@ -224,9 +238,25 @@ Une simple classe appellé \texttt{Reachability} offre les fonctionnalités pour
 
 
 \subsection{Android}
+{\bf Parser}
+Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pour ne pas bloquer l'interface utilisateur. Quand les cinq parser ont terminé leur execution, la méthode \texttt{onPostExecute(Void result)} est appelée, et crée la classe \texttt{GCM}. La différence avec les autres activités est que \texttt{GCM} étend la classe \texttt{TabActivity} et non \texttt{Activity}. En effet, cette activité permet de construire les onglets de notre application à l'aide d'un objet appelé \texttt{TabHost}. Toutes les vues des différents onglets sont crées dans GCM.java, ce qui permet à l'utilisateur de naviguer rapidement entre les différents onglets.
 
-Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \texttt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
+{\bf Préférences}
+Pour sauvegarder les préférences, une base de donnée \texttt{SQLite} a été employée. Chaque préférence (par cercle, par club, par type et le thème) est stockée dans une table différente.
+ 
+{\bf Cache des images}
+
+A chaque image trouvée par le parser, on associe une clé de type \texttt{String} qui est en fait l'url de l'image. On stocke ensuite dans une \texttt{HashMap} le fichier bitmap correspondant à cette clé.\\
+Deux conventions ont été adoptée pour le stockage des images :
+\begin{itemize}
+\item soit l'image est une affiche d'événement et elle est stockée dans le cache pendant une semaine
+\item soit l'image est un logo d'association ou d'enseigne (pour les bons plans) et elle est stockée de manière infinie dans le cache\\
+\end{itemize}
+
+{\bf Librairies externes}
+
+Afin de pourvoir réaliser la fonctionnalité d'import d'un événement au calendrier du téléphone, nous avons été obligé d'ajouter à nos options de compilation la librairie \texttt{android-8}, issue de l'API 8 d'Android. Notre application doit fonctionner sur les téléphones équipés des API 7 et plus, donc cette librairie est inclue dans les API 8 et plus, mais posait un problème pour l'API 7. Nous l'avons donc rajouté lors de la compilation, et elle fonctionne sur l'API 7 (téléphones sous Android 2.1).
 
 
 \section{Validation}

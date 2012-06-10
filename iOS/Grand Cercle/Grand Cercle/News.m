@@ -11,7 +11,9 @@
 @implementation News
 @synthesize pubDate, author, group;
 
-// Constructeur
+/****************
+ * Constructeur *
+ ***************/
 - (id) init {
     self = [super init];
     return self;

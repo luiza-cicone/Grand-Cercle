@@ -11,7 +11,9 @@
 @implementation Items
 @synthesize title, description, theLink, logo;
 
-// Constructeur
+/****************
+ * Constructeur *
+ ***************/
 - (id) init {
     self = [super init];
     return self;
