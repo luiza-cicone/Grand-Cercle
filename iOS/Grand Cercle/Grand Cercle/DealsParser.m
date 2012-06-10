@@ -14,8 +14,8 @@
 // Patron singleton, unique instance du parser de news
 static DealsParser *instanceBonsPlans = nil;
 
-/*********************************************************************************
- * Patron singleton, méthode retournant l'unique instance du parser de bons plans*
+/**********************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser de bons plans *
  *********************************************************************************/
 + (DealsParser *) instance {
     if (instanceBonsPlans == nil) {
@@ -24,9 +24,9 @@ static DealsParser *instanceBonsPlans = nil;
     return instanceBonsPlans;
 }
 
-/**************************************************
- * Méthode récupérant les informations nécessaires*
- *************************************************/
+/***************************************************
+ * Méthode récupérant les informations nécessaires *
+ **************************************************/
 - (void) handleDeals:(TBXMLElement *)dealsToParse {
     
     // Tant qu'il y a une news à traiter
@@ -62,9 +62,9 @@ static DealsParser *instanceBonsPlans = nil;
 	} while ((dealsToParse = dealsToParse->nextSibling));
 }
 
-/**************************************************
- * Méthode de parsage des données du site internet*
- *************************************************/
+/***************************************************
+ * Méthode de parsage des données du site internet *
+ **************************************************/
 - (void)loadDealsFromURL { 
     
     // Initialisation du tableau contenant les bons plans
@@ -87,8 +87,8 @@ static DealsParser *instanceBonsPlans = nil;
                                failure:failureBlock];
 }
 
-/**********************************************************
- * Méthode de parsage des données de la sauvegarde interne*
+/***********************************************************
+ * Méthode de parsage des données de la sauvegarde interne *
  **********************************************************/
 -(void) loadDealsFromFile {
     
