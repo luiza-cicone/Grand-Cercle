@@ -28,7 +28,7 @@ public class TabInfos extends Activity {
 		GCM.changeTabHost(color);
 		GCM.oldchild = 3;
 		View view = findViewById(R.id.bandeau1);
-		color = 0xFF222222;
+		color = 0xFF3B3B3B;
 		view.setBackgroundColor(color);
 		view = findViewById(R.id.bandeau2);
 		view.setBackgroundColor(color);

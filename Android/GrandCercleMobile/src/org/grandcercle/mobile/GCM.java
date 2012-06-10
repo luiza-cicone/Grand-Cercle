@@ -65,7 +65,7 @@ public class GCM extends TabActivity {
 		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        
 		if (prefered.equals("Noir")) {
-		     color = 0xFF222222;
+		     color = 0xFF3B3B3B;
 		     for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(color);
 		} else if(prefered.equals("Ensimag")) {
@@ -113,7 +113,7 @@ public class GCM extends TabActivity {
 		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 	        
 		if (prefered.equals("Noir")) {
-		    color = 0xFF222222;
+		    color = 0xFF3B3B3B;
 	        tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
 		} else if(prefered.equals("Ensimag")) {
 			color = 0xFF96BE0F;

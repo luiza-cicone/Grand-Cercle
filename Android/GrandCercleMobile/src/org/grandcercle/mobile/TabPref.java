@@ -28,6 +28,7 @@ public class TabPref extends Activity {
 		TextView type = (TextView)findViewById(R.id.Types);
 		type.setOnClickListener((OnClickListener) clickListenerPrefType);
 		
+		// Layout Design
 		TextView design = (TextView)findViewById(R.id.Design);
 		design.setOnClickListener((OnClickListener) clickListenerPrefDesign);
 	}
@@ -35,11 +36,15 @@ public class TabPref extends Activity {
 	public void onResume() {
 		super.onResume();
 		int color = 0xFFFFFFFF;
+		// On colore l'onglet sélectionné en blanc et on restaure la couleur de l'ancien onglet.
 		GCM.changeTabHost(color);
+		// on met à jour l'ancien onglet
 		GCM.oldchild = 4;
 		View view = findViewById(R.id.bandeau);
-		color = 0xFF222120;
+		color = 0xFF3B3B3B;
+		// Le premier bandeau est grisé
 		view.setBackgroundColor(color);
+		// Le deuxieme bandeau est grisé
 		view = findViewById(R.id.bandeau2);
 		view.setBackgroundColor(color);
 	}
