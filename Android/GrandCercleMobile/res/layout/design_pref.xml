@@ -11,28 +11,28 @@
 			android:id="@+id/design">
 			<RadioButton
 			    android:id="@+id/Noir"
-               	android:text="Noir GrandCercle"/>
+               	android:text="@string/NoirGrandCercle"/>
 			<RadioButton 
 			    android:id="@+id/Ensimag"
-               	android:text="Vert Ensimag"/>
+               	android:text="@string/VertEnsimag"/>
             <RadioButton 
                 android:id="@+id/Phelma"
-                android:text="Rouge Phelma"/>
+                android:text="@string/RougePhelma"/>
             <RadioButton 
                 android:id="@+id/Ense3"
-                android:text="Bleu Ense3"/>
+                android:text="@string/BleuEnse3"/>
             <RadioButton 
                 android:id="@+id/Pagora"
-                android:text="Orange Pagora"/>
+                android:text="@string/OrangePagora"/>
             <RadioButton 
                 android:id="@+id/GI"
-                android:text="Bleu GI"/>
+                android:text="@string/BleuGI"/>
             <RadioButton 
                 android:id="@+id/CPP"
-                android:text="Jaune CPP"/>
+                android:text="@string/JauneCPP"/>
             <RadioButton 
                 android:id="@+id/Esisar"
-                android:text="Violet Esisar"/>
+                android:text="@string/VioletEsisar"/>
 	    </RadioGroup>
 	    <LinearLayout
 		    	android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
 		    	    android:layout_width="75dp"
 		    	    android:layout_height="wrap_content"
 		    	    android:layout_marginRight="30dp"
-		    	    android:text="Ok"/>
+		    	    android:text="@string/Ok"/>
 		</LinearLayout>
 </LinearLayout>
     
