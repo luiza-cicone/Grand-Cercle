@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+/*
+ * Parser sur les news
+ */
+
 public class ParserXMLHandlerNews extends ParserXMLHandler {
 	
 	private final String PUBDATE = "pubDate";

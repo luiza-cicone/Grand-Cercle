@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+ * Classe représentant le détail d'un événement
+ */
+
 public class PageEvent extends Activity {
 	private String title;
 	private Spanned description;

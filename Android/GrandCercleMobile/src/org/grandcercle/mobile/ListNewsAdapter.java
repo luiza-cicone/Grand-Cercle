@@ -10,6 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+ * Classe qui gère la liste des news, en recyclant les news nécéssaires
+ */
+
 public class ListNewsAdapter extends BaseAdapter {
 
 	// les données à afficher
@@ -45,7 +49,8 @@ public class ListNewsAdapter extends BaseAdapter {
 		
 	}
 	
-	/* Le paramètre "convertView" permet de recycler les élements 
+	/* RECYCLEUR
+	 * Le paramètre "convertView" permet de recycler les élements 
 	 * de notre liste. En effet, l'opération pour convertir un layout 
 	 * XML en IHM standard est très couteuse pour la plateforme Android. 
 	 * On nous propose ici de réutiliser des occurences créées qui ne sont 
@@ -69,11 +74,6 @@ public class ListNewsAdapter extends BaseAdapter {
 		}						
 		nv.pubDate.setText(listNews.get(position).getPubDate());
 		nv.title.setText(listNews.get(position).getTitle());
-		/*try {
-			SaveImageFromUrl.setImage(nv.logo,listNews.get(position).getLogo());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 		
 		// logo stocké dans le cache pour une durée infinie
 		UrlImageViewHelper.setUrlDrawable(nv.logo,listNews.get(position).getLogo(),R.drawable.loading,UrlImageViewHelper.CACHE_DURATION_INFINITE);

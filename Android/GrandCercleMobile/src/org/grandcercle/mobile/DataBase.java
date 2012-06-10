@@ -1,11 +1,5 @@
 package org.grandcercle.mobile;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,6 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/*
+ * Classe représentant la base de donnée
+ */
 
 public class DataBase extends SQLiteOpenHelper {
 	// préférences
@@ -27,7 +24,6 @@ public class DataBase extends SQLiteOpenHelper {
 	private ArrayList<String> listType;
 	private String design;
 
-	/** Create a helper object for the Events database */
 	private DataBase() {		
 		super(ContainerData.getAppContext(), "GCM_DB", null, 2);
 	}

@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface InfosViewController : UITableViewController {
+    // Cellules contenant le titre de info et la description du Grand Cercle
     IBOutlet UITableViewCell *topCell, *descriptionCell;
-
 }
 
 @property (nonatomic, retain) IBOutlet UITableViewCell *topCell, *descriptionCell;

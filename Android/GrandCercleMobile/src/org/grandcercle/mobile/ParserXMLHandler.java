@@ -3,6 +3,9 @@ package org.grandcercle.mobile;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/*
+ * Parser générique abstrait
+ */
 
 public abstract class ParserXMLHandler extends DefaultHandler {
 

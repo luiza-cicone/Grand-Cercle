@@ -29,6 +29,6 @@
 		    	    android:layout_width="75dp"
 		    	    android:layout_height="wrap_content"
 		    	    android:layout_marginRight="30dp"
-		    	    android:text="Ok"/>
+		    	    android:text="@string/Ok"/>
 		</LinearLayout>
 </LinearLayout>

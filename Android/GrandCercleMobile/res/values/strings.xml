@@ -7,6 +7,17 @@
     <string name="tabInfos">Infos</string>
     <string name="tabParam">Parametres</string>
     <string name="parsing">Modifications en cours</string>
+    <string name="Ok">OK</string>
+    <string name="desc"></string>
+    <string name="NoirGrandCercle">Noir GrandCercle</string>
+    <string name="VertEnsimag">Vert Ensimag</string>
+    <string name="RougePhelma">Rouge Phelma</string>
+    <string name="BleuEnse3">Bleu Ense3</string>
+    <string name="OrangePagora">Orange Pagora</string>
+    <string name="BleuGI">Bleu GI</string>
+    <string name="JauneCPP">Jaune CPP</string>
+    <string name="VioletEsisar">Violet Esisar</string>
+    <string name="Ajouter">Ajouter</string>
     
     <string-array name="prefentries">
         <item >Item 1</item>

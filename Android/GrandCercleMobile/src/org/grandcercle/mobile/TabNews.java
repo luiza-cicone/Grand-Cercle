@@ -1,6 +1,5 @@
 package org.grandcercle.mobile;
 
-
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -11,6 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+/*
+ * Onglet des news
+ */
 
 public class TabNews extends Activity {
 	TabHost tabHost;

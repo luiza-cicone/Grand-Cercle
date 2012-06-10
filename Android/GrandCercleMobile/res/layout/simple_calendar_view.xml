@@ -7,6 +7,7 @@
 	android:layout_gravity="center_horizontal"
 	>
 	 <ImageView
+	    android:contentDescription="@string/desc"
         android:id="@+id/position_ecran"
 		android:src="@drawable/position_center_ecran"
         android:layout_width="wrap_content" 
@@ -36,6 +37,7 @@
 			android:layout_height="wrap_content">
 	
 			<ImageView
+			    android:contentDescription="@string/desc"
 				android:id="@+id/prevMonth"
 				android:src="@drawable/calendar_left_arrow_selector"
 				android:layout_width="wrap_content"
@@ -47,11 +49,12 @@
 				android:layout_weight="0.6"
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:background="@drawable/calendar_bar_gris"
-				android:layout_width="wrap_content"
+				android:layout_width="0dip"
 				android:layout_height="28dp"
 				android:layout_marginTop="6dp">
 			</Button>
 			<ImageView
+			    android:contentDescription="@string/desc"
 				android:id="@+id/nextMonth"
 				android:src="@drawable/calendar_right_arrow_selector"
 				android:layout_width="wrap_content"
@@ -65,6 +68,7 @@
 			android:layout_width="450dp"
 			android:layout_height="wrap_content">
 			<ImageView
+			    android:contentDescription="@string/desc"
 				android:id="@+id/calendarheader"
 				android:src="@drawable/blue_bg_with_text"
 				android:layout_gravity="center"

@@ -7,9 +7,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+/*
+ * Classe qui gère le thread et l'écran d'accueil
+ */
 
 public class GCMLaunching extends Activity {
 	
@@ -25,6 +28,7 @@ public class GCMLaunching extends Activity {
 		new LoadingPage().execute((Void)null);
 	}
 	
+	// thread permettant de parser les fichiers
 	private class LoadingPage extends AsyncTask<Void,Integer,Void> {
 		@Override
 	    protected Void doInBackground(Void... params) {

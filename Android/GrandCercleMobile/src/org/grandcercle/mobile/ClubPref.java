@@ -14,6 +14,9 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+/*
+ * Classe représentant l'activité liée au choix de préférence de clubs
+ */
 
 public class ClubPref extends Activity {
 	private ArrayList<String> listClub;

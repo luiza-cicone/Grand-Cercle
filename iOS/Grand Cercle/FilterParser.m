@@ -14,9 +14,9 @@
 // Patron singleton, unique instance du parser des noms des cercles, clubs et associations
 static FilterParser *instanceAssociation = nil;
 
-/***************************************************************************************************************
- * Patron singleton, méthode retournant l'unique instance du parser des noms des cercles, clubs et associations*
- **************************************************************************************************************/
+/****************************************************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser des noms des cercles, clubs et associations *
+ ***************************************************************************************************************/
 + (FilterParser *) instance {
     if (instanceAssociation == nil) {
         instanceAssociation = [[self alloc] init];
@@ -24,9 +24,9 @@ static FilterParser *instanceAssociation = nil;
     return instanceAssociation;
 }
 
-/**************************************************
- * Méthode récupérant les informations nécessaires*
- *************************************************/
+/***************************************************
+ * Méthode récupérant les informations nécessaires *
+ **************************************************/
 - (void) handleNames:(TBXMLElement *)listNamesToParse toArray:(NSMutableArray *)array {
     
     // Tant qu'il y a un événement à traiter
@@ -42,9 +42,9 @@ static FilterParser *instanceAssociation = nil;
 	} while ((listNamesToParse = listNamesToParse->nextSibling));
 }
 
-/**************************************************
- * Méthode de parsage des données du site internet*
- *************************************************/
+/***************************************************
+ * Méthode de parsage des données du site internet *
+ **************************************************/
 - (void)loadStuffFromURL { 
     
     // Initialisation du tableau contenant les noms
@@ -88,8 +88,8 @@ static FilterParser *instanceAssociation = nil;
                                    failure:failureBlock];
 }
 
-/**********************************************************
- * Méthode de parsage des données de la sauvegarde interne*
+/***********************************************************
+ * Méthode de parsage des données de la sauvegarde interne *
  **********************************************************/
 -(void) loadStuffFromFile {
     

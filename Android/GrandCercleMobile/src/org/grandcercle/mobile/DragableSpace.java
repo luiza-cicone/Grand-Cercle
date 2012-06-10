@@ -82,7 +82,7 @@ public class DragableSpace extends ViewGroup {
                  */
 
                 /*
-                 * Locally do absolute value. mLastMotionX est mis à l'ordonnée de l'ancien mouvement
+                 * mLastMotionX est mis à l'ordonnée de l'ancien mouvement
                  * intercepté.
                  */
                 final int xDiff = (int) Math.abs(x - mLastMotionX);

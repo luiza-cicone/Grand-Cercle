@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+ * Classe représentant le détail d'une news
+ */
+
 public class PageNews extends Activity {
 	private DataBase dataBase;
 	public void onCreate(Bundle savedInstanceState) {

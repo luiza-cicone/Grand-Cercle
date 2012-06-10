@@ -8,11 +8,12 @@
 	android:background="@drawable/tab_bg_selector"
 		>
 	<ImageView
-	    	android:id="@+id/tabEventIcone"
-			android:layout_width="fill_parent"
-			android:layout_height="20dp"
-			android:gravity="right" 
-			android:src="@+drawable/calendar">
+	    android:contentDescription="@string/desc"
+    	android:id="@+id/tabEventIcone"
+		android:layout_width="fill_parent"
+		android:layout_height="20dp"
+		android:gravity="right" 
+		android:src="@+drawable/calendar">
 	</ImageView>
 	    
 	<TextView 

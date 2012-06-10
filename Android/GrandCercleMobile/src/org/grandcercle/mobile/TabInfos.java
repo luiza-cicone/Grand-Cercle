@@ -1,8 +1,5 @@
 package org.grandcercle.mobile;
 
-
-
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,9 +7,11 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
 
+/*
+ * Onglet des infos
+ */
 
 public class TabInfos extends Activity {
-	private DataBase dataBase;
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

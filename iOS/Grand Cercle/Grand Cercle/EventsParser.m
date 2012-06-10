@@ -14,9 +14,9 @@
 // Patron singleton, unique instance du parser d'événements
 static EventsParser *instanceEvent = nil;
 
-/********************************************************************************
- * Patron singleton, méthode retournant l'unique instance du parser d'événements*
- *******************************************************************************/
+/*********************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser d'événements *
+ ********************************************************************************/
 + (EventsParser *) instance {
     if (instanceEvent == nil) {
         instanceEvent = [[self alloc] init];
@@ -24,9 +24,9 @@ static EventsParser *instanceEvent = nil;
     return instanceEvent;
 }
 
-/**************************************************
- * Méthode récupérant les informations nécessaires*
- *************************************************/
+/***************************************************
+ * Méthode récupérant les informations nécessaires *
+ **************************************************/
 - (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *)array {
 
     // Tant qu'il y a un événement à traiter
@@ -130,9 +130,9 @@ static EventsParser *instanceEvent = nil;
     
 }
 
-/**************************************************
- * Méthode de parsage des données du site internet*
- *************************************************/
+/***************************************************
+ * Méthode de parsage des données du site internet *
+ **************************************************/
 - (void)loadEventsFromURL { 
     
     // Initialisation des tableaux contenant les événements
@@ -165,8 +165,8 @@ static EventsParser *instanceEvent = nil;
                                failure:failureBlock];
 }
 
-/**********************************************************
- * Méthode de parsage des données de la sauvegarde interne*
+/***********************************************************
+ * Méthode de parsage des données de la sauvegarde interne *
  **********************************************************/
 -(void) loadEventsFromFile {
     

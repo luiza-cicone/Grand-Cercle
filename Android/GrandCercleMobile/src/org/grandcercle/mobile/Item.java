@@ -1,5 +1,9 @@
 package org.grandcercle.mobile;
 
+/*
+ * Classe abstraite gérant une information quelconque (event, news, bp)
+ */
+
 public abstract class Item {
 	protected long id;
 	protected String title;

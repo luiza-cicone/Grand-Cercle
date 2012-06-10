@@ -6,6 +6,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/*
+ * Parser sur les types (soirées, sport,...)
+ */
 
 public class ParserXMLHandlerType extends DefaultHandler {
 
