@@ -49,7 +49,7 @@ public class TabEvent extends Activity {
 		setContentView(R.layout.affichage_event);
 	}
 	
-	// Méthode rappelé quand on revient sur l'onglet événements après avoir touché aux préférences
+	// Méthode rappelée quand on revient sur l'onglet événements après avoir touché aux préférences
 	public void onResume() {
 		super.onResume();
 		int color = 0xFFFFFFFF;
@@ -113,9 +113,10 @@ public class TabEvent extends Activity {
 		_calendar = Calendar.getInstance(Locale.getDefault());
 		month = _calendar.get(Calendar.MONTH) + 1;
 		year = _calendar.get(Calendar.YEAR);
-
+		// Récupération de la vue associée au jour selectionné sur le calendrier
 		selectedDayMonthYearButton = (Button) this.findViewById(R.id.selectedDayMonthYear);
-
+		
+		// Récupération de la vue associée au bouton permettant de passer au mois précédent
 		prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
 		prevMonth.setOnClickListener(prevORnextMonthClicked);
 
@@ -124,9 +125,12 @@ public class TabEvent extends Activity {
 		s = new SimpleDateFormat("MMMM yyyy",Locale.FRANCE)	;	
 		
 		currentMonth.setText(s.format(_calendar.getTime()));
+		
+		// Récupération de la vue associée au bouton permettant de passer au mois suivant
 		nextMonth = (ImageView) this.findViewById(R.id.nextMonth);
 		nextMonth.setOnClickListener(prevORnextMonthClicked);
-
+		
+		//Récupération du calendrier en lui-même
 		calendarView = (GridView) this.findViewById(R.id.calendar);
 	
 		
@@ -151,7 +155,7 @@ public class TabEvent extends Activity {
 	}
 
 	
-	
+	// Listener sur les boutons permettant de changer de mois
 	private View.OnClickListener prevORnextMonthClicked = new View.OnClickListener() {
 		
 		public void onClick(View v) {
@@ -176,13 +180,14 @@ public class TabEvent extends Activity {
 		}
 	};
 	
+	// Listener sur un jour du calendrier permettant d'afficher la liste des événements
 	private AdapterView.OnItemClickListener clickListenerFeed = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// Ouverture nouvelle activity
 			Intent intent = new Intent(TabEvent.this,PageEvent.class);
 			// Passage des paramètres
 			Bundle bundle = new Bundle();
-			//Add the parameters to bundle as
+			//Ajoute les paramètres au bundle
 			bundle.putString("titre",((Event)parent.getItemAtPosition(position)).getTitle());
 			bundle.putString("description",((Event)parent.getItemAtPosition(position)).getDescription());
 			bundle.putString("image",((Event)parent.getItemAtPosition(position)).getImage());
@@ -206,7 +211,7 @@ public class TabEvent extends Activity {
 			Intent intent = new Intent(TabEvent.this,PageEvent.class);
 			// Passage des paramètres
 			Bundle bundle = new Bundle();
-			//Add the parameters to bundle as
+			//Ajoute les paramètres au bundle
 			bundle.putString("titre",lea.getItem(images.indexOf(v)).getTitle());
 			bundle.putString("description",lea.getItem(images.indexOf(v)).getDescription());
 			bundle.putString("image",lea.getItem(images.indexOf(v)).getImage());
@@ -302,14 +307,14 @@ public class TabEvent extends Activity {
 		}
 
 		/**
-		 * Prints Month
+		 * Affichage du mois
 		 * 
 		 * @param mm
 		 * @param yy
 		 */
 		private void printMonth(int mm, int yy) {
-			// The number of days to leave blank at
-			// the start of this month.
+			// Le nombre de jour à laisser transparent 
+			// au début du mois considéré.
 			int trailingSpaces = 0;
 			int daysInPrevMonth = 0;
 			int prevMonth = 0;
@@ -363,9 +368,9 @@ public class TabEvent extends Activity {
 				daysInPrevMonth = getNumberOfDaysOfMonth(prevMonth);
 			}
 
-			// Compute how much to leave before before the first day of the
+			// Compute how much to leave before the first day of the
 			// month.
-			// getDay() returns 0 for Sunday.
+			// getDay() retourne 0 pour Dimanche.
 			int currentWeekDay = cal.get(Calendar.DAY_OF_WEEK) - 1;
 			trailingSpaces = currentWeekDay;
 			
