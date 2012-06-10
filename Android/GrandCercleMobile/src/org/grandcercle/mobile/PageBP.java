@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+/*
+ * Classe représentant le détail d'un bon plan
+ */
+
 public class PageBP extends Activity {
 	private DataBase dataBase;
 	

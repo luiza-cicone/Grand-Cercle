@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+/*
+ * Classe représentant l'activité liée au choix de préférence de types
+ */
 
 public class TypesPref extends Activity {
 	private ArrayList<String> listTypes;

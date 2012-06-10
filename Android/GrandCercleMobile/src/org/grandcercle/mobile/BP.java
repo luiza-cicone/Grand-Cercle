@@ -1,5 +1,9 @@
 package org.grandcercle.mobile;
 
+/* 
+ * Classe représentant un bon plan
+ */
+
 public class BP extends Item {
 	private String image;
 	private String summary;

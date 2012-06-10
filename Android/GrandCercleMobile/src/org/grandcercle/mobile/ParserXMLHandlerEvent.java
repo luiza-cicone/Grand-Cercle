@@ -8,6 +8,10 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 
+/*
+ * Parser sur les événements
+ */
+
 public class ParserXMLHandlerEvent extends ParserXMLHandler {
 	private final String PUBDATE = "pubDate";
 	private final String AUTHOR = "author";

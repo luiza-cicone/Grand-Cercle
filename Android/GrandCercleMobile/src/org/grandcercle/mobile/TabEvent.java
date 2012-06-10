@@ -27,6 +27,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+ * Onglet événements
+ */
+
 public class TabEvent extends Activity {
 	
 	private ListEventAdapter lea;
@@ -41,7 +45,6 @@ public class TabEvent extends Activity {
 	private GridCellAdapter adapter;
 	private Calendar _calendar;
 	private int month, year;
-	private DataBase dataBase;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -233,10 +236,13 @@ public class TabEvent extends Activity {
 
 		private final List<String> list;
 		private static final int DAY_OFFSET = 1;
+		@SuppressWarnings("unused")
 		private final String[] weekdays = new String[]{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 		private final String[] months = {"Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"};
 		private final int[] daysOfMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		@SuppressWarnings("unused")
 		private final int month, year;
+		@SuppressWarnings("unused")
 		private int daysInMonth, prevMonthDays;
 		private int currentDayOfMonth;
 		private int currentMonth;

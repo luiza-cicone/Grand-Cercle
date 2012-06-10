@@ -1,32 +1,22 @@
 package org.grandcercle.mobile;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.CheckBox;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
+/*
+ * Classe qui gère le menu des préférences du design
+ */
 
 public class DesignPref extends Activity {
 	private DataBase dataBase;
 	private ArrayList<String> colors;
 	private Integer[] position;
 	private String ColorChecked;
-	private ArrayList<RadioButton> listRadioButton;
-	//private ProgressBar progressBarParse;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
@@ -62,13 +52,7 @@ public class DesignPref extends Activity {
 		position[5]= R.id.GI;
 		position[6]= R.id.CPP;
 		position[7]= R.id.Esisar;
-				
-		//RadioGroup rGroup = (RadioGroup)findViewById(R.id.radiogroup);
-		// This will get the radiobutton in the radiogroup that is checked
-		//RadioButton checkedRadioButton = (RadioButton)rGroup.findViewById(rGroup.getCheckedRadioButtonId());
-
         
-        listRadioButton = new ArrayList<RadioButton>();
         View buttonOk = this.findViewById(R.id.boutonOk);
 		buttonOk.setOnClickListener(OKClicked);
 	}

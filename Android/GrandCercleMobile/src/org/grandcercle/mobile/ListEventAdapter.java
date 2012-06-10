@@ -10,6 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+ * Classe qui gère la liste des événements, en recyclant les événements nécéssaires
+ */
+
 public class ListEventAdapter extends BaseAdapter {
 
 	// les données à afficher
@@ -45,7 +49,8 @@ public class ListEventAdapter extends BaseAdapter {
 		
 	}
 	
-	/* Le paramètre "convertView" permet de recycler les élements 
+	/* RECYCLEUR
+	 * Le paramètre "convertView" permet de recycler les élements 
 	 * de notre liste. En effet, l'opération pour convertir un layout 
 	 * XML en IHM standard est très couteuse pour la plateforme Android. 
 	 * On nous propose ici de réutiliser des occurences créées qui ne sont 

@@ -31,6 +31,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ImageView;
 
+/*
+ * Classes répertoriant les méthodes qui permettent de stocker et de récupérer à partir du cache
+ */
+
 public final class UrlImageViewHelper {
     private static final String LOGTAG = "UrlImageViewHelper";
     public static int copyStream(InputStream input, OutputStream output) throws IOException

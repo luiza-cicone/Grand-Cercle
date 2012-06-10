@@ -21,12 +21,19 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
+
+/*
+ * Classe représentant l'ensemble des structures de données
+ * ainsi que les méthodes qui permettent de les initialiser.
+ * 
+ * Comporte aussi les méthodes qui permettent de sauvegarder 
+ * les fichiers XML à parser dans la mémoire interne du téléphone
+ */
 
 public class ContainerData {
 	
-	static public Context context;
-	static private ArrayList<News> listNews;
+	public static Context context;
+	private static ArrayList<News> listNews;
 	private static ArrayList<Event> listEvent;
 	private static ArrayList<Event> listEventOld;
 	private static ArrayList<BP> listBP;
@@ -36,7 +43,6 @@ public class ContainerData {
 	private static ArrayList<String> listClubs;
 	private static ArrayList<String> listTypes;
 	private static Context appContext;
-	private static DataBase dataBase;
 	
 	private static String URL_CERCLES = "http://www.grandcercle.org/cercles/data.xml";
 	private static String URL_CLUBS = "http://www.grandcercle.org/clubs/data.xml";
@@ -92,55 +98,39 @@ public class ContainerData {
 	
 	public static void saveXML(String fromURL, String toFile) {
 		try {
-	        //set the download URL, a url that points to a file on the internet
-	        //this is the file to be downloaded
 	        URL url = new URL(fromURL);
 
-	        //create the new connection
+	        // nouvelle connexion
 	        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-	        //set up some things on the connection
+	        // paramètres de la connexion
 	        urlConnection.setRequestMethod("GET");
 	        urlConnection.setDoOutput(true);
-
-	        //and connect!
 	        urlConnection.connect();
 
-	        //set the path where we want to save the file
+	        // chemin du répertoire du fichier
 	        File root = new File("/data/data/org.grandcercle.mobile/files/");
 	        if (!root.exists()){
 	        	root.mkdir();
 	        }
 
-	        //create a new file, specifying the path, and the filename
-	        //which we want to save the file as.
+	        // création d'un nouveau fichier
 	        File file = new File(root,toFile);
 	        if (!file.exists()) {
 	        	file.createNewFile();
 	        }
-	        //this will be used to write the downloaded data into the file we created
+
+	        // écrire du fichier dans le répertoire
 	        FileOutputStream fileOutput = new FileOutputStream(file);
-	        
-	        //this will be used in reading the data from the internet
 	        InputStream inputStream = urlConnection.getInputStream();
 
-	        //this is the total size of the file
-	        int totalSize = urlConnection.getContentLength();
-	        //variable to store total downloaded bytes
-	        int downloadedSize = 0;
 
-	        //create a buffer...
 	        byte[] buffer = new byte[1024];
-	        int bufferLength = 0; //used to store a temporary size of the buffer
+	        int bufferLength = 0;
 
-	        //now, read through the input buffer and write the contents to the file
+	        // lecture du fichier dans le buffer
 	        while ( (bufferLength = inputStream.read(buffer)) > 0 ) {
-	                //add the data in the buffer to the file in the file output stream (the file on the sd card
 	                fileOutput.write(buffer, 0, bufferLength);
-	                //add up the size so we know how much is downloaded
-	                downloadedSize += bufferLength;
 	        }
-	        //close the output stream when done
 	        fileOutput.close();
 
 
@@ -174,130 +164,117 @@ public class ContainerData {
 	
 	public static void parseFiles(Context ctx){
 		appContext = ctx;
+		// On passe par une classe factory pour obtenir une instance de sax
+		SAXParserFactory fabrique = SAXParserFactory.newInstance();
+		SAXParser parseur = null;
+		try {
+			// On "fabrique" une instance de SAXParser
+			parseur = fabrique.newSAXParser();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
+		
+		/* 
+		 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
+		 * des opérations de parsing.
+		 */
+		
+		DefaultHandler handlerCercles = new ParserXMLHandlerAsso();
+		File fCercles = new File(FILE_CERCLES);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fCercles, handlerCercles);
+			// On récupère directement la liste des feeds
+			listCercles = ((ParserXMLHandlerAsso) handlerCercles).getListAssos();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerClubs = new ParserXMLHandlerAsso();
+		File fClubs = new File(FILE_CLUBS);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fClubs, handlerClubs);
+			// On récupère directement la liste des feeds
+			listClubs = ((ParserXMLHandlerAsso) handlerClubs).getListAssos();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		//if (savedFilesExist()) {
-			// On passe par une classe factory pour obtenir une instance de sax
-			SAXParserFactory fabrique = SAXParserFactory.newInstance();
-			SAXParser parseur = null;
-			try {
-				// On "fabrique" une instance de SAXParser
-				parseur = fabrique.newSAXParser();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			}
-			
-			/* 
-			 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
-			 * des opérations de parsing.
-			 */
-			
-			DefaultHandler handlerCercles = new ParserXMLHandlerAsso();
-			File fCercles = new File(FILE_CERCLES);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlCercles.openConnection().getInputStream(), handlerCercles);
-				parseur.parse(fCercles, handlerCercles);
-				// On récupère directement la liste des feeds
-				listCercles = ((ParserXMLHandlerAsso) handlerCercles).getListAssos();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			DefaultHandler handlerClubs = new ParserXMLHandlerAsso();
-			File fClubs = new File(FILE_CLUBS);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlClubs.openConnection().getInputStream(), handlerClubs);
-				parseur.parse(fClubs, handlerClubs);
-				// On récupère directement la liste des feeds
-				listClubs = ((ParserXMLHandlerAsso) handlerClubs).getListAssos();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	
-			DefaultHandler handlerTypes = new ParserXMLHandlerType();
-			File fTypes = new File(FILE_TYPES);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlTypes.openConnection().getInputStream(), handlerTypes);
-				parseur.parse(fTypes, handlerTypes);
-				// On récupère directement la liste des feeds
-				listTypes = ((ParserXMLHandlerType) handlerTypes).getListType();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	
-			
-			DefaultHandler handlerNews = new ParserXMLHandlerNews();
-			File fNews = new File(FILE_NEWS);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlNews.openConnection().getInputStream(), handlerNews);
-				parseur.parse(fNews, handlerNews);
-				// On récupère directement la liste des feeds
-				listNews = ((ParserXMLHandlerNews) handlerNews).getListNews();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			
-			DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
-			File fEvent = new File(FILE_EVENT);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
-				parseur.parse(fEvent,handlerEvent);
-				// On récupère directement la liste des feeds
-				listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
-				hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			DefaultHandler handlerEventOld = new ParserXMLHandlerEvent(appContext);
-			File fEventOld = new File(FILE_EVENTOLD);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
-				parseur.parse(fEventOld,handlerEventOld);
-				// On récupère directement la liste des feeds
-				listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
-				hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			DefaultHandler handlerBP = new ParserXMLHandlerBP();
-			File fBP = new File(FILE_BP);
-			try {
-				// On parse le fichier XML
-				//parseur.parse(urlBP.openConnection().getInputStream(), handlerBP);
-				parseur.parse(fBP, handlerBP);
-				// On récupère directement la liste des feeds
-				listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		/*} else {
-			Toast.makeText(appContext,"Connexion internet insuffisante ou inexistante\n" +
-					"Impossible de passer en mode hors-connexion au premier lancement de l'application !",Toast.LENGTH_LONG).show();
-		}*/
+		DefaultHandler handlerTypes = new ParserXMLHandlerType();
+		File fTypes = new File(FILE_TYPES);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fTypes, handlerTypes);
+			// On récupère directement la liste des feeds
+			listTypes = ((ParserXMLHandlerType) handlerTypes).getListType();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		
+		DefaultHandler handlerNews = new ParserXMLHandlerNews();
+		File fNews = new File(FILE_NEWS);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fNews, handlerNews);
+			// On récupère directement la liste des feeds
+			listNews = ((ParserXMLHandlerNews) handlerNews).getListNews();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
+		File fEvent = new File(FILE_EVENT);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fEvent,handlerEvent);
+			// On récupère directement la liste des feeds
+			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
+			hashEvent = ((ParserXMLHandlerEvent) handlerEvent).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerEventOld = new ParserXMLHandlerEvent(appContext);
+		File fEventOld = new File(FILE_EVENTOLD);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fEventOld,handlerEventOld);
+			// On récupère directement la liste des feeds
+			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
+			hashEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getHashEvent();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DefaultHandler handlerBP = new ParserXMLHandlerBP();
+		File fBP = new File(FILE_BP);
+		try {
+			// On parse le fichier XML
+			parseur.parse(fBP, handlerBP);
+			// On récupère directement la liste des feeds
+			listBP = ((ParserXMLHandlerBP) handlerBP).getListBP();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void parseEvent(){
@@ -317,7 +294,6 @@ public class ContainerData {
 		File fEvent = new File("/data/data/org.grandcercle.mobile/files/event.gcm");
 		try {
 			// On parse le fichier XML
-			//parseur.parse(urlEvent.openConnection().getInputStream(), handlerEvent);
 			parseur.parse(fEvent,handlerEvent);
 			// On récupère directement la liste des feeds
 			listEvent = ((ParserXMLHandlerEvent) handlerEvent).getListEvent();
@@ -332,7 +308,6 @@ public class ContainerData {
 		File fEventOld = new File("/data/data/org.grandcercle.mobile/files/eventOld.gcm");
 		try {
 			// On parse le fichier XML
-			//parseur.parse(urlEventOld.openConnection().getInputStream(), handlerEventOld);
 			parseur.parse(fEventOld,handlerEventOld);
 			// On récupère directement la liste des feeds
 			listEventOld = ((ParserXMLHandlerEvent) handlerEventOld).getListEvent();
@@ -388,16 +363,16 @@ public class ContainerData {
 	}
 	
 	public static ArrayList<String> getListColors(){
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("Noir");
-		temp.add("Ensimag");
-		temp.add("Phelma");
-		temp.add("Ense3");
-		temp.add("Pagora");
-		temp.add("GI");
-		temp.add("CPP");
-		temp.add("Esisar");
-		return temp;
+		ArrayList<String> listCol = new ArrayList<String>();
+		listCol.add("Noir");
+		listCol.add("Ensimag");
+		listCol.add("Phelma");
+		listCol.add("Ense3");
+		listCol.add("Pagora");
+		listCol.add("GI");
+		listCol.add("CPP");
+		listCol.add("Esisar");
+		return listCol;
 	}
 	
 	public static Context getAppContext() {

@@ -1,5 +1,9 @@
 package org.grandcercle.mobile;
 
+/*
+ * Classe qui représente une news
+ */
+
 public class News extends Item {
 	private String pubDate;
 	private String author;

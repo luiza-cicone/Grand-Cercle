@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+/*
+ * Parser sur les bons plans
+ */
+
 public class ParserXMLHandlerBP extends ParserXMLHandler {
 	private final String IMAGE = "image";
 	private final String SUMMARY = "summary";

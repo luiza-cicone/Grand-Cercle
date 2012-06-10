@@ -1,8 +1,5 @@
 package org.grandcercle.mobile;
 
-
-
-
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -13,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/*
+ * Onglets bons plans
+ */
 
 public class TabBP extends Activity {
 	

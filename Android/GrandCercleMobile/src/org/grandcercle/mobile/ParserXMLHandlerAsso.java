@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+/*
+ * Parser pour les cercles et les clubs
+ * A appeler en deux fois, séparément sur les fichiers cercles et clubs
+ */
+
 public class ParserXMLHandlerAsso extends ParserXMLHandler {
 	private final String GROUP = "group";
 	

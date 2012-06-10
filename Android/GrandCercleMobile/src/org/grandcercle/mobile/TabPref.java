@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
+/*
+ * Onglet des paramètres
+ */
+
 public class TabPref extends Activity {
-	private DataBase dataBase;
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);

@@ -1,5 +1,9 @@
 package org.grandcercle.mobile;
 
+/*
+ * Classe représentant un événement
+ */
+
 public class Event extends Item {
 	private String pubDate;
 	private String author;
