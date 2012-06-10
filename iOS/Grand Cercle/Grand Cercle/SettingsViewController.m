@@ -7,106 +7,111 @@
 //
 
 #import "SettingsViewController.h"
-#import "SettingsDetailViewController.h"
 
+// Définition des sections de la table view
 #define FILTER_EVENT 0
 #define FILTER_NEWS 2
 #define PERSO 1
 
-@interface SettingsViewController ()
-
-@end
-
 @implementation SettingsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+/****************************
+ * Initialisation de la vue *
+ ***************************/
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        // Titre apparaissant en haut
         self.title = NSLocalizedString(@"Settings", @"Settings");
+        // Image apparaissant dans l'onglet en bas
         self.tabBarItem.image = [UIImage imageNamed:@"settings"];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+/************************
+ * Chargement de la vue *
+ ***********************/
+- (void)viewDidLoad {
     [super viewDidLoad];
+    // Mise en place du bouton retour
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     [backButton release]; 
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewDidUnload
-{
+/****************************************************************
+ * Maintient de la vue verticale en cas de rotation du téléphone*
+ ***************************************************************/
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+/**************************
+ * Déchargement de la vue *
+ *************************/
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
+/************************************************
+ * Action réalisée après l'apparition de la vue *
+ ***********************************************/
 - (void)viewDidAppear:(BOOL)animated {
+    
+    // Récupération de la couleur des préférences utilisateurs
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     NSArray *c = [defaults objectForKey:@"theme"];
     
+    // Coloration de la barre du haut suivant les préférences
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
-//    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]];
-    
-    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
-    
+    // Coloration de l'interligne suivant les préférences, si Noir Grand Cercle on laisse la couleur par défaut
+    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0)
        [self.tableView setSeparatorColor: [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18]];
-        
-    } else {
-        
+    else
         [self.tableView setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5]];
-    
-    }
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+/**********************************
+ * Retourne le nombre de sections *
+ *********************************/
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    if (section == FILTER_EVENT) {
+/*******************************************
+ * Retourne le nombre de rows par sections *
+ ******************************************/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == FILTER_EVENT)
         return 3;
-    } else if (section == FILTER_NEWS) {
+    else if (section == FILTER_NEWS)
         return 2;
-    } else {
+    else
         return 1;
-    }
 }
 
+/**********************************
+ * Titre les différentes sections *
+ *********************************/
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == FILTER_EVENT) {
+    if (section == FILTER_EVENT)
         return @"Filtrer les événements par";
-    } else if (section == FILTER_NEWS) {
+    else if (section == FILTER_NEWS)
         return @"Filtrer les news par";
-    } else if (section == PERSO) {
+    else if (section == PERSO)
         return @"Personnaliser l'interface";
-    } else return @"";
+    else return @"";
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/*************************************
+ * Construction des différentes rows *
+ ************************************/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -114,6 +119,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
+    // Si on se trouve dans la section FILTER_EVENT, on met en place les trois rows de filtre pour les événements
     if (indexPath.section == FILTER_EVENT) { 
     
         if (indexPath.row == 0) {
@@ -129,7 +135,8 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         }
-        
+
+    // Si on se trouve dans la section FILTER_NEWS, on met en place les deux rows de filtre pour les news
     } else if (indexPath.section == FILTER_NEWS) {
         
         if (indexPath.row == 0) {
@@ -140,58 +147,23 @@
             [cell.textLabel setText:@"Clubs & Associations"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        
+    
+    // Si on se trouve dans la section PERSO, on met en place la row de thème
     } else if (indexPath.section == PERSO) {
         [cell.textLabel setText:@"Thème"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
     }    
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/************************************************
+ * Action déclenchée par la sélection d'une row *
+ ***********************************************/
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Initialisation et lancement de la vue détaillée
     SettingsDetailViewController *detailViewController = [[SettingsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     detailViewController.filter = indexPath;
     [self.navigationController pushViewController:detailViewController animated:YES];

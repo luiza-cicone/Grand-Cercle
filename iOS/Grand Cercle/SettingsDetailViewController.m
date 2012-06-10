@@ -10,69 +10,86 @@
 #import "FilterParser.h"
 #import "EventsParser.h"
 
-#define FILTER_CERCLES 0
-#define FILTER_CLUBS 1
-#define FILTER_TYPE 2
-#define PERSO_COLOR 0
+// Définition des sections de la table view
 #define EVENTS 0
 #define NEWS 2
 #define PERSO 1
 
+// Définition des rows pour les sections Event et News
+#define FILTER_CERCLES 0
+#define FILTER_CLUBS 1
+// Seulement pour Event
+#define FILTER_TYPE 2
+// Définition de la row pour la section Perso
+#define PERSO_COLOR 0
+
 @implementation SettingsDetailViewController
+@synthesize cerclesArray, clubsArray, typesArray, themesArray, clubsChoice, cerclesChoice, typesChoice, themeChoice, filter;
 
-@synthesize cerclesArray, clubsArray, typesArray, themesArray;
-@synthesize clubsChoice, cerclesChoice, typesChoice, themeChoice;
-@synthesize filter;
-
+// Dictionnaire contenant les différents thèmes et leur couleur associée
 NSMutableDictionary *themesDico;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
+// Booléen pour savoir si une préférence a été modifiée ou non
 BOOL changed = 0;
 
-- (void)viewDidLoad
-{
+/****************************
+ * Initialisation de la vue *
+ ***************************/
+- (id)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    return self;
+}
+
+/************************
+ * Chargement de la vue *
+ ***********************/
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
+    // On se trouve dans le filtrage par cercles, pour les news ou les événements
     if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
         
+        // Récupération du tableau contenant les noms des cercles
         cerclesArray = [[FilterParser instance] arrayCercles];
+        // Récupération des préférences utilisateurs
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
+        // Initialisation du dictionnaire des choix pour les cercles
         cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
-        for (NSString *cercle in cerclesArray) {
+        for (NSString *cercle in cerclesArray)
             [cerclesChoice addObject:[cerclesDico objectForKey:cercle]];
-        }
-        
+    
+    // On se trouve dans le filtrage par clubs et associations, pour les news ou les événements
     } else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS) {
-        
+        // Récupération du tableau contenant les noms des clubs et associations
         clubsArray = [[FilterParser instance] arrayClubs];
+        // Récupération des préférences utilisateurs
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSMutableDictionary *clubsDico  = [defaults objectForKey:@"filtreClubs"];
+        // Initialisation du dictionnaire des choix pour les clubs et associations
         clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
-        for (NSString *club in clubsArray) {
+        for (NSString *club in clubsArray)
             [clubsChoice addObject:[clubsDico objectForKey:club]];
-            
-        }
         
+    // On se trouve dans le filtrage par type, pour les événements
     } else if (filter.section == EVENTS && filter.row == FILTER_TYPE) {
+        // Récupération du tableau contenant les noms des types
         typesArray = [[FilterParser instance] arrayTypes];
+        // Récupération des préférences utilisateurs
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSMutableDictionary *typesDico = [defaults objectForKey:@"filtreTypes"];
+        // Initialisation du dictionnaire des choix pour les types
         typesChoice = [[NSMutableArray alloc] initWithCapacity:[typesArray count]];
-        for (NSString *type in typesArray) {
+        for (NSString *type in typesArray)
             [typesChoice addObject:[typesDico objectForKey:type]];
-        }
-        
+    
+    // On se trouve dans le filtrage par type, pour les événements
     } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         
+        // Récupération des préférences utilisateurs
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSArray *c = [defaults objectForKey:@"theme"];
+        // Initialisation du dictionnaire des thèmes
         themeChoice = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1];
         UIColor *blackColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
         UIColor *redColor = [[UIColor alloc] initWithRed:.75 green:.08 blue:.12 alpha:1];
@@ -94,70 +111,72 @@ BOOL changed = 0;
         themesArray = [[NSArray alloc] initWithObjects:@"Noir Grand Cercle", @"Bleu Ense3", @"Vert Ensimag", @"Bleu GI", @"Rouge Phelma", @"Orange Pagora", @"Violet Esisar", @"Jaune CPP", nil];
     }
 
+    // Titre apparaissant en haut
     self.title = NSLocalizedString(@"Settings", @"Settings");
-
-
-    // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewDidUnload
-{
+/**************************
+ * Déchargement de la vue *
+ *************************/
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+/****************************************************************
+ * Maintient de la vue verticale en cas de rotation du téléphone*
+ ***************************************************************/
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    if (filter.section == EVENTS || filter.section == NEWS || filter.section == PERSO) {
+/**********************************
+ * Retourne le nombre de sections *
+ *********************************/
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (filter.section == EVENTS || filter.section == NEWS || filter.section == PERSO)
         return 1;
-    } else  {
+    else
         return 0;
-    }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
+/*******************************************
+ * Retourne le nombre de rows par sections *
+ ******************************************/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES)
         return [cerclesArray count];
-    } else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS) {
+    else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS)
         return [clubsArray count];
-    } else if (filter.section == EVENTS && filter.row == FILTER_TYPE) {
+    else if (filter.section == EVENTS && filter.row == FILTER_TYPE)
         return [typesArray count];
-    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
+    else if (filter.section == PERSO && filter.row == PERSO_COLOR)
         return [themesArray count];
-    }
     return 0;
 }
 
+/**********************************
+ * Titre les différentes sections *
+ *********************************/
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
+    if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES)
         return @"Cercles";
-    } else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS) {
+    else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS)
             return @"Clubs & Associations";
-    } else if (filter.section == EVENTS && filter.row == FILTER_TYPE) {
+    else if (filter.section == EVENTS && filter.row == FILTER_TYPE)
         return @"Types d'événements";
-    } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
+    else if (filter.section == PERSO && filter.row == PERSO_COLOR)
         return @"Thèmes";
-    }
     return @"";
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/*************************************
+ * Construction des différentes rows *
+ ************************************/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -165,7 +184,10 @@ BOOL changed = 0;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    // Définition du booléen, pour savoir si un élément est check ou non
     BOOL checked;
+    
+    // On récupére dans les dictionnaires correspondant les différents booléens check
     if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
             [cell.textLabel setText:(NSString *)[cerclesArray objectAtIndex:indexPath.row]];
              checked = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
@@ -176,62 +198,26 @@ BOOL changed = 0;
         [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
         checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
     } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
-        
         [cell.textLabel setText:(NSString *)[themesArray objectAtIndex:indexPath.row]];
         checked = ([themeChoice isEqual:[themesDico objectForKey:(NSString *)[themesArray objectAtIndex:indexPath.row]]]);
+        // On met directement la couleur de la barre du haut à jour pour que l'utilisateur puisse voir le rendu du thème choisi
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSArray *c = [defaults objectForKey:@"theme"];
         [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
-//        [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.18]]; 
     }
     
+    // Si checked est à true, on met le check graphique
     cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/************************************************
+ * Action déclenchée par la sélection d'une row *
+ ***********************************************/
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Dans chaque cas, si l'utilisateur clique on enlève le check ou on le met
     if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
         BOOL value = [[cerclesChoice objectAtIndex:indexPath.row] boolValue];
         value = 1 - value;
@@ -245,6 +231,7 @@ BOOL changed = 0;
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
     } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
+        // Dans ce cas, on sauvegarde directement la couleur choisie dans les préférences
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         themeChoice = [themesDico objectForKey:(NSString *)[themesArray objectAtIndex:indexPath.row]];
         CGFloat* colors = (CGFloat *)CGColorGetComponents(themeChoice.CGColor);
@@ -252,11 +239,18 @@ BOOL changed = 0;
         [defaults setObject:c forKey:@"theme"];
         [c release];
     }
+    
+    // L'utilisateur a changé une de ses préférences, on recharge la table view
     changed = 1;
     [tableView reloadData];
 }
 
+/**************************************************
+ * Action déclenchée par la disparition de la vue *
+ *************************************************/
 - (void)viewDidDisappear:(BOOL)animated {
+    
+    // On met à jour dans les préférences utilisateurs les nouveaux choix effectués
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
 
     if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES) {
@@ -281,13 +275,15 @@ BOOL changed = 0;
         }
         [defaults setObject:typesDico forKey:@"filtreTypes"];
     }
+    
+    // Si quelquechose a été changé, on reparse les événements
     if (changed == 1) {
         [[EventsParser instance] loadEventsFromFile];
         [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"changedEvents"];
     }
     changed = 0;
 
-    
+    // Validation des nouvelles préférences
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self viewDidUnload];
 }

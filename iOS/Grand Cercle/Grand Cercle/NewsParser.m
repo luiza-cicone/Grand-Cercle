@@ -14,9 +14,9 @@
 // Patron singleton, unique instance du parser de news
 static NewsParser *instanceNews = nil;
 
-/***************************************************************************
- * Patron singleton, méthode retournant l'unique instance du parser de news*
- **************************************************************************/
+/****************************************************************************
+ * Patron singleton, méthode retournant l'unique instance du parser de news *
+ ***************************************************************************/
 + (NewsParser *) instance {
     if (instanceNews == nil) {
         instanceNews = [[self alloc] init];
@@ -24,9 +24,9 @@ static NewsParser *instanceNews = nil;
     return instanceNews;
 }
 
-/**************************************************
- * Méthode récupérant les informations nécessaires*
- *************************************************/
+/***************************************************
+ * Méthode récupérant les informations nécessaires *
+ **************************************************/
 - (void) handleNews:(TBXMLElement *)newsAParser {
     
     // Tant qu'il y a une news à traiter
@@ -69,9 +69,9 @@ static NewsParser *instanceNews = nil;
 	} while ((newsAParser = newsAParser->nextSibling));
 }
 
-/**************************************************
- * Méthode de parsage des données du site internet*
- *************************************************/
+/***************************************************
+ * Méthode de parsage des données du site internet *
+ **************************************************/
 - (void)loadNewsFromURL { 
     
     // Initialisation du tableau contenant les News
@@ -94,9 +94,9 @@ static NewsParser *instanceNews = nil;
                                failure:failureBlock];
 }
 
-/**********************************************************
- * Méthode de parsage des données de la sauvegarde interne*
- *********************************************************/
+/***********************************************************
+ * Méthode de parsage des données de la sauvegarde interne *
+ **********************************************************/
 -(void) loadNewsFromFile {
     
     // Initialisation du tableau contenant les News

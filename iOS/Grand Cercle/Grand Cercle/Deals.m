@@ -11,7 +11,9 @@
 @implementation Deals
 @synthesize summary;
 
-// Constructeur
+/****************
+ * Constructeur *
+ ***************/
 - (id) init {
     self = [super init];
     return self;
