@@ -188,56 +188,6 @@ public class ContainerData {
 				e.printStackTrace();
 			}
 			
-			// On définit les url des fichiers XML
-			/*URL urlCercles = null;
-			try {
-				urlCercles = new URL(URL_CERCLES);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}
-			
-			URL urlClubs = null;
-			try {
-				urlClubs = new URL(URL_CLUBS);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}
-			
-			URL urlTypes = null;
-			try {
-				urlTypes = new URL(URL_TYPES);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}
-			
-			URL urlNews = null;
-			try {
-				urlNews = new URL(URL_NEWS);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}
-			
-			URL urlEvent = null;
-			try {
-				urlEvent = new URL(URL_EVENT);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}
-			
-			URL urlEventOld = null;
-			try {
-				urlEventOld = new URL(URL_EVENTOLD);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}
-			
-			URL urlBP = null;
-			try {
-				urlBP = new URL(URL_BP);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
-			}*/
-			
 			/* 
 			 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
 			 * des opérations de parsing.
@@ -362,21 +312,6 @@ public class ContainerData {
 		} catch (SAXException e) {
 			e.printStackTrace();
 		}
-		
-		// On définit les url des fichiers XML
-		/*URL urlEvent = null;
-		try {
-			urlEvent = new URL(URL_EVENT);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-		// On définit les url des fichiers XML
-		URL urlEventOld = null;
-		try {
-			urlEventOld = new URL(URL_EVENTOLD);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}*/
 		
 		DefaultHandler handlerEvent = new ParserXMLHandlerEvent(appContext);
 		File fEvent = new File("/data/data/org.grandcercle.mobile/files/event.gcm");

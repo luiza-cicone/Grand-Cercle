@@ -39,7 +39,7 @@
 				android:id="@+id/prevMonth"
 				android:src="@drawable/calendar_left_arrow_selector"
 				android:layout_width="wrap_content"
-				android:layout_height="24dp"
+				android:layout_height="wrap_content"
 				android:layout_marginTop="3dp">
 			</ImageView>
 			<Button
@@ -48,14 +48,14 @@
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:background="@drawable/calendar_bar_gris"
 				android:layout_width="wrap_content"
-				android:layout_height="24dp"
-				android:layout_marginTop="3dp">
+				android:layout_height="28dp"
+				android:layout_marginTop="6dp">
 			</Button>
 			<ImageView
 				android:id="@+id/nextMonth"
 				android:src="@drawable/calendar_right_arrow_selector"
 				android:layout_width="wrap_content"
-				android:layout_height="24dp"
+				android:layout_height="wrap_content"
 				android:layout_marginTop="3dp">
 			</ImageView>
 		</LinearLayout>

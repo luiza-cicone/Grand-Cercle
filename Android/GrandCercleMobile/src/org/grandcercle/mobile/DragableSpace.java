@@ -59,14 +59,13 @@ public class DragableSpace extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         /*
-         * This method JUST determines whether we want to intercept the motion.
-         * If we return true, onTouchEvent will be called and we do the actual
-         * scrolling there.
+         * Cette méthode détermine si on doit intercepter le mouvement.
+         * Si on retourne true, onTouchEvent sera appelé et on fait le scroll
          */
 
         /*
-         * Shortcut the most recurring case: the user is in the dragging state
-         * and he is moving his finger. We want to intercept this motion.
+         * Shortcut the most recurring case: l'utilisateur est dans l'état drag et est en train de bouger
+         *son doigt sur l'écran. On veut donc intercepter le mouvement.
          */
         final int action = ev.getAction();
         if ((action == MotionEvent.ACTION_MOVE) && (mTouchState != TOUCH_STATE_REST)) {
@@ -78,45 +77,39 @@ public class DragableSpace extends ViewGroup {
         switch (action) {
             case MotionEvent.ACTION_MOVE:
                 /*
-                 * mIsBeingDragged == false, otherwise the shortcut would have caught it. Check
-                 * whether the user has moved far enough from his original down touch.
+                 * mIsBeingDragged == false, sinon on a déja capturé le mouvement. On vérifie si
+                 * l'utilisateur a bougé assez vite à partir de l'endroit où il a touché l'écran.
                  */
 
                 /*
-                 * Locally do absolute value. mLastMotionX is set to the y value
-                 * of the down event.
+                 * Locally do absolute value. mLastMotionX est mis à l'ordonnée de l'ancien mouvement
+                 * intercepté.
                  */
                 final int xDiff = (int) Math.abs(x - mLastMotionX);
 
                 boolean xMoved = xDiff > mTouchSlop;
 
                 if (xMoved) {
-                    // Scroll if the user moved far enough along the X axis
+                    // Scroll si l'utilisateur slide assez vite sur l'axe des abscisses.
                     mTouchState = TOUCH_STATE_SCROLLING;
                 }
                 break;
 
             case MotionEvent.ACTION_DOWN:
-                // Remember location of down touch
+                // mémorisation de la dernière valeur
                 mLastMotionX = x;
-
-                /*
-                 * If being flinged and user touches the screen, initiate drag;
-                 * otherwise don't.  mScroller.isFinished should be false when
-                 * being flinged.
-                 */
                 mTouchState = mScroller.isFinished() ? TOUCH_STATE_REST : TOUCH_STATE_SCROLLING;
                 break;
 
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                // Release the drag
+                // Abandon du drag
                 mTouchState = TOUCH_STATE_REST;
                 break;
         }
 
         /*
-         * The only time we want to intercept motion events is if we are in the
+         * On veut interpreter le mouvement uniquement quand on est dans le
          * drag mode.
          */
         return mTouchState != TOUCH_STATE_REST;
@@ -134,19 +127,16 @@ public class DragableSpace extends ViewGroup {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                /*
-                 * If being flinged and user touches, stop the fling. isFinished
-                 * will be false if being flinged.
-                 */
+                
                 if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
                 }
 
-                // Remember where the motion event started
+                // Sauvegarde l'endroit ou le mouvement a commencé
                 mLastMotionX = x;
                 break;
             case MotionEvent.ACTION_MOVE:
-                // Scroll to follow the motion event
+                // Scroll pour poursuivre le mouvement
                 final int deltaX = (int) (mLastMotionX - x);
                 mLastMotionX = x;
 
@@ -170,10 +160,10 @@ public class DragableSpace extends ViewGroup {
                 int velocityX = (int) velocityTracker.getXVelocity();
 
                 if (velocityX > SNAP_VELOCITY && mCurrentScreen > 0) {
-                    // Fling hard enough to move left
+                    // Mouvement assez fort pour aller vers la gauche
                     snapToScreen(mCurrentScreen - 1);
                 } else if (velocityX < -SNAP_VELOCITY && mCurrentScreen < getChildCount() - 1) {
-                    // Fling hard enough to move right
+                    // Mouvement assez fort pour aller vers la gauche
                     snapToScreen(mCurrentScreen + 1);
                 } else {
                     snapToDestination();
@@ -239,12 +229,7 @@ public class DragableSpace extends ViewGroup {
             throw new IllegalStateException("error mode.");
         }
 
-       /* final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        if (heightMode != MeasureSpec.EXACTLY) {
-            throw new IllegalStateException("error mode.");
-        }*/
-
-        // The children are given the same width and height as the workspace
+        // On donne aux fils la meme longueur et largeur que l'espace de travail
         final int count = getChildCount();
         for (int i = 0; i < count; i++) {
             getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
@@ -262,7 +247,7 @@ public class DragableSpace extends ViewGroup {
     }
  
     /**
-     * Return the parceable instance to be saved
+     * Retourne l'instance qui doit etre sauvegardée
      */
     @Override
     protected Parcelable onSaveInstanceState() {
@@ -273,7 +258,7 @@ public class DragableSpace extends ViewGroup {
 
 
     /**
-     * Restore the previous saved current screen
+     * Met à jour l'ecran actuel sauvegardé
      */
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
@@ -284,20 +269,20 @@ public class DragableSpace extends ViewGroup {
     	}
     }
 
-    // ========================= INNER CLASSES ==============================
+    // ========================= CLASSES INTERNES==============================
 
     public interface onViewChangedEvent{      
     	void onViewChange (int currentViewIndex);
     }
 
     /**
-     * A SavedState which save and load the current screen
+     * Un etat sauvegardé qui sauve et charge l'écran actuel
      */
     public static class SavedState extends BaseSavedState {
     	int currentScreen = -1;
 
       	/**
-       	* Internal constructor
+       	* Constructeur interne
        	* 
        	* @param superState
        	*/
@@ -306,7 +291,7 @@ public class DragableSpace extends ViewGroup {
       	}
 
       	/**
-      	 * Private constructor
+      	 * Constructeur privé
       	 * 
       	 * @param in
       	 */
@@ -316,7 +301,7 @@ public class DragableSpace extends ViewGroup {
       	}
 
       	/**
-       	* Save the current screen
+       	* Sauvegarde l'écran actuel
        	*/
       	@Override
       	public void writeToParcel(Parcel out, int flags) {
@@ -325,7 +310,7 @@ public class DragableSpace extends ViewGroup {
       	}
 
 		/**
-		 * Return a Parcelable creator
+		 * Retourne un créateur parcelable
 		 */
       	public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
     	  	public SavedState createFromParcel(Parcel in) {
