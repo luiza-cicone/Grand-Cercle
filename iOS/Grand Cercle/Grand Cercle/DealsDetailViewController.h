@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Deals.h"
+#import "NSString+HTML.h"
 
 @interface DealsDetailViewController : UITableViewController <UIWebViewDelegate> {
+    // Bon plan concernée par le détail view
     Deals* bonPlan;
+    // Cellule titre du bon plan
     IBOutlet UITableViewCell *cellBonPlanTop;
+    // Cellule description du bon plan
     IBOutlet UITableViewCell *cellBonPlanDescription;
-    
+    // Hauteur du cadre de la description du bon plan
     int webViewHeight;
-
 }
 
 @property (retain, nonatomic) Deals *bonPlan;
