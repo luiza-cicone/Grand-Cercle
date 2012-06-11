@@ -122,7 +122,7 @@ keepaspectratio]{background.jpg}%
 $ $\\
 \large{ \textbf{Luiza CICONE - Jérémy KREIN - Jérémy LUQUET - Paul MAYER}}\\
 \large{ \textbf{ISI - IF}}\\
-\large{ \textbf{Professeur coordonnateur : Gaëlle CALVARY}}
+\large{ \textbf{Tutrice : Gaëlle CALVARY}}
 $ $\\
 \end{center}
 \rule{\linewidth}{.5pt}
@@ -207,7 +207,7 @@ Dans l'application Android, nous avons préféré utilisé un parser SAX plutôt
 
 
 
-Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \textt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. Le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
+Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \texttt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. Le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 \section{Mise en œuvre}
 
@@ -267,11 +267,71 @@ Ces tests sont avant tout des tests techniques qui permettent de s'assurer qu'il
 \subsection{Tests d'intégration et de validation informatique}
 Ces tests permettent de tester la cohérence et l'articulation des modules entre eux, de vérifier que les modules communiquent bien entre eux.
 
+
 Ces tests ont été réalisés de manière similaire aux tests unitaires, à savoir un traçage des opérations effectuées et une comparaison du résultat obtenu avec le résultat attendu.
 
-\subsection{Tests utilisateurs, tests de conformité}
-Afin de vérifier la conformité de nos différents prototypes avec les besoins formulés par les utilisateurs, regroupés dans le cahier des charges, nous avons fait appel à un panel d'utilisateurs potentiels disposant de leur propre smartphone sous iOS ou Android, et ce dans le but de confronter ces applications à des utilisateurs habitués aux pratiques sur ces deux systèmes d'exploitation.
+\subsection{Validation ergonomique}
+Afin de vérifier la conformité de nos différents prototypes avec les besoins formulés par les utilisateurs, regroupés dans le cahier des charges, nous avons fait appel à un panel d'utilisateurs potentiels disposant de leur propre smartphone sous iOS ou Android, et ce dans le but de confronter ces applications à des utilisateurs habitués aux pratiques sur ces deux systèmes d'exploitation.\\
 
-Nous avons mis en place des une procédure qui nous a permis de toujours demander à ces utilisateurs potentiels d'effectuer les mêmes manipulations dans l'application et d'observer leur réactions. Pour prendre en compte leurs remarques et ne pas en oublier, nous avons procédé à des enregistrements vidéo de ces tests.
+Nous avons mis en place des une procédure qui nous a permis de toujours demander à ces utilisateurs potentiels d'effectuer les mêmes manipulations dans l'application et d'observer leur réactions. Pour prendre en compte leurs remarques et ne pas en oublier, nous avons procédé à des enregistrements vidéo de ces tests.\\
+Pour enrichir l'application, nous avons créé une URL de test sur le site du \texttt{Grand Cercle} afin de faire afficher un grand nombre d'événements dans l'application et de rendre le test plus réaliste.\\
+
+Le protocole est fourni en annexe, il reprend la totalité des fonctionnalités implémentée dans notre application, et comprend des manipulations très simple pour commencer ainsi que des tâches jugées plus difficile à réaliser pour finir.
+
+
+\appendix
+\addappheadtotoc
+
+\newpage
+
+\section{Protocole de tests utilisés dans les tests utilisateurs}
+\label{protocole}
+
+\textbf{1}. Lance l’application Grand Cercle Mobile.	
+\\
+
+\textbf{2}. Dis moi quels sont les 4 prochains événements qui se dérouleront  à Grenoble INP.	
+\\
+
+\textbf{3}. Donne moi les informations suivantes sur les 2 prochains événements : date, association qui organise, lieu, heure, type d’événement.
+  \\
+
+\textbf{4}. Y a-t-il un événement le 15 Novembre ?
+  \\
+
+\textbf{5}. Trouves un jour en Novembre où il y a un événement ?	
+  \\
+
+\textbf{6}. Trouve l’événement le plus éloigné en date ?	
+  \\
+
+\textbf{7}. Ajoute le au calendrier de ton téléphone	
+\\
+
+\textbf{8}. Imaginons que tu sois intéressé(e) par les événements de ton cercle et les Kfet de toutes les autres associations, fais en sorte d’afficher seulement les événements qui t’intéresse.
+\\
+
+\textbf{9}. Quelles sont les dernières nouvelles concernant les élus étudiants ?	
+  \\
+
+\textbf{10}.  Quand a été publié la dernière nouveauté concernant le Grand Cercle ?	
+\\
+
+\textbf{11}.  Cite moi trois enseignes dans lesquelles tu peux bénéficier de réductions en tant qu' étudiant de Grenoble INP.
+  \\
+
+\textbf{12}. Quelles sont les offres concernant la Fnac ?	
+\\
+
+\textbf{13}.  Trouve moi le lien de la page internet contenant les contacts du Grand Cercle.	
+  \\
+
+\textbf{14}.  Configure l’application aux couleurs de ton école ?	
+\\
+
+\textbf{15}. As tu des remarques, des choses à dire concernant l’application ?	
+  
+
+
 
 \end{document}
