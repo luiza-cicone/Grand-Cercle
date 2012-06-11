@@ -103,13 +103,12 @@ public class GCM extends TabActivity {
 		//view.refreshDrawableState();	
 	}
 	
-	public static void changeTabHost(int newcolor) {
+	public static void changeTabHost() {
 		dataBase = DataBase.getInstance();
 		String prefered = dataBase.getPref("prefDesign","design");
-		//view = tabHost.getCurrentTabView();
 		int color ;
-		//for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-	        
+	    // On teste les préférences de l'utilisateur et on change la couleur de l'ancien 
+		// onglet sélectionné.
 		if (prefered.equals("Noir")) {
 		    color = 0xFF3B3B3B;
 	        tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
@@ -135,8 +134,8 @@ public class GCM extends TabActivity {
 			color = 0xFF96147D;
 			tabHost.getTabWidget().getChildAt(oldchild).setBackgroundColor(color);
 		}
-		
-		tabHost.getCurrentTabView().setBackgroundColor(newcolor);
+		// On colore désormais l'onglet actuel en blanc
+		tabHost.getCurrentTabView().setBackgroundColor(0xFFFFFFFF);
 	}
 	
 	// inclut l'onglet dans la barre d'onglets en haut de l'écran

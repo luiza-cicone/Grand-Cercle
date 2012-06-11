@@ -55,8 +55,7 @@ public class TabEvent extends Activity {
 	// Méthode rappelée quand on revient sur l'onglet événements après avoir touché aux préférences
 	public void onResume() {
 		super.onResume();
-		int color = 0xFFFFFFFF;
-		GCM.changeTabHost(color);
+		GCM.changeTabHost();
 		GCM.oldchild = 0;
 		View view = findViewById(R.id.selectedDayMonthYear);
 		((TextView) view).setTextColor(Color.parseColor("#FFFFFF"));

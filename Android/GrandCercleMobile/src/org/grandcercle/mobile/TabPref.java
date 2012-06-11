@@ -37,13 +37,12 @@ public class TabPref extends Activity {
 
 	public void onResume() {
 		super.onResume();
-		int color = 0xFFFFFFFF;
 		// On colore l'onglet sélectionné en blanc et on restaure la couleur de l'ancien onglet.
-		GCM.changeTabHost(color);
+		GCM.changeTabHost();
 		// on met à jour l'ancien onglet
 		GCM.oldchild = 4;
 		View view = findViewById(R.id.bandeau);
-		color = 0xFF3B3B3B;
+		int color = 0xFF3B3B3B;
 		// Le premier bandeau est grisé
 		view.setBackgroundColor(color);
 		// Le deuxieme bandeau est grisé
