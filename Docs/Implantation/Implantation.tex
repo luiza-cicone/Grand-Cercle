@@ -207,15 +207,6 @@ Dans l'application Android, nous avons préféré utilisé un parser SAX plutôt
 
 
 
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
 Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \textt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. Le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 \section{Mise en œuvre}
@@ -241,14 +232,9 @@ Pour parser l'information provenant du fichier \texttt{XML} nous avons utilisé 
 Une simple classe appellé \texttt{Reachability} offre les fonctionnalités pour tester la connexion internet de l'utilisateur et d'agir en conséquence.
 
 
-<<<<<<< HEAD
-Page Control
->>>>>>> c90c84662fce6e58805743364e713d7dd76ce078
-=======
 \subsection{Android}
 {\bf Parser}
 Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pour ne pas bloquer l'interface utilisateur. Quand les cinq parser ont terminé leur execution, la méthode \texttt{onPostExecute(Void result)} est appelée, et crée la classe \texttt{GCM}. La différence avec les autres activités est que \texttt{GCM} étend la classe \texttt{TabActivity} et non \texttt{Activity}. En effet, cette activité permet de construire les onglets de notre application à l'aide d'un objet appelé \texttt{TabHost}. Toutes les vues des différents onglets sont crées dans GCM.java, ce qui permet à l'utilisateur de naviguer rapidement entre les différents onglets.
->>>>>>> dac908aa763eea69d4b461eaa38a28dca9ad9885
 
 
 {\bf Préférences}
