@@ -23,19 +23,19 @@
         // Custom initialization
     }    
     
-    eventArray = [[EventsParser instance] arrayEvents];
+    self.eventArray = [[EventsParser instance] arrayEvents];
     
     //configure sections
-    eventDico = [[NSMutableDictionary alloc] init];
+    self.eventDico = [[[NSMutableDictionary alloc] init] autorelease];
     
-    for (int i = 0; i < [eventArray count]; i++) {
-        Events *event = [eventArray objectAtIndex:i];
+    for (int i = 0; i < [self.eventArray count]; i++) {
+        Events *event = [self.eventArray objectAtIndex:i];
         
-        NSMutableArray *eventsOnThisDay = [eventDico objectForKey:event.eventDate];
+        NSMutableArray *eventsOnThisDay = [self.eventDico objectForKey:event.eventDate];
         if (eventsOnThisDay == nil) {
             eventsOnThisDay = [NSMutableArray array];
             
-            [eventDico setObject:eventsOnThisDay forKey:event.eventDate];
+            [self.eventDico setObject:eventsOnThisDay forKey:event.eventDate];
         }
         [eventsOnThisDay addObject:event];
         
@@ -48,13 +48,13 @@
     
     // Préparation du cache
 	
-	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-	imageCache.notificationName = @"newImageSmallCache";
+	self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:@"images"] autorelease];
+	self.imageCache.notificationName = @"newImageSmallCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTableImageRetrieved:) name:@"newImageSmallCache" object:nil];
 	
-	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-	imageCache2.notificationName = @"newLogoCache";
+	self.imageCache2 = [[[TKImageCache alloc] initWithCacheDirectoryName:@"images"] autorelease];
+	self.imageCache2.notificationName = @"newLogoCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTableImageRetrieved:) name:@"newLogoCache" object:nil];
 
@@ -147,7 +147,7 @@
 {
     // Return the number of rows in the section.
 
-    NSArray *dates = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *dates  = [[eventDico allKeys] sortedArrayUsingSelector:@selector(compare:)];
     id theDate = [dates objectAtIndex:section];
     id eventList = [eventDico objectForKey:theDate];
     return [eventList count];
@@ -278,7 +278,7 @@
     
     detailEventController.event = selectedEvent;
     [self.superController.navigationController pushViewController:detailEventController animated:YES];
-
+    [detailEventController release];
 }
 
 @end

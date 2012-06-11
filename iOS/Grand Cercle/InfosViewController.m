@@ -70,10 +70,16 @@
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
     // Coloration de l'interligne suivant les préférences, si Noir Grand Cercle on laisse la couleur par défaut
-    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0)
-        [self.tableView setSeparatorColor: [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18]];
-    else
-        [self.tableView setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5]];
+    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
+        UIColor *color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
+        [self.tableView setSeparatorColor: color];
+        [color release];
+    }
+    else {
+        UIColor *color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
+        [self.tableView setSeparatorColor:color];
+        [color release];
+    }
 }
 
 #pragma mark - Table view data source
@@ -144,7 +150,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier;
-    UITableViewCell *cell;
+    UITableViewCell *cell = nil;
     
     // Si on se trouve dans la section GC, on met en place la cellule de titre
     if (indexPath.section == GC) {
@@ -164,7 +170,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         
         if (indexPath.row == SITE)
             [cell.textLabel setText:@"Site Web"];

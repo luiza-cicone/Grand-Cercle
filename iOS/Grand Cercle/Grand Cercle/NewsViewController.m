@@ -21,17 +21,15 @@
         self.title = NSLocalizedString(@"News", @"News");
         self.tabBarItem.title = NSLocalizedString(@"News", @"News");
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
-    }
     
-    newsArray = [[NewsParser instance] arrayNews];
+    self.newsArray = [[NewsParser instance] arrayNews];
     
     // configure image cache
 
-    urlArray = [[NSMutableArray alloc] initWithCapacity:[newsArray count]];
-    
-    for (int i = 0; i < [newsArray count]; i++) {
-        News *n = [newsArray objectAtIndex:i];
-        [urlArray addObject:[n logo]];
+    self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
+    for (int i = 0; i < [self.newsArray count]; i++) {
+        News *n = [self.newsArray objectAtIndex:i];
+        [self.urlArray addObject:[n logo]];
     }
 	
 	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
@@ -42,7 +40,7 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     [backButton release];
-    
+    }
     return self;
 }
 
@@ -77,19 +75,17 @@
     
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
-//    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.18]]; 
-    
     if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
-        
-        [self.tView setSeparatorColor: [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18]];
-        
+        UIColor *color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
+        [self.tView setSeparatorColor: color];
+        [color release];
         
     } else {
-        
-        [self.tView setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5]];
+        UIColor *color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
+        [self.tView setSeparatorColor:color];
+        [color release];
         
     }
-
 }
 
 - (void)viewDidLoad
@@ -104,7 +100,11 @@
     [newsCell release];
     [urlArray release];
     [newsArray release];
+    urlArray = nil;
+    newsArray = nil;
+    newsCell = nil;
 	[imageCache release];
+    imageCache = nil;
     [tView release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.

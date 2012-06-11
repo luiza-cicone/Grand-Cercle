@@ -8,6 +8,9 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface Grand_CercleTests : SenTestCase
+@interface Grand_CercleTests : SenTestCase {
+    NSMutableArray *arrayWithEvents,  *arrayWithEvents2;
+    id <UIApplicationDelegate> delegate;
+}
 
 @end
