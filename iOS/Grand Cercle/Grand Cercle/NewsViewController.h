@@ -10,13 +10,17 @@
 #import <TapkuLibrary/TapkuLibrary.h>
 
 @interface NewsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    // Cellule contenant la news
     IBOutlet UITableViewCell *newsCell;
+    // Tableau contenant les news
     NSMutableArray *newsArray;
+    // Tableau contenant les images des news
     NSMutableArray *urlArray;
+    // Cache
     TKImageCache *imageCache;
+    // Tableview contenant la liste des cellule
     IBOutlet UITableView *tView;
 }
-
 
 @property (assign, nonatomic) IBOutlet UITableViewCell *newsCell;
 @property (assign, nonatomic) NSMutableArray *newsArray;

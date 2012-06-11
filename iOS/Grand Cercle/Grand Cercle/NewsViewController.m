@@ -15,87 +15,103 @@
 @synthesize tView;
 @synthesize newsArray, urlArray;
 
+/****************************
+ * Initialisation de la vue *
+ ***************************/
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        // Mise en place du titre
         self.title = NSLocalizedString(@"News", @"News");
-        self.tabBarItem.title = NSLocalizedString(@"News", @"News");
+        // Mise en place de l'image dans l'onglet
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
+        
+        // Récupération des news
+        self.newsArray = [[NewsParser instance] arrayNews];
     
-    self.newsArray = [[NewsParser instance] arrayNews];
-    
-    // configure image cache
-
-    self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
-    for (int i = 0; i < [self.newsArray count]; i++) {
-        News *n = [self.newsArray objectAtIndex:i];
-        [self.urlArray addObject:[n logo]];
-    }
+        // Récupération des liens des images des news
+        self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
+        for (int i = 0; i < [self.newsArray count]; i++) {
+            News *n = [self.newsArray objectAtIndex:i];
+            [self.urlArray addObject:[n logo]];
+        }
 	
-	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-	imageCache.notificationName = @"newImageCache";
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
+        // Configuration du cache
+        imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
+        imageCache.notificationName = @"newImageCache";
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = backButton;
-    [backButton release];
+        // Mise en place du bouton retour pour la détail view
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+        [backButton release];
     }
     return self;
 }
 
-- (void) newImageRetrieved:(NSNotification*)sender{
+/*****************************
+ * Mise à jour du table view *
+ ****************************/
+- (void) newImageRetrieved:(NSNotification*)sender {
     
+    // Définition des structures
 	NSDictionary *dict = [sender userInfo];
     NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    
     NSArray *paths = [self.tView indexPathsForVisibleRows];
 
-    
+    // Pour chaque row de la table view
     for(NSIndexPath *path in paths) {
         
+        // On charche l'image dans le cache
     	NSInteger index = path.row;
-    
         UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
         UIImageView *imageView;
         imageView = (UIImageView *)[cell viewWithTag:1];
+        
+        // Si il n'y a pas d'image on l'affiche
     	if(imageView.image == nil && tag == index){
-            
             imageView.image = [dict objectForKey:@"image"];
             [cell setNeedsLayout];
         }
     }
 }
 
-	
+/************************
+ * Apparition de la vue *
+ ***********************/
 - (void)viewDidAppear:(BOOL)animated {   
     
+    // Récupération des préférences utilisateurs
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     NSArray *c = [defaults objectForKey:@"theme"];
     
+    // Coloration de la barre du haut avec le bon thème
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
+    // Si le thème est Grand Cercle, on laisse l'interligne par défaut, sinon on la colore suivant le thème
+    UIColor *color;
     if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
-        UIColor *color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
-        [self.tView setSeparatorColor: color];
-        [color release];
-        
+        color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
     } else {
-        UIColor *color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
-        [self.tView setSeparatorColor:color];
-        [color release];
-        
+        color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
     }
+    [self.tView setSeparatorColor:color];
+    [color release];
 }
 
-- (void)viewDidLoad
-{
+/************************
+ * Chargement de la vue *
+ ***********************/
+- (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
-- (void)viewDidUnload
-{
+/**************************
+ * Déchargement de la vue *
+ *************************/
+- (void)viewDidUnload {
+    // Libération des structures
     [self setNewsCell:nil];
     [newsCell release];
     [urlArray release];
@@ -107,39 +123,45 @@
     imageCache = nil;
     [tView release];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+/****************************************************************
+ * Maintient de la vue verticale en cas de rotation du téléphone*
+ ***************************************************************/
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/************************************
+ * Retourne la hauteur des sections *
+ ***********************************/
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 85;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+/**********************************
+ * Retourne le nombre de sections *
+ *********************************/
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
+/*******************************************
+ * Retourne le nombre de rows par sections *
+ ******************************************/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [newsArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"NewsCell";
+/*************************************
+ * Construction des différentes rows *
+ ************************************/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    static NSString *CellIdentifier = @"NewsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
     
     if (cell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil];
@@ -147,83 +169,45 @@
         self.newsCell = nil;
     }
     
+    // Définition de la news
     News *n = (News *)[newsArray objectAtIndex:[indexPath row]];
     
-    
+    // Affichage de l'image de la news
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
-    
-//    UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[n logo]]]];
-
     UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
-
-
     [imageView setImage:img];
     
+    // Affichage des labels
     UILabel *label;
     label = (UILabel *)[cell viewWithTag:2];
     [label setText: [n title]];
-    
     label = (UILabel *)[cell viewWithTag:3];
     [label setText:[n pubDate]];
     
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/************************************************
+ * Action déclenchée par la sélection d'une row *
+ ***********************************************/
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    // Construction de la détail view
     NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     News *n = [newsArray objectAtIndex:[indexPath row]];
     detailViewController.news = n;
     
+    // Chargement de la détail view
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
-     
 }
 
-
+/***************
+ * Destructeur *
+ **************/
 - (void)dealloc {
     [newsCell release];
     [urlArray release];
