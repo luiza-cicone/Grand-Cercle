@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /*
- * Onglets bons plans
+ * Onglet bons plans
  */
 
 public class TabBP extends Activity {
@@ -19,14 +19,18 @@ public class TabBP extends Activity {
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Récupération du layout xml
         setContentView(R.layout.affichage_bons_plans);
         ArrayList<BP> listBP = ContainerData.getlistBP();
         
         // On construit la liste de news
         if (listBP != null) {
 	        ListBPAdapter lbpa = new ListBPAdapter(this,listBP);
+	        // Récupération de la liste de cellules de bons plans
 	        ListView feedListView = ((ListView)findViewById(R.id.listFeed));
-	        ((ListView)findViewById(R.id.listFeed)).setAdapter(lbpa);
+	        // Mise en forme
+	        feedListView.setAdapter(lbpa);
+	        // Listener permet de clicker sur un élément de la liste
 	        feedListView.setOnItemClickListener(clickListenerBP);
         } else {
         	Toast.makeText(TabBP.this,"Pas de bons plans !",Toast.LENGTH_LONG).show();
@@ -36,11 +40,11 @@ public class TabBP extends Activity {
 	 
 	 public void onResume() {
 		super.onResume();
-		int color = 0xFFFFFFFF;
-		GCM.changeTabHost(color);
+		GCM.changeTabHost();
 		GCM.oldchild = 2;
 	 }
 	 
+	 // Listener privé gérant l'action à associer à un click sur un élément de la liste
 	 private AdapterView.OnItemClickListener clickListenerBP = new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(TabBP.this,PageBP.class);

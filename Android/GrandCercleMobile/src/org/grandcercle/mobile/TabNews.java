@@ -20,8 +20,9 @@ public class TabNews extends Activity {
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Récupération du layout xml
         setContentView(R.layout.affichage_news);
-        
+        // Récupération de la liste de news prise sur le site
         ArrayList<News> listNews = ContainerData.getNews();
         
         // Construction de la liste de news
@@ -31,6 +32,7 @@ public class TabNews extends Activity {
 	        ((ListView)findViewById(R.id.listFeed)).setAdapter(lna);
 	        feedListView.setOnItemClickListener(clickListenerFeed);
         } else {
+        	// On informe à l'utilisateur qu'il n'y a aucune news
         	Toast.makeText(TabNews.this,"Pas de news !",Toast.LENGTH_LONG).show();
         }
        
@@ -38,8 +40,7 @@ public class TabNews extends Activity {
 	}
 	 public void onResume() {
 		 super.onResume();
-		 int color = 0xFFFFFFFF;
-		 GCM.changeTabHost(color);
+		 GCM.changeTabHost();
 		 GCM.oldchild = 1;
 	 }
 	 

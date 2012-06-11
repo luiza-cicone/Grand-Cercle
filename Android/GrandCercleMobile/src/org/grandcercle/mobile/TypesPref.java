@@ -61,14 +61,14 @@ public class TypesPref extends Activity {
 	
 	private OnClickListener OKClicked = new OnClickListener() {
 		public void onClick(View v) {
+			// Construction de la nouvelle liste des préférences.
 			for (int i=0; i<listCheckBox.size(); i++) {
 				if (listCheckBox.get(i).isChecked()) {
 					listTypesChecked.add(listTypes.get(i));
 				}
 			}
 			dataBase.deleteAll("prefType");
-			// on rentre dans la base de donnée la liste des préférences
-			
+			// Mise à jour de la base de donnée avec la nouvelle liste des préférences
 			dataBase.addListPref("prefType","type",listTypesChecked); 
 			dataBase.addListPref("prefType","type",listTypesChecked);
 			LayoutInflater inflater = getLayoutInflater();
@@ -80,10 +80,13 @@ public class TypesPref extends Activity {
 			toast.show();
 			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);
 			new ParsingProcessing().execute((Void)null);
+			// Fin de l'activité
 			finish();
 		}
 	};
 	
+	// classe privée qui permet de reparser les données en provenance du site
+	// en prenant en compte les préférences de l'utilisateur
 	private class ParsingProcessing extends AsyncTask<Void,Integer,Void> {
 		
 		@Override

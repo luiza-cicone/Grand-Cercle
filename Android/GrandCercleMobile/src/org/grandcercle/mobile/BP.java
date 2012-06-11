@@ -1,7 +1,7 @@
 package org.grandcercle.mobile;
 
 /* 
- * Classe représentant un bon plan
+ * Classe représentant un élément bons plans
  */
 
 public class BP extends Item {

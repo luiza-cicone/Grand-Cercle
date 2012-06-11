@@ -20,9 +20,12 @@ public class DesignPref extends Activity {
 	
 	public void onCreate(Bundle saveInstanceState) {
 		super.onCreate(saveInstanceState);
+		// Récupération du layout xml
 		setContentView(R.layout.design_pref);
+		// Création d'une instance de base de données
 		dataBase = DataBase.getInstance();
 		ColorChecked = new String();
+		// Récupération du design courant
 		String prefered = dataBase.getPref("prefDesign","design");
 		RadioGroup radiogroup = (RadioGroup) findViewById(R.id.design);
 		if (prefered.equals("Noir")) {
@@ -54,9 +57,12 @@ public class DesignPref extends Activity {
 		position[7]= R.id.Esisar;
         
         View buttonOk = this.findViewById(R.id.boutonOk);
+     // Listener sur le bouton ok
 		buttonOk.setOnClickListener(OKClicked);
 	}
 	
+	// Listener privé lançant toutes les actions nécessaires
+	// après la validation des préférences.
 	private OnClickListener OKClicked = new OnClickListener() {
 		public void onClick(View v) {
 			View radiogroup = findViewById(R.id.design);
@@ -67,15 +73,8 @@ public class DesignPref extends Activity {
 			}
 			ColorChecked =colors.get(i);
 			dataBase.deleteAll("prefDesign");
+			// Mise à jour de la base de données avec la nouvelle couleur selectionnée
 			dataBase.addPref("prefDesign","design",ColorChecked);
-			/*LayoutInflater inflater = getLayoutInflater();
-			View layout = inflater.inflate(R.layout.toast_parse, (ViewGroup) findViewById(R.id.toast_layout_root));
-			Toast toast = new Toast(getApplicationContext());
-			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-			toast.setDuration(Toast.LENGTH_SHORT);
-			toast.setView(layout);
-			toast.show();
-			progressBarParse = (ProgressBar)findViewById(R.id.progressBarParse);*/
 			finish();
 		}
 	};
