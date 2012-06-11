@@ -51,11 +51,15 @@ int kNumberOfPages = 3;
         [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"reloadEvents"];
     }
     
+    
+//[[self.tabBarController tabBar] setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]]; 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     NSArray *c = [defaults objectForKey:@"theme"];
     
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
-    
-//[[self.tabBarController tabBar] setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]]; 
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
