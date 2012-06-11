@@ -48,6 +48,7 @@
     webView = (UIWebView *)[cellEventDescription viewWithTag:1];
     webView.delegate = self;
     [webView loadHTMLString:event.description baseURL:nil];
+    [plusButton release];
 
 }
 
@@ -144,7 +145,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier;
-    UITableViewCell *cell;
+    UITableViewCell *cell = nil;
     UIImageView *imageView;
     UILabel *label;
 
@@ -159,10 +160,12 @@
             }
             
             imageView = (UIImageView *)[cell viewWithTag:1];
-            
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event image]]]];
+            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event image]]];
+            UIImage *myimage = [[UIImage alloc] initWithData:data];
+            [data release];
             [imageView setImage:myimage];
-//            
+            [myimage release];
+//           
 //            UIWebView *wv = (UIWebView *)[cell viewWithTag:7];
 //            
 //            [wv loadHTMLString:[NSString stringWithFormat:@"<p style=\"font-family : Helvetica;\"><b>%@</b></p><p>%@</p>", [event title], [event group]] baseURL:nil];
@@ -175,9 +178,11 @@
             [label setText : event.group];
             
             imageView = (UIImageView *)[cell viewWithTag:4];
-            UIImage *img2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]]];
+            data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]];
+            UIImage *img2 = [[UIImage alloc] initWithData:data];
+            [data release];
             [imageView setImage: img2];
-            
+            [img2 release];
             break;
         
         case INFOS:

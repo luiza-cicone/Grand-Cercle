@@ -9,7 +9,7 @@
 #import "Events.h"
 
 @implementation Events
-@synthesize day, date, time, type, place, priceCva, priceNoCva, image, imageSmall, pubDate, group, author, eventDate;
+@synthesize day, date, time, type, place, image, imageSmall, pubDate, group, author, eventDate;
 
 /****************
  * Constructeur *

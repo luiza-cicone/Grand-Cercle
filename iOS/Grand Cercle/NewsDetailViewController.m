@@ -81,7 +81,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier;
-    UITableViewCell *cell;
+    UITableViewCell *cell = nil;
     
     switch (indexPath.section) {
             
@@ -96,10 +96,11 @@
             
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
-            
-            UIImage *myimage2 = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[news logo]]]];
+            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[news logo]]];
+            UIImage *myimage2 = [[UIImage alloc] initWithData:data];
+            [data release];
             [imageView setImage:myimage2];
-            
+            [myimage2 release];
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [news title]];
@@ -128,7 +129,6 @@
         default:
             break;
     }
-    
     return cell;
 }
 

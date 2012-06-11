@@ -41,8 +41,11 @@ int borneSup = 0;
             imageView = (UIImageView *)[self.view viewWithTag:i+1];
             button = (UIButton *)[self.view viewWithTag:i+9];
             [button setHidden:NO];
-            UIImage *myimage = [[UIImage alloc] initWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[tabImage objectAtIndex:i]]]];
+            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[tabImage objectAtIndex:i]]];
+            UIImage *myimage = [[UIImage alloc] initWithData:data];
+            [data release];
             [imageView setImage:myimage];
+            [myimage release];
             
         }
         for (int i = borneSup; i < 4; i++) {

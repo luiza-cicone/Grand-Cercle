@@ -23,19 +23,19 @@
         self.tabBarItem.image = [UIImage imageNamed:@"deals"];
     }
     
-    arrayBonsPlans = [[DealsParser instance] arrayDeals];
+    self.arrayBonsPlans = [[DealsParser instance] arrayDeals];
 
     // configure image cache
     
-    urlArray = [[NSMutableArray alloc] initWithCapacity:[arrayBonsPlans count]];
+    self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.arrayBonsPlans count]];
     
-    for (int i = 0; i < [arrayBonsPlans count]; i++) {
-        Deals *bp = [arrayBonsPlans objectAtIndex:i];
-        [urlArray addObject:[bp logo]];
+    for (int i = 0; i < [self.arrayBonsPlans count]; i++) {
+        Deals *bp = [self.arrayBonsPlans objectAtIndex:i];
+        [self.urlArray addObject:[bp logo]];
     }
 	
-	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"logos"];
-	imageCache.notificationName = @"newLogoCache";
+	self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:@"logos"] autorelease];
+	self.imageCache.notificationName = @"newLogoCache";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
     
@@ -86,13 +86,15 @@
 //    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]];
     
     if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
-        
-        [self.tview setSeparatorColor: [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18]];
-        
+        UIColor *color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
+        [self.tview setSeparatorColor: color];
+        [color release];
         
     } else {
-        
-        [self.tview setSeparatorColor:[[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5]];
+        UIColor *color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
+
+        [self.tview setSeparatorColor:color];
+        [color release];
         
     }
     
@@ -102,9 +104,15 @@
 {
     [bonsPlansCell release];
     bonsPlansCell = nil;
+    [urlArray release];
+    urlArray = nil;
+    [arrayBonsPlans release];
+    arrayBonsPlans = nil;
     [self setBonsPlansCell:nil];
     [tview release];
     tview = nil;
+    [imageCache release];
+    self.imageCache = nil;
     [self setTview:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.

@@ -14,22 +14,29 @@
 @synthesize tabBarController = _tabBarController;
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [activity setFrame:CGRectMake(100, 350, 100, 100)];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
-    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.window.frame.size.width, self.window.frame.size.height)];
-    [iv setImage:[UIImage imageNamed:@"default.png"]];
-    [v addSubview:iv];
-    [v addSubview:activity];
-    UIViewController *vc  = [[UIViewController alloc] init];
-    [vc setView: v];
-    self.window.rootViewController = vc;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
+   
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.window.frame.size.width, self.window.frame.size.height)];
+    [imageView setImage:[UIImage imageNamed:@"default.png"]];
+    [view addSubview:imageView];
+    [imageView release];
 
+    
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityIndicator setFrame:CGRectMake(72, 182, 40, 40)];
+    [view addSubview:activityIndicator];
+    [activityIndicator release];
+    
+    UIViewController *vc  = [[UIViewController alloc] init];
+    [vc setView: view];
+    [view release];
+    self.window.rootViewController = vc;
+    [vc release];
     [self.window makeKeyAndVisible];
 
-    [activity startAnimating];
+    [activityIndicator startAnimating];
     
     // allocate a reachability object
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.grandcercle.org"];
@@ -50,29 +57,29 @@
 - (void)startParse {
     
     // Override point for customization after application launch.
-    UINavigationController *navigationController1 = [[UINavigationController alloc] init];
+    UINavigationController *navigationController1 = [[[UINavigationController alloc] init] autorelease];
     UIViewController *viewController1 = [[[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil] autorelease];
     navigationController1.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController1.viewControllers = [NSArray arrayWithObjects:viewController1, nil];
-    
+
     UIViewController *viewController2 = [[[NewsViewController alloc] initWithNibName:@"NewsViewController" bundle:nil] autorelease];
-    UINavigationController *navigationController2 = [[UINavigationController alloc] init];
+    UINavigationController *navigationController2 = [[[UINavigationController alloc] init] autorelease];
     navigationController2.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController2.viewControllers = [NSArray arrayWithObjects:viewController2, nil];
-    
+
     UIViewController *viewController3 = [[[DealsViewController alloc] initWithNibName:@"DealsViewController" bundle:nil] autorelease];
-    UINavigationController *navigationController3 = [[UINavigationController alloc] init];
+    UINavigationController *navigationController3 = [[[UINavigationController alloc] init] autorelease];
     navigationController3.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController3.viewControllers = [NSArray arrayWithObjects:viewController3, nil];
-    
+
     UIViewController *viewController4 = [[[InfosViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    UINavigationController *navigationController4 = [[UINavigationController alloc] init];
+    UINavigationController *navigationController4 = [[[UINavigationController alloc] init] autorelease];
     navigationController4.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
     
-    UIViewController *viewController5 = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UIViewController *viewController5 = [[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    UINavigationController *navigationController5 = [[UINavigationController alloc] init];
+    UINavigationController *navigationController5 = [[[UINavigationController alloc] init] autorelease];
     navigationController5.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController5.viewControllers = [NSArray arrayWithObjects:viewController5, nil];
     
@@ -100,22 +107,24 @@
                 [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
             }
             [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+            [cerclesDico release];
             
             NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
             for (NSString *clubs in [ap arrayClubs]) {
                 [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
             }
             [defaults setObject:clubsDico forKey:@"filtreClubs"];
+            [clubsDico release];
             
             NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
             for (NSString *type in [ap arrayTypes]) {
                 [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
             }
             [defaults setObject:typesDico forKey:@"filtreTypes"];
-            
+            [typesDico release];
             NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
             [defaults setObject:colorArray forKey:@"theme"];
-            
+            [colorArray release];
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -146,22 +155,25 @@
                 [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
             }
             [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+            [cerclesDico release];
             
             NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
             for (NSString *clubs in [ap arrayClubs]) {
                 [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
             }
             [defaults setObject:clubsDico forKey:@"filtreClubs"];
+            [clubsDico release];
             
             NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
             for (NSString *type in [ap arrayTypes]) {
                 [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
             }
             [defaults setObject:typesDico forKey:@"filtreTypes"];
+            [typesDico release];
             
             NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
             [defaults setObject:colorArray forKey:@"theme"];
-            
+            [colorArray release];
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
         
