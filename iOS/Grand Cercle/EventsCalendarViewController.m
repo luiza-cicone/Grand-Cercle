@@ -197,7 +197,7 @@
 	self.dataDictionary = [NSMutableDictionary dictionary];
     
     //configure sections
-    self.dataDictionary = [[NSMutableDictionary alloc] init];
+    self.dataDictionary = [[[NSMutableDictionary alloc] init] autorelease];
     
     NSDate *d = start;
 	while(YES){
@@ -237,6 +237,11 @@
         }
         [gregorian release];
     }
+}
+-(void)dealloc {
+    [super dealloc];
+    [dataDictionary release];
+    dataDictionary = nil;
 }
 
 

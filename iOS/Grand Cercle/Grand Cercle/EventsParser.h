@@ -28,6 +28,6 @@
 // Méthode récupérant l'ensemble des événements depuis une sauvegarde locale
 - (void)loadEventsFromFile;
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
-- (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array;
-
+- (void) handleEvents:(TBXMLElement *)eventsToParse toArray:(NSMutableArray *) array withFilter:(BOOL) filter;
+- (void) loadEventsFromString: (NSString *) xmlString toArray: (NSMutableArray *) array;
 @end
