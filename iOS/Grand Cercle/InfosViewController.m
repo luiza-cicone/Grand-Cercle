@@ -28,7 +28,7 @@
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
-        // Titre apparaissant en haut
+        // Titre apparaissant dans les onglets du bas
         self.title = NSLocalizedString(@"Infos", @"Infos");
         // Image apparaissant dans l'onglet en bas
         self.tabBarItem.image = [UIImage imageNamed:@"infos"];
