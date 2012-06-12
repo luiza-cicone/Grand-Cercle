@@ -19,5 +19,5 @@
 @property (retain, nonatomic) EventsViewController *superController;
 
 - (IBAction)imageButtonAction:(id)sender;
-
+-(void) loadData;
 @end
