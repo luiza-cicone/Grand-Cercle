@@ -1,4 +1,4 @@
-\documentclass[a4paper, 11px]{article}
+\documentclass[a4paper, 11pt]{article}
 
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
@@ -198,8 +198,6 @@ La technologie Android repose sur la dualité entre la langage \texttt{Java} et 
 \end{itemize}
 Dans l'application Android, nous avons préféré utiliser un parser SAX plutôt qu'un DOM, puisque le SAX est plus rapide que le DOM (cf \href{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}).
 
-
-
 Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \texttt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. Le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 \section{Mise en œuvre}
@@ -236,7 +234,7 @@ Pour sauvegarder les préférences nous avons utilisé le dictionnaire par défa
  
 {\bf Cache des images}
 
-Chaque fois que l'on trouve une nouvelle image à télécharger, on la place dans une file d'attente et on la sauvegarde dans la mémoire lorsqu'elle est disponible. On garde un dictionnaire ayant comme clé de hashage (signature des données) l'URL de l'image. Le téléchargement est fait dans un thread et une notification est envoyée pour mettre à jour l'affichage.
+Chaque fois que l'on trouve une nouvelle image à télécharger, on la place dans une file d'attente et on la sauvegarde dans la mémoire lorsqu'elle est disponible. On garde un dictionnaire ayant comme clé l'URL de l'image. Le téléchargement est fait dans un thread et une notification est envoyée pour mettre à jour l'affichage.
 
 {\bf Librairies externes}
 
@@ -273,17 +271,20 @@ Les deux applications ont été validées suivant une démarche commune afin d'a
 Certains tests ont été réalisés au fur et à mesure du développement des applications. D'autres ont été effectués sur des prototypes fonctionnels et enfin la version finale des deux applications a été évaluée par un panel d'utilisateurs potentiels.
 
 \subsection{Tests unitaires}
-Chaque module a été testé grâce à des tests unitaires. Majoritairement, ces tests consistent à envoyer en entrée du module un cas de test spécifique, de tracer le module afin de vérifier qu'au cours de l’exécution rien d'anormal ne se produit, et de récupérer en sortie un résultat que l'on compare au résultat attendu. Les tests spécifiques sont pour la plupart des tests dits "boite blanche".
+Chaque module a été testé grâce à des tests unitaires. Majoritairement, ces tests consistent à envoyer en entrée du module un cas de test spécifique, de tracer le module afin de vérifier qu'au cours de l'exécution rien d'anormal ne se produit, et de récupérer en sortie un résultat que l'on compare au résultat attendu. Les tests spécifiques sont pour la plupart des tests dits "boite blanche".
+
+Pour l'application iOS, nous avons utilisé le framework de tests OCUnit qui intégré dans Xcode. 
 
 Ces tests sont avant tout des tests techniques qui permettent de s'assurer qu'il n'y a pas d'erreur d'analyse et/ou de programmation.
 
 \subsection{Tests d'intégration et de validation informatique}
 Ces tests permettent de tester la cohérence et l'articulation des modules entre eux, de vérifier que les modules communiquent bien entre eux.
 
-
 Ces tests ont été réalisés de manière similaire aux tests unitaires, à savoir un traçage des opérations effectuées et une comparaison du résultat obtenu avec le résultat attendu.
 
-\subsection{Validation ergonomique}
+Dans le langage Objective-C il n'existe pas de Garbage Collecter comme dans le langage Java. Pour cella nous avons du testé pour l'application iOS les allocations et les fuites de mémoire. De plus, avec les outils de développement d'Apple, nous avons aussi testé les performances de l'application, la consommation du processeur et de la batterie.
+
+\subsection{Évaluation ergonomique}
 Afin de vérifier la conformité de nos différents prototypes avec les besoins formulés par les utilisateurs, regroupés dans le cahier des charges, nous avons fait appel à un panel d'utilisateurs potentiels disposant de leur propre smartphone sous iOS ou Android, et ce dans le but de confronter ces applications à des utilisateurs habitués aux pratiques sur ces deux systèmes d'exploitation.\\
 
 Nous avons mis en place un protocole d'évaluation qui nous a permis de toujours demander à ces utilisateurs potentiels d'effectuer les mêmes manipulations dans l'application et d'observer leur réactions. Pour prendre en compte leurs remarques et ne pas en oublier, nous avons procédé à des enregistrements vidéo de ces tests.\\
@@ -349,32 +350,19 @@ Le protocole est fourni en annexe \ref{protocole}, il reprend la totalité des f
 \clearpage
 \section{Interface abstraite}
 \label{abstr}
+\newpage
 
-\section{Interface concrète}
+\section{Interface concrète (Sketching)}
 \label{concrete}
-
-
-\subsubsection{Sketching}
-\textbf{Remarques générales}
-
-L'affichage des événements se fait dans trois manières différentes : par calendrier, par liste et les quatre prochaines événements . Ces trois visualisations se trouvent sur des pages distinctes et le changement de page se fait par un mouvement de gauche a droit ou de droit a gauche du doit sur l'écran tactile. Un objet standard composé de 3 indicateurs circulaires permette d'informer l'utilisateur de la page courante et de signaler le changement.
-
-Dans l'affichage calendrier, l'utilisateur peut accéder à la date qu'il souhaite pour voir les événements correspondants. Dans la liste se trouvent tous les événements prochaines à partir du jour présent.
 
 \subsection{Sketching pour l'application iOS}
 \label{sketchiOS}
 
-Pour l'application iOS, les affichages seront implémentés en utilisant les éléments par défaut d'Apple. L'avantage du point de vue de l'utilisateur est qu'il pourra naviguer facilement dans l'application comme il reconnaîtra les différentes objets.
-
 \underline{Pages événements}
-
-Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les événements groupés par date, utilisant le tableau par sections d'iOS. 
-
-
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_calendar.png}
+			\includegraphics[scale=0.28]{../../Sketch/iOS/evenements_calendar.png}
 		\end{center}
 	\caption{Calendrier}
 	\label{calendar}
@@ -383,7 +371,7 @@ Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les évé
 	\hfill
 	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_liste.png}
+			\includegraphics[scale=0.28]{../../Sketch/iOS/evenements_liste.png}
 		\end{center}
 	\caption{Liste}
 	\label{even_liste}
@@ -391,33 +379,33 @@ Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les évé
 	\end{minipage}
 	\begin{minipage}[c]{.32\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_4_prochains.png}
+			\includegraphics[scale=0.28]{../../Sketch/iOS/evenements_4_prochains.png}
 		\end{center}
 	\caption{4 prochains}
 	\label{4_prochains}
 
 	\end{minipage}
 \end{figure}
-\vfill
-\clearpage
-
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_detail.png}
+			\includegraphics[scale=0.28]{../../Sketch/iOS/evenements_detail.png}
 		\end{center}
 	\caption{Détails d'un événement}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_detail_plus.png}
+			\includegraphics[scale=0.28]{../../Sketch/iOS/evenements_detail_plus.png}
 		\end{center}
 	\caption{Exporter événement}
 	\end{minipage}
 \end{figure}
+\vfill
+\clearpage
 
 \underline{Pages news}
+
 \begin{figure}[h!]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
@@ -434,10 +422,10 @@ Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les évé
 	\caption{Détails d'un news}
 	\end{minipage}
 \end{figure}
-\vfill
-\clearpage
+
+
 \underline{Pages bons plans}
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.29]{../../Sketch/iOS/bons_plans_liste.png}
@@ -454,147 +442,129 @@ Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les évé
 
 	\end{minipage}
 \end{figure}
+\vfill
+\clearpage
 
-\underline{Page informations}
+\underline{Page informations et paramètres}
 \begin{figure}[h!]
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.29]{../../Sketch/iOS/infos.png}
 		\end{center}
 	\caption{Page d'informations}
 	\end{minipage}
-\end{figure}
-
-\clearpage
-\underline{Pages paramètres}
-
-En ce qui concerne les préférences utilisateurs, tous les choix se feront par le biais de checkbox comme pour l'application Android mais il n'y aura pas de bouton pour valider les choix effectués par les utilisateurs. 
-En effet, les choix de thème seront pris en compte immédiatement après le "check" et les choix de filtre seront pris en compte quand l'utilisateur sortira de la page courante où il formule ses choix.
-\begin{figure}[htbp]
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/parametres.png}
+			\includegraphics[scale=0.29]{../../Sketch/iOS/parametres.png}
 		\end{center}
+	\caption{Paramètres}
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/parametres_detail.png}
+			\includegraphics[scale=0.29]{../../Sketch/iOS/parametres_detail.png}
 		\end{center}
+	\caption{Détail paramètres}
 	\end{minipage}
 \end{figure}
-\vfill
-\clearpage
 
-\section{Sketching pour l'applicationAndroid}
-\label{sketchAndroid}
-
-\textbf{Sketching pour l'application Android}
-
-Les sketching de l'application Android ont été réalisés avec un plugin d'eclipse, \textbf{Wireframe Sketcher}, qui ne permet pas de séléctionner des onglets différents. Ainsi, dans toutes les pages présentées ci-après, l'onglet qui est mis en relief est toujours l'onglet "Evénements", ce qui ne représente pas toujours l'onglet actif. Afin de régler ce problème, l'onglet actif a été mis en gras.
-
+\subsection{Sketching pour l'application Android}
 \underline{Pages événements}
-\vfill
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/Android/quatreEvent.png}
+			\includegraphics[scale=0.29]{../../Sketch/Android/quatreEvent.png}
 		\end{center}
+	\caption{4 prochains}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/Android/ListEvent.png}
+			\includegraphics[scale=0.29]{../../Sketch/Android/ListEvent.png}
 		\end{center}
+	\caption{Liste}
 	\end{minipage}
 \end{figure}
-
+\vfill
+\clearpage
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Calendrier.png}
 		\end{center}
+	\caption{Calendrier}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/DescrEvent.png}
 		\end{center}
+	\caption{Détail}
 	\end{minipage}
 \end{figure}
-Les sketch concernant les autres pages de l'application sont disponibles en annexe \ref{sketchAndroid}.
-\vfill
-\clearpage
-
-
 
 \underline{Pages news}\\
-Dans cette section, l'onglet actif est l'onglet "News".
-\vfill
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/News.png}
 		\end{center}
+	\caption{Liste news}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.50\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/DescrNews.png}
 		\end{center}
-	\end{minipage}
-\end{figure}
-
-\underline{Pages bons plans}\\
-Dans cette section, l'onglet actif est l'onglet "Bons plans".
-\begin{figure}[htbp]
-	\begin{minipage}[c]{.50\linewidth}
-		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/Android/BP.png}
-		\end{center}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[c]{.50\linewidth}
-		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/Android/DescrBP.png}
-		\end{center}
+	\caption{Détail news}
 	\end{minipage}
 \end{figure}
 \vfill
 \clearpage
 
-\underline{Page informations}\\
-Dans cette section, l'onglet actif est l'onglet "Infos".
-La page information présente sur la même page deux liens cliquables et une description du Grand Cercle de Grenoble INP.
-\vfill
+\underline{Pages bons plans et page informations}\\
 \begin{figure}[htbp]
-	\begin{minipage}[c]{.50\linewidth}
+	\begin{minipage}[c]{.33\linewidth}
+		\begin{center}
+			\includegraphics[scale=0.3]{../../Sketch/Android/BP.png}
+		\end{center}
+	\caption{Liste bons plans}
+	\end{minipage}
+	\begin{minipage}[c]{.33\linewidth}
+		\begin{center}
+			\includegraphics[scale=0.3]{../../Sketch/Android/DescrBP.png}
+		\end{center}
+	\caption{Détail bon plan}
+	\end{minipage}
+	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Infos.png}
 		\end{center}
+	\caption{Page infos}
 	\end{minipage}
 \end{figure}
 
 \underline{Pages paramètres}\\
-Dans cette section, l'onglet actif est l'onglet "Paramètres". 
-Pour sauvegarder ses préférences, il est nécessaire d'appuyer sur le bouton "OK" avant de quitter la fenêtre. La sauvegarde est effectuée au moment de l'appui sur ce bouton
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Param.png}
 		\end{center}
+	\caption{Page paramètres}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Filtre.png}
 		\end{center}
+	\caption{Choix association}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{.32\linewidth}
 		\begin{center}
 			\includegraphics[scale=0.3]{../../Sketch/Android/Design.png}
 		\end{center}
+	\caption{Choix thème}
 	\end{minipage}
 \end{figure}
 \vfill
