@@ -44,7 +44,7 @@ public abstract class Item {
 
 	@Override
 	public String toString() {
-		return "[title=" + title + "description=" + description + "]";
+		return "[title=" + title + "]";
 	}
 	
 }

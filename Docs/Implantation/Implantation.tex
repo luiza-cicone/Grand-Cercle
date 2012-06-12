@@ -306,7 +306,12 @@ Les sketch concernant les autres pages de l'application sont disponibles en anne
 \subsection{Conception logicielle}
 
 \subsubsection{Architecture logicielle}
-L'architecture utilisée pour les deux applications est l'architecture Modèle-Vue-Contrôleur qui à été facilement mise en œuvre avec les frameworks Android pour Java et Cocoa Touch pour Objective-C.
+L'architecture utilisée pour les deux applications est l'architecture Modèle-Vue-Contrôleur qui à été facilement mise en œuvre avec les frameworks Android pour Java et Cocoa Touch pour Objective-C. Voici le diagramme correspondant :
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.3]{MVC.png}
+\end{center}
+\end{figure}
 
 L'application réalisée ne peut exister sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parsers qui agissent sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.\\
 

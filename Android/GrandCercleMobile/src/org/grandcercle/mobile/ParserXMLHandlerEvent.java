@@ -7,6 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+import android.util.Log;
 
 /*
  * Parser sur les événements
@@ -228,6 +229,7 @@ public class ParserXMLHandlerEvent extends ParserXMLHandler {
 		}
 		if (localName.equalsIgnoreCase(NODE)){
 			// correspond aux préférences ?
+			Log.d("ParserEvent",currentEvent.toString());
 			if (listPref.contains(currentEvent.getGroup()) && listType.contains(currentEvent.getType())) {
 				listEvent.add(currentEvent);
 				if (hashEvent.containsKey(currentEvent.getEventDate())) {
