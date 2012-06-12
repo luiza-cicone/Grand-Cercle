@@ -169,7 +169,6 @@ public class Event extends Item {
 
 	@Override
 	public String toString() {
-		return "Event [type=" + type + ", day=" + day + ", date=" + date + ", time=" + time + 
-				", lieu=" + lieu + "paf=" + paf + "]" + super.toString();
+		return super.toString();
 	}
 }

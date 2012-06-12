@@ -19,11 +19,22 @@ int borneSup = 0;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+
+        [self loadData];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveTestNotification:) 
+                                                     name:@"ReloadData"
+                                                   object:nil];
+    }
     
+    return self;
+}
+
+-(void) loadData {
     EventsParser *ep = [EventsParser instance];
     borneSup = MIN(4, [ep.arrayEvents count]);
     
-    if (self) {
         tabLabel = [[[NSMutableArray alloc] initWithCapacity:4] autorelease];
         tabImage = [[[NSMutableArray alloc] initWithCapacity:4] autorelease];
         
@@ -52,10 +63,13 @@ int borneSup = 0;
             label = (UILabel *)[self.view viewWithTag:i+5];
             [label setText: @""];
         }
+}
 
+- (void) receiveTestNotification:(NSNotification *) notification
+{    
+    if ([[notification name] isEqualToString:@"ReloadData"]){
+        [self loadData];
     }
-    
-    return self;
 }
 
 - (void)viewDidLoad

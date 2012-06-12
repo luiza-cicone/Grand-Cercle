@@ -17,7 +17,6 @@
     TKImageCache *imageCache, *imageCache2;
     IBOutlet UITableView *tView;
     EventsViewController *superController;
-
 }
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *eventCell;
@@ -26,4 +25,6 @@
 @property (retain, nonatomic) TKImageCache *imageCache, *imageCache2;
 @property (retain, nonatomic) IBOutlet UITableView *tView;
 @property (retain, nonatomic) EventsViewController *superController;
+
+-(void)loadData;
 @end
