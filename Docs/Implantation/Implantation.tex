@@ -215,7 +215,7 @@ Dans l'affichage liste des événements (Fig. \ref{even_liste}) il y a les évé
 \begin{figure}[htbp]
 	\begin{minipage}[c]{.33\linewidth}
 		\begin{center}
-			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_liste.png}
+			\includegraphics[scale=0.3]{../../Sketch/iOS/evenements_calendar.png}
 		\end{center}
 	\caption{Calendrier}
 	\label{calendar}
@@ -329,14 +329,13 @@ L'application réalisée ne peut exister sans que le site du Grand Cercle ne soi
  Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
 \subsubsection{iOS}
-Pour Objective-C, les classes sont séparées dans les fichiers header (extension \texttt{.h}) et les fichiers d'implémentation (extension \texttt{.m})
-Les classes qui correspondent au modèle contiennent les attributs et les mutateurs comme dans le modèle objet présenté dans la figure \ref{modele_objet}. Les classes de la vue sont les fichiers avec l'extension \texttt{.xib} qui sont des fichiers de type \texttt{xml}. Ces fichiers peuvent être créés et édités facilement grâce à l'interface graphique fournie par Xcode. Toutes les vues sont contrôlées par des classes \texttt{ViewController} qui font la connexion entre les objets et les données des contrôleurs.
+Concernant Objective-C, les classes sont séparées dans les fichiers header (extension \texttt{.h}) et les fichiers d'implémentation (extension \texttt{.m}).
+Les classes qui correspondent au modèle contiennent les attributs comme dans le modèle objet présenté dans la figure \ref{modele_objet}, ainsi que des mutateurs et des accesseurs pour ces attributs. La pluspart des classes concernant les différentes vues de l'application sont des fichiers avec l'extension \texttt{.xib} qui sont des fichiers de type \texttt{xml}. Ces fichiers peuvent être créés et édités facilement grâce à l'interface graphique fournie par Xcode. Toutes les vues sont contrôlées par des classes \texttt{ViewController} qui font la connexion entre les objets et les données des contrôleurs.
 Les classes du contrôleur sont les classes pour récupérer, parser et filtrer les données.\\
 
 {\bf Patrons de conception}
 
 Pour toutes les classes contrôleur nous avons utilisé le \texttt{Singleton} pour s'assurer d'avoir une seule instance qui effectue les traitements des données.
-
 
 Nous avons utilisé aussi quelques autres patrons de conception fournis par le framework et Xcode. \\
 \begin{itemize}
@@ -375,16 +374,16 @@ Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pou
 {\bf Préférences}
 
 Pour sauvegarder les préférences nous avons utilisé le dictionnaire par défaut de l'application 
-\texttt{[NSUserDefaults standardUserDefaults]}. A la clé choisie il y un pointer vers: un dictionnaire pour les filtres ou un vecteur pour le choix de thème. Pour le filtre de cercle, club et type nous avons un dictionnaire des booléens où la clé est le nom du cercle, du club ou du type. La couleur du thème est sauvegardé en RGB dans un vecteur de taille 3. 
+\texttt{[NSUserDefaults standardUserDefaults]}. Pour la clé choisie il y un pointeur vers un dictionnaire pour les filtres ou un vecteur pour le choix du thème. Pour le filtre cercle, club et type nous avons un dictionnaire de booléens où la clé est le nom du cercle, club ou type. La couleur du thème est sauvegardé en RGB dans un vecteur de taille 3. 
  
 {\bf Cache des images}
 
-Chaque fois qu'on trouve une nouvelle image à télécharger, on la met dans une queue et on lasauvegarde dans la mémoire lorsqu'elle est disponible. On garde un dictionnaire ayant comme clé le hash(signature des données) de l'URL de l'image. Le téléchargement est fait dans un thread et une notification est envoyée pour mettre à jour l'affichage.
+Chaque fois que l'on trouve une nouvelle image à télécharger, on la place dans une file d'attente et on la sauvegarde dans la mémoire lorsqu'elle est disponible. On garde un dictionnaire ayant comme clé de hashage (signature des données) l'URL de l'image. Le téléchargement est fait dans un thread et une notification est envoyée pour mettre à jour l'affichage.
 
 {\bf Librairies externes}
 
 Pour parser l'information provenant du fichier \texttt{XML} nous avons utilisé la librairie \texttt{TBXML} qui d'après les critiques est la plus rapide et la plus adaptée a nos besoins. De plus, une classe avec des extensions pour \texttt{NSString} est utilisée pour décoder les entités \texttt{HTML}\\
-\indent On se sert de la librairie \texttt{tapuku} pour la gestion du cache des images et pour le calendrier. Des changements ont étés fait au calendrier pour factoriser le code et pouvoir contrôler la taille du calendrier facilement.
+\indent On utilise la librairie \texttt{tapuku} pour la gestion du cache et du calendrier. Des changements ont été fait au calendrier pour factoriser le code et pouvoir contrôler la taille du calendrier facilement.
 Une simple classe appellée \texttt{Reachability} offre les fonctionnalités pour tester la connexion internet de l'utilisateur et permet d'agir en conséquence.
 
 
@@ -413,7 +412,7 @@ Afin de pouvoir réaliser la fonctionnalité d'import d'un événement au calend
 \section{Validation}
 Les deux applications ont été validées suivant une démarche commune afin d'assurer un niveau de qualité équivalent d'une application à l'autre.
 
-Certains tests ont été réalisés au fur et à mesure du développement des applications, d'autres ont été effectués sur des prototypes fonctionnels et enfin la version finale des deux application a été évaluée par un panel d'utilisateurs potentiels.
+Certains tests ont été réalisés au fur et à mesure du développement des applications, d'autres ont été effectués sur des prototypes fonctionnels et enfin la version finale des deux applications a été évaluée par un panel d'utilisateurs potentiels.
 
 \subsection{Tests unitaires}
 Chaque module a été testé grâce à des tests unitaires. Majoritairement, ces tests consistent à envoyer en entrée du module un cas de test spécifique, de tracer le module afin de vérifier qu'au cours de l’exécution rien d'anormal ne se produit, et de récupérer en sortie un résultat que l'on compare au résultat attendu. Les tests spécifiques sont pour la plupart des tests dits "boite blanche".
@@ -432,7 +431,7 @@ Afin de vérifier la conformité de nos différents prototypes avec les besoins 
 Nous avons mis en place un protocole d'évaluation qui nous a permis de toujours demander à ces utilisateurs potentiels d'effectuer les mêmes manipulations dans l'application et d'observer leur réactions. Pour prendre en compte leurs remarques et ne pas en oublier, nous avons procédé à des enregistrements vidéo de ces tests.\\
 Pour enrichir l'application, nous avons créé une URL de test sur le site du \texttt{Grand Cercle} afin de faire afficher un grand nombre d'événements dans l'application et de rendre le test plus réaliste.\\
 
-Le protocole est fourni en annexe \ref{protocole}, il reprend la totalité des fonctionnalités implémentée dans notre application, et comprend des manipulations très simple pour commencer ainsi que des tâches jugées plus difficile à réaliser pour finir.
+Le protocole est fourni en annexe \ref{protocole}, il reprend la totalité des fonctionnalités implémentée dans notre application, et comprend des manipulations concernant les événements pour commencer ainsi que des tâches concernant les autres fonctionnalités pour finir.
 
 
 \appendix
@@ -600,7 +599,7 @@ Pour sauvegarder ses préférences, il est nécessaire d'appuyer sur le bouton "
 \textbf{4}. Y a-t-il un événement le 15 Novembre ?
   \\
 
-\textbf{5}. Trouves un jour en Novembre où il y a un événement ?	
+\textbf{5}. Trouve un jour en Novembre où il y a un événement ?	
   \\
 
 \textbf{6}. Trouve l’événement le plus éloigné en date ?	
