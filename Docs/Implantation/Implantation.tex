@@ -191,12 +191,12 @@ La technologie Android repose sur la dualité entre la langage \texttt{Java} et 
 {\bf Patrons de conception}
 
 \begin{itemize}
-	\item {\bf Singleton} a été mis en œuvre pour notre base de donnée, afin de s'assurer qu'elle n'est instanciée qu'une seule fois et ainsi d'assurer un traitement des données cohérent pour toute l'application.\\
+	\item {\bf Singleton} a été mis en œuvre pour notre base de données, afin de s'assurer qu'elle n'est instanciée qu'une seule fois et ainsi d'assurer un traitement des données cohérent pour toute l'application.\\
 	\item {\bf Commande} est le patron utilisé pour rediriger l'exécution quand un événement apparaît (exemple : appui sur une zone de l'écran, sur un bouton, \dots)\\
-	\item {\bf Observateur} est utilisé lorsque les préférences sont modifiées par l'utilisateur. Il se résume a un seul appel à la méthode \texttt{ParseEvent()} afin d'actualiser les données affichées et stockées, étant donné que les données qui ne correspondent pas aux préférences n'ont pas de raison d'être stockées dans les structures de données appropriées.
+	\item {\bf Observateur} est utilisé lorsque les préférences sont modifiées par l'utilisateur. Il se résume à un seul appel à la méthode \texttt{ParseEvent()} afin d'actualiser les données affichées et stockées, étant donné que les données qui ne correspondent pas aux préférences n'ont pas de raison d'être stockées dans les structures de données appropriées.
 	\item {\bf Fabrique} est nécéssaire pour construire une instance du parser SAX qui permet de récupérer les données.
 \end{itemize}
-Dans l'application Android, nous avons préféré utilisé un parser SAX plutôt qu'un DOM, puisque le SAX est plus rapide que le DOM (cf \href{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}).
+Dans l'application Android, nous avons préféré utiliser un parser SAX plutôt qu'un DOM, puisque le SAX est plus rapide que le DOM (cf \href{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}{http://www.developer.com/ws/android/development-tools/Android-XML-Parser-Performance-3824221-2.htm}).
 
 
 
@@ -204,7 +204,7 @@ Notre application témoigne d'une volonté de simplicité et de rapidité auprè
 
 \section{Mise en œuvre}
 
-L'application réalisée ne peut existée sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parsers qui agissent sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.
+L'application réalisée ne peut exister sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parsers qui agissent sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.
 
 \noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
 \begin{itemize}
@@ -215,9 +215,9 @@ L'application réalisée ne peut existée sans que le site du Grand Cercle ne so
 \end{itemize}
 
 \vspace{0.5cm}
-\noindent Un des points importants de la récupération de donnée est la présence ou non de connexion internet: 
+\noindent Un des points importants de la récupération de données est la présence ou non de connexion internet: 
 \begin{itemize}
-\item soit une connexion internet est disponible. Dans ce cas on sauvegarde les fichiers xml en provenance du site dans la mémoire et on parse ces fichiers qui sont alors contenues dans la mémoire interne du téléphone.
+\item soit une connexion internet est disponible. Dans ce cas on sauvegarde les fichiers xml en provenance du site dans la mémoire et on parse ces fichiers qui sont alors contenus dans la mémoire interne du téléphone.
 \item soit aucune connexion n'est possible et dans ce cas, on parse les données qui sont dans la mémoire, sauvegardées lors de connexions antérieures.\\
 \end{itemize}
 
@@ -226,7 +226,7 @@ L'application réalisée ne peut existée sans que le site du Grand Cercle ne so
 
 \subsection{iOS}
 {\bf Parser}
-Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pour ne pas bloquer l'interface utilisateur. Quand l'information est disponible une notification est envoyé et la mise à jour de l'affichage est faite.
+Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pour ne pas bloquer l'interface utilisateur. Quand l'information est disponible une notification est envoyée et la mise à jour de l'affichage est faite.
 
 
 {\bf Préférences}
@@ -240,9 +240,9 @@ Chaque fois que l'on trouve une nouvelle image à télécharger, on la place dan
 
 {\bf Librairies externes}
 
-Pour parser l'information provenant du fichier \texttt{XML} nous avons utilisé la librairie \texttt{TBXML} qui d'après les critiques est la plus rapide et la plus adaptée a nos besoins. De plus, une classe avec des extensions pour \texttt{NSString} est utilisée pour décoder les entités \texttt{HTML}\\
-\indent On utilise la librairie \texttt{tapuku} pour la gestion du cache et du calendrier. Des changements ont été fait au calendrier pour factoriser le code et pouvoir contrôler la taille du calendrier facilement.
-Une simple classe appellée \texttt{Reachability} offre les fonctionnalités pour tester la connexion internet de l'utilisateur et permet d'agir en conséquence.
+Pour parser l'information provenant du fichier \texttt{XML} nous avons utilisé la librairie \texttt{TBXML} qui d'après les critiques est la plus rapide et la plus adaptée à nos besoins. De plus, une classe avec des extensions pour \texttt{NSString} est utilisée pour décoder les entités \texttt{HTML}.\\
+\indent On utilise la librairie \texttt{tapuku} pour la gestion du cache et du calendrier. Des changements ont été faits au calendrier pour factoriser le code et pouvoir contrôler la taille du calendrier facilement.
+Une simple classe appelée \texttt{Reachability} offre les fonctionnalités pour tester la connexion internet de l'utilisateur et permet d'agir en conséquence.
 
 
 \subsection{Android}
@@ -251,7 +251,7 @@ Nous avons utilisé un thread pour parser les informations de l'\texttt{XML} pou
 
 
 {\bf Préférences}
-Pour sauvegarder les préférences, une base de donnée \texttt{SQLite} a été employée. Chaque préférence (par cercle, par club, par type et le thème) est stockée dans une table différente.
+Pour sauvegarder les préférences, une base de données \texttt{SQLite} a été employée. Chaque préférence (par cercle, par club, par type et le thème) est stockée dans une table différente.
  
 {\bf Cache des images}
 
@@ -270,7 +270,7 @@ Afin de pouvoir réaliser la fonctionnalité d'import d'un événement au calend
 \section{Validation}
 Les deux applications ont été validées suivant une démarche commune afin d'assurer un niveau de qualité équivalent d'une application à l'autre.
 
-Certains tests ont été réalisés au fur et à mesure du développement des applications, d'autres ont été effectués sur des prototypes fonctionnels et enfin la version finale des deux applications a été évaluée par un panel d'utilisateurs potentiels.
+Certains tests ont été réalisés au fur et à mesure du développement des applications. D'autres ont été effectués sur des prototypes fonctionnels et enfin la version finale des deux applications a été évaluée par un panel d'utilisateurs potentiels.
 
 \subsection{Tests unitaires}
 Chaque module a été testé grâce à des tests unitaires. Majoritairement, ces tests consistent à envoyer en entrée du module un cas de test spécifique, de tracer le module afin de vérifier qu'au cours de l’exécution rien d'anormal ne se produit, et de récupérer en sortie un résultat que l'on compare au résultat attendu. Les tests spécifiques sont pour la plupart des tests dits "boite blanche".
@@ -289,7 +289,7 @@ Afin de vérifier la conformité de nos différents prototypes avec les besoins 
 Nous avons mis en place un protocole d'évaluation qui nous a permis de toujours demander à ces utilisateurs potentiels d'effectuer les mêmes manipulations dans l'application et d'observer leur réactions. Pour prendre en compte leurs remarques et ne pas en oublier, nous avons procédé à des enregistrements vidéo de ces tests.\\
 Pour enrichir l'application, nous avons créé une URL de test sur le site du \texttt{Grand Cercle} afin de faire afficher un grand nombre d'événements dans l'application et de rendre le test plus réaliste.\\
 
-Le protocole est fourni en annexe \ref{protocole}, il reprend la totalité des fonctionnalités implémentée dans notre application, et comprend des manipulations concernant les événements pour commencer ainsi que des tâches concernant les autres fonctionnalités pour finir.
+Le protocole est fourni en annexe \ref{protocole}, il reprend la totalité des fonctionnalités implémentées dans notre application, et comprend des manipulations concernant les événements pour commencer ainsi que des tâches concernant les autres fonctionnalités pour finir.
 
 
 \appendix
