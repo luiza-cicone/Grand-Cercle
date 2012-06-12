@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Grand Cercle Mobile</string>
+    <string name="app_name">Grand Cercle</string>
     <string name="tabEvent">Evenements</string>
     <string name="tabNews">News</string>
     <string name="tabBP">Bons Plans</string>
