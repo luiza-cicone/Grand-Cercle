@@ -38,13 +38,18 @@
 			android:id="@+id/Clubs"
 			android:text="Clubs" />
 	 
-		<ImageView android:src="@drawable/list_item_arrow"
-			android:layout_weight="0" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+		<ImageView 
+		    android:src="@drawable/list_item_arrow"
+			android:layout_weight="0" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/desc"/>
 	</LinearLayout>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_height="55dp"
-		android:layout_width="fill_parent" android:gravity="center_vertical|left"
+		android:orientation="horizontal" 
+		android:layout_height="55dp"
+		android:layout_width="fill_parent" 
+		android:gravity="center_vertical|left"
 		>	
 		<TextView android:layout_height="wrap_content"
 			android:layout_weight="1" android:textAppearance="@style/ListItemTextStyle"
@@ -52,31 +57,39 @@
 			android:id="@+id/Types"
 			android:text="Types" />
 	 
-		<ImageView android:src="@drawable/list_item_arrow"
-			android:layout_weight="0" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+		<ImageView 
+		    android:src="@drawable/list_item_arrow"
+			android:layout_weight="0" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/desc" />
  	</LinearLayout>
  	<TextView 
  	    android:id="@+id/bandeau2"
  	    android:layout_width="fill_parent"
- 	    android:layout_height="35dp"
- 	    android:text="Choisissez le thème de l'application"
+ 	    android:layout_height="50dp"
+ 	    android:text="@string/interfacePerso"
  	    android:textAppearance="?android:attr/textAppearanceMedium"
  	    android:layout_marginTop="30dp"
  	    android:gravity="center_vertical|center_horizontal"/>
  	
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_height="55dp"
-		android:layout_width="fill_parent" android:gravity="center_vertical|left"
+		android:orientation="horizontal" 
+		android:layout_height="55dp"
+		android:layout_width="fill_parent" 
+		android:gravity="center_vertical|left"
 		>
 		<TextView android:layout_height="wrap_content"
-			android:layout_weight="1" android:textAppearance="@style/ListItemTextStyle"
+			android:layout_weight="1" 
+			android:textAppearance="@style/ListItemTextStyle"
 			android:layout_width="fill_parent" 
 			android:id="@+id/Design"
-			android:text="Design" />
+			android:text="@string/Theme" />
 	 
 		<ImageView android:src="@drawable/list_item_arrow"
-			android:layout_weight="0" android:layout_width="wrap_content"
+			android:layout_weight="0" 
+			android:layout_width="wrap_content"
+			android:contentDescription="@string/desc"
 			android:layout_height="wrap_content" />	
 	</LinearLayout>
 </LinearLayout>

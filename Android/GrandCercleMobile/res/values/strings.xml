@@ -18,6 +18,8 @@
     <string name="JauneCPP">Jaune CPP</string>
     <string name="VioletEsisar">Violet Esisar</string>
     <string name="Ajouter">Ajouter</string>
+    <string name="interfacePerso">Personnaliser l\'interface de l\'application</string>
+    <string name="Theme">Thème</string>
     
     <string-array name="prefentries">
         <item >Item 1</item>
