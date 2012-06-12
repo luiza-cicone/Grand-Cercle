@@ -279,9 +279,8 @@ BOOL changed = 0;
     // Si quelquechose a été changé, on reparse les événements
     if (changed == 1) {
         [[EventsParser instance] loadEventsFromFile];
-        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"changedEvents"];
+        changed = 0;
     }
-    changed = 0;
 
     // Validation des nouvelles préférences
     [[NSUserDefaults standardUserDefaults] synchronize];

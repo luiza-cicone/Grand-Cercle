@@ -206,7 +206,14 @@ static EventsParser *instanceEvent = nil;
         if (tbxml.rootXMLElement)
             [self handleEvents:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement] toArray:arrayOldEvents withFilter:1];
     }
+    
+    // notification a la fin pour recharger la vue
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadData" object:self];
 }
+
+/****************************************************************************************
+ * Méthode de parsage des données a partir d'un string utilisé pour les tests unitaires *
+ ***************************************************************************************/
 -(void) loadEventsFromString: (NSString *) xmlString toArray: (NSMutableArray *) array {
     
     // Initialisation des tableaux contenant les événements
