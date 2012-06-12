@@ -122,7 +122,7 @@ keepaspectratio]{background.jpg}%
 $ $\\
 \large{ \textbf{Luiza CICONE - Jérémy KREIN - Jérémy LUQUET - Paul MAYER}}\\
 \large{ \textbf{ISI - IF}}\\
-\large{ \textbf{Professeur coordonnateur : Gaëlle CALVARY}}
+\large{ \textbf{Tutrice : Gaëlle CALVARY}}
 
 $ $\\
 \end{center}
@@ -145,16 +145,16 @@ $ $\\
 
 \section{Installation de l'application iOS}
 \subsection{Installation pour la maintenance}
-Pour effectuer la maintenance de l'application iOS, il est nécessaire de posséder un Mac munit du logiciel Xcode, disponible sur l'Apple Store. 
+Pour effectuer la maintenance de l'application iOS, il est nécessaire de posséder un Mac muni du logiciel Xcode, disponible sur l'Apple Store. 
 Il est possible d'installer les différentes versions des simulateurs iOS pour pouvoir tester sur les différentes versions de l'OS (4.3, 5.0, 5.1). Il n'est plus possible de compiler l'application pour les versions plus anciennes d'OS.
 
 Dans le dossier iOS se trouve le projet \lstinline!Grand Cercle.xcodeproj! qui s'ouvre automatiquement avec Xcode.
 
 \subsection{Installation pour l'utilisateur}
-L'application sera disponible sur l'Apple Store, donc les utilisateurs pourront la télécharger et l'installer comme tout autre application.
+L'application sera disponible sur l'Apple Store, donc les utilisateurs pourront la télécharger et l'installer comme toute autre application.
 
-Une autre manière pour installer l'application est de connecter l'iPhone (3GS, 4 et 4S) ou l'iPod (4eme génération) à l'ordinateur avec un câble USB. Dans Xcode il faut choisir la Scheme le nom du dispositif et appuyer sur Run pour compiler et rouler le projet.
-Dans ce cas, il est nécessaire d'avoir un profil de développeur Apple et d'associer dans un Provisioning Profile cet profil avec l'UDID du dispositif sur \texttt{http://developer.apple.com/devcenter/ios}. Après le télécharger, il faut l'ajouter en Xcode (se fait automatiquement en l'ouvrant). Dans le Target Grand Cercle, sous le Code Signing Identity il faut choisir le profil de développeur correspondant.
+Une autre manière d'installer l'application est de connecter l'iPhone (3GS, 4 et 4S) ou l'iPod (4ème génération) à l'ordinateur avec un câble USB. Dans Xcode il faut choisir la \og Scheme \fg le nom du dispositif et appuyer sur Run pour compiler et lancer le projet.
+Dans ce cas, il est nécessaire d'avoir un profil de développeur Apple et d'associer dans un Provisioning Profile ce profil avec l'UDID du dispositif sur \texttt{http://developer.apple.com/devcenter/ios}. Après l'avoir téléchargé, il faut l'ajouter dans Xcode (se fait automatiquement en l'ouvrant). Dans la cible Grand Cercle (sous le Code Signing Identity), il faut choisir le profil de développeur correspondant.
 
 
 \section{Installation de l'application Android}
@@ -163,7 +163,10 @@ Pour effectuer la maintenance de l'application Android, il est nécessaire de di
 
 Pour tester directement l'application sur un ordinateur, le \texttt{plugin ADT} propose des émulateurs qui permettent de simuler des téléphones ou tablettes qui mettent en oeuvre différentes versions d'Android.
 
-Cependant il est important de noter que les différents émulateurs proposés ne permettent pas de tester toutes les fonctionnalités de notre application. En effet, l'import d'un événement dans le calendrier du téléphone n'est pas géré par les émulateurs. Cette fonctionnalité doit donc être testée directement sur un téléphone sous Android. Ceci peut être réalisé en reliant directement le téléphone à l'ordinateur via un câble \texttt{USB}.
+Cependant il est important de noter que les différents émulateurs proposés ne permettent pas de tester toutes les fonctionnalités de notre application. En effet, l'import d'un événement dans le calendrier du téléphone n'est pas géré par les émulateurs. Cette fonctionnalité doit donc être testée directement sur un téléphone sous Android. Ceci peut être réalisé en reliant directement le téléphone à l'ordinateur via un câble \texttt{USB}.\\
+
+Dans tous les cas, la personne en charge de la maintenance devra au minimum avoir installé le Software Developer Kit(SDK) \texttt{Android 1.6 (API 4)}. En effet, nous signalons dans le fichier AndroidManifest.xml qui gère toutes les activités de l'application, que la version minimale sur laquelle cette dernière peut fonctionner est Android $1.6$.\\
+
 
 Pour pouvoir éditer le code source, il suffit d'importer le répertoire GrandCercleMobile dans un nouveau projet dans \texttt{eclipse}.
 \subsection{Installation pour l'utilisateur}

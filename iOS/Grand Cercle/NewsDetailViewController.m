@@ -9,83 +9,98 @@
 #import "NewsDetailViewController.h"
 #import "NSString+HTML.h"
 
+// Section
 #define TITRE 0
 #define DESCRIPTION 1
 
 @implementation NewsDetailViewController
 @synthesize news, cellNewsDescription, cellNewsTop;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+/****************************
+ * Initialisation de la vue *
+ ***************************/
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void)viewDidLoad
-{
+/************************
+ * Chargement de la vue *
+ ***********************/
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = NSLocalizedString(@"News", @"News");
-
     webViewHeight = 0;
 
+    // Définition du webview qui sera delegate ici
     [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
-    
     UIWebView *webView;
     webView = (UIWebView *)[cellNewsDescription viewWithTag:1];
     webView.delegate = self;
     [webView loadHTMLString:news.description baseURL:nil];
-    
 }
 
+/************************
+ * Apparition de la vue *
+ ***********************/
+- (void)viewDidAppear:(BOOL)animated {
+    // Récupération des préférences utilisateurs
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    NSArray *c = [defaults objectForKey:@"theme"];
+    // Coloration de la barre supérieure avec la
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+}
 
-
-- (void)viewDidUnload
-{
+/**************************
+ * Déchargement de la vue *
+ *************************/
+- (void)viewDidUnload {
+    // Destruction des structures
     [cellNewsDescription release];
     cellNewsDescription = nil;
     [cellNewsTop release];
     cellNewsTop = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+/****************************************************************
+ * Maintient de la vue verticale en cas de rotation du téléphone*
+ ***************************************************************/
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+/**********************************
+ * Retourne le nombre de sections *
+ *********************************/
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
+/*******************************************
+ * Retourne le nombre de rows par sections *
+ ******************************************/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/*************************************
+ * Construction des différentes rows *
+ ************************************/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier;
     UITableViewCell *cell = nil;
     
     switch (indexPath.section) {
-            
+        
+        // Première section
         case TITRE:
+            
+            // Mise en place de la cellule de titre
             CellIdentifier = @"NewsTopCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -94,6 +109,7 @@
                 self.cellNewsTop = nil;
             }
             
+            // Chargement de l'image de la news
             UIImageView *imageView;
             imageView = (UIImageView *)[cell viewWithTag:1];
             NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[news logo]]];
@@ -101,15 +117,19 @@
             [data release];
             [imageView setImage:myimage2];
             [myimage2 release];
+            
+            // Chargement des labels
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [news title]];
-            
             label = (UILabel *)[cell viewWithTag:3];
             [label setText:[news pubDate]];
             break;
             
+        // Deuxième section
         case DESCRIPTION:
+            
+            // Mise en place de la cellule description de la news
             CellIdentifier = @"DescriptionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -118,6 +138,7 @@
                 self.cellNewsDescription = nil;
             }
             
+            // Initialisation du webView
             UIWebView *webView;
             webView = (UIWebView *)[cell viewWithTag:1];
             webView.delegate = self;
@@ -132,31 +153,45 @@
     return cell;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
+/***********************************
+ * Fin du chargement de la webView *
+ **********************************/
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
     
+    // Calcul de la taille pour la webView
     [[NSBundle mainBundle] loadNibNamed:@"NewsDescriptionCell" owner:self options:nil];
     NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
     [webView setFrame:CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, [output intValue])];
+    
+    // On met en place la bonne taille pour la webView
     if (webViewHeight == 0) {
         webViewHeight = [output intValue];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
+
+/********************************
+ * Disparition future de la vue *
+ *******************************/
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     webViewHeight = 0;
 }
 
+/************************************************************************
+ * Ouvrir un lien dans une nouvelle fenêtre, celle du navigateur safari *
+ ***********************************************************************/
 -(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
     if ( inType == UIWebViewNavigationTypeLinkClicked ) {
         [[UIApplication sharedApplication] openURL:[inRequest URL]];
         return NO;
     }
-    
     return YES;
 }
 
+/************************************
+ * Retourne la hauteur des sections *
+ ***********************************/
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     switch (indexPath.section) {
@@ -174,59 +209,9 @@
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-}
-
+/***************
+ * Destructeur *
+ **************/
 - (void)dealloc {
     [cellNewsDescription release];
     [cellNewsTop release];

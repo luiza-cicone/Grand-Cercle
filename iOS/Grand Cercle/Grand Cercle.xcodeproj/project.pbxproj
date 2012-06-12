@@ -878,7 +878,7 @@
 		2595EADB1573FA9000CA27B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Luiza Cicone (C9MN9UWWVM)";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
@@ -899,7 +899,7 @@
 		2595EADC1573FA9000CA27B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Luiza Cicone (C9MN9UWWVM)";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
