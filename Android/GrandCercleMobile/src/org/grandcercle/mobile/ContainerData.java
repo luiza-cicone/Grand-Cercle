@@ -48,7 +48,7 @@ public class ContainerData {
 	private static String URL_CLUBS = "http://www.grandcercle.org/clubs/data.xml";
 	private static String URL_TYPES = "http://www.grandcercle.org/types/data.xml";
 	private static String URL_NEWS = "http://www.grandcercle.org/news/data.xml";
-	private static String URL_EVENT = "http://www.grandcercle.org/evenements/data.xml";
+	private static String URL_EVENT = "http://www.grandcercle.org/test/evenements/data.xml";
 	private static String URL_EVENTOLD = "http://www.grandcercle.org/evenements/data-old.xml";
 	private static String URL_BP = "http://www.grandcercle.org/bons-plans/data.xml";
 	
