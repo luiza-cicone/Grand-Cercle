@@ -152,26 +152,6 @@ Le diagramme suivant représente la modélisation objet du domaine d'application
 \subsubsection{Architecture logicielle}
 L'architecture utilisé pour les deux applications est l'architecture Modèle-Vue-Contrôleur qui à été facilement mise en œuvre avec les frameworks Android pour Java et Cocoa Touch pour Objective-C.
 
-L'application réalisée ne peut existée sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parsers qui agissent sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.\\
-
-\noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
-\begin{itemize}
-\item récupération des données sur le site
-\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences.
-\item initialisation de toutes les autres structures de données (listes des données relatives aux événements, aux news, aux bons plans).
-\item initialisation des préférences (dictionnaire pour iOS et base de donnée pour Android)
-\end{itemize}
-
-\vspace{0.5cm}
-\noindent Un des points importants de la récupération de donnée est la présence ou non de connexion internet: 
-\begin{itemize}
-\item soit une connexion internet est disponible. Dans ce cas on sauvegarde les fichiers xml en provenance du site dans la mémoire et on parse ces fichiers qui sont alors contenues dans la mémoire interne du téléphone.
-\item soit aucune connexion n'est possible et dans ce cas, on parse les données qui sont dans la mémoire, sauvegardées lors de connexions antérieures.
-\end{itemize}
-
-\noindent Lors de la première utilisation de l'application, un message est affiché à l'utilisateur s'il n'est pas connecté à internet pour lui indiquer qu'aucune donnée n'a pu être chargée (mais l'application se lance correctement).
- Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
-
 \subsubsection{iOS}
 Pour Objective-C, les classes sont séparées dans les fichiers header (extension \texttt{.h}) et les fichiers d'implémentation (extension \texttt{.m})
 Les classes qui correspondent au modèle contiennent les attributs et les mutateurs comme dans le modèle objet présenté dans la figure \ref{modele_objet}. Les classes de la vue sont les fichiers avec l'extension \texttt{.xib} qui sont des fichiers de type \texttt{xml}. Ces fichiers peuvent être crées et édités facilement grâce à l'interface graphique fournie par Xcode. Tous les vues sont contrôlés par des classes \texttt{ViewController} qui font la connexion entre les objets et les données des contrôleurs.
@@ -207,9 +187,29 @@ Dans l'application Android, nous avons préféré utilisé un parser SAX plutôt
 
 
 
-Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \textt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. Le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
+Notre application témoigne d'une volonté de simplicité et de rapidité auprès des utilisateurs. Ainsi, la classe \texttt{DragableSpace.java} permet de \og slider \fg afin de limiter le nombre d'onglets. Le changement de vue n'est réalisé que si l'utilisateur effectue le slide assez rapidement.
 
 \section{Mise en œuvre}
+
+L'application réalisée ne peut existée sans que le site du Grand Cercle ne soit tenu à jour. Nous récupérons ainsi toutes les données présentes sur ce site à l'aide de cinq parsers qui agissent sur cinq fichiers xml différents en même temps que l'affichage d'accueil à l'aide de threads.
+
+\noindent Plusieurs choses sont ainsi réalisées lors de cette phase:
+\begin{itemize}
+\item récupération des données sur le site
+\item création des listes de clubs, de cercles et de types d'événements, nécessaire pour la gestion des préférences.
+\item initialisation de toutes les autres structures de données (listes des données relatives aux événements, aux news, aux bons plans).
+\item initialisation des préférences (dictionnaire pour iOS et base de donnée pour Android)
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent Un des points importants de la récupération de donnée est la présence ou non de connexion internet: 
+\begin{itemize}
+\item soit une connexion internet est disponible. Dans ce cas on sauvegarde les fichiers xml en provenance du site dans la mémoire et on parse ces fichiers qui sont alors contenues dans la mémoire interne du téléphone.
+\item soit aucune connexion n'est possible et dans ce cas, on parse les données qui sont dans la mémoire, sauvegardées lors de connexions antérieures.\\
+\end{itemize}
+
+\noindent Lors de la première utilisation de l'application, un message est affiché à l'utilisateur s'il n'est pas connecté à internet pour lui indiquer qu'aucune donnée n'a pu être chargée (mais l'application se lance correctement).
+ Lors de l'initialisation de la base de données, aucun filtre n'est appliqué et les données sont récupérées dans leur totalité, l'utilisateur ayant ensuite le choix d'appliquer ou non ces filtres.
 
 \subsection{iOS}
 {\bf Parser}
