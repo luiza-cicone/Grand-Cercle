@@ -60,6 +60,7 @@ public class GCMLaunching extends Activity {
 	    protected void onPostExecute(Void result) {
 	        Intent intent = new Intent(GCMLaunching.this,GCM.class);
 	        GCMLaunching.this.startActivity(intent);
+	        GCMLaunching.this.finish();
 	    }
 		
 		public boolean isConnected() {

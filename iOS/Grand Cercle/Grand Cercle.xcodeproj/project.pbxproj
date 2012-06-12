@@ -890,6 +890,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5D716423-6750-4C7E-B441-4B5E2EB1A4E7";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -910,6 +911,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5D716423-6750-4C7E-B441-4B5E2EB1A4E7";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};

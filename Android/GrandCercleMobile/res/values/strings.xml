@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Grand Cercle Mobile</string>
+    <string name="app_name">Grand Cercle</string>
     <string name="tabEvent">Evenements</string>
     <string name="tabNews">News</string>
     <string name="tabBP">Bons Plans</string>
@@ -18,6 +18,8 @@
     <string name="JauneCPP">Jaune CPP</string>
     <string name="VioletEsisar">Violet Esisar</string>
     <string name="Ajouter">Ajouter</string>
+    <string name="interfacePerso">Personnaliser l\'interface de l\'application</string>
+    <string name="Theme">Thème</string>
     
     <string-array name="prefentries">
         <item >Item 1</item>

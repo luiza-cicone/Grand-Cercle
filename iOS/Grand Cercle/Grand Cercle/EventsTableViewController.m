@@ -23,28 +23,7 @@
         // Custom initialization
     }    
     
-    self.eventArray = [[EventsParser instance] arrayEvents];
-    
-    //configure sections
-    self.eventDico = [[[NSMutableDictionary alloc] init] autorelease];
-    
-    for (int i = 0; i < [self.eventArray count]; i++) {
-        Events *event = [self.eventArray objectAtIndex:i];
-        
-        NSMutableArray *eventsOnThisDay = [self.eventDico objectForKey:event.eventDate];
-        if (eventsOnThisDay == nil) {
-            eventsOnThisDay = [NSMutableArray array];
-            
-            [self.eventDico setObject:eventsOnThisDay forKey:event.eventDate];
-        }
-        [eventsOnThisDay addObject:event];
-        
-    }
-    
-    // print
-//    for (id key in eventDico) {
-//        NSLog(@"key: %@, value: %@", key, [eventDico objectForKey:key]);
-//    }
+    [self loadData];
     
     // Préparation du cache
 	
@@ -59,19 +38,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTableImageRetrieved:) name:@"newLogoCache" object:nil];
 
     return self;
-
-}
--(void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    if ([[defaults objectForKey:@"reloadEvents"] boolValue] == 1) {
-        NSLog(@"reload data in table");
-        eventArray = [[EventsParser instance] arrayEvents];
-        [self.tView reloadData];
-        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"reloadEvents"];
-    }
-
 }
 
 - (void) newTableImageRetrieved:(NSNotification*)sender{
@@ -110,8 +76,43 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveTestNotification:) 
+                                                 name:@"ReloadData"
+                                               object:nil];
 }
 
+- (void) receiveTestNotification:(NSNotification *) notification
+{
+
+    
+    if ([[notification name] isEqualToString:@"ReloadData"]){
+        [self loadData];
+    }
+}
+
+-(void)loadData {
+    
+    eventArray = [[EventsParser instance] arrayEvents];
+    //configure sections
+    self.eventDico = [[[NSMutableDictionary alloc] init] autorelease];
+    
+    for (int i = 0; i < [self.eventArray count]; i++) {
+        Events *event = [self.eventArray objectAtIndex:i];
+        
+        NSMutableArray *eventsOnThisDay = [self.eventDico objectForKey:event.eventDate];
+        if (eventsOnThisDay == nil) {
+            eventsOnThisDay = [NSMutableArray array];
+            
+            [self.eventDico setObject:eventsOnThisDay forKey:event.eventDate];
+        }
+        [eventsOnThisDay addObject:event];
+        
+    }
+    [self.tView reloadData];
+    
+}
+    
 - (void)viewDidUnload
 {
     [super viewDidUnload];
