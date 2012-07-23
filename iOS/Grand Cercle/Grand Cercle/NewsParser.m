@@ -32,19 +32,15 @@ static NewsParser *instanceNews = nil;
     // Tant qu'il y a une news à traiter
 	do {
         // Initialisation de la news à récupérer
-        Newss *aNews = [[Newss alloc] init];
+        News *aNews = [[News alloc] init];
         
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsAParser];
         aNews.title = [[TBXML textForElement:title] stringByConvertingHTMLToPlainText];
         
         // Récupération de la description
-        TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:newsAParser];
-        aNews.description = [[TBXML textForElement:description] stringByDecodingHTMLEntities];
-        
-        // Récupération du lien
-        TBXMLElement *link = [TBXML childElementNamed:@"link" parentElement:newsAParser];
-        aNews.theLink = [[TBXML textForElement:link] stringByConvertingHTMLToPlainText];
+        TBXMLElement *content = [TBXML childElementNamed:@"content" parentElement:newsAParser];
+        aNews.content = [[TBXML textForElement:content] stringByDecodingHTMLEntities];
         
         // Récupération de la date de publication
         TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:newsAParser];
@@ -52,15 +48,19 @@ static NewsParser *instanceNews = nil;
         
         // Récupération de l'auteur
         TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:newsAParser];
-        aNews.author = [[TBXML textForElement:author]  stringByConvertingHTMLToPlainText];
         
-        // Récupération du groupe
-        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:newsAParser];
-        aNews.group = [[TBXML textForElement:group]  stringByConvertingHTMLToPlainText];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
+        NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
+        [request setEntity:entity];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                  @"id = %@", [TBXML textForElement:author]];
+        [request setPredicate:predicate];        
+        
+        aNews.author = request 
         
         // Récupération du logo
-        TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:newsAParser];
-        aNews.logo = [[TBXML textForElement:logo]  stringByConvertingHTMLToPlainText];
+        TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:newsAParser];
+        aNews.image = [[TBXML textForElement:image]  stringByConvertingHTMLToPlainText];
 
         // Ajout de la news dans le tableau
         [arrayNews addObject:aNews];

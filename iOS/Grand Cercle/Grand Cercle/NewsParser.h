@@ -11,7 +11,7 @@
 #import "TBXML.h"
 #import "NSString+HTML.h"
 
-#import "Newss.h"
+#import "News.h"
 
 @interface NewsParser : NSObject {
     // Parser
