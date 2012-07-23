@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "News.h"
+#import "Newss.h"
 
 @interface NewsDetailViewController : UITableViewController <UIWebViewDelegate> {
     // News de la vue détaillée
-    News *news;
+    Newss *news;
     // Cellule titre de la news
     IBOutlet UITableViewCell *cellNewsTop;
     // Cellule description de la news
@@ -20,6 +20,6 @@
     int webViewHeight;
 }
 
-@property (retain, nonatomic) News *news;
+@property (retain, nonatomic) Newss *news;
 @property (retain, nonatomic) IBOutlet UITableViewCell *cellNewsDescription, *cellNewsTop;
 @end

@@ -158,7 +158,7 @@ static EventsParser *instanceEvent = nil;
     };
     
     // Initialisation de deux objets TBXML avec les liens des fichiers xml à parser
-    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/test/evenements/data.xml"] 
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements/data.xml"] 
                                success:successBlock 
                                failure:failureBlock];
     tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/evenements-old/data.xml"] 

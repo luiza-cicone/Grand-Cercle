@@ -44,24 +44,24 @@ int kNumberOfPages = 3;
     }
     return self;
 }
-
-/************************
- * Chargement de la vue *
- ***********************/
--(void)viewDidAppear:(BOOL)animated {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    if ([[defaults objectForKey:@"changedEvents"] boolValue] == 1) {
-        [self viewDidUnload];
-
-        [self viewDidLoad];
-        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"changedEvents"];
-        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"reloadEvents"];
-    }
+//
+///************************
+// * Chargement de la vue *
+// ***********************/
+//-(void)viewDidAppear:(BOOL)animated {
+//    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+//    if ([[defaults objectForKey:@"changedEvents"] boolValue] == 1) {
+//        [self viewDidUnload];
+//
+//        [self viewDidLoad];
+//        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"changedEvents"];
+//        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"reloadEvents"];
+//    }
     
     
 //[[self.tabBarController tabBar] setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]]; 
-}
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
@@ -72,26 +72,25 @@ int kNumberOfPages = 3;
 
 -(void)viewDidDisappear:(BOOL)animated {
 }
-
-- (void)viewDidUnload
-{
-
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
+//
+//- (void)viewDidUnload
+//{
+//
+//    [super viewDidUnload];
+//    // Release any retained subviews of the main view.
+//}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationLandscapeLeft && interfaceOrientation != UIInterfaceOrientationLandscapeRight);
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
+//- (void)dealloc {
+//    [super dealloc];
+//}
 
 #pragma mark - Scroll View
 
->>>>>>> 33b7526cf4ce14055d371f609d2c646ec5d956e7
 - (void)viewDidLoad
 {
     [super viewDidLoad];

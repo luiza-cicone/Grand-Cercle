@@ -32,7 +32,7 @@ static NewsParser *instanceNews = nil;
     // Tant qu'il y a une news à traiter
 	do {
         // Initialisation de la news à récupérer
-        News *aNews = [[News alloc] init];
+        Newss *aNews = [[Newss alloc] init];
         
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsAParser];

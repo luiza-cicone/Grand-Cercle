@@ -33,7 +33,7 @@
         // Récupération des liens des images des news
         self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
         for (int i = 0; i < [self.newsArray count]; i++) {
-            News *n = [self.newsArray objectAtIndex:i];
+            Newss *n = [self.newsArray objectAtIndex:i];
             [self.urlArray addObject:[n logo]];
         }
 	
@@ -170,7 +170,7 @@
     }
     
     // Définition de la news
-    News *n = (News *)[newsArray objectAtIndex:[indexPath row]];
+    Newss *n = (Newss *)[newsArray objectAtIndex:[indexPath row]];
     
     // Affichage de l'image de la news
     UIImageView *imageView;
@@ -197,7 +197,7 @@
     
     // Construction de la détail view
     NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    News *n = [newsArray objectAtIndex:[indexPath row]];
+    Newss *n = [newsArray objectAtIndex:[indexPath row]];
     detailViewController.news = n;
     
     // Chargement de la détail view
