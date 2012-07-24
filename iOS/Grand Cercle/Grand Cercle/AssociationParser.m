@@ -77,6 +77,11 @@ static AssociationParser *instanceNews = nil;
     tbxml = [[TBXML alloc] initWithURL: [NSURL URLWithString:@"http://www.grandcercle.org/xml/cercles.xml"] 
                                success: successBlock 
                                failure: failureBlock];
+    [tbxml release];
+    // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
+    tbxml = [[TBXML alloc] initWithURL: [NSURL URLWithString:@"http://www.grandcercle.org/xml/clubs.xml"] 
+                               success: successBlock 
+                               failure: failureBlock];
 }
 
 @end

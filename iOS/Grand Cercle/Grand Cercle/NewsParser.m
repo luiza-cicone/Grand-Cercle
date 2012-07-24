@@ -8,6 +8,7 @@
 
 #import "NewsParser.h"
 #import "AppDelegate.h"
+#import "Association.h"
 
 @implementation NewsParser
 //@synthesize arrayNews;
@@ -56,14 +57,16 @@ static NewsParser *instanceNews = nil;
         
         NSEntityDescription *assosEntity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
         NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
-//        NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"idAssos = %@", [TBXML textForElement:author]];
+        NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"idAssos = %@", [TBXML textForElement:author]];
         [request setEntity:assosEntity];
-//        [request setPredicate:ofIdPredicate];        
+        [request setPredicate:ofIdPredicate];        
         NSError *error = nil;
         
         NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
-        if (array != nil) {
+        if (array != nil && error == nil) {
+//            [array retain];
             aNews.author =  [array objectAtIndex:0];
+//            [array release];
         }
         else {
             // Deal with error.
@@ -72,7 +75,6 @@ static NewsParser *instanceNews = nil;
         // Récupération de l'image
         TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:newsAParser];
         aNews.image = [[TBXML textForElement:image]  stringByConvertingHTMLToPlainText];
-        
         
         if (![managedObjectContext save:&error]) {
             NSLog(@"Couldn't save: %@", [error localizedDescription]);
