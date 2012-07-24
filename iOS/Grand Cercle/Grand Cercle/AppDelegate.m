@@ -127,6 +127,10 @@
             [colorArray release];
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
+
+        // On parse les événements
+        AssociationParser *assos = [AssociationParser instance];
+        [assos loadFromURL];
         
         // On parse les événements
         EventsParser *ep = [EventsParser instance];
@@ -182,8 +186,8 @@
         [ep loadEventsFromFile];
         
         // On parse les news
-        NewsParser *np = [NewsParser instance];
-        [np loadNewsFromFile];
+//        NewsParser *np = [NewsParser instance];
+//        [np loadNewsFromFile];
         
         // On parse les bons plans
         DealsParser *bp = [DealsParser instance];
@@ -215,24 +219,27 @@
     if (managedObjectModel != nil) {
         return managedObjectModel;
     }
-    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];
-    
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Data" withExtension:@"momd"];
+    managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
+
     return managedObjectModel;
 }
-
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    
     if (persistentStoreCoordinator != nil) {
         return persistentStoreCoordinator;
     }
-    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory]
-                                               stringByAppendingPathComponent: @"Data.sqlite"]];
+    
+    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"Data.sqlite"]];
+    
     NSError *error = nil;
-    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
-                                  initWithManagedObjectModel:[self managedObjectModel]];
-    if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                 configuration:nil URL:storeUrl options:nil error:&error]) {
-        /*Error for store creation should be handled in here*/
-    }
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
+        // Handle error
+    }    
     
     return persistentStoreCoordinator;
 }
@@ -240,7 +247,23 @@
 - (NSString *)applicationDocumentsDirectory {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
-
+- (void)saveContext
+{
+    NSError *error = nil;
+    if (managedObjectContext != nil)
+    {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
+        {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+             
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+             */
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        } 
+    }
+}
 
 - (void)dealloc
 {

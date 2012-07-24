@@ -12,7 +12,7 @@
 
 @implementation News
 
-@dynamic id;
+@dynamic idNews;
 @dynamic title;
 @dynamic pubDate;
 @dynamic content;

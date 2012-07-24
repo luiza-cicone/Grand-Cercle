@@ -9,38 +9,60 @@
 #import "NewsViewController.h"
 #import "NewsDetailViewController.h"
 #import "NewsParser.h"
+#import "AppDelegate.h"
 
 @implementation NewsViewController
 @synthesize newsCell;
 @synthesize tView;
 @synthesize newsArray, urlArray;
 
-/****************************
- * Initialisation de la vue *
- ***************************/
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        if (managedObjectContext == nil) { 
+            managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
+        }
         
         // Mise en place du titre
         self.title = NSLocalizedString(@"News", @"News");
         // Mise en place de l'image dans l'onglet
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
         
-        // Récupération des news
-        self.newsArray = [[NewsParser instance] arrayNews];
-    
-        // Récupération des liens des images des news
-        self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
-        for (int i = 0; i < [self.newsArray count]; i++) {
-            Newss *n = [self.newsArray objectAtIndex:i];
-            [self.urlArray addObject:[n logo]];
+
+        NSManagedObjectContext *moc = self->managedObjectContext;
+        NSEntityDescription *entityDescription = [NSEntityDescription
+                                                  entityForName:@"News" inManagedObjectContext:moc];
+        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+        [request setEntity:entityDescription];
+        
+        NSError *error = nil;
+        
+        NSArray *array = [moc executeFetchRequest:request error:&error];
+        if (array != nil && error == nil) {
+            NSLog(@"array count %d", [array count]);
         }
-	
-        // Configuration du cache
-        imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-        imageCache.notificationName = @"newImageCache";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
+        else {
+            NSLog(@"error %@", error);
+            // Deal with error.
+        }
+        [self setNewsArray:array];
+        [newsArray retain];
+        
+        
+        // Récupération des news
+//        self.newsArray = [[NewsParser instance] arrayNews];
+//    
+//        // Récupération des liens des images des news
+//        self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
+//        for (int i = 0; i < [self.newsArray count]; i++) {
+//            Newss *n = [self.newsArray objectAtIndex:i];
+//            [self.urlArray addObject:[n logo]];
+//        }
+//	
+//        // Configuration du cache
+//        imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
+//        imageCache.notificationName = @"newImageCache";
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
     
         // Mise en place du bouton retour pour la détail view
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -50,31 +72,24 @@
     return self;
 }
 
-/*****************************
- * Mise à jour du table view *
- ****************************/
-- (void) newImageRetrieved:(NSNotification*)sender {
-    
-    // Définition des structures
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    NSArray *paths = [self.tView indexPathsForVisibleRows];
 
-    // Pour chaque row de la table view
-    for(NSIndexPath *path in paths) {
-        
-        // On charche l'image dans le cache
-    	NSInteger index = path.row;
-        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
-        UIImageView *imageView;
-        imageView = (UIImageView *)[cell viewWithTag:1];
-        
-        // Si il n'y a pas d'image on l'affiche
-    	if(imageView.image == nil && tag == index){
-            imageView.image = [dict objectForKey:@"image"];
-            [cell setNeedsLayout];
-        }
-    }
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
+- (void)viewDidUnload {
+    // Libération des structures
+    [self setNewsCell:nil];
+    [newsCell release];
+    [urlArray release];
+    [newsArray release];
+    urlArray = nil;
+    newsArray = nil;
+    newsCell = nil;
+	[imageCache release];
+    imageCache = nil;
+    [tView release];
+    [super viewDidUnload];
 }
 
 /************************
@@ -100,36 +115,39 @@
     [color release];
 }
 
-/************************
- * Chargement de la vue *
- ***********************/
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-/**************************
- * Déchargement de la vue *
- *************************/
-- (void)viewDidUnload {
-    // Libération des structures
-    [self setNewsCell:nil];
-    [newsCell release];
-    [urlArray release];
-    [newsArray release];
-    urlArray = nil;
-    newsArray = nil;
-    newsCell = nil;
-	[imageCache release];
-    imageCache = nil;
-    [tView release];
-    [super viewDidUnload];
-}
-
 /****************************************************************
  * Maintient de la vue verticale en cas de rotation du téléphone*
  ***************************************************************/
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+
+/*****************************
+ * Mise à jour du table view *
+ ****************************/
+- (void) newImageRetrieved:(NSNotification*)sender {
+    
+    // Définition des structures
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    NSArray *paths = [self.tView indexPathsForVisibleRows];
+    
+    // Pour chaque row de la table view
+    for(NSIndexPath *path in paths) {
+        
+        // On charche l'image dans le cache
+    	NSInteger index = path.row;
+        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
+        UIImageView *imageView;
+        imageView = (UIImageView *)[cell viewWithTag:1];
+        
+        // Si il n'y a pas d'image on l'affiche
+    	if(imageView.image == nil && tag == index){
+            imageView.image = [dict objectForKey:@"image"];
+            [cell setNeedsLayout];
+        }
+    }
 }
 
 #pragma mark - Table view data source
@@ -170,7 +188,7 @@
     }
     
     // Définition de la news
-    Newss *n = (Newss *)[newsArray objectAtIndex:[indexPath row]];
+    News *n = (News *)[newsArray objectAtIndex:[indexPath row]];
     
     // Affichage de l'image de la news
     UIImageView *imageView;

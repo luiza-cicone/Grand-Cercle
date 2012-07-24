@@ -1,21 +1,23 @@
 //
 //  Association.m
-//  TapkuLibrary
+//  Grand Cercle
 //
-//  Created by Luiza Cicone on 21/7/12.
+//  Created by Luiza Cicone on 23/7/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
 #import "Association.h"
+#import "Event.h"
+#import "News.h"
 
 
 @implementation Association
 
-@dynamic id;
-@dynamic name;
+@dynamic idAssos;
 @dynamic imagePath;
+@dynamic name;
 @dynamic type;
-@dynamic news;
 @dynamic events;
+@dynamic news;
 
 @end

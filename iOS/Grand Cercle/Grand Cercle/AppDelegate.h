@@ -12,6 +12,7 @@
 #import "DealsViewController.h"
 #import "InfosViewController.h"
 #import "SettingsViewController.h"
+#import "AssociationParser.h"
 #import "NewsParser.h"
 #import "EventsParser.h"
 #import "DealsParser.h"
@@ -28,10 +29,11 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+- (void)saveContext;
 - (NSString *)applicationDocumentsDirectory;
 
 @end

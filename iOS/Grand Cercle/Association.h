@@ -1,33 +1,36 @@
 //
 //  Association.h
-//  TapkuLibrary
+//  Grand Cercle
 //
-//  Created by Luiza Cicone on 21/7/12.
+//  Created by Luiza Cicone on 23/7/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Event, News;
 
 @interface Association : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * idAssos;
 @property (nonatomic, retain) NSString * imagePath;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * type;
-@property (nonatomic, retain) NSSet *news;
 @property (nonatomic, retain) NSSet *events;
+@property (nonatomic, retain) NSSet *news;
 @end
 
 @interface Association (CoreDataGeneratedAccessors)
 
-- (void)addNewsObject:(NSManagedObject *)value;
-- (void)removeNewsObject:(NSManagedObject *)value;
-- (void)addNews:(NSSet *)values;
-- (void)removeNews:(NSSet *)values;
-- (void)addEventsObject:(NSManagedObject *)value;
-- (void)removeEventsObject:(NSManagedObject *)value;
+- (void)addEventsObject:(Event *)value;
+- (void)removeEventsObject:(Event *)value;
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
+
+- (void)addNewsObject:(News *)value;
+- (void)removeNewsObject:(News *)value;
+- (void)addNews:(NSSet *)values;
+- (void)removeNews:(NSSet *)values;
+
 @end

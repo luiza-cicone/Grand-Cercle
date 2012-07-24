@@ -48,6 +48,8 @@
 		258D36A6157CB1260001E64E /* FilterParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D36A5157CB1260001E64E /* FilterParser.m */; };
 		258D370D157E29930001E64E /* EventInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 258D370C157E29930001E64E /* EventInfoCell.xib */; };
 		258D371E157F60DD0001E64E /* StyledPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D371D157F60DC0001E64E /* StyledPageControl.m */; };
+		25913BB315BDD40000CE3996 /* AssociationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 25913BB215BDD40000CE3996 /* AssociationParser.m */; };
+		25913BB615BDDF8D00CE3996 /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 25913BB515BDDF8D00CE3996 /* Association.m */; };
 		2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9D1573FA9000CA27B3 /* UIKit.framework */; };
 		2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EA9F1573FA9000CA27B3 /* Foundation.framework */; };
 		2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */; };
@@ -83,7 +85,6 @@
 		25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29815751DC2009B8921 /* MapKit.framework */; };
 		25ECD56015775F2A006E4652 /* EventsCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECD55F15775F2A006E4652 /* EventsCalendarViewController.m */; };
 		25ECD56215777F81006E4652 /* EventSmallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25ECD56115777F81006E4652 /* EventSmallCell.xib */; };
-		25F9300715BAFC7000C49C23 /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9300015BAFC7000C49C23 /* Association.m */; };
 		25F9300815BAFC7000C49C23 /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9300215BAFC7000C49C23 /* Deal.m */; };
 		25F9300915BAFC7000C49C23 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9300415BAFC7000C49C23 /* Event.m */; };
 		25F9300A15BAFC7000C49C23 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9300615BAFC7000C49C23 /* News.m */; };
@@ -168,7 +169,7 @@
 		255C80AA157411AD00E6ECC3 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		255C813C157428A000E6ECC3 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		255C813D157428A000E6ECC3 /* NewsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsParser.m; sourceTree = "<group>"; };
-		255C813E157428A000E6ECC3 /* Newss.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Newss.h; sourceTree = "<group>"; };
+		255C813E157428A000E6ECC3 /* Newss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Newss.h; sourceTree = "<group>"; };
 		255C813F157428A000E6ECC3 /* Newss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Newss.m; sourceTree = "<group>"; };
 		255C8140157428A000E6ECC3 /* NewsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsParser.h; sourceTree = "<group>"; };
 		255C8141157428A000E6ECC3 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
@@ -184,6 +185,10 @@
 		258D370C157E29930001E64E /* EventInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoCell.xib; sourceTree = "<group>"; };
 		258D371C157F60DB0001E64E /* StyledPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StyledPageControl.h; path = ../StyledPageControl.h; sourceTree = "<group>"; };
 		258D371D157F60DC0001E64E /* StyledPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StyledPageControl.m; path = ../StyledPageControl.m; sourceTree = "<group>"; };
+		25913BB115BDD40000CE3996 /* AssociationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssociationParser.h; sourceTree = "<group>"; };
+		25913BB215BDD40000CE3996 /* AssociationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssociationParser.m; sourceTree = "<group>"; };
+		25913BB415BDDF8D00CE3996 /* Association.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Association.h; sourceTree = "<group>"; };
+		25913BB515BDDF8D00CE3996 /* Association.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Association.m; sourceTree = "<group>"; };
 		2595EA991573FA9000CA27B3 /* Grand Cercle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grand Cercle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2595EA9D1573FA9000CA27B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2595EA9F1573FA9000CA27B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -230,8 +235,6 @@
 		25ECD55E15775F2A006E4652 /* EventsCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsCalendarViewController.h; path = ../EventsCalendarViewController.h; sourceTree = "<group>"; };
 		25ECD55F15775F2A006E4652 /* EventsCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsCalendarViewController.m; path = ../EventsCalendarViewController.m; sourceTree = "<group>"; };
 		25ECD56115777F81006E4652 /* EventSmallCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventSmallCell.xib; sourceTree = "<group>"; };
-		25F92FFF15BAFC7000C49C23 /* Association.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Association.h; path = "Grand Cercle/Models/Association.h"; sourceTree = "<group>"; };
-		25F9300015BAFC7000C49C23 /* Association.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Association.m; path = "Grand Cercle/Models/Association.m"; sourceTree = "<group>"; };
 		25F9300115BAFC7000C49C23 /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deal.h; path = "Grand Cercle/Models/Deal.h"; sourceTree = "<group>"; };
 		25F9300215BAFC7000C49C23 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deal.m; path = "Grand Cercle/Models/Deal.m"; sourceTree = "<group>"; };
 		25F9300315BAFC7000C49C23 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = "Grand Cercle/Models/Event.h"; sourceTree = "<group>"; };
@@ -561,6 +564,8 @@
 				0435F4941574F4B3009F23CD /* EventsParser.m */,
 				258D36A7157CB12F0001E64E /* FilterParser.h */,
 				258D36A5157CB1260001E64E /* FilterParser.m */,
+				25913BB115BDD40000CE3996 /* AssociationParser.h */,
+				25913BB215BDD40000CE3996 /* AssociationParser.m */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -568,8 +573,8 @@
 		25F9300B15BAFC7A00C49C23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				25F92FFF15BAFC7000C49C23 /* Association.h */,
-				25F9300015BAFC7000C49C23 /* Association.m */,
+				25913BB415BDDF8D00CE3996 /* Association.h */,
+				25913BB515BDDF8D00CE3996 /* Association.m */,
 				25F9300115BAFC7000C49C23 /* Deal.h */,
 				25F9300215BAFC7000C49C23 /* Deal.m */,
 				25F9300315BAFC7000C49C23 /* Event.h */,
@@ -774,10 +779,11 @@
 				251FD3F4157F8E7E00F93E4F /* Reachability.m in Sources */,
 				25D13CEA1580EF1B006A4F0C /* InfosViewController.m in Sources */,
 				2598E89D15BAEFCA00F7B93B /* Data.xcdatamodeld in Sources */,
-				25F9300715BAFC7000C49C23 /* Association.m in Sources */,
 				25F9300815BAFC7000C49C23 /* Deal.m in Sources */,
 				25F9300915BAFC7000C49C23 /* Event.m in Sources */,
 				25F9300A15BAFC7000C49C23 /* News.m in Sources */,
+				25913BB315BDD40000CE3996 /* AssociationParser.m in Sources */,
+				25913BB615BDDF8D00CE3996 /* Association.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

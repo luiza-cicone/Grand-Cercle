@@ -12,7 +12,7 @@
 
 @implementation Event
 
-@dynamic id;
+@dynamic idEvent;
 @dynamic title;
 @dynamic content;
 @dynamic image;

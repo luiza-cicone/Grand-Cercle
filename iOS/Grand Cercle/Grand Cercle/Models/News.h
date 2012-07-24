@@ -13,7 +13,7 @@
 
 @interface News : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber * idNews;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * pubDate;
 @property (nonatomic, retain) NSString * content;
