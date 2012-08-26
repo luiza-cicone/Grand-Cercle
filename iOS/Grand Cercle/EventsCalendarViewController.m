@@ -9,6 +9,8 @@
 #import "EventsCalendarViewController.h"
 #import "EventsParser.h"
 #import "EventDetailViewController.h"
+#import "AppDelegate.h"
+#import "Association.h"
 
 
 @implementation EventsCalendarViewController
@@ -20,20 +22,40 @@
 - (void) viewDidLoad{
 	[super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newAssosImageRetrieved:) name:@"newAssosImage" object:nil];
+
 	[self.monthView selectDate:[NSDate date]];
     
     // Préparation du cache
 	
-	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-	imageCache.notificationName = @"newImageSmallCacheCalendar";
+	imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images/events/thumb"];
+	imageCache.notificationName = @"newCalendarImage";
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newImageSmallCacheCalendar" object:nil];
-	
-	imageCache2 = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-	imageCache2.notificationName = @"newLogoCacheCalendar";
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newLogoCacheCalendar" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newCalendarImage" object:nil];
+}
+
+- (void) newAssosImageRetrieved:(NSNotification*)sender {
     
+    // Définition des structures
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tableView indexPathsForVisibleRows];
+    // Pour chaque row de la table view
+    for(NSIndexPath *path in paths) {
+        
+        // On charche l'image dans le cache
+    	NSInteger index = path.row;
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:6];
+        
+        Event *event = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:index];
+        // Si il n'y a pas d'image on l'affiche
+    	if(imageView.image == nil && tag == [[[event author] idAssos] intValue]){
+            imageView.image = [dict objectForKey:@"image"];
+            [cell setNeedsLayout];
+        }
+    }
 }
 
 - (void) newCalendarImageRetrieved:(NSNotification*)sender{
@@ -46,14 +68,8 @@
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
 
-        UIImageView *imageView;
-        if ([[(NSNotification *) sender name] isEqualToString:@"newLogoCacheCalendar"]) {
-            imageView = (UIImageView *)[cell viewWithTag:4];
-        }
-        else if ([[(NSNotification *) sender name] isEqualToString:@"newImageSmallCacheCalendar"]) {
-            imageView = (UIImageView *)[cell viewWithTag:1];
-        }
-        else return;
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+        
     	if(imageView.image == nil && tag == index){
             
             imageView.image = [dict objectForKey:@"image"];
@@ -111,7 +127,10 @@
 {
     return 40;
 }
-    
+-(void)reloadData {
+    [self.monthView reload];
+}  
+
 - (UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"EventSmallCell";
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -131,35 +150,53 @@
     
     for (NSDate * date in ar) {
         if ([date isEqualToDate:[self.monthView dateSelected]] ) {
-            Events *e  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
-            
-            UIImageView *imageView;
-            imageView = (UIImageView *)[cell viewWithTag:1];
-            
-            UIImage *img;
-            if (![e.imageSmall isEqualToString:@""]) {
-                img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [e.imageSmall hash]] url:[NSURL URLWithString:e.imageSmall] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
-                [imageView setImage:img];
-            }
-            else {
-                [imageView setImage:nil];
-            }
-                        
+            Event *e  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [e title]];
             
-            
             label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[[[e time] stringByAppendingString:@" - "] stringByAppendingString : [e place]]];
+            [label setText:[[[e time] stringByAppendingString:@" - "] stringByAppendingString : [e location]]];
             
+            UIImageView *imageView;
+            imageView = (UIImageView *)[cell viewWithTag:1];
+            
+            if (![e.thumbnail isEqualToString:@""]) {
+                // test si c'est dans le cache
+                NSString *imageKey = [NSString stringWithFormat:@"%x", [e.thumbnail hash]];
+                
+                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/events/thumb"] stringByAppendingPathComponent:imageKey];
+                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+                
+                if (!fileExists) {
+                    // download img async
+                    UIImage *img = [imageCache imageForKey:imageKey url:[NSURL URLWithString:e.thumbnail] queueIfNeeded:YES tag: indexPath.row];
+                    [imageView setImage:img];
+                }
+                else {
+                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+                }
+            } else 
+                [imageView setImage:nil];
+
+
             imageView = (UIImageView *)[cell viewWithTag:4];
             
-            img = [imageCache2 imageForKey:[NSString stringWithFormat:@"%d", [e.logo hash]] url:[NSURL URLWithString: e.logo] queueIfNeeded:YES tag: indexPath.section * 1000 + indexPath.row];
-            [imageView setImage:img];
-
+            NSString *imageKey = [NSString stringWithFormat:@"%x", [e.author.imagePath hash]];
             
+            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
+            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+            
+            
+            if (!fileExists) {
+                [imageView setImage:nil];
+            }
+            else {
+                [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+            }
         }
     }
     return cell;
@@ -172,7 +209,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Events *selectedEvent  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
+    Event *selectedEvent  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
     EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     
@@ -188,11 +225,79 @@
 	// dataArray: has boolean markers for each day to pass to the calendar view (via the delegate function)
 	// dataDictionary: has items that are associated with date keys (for tableview)
 	    
-    NSArray *theDates = [[EventsParser instance] arrayEvents];     
-    theDates = [theDates arrayByAddingObjectsFromArray:[[EventsParser instance] arrayOldEvents]];
+    
+    if (managedObjectContext == nil) { 
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
+    }
+    
+    
+    NSMutableArray *theDates = [[NSMutableArray alloc] init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"]; 
+    
+    for (NSString *aCercle in cerclesDico) {
+        NSMutableDictionary *typesDico = [cerclesDico objectForKey:aCercle];
+        
+        NSMutableArray *typesForCercle = [[NSMutableArray alloc] init];
+        
+        for (NSString *aType in typesDico) {
+            if ([[typesDico objectForKey:aType] boolValue]) {
+                [typesForCercle addObject:aType];
+            }
+        }
+        
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
+        NSLog(@"%@, %@", start, end);
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) AND (date <= %@) AND (author.name = %@) AND (type in %@)", start, end, aCercle, typesForCercle];
+        
+        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+        [request setEntity:entityDescription];
+        [request setPredicate:predicate];
+        
+        NSError *error = nil;
+        
+        NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+        if (array != nil && error == nil) {
+            [theDates addObjectsFromArray:array];
+        }
+        else {
+            NSLog(@"error %@", error);
+            // Deal with error.
+        }
+        [typesForCercle release];
 
+        
+    }
+    NSMutableArray *authors = [[NSMutableArray alloc] initWithCapacity:7];
     
+    NSDictionary *clubsArr = [defaults objectForKey:@"filtreClubs"];
+    for (NSString *aClub in clubsArr) {
+        if ([[clubsArr objectForKey:aClub] boolValue])
+            [authors addObject:aClub];
+    }
+    // ajout du Grand Cercle et elus automatiquemet
+    [authors addObject:@"Grand Cercle"];
     
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) AND (date <= %@) AND (author.name in %@)", start, end, authors];
+    
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    if (array != nil && error == nil) {
+        [theDates addObjectsFromArray:array];
+    }
+    else {
+        NSLog(@"error %@", error);
+        // Deal with error.
+    }
+    [authors release];
 	self.dataArray = [NSMutableArray array];
 	self.dataDictionary = [NSMutableDictionary dictionary];
     
@@ -211,13 +316,13 @@
     
     
     for (int i = 0; i < [theDates count]; i++) {
-        Events *event = [theDates objectAtIndex:i];
+        Event *event = [theDates objectAtIndex:i];
         
-        NSMutableArray *eventsOnThisDay = [self.dataDictionary objectForKey:event.eventDate];
+        NSMutableArray *eventsOnThisDay = [self.dataDictionary objectForKey:event.date];
         if (eventsOnThisDay == nil) {
             eventsOnThisDay = [NSMutableArray array];
             
-            [self.dataDictionary setObject:eventsOnThisDay forKey:event.eventDate];
+            [self.dataDictionary setObject:eventsOnThisDay forKey:event.date];
         }
         [eventsOnThisDay addObject:event];
 
@@ -225,8 +330,8 @@
         int numDays, numDays2;
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSUInteger unitFlags = NSDayCalendarUnit;
-        NSDateComponents *components = [gregorian components:unitFlags fromDate:start toDate:event.eventDate options:0];
-        NSDateComponents *components2 = [gregorian components:unitFlags fromDate:event.eventDate toDate:end options:0];
+        NSDateComponents *components = [gregorian components:unitFlags fromDate:start toDate:event.date options:0];
+        NSDateComponents *components2 = [gregorian components:unitFlags fromDate:event.date toDate:end options:0];
 
         numDays = [components day];
         numDays2 = [components2 day];
@@ -237,6 +342,7 @@
         }
         [gregorian release];
     }
+    [theDates release];
 }
 -(void)dealloc {
     [super dealloc];

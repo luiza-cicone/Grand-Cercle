@@ -19,6 +19,8 @@
     TKImageCache *imageCache, *imageCache2;
     
     EventsViewController *superController;
+    
+    NSManagedObjectContext *managedObjectContext;
 
 }
 
@@ -29,5 +31,5 @@
 @property (retain, nonatomic) EventsViewController *superController;
 
 - (void) generateDataForStartDate:(NSDate*)start endDate:(NSDate*)end;
-
+- (void) reloadData;
 @end

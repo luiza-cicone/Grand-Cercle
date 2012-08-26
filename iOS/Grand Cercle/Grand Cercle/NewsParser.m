@@ -11,14 +11,9 @@
 #import "Association.h"
 
 @implementation NewsParser
-//@synthesize arrayNews;
 
-// Patron singleton, unique instance du parser de news
 static NewsParser *instanceNews = nil;
 
-/****************************************************************************
- * Patron singleton, méthode retournant l'unique instance du parser de news *
- ***************************************************************************/
 + (NewsParser *) instance {
     if (instanceNews == nil) {
         instanceNews = [[self alloc] init];
@@ -26,74 +21,84 @@ static NewsParser *instanceNews = nil;
     return instanceNews;
 }
 
-/***************************************************
- * Méthode récupérant les informations nécessaires *
- **************************************************/
-- (void) handleNews:(TBXMLElement *)newsAParser {
-    if (managedObjectContext == nil) { 
-        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
-    }
+- (void) handle:(TBXMLElement *)newsToParse {
 
     // Tant qu'il y a une news à traiter
 	do {
+        // Test if the news is already in the DB
+        NSFetchRequest *requestNews = [[[NSFetchRequest alloc] init] autorelease];
+        
+        NSEntityDescription *newsEntity = [NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext];
+        [requestNews setEntity:newsEntity];
+        
+        TBXMLElement *idNews = [TBXML childElementNamed:@"id" parentElement:newsToParse];
+        NSPredicate *newsIdPredicate = [NSPredicate predicateWithFormat:@"idNews = %@", [TBXML textForElement:idNews]];
+        [requestNews setPredicate:newsIdPredicate];        
+
+        NSError *error = nil;
+        
+        NSArray *news = [managedObjectContext executeFetchRequest:requestNews error:&error];
+        if (news != nil && error == nil) {
+            if([news count] != 0)
+                continue;
+        }
+        
         // Initialisation de la news à récupérer
         News *aNews = [NSEntityDescription insertNewObjectForEntityForName:@"News" inManagedObjectContext:managedObjectContext];
         
+        aNews.idNews = [NSNumber numberWithInt:[[TBXML textForElement:idNews] intValue]];
         
         // Récupération du titre
-        TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsAParser];
+        TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:newsToParse];
         aNews.title = [[TBXML textForElement:title] stringByConvertingHTMLToPlainText];
         
         // Récupération de la description
-        TBXMLElement *content = [TBXML childElementNamed:@"description" parentElement:newsAParser];
+        TBXMLElement *content = [TBXML childElementNamed:@"description" parentElement:newsToParse];
         aNews.content = [[TBXML textForElement:content] stringByDecodingHTMLEntities];
         
         // Récupération de la date de publication
-        TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:newsAParser];
+        TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:newsToParse];
         aNews.pubDate = [[TBXML textForElement:pubDate] stringByConvertingHTMLToPlainText];
         
-        // Récupération du cercle ou club
-        TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:newsAParser];
+        // Récupération de l'assos auteur
+        TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:newsToParse];
         
         NSEntityDescription *assosEntity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
         NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
         NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"idAssos = %@", [TBXML textForElement:author]];
         [request setEntity:assosEntity];
         [request setPredicate:ofIdPredicate];        
-        NSError *error = nil;
+        
+        error = nil;
         
         NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
         if (array != nil && error == nil) {
-//            [array retain];
             aNews.author =  [array objectAtIndex:0];
-//            [array release];
         }
         else {
             // Deal with error.
         }
-        
+        [request release];
         // Récupération de l'image
-        TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:newsAParser];
+        TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:newsToParse];
         aNews.image = [[TBXML textForElement:image]  stringByConvertingHTMLToPlainText];
         
         if (![managedObjectContext save:&error]) {
             NSLog(@"Couldn't save: %@", [error localizedDescription]);
         }
-	} while ((newsAParser = newsAParser->nextSibling));
+	} while ((newsToParse = newsToParse->nextSibling));
 }
 
-/***************************************************
- * Méthode de parsage des données du site internet *
- **************************************************/
 - (void)loadNewsFromURL { 
     
-    // Initialisation du tableau contenant les News
-//    arrayNews = [[NSMutableArray alloc] initWithCapacity:10];
+    if (managedObjectContext == nil) { 
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
+    }
     
     // Si le lien du fichier xml est correct, ce block est appelé
     TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
         if (tbxmlDocument.rootXMLElement)
-            [self handleNews:tbxmlDocument.rootXMLElement->firstChild];
+            [self handle:tbxmlDocument.rootXMLElement->firstChild];
     };
 
     // Si le lien du fichier xml est incorrect, ce block est appelé
@@ -106,35 +111,5 @@ static NewsParser *instanceNews = nil;
                                success:successBlock 
                                failure:failureBlock];
 }
-
-///***********************************************************
-// * Méthode de parsage des données de la sauvegarde interne *
-// **********************************************************/
-//-(void) loadNewsFromFile {
-//    
-//    // Initialisation du tableau contenant les News
-//    arrayNews = [[NSMutableArray alloc] initWithCapacity:10];
-//
-//    // Récupération du chemin de la sauvegarde interne
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *filename = @"news.xml";
-//    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
-//
-//    // Initialisation du fichier TBXML avec le chemin de la sauvegarde interne
-//    NSData * data = [NSData dataWithContentsOfFile:filePath];    
-//    NSError *error = nil;
-//	tbxml = [[TBXML alloc] initWithXMLData:data error:&error];
-//    
-//    if (error) {
-//        // Si l'initialisation s'est mal passée, on affiche l'erreur    
-//        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-//    } else {
-//        // Si aucune erreur n'est levée, on parse la sauvegarde interne
-//        if (tbxml.rootXMLElement){
-//                [self handleNews:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
-//        }
-//    }
-//}
 
 @end

@@ -14,23 +14,17 @@
 #import "News.h"
 
 @interface NewsParser : NSObject {
-    // Parser
+    
     TBXML *tbxml;
-    // Tableau contenant les News
-//	NSMutableArray *arrayNews;
     NSManagedObjectContext *managedObjectContext;
 }
 
-//@property(nonatomic, retain) NSMutableArray *arrayNews;
-
-// Patron singleton, unique instance du parser de news
 + (NewsParser *) instance;
 
 // Méthode récupérant l'ensemble des news depuis le site
 - (void) loadNewsFromURL;
-// Méthode récupérant l'ensemble des news depuis une sauvegarde locale
-//- (void) loadNewsFromFile;
+
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
-- (void) handleNews:(TBXMLElement *)newsToParse;
+- (void) handle:(TBXMLElement *)newsToParse;
 
 @end

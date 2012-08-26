@@ -7,26 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TBXML+HTTP.h"
 #import "TBXML.h"
-#import "NSString+HTML.h"
 
 @interface FilterParser : NSObject {
-    // Parser
     TBXML *tbxml;
-    // Tableau contenant les noms des cercles, clubs et associations
-	NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
+	NSMutableArray *arrayTypes;
 }
 
-@property (nonatomic, retain) NSMutableArray *arrayCercles, *arrayClubs, *arrayTypes;
+@property (nonatomic, retain) NSMutableArray *arrayTypes;
 
-// Patron singleton, retourne l'unique instance du parser des noms des cercles, clubs et associations
+// retourne l'unique instance du parser
 + (FilterParser *) instance;
+
 // Méthode récupérant l'ensemble des noms des cercles, clubs et associations depuis le site
-- (void)loadStuffFromURL;
+- (void)loadFromURL;
+
 // Méthode récupérant l'ensemble des noms des cercles, clubs et associations depuis une sauvegarde locale
-- (void)loadStuffFromFile;
+- (void)loadFromFile;
+
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
-- (void) handleNames:(TBXMLElement *)listNamesToParse toArray:(NSMutableArray *) array;
+- (void) handle:(TBXMLElement *)listNamesToParse;
 
 @end

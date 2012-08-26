@@ -25,7 +25,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>ro.pub.ing.students.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>org.grandcercle</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -49,5 +49,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

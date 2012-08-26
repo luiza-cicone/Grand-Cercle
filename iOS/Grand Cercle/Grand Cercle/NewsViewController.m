@@ -9,12 +9,16 @@
 #import "NewsViewController.h"
 #import "NewsDetailViewController.h"
 #import "NewsParser.h"
+#import "Association.h"
 #import "AppDelegate.h"
 
 @implementation NewsViewController
 @synthesize newsCell;
 @synthesize tView;
-@synthesize newsArray, urlArray;
+@synthesize newsArray;
+@synthesize imageCache;
+
+NSString *const newsImageFolder = @"images/news";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,45 +29,34 @@
         
         // Mise en place du titre
         self.title = NSLocalizedString(@"News", @"News");
+        
         // Mise en place de l'image dans l'onglet
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
         
 
-        NSManagedObjectContext *moc = self->managedObjectContext;
-        NSEntityDescription *entityDescription = [NSEntityDescription
-                                                  entityForName:@"News" inManagedObjectContext:moc];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext];
         NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
         [request setEntity:entityDescription];
         
         NSError *error = nil;
         
-        NSArray *array = [moc executeFetchRequest:request error:&error];
+        NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
         if (array != nil && error == nil) {
-            NSLog(@"array count %d", [array count]);
+            [self setNewsArray:array];
+            [newsArray retain];
         }
         else {
             NSLog(@"error %@", error);
             // Deal with error.
         }
-        [self setNewsArray:array];
-        [newsArray retain];
-        
-        
-        // Récupération des news
-//        self.newsArray = [[NewsParser instance] arrayNews];
-//    
-//        // Récupération des liens des images des news
-//        self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.newsArray count]];
-//        for (int i = 0; i < [self.newsArray count]; i++) {
-//            Newss *n = [self.newsArray objectAtIndex:i];
-//            [self.urlArray addObject:[n logo]];
-//        }
-//	
-//        // Configuration du cache
-//        imageCache = [[TKImageCache alloc] initWithCacheDirectoryName:@"images"];
-//        imageCache.notificationName = @"newImageCache";
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newImageCache" object:nil];
     
+        self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:newsImageFolder] autorelease];
+        self.imageCache.notificationName = @"newNewsImage";
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newNewsImage" object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newAssosImageRetrieved:) name:@"newAssosImage" object:nil];
+        
         // Mise en place du bouton retour pour la détail view
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
@@ -81,15 +74,20 @@
     // Libération des structures
     [self setNewsCell:nil];
     [newsCell release];
-    [urlArray release];
     [newsArray release];
-    urlArray = nil;
     newsArray = nil;
     newsCell = nil;
 	[imageCache release];
     imageCache = nil;
     [tView release];
     [super viewDidUnload];
+}
+
+- (void)dealloc {
+    [newsCell release];
+    [newsArray release];
+	[imageCache release];
+    [super dealloc];
 }
 
 /************************
@@ -122,25 +120,21 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-
-/*****************************
- * Mise à jour du table view *
- ****************************/
 - (void) newImageRetrieved:(NSNotification*)sender {
     
     // Définition des structures
 	NSDictionary *dict = [sender userInfo];
     NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    NSArray *paths = [self.tView indexPathsForVisibleRows];
     
+    NSArray *paths = [self.tView indexPathsForVisibleRows];
     // Pour chaque row de la table view
     for(NSIndexPath *path in paths) {
         
         // On charche l'image dans le cache
     	NSInteger index = path.row;
         UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
-        UIImageView *imageView;
-        imageView = (UIImageView *)[cell viewWithTag:1];
+        
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
         
         // Si il n'y a pas d'image on l'affiche
     	if(imageView.image == nil && tag == index){
@@ -150,32 +144,43 @@
     }
 }
 
-#pragma mark - Table view data source
-
-/************************************
- * Retourne la hauteur des sections *
- ***********************************/
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 85;
+- (void) newAssosImageRetrieved:(NSNotification*)sender {
+    
+    // Définition des structures
+	NSDictionary *dict = [sender userInfo];
+    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
+    
+    NSArray *paths = [self.tView indexPathsForVisibleRows];
+    // Pour chaque row de la table view
+    for(NSIndexPath *path in paths) {
+        
+        // On charche l'image dans le cache
+    	NSInteger index = path.row;
+        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+        
+        // Si il n'y a pas d'image on l'affiche
+    	if(imageView.image == nil && tag == [[[[newsArray objectAtIndex:index] author] idAssos] intValue] ){
+            imageView.image = [dict objectForKey:@"image"];
+            [cell setNeedsLayout];
+        }
+    }
 }
 
-/**********************************
- * Retourne le nombre de sections *
- *********************************/
+#pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-/*******************************************
- * Retourne le nombre de rows par sections *
- ******************************************/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [newsArray count];
 }
 
-/*************************************
- * Construction des différentes rows *
- ************************************/
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 85;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"NewsCell";
@@ -188,49 +193,66 @@
     }
     
     // Définition de la news
-    News *n = (News *)[newsArray objectAtIndex:[indexPath row]];
+    News *news = (News *)[newsArray objectAtIndex:[indexPath row]];
     
     // Affichage de l'image de la news
-    UIImageView *imageView;
+    UIImageView *imageView = nil;
     imageView = (UIImageView *)[cell viewWithTag:1];
-    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", indexPath.row] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row];
-    [imageView setImage:img];
+    
+    if (![news.image isEqualToString:@""]) {
+        // test si c'est dans le cache
+        NSString *imageKey = [NSString stringWithFormat:@"%x", [news.image hash]];
+        
+        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:newsImageFolder] stringByAppendingPathComponent:imageKey];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+        
+        if (!fileExists) {
+            // download img async
+            UIImage *img = [imageCache imageForKey:imageKey url:[NSURL URLWithString:news.image] queueIfNeeded:YES tag: indexPath.row];
+            [imageView setImage:img];
+        }
+        else {
+            [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+        }
+    }
+    else {
+        NSString *imageKey = [NSString stringWithFormat:@"%x", [news.author.imagePath hash]];
+        
+        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+        
+        
+        if (!fileExists) {
+            [imageView setImage:nil];
+        }
+        else {
+            [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+        }
+    }
     
     // Affichage des labels
-    UILabel *label;
-    label = (UILabel *)[cell viewWithTag:2];
-    [label setText: [n title]];
+    UILabel *label = (UILabel *)[cell viewWithTag:2];
+    [label setText: [news title]];
+    
     label = (UILabel *)[cell viewWithTag:3];
-    [label setText:[n pubDate]];
+    [label setText:[news pubDate]];
     
     return cell;
 }
 
 #pragma mark - Table view delegate
 
-/************************************************
- * Action déclenchée par la sélection d'une row *
- ***********************************************/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Construction de la détail view
     NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    Newss *n = [newsArray objectAtIndex:[indexPath row]];
-    detailViewController.news = n;
+    News *news = [newsArray objectAtIndex:[indexPath row]];
+    detailViewController.news = news;
     
     // Chargement de la détail view
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
-}
-
-/***************
- * Destructeur *
- **************/
-- (void)dealloc {
-    [newsCell release];
-    [urlArray release];
-    [newsArray release];
-	[imageCache release];
-    [super dealloc];
 }
 @end

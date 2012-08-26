@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Association.h"
 
 @implementation AppDelegate
 
@@ -18,14 +19,15 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.window.frame.size.width, self.window.frame.size.height)];
+    // set the background image
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
     [imageView setImage:[UIImage imageNamed:@"default.png"]];
     [view addSubview:imageView];
     [imageView release];
 
-    
+    // set the activity indicator
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [activityIndicator setFrame:CGRectMake(72, 182, 40, 40)];
+    activityIndicator.center = CGPointMake(self.window.frame.size.width/2-68, self.window.frame.size.height/2-18);
     [view addSubview:activityIndicator];
     [activityIndicator release];
     
@@ -54,8 +56,9 @@
     return YES;
 }
 
-- (void)startParse {
-    
+- (void)startApp {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+
     // Override point for customization after application launch.
     UINavigationController *navigationController1 = [[[UINavigationController alloc] init] autorelease];
     UIViewController *viewController1 = [[[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil] autorelease];
@@ -89,52 +92,111 @@
     [self.window makeKeyAndVisible];
 }
 
--(void)reachabilityChanged:(NSNotification*)note
+-(void)initializeOnFirstRun {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSDate date] forKey:@"firstRun"];
+
+    if (managedObjectContext == nil) { 
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
+    }
+    
+    
+    NSEntityDescription *assosEntity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
+    NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
+            
+    // filter des cercles
+
+    NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"(type = %d) AND NOT (name = 'Grand Cercle')", 1];
+    [request setEntity:assosEntity];
+    [request setPredicate:ofIdPredicate];        
+    
+    NSError *error = nil;
+    
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    if (array != nil && error == nil) {
+        arrayCercles = array;
+        [arrayCercles retain];
+    }
+    else {
+        // Deal with error.
+    }
+    [request release];
+    
+    
+    NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
+    for (Association *cercle in arrayCercles) {
+        FilterParser *ap = [FilterParser instance];
+        arrayTypes = [ap arrayTypes];
+        
+        NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
+        for (NSString *type in arrayTypes) {
+            [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
+        }
+        [cerclesDico setValue:typesDico forKey:[cercle name]];
+        [typesDico release];
+    }
+    [defaults setObject:cerclesDico forKey:@"filtreCercles"];
+    [cerclesDico release];
+    
+    
+    // filter des clubs
+    request = [[NSFetchRequest alloc] init]; 
+        
+    ofIdPredicate = [NSPredicate predicateWithFormat:@"type = %d", 2];
+    [request setEntity:assosEntity];
+    [request setPredicate:ofIdPredicate];        
+    
+    error = nil;
+    
+    array = [managedObjectContext executeFetchRequest:request error:&error];
+    if (array != nil && error == nil) {
+        arrayClubs = array;
+        [arrayClubs retain];
+    }
+    else {
+        // Deal with error.
+    }
+    [request release];
+        
+    NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
+    for (Association *clubs in arrayClubs) {
+        [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:[clubs name]];
+    }
+    [defaults setObject:clubsDico forKey:@"filtreClubs"];
+    [clubsDico release];
+    
+
+    // filter color
+    NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
+    [defaults setObject:colorArray forKey:@"theme"];
+    [colorArray release];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)reachabilityChanged:(NSNotification*) note
 {
     Reachability * reach = [note object];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     if([reach isReachable]) {
 
-        // On parse les associations
+        // On parse les types
         FilterParser *ap = [FilterParser instance];
-        [ap loadStuffFromURL];
+        [ap loadFromURL];
         
-        if (![defaults objectForKey:@"firstRun"]) {
-            [defaults setObject:[NSDate date] forKey:@"firstRun"];
-            NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
-            for (NSString *cercle in [ap arrayCercles]) {
-                [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
-            }
-            [defaults setObject:cerclesDico forKey:@"filtreCercles"];
-            [cerclesDico release];
-            
-            NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
-            for (NSString *clubs in [ap arrayClubs]) {
-                [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
-            }
-            [defaults setObject:clubsDico forKey:@"filtreClubs"];
-            [clubsDico release];
-            
-            NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
-            for (NSString *type in [ap arrayTypes]) {
-                [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
-            }
-            [defaults setObject:typesDico forKey:@"filtreTypes"];
-            [typesDico release];
-            NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
-            [defaults setObject:colorArray forKey:@"theme"];
-            [colorArray release];
-        }
-        [[NSUserDefaults standardUserDefaults] synchronize];
-
-        // On parse les événements
         AssociationParser *assos = [AssociationParser instance];
         [assos loadFromURL];
         
+        // puis les cercles et clubs
+        
+        if (![defaults objectForKey:@"firstRun"]) {
+            [self initializeOnFirstRun];
+        }
+        
         // On parse les événements
         EventsParser *ep = [EventsParser instance];
-        [ep loadEventsFromURL];
+        [ep loadFromURL];
         
         // On parse les news
         NewsParser *np = [NewsParser instance];
@@ -142,60 +204,22 @@
         
         // On parse les bons plans
         DealsParser *bp = [DealsParser instance];
-        [bp loadDealsFromURL];
+        [bp loadFromURL];
 
     }
-    else
-    {
-        
-        // On parse les associations
+    else {
         FilterParser *ap = [FilterParser instance];
-        [ap loadStuffFromFile];
+        [ap loadFromFile];
         
         if (![defaults objectForKey:@"firstRun"]) {
-            [defaults setObject:[NSDate date] forKey:@"firstRun"];
-            NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
-            for (NSString *cercle in [ap arrayCercles]) {
-                [cerclesDico setValue:[NSNumber numberWithBool:YES] forKey:cercle];
-            }
-            [defaults setObject:cerclesDico forKey:@"filtreCercles"];
-            [cerclesDico release];
+            AssociationParser *assos = [AssociationParser instance];
+            [assos loadFromFile];
             
-            NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] init];
-            for (NSString *clubs in [ap arrayClubs]) {
-                [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:clubs];
-            }
-            [defaults setObject:clubsDico forKey:@"filtreClubs"];
-            [clubsDico release];
-            
-            NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] init];
-            for (NSString *type in [ap arrayTypes]) {
-                [typesDico setValue:[NSNumber numberWithBool:YES] forKey:type];
-            }
-            [defaults setObject:typesDico forKey:@"filtreTypes"];
-            [typesDico release];
-            
-            NSArray *colorArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], [NSNumber numberWithFloat:0], nil];
-            [defaults setObject:colorArray forKey:@"theme"];
-            [colorArray release];
+            [self initializeOnFirstRun];
         }
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        // On parse les événements
-        EventsParser *ep = [EventsParser instance];
-        [ep loadEventsFromFile];
-        
-        // On parse les news
-//        NewsParser *np = [NewsParser instance];
-//        [np loadNewsFromFile];
-        
-        // On parse les bons plans
-        DealsParser *bp = [DealsParser instance];
-        [bp loadDealsFromFile];
-
     }
     
-    [self performSelector:@selector(startParse) withObject:nil afterDelay:0.01];
+    [self performSelector:@selector(startApp) withObject:nil afterDelay:0.01];
     [reach stopNotifier];
 }
 
@@ -264,7 +288,7 @@
         } 
     }
 }
-
+#pragma mark - Object classes
 - (void)dealloc
 {
     [_window release];

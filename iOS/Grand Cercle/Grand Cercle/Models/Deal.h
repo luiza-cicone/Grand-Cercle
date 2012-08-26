@@ -1,8 +1,8 @@
 //
 //  Deal.h
-//  TapkuLibrary
+//  Grand Cercle
 //
-//  Created by Luiza Cicone on 21/7/12.
+//  Created by Luiza Cicone on 4/8/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
@@ -12,9 +12,10 @@
 
 @interface Deal : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * subtitle;
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSString * image;
+@property (nonatomic, retain) NSString * subtitle;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * idDeal;
 
 @end

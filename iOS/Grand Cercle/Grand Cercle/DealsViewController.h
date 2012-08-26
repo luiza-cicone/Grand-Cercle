@@ -12,20 +12,24 @@
 #import "DealsDetailViewController.h"
 
 @interface DealsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    
     // Tableau contenant les bons plans
-    NSMutableArray *arrayBonsPlans;
-    // Cellule de la liste des bons plans
-    IBOutlet UITableViewCell *bonsPlansCell;
-    // Tableau contenant les url des images
-    NSMutableArray *urlArray;
-    // Cache
+    NSMutableArray *arrayDeals;
+    
+    // La cellule customize
+    IBOutlet UITableViewCell *dealsCell;
+    
     TKImageCache *imageCache;
+    
     // Table view des bons plans
     IBOutlet UITableView *tview;
+    
+    NSManagedObjectContext *managedObjectContext;
+
 }
 
-@property (retain, nonatomic) NSMutableArray *arrayBonsPlans, *urlArray;
-@property (retain, nonatomic) IBOutlet UITableViewCell *bonsPlansCell;
+@property (retain, nonatomic) NSArray *arrayDeals;
+@property (retain, nonatomic) IBOutlet UITableViewCell *dealsCell;
 @property (retain, nonatomic) TKImageCache *imageCache;
 @property (retain, nonatomic) IBOutlet UITableView *tview;
 

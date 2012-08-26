@@ -9,12 +9,11 @@
 #import "EventDetailViewController.h"
 #import "NSString+HTML.h"
 #import "AppDelegate.h"
+#import "Association.h"
 
-#define DATE 0
-#define TITRE 1
-#define INFOS 2
-//#define ORGANISATION 3
-#define DESCRIPTION 3
+#define TITRE 0
+#define INFOS 1
+#define DESCRIPTION 2
 
 @implementation EventDetailViewController
 @synthesize event, cellEventTop, cellEventDescription, cellEventInfo;
@@ -75,11 +74,11 @@
         EKEvent *myEvent  = [EKEvent eventWithEventStore:eventDB];
     
         myEvent.title     = event.title;
-        myEvent.startDate = event.eventDate;
-        myEvent.endDate   = event.eventDate;
+        myEvent.startDate = event.date;
+        myEvent.endDate   = event.date;
         myEvent.allDay = YES;
         myEvent.notes = [event.description stringByConvertingHTMLToPlainText];
-        myEvent.location = event.place;
+        myEvent.location = event.location;
     
         // Choix du calendrier
         [myEvent setCalendar:[eventDB defaultCalendarForNewEvents]];
@@ -120,7 +119,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -128,7 +127,7 @@
     // Return the number of rows in the section.
     switch (section) {
         case INFOS:
-            return 2;
+            return 3;
             break;
         default:
             break;
@@ -165,34 +164,55 @@
                 self.cellEventTop = nil;
             }
             
+            
             imageView = (UIImageView *)[cell viewWithTag:1];
-            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[event image]]];
-            UIImage *myimage = [[UIImage alloc] initWithData:data];
-            [data release];
-            [imageView setImage:myimage];
-            [myimage release];
+            
+            if (![event.thumbnail isEqualToString:@""]) {
+                // test si c'est dans le cache
+                NSString *imageKey = [NSString stringWithFormat:@"%x", [event.thumbnail hash]];
+                
+                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/events/thumb"] stringByAppendingPathComponent:imageKey];
+                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+                
+                if (fileExists) {
+                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+                } else {
+                    [imageView setImage:nil];
+                }
+            }
+            
 //           
 //            UIWebView *wv = (UIWebView *)[cell viewWithTag:7];
 //            
-//            [wv loadHTMLString:[NSString stringWithFormat:@"<p style=\"font-family : Helvetica;\"><b>%@</b></p><p>%@</p>", [event title], [event group]] baseURL:nil];
+//            [wv loadHTMLString:[NSString stringWithFormat:@"<p style=\"font-family : Helvetica;\"><b>%@</b></p><p>%@</p>", [event title], [[event author] name]] baseURL:nil];
             
             
             label = (UILabel *)[cell viewWithTag:2];
             [label setText: [event title]];
             
             label = (UILabel *)[cell viewWithTag:3];
-            [label setText : event.group];
+            [label setText : event.author.name];
             
             imageView = (UIImageView *)[cell viewWithTag:4];
-            data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)event.logo]];
-            UIImage *img2 = [[UIImage alloc] initWithData:data];
-            [data release];
-            [imageView setImage: img2];
-            [img2 release];
+ 
+            
+            NSString *imageKey = [NSString stringWithFormat:@"%x", [event.author.imagePath hash]];
+            
+            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
+            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+            
+            if (!fileExists) {
+                [imageView setImage:nil];
+            }
+            else {
+                [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+            }
+            
             break;
         
-        case INFOS:
-        case DATE:            
+        case INFOS:          
             CellIdentifier = @"EventInfoCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -203,17 +223,17 @@
             UILabel *label2;
             label = (UILabel *)[cell viewWithTag:1];
             label2 = (UILabel *)[cell viewWithTag:2];
-            if (indexPath.row == 0 && indexPath.section == DATE) {
+            if (indexPath.row == 0 ) {
                 [label setText:@"Date"];
-                [label2 setText:[NSString stringWithFormat:@"%@, %@", [event day], [event date]]];
+                [label2 setText:[NSString stringWithFormat:@"%@, %@", [event day], [event dateText]]];
             }
-            else if (indexPath.row == 0) {
+            else if (indexPath.row == 1) {
                 [label setText:@"Heure"];
                 [label2 setText:[event time]];
             }
-            else if (indexPath.row == 1) {
+            else if (indexPath.row == 2) {
                 [label setText:@"Lieu"];
-                [label2 setText:[event place]];
+                [label2 setText:[event location]];
             }
                         
             break;
@@ -240,7 +260,7 @@
             UIWebView *webView;
             webView = (UIWebView *)[cell viewWithTag:1];
             webView.delegate = self;
-            [webView loadHTMLString:event.description baseURL:nil];
+            [webView loadHTMLString:event.content baseURL:nil];
             [webView sizeToFit];
             
             break;
@@ -292,7 +312,6 @@
             return 80;
             break;
         case INFOS :
-        case DATE :
             return 28;
             break;
         

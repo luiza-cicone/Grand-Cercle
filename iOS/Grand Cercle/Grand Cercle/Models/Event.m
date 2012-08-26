@@ -1,8 +1,8 @@
 //
 //  Event.m
-//  TapkuLibrary
+//  Grand Cercle
 //
-//  Created by Luiza Cicone on 21/7/12.
+//  Created by Luiza Cicone on 7/8/12.
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
@@ -12,14 +12,17 @@
 
 @implementation Event
 
-@dynamic idEvent;
-@dynamic title;
 @dynamic content;
-@dynamic image;
-@dynamic pubDate;
 @dynamic date;
+@dynamic dateText;
+@dynamic day;
+@dynamic idEvent;
+@dynamic image;
 @dynamic location;
+@dynamic time;
+@dynamic title;
 @dynamic type;
+@dynamic thumbnail;
 @dynamic author;
 
 @end

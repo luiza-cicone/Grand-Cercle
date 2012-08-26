@@ -24,6 +24,10 @@
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    
+    NSArray *arrayCercles;
+    NSArray *arrayClubs;
+    NSArray *arrayTypes;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -35,7 +39,7 @@
 
 - (void)saveContext;
 - (NSString *)applicationDocumentsDirectory;
-
+- (void)initializeOnFirstRun;
 @end
 
 

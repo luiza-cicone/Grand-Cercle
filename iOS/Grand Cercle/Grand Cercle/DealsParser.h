@@ -7,27 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Deals.h"
+#import "Deal.h"
 #import "TBXML+HTTP.h"
-#import "TBXML.h"
 #import "NSString+HTML.h"
 
+#import "TBXML.h"
+
 @interface DealsParser : NSObject {
-    // Parser
+    
     TBXML *tbxml;
-    // Tableau contenant les bons plans
-    NSMutableArray *arrayDeals;
+    NSManagedObjectContext *managedObjectContext;
 }
 
-@property(nonatomic, retain) NSMutableArray *arrayDeals;
-
-// Patron singleton, retourne l'unique instance du parser de bons plans
 + (DealsParser *) instance;
+
 // Méthode récupérant l'ensemble des bons plans depuis le site
-- (void) loadDealsFromURL;
-// Méthode récupérant l'ensemble des bons plans depuis une sauvegarde locale
-- (void) loadDealsFromFile;
+- (void) loadFromURL;
+
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
-- (void) handleDeals:(TBXMLElement *)dealsToParse;
+- (void) handle:(TBXMLElement *)dealsToParse;
 
 @end

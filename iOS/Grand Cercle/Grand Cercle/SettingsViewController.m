@@ -92,9 +92,7 @@
  * Retourne le nombre de rows par sections *
  ******************************************/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == FILTER_EVENT)
-        return 3;
-    else if (section == FILTER_NEWS)
+    if (section == FILTER_EVENT || section == FILTER_NEWS)
         return 2;
     else
         return 1;
@@ -136,11 +134,7 @@
             [cell.textLabel setText:@"Clubs & Associations"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        } else if (indexPath.row == 2) {
-            [cell.textLabel setText:@"Type"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-        }
+        } 
 
     // Si on se trouve dans la section FILTER_NEWS, on met en place les deux rows de filtre pour les news
     } else if (indexPath.section == FILTER_NEWS) {
@@ -172,6 +166,7 @@
     // Initialisation et lancement de la vue détaillée
     SettingsDetailViewController *detailViewController = [[SettingsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     detailViewController.filter = indexPath;
+    detailViewController.cercleType = @"";
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
 }

@@ -7,43 +7,57 @@
 //
 
 #import "DealsViewController.h"
+#import "AppDelegate.h"
+
 
 @implementation DealsViewController
-@synthesize bonsPlansCell, arrayBonsPlans, urlArray, imageCache, tview;
+@synthesize dealsCell, tview;
+@synthesize arrayDeals, imageCache;
 
-/****************************
- * Initialisation de la vue *
- ***************************/
+NSString *const dealsImageFolder = @"images/deals";
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        if (managedObjectContext == nil) { 
+            managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
+        }
+        
         // Mise en place du titre dans les onglets du bas
         self.title = NSLocalizedString(@"Deals", @"");
+        
         // Mise en place de l'image dans les onglets du bas
         self.tabBarItem.image = [UIImage imageNamed:@"deals"];
-    }
-    
-    // Récupération des bons plans
-    self.arrayBonsPlans = [[DealsParser instance] arrayDeals];
 
-    // Récupération des url des images des bons plans
-    self.urlArray = [[NSMutableArray alloc] initWithCapacity:[self.arrayBonsPlans count]];
-    for (int i = 0; i < [self.arrayBonsPlans count]; i++) {
-        Deals *bp = [self.arrayBonsPlans objectAtIndex:i];
-        [self.urlArray addObject:[bp logo]];
-    }
-	
-    // Configuration du cache
-	self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:@"logos"] autorelease];
-	self.imageCache.notificationName = @"newLogoCache";
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newLogoCache" object:nil];
+    
+        // Récupération des bons plans
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Deal" inManagedObjectContext:managedObjectContext];
+        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+        [request setEntity:entityDescription];
+        
+        NSError *error = nil;
+        
+        NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+        if (array != nil && error == nil) {
+            [self setArrayDeals:array];
+            [arrayDeals retain];
+        }
+        else {
+            NSLog(@"error %@", error);
+            // Deal with error.
+        }
+
+    // Configuration du cache des images
+	self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:dealsImageFolder] autorelease];
+	self.imageCache.notificationName = @"newDealsImage";
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newDealsImage" object:nil];
     
     // Mise en place du bouton retour, pour la détail view
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     [backButton release];
-
+    }
     return self;
 }
 
@@ -109,13 +123,11 @@
  *************************/
 - (void)viewDidUnload {
     // Libération des structures qui ne sont plus utilisées
-    [bonsPlansCell release];
-    bonsPlansCell = nil;
-    [urlArray release];
-    urlArray = nil;
-    [arrayBonsPlans release];
-    arrayBonsPlans = nil;
-    [self setBonsPlansCell:nil];
+    [dealsCell release];
+    dealsCell = nil;
+    [arrayDeals release];
+    arrayDeals = nil;
+    [self setDealsCell:nil];
     [tview release];
     tview = nil;
     [imageCache release];
@@ -144,7 +156,7 @@
  * Retourne le nombre de rows par sections *
  ******************************************/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrayBonsPlans count];
+    return [arrayDeals count];
 }
 
 /*************************************
@@ -158,25 +170,44 @@
     
     if (cell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"DealCell" owner:self options:nil];
-        cell = bonsPlansCell;
-        self.bonsPlansCell = nil;
+        cell = dealsCell;
+        self.dealsCell = nil;
     }
     
     // Récupération du bon plan à mettre dans la cellule
-    Deals *b = (Deals *)[arrayBonsPlans objectAtIndex:[indexPath row]];
+    Deal *deal = (Deal *)[arrayDeals objectAtIndex:[indexPath row]];
     
-    // Récupération et affichage de l'image du bon plan
+    // Affichage de l'image de la news
     UIImageView *imageView;
     imageView = (UIImageView *)[cell viewWithTag:1];
-    UIImage *img = [imageCache imageForKey:[NSString stringWithFormat:@"%d", [indexPath row]] url:[NSURL URLWithString:[urlArray objectAtIndex: indexPath.row]] queueIfNeeded:YES tag: indexPath.row]; 
-    [imageView setImage:img];
+    
+    if (![deal.image isEqualToString:@""]) {
+        // test si c'est dans le cache
+        NSString *imageKey = [NSString stringWithFormat:@"%x", [deal.image hash]];
+        
+        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:dealsImageFolder] stringByAppendingPathComponent:imageKey];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+        
+        if (!fileExists) {
+            // download img async
+            UIImage *img = [imageCache imageForKey:imageKey url:[NSURL URLWithString:deal.image] queueIfNeeded:YES tag: indexPath.row];
+            [imageView setImage:img];
+        }
+        else {
+            [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+        }
+    }
+    else  [imageView setImage:nil];
+
+
     
     // Affichage des labels
-    UILabel *label;
-    label = (UILabel *)[cell viewWithTag:2];
-    [label setText: [b title]];
+    UILabel *label = (UILabel *)[cell viewWithTag:2];
+    [label setText: [deal title]];
+    
     label = (UILabel *)[cell viewWithTag:3];
-    [label setText: [b summary]];
+    [label setText: [deal subtitle]];
     
     return cell;
 }
@@ -190,8 +221,8 @@
     
     // Construction de la vue détaillée
     DealsDetailViewController *detailViewController = [[DealsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    Deals *b = [arrayBonsPlans objectAtIndex:[indexPath row]];
-    detailViewController.bonPlan = b;
+    Deal *deal = [arrayDeals objectAtIndex:[indexPath row]];
+    detailViewController.deal = deal;
     // Chargement de la vue détaillée
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release]; 
@@ -208,8 +239,8 @@
  * Destructeur *
  **************/
 - (void)dealloc {
-    [bonsPlansCell release];
-    [bonsPlansCell release];
+    [dealsCell release];
+    [dealsCell release];
     [tview release];
     [tview release];
     [super dealloc];

@@ -13,6 +13,7 @@
 #import "EventFourNextViewController.h"
 
 #import "EventsParser.h"
+#import "Reachability.h"
 
 @interface EventsViewController ()
 
@@ -32,6 +33,7 @@ int kNumberOfPages = 3;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         self.title = NSLocalizedString(@"Events", @"Evenements");
         self.tabBarItem.image = [UIImage imageNamed:@"events"];
         
@@ -72,22 +74,11 @@ int kNumberOfPages = 3;
 
 -(void)viewDidDisappear:(BOOL)animated {
 }
-//
-//- (void)viewDidUnload
-//{
-//
-//    [super viewDidUnload];
-//    // Release any retained subviews of the main view.
-//}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationLandscapeLeft && interfaceOrientation != UIInterfaceOrientationLandscapeRight);
 }
-
-//- (void)dealloc {
-//    [super dealloc];
-//}
 
 #pragma mark - Scroll View
 
@@ -126,6 +117,14 @@ int kNumberOfPages = 3;
     [self loadScrollViewWithPage:1];
     [self loadScrollViewWithPage:2];
         
+    // Reload issues button
+    UIBarButtonItem *button = [[UIBarButtonItem alloc]
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                               target:self
+                               action:@selector(refresh:)];
+    self.navigationItem.rightBarButtonItem = button;
+    [button release];
+    
     //mise en place du boutton de retour
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle: @"Retour" 
                                                                    style: UIBarButtonItemStylePlain 
@@ -134,6 +133,79 @@ int kNumberOfPages = 3;
     self.navigationItem.backBarButtonItem = backButton;
     [backButton release];
 
+}
+
+- (IBAction)refresh:(id)sender {
+    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable]; 
+    NSLog(@"can update %d", canUpdate);
+    if (canUpdate) {
+        
+        // replace right bar button 'refresh' with spinner
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
+        spinner.hidesWhenStopped = YES;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.view.frame.size.height/2, self.view.frame.size.width, 60)];
+        [label setText:@"Chargement de mises à jour"];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
+        [label setTextAlignment:UITextAlignmentCenter];
+        
+        
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
+        iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+
+        
+        UIView *v = [[UIView alloc]initWithFrame:self.view.frame];
+        [v setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+        [v addSubview:iv];
+        [iv release];
+        [v addSubview:spinner];
+        [spinner release];
+        [v addSubview:label];
+        [label release];
+        
+        [self.view addSubview:v]; 
+        [v release];
+        [spinner startAnimating];
+        [scrollView setUserInteractionEnabled:FALSE];
+
+        // how we stop refresh from freezing the main UI thread
+        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // do our long running process here            
+            // On parse les événements
+            EventsParser *ep = [EventsParser instance];
+            [ep loadFromURL];        [NSThread sleepForTimeInterval:10];
+
+            
+            // do any UI stuff on the main UI thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [spinner stopAnimating];
+                [v removeFromSuperview];
+                [scrollView setUserInteractionEnabled:TRUE];
+                
+                [((EventsTableViewController *)[viewControllers objectAtIndex:2]) loadData];
+                [((EventsCalendarViewController *)[viewControllers objectAtIndex:1])reloadData];
+                [((EventFourNextViewController *)[viewControllers objectAtIndex:0]) loadData];
+
+            });
+            
+        });
+        dispatch_release(downloadQueue);
+        
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas de connexion internet" 
+                                                        message:@"Vous devez vous connecter à internet pour avoir les mises à jour." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 /************************************************

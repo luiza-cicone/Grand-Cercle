@@ -9,11 +9,8 @@
 #import "DealsDetailViewController.h"
 
 @implementation DealsDetailViewController
-@synthesize bonPlan, cellBonPlanTop, cellBonPlanDescription;
+@synthesize deal, cellBonPlanTop, cellBonPlanDescription;
 
-/****************************
- * Initialisation de la vue *
- ***************************/
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     return self;
@@ -33,7 +30,7 @@
     webView = (UIWebView *)[cellBonPlanDescription viewWithTag:1];
     // On implémentera les fonctions delegate ici
     webView.delegate = self;
-    [webView loadHTMLString:bonPlan.description baseURL:nil];
+    [webView loadHTMLString:deal.description baseURL:nil];
 }
 
 /************************
@@ -105,20 +102,31 @@
             }
             
             // On charge l'image du bon plan
-            UIImageView *imageView;
-            imageView = (UIImageView *)[cell viewWithTag:1];
-            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[bonPlan logo]]];
-            UIImage *myimage2 = [[UIImage alloc] initWithData:data];
-            [data release];
-            [imageView setImage:myimage2];
-            [myimage2 release];
+            UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+
+            if (![deal.image isEqualToString:@""]) {
+                // test si c'est dans le cache
+                NSString *imageKey = [NSString stringWithFormat:@"%x", [deal.image hash]];
+                
+                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/deals"] stringByAppendingPathComponent:imageKey];
+                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+                
+                if (fileExists) {
+                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+                }
+                else {
+                    [imageView setImage:nil];
+                }
+            }
+            else  [imageView setImage:nil];
             
             // On charge les labels
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
-            [label setText: [bonPlan title]];
+            [label setText: [deal title]];
             label = (UILabel *)[cell viewWithTag:3];
-            [label setText: [bonPlan summary]];
+            [label setText: [deal subtitle]];
             break;
             
         // Si on se trouve dans la deuxième section
@@ -137,7 +145,7 @@
             UIWebView *webView;
             webView = (UIWebView *)[cell viewWithTag:1];
             webView.delegate = self;
-            [webView loadHTMLString:bonPlan.description baseURL:nil];
+            [webView loadHTMLString:deal.content baseURL:nil];
             [webView sizeToFit];
             break;
             

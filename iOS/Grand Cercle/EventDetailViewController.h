@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
-#import "Events.h"
+#import "Event.h"
 
 @interface EventDetailViewController : UITableViewController <UIActionSheetDelegate, UIWebViewDelegate> {
-    Events *event;
+    Event *event;
     IBOutlet UITableViewCell *cellEventDescription;
     IBOutlet UITableViewCell *cellEventTop;
     IBOutlet UITableViewCell *cellEventInfo;
@@ -19,7 +19,7 @@
     int webViewHeight;
 }
 
-@property (retain, nonatomic) Events *event;
+@property (retain, nonatomic) Event *event;
 @property (retain, nonatomic) IBOutlet UITableViewCell *cellEventTop, *cellEventDescription, *cellEventInfo;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "NewsDetailViewController.h"
 #import "NSString+HTML.h"
+#import "Association.h"
 
 // Section
 #define TITRE 0
@@ -110,13 +111,36 @@
             }
             
             // Chargement de l'image de la news
-            UIImageView *imageView;
-            imageView = (UIImageView *)[cell viewWithTag:1];
-            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:(NSString*)[news logo]]];
-            UIImage *myimage2 = [[UIImage alloc] initWithData:data];
-            [data release];
-            [imageView setImage:myimage2];
-            [myimage2 release];
+            UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+
+            if (![news.image isEqualToString:@""]) {
+                // test si c'est dans le cache
+                NSString *imageKey = [NSString stringWithFormat:@"%x", [news.image hash]];
+                
+                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/news"] stringByAppendingPathComponent:imageKey];
+                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+                
+                if (fileExists) {
+                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+                } else {
+                    [imageView setImage:nil];
+                }
+            } else {
+                NSString *imageKey = [NSString stringWithFormat:@"%x", [news.author.imagePath hash]];
+                
+                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
+                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+                
+                
+                if (!fileExists) {
+                    [imageView setImage:nil];
+                }
+                else {
+                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+                }
+            }
             
             // Chargement des labels
             UILabel *label;
@@ -142,7 +166,7 @@
             UIWebView *webView;
             webView = (UIWebView *)[cell viewWithTag:1];
             webView.delegate = self;
-            [webView loadHTMLString:news.description baseURL:nil];
+            [webView loadHTMLString:[news content] baseURL:nil];
             [webView sizeToFit];
             
             break;
