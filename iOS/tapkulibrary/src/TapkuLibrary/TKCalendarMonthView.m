@@ -157,7 +157,7 @@ int rectHeight = 34;
 @end
 
 #pragma mark -
-#define dotFontSize 16.0
+#define dotFontSize 24.0
 #define dateFontSize 20.0
 @interface TKCalendarMonthTiles (private)
 @property (strong,nonatomic) UIImageView *selectedImageView;
@@ -334,7 +334,7 @@ int rectHeight = 34;
 	
 	if(mark){
 		r.size.height = 10;
-		r.origin.y += 14;
+		r.origin.y += 10;
 		
 		[@"•" drawInRect: r
 				withFont: f2

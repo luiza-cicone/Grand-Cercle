@@ -35,8 +35,10 @@ NSString *const newsImageFolder = @"images/news";
         
 
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"idNews" ascending:false];
         NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
         [request setEntity:entityDescription];
+        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         
         NSError *error = nil;
         
@@ -61,8 +63,86 @@ NSString *const newsImageFolder = @"images/news";
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
         [backButton release];
+        
+        // Reload issues button
+        UIBarButtonItem *button = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                   target:self
+                                   action:@selector(refresh:)];
+        self.navigationItem.rightBarButtonItem = button;
+        [button release];
     }
     return self;
+}
+
+- (IBAction)refresh:(id)sender {
+    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable]; 
+    NSLog(@"can update %d", canUpdate);
+    if (canUpdate) {
+        
+        // replace right bar button 'refresh' with spinner
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
+        spinner.hidesWhenStopped = YES;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.view.frame.size.height/2, self.view.frame.size.width, 60)];
+        [label setText:@"Chargement de mises à jour"];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
+        [label setTextAlignment:UITextAlignmentCenter];
+        
+        
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
+        iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        
+        
+        UIView *v = [[UIView alloc]initWithFrame:self.view.frame];
+        [v setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+        [v addSubview:iv];
+        [iv release];
+        [v addSubview:spinner];
+        [spinner release];
+        [v addSubview:label];
+        [label release];
+        
+        [self.view addSubview:v]; 
+        [v release];
+        [spinner startAnimating];
+        [[self view] setUserInteractionEnabled:FALSE];
+        
+        // how we stop refresh from freezing the main UI thread
+        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // do our long running process here            
+            // On parse les événements
+            EventsParser *ep = [EventsParser instance];
+            [ep loadFromURL];       
+            
+            // do any UI stuff on the main UI thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [spinner stopAnimating];
+                [v removeFromSuperview];
+                [[self view] setUserInteractionEnabled:TRUE];
+                
+// reload data
+                
+            });
+            
+        });
+        dispatch_release(downloadQueue);
+        
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas de connexion internet" 
+                                                        message:@"Vous devez vous connecter à internet pour avoir les mises à jour." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 

@@ -94,22 +94,55 @@ static NewsParser *instanceNews = nil;
     if (managedObjectContext == nil) { 
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
+    /*  send a request for file modification date  */
+    NSURLRequest *modReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/news.xml"]
+                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0f];
+    NSURLResponse* response;
+    NSError* error = nil;
+    [NSURLConnection sendSynchronousRequest:modReq returningResponse:&response error:&error];
     
-    // Si le lien du fichier xml est correct, ce block est appelé
-    TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
-        if (tbxmlDocument.rootXMLElement)
-            [self handle:tbxmlDocument.rootXMLElement->firstChild];
-    };
-
-    // Si le lien du fichier xml est incorrect, ce block est appelé
-    TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
-        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
-    };
+    NSString * last_modified = [NSString stringWithFormat:@"%@",
+                                [[(NSHTTPURLResponse *)response allHeaderFields] objectForKey:@"Last-Modified"]];
     
-    // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
-    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/news.xml"] 
-                               success:successBlock 
-                               failure:failureBlock];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (! [last_modified isEqualToString:[defaults stringForKey:@"news-last-modified"]]) {
+        [defaults setObject:last_modified forKey:@"news-last-modified"];
+        
+        NSFetchRequest * allNews = [[NSFetchRequest alloc] init];
+        [allNews setEntity:[NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext]];
+        [allNews setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+        
+        NSError * error = nil;
+        NSArray * news
+        = [managedObjectContext executeFetchRequest:allNews error:&error];
+        [allNews release];
+        //error handling goes here
+        for (News *aNews in news) {
+            [managedObjectContext deleteObject:aNews];
+        }
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Couldn't save: %@", [error localizedDescription]);
+        }
+        
+        // Si le lien du fichier xml est correct, ce block est appelé
+        TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
+            if (tbxmlDocument.rootXMLElement)
+                [self handle:tbxmlDocument.rootXMLElement->firstChild];
+        };
+        
+        // Si le lien du fichier xml est incorrect, ce block est appelé
+        TBXMLFailureBlock failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
+            NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+        };
+        
+        
+        
+        // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
+        tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/news.xml"] 
+                                   success:successBlock 
+                                   failure:failureBlock];
+    }
 }
 
 @end

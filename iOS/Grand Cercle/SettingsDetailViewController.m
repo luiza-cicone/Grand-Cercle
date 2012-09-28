@@ -116,7 +116,7 @@ BOOL changed = 0;
 
         NSEntityDescription *assosEntity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
         NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
-        NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"type = %d", 2];
+        NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"(type = %d) AND NOT (name = 'Elus étudiants')", 2];
         [request setEntity:assosEntity];
         [request setPredicate:ofIdPredicate];        
         

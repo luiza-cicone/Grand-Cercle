@@ -178,8 +178,7 @@ int kNumberOfPages = 3;
             // do our long running process here            
             // On parse les événements
             EventsParser *ep = [EventsParser instance];
-            [ep loadFromURL];        [NSThread sleepForTimeInterval:10];
-
+            [ep loadFromURL];     
             
             // do any UI stuff on the main UI thread
             dispatch_async(dispatch_get_main_queue(), ^{

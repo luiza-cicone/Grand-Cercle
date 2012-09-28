@@ -77,7 +77,7 @@
         myEvent.startDate = event.date;
         myEvent.endDate   = event.date;
         myEvent.allDay = YES;
-        myEvent.notes = [event.description stringByConvertingHTMLToPlainText];
+        myEvent.notes = [event.content stringByConvertingHTMLToPlainText];
         myEvent.location = event.location;
     
         // Choix du calendrier

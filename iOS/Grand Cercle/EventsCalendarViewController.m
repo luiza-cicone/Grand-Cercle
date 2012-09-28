@@ -278,7 +278,8 @@
     }
     // ajout du Grand Cercle et elus automatiquemet
     [authors addObject:@"Grand Cercle"];
-    
+    [authors addObject:@"Elus étudiants"];
+
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) AND (date <= %@) AND (author.name in %@)", start, end, authors];
