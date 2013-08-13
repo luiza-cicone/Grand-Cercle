@@ -97,4 +97,27 @@ static DealsParser *instanceBonsPlans = nil;
                                failure:failureBlock];
 }
 
+-(void) loadFromFile {
+    
+    if (managedObjectContext == nil) {
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    }
+    
+    // Initialisation des fichiers TBXML avec le chemin de la sauvegarde interne
+    NSError *error = nil;
+    
+    tbxml = [[TBXML alloc] initWithXMLFile:@"deals.xml" error:&error];
+    
+    if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+    } else {
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
+            [self handle:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
+    }
+    [tbxml release];
+    
+}
+
 @end

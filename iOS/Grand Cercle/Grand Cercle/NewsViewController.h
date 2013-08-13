@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TapkuLibrary/TapkuLibrary.h>
 
 @interface NewsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
@@ -16,9 +15,7 @@
     
     // Tableau contenant les news
     NSArray *newsArray;
-    
-    TKImageCache *imageCache;
-    
+        
     // Tableview contenant la liste des cellule
     IBOutlet UITableView *tView;
    
@@ -28,6 +25,5 @@
 @property (assign, nonatomic) IBOutlet UITableViewCell *newsCell;
 @property (assign, nonatomic) NSArray *newsArray;
 @property (assign, nonatomic) IBOutlet UITableView *tView;
-@property (retain, nonatomic) TKImageCache *imageCache;
 
 @end

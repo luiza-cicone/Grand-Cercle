@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<nodes>
+  <node>
+    <id>225</id>
+    <group>Bureau International Etudiant</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/bie.jpg?itok=-V5Waj-F</logo>
+  </node>
+  <node>
+    <id>74</id>
+    <group>CPP</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/cpp_0.png?itok=tSI6X76Y</logo>
+  </node>
+  <node>
+    <id>76</id>
+    <group>Ense3</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/e3.png?itok=A9XCVKXz</logo>
+  </node>
+  <node>
+    <id>72</id>
+    <group>Ensimag</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/imag.png?itok=LpN0s7I-</logo>
+  </node>
+  <node>
+    <id>75</id>
+    <group>Esisar</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_2012_sans_cartouche.png?itok=p-3ckFTH</logo>
+  </node>
+  <node>
+    <id>77</id>
+    <group>GI</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/gi.png?itok=oRUpKuZf</logo>
+  </node>
+  <node>
+    <id>159</id>
+    <group>Grand Cercle</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_gc_0.png?itok=Ycpq14JU</logo>
+  </node>
+  <node>
+    <id>78</id>
+    <group>Pagora</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/pagora.png?itok=nDCWmUGg</logo>
+  </node>
+  <node>
+    <id>73</id>
+    <group>Phelma</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logocercle.png?itok=-ylhHPZe</logo>
+  </node>
+</nodes>

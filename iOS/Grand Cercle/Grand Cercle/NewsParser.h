@@ -22,7 +22,8 @@
 + (NewsParser *) instance;
 
 // Méthode récupérant l'ensemble des news depuis le site
-- (void) loadNewsFromURL;
+- (void) loadFromURL;
+- (void) loadFromFile;
 
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
 - (void) handle:(TBXMLElement *)newsToParse;

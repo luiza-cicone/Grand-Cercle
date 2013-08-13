@@ -26,6 +26,6 @@
 - (void)loadFromFile;
 
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
-- (void) handle:(TBXMLElement *)listNamesToParse;
+- (void) handle:(TBXMLElement *)list;
 
 @end

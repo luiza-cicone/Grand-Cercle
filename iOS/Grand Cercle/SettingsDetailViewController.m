@@ -63,7 +63,7 @@ BOOL changed = 0;
     self.title = NSLocalizedString(@"Settings", @"Settings");
     self.clearsSelectionOnViewWillAppear = NO;
     
-    if (cercleType != @"") {
+    if (![cercleType isEqualToString: @""]) {
         // Récupération du tableau contenant les noms des types
         typesArray = [[FilterParser instance] arrayTypes];
         
@@ -85,6 +85,8 @@ BOOL changed = 0;
         NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
         
         NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"(type = %d) AND NOT (name = 'Grand Cercle')", 1];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:true];
+        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 
         [request setEntity:assosEntity];
         [request setPredicate:ofIdPredicate];        
@@ -101,7 +103,6 @@ BOOL changed = 0;
         else {
             // Deal with error.
         }
-
         // Récupération des préférences utilisateurs
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
         NSMutableDictionary *cerclesDico = [defaults objectForKey:@"filtreCercles"];
@@ -109,16 +110,19 @@ BOOL changed = 0;
         cerclesChoice = [[NSMutableArray alloc] initWithCapacity:[cerclesArray count]];
         for (NSString *cercle in cerclesArray)
             [cerclesChoice addObject:[cerclesDico objectForKey:cercle]];
-    
+        [request release];
+        [sortDescriptor release];
     // On se trouve dans le filtrage par clubs et associations, pour les news ou les événements
     } else if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CLUBS) {
         // Récupération du tableau contenant les noms des clubs et associations
 
         NSEntityDescription *assosEntity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
-        NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:true];
         NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"(type = %d) AND NOT (name = 'Elus étudiants')", 2];
         [request setEntity:assosEntity];
-        [request setPredicate:ofIdPredicate];        
+        [request setPredicate:ofIdPredicate];
+        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         
         NSError *error = nil;
         
@@ -140,7 +144,8 @@ BOOL changed = 0;
         clubsChoice = [[NSMutableArray alloc] initWithCapacity:[clubsArray count]];
         for (NSString *club in clubsArray)
             [clubsChoice addObject:[clubsDico objectForKey:club]];
-        
+        [request release];
+        [sortDescriptor release];
     // On se trouve dans le filtrage par type, pour les événements
     } else if (filter.section == PERSO && filter.row == PERSO_COLOR) {
         
@@ -149,15 +154,14 @@ BOOL changed = 0;
         NSArray *c = [defaults objectForKey:@"theme"];
         // Initialisation du dictionnaire des thèmes
         themeChoice = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1];
-        
-        UIColor *blackColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
-        UIColor *redColor = [[UIColor alloc] initWithRed:.75 green:.08 blue:.12 alpha:1];
-        UIColor *greenColor = [[UIColor alloc] initWithRed:.59 green:.74 blue:.06 alpha:1];
-        UIColor *blueColor = [[UIColor alloc] initWithRed:0 green:0.59 blue:0.83 alpha:1];
-        UIColor *darkBlueColor = [[UIColor alloc] initWithRed:0 green:.29 blue:.61 alpha:1];
-        UIColor *yellowColor = [[UIColor alloc] initWithRed:1 green:.80 blue:0 alpha:1];
-        UIColor *orangeColor = [[UIColor alloc] initWithRed:.94 green:.59 blue:0 alpha:1];
-        UIColor *purpleColor = [[UIColor alloc] initWithRed:.59 green:.08 blue:0.49 alpha:1];
+        UIColor *blackColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+        UIColor *redColor = [UIColor colorWithRed:.75 green:.08 blue:.12 alpha:1];
+        UIColor *greenColor = [UIColor colorWithRed:.59 green:.74 blue:.06 alpha:1];
+        UIColor *blueColor = [UIColor colorWithRed:0 green:0.59 blue:0.83 alpha:1];
+        UIColor *darkBlueColor = [UIColor colorWithRed:0 green:.29 blue:.61 alpha:1];
+        UIColor *yellowColor = [UIColor colorWithRed:1 green:.80 blue:0 alpha:1];
+        UIColor *orangeColor = [UIColor colorWithRed:.94 green:.59 blue:0 alpha:1];
+        UIColor *purpleColor = [UIColor colorWithRed:.59 green:.08 blue:0.49 alpha:1];
         
         themesDico = [[NSMutableDictionary alloc] initWithCapacity:8];
         [themesDico setObject:blackColor forKey:@"Noir Grand Cercle"];
@@ -200,7 +204,7 @@ BOOL changed = 0;
  * Retourne le nombre de rows par sections *
  ******************************************/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (cercleType != @"") {
+    if ([cercleType isEqualToString:@""]) {
         return [typesArray count];
     } else {
         if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES)
@@ -217,7 +221,7 @@ BOOL changed = 0;
  * Titre les différentes sections *
  *********************************/
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (cercleType != @"") {
+    if ([cercleType isEqualToString:@""]) {
         return @"Types d'événements";
     } else {
         if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES)
@@ -244,7 +248,7 @@ BOOL changed = 0;
     
     // Définition du booléen, pour savoir si un élément est check ou non
     BOOL checked;
-    if (cercleType != @"") {
+    if ([cercleType isEqualToString:@""]) {
         [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
         checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
@@ -286,7 +290,7 @@ BOOL changed = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dans chaque cas, si l'utilisateur clique on enlève le check ou on le met
     
-    if (cercleType != @"") {
+    if ([cercleType isEqualToString:@""]) {
         BOOL value = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
@@ -332,15 +336,16 @@ BOOL changed = 0;
     
     // On met à jour dans les préférences utilisateurs les nouveaux choix effectués
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    if (cercleType != @"") {
-        NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];        
+    if ([cercleType isEqualToString:@""]) {
+        NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
         NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] initWithDictionary:[cerclesDico objectForKey:cercleType]];
         for (int i = 0; i < [typesArray count]; i++) {
             [typesDico setObject:[typesChoice objectAtIndex:i] forKey:[typesArray objectAtIndex:i]];
         }
         [cerclesDico setObject:typesDico forKey:cercleType]; 
         [defaults setObject:cerclesDico forKey:@"filtreCercles"];
-        
+        [typesDico release];
+        [cerclesDico release];
     } else {
         if (filter.section == NEWS && filter.row == FILTER_CERCLES) {
             NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
@@ -348,7 +353,8 @@ BOOL changed = 0;
                 [cerclesDico setObject:[cerclesChoice objectAtIndex:i] forKey:[cerclesArray objectAtIndex:i]];
             }        
             [defaults setObject:cerclesDico forKey:@"filtreCerclesNews"];
-            
+            [cerclesDico release];
+
         } else if (filter.section == NEWS && filter.row == FILTER_CLUBS) {
 
             NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreClubs"]];
@@ -356,6 +362,7 @@ BOOL changed = 0;
                 [clubsDico setObject:[clubsChoice objectAtIndex:i] forKey:[clubsArray objectAtIndex:i]];
             }
             [defaults setObject:clubsDico forKey:@"filtreClubsNews"];
+            [clubsDico release];
 
         } else if (filter.section == EVENTS && filter.row == FILTER_CLUBS) {
             NSMutableDictionary *clubsDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreClubs"]];
@@ -363,6 +370,7 @@ BOOL changed = 0;
                 [clubsDico setObject:[clubsChoice objectAtIndex:i] forKey:[clubsArray objectAtIndex:i]];
             }
             [defaults setObject:clubsDico forKey:@"filtreClubs"];
+            [clubsDico release];
         } else return;
     }
     // Validation des nouvelles préférences

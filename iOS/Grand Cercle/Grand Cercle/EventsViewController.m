@@ -23,14 +23,12 @@
 @synthesize viewControllers, scrollView;
 @synthesize pageControl = _pageControl;
 
-// constante pour le nombre des pages
 int kNumberOfPages = 3;
 
 #pragma mark - View Functions
-/****************************
- * Initialisation de la vue *
- ***************************/
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
@@ -40,47 +38,32 @@ int kNumberOfPages = 3;
         // initialisation du page control
         _pageControl = [[StyledPageControl alloc] initWithFrame:CGRectZero];
         [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        [_pageControl setFrame:CGRectMake(0, 350, 320, 20)];
+        
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        CGFloat tabBarHeight = 49;
+        CGFloat navBarHeight = 44;
+        CGFloat statusBarHeight = 20;
+    
+        CGFloat pageControlHeight = 20;
+        
+        CGFloat posY = screenHeight - statusBarHeight - navBarHeight - tabBarHeight - pageControlHeight;
+
+        [_pageControl setFrame:CGRectMake(0, posY , screenWidth, pageControlHeight)];
         [self.view addSubview:_pageControl];
+        
+        // listen to notifications to update views
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadEventsData:) name:@"updateFinished" object:nil];
 
     }
     return self;
-}
-//
-///************************
-// * Chargement de la vue *
-// ***********************/
-//-(void)viewDidAppear:(BOOL)animated {
-//    
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-//    if ([[defaults objectForKey:@"changedEvents"] boolValue] == 1) {
-//        [self viewDidUnload];
-//
-//        [self viewDidLoad];
-//        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"changedEvents"];
-//        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"reloadEvents"];
-//    }
-    
-    
-//[[self.tabBarController tabBar] setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:.18]]; 
-//}
-
-- (void)viewWillAppear:(BOOL)animated {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    NSArray *c = [defaults objectForKey:@"theme"];
-    
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
-}
-
--(void)viewDidDisappear:(BOOL)animated {
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationLandscapeLeft && interfaceOrientation != UIInterfaceOrientationLandscapeRight);
 }
-
-#pragma mark - Scroll View
 
 - (void)viewDidLoad
 {
@@ -135,82 +118,16 @@ int kNumberOfPages = 3;
 
 }
 
-- (IBAction)refresh:(id)sender {
-    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable]; 
-    NSLog(@"can update %d", canUpdate);
-    if (canUpdate) {
-        
-        // replace right bar button 'refresh' with spinner
-        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
-        spinner.hidesWhenStopped = YES;
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.view.frame.size.height/2, self.view.frame.size.width, 60)];
-        [label setText:@"Chargement de mises à jour"];
-        [label setTextColor:[UIColor whiteColor]];
-        [label setBackgroundColor:[UIColor clearColor]];
-        [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
-        [label setTextAlignment:UITextAlignmentCenter];
-        
-        
-        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
-        iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-
-        
-        UIView *v = [[UIView alloc]initWithFrame:self.view.frame];
-        [v setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
-        [v addSubview:iv];
-        [iv release];
-        [v addSubview:spinner];
-        [spinner release];
-        [v addSubview:label];
-        [label release];
-        
-        [self.view addSubview:v]; 
-        [v release];
-        [spinner startAnimating];
-        [scrollView setUserInteractionEnabled:FALSE];
-
-        // how we stop refresh from freezing the main UI thread
-        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
-        dispatch_async(downloadQueue, ^{
-            
-            // do our long running process here            
-            // On parse les événements
-            EventsParser *ep = [EventsParser instance];
-            [ep loadFromURL];     
-            
-            // do any UI stuff on the main UI thread
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [spinner stopAnimating];
-                [v removeFromSuperview];
-                [scrollView setUserInteractionEnabled:TRUE];
-                
-                [((EventsTableViewController *)[viewControllers objectAtIndex:2]) loadData];
-                [((EventsCalendarViewController *)[viewControllers objectAtIndex:1])reloadData];
-                [((EventFourNextViewController *)[viewControllers objectAtIndex:0]) loadData];
-
-            });
-            
-        });
-        dispatch_release(downloadQueue);
-        
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas de connexion internet" 
-                                                        message:@"Vous devez vous connecter à internet pour avoir les mises à jour." 
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *c = [defaults objectForKey:@"theme"];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
 }
 
-/************************************************
- * Action réalisée après l'apparition de la vue *
- ***********************************************/
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated
+{
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
     NSArray *c = [defaults objectForKey:@"theme"];
@@ -218,9 +135,6 @@ int kNumberOfPages = 3;
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
 }
 
-/**************************
- * Déchargement de la vue *
- *************************/
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -231,18 +145,15 @@ int kNumberOfPages = 3;
     viewControllers = nil;
 }
 
-/********************************
- * Deallocation du controllerur *
- *******************************/
-- (void)dealloc {
+- (void)dealloc
+{
     [super dealloc];
 }
+
 #pragma mark - Scroll View Delegate
 
-/************************************************************
- * Fonction appelle quand il y a le mouvement sur le scroll *
- ***********************************************************/
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
 
     if (pageControlUsed) {
         return;
@@ -255,21 +166,16 @@ int kNumberOfPages = 3;
 
 }
 
-/***************************************
- * Fonction appelle a la fin du scroll *
- ***************************************/
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
     pageControlUsed = NO;
 }
 
-#pragma mark - Fonctions pour les pages
+#pragma mark - Paginf
 
-/*****************************************
- * Change la page si il y a un mouvement * 
- * ou si on a cliqué sur le page control *
- ****************************************/
 
-- (IBAction)changePage:(id)sender {
+- (IBAction)changePage:(id)sender
+{
 
     int page = _pageControl.currentPage;
     
@@ -282,12 +188,8 @@ int kNumberOfPages = 3;
     pageControlUsed = YES;
 }
 
-
-/************************************************************
- * Initialise le scroll view avec les controllers des pages *
- ***********************************************************/
-
-- (void)loadScrollViewWithPage:(int)page {
+- (void)loadScrollViewWithPage:(int)page
+{
     if (page < 0) return;
     if (page >= kNumberOfPages) return;
     
@@ -324,5 +226,90 @@ int kNumberOfPages = 3;
         [scrollView addSubview:controller.view];
     }
 }
+
+#pragma mark - Update
+
+- (IBAction)refresh:(id)sender
+{
+//    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable];
+//    
+//    if (canUpdate) {
+//        
+//        // replace right bar button 'refresh' with spinner
+//        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//        spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
+//        spinner.hidesWhenStopped = YES;
+//        
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.view.frame.size.height/2, self.view.frame.size.width, 60)];
+//        [label setText:@"Chargement de mises à jour"];
+//        [label setTextColor:[UIColor whiteColor]];
+//        [label setBackgroundColor:[UIColor clearColor]];
+//        [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
+//        [label setTextAlignment:UITextAlignmentCenter];
+//        
+//        
+//        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
+//        iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+//        
+//        
+//        UIView *v = [[UIView alloc]initWithFrame:self.view.frame];
+//        [v setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+//        [v addSubview:iv];
+//        [iv release];
+//        [v addSubview:spinner];
+//        [spinner release];
+//        [v addSubview:label];
+//        [label release];
+//        
+//        [self.view addSubview:v];
+//        [v release];
+//        [spinner startAnimating];
+//        [scrollView setUserInteractionEnabled:FALSE];
+//        
+//        // how we stop refresh from freezing the main UI thread
+//        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+//        dispatch_async(downloadQueue, ^{
+//            
+//            // do our long running process here
+//            // On parse les événements
+//           [[EventsParser instance] loadFromURL];
+//            
+//            // do any UI stuff on the main UI thread
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [spinner stopAnimating];
+//                [v removeFromSuperview];
+//                [scrollView setUserInteractionEnabled:TRUE];
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFinished" object:nil];
+//                
+//            });
+//            
+//        });
+//        dispatch_release(downloadQueue);
+//        
+//    }
+//    else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas de connexion internet"
+//                                                        message:@"Vous devez vous connecter à internet pour avoir les mises à jour."
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//        [alert release];
+//    }
+}
+
+- (void) reloadEventsData: (NSNotification *) notification {
+    if ([[notification name] isEqualToString:@"updateFinished"]){
+        
+        NSLog(@"notification received");
+        
+        [((EventFourNextViewController *)[viewControllers objectAtIndex:0]) loadData];
+        [((EventsCalendarViewController *)[viewControllers objectAtIndex:1])reloadData];
+        [((EventsTableViewController *)[viewControllers objectAtIndex:2]) loadData];
+
+    }
+}
+
 
 @end

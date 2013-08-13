@@ -8,20 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "EventsViewController.h"
-#import <TapkuLibrary/TapkuLibrary.h>
+#import "Event.h"
+#import "TapkuLibrary/TapkuLibrary.h"
 
 @interface EventFourNextViewController : UIViewController {
     EventsViewController *superController;
-    
-    TKImageCache *imageCache;
-    NSMutableArray *arrayEvents;
+    Event *event;
     
     NSManagedObjectContext *managedObjectContext;
+    
+    TKImageCache *imageCache;
+
+    IBOutlet UILabel *titleLabel, *dateLabel, *placeLabel;
+    IBOutlet UIImageView *eventImageView;
 }
 
-@property (retain, nonatomic) NSMutableArray *arrayEvents;
+@property (retain, nonatomic) Event *event;
 @property (retain, nonatomic) EventsViewController *superController;
 @property (retain, nonatomic) TKImageCache *imageCache;
+@property (nonatomic, retain) IBOutlet UILabel *titleLabel, *dateLabel, *placeLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *eventImageView;
+
 
 - (IBAction)imageButtonAction:(id)sender;
 -(void) loadData;

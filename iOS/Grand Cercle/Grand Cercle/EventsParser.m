@@ -25,7 +25,7 @@ static EventsParser *instanceEvent = nil;
 /***************************************************
  * Méthode récupérant les informations nécessaires *
  **************************************************/
-- (void) handleEvents:(TBXMLElement *)eventsToParse {
+- (void) handle:(TBXMLElement *)eventsToParse {
     // Tant qu'il y a un événement à traiter
 	do {
         
@@ -159,7 +159,6 @@ static EventsParser *instanceEvent = nil;
         
         NSError * error = nil;
         NSArray * events = [managedObjectContext executeFetchRequest:allEvents error:&error];
-        [allEvents release];
         //error handling goes here
         for (Event *event in events) {
             [managedObjectContext deleteObject:event];
@@ -167,11 +166,12 @@ static EventsParser *instanceEvent = nil;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Couldn't save: %@", [error localizedDescription]);
         }
-        
+        [allEvents release];
+
         // Si le premier lien du fichier xml est correct, ce block est appelé
         TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
             if (tbxmlDocument.rootXMLElement)
-                [self handleEvents:tbxmlDocument.rootXMLElement->firstChild];
+                [self handle:tbxmlDocument.rootXMLElement->firstChild];
         };
         
         // Si un des liens des fichiers xml est incorrect, ce block est appelé
@@ -185,6 +185,29 @@ static EventsParser *instanceEvent = nil;
                                    failure:failureBlock];
     }
 
+}
+
+-(void) loadFromFile {
+    
+    if (managedObjectContext == nil) {
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    }
+    
+    // Initialisation des fichiers TBXML avec le chemin de la sauvegarde interne
+    NSError *error = nil;
+    
+    tbxml = [[TBXML alloc] initWithXMLFile:@"events.xml" error:&error];
+    
+    if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+    } else {
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
+            [self handle:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
+    }
+    [tbxml release];
+    
 }
                                 
 

@@ -26,8 +26,16 @@
 		04F4CBE1157915C200A49037 /* EventFourNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4CBDF157915C000A49037 /* EventFourNextViewController.m */; };
 		04F4CBE2157915C200A49037 /* EventFourNextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */; };
 		250926561585043900BCF015 /* events_bkgd.png in Resources */ = {isa = PBXBuildFile; fileRef = 250926551585043900BCF015 /* events_bkgd.png */; };
-		2509265B158526A800BCF015 /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25092659158526A800BCF015 /* default@2x.png */; };
-		2509265C158526A800BCF015 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2509265A158526A800BCF015 /* default.png */; };
+		2509265B158526A800BCF015 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25092659158526A800BCF015 /* Default@2x.png */; };
+		2509265C158526A800BCF015 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2509265A158526A800BCF015 /* Default.png */; };
+		250BF50917A6B07A0099B2A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 250BF50817A6B07A0099B2A3 /* Default-568h@2x.png */; };
+		250BF51217A6B3650099B2A3 /* UIImage+568h.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BF51117A6B3650099B2A3 /* UIImage+568h.m */; };
+		250BF51517A6CC210099B2A3 /* events.xml in Resources */ = {isa = PBXBuildFile; fileRef = 250BF51317A6CC210099B2A3 /* events.xml */; };
+		250BF51617A6CC210099B2A3 /* news.xml in Resources */ = {isa = PBXBuildFile; fileRef = 250BF51417A6CC210099B2A3 /* news.xml */; };
+		250BF51817A6CD000099B2A3 /* deals.xml in Resources */ = {isa = PBXBuildFile; fileRef = 250BF51717A6CD000099B2A3 /* deals.xml */; };
+		250BF51C17A6D0850099B2A3 /* cercles.xml in Resources */ = {isa = PBXBuildFile; fileRef = 250BF51917A6D0850099B2A3 /* cercles.xml */; };
+		250BF51D17A6D0850099B2A3 /* clubs.xml in Resources */ = {isa = PBXBuildFile; fileRef = 250BF51A17A6D0850099B2A3 /* clubs.xml */; };
+		250BF51E17A6D0850099B2A3 /* types.xml in Resources */ = {isa = PBXBuildFile; fileRef = 250BF51B17A6D0850099B2A3 /* types.xml */; };
 		250DE5A115DE625B00F5635F /* rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 250DE59F15DE625B00F5635F /* rectangle.png */; };
 		250DE5A215DE625B00F5635F /* rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 250DE5A015DE625B00F5635F /* rectangle@2x.png */; };
 		251FD3F4157F8E7E00F93E4F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FD3F3157F8E7E00F93E4F /* Reachability.m */; };
@@ -40,9 +48,6 @@
 		255C8145157428A000E6ECC3 /* NewsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C813D157428A000E6ECC3 /* NewsParser.m */; };
 		255C8147157428A000E6ECC3 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C8141157428A000E6ECC3 /* TBXML+HTTP.m */; };
 		256217401576A2AC00667661 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2562173E1576A2AC00667661 /* EventCell.xib */; };
-		257C49CC15C6FD04000282C4 /* cercles.xml in Resources */ = {isa = PBXBuildFile; fileRef = 257C49C915C6FD04000282C4 /* cercles.xml */; };
-		257C49CD15C6FD04000282C4 /* clubs.xml in Resources */ = {isa = PBXBuildFile; fileRef = 257C49CA15C6FD04000282C4 /* clubs.xml */; };
-		257C49CE15C6FD04000282C4 /* types.xml in Resources */ = {isa = PBXBuildFile; fileRef = 257C49CB15C6FD04000282C4 /* types.xml */; };
 		257FDAAB15CD6F6F00840AEE /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FDAAA15CD6F6F00840AEE /* Association.m */; };
 		257FDAAE15CD6FC300840AEE /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FDAAD15CD6FC300840AEE /* Deal.m */; };
 		258D3695157CA8DE0001E64E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258D3694157CA8DE0001E64E /* SettingsViewController.m */; };
@@ -79,12 +84,14 @@
 		25D7C0FE15760BDB00C2B988 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */; };
 		25D8AD7315791F240065C038 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7215791F240065C038 /* icon.png */; };
 		25D8AD7515791F2D0065C038 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D8AD7415791F2D0065C038 /* icon@2x.png */; };
-		25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */; };
-		25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E25D15751736009B8921 /* libTapkuLibrary.a */; };
 		25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29615751DBC009B8921 /* QuartzCore.framework */; };
 		25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E29815751DC2009B8921 /* MapKit.framework */; };
 		25E2333315D1A9AF0012EB82 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E2333215D1A9AF0012EB82 /* Event.m */; };
 		25E2333715D1AC350012EB82 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25E2333515D1AC350012EB82 /* Data.xcdatamodeld */; };
+		25EBE93217BAE3ED0070D80A /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25EBE92E17BAE3ED0070D80A /* TapkuLibrary.bundle */; };
+		25EBE93917BAE3FC0070D80A /* libTapkuLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EBE93617BAE3EE0070D80A /* libTapkuLibrary.a */; };
+		25EBE93D17BAE5350070D80A /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EBE93C17BAE5350070D80A /* SDWebImage.framework */; };
+		25EBE93F17BAE54B0070D80A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EBE93E17BAE54B0070D80A /* ImageIO.framework */; };
 		25ECD56015775F2A006E4652 /* EventsCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECD55F15775F2A006E4652 /* EventsCalendarViewController.m */; };
 		25ECD56215777F81006E4652 /* EventSmallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25ECD56115777F81006E4652 /* EventSmallCell.xib */; };
 		25F9300A15BAFC7000C49C23 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9300615BAFC7000C49C23 /* News.m */; };
@@ -100,23 +107,23 @@
 			remoteGlobalIDString = 2595EA981573FA9000CA27B3;
 			remoteInfo = "Grand Cercle";
 		};
-		25E0E25C15751736009B8921 /* PBXContainerItemProxy */ = {
+		25EBE93517BAE3EE0070D80A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+			containerPortal = 25EBE92F17BAE3ED0070D80A /* TapkuLibrary.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = TapkuLibrary;
 		};
-		25E0E25E15751736009B8921 /* PBXContainerItemProxy */ = {
+		25EBE93717BAE3EE0070D80A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+			containerPortal = 25EBE92F17BAE3ED0070D80A /* TapkuLibrary.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3B45DDF1134C736600D24C1A;
 			remoteInfo = LogicTests;
 		};
-		25E0E29315751DA1009B8921 /* PBXContainerItemProxy */ = {
+		25EBE93A17BAE4160070D80A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+			containerPortal = 25EBE92F17BAE3ED0070D80A /* TapkuLibrary.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = TapkuLibrary;
@@ -151,8 +158,18 @@
 		04F4CBDF157915C000A49037 /* EventFourNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventFourNextViewController.m; path = ../EventFourNextViewController.m; sourceTree = "<group>"; };
 		04F4CBE0157915C200A49037 /* EventFourNextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventFourNextViewController.xib; path = ../EventFourNextViewController.xib; sourceTree = "<group>"; };
 		250926551585043900BCF015 /* events_bkgd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = events_bkgd.png; sourceTree = "<group>"; };
-		25092659158526A800BCF015 /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
-		2509265A158526A800BCF015 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		25092659158526A800BCF015 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		2509265A158526A800BCF015 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		250BF50817A6B07A0099B2A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		250BF51017A6B3650099B2A3 /* UIImage+568h.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+568h.h"; path = "../UIImage+568h.h"; sourceTree = "<group>"; };
+		250BF51117A6B3650099B2A3 /* UIImage+568h.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+568h.m"; path = "../UIImage+568h.m"; sourceTree = "<group>"; };
+		250BF51317A6CC210099B2A3 /* events.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = events.xml; sourceTree = "<group>"; };
+		250BF51417A6CC210099B2A3 /* news.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = news.xml; sourceTree = "<group>"; };
+		250BF51717A6CD000099B2A3 /* deals.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = deals.xml; sourceTree = "<group>"; };
+		250BF51917A6D0850099B2A3 /* cercles.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cercles.xml; sourceTree = "<group>"; };
+		250BF51A17A6D0850099B2A3 /* clubs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = clubs.xml; sourceTree = "<group>"; };
+		250BF51B17A6D0850099B2A3 /* types.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = types.xml; sourceTree = "<group>"; };
+		250BF51F17A6DB8B0099B2A3 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		250DE59F15DE625B00F5635F /* rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rectangle.png; sourceTree = "<group>"; };
 		250DE5A015DE625B00F5635F /* rectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rectangle@2x.png"; sourceTree = "<group>"; };
 		251FD3F2157F8E7E00F93E4F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -169,9 +186,6 @@
 		255C8142157428A000E6ECC3 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		255C8143157428A000E6ECC3 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
 		2562173F1576A2AC00667661 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EventCell.xib; sourceTree = "<group>"; };
-		257C49C915C6FD04000282C4 /* cercles.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = cercles.xml; path = ../../xml/cercles.xml; sourceTree = "<group>"; };
-		257C49CA15C6FD04000282C4 /* clubs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = clubs.xml; path = ../../xml/clubs.xml; sourceTree = "<group>"; };
-		257C49CB15C6FD04000282C4 /* types.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = types.xml; path = ../../xml/types.xml; sourceTree = "<group>"; };
 		257FDAA915CD6F6F00840AEE /* Association.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Association.h; path = "Grand Cercle/Models/Association.h"; sourceTree = "<group>"; };
 		257FDAAA15CD6F6F00840AEE /* Association.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Association.m; path = "Grand Cercle/Models/Association.m"; sourceTree = "<group>"; };
 		257FDAAC15CD6FC300840AEE /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deal.h; path = "Grand Cercle/Models/Deal.h"; sourceTree = "<group>"; };
@@ -223,15 +237,17 @@
 		25D13CE91580EF1B006A4F0C /* InfosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfosViewController.m; path = ../InfosViewController.m; sourceTree = "<group>"; };
 		25D7C0FC15760BDB00C2B988 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
 		25D7C0FD15760BDB00C2B988 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsTableViewController.m; sourceTree = "<group>"; };
-		25D8AD7215791F240065C038 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		25D8AD7415791F2D0065C038 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapkuLibrary.xcodeproj; path = ../tapkulibrary/src/TapkuLibrary.xcodeproj; sourceTree = "<group>"; };
-		25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TapkuLibrary.bundle; path = ../tapkulibrary/src/TapkuLibrary.bundle; sourceTree = "<group>"; };
+		25D8AD7215791F240065C038 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		25D8AD7415791F2D0065C038 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		25E0E29615751DBC009B8921 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		25E0E29815751DC2009B8921 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		25E2333115D1A9AF0012EB82 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = "Grand Cercle/Models/Event.h"; sourceTree = "<group>"; };
 		25E2333215D1A9AF0012EB82 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = "Grand Cercle/Models/Event.m"; sourceTree = "<group>"; };
 		25E2333615D1AC350012EB82 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
+		25EBE92E17BAE3ED0070D80A /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TapkuLibrary.bundle; path = ../tapkulibrary/src/TapkuLibrary.bundle; sourceTree = "<group>"; };
+		25EBE92F17BAE3ED0070D80A /* TapkuLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapkuLibrary.xcodeproj; path = ../tapkulibrary/src/TapkuLibrary.xcodeproj; sourceTree = "<group>"; };
+		25EBE93C17BAE5350070D80A /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		25EBE93E17BAE54B0070D80A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		25ECD55E15775F2A006E4652 /* EventsCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsCalendarViewController.h; path = ../EventsCalendarViewController.h; sourceTree = "<group>"; };
 		25ECD55F15775F2A006E4652 /* EventsCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsCalendarViewController.m; path = ../EventsCalendarViewController.m; sourceTree = "<group>"; };
 		25ECD56115777F81006E4652 /* EventSmallCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventSmallCell.xib; sourceTree = "<group>"; };
@@ -246,15 +262,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25EBE93F17BAE54B0070D80A /* ImageIO.framework in Frameworks */,
+				25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */,
+				25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */,
 				251FD48D157FFABD00F93E4F /* CoreData.framework in Frameworks */,
 				251FD3F6157F910F00F93E4F /* SystemConfiguration.framework in Frameworks */,
 				040404FB157D068D00157FD4 /* EventKit.framework in Frameworks */,
-				25E0E29915751DC2009B8921 /* MapKit.framework in Frameworks */,
-				25E0E29715751DBC009B8921 /* QuartzCore.framework in Frameworks */,
-				25E0E29515751DB0009B8921 /* libTapkuLibrary.a in Frameworks */,
+				25EBE93917BAE3FC0070D80A /* libTapkuLibrary.a in Frameworks */,
 				2595EA9E1573FA9000CA27B3 /* UIKit.framework in Frameworks */,
 				2595EAA01573FA9000CA27B3 /* Foundation.framework in Frameworks */,
 				2595EAA21573FA9000CA27B3 /* CoreGraphics.framework in Frameworks */,
+				25EBE93D17BAE5350070D80A /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,9 +399,12 @@
 		257C49C815C6FADB000282C4 /* xml */ = {
 			isa = PBXGroup;
 			children = (
-				257C49C915C6FD04000282C4 /* cercles.xml */,
-				257C49CA15C6FD04000282C4 /* clubs.xml */,
-				257C49CB15C6FD04000282C4 /* types.xml */,
+				250BF51917A6D0850099B2A3 /* cercles.xml */,
+				250BF51A17A6D0850099B2A3 /* clubs.xml */,
+				250BF51B17A6D0850099B2A3 /* types.xml */,
+				250BF51717A6CD000099B2A3 /* deals.xml */,
+				250BF51317A6CC210099B2A3 /* events.xml */,
+				250BF51417A6CC210099B2A3 /* news.xml */,
 			);
 			name = xml;
 			sourceTree = "<group>";
@@ -413,6 +434,8 @@
 		258F1E2B15D047D300BFD2E8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				250BF51017A6B3650099B2A3 /* UIImage+568h.h */,
+				250BF51117A6B3650099B2A3 /* UIImage+568h.m */,
 				251FD3F1157F8E2100F93E4F /* NetworkReachability */,
 				251FD3DF157F679C00F93E4F /* StyledPageControl */,
 				255C8148157428A300E6ECC3 /* TBXML */,
@@ -423,11 +446,7 @@
 		2595EA8E1573FA9000CA27B3 = {
 			isa = PBXGroup;
 			children = (
-				25E2333515D1AC350012EB82 /* Data.xcdatamodeld */,
-				25092659158526A800BCF015 /* default@2x.png */,
-				2509265A158526A800BCF015 /* default.png */,
-				25D8AD7415791F2D0065C038 /* icon@2x.png */,
-				25D8AD7215791F240065C038 /* icon.png */,
+				25EBE93E17BAE54B0070D80A /* ImageIO.framework */,
 				2595EAA31573FA9000CA27B3 /* Grand Cercle */,
 				2595EACF1573FA9000CA27B3 /* Grand CercleTests */,
 				2595EA9C1573FA9000CA27B3 /* Frameworks */,
@@ -447,13 +466,14 @@
 		2595EA9C1573FA9000CA27B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25EBE93C17BAE5350070D80A /* SDWebImage.framework */,
+				25EBE92E17BAE3ED0070D80A /* TapkuLibrary.bundle */,
+				25EBE92F17BAE3ED0070D80A /* TapkuLibrary.xcodeproj */,
 				251FD48C157FFABD00F93E4F /* CoreData.framework */,
 				251FD3F5157F910F00F93E4F /* SystemConfiguration.framework */,
 				040404FA157D068D00157FD4 /* EventKit.framework */,
 				25E0E29815751DC2009B8921 /* MapKit.framework */,
 				25E0E29615751DBC009B8921 /* QuartzCore.framework */,
-				25E0E29115751D5F009B8921 /* TapkuLibrary.bundle */,
-				25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */,
 				2595EA9D1573FA9000CA27B3 /* UIKit.framework */,
 				2595EA9F1573FA9000CA27B3 /* Foundation.framework */,
 				2595EAA11573FA9000CA27B3 /* CoreGraphics.framework */,
@@ -465,9 +485,12 @@
 		2595EAA31573FA9000CA27B3 /* Grand Cercle */ = {
 			isa = PBXGroup;
 			children = (
-				258F1E2B15D047D300BFD2E8 /* Libs */,
+				250BF50817A6B07A0099B2A3 /* Default-568h@2x.png */,
+				25092659158526A800BCF015 /* Default@2x.png */,
+				2509265A158526A800BCF015 /* Default.png */,
 				2595EAAC1573FA9000CA27B3 /* AppDelegate.h */,
 				2595EAAD1573FA9000CA27B3 /* AppDelegate.m */,
+				258F1E2B15D047D300BFD2E8 /* Libs */,
 				257C49C815C6FADB000282C4 /* xml */,
 				25F9300B15BAFC7A00C49C23 /* Model */,
 				25F41CC0157AC76E002C15C3 /* Parser */,
@@ -479,6 +502,7 @@
 				040404F9157CDBA100157FD4 /* Info */,
 				258D36A1157CAD9B0001E64E /* Settings */,
 				2595EAA41573FA9000CA27B3 /* Supporting Files */,
+				250BF51F17A6DB8B0099B2A3 /* Constants.h */,
 			);
 			path = "Grand Cercle";
 			sourceTree = "<group>";
@@ -517,6 +541,9 @@
 		2595EAE01573FAAB00CA27B3 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				25E2333515D1AC350012EB82 /* Data.xcdatamodeld */,
+				25D8AD7415791F2D0065C038 /* icon@2x.png */,
+				25D8AD7215791F240065C038 /* icon.png */,
 				250DE59F15DE625B00F5635F /* rectangle.png */,
 				250DE5A015DE625B00F5635F /* rectangle@2x.png */,
 				250926551585043900BCF015 /* events_bkgd.png */,
@@ -544,11 +571,11 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		25E0E25515751735009B8921 /* Products */ = {
+		25EBE93017BAE3ED0070D80A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				25E0E25D15751736009B8921 /* libTapkuLibrary.a */,
-				25E0E25F15751736009B8921 /* LogicTests.octest */,
+				25EBE93617BAE3EE0070D80A /* libTapkuLibrary.a */,
+				25EBE93817BAE3EE0070D80A /* LogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -600,7 +627,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				25E0E29415751DA1009B8921 /* PBXTargetDependency */,
+				25EBE93B17BAE4160070D80A /* PBXTargetDependency */,
 			);
 			name = "Grand Cercle";
 			productName = "Grand Cercle";
@@ -647,8 +674,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 25E0E25515751735009B8921 /* Products */;
-					ProjectRef = 25E0E25415751735009B8921 /* TapkuLibrary.xcodeproj */;
+					ProductGroup = 25EBE93017BAE3ED0070D80A /* Products */;
+					ProjectRef = 25EBE92F17BAE3ED0070D80A /* TapkuLibrary.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -660,18 +687,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		25E0E25D15751736009B8921 /* libTapkuLibrary.a */ = {
+		25EBE93617BAE3EE0070D80A /* libTapkuLibrary.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libTapkuLibrary.a;
-			remoteRef = 25E0E25C15751736009B8921 /* PBXContainerItemProxy */;
+			remoteRef = 25EBE93517BAE3EE0070D80A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		25E0E25F15751736009B8921 /* LogicTests.octest */ = {
+		25EBE93817BAE3EE0070D80A /* LogicTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = LogicTests.octest;
-			remoteRef = 25E0E25E15751736009B8921 /* PBXContainerItemProxy */;
+			remoteRef = 25EBE93717BAE3EE0070D80A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -695,7 +722,6 @@
 				255C809C15740E0100E6ECC3 /* Localizable.strings in Resources */,
 				255C80A415740EE900E6ECC3 /* DealsViewController.xib in Resources */,
 				255C80AB157411AD00E6ECC3 /* NewsCell.xib in Resources */,
-				25E0E29215751D5F009B8921 /* TapkuLibrary.bundle in Resources */,
 				047EB1DB1575383800F2F59B /* EventTopCell.xib in Resources */,
 				047EB1F615761A7300F2F59B /* DealCell.xib in Resources */,
 				256217401576A2AC00667661 /* EventCell.xib in Resources */,
@@ -713,13 +739,18 @@
 				25FCD7251580F8E800815C1D /* InfosTopCell.xib in Resources */,
 				25FCD7271580F94A00815C1D /* InfosDescriptionCell.xib in Resources */,
 				250926561585043900BCF015 /* events_bkgd.png in Resources */,
-				2509265B158526A800BCF015 /* default@2x.png in Resources */,
-				2509265C158526A800BCF015 /* default.png in Resources */,
-				257C49CC15C6FD04000282C4 /* cercles.xml in Resources */,
-				257C49CD15C6FD04000282C4 /* clubs.xml in Resources */,
-				257C49CE15C6FD04000282C4 /* types.xml in Resources */,
+				2509265B158526A800BCF015 /* Default@2x.png in Resources */,
+				2509265C158526A800BCF015 /* Default.png in Resources */,
 				250DE5A115DE625B00F5635F /* rectangle.png in Resources */,
 				250DE5A215DE625B00F5635F /* rectangle@2x.png in Resources */,
+				250BF50917A6B07A0099B2A3 /* Default-568h@2x.png in Resources */,
+				250BF51517A6CC210099B2A3 /* events.xml in Resources */,
+				250BF51617A6CC210099B2A3 /* news.xml in Resources */,
+				250BF51817A6CD000099B2A3 /* deals.xml in Resources */,
+				250BF51C17A6D0850099B2A3 /* cercles.xml in Resources */,
+				250BF51D17A6D0850099B2A3 /* clubs.xml in Resources */,
+				250BF51E17A6D0850099B2A3 /* types.xml in Resources */,
+				25EBE93217BAE3ED0070D80A /* TapkuLibrary.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +815,7 @@
 				257FDAAE15CD6FC300840AEE /* Deal.m in Sources */,
 				25E2333315D1A9AF0012EB82 /* Event.m in Sources */,
 				25E2333715D1AC350012EB82 /* Data.xcdatamodeld in Sources */,
+				250BF51217A6B3650099B2A3 /* UIImage+568h.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,10 +835,10 @@
 			target = 2595EA981573FA9000CA27B3 /* Grand Cercle */;
 			targetProxy = 2595EACD1573FA9000CA27B3 /* PBXContainerItemProxy */;
 		};
-		25E0E29415751DA1009B8921 /* PBXTargetDependency */ = {
+		25EBE93B17BAE4160070D80A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TapkuLibrary;
-			targetProxy = 25E0E29315751DA1009B8921 /* PBXContainerItemProxy */;
+			targetProxy = 25EBE93A17BAE4160070D80A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -922,19 +954,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Grand Cercle (U3BNNHA6QE)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-fobjc-arc",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9CADD228-71A3-4DED-A881-5F53692BDD62";
+				PROVISIONING_PROFILE = "A1FC5D2A-14CB-441D-A958-0863B3E2BFF5";
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = ../tapkulibrary/src;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -942,20 +979,25 @@
 		2595EADC1573FA9000CA27B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Grand Cercle";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Grand Cercle (RXK8EANYC9)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Grand Cercle/Grand Cercle-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../tapkulibrary/src/;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Grand Cercle/Grand Cercle-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-fobjc-arc",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6E30F35E-9F31-41FE-8BE1-4CA16F768434";
+				PROVISIONING_PROFILE = "B5B0BEA4-E8A9-440A-9204-6901B6214DE9";
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = ../tapkulibrary/src;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1033,7 +1075,8 @@
 				25E2333615D1AC350012EB82 /* Data.xcdatamodel */,
 			);
 			currentVersion = 25E2333615D1AC350012EB82 /* Data.xcdatamodel */;
-			path = Data.xcdatamodeld;
+			name = Data.xcdatamodeld;
+			path = ../Data.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -6,9 +6,8 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import <TapkuLibrary/TapkuLibrary.h>
-#import <UIKit/UIKit.h>
 #import "EventsViewController.h"
+#import "TapkuLibrary/TapkuLibrary.h"
 
 @interface EventsCalendarViewController : TKCalendarMonthTableViewController {
 	NSMutableArray *dataArray; 

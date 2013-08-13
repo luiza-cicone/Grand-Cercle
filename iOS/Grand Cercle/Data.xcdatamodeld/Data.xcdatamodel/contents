@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G56" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Association" representedClassName="Association" syncable="YES">
         <attribute name="idAssos" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
@@ -38,7 +38,7 @@
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Association" inverseName="news" inverseEntity="Association" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Association" positionX="207" positionY="216" width="128" height="135"/>
+        <element name="Association" positionX="270" positionY="198" width="128" height="135"/>
         <element name="Deal" positionX="162" positionY="54" width="128" height="120"/>
         <element name="Event" positionX="-29" positionY="378" width="128" height="225"/>
         <element name="News" positionX="-81" positionY="69" width="128" height="135"/>

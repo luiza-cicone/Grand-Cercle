@@ -26,7 +26,7 @@ static NewsParser *instanceNews = nil;
     // Tant qu'il y a une news à traiter
 	do {
         // Test if the news is already in the DB
-        NSFetchRequest *requestNews = [[[NSFetchRequest alloc] init] autorelease];
+        NSFetchRequest *requestNews = [[NSFetchRequest alloc] init];
         
         NSEntityDescription *newsEntity = [NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext];
         [requestNews setEntity:newsEntity];
@@ -79,6 +79,7 @@ static NewsParser *instanceNews = nil;
             // Deal with error.
         }
         [request release];
+        
         // Récupération de l'image
         TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:newsToParse];
         aNews.image = [[TBXML textForElement:image]  stringByConvertingHTMLToPlainText];
@@ -89,11 +90,12 @@ static NewsParser *instanceNews = nil;
 	} while ((newsToParse = newsToParse->nextSibling));
 }
 
-- (void)loadNewsFromURL { 
+- (void)loadFromURL { 
     
     if (managedObjectContext == nil) { 
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
+    
     /*  send a request for file modification date  */
     NSURLRequest *modReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/news.xml"]
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0f];
@@ -114,8 +116,7 @@ static NewsParser *instanceNews = nil;
         [allNews setIncludesPropertyValues:NO]; //only fetch the managedObjectID
         
         NSError * error = nil;
-        NSArray * news
-        = [managedObjectContext executeFetchRequest:allNews error:&error];
+        NSArray * news = [managedObjectContext executeFetchRequest:allNews error:&error];
         [allNews release];
         //error handling goes here
         for (News *aNews in news) {
@@ -143,6 +144,29 @@ static NewsParser *instanceNews = nil;
                                    success:successBlock 
                                    failure:failureBlock];
     }
+}
+
+-(void) loadFromFile {
+    
+    if (managedObjectContext == nil) {
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    }
+    
+    // Initialisation des fichiers TBXML avec le chemin de la sauvegarde interne
+    NSError *error = nil;
+    
+    tbxml = [[TBXML alloc] initWithXMLFile:@"news.xml" error:&error];
+    
+    if (error) {
+        // Si l'initialisation s'est mal passée, on affiche l'erreur
+        NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
+    } else {
+        // Si aucune erreur n'est levée, on parse la sauvegarde interne
+        if (tbxml.rootXMLElement)
+            [self handle:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
+    }
+    [tbxml release];
+    
 }
 
 @end

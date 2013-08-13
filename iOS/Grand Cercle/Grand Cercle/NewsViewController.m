@@ -11,14 +11,13 @@
 #import "NewsParser.h"
 #import "Association.h"
 #import "AppDelegate.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @implementation NewsViewController
 @synthesize newsCell;
 @synthesize tView;
 @synthesize newsArray;
-@synthesize imageCache;
-
-NSString *const newsImageFolder = @"images/news";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,31 +32,7 @@ NSString *const newsImageFolder = @"images/news";
         // Mise en place de l'image dans l'onglet
         self.tabBarItem.image = [UIImage imageNamed:@"news"];
         
-
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext];
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"idNews" ascending:false];
-        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-        [request setEntity:entityDescription];
-        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-        
-        NSError *error = nil;
-        
-        NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
-        if (array != nil && error == nil) {
-            [self setNewsArray:array];
-            [newsArray retain];
-        }
-        else {
-            NSLog(@"error %@", error);
-            // Deal with error.
-        }
-    
-        self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:newsImageFolder] autorelease];
-        self.imageCache.notificationName = @"newNewsImage";
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newNewsImage" object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newAssosImageRetrieved:) name:@"newAssosImage" object:nil];
+        [self requeryData];
         
         // Mise en place du bouton retour pour la détail view
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -68,18 +43,41 @@ NSString *const newsImageFolder = @"images/news";
         UIBarButtonItem *button = [[UIBarButtonItem alloc]
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                    target:self
-                                   action:@selector(refresh:)];
+                                   action:@selector(refreshButtonClicked:)];
         self.navigationItem.rightBarButtonItem = button;
         [button release];
     }
     return self;
 }
 
-- (IBAction)refresh:(id)sender {
-    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable]; 
-    NSLog(@"can update %d", canUpdate);
+- (void)requeryData {
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"idNews" ascending:false];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entityDescription];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    NSError *error = nil;
+    
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    if (array != nil && error == nil) {
+
+        [self setNewsArray:array];
+        [newsArray retain];
+    }
+    else {
+        NSLog(@"error %@", error);
+        // Deal with error.
+    }
+    [sortDescriptor release];
+    [self.tView reloadData];
+}
+
+- (IBAction)refreshButtonClicked:(id)sender {
+    // test network reachable
+    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable];
+    
     if (canUpdate) {
-        
         // replace right bar button 'refresh' with spinner
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
@@ -91,7 +89,6 @@ NSString *const newsImageFolder = @"images/news";
         [label setBackgroundColor:[UIColor clearColor]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
         [label setTextAlignment:UITextAlignmentCenter];
-        
         
         UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
         iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
@@ -117,8 +114,8 @@ NSString *const newsImageFolder = @"images/news";
             
             // do our long running process here            
             // On parse les événements
-            EventsParser *ep = [EventsParser instance];
-            [ep loadFromURL];       
+            NewsParser *np = [NewsParser instance];
+            [np loadFromURL];
             
             // do any UI stuff on the main UI thread
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -126,7 +123,7 @@ NSString *const newsImageFolder = @"images/news";
                 [v removeFromSuperview];
                 [[self view] setUserInteractionEnabled:TRUE];
                 
-// reload data
+                [self requeryData];
                 
             });
             
@@ -157,8 +154,6 @@ NSString *const newsImageFolder = @"images/news";
     [newsArray release];
     newsArray = nil;
     newsCell = nil;
-	[imageCache release];
-    imageCache = nil;
     [tView release];
     [super viewDidUnload];
 }
@@ -166,13 +161,9 @@ NSString *const newsImageFolder = @"images/news";
 - (void)dealloc {
     [newsCell release];
     [newsArray release];
-	[imageCache release];
     [super dealloc];
 }
 
-/************************
- * Apparition de la vue *
- ***********************/
 - (void)viewDidAppear:(BOOL)animated {   
     
     // Récupération des préférences utilisateurs
@@ -193,58 +184,8 @@ NSString *const newsImageFolder = @"images/news";
     [color release];
 }
 
-/****************************************************************
- * Maintient de la vue verticale en cas de rotation du téléphone*
- ***************************************************************/
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void) newImageRetrieved:(NSNotification*)sender {
-    
-    // Définition des structures
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    
-    NSArray *paths = [self.tView indexPathsForVisibleRows];
-    // Pour chaque row de la table view
-    for(NSIndexPath *path in paths) {
-        
-        // On charche l'image dans le cache
-    	NSInteger index = path.row;
-        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
-        
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-        
-        // Si il n'y a pas d'image on l'affiche
-    	if(imageView.image == nil && tag == index){
-            imageView.image = [dict objectForKey:@"image"];
-            [cell setNeedsLayout];
-        }
-    }
-}
-
-- (void) newAssosImageRetrieved:(NSNotification*)sender {
-    
-    // Définition des structures
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    
-    NSArray *paths = [self.tView indexPathsForVisibleRows];
-    // Pour chaque row de la table view
-    for(NSIndexPath *path in paths) {
-        
-        // On charche l'image dans le cache
-    	NSInteger index = path.row;
-        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:path];
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-        
-        // Si il n'y a pas d'image on l'affiche
-    	if(imageView.image == nil && tag == [[[[newsArray objectAtIndex:index] author] idAssos] intValue] ){
-            imageView.image = [dict objectForKey:@"image"];
-            [cell setNeedsLayout];
-        }
-    }
 }
 
 #pragma mark - Table view data source
@@ -277,41 +218,17 @@ NSString *const newsImageFolder = @"images/news";
     
     // Affichage de l'image de la news
     UIImageView *imageView = nil;
+    
     imageView = (UIImageView *)[cell viewWithTag:1];
+    NSString *image;
     
-    if (![news.image isEqualToString:@""]) {
-        // test si c'est dans le cache
-        NSString *imageKey = [NSString stringWithFormat:@"%x", [news.image hash]];
-        
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:newsImageFolder] stringByAppendingPathComponent:imageKey];
-        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-        
-        if (!fileExists) {
-            // download img async
-            UIImage *img = [imageCache imageForKey:imageKey url:[NSURL URLWithString:news.image] queueIfNeeded:YES tag: indexPath.row];
-            [imageView setImage:img];
-        }
-        else {
-            [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-        }
-    }
-    else {
-        NSString *imageKey = [NSString stringWithFormat:@"%x", [news.author.imagePath hash]];
-        
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
-        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-        
-        
-        if (!fileExists) {
-            [imageView setImage:nil];
-        }
-        else {
-            [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-        }
-    }
-    
+    if (![news.image isEqualToString:@""]) 
+        image = news.image;
+    else 
+        image = news.author.imagePath;
+ 
+    [imageView setImageWithURL:[NSURL URLWithString:image] placeholderImage:nil];
+
     // Affichage des labels
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     [label setText: [news title]];

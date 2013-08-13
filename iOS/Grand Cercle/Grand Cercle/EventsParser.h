@@ -22,7 +22,8 @@
 + (EventsParser *) instance;
 
 - (void)loadFromURL;
+- (void)loadFromFile;
 
-- (void) handleEvents:(TBXMLElement *)eventsToParse;
+- (void) handle:(TBXMLElement *)eventsToParse;
 
 @end

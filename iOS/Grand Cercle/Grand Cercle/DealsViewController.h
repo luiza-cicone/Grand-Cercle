@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TapkuLibrary/TapkuLibrary.h>
 #import "DealsParser.h"
 #import "DealsDetailViewController.h"
+#import "TapkuLibrary/TapkuLibrary.h"
 
 @interface DealsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     

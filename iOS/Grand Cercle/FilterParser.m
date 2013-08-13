@@ -29,19 +29,19 @@ static FilterParser *instanceAssociation = nil;
 /***************************************************
  * Méthode récupérant les informations nécessaires *
  **************************************************/
-- (void) handle:(TBXMLElement *)listNamesToParse {
+- (void) handle:(TBXMLElement *)list {
     
     // Tant qu'il y a un événement à traiter
 	do {
         
         // Récupération du nom du cercle, club ou d'association
-        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:listNamesToParse];
+        TBXMLElement *group = [TBXML childElementNamed:@"group" parentElement:list];
         NSString *nomAssociation = [[TBXML textForElement:group] stringByConvertingHTMLToPlainText];
         
         // Ajout du nom au tableau
         [arrayTypes addObject:nomAssociation];
         
-	} while ((listNamesToParse = listNamesToParse->nextSibling));
+	} while ((list = list->nextSibling));
 }
 
 /***************************************************

@@ -12,7 +12,6 @@
 #import "AppDelegate.h"
 #import "Association.h"
 
-
 @implementation EventsCalendarViewController
 @synthesize dataArray, dataDictionary;
 @synthesize eventCell;
@@ -32,6 +31,7 @@
 	imageCache.notificationName = @"newCalendarImage";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newCalendarImage" object:nil];
+    
 }
 
 - (void) newAssosImageRetrieved:(NSNotification*)sender {
@@ -127,6 +127,7 @@
 {
     return 40;
 }
+
 -(void)reloadData {
     [self.monthView reload];
 }  
@@ -248,7 +249,7 @@
         }
         
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
-        NSLog(@"%@, %@", start, end);
+
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) AND (date <= %@) AND (author.name = %@) AND (type in %@)", start, end, aCercle, typesForCercle];
         
         NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];

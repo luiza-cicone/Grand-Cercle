@@ -72,9 +72,11 @@ static AssociationParser *instanceNews = nil;
         NSArray *arrayTypes = [[FilterParser instance] arrayTypes];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSMutableDictionary *cerclesDico = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"filtreCercles"]];
-        if (cerclesDico == nil) {
-            cerclesDico = [[NSMutableDictionary alloc] init];
+        if (type == 1) {
+            NSMutableDictionary *cerclesDico = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"filtreCercles"]];
+//            if (cerclesDico == nil) {
+//                cerclesDico = [[NSMutableDictionary alloc] init];
+//            }
             NSMutableDictionary *typesDico = [cerclesDico objectForKey:anAssos.name];
             
             if (typesDico == nil) {
@@ -87,27 +89,34 @@ static AssociationParser *instanceNews = nil;
             }
             [defaults setObject:cerclesDico forKey:@"filtreCercles"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [cerclesDico release];
+        
+        } else if (type == 2) {
+            NSMutableDictionary *clubsDico = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"filtreClubs"]];
+//            if (clubsDico == nil) {
+//                clubsDico = [[NSMutableDictionary alloc] init];
+//            }
+            [clubsDico setValue:[NSNumber numberWithBool:YES] forKey:anAssos.name];
+            [defaults setObject:clubsDico forKey:@"filtreClubs"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
-        
-        
+
         // Récupération de la date de publication
         TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:objectToParse];
         anAssos.imagePath = [[TBXML textForElement:logo] stringByConvertingHTMLToPlainText];
-        
-        if (![anAssos.imagePath isEqualToString:@""]) {
-            // test si c'est dans le cache
-            NSString *imageKey = [NSString stringWithFormat:@"%x", [anAssos.imagePath hash]];
-            
-            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
-            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-            
-            if (!fileExists) {
-                // download img async
-                [imageCache imageForKey:imageKey url:[NSURL URLWithString:anAssos.imagePath] queueIfNeeded:YES tag:[anAssos.idAssos intValue]];
-            }
-        }
+              
+//        if (![anAssos.imagePath isEqualToString:@""]) {
+//            // test si c'est dans le cache
+//            NSString *imageKey = [NSString stringWithFormat:@"%x", [anAssos.imagePath hash]];
+//            
+//            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//            NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
+//            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+//            
+//            if (!fileExists) {
+//                // download img async
+//                [imageCache imageForKey:imageKey url:[NSURL URLWithString:anAssos.imagePath] queueIfNeeded:YES tag:[anAssos.idAssos intValue]];
+//            }
+//        }
         
         anAssos.type = [NSNumber numberWithInt:type];
         
@@ -127,12 +136,12 @@ static AssociationParser *instanceNews = nil;
     self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:@"images/assos"] autorelease];
     self.imageCache.notificationName = @"newAssosImage";
     
-    TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
+    TBXMLSuccessBlock successBlockForCercles = ^(TBXML *tbxmlDocument) {
         if (tbxmlDocument.rootXMLElement)
             [self handle:tbxmlDocument.rootXMLElement->firstChild ofType:1];
     };
     
-    TBXMLSuccessBlock successBlock2 = ^(TBXML *tbxmlDocument) {
+    TBXMLSuccessBlock successBlockForClubs = ^(TBXML *tbxmlDocument) {
         if (tbxmlDocument.rootXMLElement)
             [self handle:tbxmlDocument.rootXMLElement->firstChild ofType:2];
     };
@@ -143,12 +152,12 @@ static AssociationParser *instanceNews = nil;
     
     // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
     tbxml = [[TBXML alloc] initWithURL: [NSURL URLWithString:@"http://www.grandcercle.org/xml/cercles.xml"] 
-                               success: successBlock 
+                               success: successBlockForCercles
                                failure: failureBlock];
     [tbxml release];
     // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
     tbxml = [[TBXML alloc] initWithURL: [NSURL URLWithString:@"http://www.grandcercle.org/xml/clubs.xml"] 
-                               success: successBlock2 
+                               success: successBlockForClubs
                                failure: failureBlock];
     [tbxml release];
 }

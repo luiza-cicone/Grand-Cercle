@@ -23,6 +23,7 @@
 
 // Méthode récupérant l'ensemble des bons plans depuis le site
 - (void) loadFromURL;
+- (void) loadFromFile;
 
 // Méthode appelée par les autres pour récupérer les informations nécéssaires
 - (void) handle:(TBXMLElement *)dealsToParse;

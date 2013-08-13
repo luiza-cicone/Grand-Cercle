@@ -9,6 +9,7 @@
 #import "NewsDetailViewController.h"
 #import "NSString+HTML.h"
 #import "Association.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 // Section
 #define TITRE 0
@@ -113,34 +114,27 @@
             // Chargement de l'image de la news
             UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
 
-            if (![news.image isEqualToString:@""]) {
-                // test si c'est dans le cache
-                NSString *imageKey = [NSString stringWithFormat:@"%x", [news.image hash]];
-                
-                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/news"] stringByAppendingPathComponent:imageKey];
-                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-                
-                if (fileExists) {
-                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-                } else {
-                    [imageView setImage:nil];
-                }
-            } else {
-                NSString *imageKey = [NSString stringWithFormat:@"%x", [news.author.imagePath hash]];
-                
-                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
-                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-                
-                
-                if (!fileExists) {
-                    [imageView setImage:nil];
-                }
-                else {
-                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-                }
-            }
+            NSString *image;
+            
+            if (![news.image isEqualToString:@""])
+                image = news.image;
+            else
+                image = news.author.imagePath;
+            [imageView setImageWithURL:[NSURL URLWithString:image] placeholderImage:nil];
+
+//            NSString *imageKey = [NSString stringWithFormat:@"%x", [image hash]];
+//            
+//            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//            NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:kNewsFolder] stringByAppendingPathComponent:imageKey];
+//            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+//            
+//            if (!fileExists) {
+//                // download img async
+//                [imageView setImage:nil];
+//            }
+//            else {
+//                [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+//            }
             
             // Chargement des labels
             UILabel *label;

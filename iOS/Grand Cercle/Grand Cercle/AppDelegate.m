@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Association.h"
+#import "UIImage+568h.h"
 
 @implementation AppDelegate
 
@@ -21,7 +22,7 @@
    
     // set the background image
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
-    [imageView setImage:[UIImage imageNamed:@"default.png"]];
+    [imageView setImage:[UIImage imageNamed:@"Default"]];
     [view addSubview:imageView];
     [imageView release];
 
@@ -40,17 +41,35 @@
 
     [activityIndicator startAnimating];
     
-    // allocate a reachability object
-    Reachability* reach = [Reachability reachabilityWithHostname:@"www.grandcercle.org"];
     
-    // here we set up a NSNotification observer. The Reachability that caused the notification
-    // is passed in the object parameter
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(reachabilityChanged:) 
-                                                 name:kReachabilityChangedNotification 
-                                               object:nil];
-    
-    [reach startNotifier];
+    // how we stop refresh from freezing the main UI thread
+    dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if (![defaults objectForKey:@"firstRun"]) {
+            NSLog(@"initialize on first run");
+            [self initializeOnFirstRun];
+        }
+
+        // do any UI stuff on the main UI thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:@selector(startApp) withObject:nil afterDelay:0.01];
+        });
+
+    });
+    dispatch_release(downloadQueue);
+        
+//    // allocate a reachability object
+//    Reachability* reach = [Reachability reachabilityWithHostname:@"www.grandcercle.org"];
+//    
+//    // here we set up a NSNotification observer. The Reachability that caused the notification
+//    // is passed in the object parameter
+//    [[NSNotificationCenter defaultCenter] addObserver:self 
+//                                             selector:@selector(reachabilityChanged:) 
+//                                                 name:kReachabilityChangedNotification 
+//                                               object:nil];
+//    
+//    [reach startNotifier];
 
     
     return YES;
@@ -81,18 +100,24 @@
     navigationController4.viewControllers = [NSArray arrayWithObjects:viewController4, nil];
     
     UIViewController *viewController5 = [[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     UINavigationController *navigationController5 = [[[UINavigationController alloc] init] autorelease];
     navigationController5.navigationBar.barStyle = UIBarStyleBlackOpaque;
     navigationController5.viewControllers = [NSArray arrayWithObjects:viewController5, nil];
     
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController1, navigationController2, navigationController3, navigationController4, navigationController5, nil];
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
 }
 
--(void)initializeOnFirstRun {
+-(void)initializeOnFirstRun
+{
+    
+    [[AssociationParser instance] loadFromFile];
+    [[FilterParser instance] loadFromFile];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSDate date] forKey:@"firstRun"];
 
@@ -100,12 +125,10 @@
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
     
-    
     NSEntityDescription *assosEntity = [NSEntityDescription entityForName:@"Association" inManagedObjectContext:managedObjectContext]; 
     NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
             
-    // filter des cercles
-
+    // filtre des cercles
     NSPredicate *ofIdPredicate = [NSPredicate predicateWithFormat:@"(type = %d) AND NOT (name = 'Grand Cercle')", 1];
     [request setEntity:assosEntity];
     [request setPredicate:ofIdPredicate];        
@@ -141,8 +164,9 @@
     
     // filter des clubs
     request = [[NSFetchRequest alloc] init]; 
-        
-    ofIdPredicate = [NSPredicate predicateWithFormat:@"type = %d", 2];
+    
+    ofIdPredicate = [NSPredicate predicateWithFormat:@"(type = %d) AND NOT (name = 'Elus étudiants')", 2];
+
     [request setEntity:assosEntity];
     [request setPredicate:ofIdPredicate];        
     
@@ -172,55 +196,60 @@
     [colorArray release];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NewsParser instance] loadFromFile];
+    NSLog(@"News loaded");
+    [[EventsParser instance] loadFromFile];
+    NSLog(@"Events loaded");
+    [[DealsParser instance] loadFromFile];
+    NSLog(@"Deals loaded");
+
 }
 
--(void)reachabilityChanged:(NSNotification*) note
+-(void)reachabilityChanged:(NSNotification*) notification
 {
-    Reachability * reach = [note object];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    Reachability * reach = [notification object];
 
     if([reach isReachable]) {
+        
+        NSLog(@"Rechability changed : now reachable");
 
-        // On parse les types
-        FilterParser *ap = [FilterParser instance];
-        [ap loadFromURL];
+//        // On parse les types
+//        [[FilterParser instance] loadFromURL];
+//        [[AssociationParser instance] loadFromURL];
+//        
+//        // puis les cercles et clubs
+//        if (![defaults objectForKey:@"firstRun"]) {
+//            [self initializeOnFirstRun];
+//        }
         
-        AssociationParser *assos = [AssociationParser instance];
-        [assos loadFromURL];
-        
-        // puis les cercles et clubs
-        
-        if (![defaults objectForKey:@"firstRun"]) {
-            [self initializeOnFirstRun];
-        }
-        
-        // On parse les événements
-        EventsParser *ep = [EventsParser instance];
-        [ep loadFromURL];
-        
-        // On parse les news
-        NewsParser *np = [NewsParser instance];
-        [np loadNewsFromURL];
-        
-        // On parse les bons plans
-        DealsParser *bp = [DealsParser instance];
-        [bp loadFromURL];
+//        [[EventsParser instance] loadFromURL];
+//        [[NewsParser instance] loadFromURL];
+//        [[DealsParser instance] loadFromURL];
 
     }
     else {
-        FilterParser *ap = [FilterParser instance];
-        [ap loadFromFile];
-        
-        if (![defaults objectForKey:@"firstRun"]) {
-            AssociationParser *assos = [AssociationParser instance];
-            [assos loadFromFile];
-            
-            [self initializeOnFirstRun];
-        }
+        NSLog(@"Rechability changed : now NOT reachable");
+
+//        FilterParser *ap = [FilterParser instance];
+//        [ap loadFromFile];
+//        
+//        if (![defaults objectForKey:@"firstRun"]) {
+//            AssociationParser *assos = [AssociationParser instance];
+//            [assos loadFromFile];
+//            
+//            [self initializeOnFirstRun];
+//        }
     }
-    
-    [self performSelector:@selector(startApp) withObject:nil afterDelay:0.01];
-    [reach stopNotifier];
+}
+
+-(void)applicationWillEnterForeground:(UIApplication *)application {
+    NSLog(@"foreground");
+    [self update];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    NSLog(@"active");
 }
 
 #pragma mark - CORE DATA
@@ -271,6 +300,7 @@
 - (NSString *)applicationDocumentsDirectory {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
+
 - (void)saveContext
 {
     NSError *error = nil;
@@ -299,6 +329,23 @@
     [persistentStoreCoordinator release];
     
     [super dealloc];
+}
+
+- (void) update
+{
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Add code here to do background processing
+        
+        [[EventsParser instance] loadFromURL];
+        [[NewsParser instance] loadFromURL];
+        [[DealsParser instance] loadFromURL];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            // Add code here to update the UI/send notifications based on the
+            // results of the background processing
+            NSLog(@"Update finished");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFinished" object:nil];
+        });
+    });
 }
 
 @end

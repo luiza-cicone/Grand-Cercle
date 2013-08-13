@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
 #import "Event.h"
 
