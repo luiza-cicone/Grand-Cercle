@@ -7,11 +7,14 @@
 //
 
 #import "NewsViewController.h"
-#import "NewsDetailViewController.h"
+#import "NewsDetailsViewController.h"
 #import "NewsParser.h"
 #import "Association.h"
 #import "AppDelegate.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "AssociationParser.h"
+
+#import "UIScreen.m"
 
 
 @implementation NewsViewController
@@ -46,6 +49,9 @@
                                    action:@selector(refreshButtonClicked:)];
         self.navigationItem.rightBarButtonItem = button;
         [button release];
+        
+        // listen to notifications to update views
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewsData:) name:@"updateFinished" object:nil];
     }
     return self;
 }
@@ -113,7 +119,7 @@
         dispatch_async(downloadQueue, ^{
             
             // do our long running process here            
-            // On parse les événements
+            [[AssociationParser instance] loadFromURL];
             NewsParser *np = [NewsParser instance];
             [np loadFromURL];
             
@@ -174,14 +180,15 @@
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
     // Si le thème est Grand Cercle, on laisse l'interligne par défaut, sinon on la colore suivant le thème
-    UIColor *color;
-    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
-        color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
-    } else {
-        color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
-    }
-    [self.tView setSeparatorColor:color];
-    [color release];
+//    UIColor *color;
+//    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
+//        color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
+//    } else {
+//        color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
+//    }
+//    [self.tView setSeparatorColor:color];
+//
+//    [color release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -199,7 +206,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 85;
+    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -220,22 +227,37 @@
     UIImageView *imageView = nil;
     
     imageView = (UIImageView *)[cell viewWithTag:1];
-    NSString *image;
-    
-    if (![news.image isEqualToString:@""]) 
-        image = news.image;
-    else 
-        image = news.author.imagePath;
- 
-    [imageView setImageWithURL:[NSURL URLWithString:image] placeholderImage:nil];
 
-    // Affichage des labels
+    NSString *image;
+    if (![news.thumbnail2x isEqualToString:@""])
+        if ([UIScreen retinaScreen])
+            image = news.thumbnail2x;
+        else image = news.thumbnail;
+    else image = news.author.imagePath;
+ 
+    [imageView setImageWithURL:[NSURL URLWithString:image] placeholderImage:[UIImage imageNamed:@"placeholder70.png"]];
+
+    // Title
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     [label setText: [news title]];
     
+    // Association
     label = (UILabel *)[cell viewWithTag:3];
-    [label setText:[news pubDate]];
+    [label setText:[[news author] name]];
     
+    CGRect frame = label.frame;
+    CGSize s = [label.text sizeWithFont:label.font constrainedToSize:CGSizeMake(160, MAXFLOAT) lineBreakMode:label.lineBreakMode];
+    frame.size.width = s.width + 4;
+    label.frame = frame;
+    
+    UIView *view = (UIView *)[cell viewWithTag:4];
+    [view setBackgroundColor:[(AppDelegate *)[[UIApplication sharedApplication] delegate]colorWithHexString:news.author.color]];
+    view.frame = frame;
+    
+    // Published date
+    label = (UILabel *)[cell viewWithTag:5];
+    [label setText:[news pubDate]];
+
     return cell;
 }
 
@@ -244,12 +266,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Construction de la détail view
-    NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    NewsDetailsViewController *detailViewController = [[NewsDetailsViewController alloc] initWithNibName:@"NewsDetailsViewController" bundle:nil];
     News *news = [newsArray objectAtIndex:[indexPath row]];
-    detailViewController.news = news;
+    detailViewController.event = news;
     
     // Chargement de la détail view
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
+
+- (void) reloadNewsData: (NSNotification *) notification {
+    NSLog(@"%@", [NSString stringWithFormat: @"NewsViewControler : notification %@ received", notification.name]);
+
+    if ([[notification name] isEqualToString:@"updateFinished"]){
+        [self requeryData];
+    }
+}
+
 @end

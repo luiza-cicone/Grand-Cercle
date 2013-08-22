@@ -8,27 +8,33 @@
 
 #import "AppDelegate.h"
 #import "Association.h"
-#import "UIImage+568h.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator; 
+@synthesize helperView;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
    
     // set the background image
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
-    [imageView setImage:[UIImage imageNamed:@"Default"]];
+    if(IS_WIDESCREEN)
+        [imageView setImage:[UIImage imageNamed:@"Default-568h"]];
+    else [imageView setImage:[UIImage imageNamed:@"Default"]];
     [view addSubview:imageView];
     [imageView release];
 
     // set the activity indicator
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicator.center = CGPointMake(self.window.frame.size.width/2-68, self.window.frame.size.height/2-18);
+    if (IS_WIDESCREEN)
+        activityIndicator.center = CGPointMake(self.window.frame.size.width/2-82, self.window.frame.size.height/2+7);
+    else
+        activityIndicator.center = CGPointMake(self.window.frame.size.width/2-68, self.window.frame.size.height/2-18);
     [view addSubview:activityIndicator];
     [activityIndicator release];
     
@@ -46,7 +52,7 @@
     dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
     dispatch_async(downloadQueue, ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if (![defaults objectForKey:@"firstRun"]) {
+        if (![defaults objectForKey:@"firstRunV2.0"]) {
             NSLog(@"initialize on first run");
             [self initializeOnFirstRun];
         }
@@ -106,10 +112,31 @@
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
 
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController1, navigationController2, navigationController3, navigationController4, navigationController5, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController1, navigationController2, navigationController3, navigationController5, nil];
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"firstRunV2.0-2"]) {
+        [defaults setObject:[NSDate date] forKey:@"firstRunV2.0-2"];
+        
+        helperView = [[[NSBundle mainBundle] loadNibNamed:@"HelpView" owner:self options:nil]   objectAtIndex:0];
+        UIImageView *iv = (UIImageView *)[helperView viewWithTag:1];
+        if (IS_WIDESCREEN)
+            [iv setImage:[UIImage imageNamed:@"helper-568h"]];
+        else
+            [iv setImage:[UIImage imageNamed:@"helper"]];
+        
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        CGRect frame = CGRectMake(0, 0, screenWidth, screenHeight);
+        [helperView setFrame:frame];
+        [iv setFrame:frame];
+    
+        [self.window addSubview:helperView];
+    }
 }
 
 -(void)initializeOnFirstRun
@@ -119,7 +146,7 @@
     [[FilterParser instance] loadFromFile];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSDate date] forKey:@"firstRun"];
+    [defaults setObject:[NSDate date] forKey:@"firstRunV2.0"];
 
     if (managedObjectContext == nil) { 
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
@@ -145,9 +172,9 @@
     }
     [request release];
     
-    
     NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] init];
     for (Association *cercle in arrayCercles) {
+        
         FilterParser *ap = [FilterParser instance];
         arrayTypes = [ap arrayTypes];
         
@@ -301,6 +328,10 @@
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
+- (IBAction)closeHelperView:(id)sender {
+    [[self helperView] removeFromSuperview];
+}
+
 - (void)saveContext
 {
     NSError *error = nil;
@@ -328,6 +359,7 @@
     [managedObjectModel release];
     [persistentStoreCoordinator release];
     
+    [helperView release];
     [super dealloc];
 }
 
@@ -335,7 +367,7 @@
 {
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
-        
+        [[AssociationParser instance] loadFromURL];
         [[EventsParser instance] loadFromURL];
         [[NewsParser instance] loadFromURL];
         [[DealsParser instance] loadFromURL];
@@ -348,4 +380,40 @@
     });
 }
 
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
+}
 @end

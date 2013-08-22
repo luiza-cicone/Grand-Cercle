@@ -8,9 +8,12 @@
 
 #import "EventsCalendarViewController.h"
 #import "EventsParser.h"
-#import "EventDetailViewController.h"
+#import "EventsDetailViewController.h"
 #import "AppDelegate.h"
 #import "Association.h"
+
+#import "UIScreen.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation EventsCalendarViewController
 @synthesize dataArray, dataDictionary;
@@ -33,51 +36,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newCalendarImageRetrieved:) name:@"newCalendarImage" object:nil];
     
 }
-
-- (void) newAssosImageRetrieved:(NSNotification*)sender {
-    
-    // Définition des structures
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    
-    NSArray *paths = [self.tableView indexPathsForVisibleRows];
-    // Pour chaque row de la table view
-    for(NSIndexPath *path in paths) {
-        
-        // On charche l'image dans le cache
-    	NSInteger index = path.row;
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:6];
-        
-        Event *event = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:index];
-        // Si il n'y a pas d'image on l'affiche
-    	if(imageView.image == nil && tag == [[[event author] idAssos] intValue]){
-            imageView.image = [dict objectForKey:@"image"];
-            [cell setNeedsLayout];
-        }
-    }
-}
-
-- (void) newCalendarImageRetrieved:(NSNotification*)sender{
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    
-    NSArray *paths = [self.tableView indexPathsForVisibleRows];
-    for(NSIndexPath *path in paths) {
-        NSInteger index = path.section * 1000 + path.row;
-        
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
-
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-        
-    	if(imageView.image == nil && tag == index){
-            
-            imageView.image = [dict objectForKey:@"image"];
-            [cell setNeedsLayout];
-        }
-    }
-}
-
 
 - (void) viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
@@ -125,7 +83,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 60;
 }
 
 -(void)reloadData {
@@ -144,60 +102,49 @@
     }
     
     NSArray *ar = [dataDictionary allKeys];
-    [(UIImageView *)[cell viewWithTag:1] setImage:nil];
-    [(UILabel *)[cell viewWithTag:2] setText:nil];
-    [(UILabel *)[cell viewWithTag:3] setText:nil];
-    [(UIImageView *)[cell viewWithTag:4] setImage:nil];
+//    [(UIImageView *)[cell viewWithTag:1] setImage:nil];
+//    [(UILabel *)[cell viewWithTag:2] setText:nil];
+//    [(UILabel *)[cell viewWithTag:3] setText:nil];
+//    [(UIImageView *)[cell viewWithTag:4] setImage:nil];
     
     for (NSDate * date in ar) {
         if ([date isEqualToDate:[self.monthView dateSelected]] ) {
-            Event *e  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
+            Event *event  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
             
-            UILabel *label;
-            label = (UILabel *)[cell viewWithTag:2];
-            [label setText: [e title]];
-            
-            label = (UILabel *)[cell viewWithTag:3];
-            [label setText:[[[e time] stringByAppendingString:@" - "] stringByAppendingString : [e location]]];
-            
-            UIImageView *imageView;
+            UIImageView *imageView = nil;
             imageView = (UIImageView *)[cell viewWithTag:1];
             
-            if (![e.thumbnail isEqualToString:@""]) {
-                // test si c'est dans le cache
-                NSString *imageKey = [NSString stringWithFormat:@"%x", [e.thumbnail hash]];
-                
-                NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/events/thumb"] stringByAppendingPathComponent:imageKey];
-                BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-                
-                if (!fileExists) {
-                    // download img async
-                    UIImage *img = [imageCache imageForKey:imageKey url:[NSURL URLWithString:e.thumbnail] queueIfNeeded:YES tag: indexPath.row];
-                    [imageView setImage:img];
-                }
-                else {
-                    [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-                }
-            } else 
-                [imageView setImage:nil];
-
-
-            imageView = (UIImageView *)[cell viewWithTag:4];
+            NSString *image;
+            if (![event.thumbnail2x isEqualToString:@""])
+                if([UIScreen retinaScreen])
+                    image = event.thumbnail2x;
+                else image = event.thumbnail;
+                else image = event.author.imagePath;
             
-            NSString *imageKey = [NSString stringWithFormat:@"%x", [e.author.imagePath hash]];
+            [imageView setImageWithURL:[NSURL URLWithString:image] placeholderImage:[UIImage imageNamed:@"placeholder50.png"]];
             
-            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:@"images/assos"] stringByAppendingPathComponent:imageKey];
-            BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+            // Title
+            UILabel *label = (UILabel *)[cell viewWithTag:2];
+            [label setText: [event title]];
             
+            // Association
+            label = (UILabel *)[cell viewWithTag:3];
+            [label setText:[[event author] name]];
             
-            if (!fileExists) {
-                [imageView setImage:nil];
-            }
-            else {
-                [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-            }
+            CGRect frame = label.frame;
+            CGSize s = [label.text sizeWithFont:label.font constrainedToSize:CGSizeMake(250, MAXFLOAT) lineBreakMode:label.lineBreakMode];
+            frame.size.width = s.width + 4;
+            label.frame = frame;
+            
+            UIView *view = (UIView *)[cell viewWithTag:4];
+            [view setBackgroundColor:[(AppDelegate *)[[UIApplication sharedApplication] delegate]colorWithHexString:event.author.color]];
+            view.frame = frame;
+            
+            label = (UILabel *)[cell viewWithTag:5];
+            [label setText: [event time]];
+            
+            label = (UILabel *)[cell viewWithTag:6];
+            [label setText:[event location]];
         }
     }
     return cell;
@@ -205,13 +152,12 @@
 }
 
 
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Event *selectedEvent  = [[dataDictionary objectForKey:[self.monthView dateSelected]] objectAtIndex:indexPath.row];
-    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    EventsDetailViewController *detailEventController = [[EventsDetailViewController alloc] initWithNibName:@"EventsDetailViewController" bundle:nil];
     
     
     detailEventController.event = selectedEvent;
@@ -219,6 +165,8 @@
     
     [detailEventController release];
     detailEventController = nil;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void) generateDataForStartDate:(NSDate*)start endDate:(NSDate*)end{

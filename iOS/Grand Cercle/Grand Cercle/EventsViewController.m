@@ -13,6 +13,7 @@
 #import "EventFourNextViewController.h"
 
 #import "EventsParser.h"
+#import "AssociationParser.h"
 #import "Reachability.h"
 
 @interface EventsViewController ()
@@ -33,7 +34,7 @@ int kNumberOfPages = 3;
     if (self) {
         
         self.title = NSLocalizedString(@"Events", @"Evenements");
-        self.tabBarItem.image = [UIImage imageNamed:@"events"];
+        self.tabBarItem.image = [UIImage imageNamed:@"calendar_icon"];
         
         // initialisation du page control
         _pageControl = [[StyledPageControl alloc] initWithFrame:CGRectZero];
@@ -79,11 +80,15 @@ int kNumberOfPages = 3;
     
     // mise en place du scroll view
     scrollView.pagingEnabled = YES;
-    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, scrollView.frame.size.height);
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, screenHeight-kTabBarHeight-kNavBarHeight-kStatusBarHeight);
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.scrollsToTop = NO;
     scrollView.delegate = self;
+    scrollView.bounces = NO;
     
     // mise en place du page control
     [_pageControl setPageControlStyle:PageControlStyleDefault]; 
@@ -92,7 +97,8 @@ int kNumberOfPages = 3;
     [_pageControl setDiameter:9];
     
     [_pageControl setNumberOfPages:kNumberOfPages];
-    [_pageControl setCurrentPage:0];
+    [_pageControl setCurrentPage:1];
+    [self changePage:nil];
     [_pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
     
     // initialise les 3 pages
@@ -196,13 +202,13 @@ int kNumberOfPages = 3;
     // initialise l'array des controlleurs pour les 3 subviews
     UIViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null]) {
-        if (page == 2) {
+        if (page == 0) {
             controller = [[EventsTableViewController alloc] initWithNibName:@"EventsTableViewController" bundle:nil];
             [(EventsTableViewController *)controller setSuperController: self];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
             [controller release];
         }
-        else if (page == 1){
+        else if (page == 2){
             controller = [[EventsCalendarViewController alloc] init];
             [(EventsCalendarViewController *)controller setSuperController:self];
             [viewControllers replaceObjectAtIndex:page withObject:controller];
@@ -231,82 +237,84 @@ int kNumberOfPages = 3;
 
 - (IBAction)refresh:(id)sender
 {
-//    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable];
-//    
-//    if (canUpdate) {
-//        
-//        // replace right bar button 'refresh' with spinner
-//        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//        spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
-//        spinner.hidesWhenStopped = YES;
-//        
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.view.frame.size.height/2, self.view.frame.size.width, 60)];
-//        [label setText:@"Chargement de mises à jour"];
-//        [label setTextColor:[UIColor whiteColor]];
-//        [label setBackgroundColor:[UIColor clearColor]];
-//        [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
-//        [label setTextAlignment:UITextAlignmentCenter];
-//        
-//        
-//        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
-//        iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-//        
-//        
-//        UIView *v = [[UIView alloc]initWithFrame:self.view.frame];
-//        [v setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
-//        [v addSubview:iv];
-//        [iv release];
-//        [v addSubview:spinner];
-//        [spinner release];
-//        [v addSubview:label];
-//        [label release];
-//        
-//        [self.view addSubview:v];
-//        [v release];
-//        [spinner startAnimating];
-//        [scrollView setUserInteractionEnabled:FALSE];
-//        
-//        // how we stop refresh from freezing the main UI thread
-//        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
-//        dispatch_async(downloadQueue, ^{
-//            
-//            // do our long running process here
-//            // On parse les événements
-//           [[EventsParser instance] loadFromURL];
-//            
-//            // do any UI stuff on the main UI thread
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [spinner stopAnimating];
-//                [v removeFromSuperview];
-//                [scrollView setUserInteractionEnabled:TRUE];
-//                
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFinished" object:nil];
-//                
-//            });
-//            
-//        });
-//        dispatch_release(downloadQueue);
-//        
-//    }
-//    else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas de connexion internet"
-//                                                        message:@"Vous devez vous connecter à internet pour avoir les mises à jour."
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//        [alert release];
-//    }
+    BOOL canUpdate = [[Reachability reachabilityWithHostname:@"www.grandcercle.org"] isReachable];
+    
+    if (canUpdate) {
+        
+        // replace right bar button 'refresh' with spinner
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        spinner.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-10);
+        spinner.hidesWhenStopped = YES;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.view.frame.size.height/2, self.view.frame.size.width, 60)];
+        [label setText:@"Chargement de mises à jour"];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setFont:[UIFont fontWithName:@"Helvetica" size:14.0]];
+        [label setTextAlignment:UITextAlignmentCenter];
+        
+        
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rectangle"]];
+        iv.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        
+        
+        UIView *v = [[UIView alloc]initWithFrame:self.view.frame];
+        [v setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+        [v addSubview:iv];
+        [iv release];
+        [v addSubview:spinner];
+        [spinner release];
+        [v addSubview:label];
+        [label release];
+        
+        [self.view addSubview:v];
+        [v release];
+        [spinner startAnimating];
+        [scrollView setUserInteractionEnabled:FALSE];
+        
+        // how we stop refresh from freezing the main UI thread
+        dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // do our long running process here
+            // On parse les événements
+            [[AssociationParser instance] loadFromURL];
+            [[EventsParser instance] loadFromURL];
+            
+            // do any UI stuff on the main UI thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [spinner stopAnimating];
+                [v removeFromSuperview];
+                [scrollView setUserInteractionEnabled:TRUE];
+                            
+                [((EventFourNextViewController *)[viewControllers objectAtIndex:1]) loadData];
+                [((EventsCalendarViewController *)[viewControllers objectAtIndex:2])reloadData];
+                [((EventsTableViewController *)[viewControllers objectAtIndex:0]) loadData];
+            });
+            
+        });
+        dispatch_release(downloadQueue);
+        
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas de connexion internet"
+                                                        message:@"Vous devez vous connecter à internet pour avoir les mises à jour."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 - (void) reloadEventsData: (NSNotification *) notification {
+    NSLog(@"%@", [NSString stringWithFormat: @"EventsViewControler : notification %@ received", notification.name]);
+
     if ([[notification name] isEqualToString:@"updateFinished"]){
         
-        NSLog(@"notification received");
-        
-        [((EventFourNextViewController *)[viewControllers objectAtIndex:0]) loadData];
-        [((EventsCalendarViewController *)[viewControllers objectAtIndex:1])reloadData];
-        [((EventsTableViewController *)[viewControllers objectAtIndex:2]) loadData];
+        [((EventFourNextViewController *)[viewControllers objectAtIndex:1]) loadData];
+        [((EventsCalendarViewController *)[viewControllers objectAtIndex:2])reloadData];
+        [((EventsTableViewController *)[viewControllers objectAtIndex:0]) loadData];
 
     }
 }

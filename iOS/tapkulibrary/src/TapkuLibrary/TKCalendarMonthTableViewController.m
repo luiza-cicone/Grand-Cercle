@@ -49,7 +49,7 @@
 	height = self.view.frame.size.height - y;
 		
 	
-	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y+10, self.view.bounds.size.width, height) style:UITableViewStylePlain];
+	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y+10, self.view.bounds.size.width, height-10) style:UITableViewStylePlain];
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	_tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -97,15 +97,9 @@
 
 	
 	float y = self.monthView.frame.origin.y + self.monthView.frame.size.height;
-	self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, y+10, self.tableView.frame.size.width, self.view.frame.size.height - y );
+	self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, y+10, self.tableView.frame.size.width, self.view.frame.size.height - y - 10 );
 	
 	if(animated) [UIView commitAnimations];
 }
-
-
-
-
-
-
 
 @end

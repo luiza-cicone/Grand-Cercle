@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<nodes>
+  <node>
+    <id>381</id>
+    <group>AS Grenoble INP</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_as_grenoble_inp.png?itok=6QRiH1gZ</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>101</id>
+    <group>BEST</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/facebook_pic.gif?itok=0vHqpyw5</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>609</id>
+    <group>Cercle Universitaire des Bureaux des Arts</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_cuba.jpg?itok=vrDzCaoV</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>46</id>
+    <group>Ciné&#039;toile</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/cinetoile.png?itok=aGGIPUzu</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>55</id>
+    <group>Club BD</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/clubbd-petit.png?itok=_hFlnHMw</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>54</id>
+    <group>Club d&#039;Astronomie</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/club-astro2.png?itok=v7mmhU6Z</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>56</id>
+    <group>Club Echec and Go</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo-club-echecs.png?itok=LKMUd3FZ</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>59</id>
+    <group>Club Magie</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logogc_0.jpg?itok=tq5ouL_5</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>60</id>
+    <group>Club Mix Grenoble INP</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_club_mix.png?itok=T9Gmntlo</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>488</id>
+    <group>Club Montagne</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_0.jpg?itok=kxL0lWSG</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>62</id>
+    <group>Club Poker</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/1208799_74715645.png?itok=dLe8G2Ge</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>64</id>
+    <group>Club Rock</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/clubrock.jpg?itok=TcGG3HON</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>66</id>
+    <group>Club théâtre</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/inproxsaynete_0.png?itok=Tk1kEJS_</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>47</id>
+    <group>Club Œnologie</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_devant3_couleur_1.png?itok=PzubYCmE</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>125</id>
+    <group>Elus étudiants</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/elus.jpg?itok=S0Q3rtmu</logo>
+    <color>646464</color>
+  </node>
+  <node>
+    <id>57</id>
+    <group>Fanfarnaque</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_retouche_mini.png?itok=LMpWz2Oq</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>391</id>
+    <group>INP Arts</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/sans_titre-1.jpg?itok=SGuWbneQ</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>336</id>
+    <group>INP Jeux</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/552652_157580214370871_1434577489_n_0.jpg?itok=TPZPA860</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>138</id>
+    <group>INP Motor Club</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/inpmotorclub.jpg?itok=ENv47sRN</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>102</id>
+    <group>INPGay friendly</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo_ok_blanc_0.png?itok=HwPNBK3I</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>48</id>
+    <group>INProd</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/inprod_noir_0.jpg?itok=hTZFpgOi</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>49</id>
+    <group>ISF : Ingénieurs Sans Frontières</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/logo-isf.jpg?itok=mSepwgZV</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>67</id>
+    <group>La salle ZIK</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/sallezik.jpg?itok=tV8jq7dj</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>61</id>
+    <group>Motards de l&#039;INP</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/motards.png?itok=TLzbWiVJ</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>50</id>
+    <group>RAID</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/raid.jpg?itok=Z1oPUom3</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>65</id>
+    <group>S&#039;Beer Eck</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/sbeereck_0.jpg?itok=DXbnm8RL</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>52</id>
+    <group>Solida&#039;rire</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/solidarire.jpg?itok=oO1UjkLr</logo>
+    <color></color>
+  </node>
+  <node>
+    <id>53</id>
+    <group>Sport Nature Esisar</group>
+    <logo>http://grandcercle.org/sites/default/files/styles/clubs_assos_thumbnail/public/lgsn-couleur-degrade.png?itok=XG139NwB</logo>
+    <color></color>
+  </node>
+</nodes>

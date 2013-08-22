@@ -65,6 +65,7 @@ BOOL changed = 0;
     
     if (![cercleType isEqualToString: @""]) {
         // Récupération du tableau contenant les noms des types
+        [[FilterParser instance] loadFromFile];
         typesArray = [[FilterParser instance] arrayTypes];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -204,7 +205,7 @@ BOOL changed = 0;
  * Retourne le nombre de rows par sections *
  ******************************************/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([cercleType isEqualToString:@""]) {
+    if (![cercleType isEqualToString:@""]) {
         return [typesArray count];
     } else {
         if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES)
@@ -221,7 +222,7 @@ BOOL changed = 0;
  * Titre les différentes sections *
  *********************************/
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([cercleType isEqualToString:@""]) {
+    if (![cercleType isEqualToString:@""]) {
         return @"Types d'événements";
     } else {
         if ((filter.section == EVENTS || filter.section == NEWS) && filter.row == FILTER_CERCLES)
@@ -248,7 +249,7 @@ BOOL changed = 0;
     
     // Définition du booléen, pour savoir si un élément est check ou non
     BOOL checked;
-    if ([cercleType isEqualToString:@""]) {
+    if (![cercleType isEqualToString:@""]) {
         [cell.textLabel setText:(NSString *)[typesArray objectAtIndex:indexPath.row]];
         checked = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone;
@@ -277,6 +278,8 @@ BOOL changed = 0;
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
             NSArray *c = [defaults objectForKey:@"theme"];
             [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+//            [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
+
         }
     }
     return cell;
@@ -290,7 +293,7 @@ BOOL changed = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dans chaque cas, si l'utilisateur clique on enlève le check ou on le met
     
-    if ([cercleType isEqualToString:@""]) {
+    if (![cercleType isEqualToString:@""]) {
         BOOL value = [[typesChoice objectAtIndex:indexPath.row] boolValue];
         value = 1 - value;
         [typesChoice replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:value]];
@@ -336,7 +339,7 @@ BOOL changed = 0;
     
     // On met à jour dans les préférences utilisateurs les nouveaux choix effectués
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    if ([cercleType isEqualToString:@""]) {
+    if (![cercleType isEqualToString:@""]) {
         NSMutableDictionary *cerclesDico = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"filtreCercles"]];
         NSMutableDictionary *typesDico = [[NSMutableDictionary alloc] initWithDictionary:[cerclesDico objectForKey:cercleType]];
         for (int i = 0; i < [typesArray count]; i++) {
@@ -377,7 +380,7 @@ BOOL changed = 0;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self viewDidUnload];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadData" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFinished" object:self];
 }
 
 @end

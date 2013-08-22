@@ -6,13 +6,10 @@
 //  Copyright (c) 2012 Ensimag. All rights reserved.
 //
 #import "EventsViewController.h"
-#import "TapkuLibrary/TapkuLibrary.h"
-
 @interface EventsTableViewController : UIViewController {
     IBOutlet UITableViewCell *eventCell;
     NSMutableArray *eventArray;
     NSMutableDictionary *eventDico;
-    TKImageCache *imageCache;
     IBOutlet UITableView *tView;
     EventsViewController *superController;
     
@@ -22,7 +19,6 @@
 @property (retain, nonatomic) IBOutlet UITableViewCell *eventCell;
 @property (retain, nonatomic) NSMutableArray *eventArray;
 @property (retain, nonatomic) NSMutableDictionary *eventDico;
-@property (retain, nonatomic) TKImageCache *imageCache;
 @property (retain, nonatomic) IBOutlet UITableView *tView;
 @property (retain, nonatomic) EventsViewController *superController;
 

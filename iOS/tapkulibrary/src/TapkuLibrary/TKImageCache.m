@@ -274,8 +274,6 @@
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self cacheDirectoryPath] error:&error];
 	
 	NSLog(@"%@",files);
-
-	
 	
 }
 

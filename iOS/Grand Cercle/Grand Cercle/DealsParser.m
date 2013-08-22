@@ -11,6 +11,7 @@
 
 
 @implementation DealsParser
+@synthesize managedObjectContext;
 
 static DealsParser *instanceBonsPlans = nil;
 
@@ -92,7 +93,7 @@ static DealsParser *instanceBonsPlans = nil;
     };
     
     // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
-    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/bons-plans.xml"] 
+    tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:kDealsURL]
                                success:successBlock 
                                failure:failureBlock];
 }

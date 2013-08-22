@@ -20,6 +20,7 @@
 }
 
 + (NewsParser *) instance;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 // Méthode récupérant l'ensemble des news depuis le site
 - (void) loadFromURL;

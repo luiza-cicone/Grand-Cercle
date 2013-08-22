@@ -30,7 +30,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <TapkuLibrary/TapkuLibrary.h>
+#import "TapkuLibrary/TapkuLibrary.h"
 
 /** An `TKImageCache` object provides a way to manage images between the network, disk and `NSCache`. */
 @interface TKImageCache : NSCache {

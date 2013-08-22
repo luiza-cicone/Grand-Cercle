@@ -106,6 +106,7 @@
 	c.day = days;
 	return [[NSCalendar currentCalendar] dateByAddingComponents:c toDate:self options:0];
 }
+
 + (NSDate *) dateWithDatePart:(NSDate *)aDate andTimePart:(NSDate *)aTime {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"dd/MM/yyyy"];

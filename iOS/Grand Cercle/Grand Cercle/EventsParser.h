@@ -18,6 +18,7 @@
     NSManagedObjectContext *managedObjectContext;
 
 }
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 + (EventsParser *) instance;
 

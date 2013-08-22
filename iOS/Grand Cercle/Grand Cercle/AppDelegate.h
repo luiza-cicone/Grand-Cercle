@@ -28,6 +28,8 @@
     NSArray *arrayCercles;
     NSArray *arrayClubs;
     NSArray *arrayTypes;
+    IBOutlet UIView *helperView;
+    
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -36,10 +38,14 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (retain, nonatomic) IBOutlet UIView *helperView;
 
+- (IBAction)closeHelperView:(id)sender;
 - (void)saveContext;
 - (NSString *)applicationDocumentsDirectory;
 - (void)initializeOnFirstRun;
+
+- (UIColor*)colorWithHexString:(NSString*)hex;
 @end
 
 

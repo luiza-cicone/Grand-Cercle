@@ -2,8 +2,8 @@
 //  Association.m
 //  Grand Cercle
 //
-//  Created by Luiza Cicone on 4/8/12.
-//  Copyright (c) 2012 Ensimag. All rights reserved.
+//  Created by Luiza Cicone on 15/8/13.
+//  Copyright (c) 2013 Ensimag. All rights reserved.
 //
 
 #import "Association.h"
@@ -17,6 +17,7 @@
 @dynamic imagePath;
 @dynamic name;
 @dynamic type;
+@dynamic color;
 @dynamic events;
 @dynamic news;
 

@@ -1,9 +1,9 @@
 //
 //  News.m
-//  TapkuLibrary
+//  Grand Cercle
 //
-//  Created by Luiza Cicone on 21/7/12.
-//  Copyright (c) 2012 Ensimag. All rights reserved.
+//  Created by Luiza Cicone on 19/8/13.
+//  Copyright (c) 2013 Ensimag. All rights reserved.
 //
 
 #import "News.h"
@@ -12,11 +12,14 @@
 
 @implementation News
 
-@dynamic idNews;
-@dynamic title;
-@dynamic pubDate;
 @dynamic content;
+@dynamic idNews;
 @dynamic image;
+@dynamic pubDate;
+@dynamic thumbnail;
+@dynamic thumbnail2x;
+@dynamic title;
+@dynamic image2x;
 @dynamic author;
 
 @end

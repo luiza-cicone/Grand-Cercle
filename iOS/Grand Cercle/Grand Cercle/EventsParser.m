@@ -11,7 +11,9 @@
 #import "Association.h"
 
 
+
 @implementation EventsParser
+@synthesize managedObjectContext;
 
 static EventsParser *instanceEvent = nil;
 
@@ -29,32 +31,35 @@ static EventsParser *instanceEvent = nil;
     // Tant qu'il y a un événement à traiter
 	do {
         
-//        // Test if the news is already in the DB
-//        NSFetchRequest *requestEvent = [[[NSFetchRequest alloc] init] autorelease];
-//        
-//        NSEntityDescription *eventEntity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
-//        [requestEvent setEntity:eventEntity];
-//        
+        // Test if the news is already in the DB
+        NSFetchRequest *requestEvent = [[[NSFetchRequest alloc] init] autorelease];
+
+        NSEntityDescription *eventEntity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
+        [requestEvent setEntity:eventEntity];
+
         TBXMLElement *idEvent = [TBXML childElementNamed:@"id" parentElement:eventsToParse];
-//        NSPredicate *eventIdPredicate = [NSPredicate predicateWithFormat:@"idEvent = %@", [TBXML textForElement:idEvent]];
-//        [requestEvent setPredicate:eventIdPredicate];        
-//        
+        NSPredicate *eventIdPredicate = [NSPredicate predicateWithFormat:@"idEvent = %@", [TBXML textForElement:idEvent]];
+        [requestEvent setPredicate:eventIdPredicate];
+
         NSError *error = nil;
-//        
-//        
+        
         Event *anEvent;
-//        NSArray *events = [managedObjectContext executeFetchRequest:requestEvent error:&error];
-//        if (events != nil && error == nil) {
-//            if([events count] != 0)
-//                anEvent = [events objectAtIndex:0];
-//            else {
-//                // Définition de l'événement à récupérer
-                 anEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:managedObjectContext];
-//            }
-//            
-//        }
-//        
-        anEvent.idEvent = [NSNumber numberWithInt:[[TBXML textForElement:idEvent] intValue]]; 
+        NSArray *events = [managedObjectContext executeFetchRequest:requestEvent error:&error];
+        if (error == nil && events != nil )  {
+            if([events count] > 0) {
+                anEvent = [events objectAtIndex:0];
+            }
+            else {
+                // Définition de l'événement à récupérer
+                anEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:managedObjectContext];
+            }
+        }
+        else {
+            NSLog(@"Error in EventsParser : handle: eventToParse ");
+            continue;
+        }
+
+        anEvent.idEvent = [NSNumber numberWithInt:[[TBXML textForElement:idEvent] intValue]];
         
         // Récupération du type
         TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:eventsToParse];
@@ -63,6 +68,16 @@ static EventsParser *instanceEvent = nil;
         // Récupération du titre
         TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:eventsToParse];
         anEvent.title = [[TBXML textForElement:title] stringByConvertingHTMLToPlainText];
+        
+        TBXMLElement *promo = [TBXML childElementNamed:@"promo" parentElement:eventsToParse];
+        NSString *promoStr = [[TBXML textForElement:promo] stringByConvertingHTMLToPlainText];
+        
+        NSScanner *scanner = [[NSScanner alloc] initWithString:promoStr];
+        NSInteger integer;
+        if ([scanner scanInteger:&integer]) {
+            anEvent.promo = [NSNumber numberWithInt:integer];;
+        }
+        else anEvent.promo = [NSNumber numberWithInt:0];
         
         // Récupération de la description
         TBXMLElement *description = [TBXML childElementNamed:@"description" parentElement:eventsToParse];
@@ -80,11 +95,21 @@ static EventsParser *instanceEvent = nil;
         error = nil;
         
         NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
-        if (array != nil && error == nil) {
+        if (array != nil && array.count > 0 && error == nil) {
             anEvent.author =  [array objectAtIndex:0];
         }
         else {
-            // Deal with error.
+            NSFetchRequest *request2 = [[NSFetchRequest alloc] init];
+            [request2 setEntity:assosEntity];
+            NSPredicate *gcPred = [NSPredicate predicateWithFormat:@"name = %@", kGrandCercle];
+            [request2 setPredicate:gcPred];
+            NSArray *array2 = [managedObjectContext executeFetchRequest:request2 error:&error];
+            if (array2 != nil && array2.count > 0 && error == nil) {
+                anEvent.author =  [array2 objectAtIndex:0];
+            }
+            else
+                // normally never happens
+                anEvent.author = [[Association alloc] init];
         }
     
         [request release];
@@ -100,15 +125,24 @@ static EventsParser *instanceEvent = nil;
         TBXMLElement *time = [TBXML childElementNamed:@"time" parentElement:eventsToParse];
         anEvent.time = [[TBXML textForElement:time] stringByConvertingHTMLToPlainText];
 
-        // Récupération de la petite image
-        TBXMLElement *imageSmall = [TBXML childElementNamed:@"thumbnail" parentElement:eventsToParse];
+        // images
+        TBXMLElement *imageSmall = [TBXML childElementNamed:@"thumb" parentElement:eventsToParse];
         anEvent.thumbnail = [[TBXML textForElement:imageSmall] stringByConvertingHTMLToPlainText];
+        TBXMLElement *imageSmall2x = [TBXML childElementNamed:@"thumb2x" parentElement:eventsToParse];
+        anEvent.thumbnail2x = [[TBXML textForElement:imageSmall2x] stringByConvertingHTMLToPlainText];
 
-        // Récupération de l'fimage
         TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:eventsToParse];
         anEvent.image = [[TBXML textForElement:image] stringByConvertingHTMLToPlainText];
+        TBXMLElement *image2x= [TBXML childElementNamed:@"image2x" parentElement:eventsToParse];
+        anEvent.image2x = [[TBXML textForElement:image2x] stringByConvertingHTMLToPlainText];\
+        
+        TBXMLElement *poster= [TBXML childElementNamed:@"poster" parentElement:eventsToParse];
+        anEvent.poster = [[TBXML textForElement:poster] stringByConvertingHTMLToPlainText];
+        TBXMLElement *poster2x= [TBXML childElementNamed:@"poster2x" parentElement:eventsToParse];
+        anEvent.poster2x = [[TBXML textForElement:poster2x] stringByConvertingHTMLToPlainText];
+        TBXMLElement *poster2xWide= [TBXML childElementNamed:@"poster2xWide" parentElement:eventsToParse];
+        anEvent.poster2xWide = [[TBXML textForElement:poster2xWide] stringByConvertingHTMLToPlainText];
 
-        // Récupération du lieu
         TBXMLElement *place = [TBXML childElementNamed:@"location" parentElement:eventsToParse];
         anEvent.location = [[TBXML textForElement:place] stringByConvertingHTMLToPlainText];
 
@@ -139,8 +173,11 @@ static EventsParser *instanceEvent = nil;
     if (managedObjectContext == nil) { 
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
+    
+    NSLog(@"EventsParser.loadFromURL : try to update events");
+
     /*  send a request for file modification date  */
-    NSURLRequest *modReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/events.xml"]
+    NSURLRequest *modReq = [NSURLRequest requestWithURL:[NSURL URLWithString:kEventsURL]
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0f];
     NSURLResponse* response;
     NSError* error = nil;
@@ -150,23 +187,12 @@ static EventsParser *instanceEvent = nil;
                                 [[(NSHTTPURLResponse *)response allHeaderFields] objectForKey:@"Last-Modified"]];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (! [last_modified isEqualToString:[defaults stringForKey:@"last-modified"]]) {
+    
+    if (![last_modified isEqualToString:[defaults stringForKey:@"last-modified"]]) {
+        
+        NSLog(@"EventsParser.loadFromURL : updating events");
+
         [defaults setObject:last_modified forKey:@"last-modified"];
-        
-        NSFetchRequest * allEvents = [[NSFetchRequest alloc] init];
-        [allEvents setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext]];
-        [allEvents setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-        
-        NSError * error = nil;
-        NSArray * events = [managedObjectContext executeFetchRequest:allEvents error:&error];
-        //error handling goes here
-        for (Event *event in events) {
-            [managedObjectContext deleteObject:event];
-        }
-        if (![managedObjectContext save:&error]) {
-            NSLog(@"Couldn't save: %@", [error localizedDescription]);
-        }
-        [allEvents release];
 
         // Si le premier lien du fichier xml est correct, ce block est appelé
         TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
@@ -180,15 +206,18 @@ static EventsParser *instanceEvent = nil;
         };
         
         // Initialisation de deux objets TBXML avec les liens des fichiers xml à parser
-        tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/events.xml"] 
+        tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:kEventsURL] 
                                    success:successBlock 
                                    failure:failureBlock];
+        
+        NSLog(@"EventsParser.loadFromURL : finished updating events");
     }
 
 }
 
 -(void) loadFromFile {
-    
+    NSLog(@"EventsParser.loadFromFile");
+
     if (managedObjectContext == nil) {
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     }
@@ -207,8 +236,9 @@ static EventsParser *instanceEvent = nil;
             [self handle:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
     }
     [tbxml release];
-    
+    NSLog(@"EventsParser.loadFromFile : finished loading events");
+
 }
-                                
+
 
 @end

@@ -20,6 +20,7 @@
 }
 
 + (DealsParser *) instance;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 // Méthode récupérant l'ensemble des bons plans depuis le site
 - (void) loadFromURL;

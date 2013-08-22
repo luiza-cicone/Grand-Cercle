@@ -19,15 +19,21 @@
     
     TKImageCache *imageCache;
 
-    IBOutlet UILabel *titleLabel, *dateLabel, *placeLabel;
+    IBOutlet UILabel *titleLabel, *dateLabel,*hourLabel, *placeLabel;
     IBOutlet UIImageView *eventImageView;
+    IBOutlet UIImageView *vBkgd;
+    IBOutlet UIButton *bDetail;
+    IBOutlet UIView *vText;
 }
+@property (retain, nonatomic) IBOutlet UIImageView *vBkgd;
 
+@property (retain, nonatomic) IBOutlet UIView *vText;
 @property (retain, nonatomic) Event *event;
 @property (retain, nonatomic) EventsViewController *superController;
 @property (retain, nonatomic) TKImageCache *imageCache;
-@property (nonatomic, retain) IBOutlet UILabel *titleLabel, *dateLabel, *placeLabel;
+@property (nonatomic, retain) IBOutlet UILabel *titleLabel, *dateLabel,*hourLabel, *placeLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *eventImageView;
+@property (retain, nonatomic) IBOutlet UIButton *bDetail;
 
 
 - (IBAction)imageButtonAction:(id)sender;

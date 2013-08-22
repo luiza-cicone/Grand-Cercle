@@ -9,13 +9,16 @@
 #import "EventFourNextViewController.h"
 #import "EventsParser.h"
 #import "Event.h"
-#import "EventDetailViewController.h"
+#import "EventsDetailViewController.h"
 #import "AppDelegate.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIScreen.h"
 
 @implementation EventFourNextViewController
 @synthesize superController;
 @synthesize event, imageCache;
-@synthesize titleLabel, dateLabel, placeLabel, eventImageView;
+@synthesize titleLabel, dateLabel, placeLabel, hourLabel, eventImageView;
+@synthesize vBkgd, bDetail, vText;
 
 int borneSup = 0;
 
@@ -32,7 +35,8 @@ int borneSup = 0;
 }
 
 -(void)loadData {
-            
+    
+    
     NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
 
     [comps setHour:0];
@@ -42,13 +46,8 @@ int borneSup = 0;
     NSDate *today = [NSDate dateWithDatePart:[NSDate date] andTimePart:[[NSCalendar currentCalendar] dateFromComponents:comps]];
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedObjectContext];
-    
-    NSMutableArray *authors = [[NSMutableArray alloc] initWithCapacity:2];
-    
-    [authors addObject:@"Grand Cercle"];
-    [authors addObject:@"Elus étudiants"];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) AND (author.name in %@)", today, authors];
+            
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) AND (author.name = %@) AND (promo = 1)", today, kGrandCercle];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
@@ -69,15 +68,31 @@ int borneSup = 0;
     
     [titleLabel setText: [event title]];
     [dateLabel setText: [NSString stringWithFormat:@"%@, %@", [event day], [event dateText]]];
-    [placeLabel setText: [NSString stringWithFormat:@"à %@, %@", [event time], [event location]]];
+    [hourLabel setText: [NSString stringWithFormat:@"%@", [event time]]];
+    [placeLabel setText: [NSString stringWithFormat:@"%@", [event location]]];
         
-    if (![event.image isEqualToString:@""]) {
-        // test si c'est dans le cache
-        
-        UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:event.image]]];
-
-        [eventImageView setImage:img];
+    if(IS_WIDESCREEN) {
+        [eventImageView setFrame:CGRectMake(45, 35, 230, 340)];
+        [bDetail setFrame:CGRectMake(45, 35, 230, 340)];
+        [eventImageView setImageWithURL:[NSURL URLWithString:event.poster2xWide] placeholderImage:nil];
+        [vBkgd setFrame:CGRectMake(0, 0, 320, 450)];
+        [vText setFrame:CGRectMake(45, 376, 230, 56)];
+        [vBkgd setImage:[UIImage imageNamed:@"home-568h"]];
+    } else {
+        [eventImageView setFrame:CGRectMake(66, 28, 188, 274)];
+        [bDetail setFrame:CGRectMake(66, 28, 188, 274)];
+        if ([UIScreen retinaScreen])
+            [eventImageView setImageWithURL:[NSURL URLWithString:event.poster2x] placeholderImage:nil];
+        else [eventImageView setImageWithURL:[NSURL URLWithString:event.poster] placeholderImage:nil];
+        [vBkgd setFrame:CGRectMake(0, 0, 320, 365)];
+        [vText setFrame:CGRectMake(66, 302, 188, 48)];
+        [vBkgd setImage:[UIImage imageNamed:@"home"]];
     }
+    CGRect frame = vText.frame;
+    [titleLabel setFrame:CGRectMake(0, 0, frame.size.width, 18)];
+    [dateLabel setFrame:CGRectMake(0, frame.size.height/3, frame.size.width, 16)];
+    [hourLabel setFrame:CGRectMake(0, frame.size.height/3*2, 60, 14)];
+    [placeLabel setFrame:CGRectMake(60, frame.size.height/3*2, frame.size.width-60, 14)];
 }
 
 - (void)viewDidLoad
@@ -89,6 +104,15 @@ int borneSup = 0;
 
 - (void)viewDidUnload
 {
+    [vBkgd release];
+    vBkgd = nil;
+    [self setVBkgd:nil];
+    [bDetail release];
+    bDetail = nil;
+    [self setBDetail:nil];
+    [vText release];
+    vText = nil;
+    [self setVText:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -101,7 +125,7 @@ int borneSup = 0;
 
 - (IBAction)imageButtonAction:(id)sender {
         
-    EventDetailViewController *detailEventController = [[EventDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    EventsDetailViewController *detailEventController = [[EventsDetailViewController alloc] initWithNibName:@"EventsDetailViewController" bundle:nil];
     detailEventController.event = event;
     [self.superController.navigationController pushViewController:detailEventController animated:YES];
     [detailEventController release];
@@ -110,6 +134,9 @@ int borneSup = 0;
 
 - (void)dealloc {
 
+    [vBkgd release];
+    [bDetail release];
+    [vText release];
     [super dealloc];
 }
 @end

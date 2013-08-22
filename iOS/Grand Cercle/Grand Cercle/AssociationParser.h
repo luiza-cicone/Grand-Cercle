@@ -11,15 +11,14 @@
 #import "TBXML+HTTP.h"
 #import "TBXML.h"
 #import "NSString+HTML.h"
-#import "TapkuLibrary/TapkuLibrary.h"
 
 @interface AssociationParser : NSObject {
     TBXML *tbxml;
     NSManagedObjectContext *managedObjectContext;
-    TKImageCache *imageCache;
 }
 
-@property (nonatomic, retain) TKImageCache *imageCache;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 // L'instance du parser
 + (AssociationParser *) instance;
 

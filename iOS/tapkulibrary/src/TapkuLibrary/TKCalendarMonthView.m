@@ -63,8 +63,8 @@ int rectHeight = 34;
 	info.hour = 0;
 	return [NSDate dateFromDateInformation:info timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 }
+
 - (NSDate*) nextMonth{
-	
 	
 	TKDateInformation info = [self dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	info.month++;
@@ -79,6 +79,7 @@ int rectHeight = 34;
 	return [NSDate dateFromDateInformation:info timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	
 }
+
 - (NSDate*) previousMonth{
 	
 	
@@ -157,7 +158,7 @@ int rectHeight = 34;
 @end
 
 #pragma mark -
-#define dotFontSize 24.0
+#define dotFontSize 22.0
 #define dateFontSize 20.0
 @interface TKCalendarMonthTiles (private)
 @property (strong,nonatomic) UIImageView *selectedImageView;
@@ -333,8 +334,8 @@ int rectHeight = 34;
 		  alignment: UITextAlignmentCenter];
 	
 	if(mark){
-		r.size.height = 10;
-		r.origin.y += 10;
+		r.size.height = 12;
+		r.origin.y += 12;
 		
 		[@"•" drawInRect: r
 				withFont: f2
@@ -475,8 +476,6 @@ int rectHeight = 34;
 	info.day = selectedDay;
 	NSDate *d = [NSDate dateFromDateInformation:info timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	
-		
-	
 	return d;
 	
 }
@@ -592,8 +591,8 @@ int rectHeight = 34;
 - (UILabel *) dot{
 	if(dot==nil){
 		CGRect r = self.selectedImageView.bounds;
-		r.origin.y += 29;
-		r.size.height -= 31;
+		r.origin.y += 27;
+		r.size.height -= 29;
 		dot = [[UILabel alloc] initWithFrame:r];
 		
 		dot.text = @"•";

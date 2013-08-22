@@ -2,8 +2,8 @@
 //  Association.h
 //  Grand Cercle
 //
-//  Created by Luiza Cicone on 4/8/12.
-//  Copyright (c) 2012 Ensimag. All rights reserved.
+//  Created by Luiza Cicone on 15/8/13.
+//  Copyright (c) 2013 Ensimag. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * imagePath;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSString * color;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *news;
 @end

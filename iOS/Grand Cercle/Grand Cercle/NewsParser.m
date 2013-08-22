@@ -11,6 +11,7 @@
 #import "Association.h"
 
 @implementation NewsParser
+@synthesize managedObjectContext;
 
 static NewsParser *instanceNews = nil;
 
@@ -38,13 +39,18 @@ static NewsParser *instanceNews = nil;
         NSError *error = nil;
         
         NSArray *news = [managedObjectContext executeFetchRequest:requestNews error:&error];
+        News *aNews;
         if (news != nil && error == nil) {
             if([news count] != 0)
-                continue;
+                aNews = [news objectAtIndex:0];
+            else
+                // Initialisation de la news à récupérer
+                aNews = [NSEntityDescription insertNewObjectForEntityForName:@"News" inManagedObjectContext:managedObjectContext];
         }
-        
-        // Initialisation de la news à récupérer
-        News *aNews = [NSEntityDescription insertNewObjectForEntityForName:@"News" inManagedObjectContext:managedObjectContext];
+        else {
+            NSLog(@"Error in NewsParser : handle: newsToParse ");
+            continue;
+        }
         
         aNews.idNews = [NSNumber numberWithInt:[[TBXML textForElement:idNews] intValue]];
         
@@ -72,18 +78,25 @@ static NewsParser *instanceNews = nil;
         error = nil;
         
         NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
-        if (array != nil && error == nil) {
+        if (array != nil && array.count > 0 && error == nil) {
             aNews.author =  [array objectAtIndex:0];
         }
         else {
-            // Deal with error.
+            aNews.author = -1;
         }
         [request release];
         
         // Récupération de l'image
         TBXMLElement *image = [TBXML childElementNamed:@"image" parentElement:newsToParse];
         aNews.image = [[TBXML textForElement:image]  stringByConvertingHTMLToPlainText];
+        TBXMLElement *image2x = [TBXML childElementNamed:@"image2x" parentElement:newsToParse];
+        aNews.image2x = [[TBXML textForElement:image2x]  stringByConvertingHTMLToPlainText];
         
+        TBXMLElement *imageSmall = [TBXML childElementNamed:@"thumb" parentElement:newsToParse];
+        aNews.thumbnail = [[TBXML textForElement:imageSmall] stringByConvertingHTMLToPlainText];
+        TBXMLElement *imageSmall2x = [TBXML childElementNamed:@"thumb2x" parentElement:newsToParse];
+        aNews.thumbnail2x = [[TBXML textForElement:imageSmall2x] stringByConvertingHTMLToPlainText];
+
         if (![managedObjectContext save:&error]) {
             NSLog(@"Couldn't save: %@", [error localizedDescription]);
         }
@@ -96,8 +109,10 @@ static NewsParser *instanceNews = nil;
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
     
+    NSLog(@"NewsParser.loadFromURL : try to update news");
+    
     /*  send a request for file modification date  */
-    NSURLRequest *modReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/news.xml"]
+    NSURLRequest *modReq = [NSURLRequest requestWithURL:[NSURL URLWithString:kNewsURL]
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0f];
     NSURLResponse* response;
     NSError* error = nil;
@@ -108,23 +123,10 @@ static NewsParser *instanceNews = nil;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if (! [last_modified isEqualToString:[defaults stringForKey:@"news-last-modified"]]) {
+    if (![last_modified isEqualToString:[defaults stringForKey:@"news-last-modified"]]) {
         [defaults setObject:last_modified forKey:@"news-last-modified"];
         
-        NSFetchRequest * allNews = [[NSFetchRequest alloc] init];
-        [allNews setEntity:[NSEntityDescription entityForName:@"News" inManagedObjectContext:managedObjectContext]];
-        [allNews setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-        
-        NSError * error = nil;
-        NSArray * news = [managedObjectContext executeFetchRequest:allNews error:&error];
-        [allNews release];
-        //error handling goes here
-        for (News *aNews in news) {
-            [managedObjectContext deleteObject:aNews];
-        }
-        if (![managedObjectContext save:&error]) {
-            NSLog(@"Couldn't save: %@", [error localizedDescription]);
-        }
+        NSLog(@"NewsParser.loadFromURL : updating news");
         
         // Si le lien du fichier xml est correct, ce block est appelé
         TBXMLSuccessBlock successBlock = ^(TBXML *tbxmlDocument) {
@@ -140,14 +142,18 @@ static NewsParser *instanceNews = nil;
         
         
         // Initialisation d'un objet TBXML avec le lien du fichier xml à parser
-        tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.grandcercle.org/xml/news.xml"] 
+        tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:kNewsURL] 
                                    success:successBlock 
                                    failure:failureBlock];
+        
+        NSLog(@"NewsParser.loadFromURL : finished updating news");
+
     }
 }
 
 -(void) loadFromFile {
-    
+    NSLog(@"NewsParser.loadFromFile");
+
     if (managedObjectContext == nil) {
         managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     }
@@ -166,7 +172,8 @@ static NewsParser *instanceNews = nil;
             [self handle:[TBXML childElementNamed:@"node" parentElement:tbxml.rootXMLElement]];
     }
     [tbxml release];
-    
+    NSLog(@"NewsParser.loadFromFile : finished loading news");
+
 }
 
 @end

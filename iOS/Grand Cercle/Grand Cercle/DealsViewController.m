@@ -8,11 +8,12 @@
 
 #import "DealsViewController.h"
 #import "AppDelegate.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @implementation DealsViewController
 @synthesize dealsCell, tview;
-@synthesize arrayDeals, imageCache;
+@synthesize arrayDeals;
 
 NSString *const dealsImageFolder = @"images/deals";
 
@@ -28,7 +29,7 @@ NSString *const dealsImageFolder = @"images/deals";
         self.title = NSLocalizedString(@"Deals", @"");
         
         // Mise en place de l'image dans les onglets du bas
-        self.tabBarItem.image = [UIImage imageNamed:@"deals"];
+        self.tabBarItem.image = [UIImage imageNamed:@"deal"];
 
     
         // Récupération des bons plans
@@ -46,12 +47,7 @@ NSString *const dealsImageFolder = @"images/deals";
         else {
             NSLog(@"error %@", error);
             // Deal with error.
-        }
-
-    // Configuration du cache des images
-	self.imageCache = [[[TKImageCache alloc] initWithCacheDirectoryName:dealsImageFolder] autorelease];
-	self.imageCache.notificationName = @"newDealsImage";
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newImageRetrieved:) name:@"newDealsImage" object:nil];
+        }	
     
     // Mise en place du bouton retour, pour la détail view
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Retour" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -59,33 +55,6 @@ NSString *const dealsImageFolder = @"images/deals";
     [backButton release];
     }
     return self;
-}
-
-/*****************************
- * Mise à jour du table view *
- ****************************/
-- (void) newImageRetrieved:(NSNotification*)sender{
-    
-    // Définition des structures nécéssaires
-	NSDictionary *dict = [sender userInfo];
-    NSInteger tag = [[dict objectForKey:@"tag"] intValue];
-    NSArray *paths = [self.tview indexPathsForVisibleRows];
-    
-    // Pour chaque row de la table view
-    for(NSIndexPath *path in paths) {
-        
-        // On recherche l'image dans le cache
-    	NSInteger index = path.row;
-        UITableViewCell *cell = [self.tview cellForRowAtIndexPath:path];
-        UIImageView *imageView;
-        imageView = (UIImageView *)[cell viewWithTag:1];
-        
-        // Si il n'y avais pas déjà une image on l'affiche
-    	if(imageView.image == nil && tag == index){
-            imageView.image = [dict objectForKey:@"image"];
-            [cell setNeedsLayout];
-        }
-    }
 }
 
 /************************
@@ -108,14 +77,14 @@ NSString *const dealsImageFolder = @"images/deals";
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:1]];
     
     // Si le thème choisie est Grand Cercle, on laisse l'interligne par défaut, sinon on met l'interligne de la couleur du thème
-    UIColor* color;
-    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
-        color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
-    } else {
-        color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
-    }
-    [self.tview setSeparatorColor:color];
-    [color release];
+//    UIColor* color;
+//    if ([[c objectAtIndex:0] floatValue] == 0.0 && [[c objectAtIndex:1] floatValue] == 0.0 && [[c objectAtIndex:2] floatValue] == 0.0) {
+//        color = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.18];
+//    } else {
+//        color = [[UIColor alloc] initWithRed:[[c objectAtIndex:0] floatValue] green:[[c objectAtIndex:1] floatValue] blue:[[c objectAtIndex:2] floatValue] alpha:0.5];
+//    }
+//    [self.tview setSeparatorColor:color];
+//    [color release];
 }
 
 /**************************
@@ -130,8 +99,6 @@ NSString *const dealsImageFolder = @"images/deals";
     [self setDealsCell:nil];
     [tview release];
     tview = nil;
-    [imageCache release];
-    self.imageCache = nil;
     [self setTview:nil];
     [super viewDidUnload];
 }
@@ -182,21 +149,7 @@ NSString *const dealsImageFolder = @"images/deals";
     imageView = (UIImageView *)[cell viewWithTag:1];
     
     if (![deal.image isEqualToString:@""]) {
-        // test si c'est dans le cache
-        NSString *imageKey = [NSString stringWithFormat:@"%x", [deal.image hash]];
-        
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *imagePath = [[documentsDirectory stringByAppendingPathComponent:dealsImageFolder] stringByAppendingPathComponent:imageKey];
-        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-        
-        if (!fileExists) {
-            // download img async
-            UIImage *img = [imageCache imageForKey:imageKey url:[NSURL URLWithString:deal.image] queueIfNeeded:YES tag: indexPath.row];
-            [imageView setImage:img];
-        }
-        else {
-            [imageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
-        }
+        [imageView setImageWithURL:[NSURL URLWithString:deal.image] placeholderImage:[UIImage imageNamed:@"placeholder70.png"]];
     }
     else  [imageView setImage:nil];
 
@@ -220,12 +173,15 @@ NSString *const dealsImageFolder = @"images/deals";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Construction de la vue détaillée
-    DealsDetailViewController *detailViewController = [[DealsDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    DealDetailViewController *detailViewController = [[DealDetailViewController alloc] initWithNibName:@"DealDetailViewController" bundle:nil];
     Deal *deal = [arrayDeals objectAtIndex:[indexPath row]];
-    detailViewController.deal = deal;
+    detailViewController.event = deal;
     // Chargement de la vue détaillée
     [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release]; 
+    [detailViewController release];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 /****************************************************************

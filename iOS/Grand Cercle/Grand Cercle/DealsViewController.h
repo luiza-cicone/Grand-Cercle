@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DealsParser.h"
-#import "DealsDetailViewController.h"
-#import "TapkuLibrary/TapkuLibrary.h"
+#import "DealDetailViewController.h"
 
 @interface DealsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     
@@ -18,9 +17,7 @@
     
     // La cellule customize
     IBOutlet UITableViewCell *dealsCell;
-    
-    TKImageCache *imageCache;
-    
+        
     // Table view des bons plans
     IBOutlet UITableView *tview;
     
@@ -30,7 +27,6 @@
 
 @property (retain, nonatomic) NSArray *arrayDeals;
 @property (retain, nonatomic) IBOutlet UITableViewCell *dealsCell;
-@property (retain, nonatomic) TKImageCache *imageCache;
 @property (retain, nonatomic) IBOutlet UITableView *tview;
 
 @end
